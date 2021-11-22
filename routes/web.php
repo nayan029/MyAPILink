@@ -20,20 +20,26 @@ Route::get('', function () {
 
 //admin without login route
 
-Route::group(['namespace' => 'App\Http\Controllers\Admin'],function ($normalAdminRoute) {
-    $normalAdminRoute->get('administrator','LoginController@index')->name('admin.login');
-    $normalAdminRoute->post('administrator/login','LoginController@adminLogin')->name('admin.auth');
-    $normalAdminRoute->get('forgot-password','ForgotPasswordController@index')->name('forgot.password');
-    $normalAdminRoute->post('forgot-password','ForgotPasswordController@store')->name('password.save');
-    $normalAdminRoute->get('reset-password/{token}','ForgotPasswordController@ResetPasswordForm')->name('reset.password');
-    $normalAdminRoute->post('reset-password','ForgotPasswordController@ResetPassword')->name('reset.save');
+Route::group(['namespace' => 'App\Http\Controllers\Admin'], function ($normalAdminRoute) {
+    $normalAdminRoute->get('administrator', 'LoginController@index')->name('admin.login');
+    $normalAdminRoute->post('administrator/login', 'LoginController@adminLogin')->name('admin.auth');
+    $normalAdminRoute->get('forgot-password', 'ForgotPasswordController@index')->name('forgot.password');
+    $normalAdminRoute->post('forgot-password', 'ForgotPasswordController@store')->name('password.save');
+    $normalAdminRoute->get('reset-password/{token}', 'ForgotPasswordController@ResetPasswordForm')->name('reset.password');
+    $normalAdminRoute->post('reset-password', 'ForgotPasswordController@ResetPassword')->name('reset.save');
 });
 
 //admin with login route access
-Route::middleware(['auth:admins'])->group(function ($route) {
+Route::middleware(['auth:admin'])->group(function ($route) {
     $route->group(['namespace' => 'App\Http\Controllers\Admin'], function ($adminRoute) {
-            $adminRoute->get('admin/dashborad','LoginController@adminDashboard')->name('admin.dashboard');
-            $adminRoute->post('admin/logout','LoginController@logout')->name('logout');
-        });
+        $adminRoute->get('admin/dashborad', 'LoginController@adminDashboard')->name('admin.dashboard');
+        $adminRoute->post('admin/logout', 'LoginController@adminlogout')->name('admin.logout');
+    });
 });
 
+Route::middleware(['auth:web', 'verified'])->group(function ($route) {
+    $route->group(['namespace' => 'App\Http\Controllers\Admin'], function ($adminRoute) {
+        $adminRoute->get('user/dashboard', 'LoginController@userDashboard')->name('dashboard');
+        $adminRoute->post('user/logout', 'LoginController@logout')->name('logout');
+    });
+});

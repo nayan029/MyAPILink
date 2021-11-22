@@ -10,9 +10,9 @@
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <a href="javascript:void(0);">Name And Profile Pic Here</a> 
+          <a href="javascript:void(0);">{{\Illuminate\Support\Facades\Auth::user()->name}}</a> 
         </div>
-
+    
         <!-- SidebarSearch Form -->
         <div class="form-inline">
             <div class="input-group" data-widget="sidebar-search">
@@ -40,16 +40,28 @@
                 </li>
        
 
-
                 <li class="nav-item menu-open">
-                    <form action="{{route('logout')}}" method="POST">
+                @if(Auth::guard('admin')->check())
+                    <form action="{{route('admin.logout')}}" method="POST">
                         @csrf
-                        <a href="{{route('logout')}}" onclick="event.preventDefault();
+                        <a href="javascript:void(0);" onclick="event.preventDefault();
                                                 this.closest('form').submit();" class="nav-link">
                             <i class="nav-icon fas fa-sign-out-alt"></i>
                             <p>Logout</p>
                         </a>
                     </form>
+                    @else
+                    
+                    <form action="{{route('logout')}}" method="POST">
+                        @csrf
+                        <a href="#" onclick="event.preventDefault();
+                                                this.closest('form').submit();" class="nav-link">
+                            <i class="nav-icon fas fa-sign-out-alt"></i>
+                            <p>Logout</p>
+                        </a>
+                    </form>
+
+                    @endif
                 </li>
             </ul>
         </nav>

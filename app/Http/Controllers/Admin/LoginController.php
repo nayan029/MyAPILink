@@ -11,49 +11,75 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
-{   
+{
     protected $validationRules = [
         'email' => 'required|email',
         'password' => 'required|min:6'
     ];
 
-    public function index(){
-        if(Auth::guard('admins')->check()){
+    public function index()
+    {
+        if (Auth::guard('admin')->check()) {
             return redirect()->route('admin.dashboard');
+        } else {
+            $data['validator'] = JsValidator::make($this->validationRules);
+            return view('backend.login', $data);
         }
-        $data['validator'] = JsValidator::make($this->validationRules);
-        return view('backend.login',$data);
     }
 
     public function adminLogin(Request $request)
-    {   
+    {
         $validation = Validator::make($request->all(), $this->validationRules);
         if ($validation->fails()) {
-                return redirect()->back()->withErrors($validation->errors());
+            return redirect()->back()->withErrors($validation->errors());
         }
-        
-        $remember_me  = ( !empty( $request->remember_me ) )? TRUE : FALSE;
-                                                            
+
+        $remember_me  = (!empty($request->remember_me)) ? TRUE : FALSE;
+
         $credentials = $request->only('email', 'password');
-        if(Auth::guard('admins')->attempt($credentials,$remember_me)){
-            Session::flash('success','Administrator login successfuly!!...');
+
+        if (auth()->guard('admin')->attempt($credentials)) {
+            Session::flash('success', 'Administrator login successfuly!!...');
             return redirect()->route('admin.dashboard');
-        }else{
-            Session::flash('error','Email or password invalid');
+        } else {
+            Session::flash('error', 'Email or password invalid');
             return redirect()->back();
-        }        
+        }
+        if (auth()->guard('web')->attempt($credentials)) {
+            Session::flash('success', 'Login successfuly!!...');
+            return redirect()->route('/dashboard');
+        }
     }
-    public function adminDashboard(){
-        if(Auth::guard('admins')->check()){
+    public function adminDashboard()
+    {
+        if (Auth::guard('admin')->check()) {
             return view('backend.dashboard.index');
-        }else{
+        } {
             return view('backend.login');
         }
-
     }
 
-    public function logout(Request $request) {
-        Auth::logout();
+    public function userDashboard()
+    {
+        if (Auth::check()) {
+            return view('frontend.dashboard');
+        } {
+            return view('/login');
+        }
+    }
+
+    public function adminlogout(Request $request)
+    {
+        Auth::guard('admin')->logout();
+        $request->session()->regenerateToken();
         return redirect()->route('admin.login');
+    }
+
+
+    public function logout(Request $request)
+    {
+        Auth::guard('web')->logout();
+        $request->session()->regenerateToken();
+        return redirect()->route('login');
     }
 }

@@ -22,5 +22,8 @@
   <link rel="stylesheet" href="{{asset('admin/plugins/flag-icon-css/css/flag-icon.min.css')}}">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <link href="{{asset('admin/plugins/summernote/summernote-bs4.css')}}" rel="stylesheet">
+   <!-- iCheck for checkboxes and radio inputs -->
+   <link rel="stylesheet" href="{{asset('admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
+
 
 

@@ -60,6 +60,7 @@
                 <ul class="nos-avantages-ul">
                     @foreach($widget as $wt)
                     @if($wt->slug == 'our_added_value')
+                    @php $circle = ($wt->id%2==0)?'img_discover':'img_discover'; @endphp
                     <li>
                         <div class="discover_card index-our">
                             <div class="img_discover ">
@@ -96,9 +97,10 @@
                     <ul class="comment-ul d-inline-flex">
                         @foreach($widget as $wt)
                         @if($wt->slug == 'how_it_works')
+                    @php $circle = ($wt->id%2==0)?'blue-border':'pink-border'; @endphp
                         <li>
                             <div class="comment-img">
-                                <div class="blue-border">
+                            <div class="{{$circle}}">
                                     <img src="{{asset($wt->image)}}" />
                                 </div>
                             </div>

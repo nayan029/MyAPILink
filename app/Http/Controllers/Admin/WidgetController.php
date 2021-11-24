@@ -33,6 +33,11 @@ class WidgetController extends Controller
         'slug' => 'required',
     ];
 
+    protected $slugupdaterules = [
+        'slug' => 'required',
+        'description' => 'required',
+    ];
+
     protected $widgetRepository = "";
     /**
      * Display a listing of the resource.
@@ -129,20 +134,21 @@ class WidgetController extends Controller
     {
         if($request->slug=="how_it_works")
         {
-            $validation = Validator::make($request->all(), $this->slugvalidationrules);
+            $validation = Validator::make($request->all(), $this->slugupdaterules);
         }else{
-            $validation = Validator::make($request->all(), $this->updatevalidationrules);
+            $validation = Validator::make($request->all(), $this->slugvalidationrules);
         }
         
         if ($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors());
         }
-
+        
         $updateWidget = $this->widgetRepository->updateWidget($request, $id);
+
         if ($updateWidget) {
             Session::flash('success', 'Successfully updated');
             return redirect()->route('widget.index');
-        }
+    }
     }
 
     /**

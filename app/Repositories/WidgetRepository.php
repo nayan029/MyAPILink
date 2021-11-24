@@ -27,7 +27,6 @@ class WidgetRepository implements WidgetRepositoryInterface
     public function updateWidget(Request $request, $id)
     {
         $data = $request->all();
-        
         $image = "";
         $widget = $this->getSingleWidget($id);
         if ($request->hasFile('image')) {
@@ -43,7 +42,6 @@ class WidgetRepository implements WidgetRepositoryInterface
     public function deleteWidget($id)
     {
         $widget = $this->getSingleWidget($id);
-
         if(File::exists($widget->image)){
         unlink("".$widget->image);
         }

@@ -1,7 +1,7 @@
 @extends('backend.master')
 @section('css')
 <style>
-    #widget-update input {
+    #skill-update input {
         width: 100%;
     }
 </style>
@@ -17,34 +17,35 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                {!! Form::model($widget,['method' => 'PUT', 'route' => ['widget.update',$widget->id], 'files' => true,'id'=>'widget-update']) !!}
+                {!! Form::model($skill,['method' => 'PUT', 'route' => ['skill.update',$skill->id], 'files' => true,'id'=>'skill-update']) !!}
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                {!! Form::label('slug','Select Widget') !!}
-                                {!! Form::select('slug',$widgets,old('slug')?old('slug'):$widget->slug, ['class' => 'form-control', 'multiple' => false,'placeholder' => 'Please select widget','id'=>'slug']) !!}
-                            </div>
-                        </div>
                         <div class="col-md-4 slug">
                             <div class="form-group ">
-                                {!! Form::label('title', 'Title') !!}
-                                {!! Form::text('title', old('title'), ['class' => 'form-control', 'placeholder' => 'Enter Title','id'=>'title']) !!}
+                                {!! Form::label('name', 'Name') !!}
+                                {!! Form::text('name', old('name'), ['class' => 'form-control', 'placeholder' => 'Enter Name','id'=>'name']) !!}
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                {!! Form::label('image', 'Image') !!}
-                                {!! Form::file('image', old('image'), ['class' => 'form-control','id'=>'image']) !!}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
+                        <div class="col-md-12">
                         <div class="form-group">
                             {!! Form::label('description', 'Description') !!}
                             {!! Form::textarea('description', old('description'), ['class' => 'form-control', 'placeholder' => 'Enter Description','id'=>'summernote']) !!}
                         </div>
                     </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('image', 'Image') !!}
+                                {!! Form::file('image', old('image'), ['class' => 'form-control','id'=>'image']) !!}
+                            </div>
+                        </div>     
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            {!! Form::label('my-checkbox', 'Status') !!}
+                            {!! Form::checkbox('status', '1', true  , ['id' => 'status', 'name' => 'status', 'data-bootstrap-switch','data-off-color' => 'danger','data-on-color'=>'success','checked']) !!}
+                            </div>
+                        </div>            
                 </div>
                 <!-- /.card-body -->
 
@@ -61,15 +62,5 @@
     @section('script')
     @section('script')
     <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-    {!! $validator->selector('#widget-update') !!}
-    <script>
-        var slug = $('#slug').val();
-        alert
-        if (slug == 'how_it_works') {
-            $('.slug').hide();
-        } else {
-            $('.slug').show();
-
-        }
-    </script>
+    {!! $validator->selector('#skill-update') !!}
     @endsection

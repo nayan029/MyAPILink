@@ -37,8 +37,13 @@ Route::middleware(['auth:admin'])->group(function ($route) {
         $adminRoute->get('admin/dashborad', 'LoginController@adminDashboard')->name('admin.dashboard');
         $adminRoute->post('admin/logout', 'LoginController@adminlogout')->name('admin.logout');
 
+        //Widget module
         $adminRoute->resource('widget','WidgetController');
         $adminRoute->get('/getdata','WidgetController@getAjaxData')->name('widget.data');
+
+        //Skills module
+        $adminRoute->resource('skill','SkillsController');
+        $adminRoute->get('/skilldata','SkillsController@getData')->name('skill.data');
 
     });
 

@@ -1,0 +1,883 @@
+@media screen and (min-width: 1920px) {
+    .nos-imgs-res {
+        height: 100vh;
+    }
+    .noscarousel .owl-nav .owl-next img,
+    .noscarousel .owl-nav .owl-prev img {
+        height: 20px;
+        margin-top: 40px;
+    }
+    .mt-nos-minus {
+        /* margin-top: -402px; */
+        margin-bottom: 80px;
+        margin-top: -97vh;
+    }
+}
+
+@media screen and (min-width: 1300px) {}
+
+
+/*----------------------------------------------------------------------------------------------*/
+
+@media screen and (min-width: 1200px) {}
+
+
+/*----------------------------------------------------------------------------------------------*/
+
+@media screen and (min-width: 1200px) and (max-width: 1299px) {}
+
+
+/*----------------------------------------------------------------------------------------------*/
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    .dropzone-desc {
+        top: 32px;
+    }
+    .profile-img img {
+        height: 215px;
+    }
+    .sr-radio .custom-control-input:checked~.custom-control-label::after {
+        background-size: 84%;
+    }
+    .img-ul li:nth-child(4n+4) {
+        margin-right: 10px;
+    }
+    .img-ul li:nth-child(3n+3) {
+        margin-right: 0px;
+    }
+    .edit-line-tab .nav-link {
+        margin: 0 18px;
+    }
+    .res-sr-mr {
+        margin-right: 0px!important;
+    }
+    .btn-save,
+    .btn-save:hover {
+        width: auto;
+    }
+    .une_h1 {
+        font-size: 32px;
+    }
+    .women-img img {
+        height: 197px;
+    }
+    .women-img {
+        position: absolute;
+        right: -28px;
+        bottom: 0px;
+    }
+    .vous_h5 {
+        font-size: 17px;
+    }
+    .flower img {
+        display: none;
+    }
+    .res-dec .btn-blue {
+        border-radius: 38px;
+        padding: 12px 30px;
+        font-size: 13px;
+    }
+    .mens-img img {
+        height: 252px;
+    }
+    .blue_front_img img {
+        height: 313px;
+        width: 313px;
+    }
+    .blue_front_img {
+        right: 19px;
+    }
+    .btn-receive .btn-blue {
+        font-size: 16px;
+    }
+    .register-line-tab .nav-link {
+        margin: 0 7px;
+        font-size: 25px;
+    }
+    .img_content img {
+        height: 120px;
+        width: 120px;
+    }
+    .res-mb-15 {
+        margin-bottom: 20px;
+    }
+    .img-ul li:nth-child(3n+3) {
+        margin-right: 10px;
+    }
+    .img-ul li:nth-child(4n+4) {
+        margin-right: 0px;
+    }
+    .partner-ul li img {
+        width: 100%;
+        height: 84px;
+    }
+    .resbtn-flex {
+        flex-direction: column;
+        float: right;
+    }
+    .resbtn-flex .listviewjob {
+        margin-bottom: 10px;
+    }
+    .listapply {
+        min-width: 198px;
+    }
+    .mans-img-index .index-rightmans {
+        height: auto;
+    }
+    .mt-nos-minus {
+        margin-top: -373px;
+    }
+}
+
+
+/*----------------------------------------------------------------------------------------------*/
+
+@media screen and (max-width: 991px) {
+    .register-line-tab {
+        flex-wrap: nowrap;
+    }
+    .sr-nav-link {
+        font-size: 18px;
+    }
+}
+
+
+/*----------------------------------------------------------------------------------------------*/
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .login {
+        display: flex;
+        justify-content: center;
+        padding: 0px 36px 0;
+        flex-direction: column;
+    }
+    .text-imgs p {
+        font-family: 'Quicksand-SemiBold';
+        font-size: 10px;
+    }
+    .edit-line-tab {
+        padding: 15px 10px 0px 10px;
+    }
+    .edit-line-tab .nav-link {
+        margin: 0 8px;
+        font-size: 13px;
+    }
+    .edit-line-tab .nav-link svg {
+        display: none;
+    }
+    .application_btn .btn-blue {
+        padding: 10px 26px;
+        font-family: 'Quicksand-SemiBold';
+        font-size: 15px;
+    }
+    .res-mb-15 {
+        margin-bottom: 20px;
+    }
+    .candidate-personaldetail {
+        margin: 20px 3px;
+    }
+    .tab-space {
+        padding: 20px 3px;
+    }
+    .table-padd {
+        padding: 0 20px;
+    }
+    .res-sr-mr {
+        margin-right: 0px!important;
+    }
+    .img_content img {
+        height: 100px;
+        width: 100px;
+    }
+    .img-ul li:nth-child(3n+3) {
+        margin-right: 0px;
+    }
+    .img-ul li:nth-child(4n+4) {
+        margin-right: 10px;
+    }
+    .pl-res {
+        padding-left: 0px;
+    }
+    .chat-container .mid ul li {
+        display: flex;
+        max-width: 100%;
+    }
+    .loginimg-text .log-wel {
+        font-size: 38px;
+    }
+    .register-line-tab .nav-link {
+        margin: 0px 17px;
+    }
+    .btn-blue {
+        background: #192842;
+        color: #fff!important;
+        box-shadow: 0px 3px 6px #00000029;
+        border-radius: 38px;
+        padding: 10px 34px;
+        font-family: 'Quicksand-Bold';
+        font-size: 17px;
+    }
+    .sr-nav-link.active div .regtab-border {
+        border-bottom: 3px solid #fcc55b;
+        width: 50px;
+        border-radius: 20px;
+        margin-top: 9px;
+    }
+    .register-line-tab .nav-link {
+        height: 20px;
+    }
+    .cus-drop {
+        font-size: 13px!important;
+    }
+    .sr-cuscheck label {
+        font-size: 14px;
+    }
+    .loginimg-text p {
+        font-size: 14px;
+    }
+    .profile-progress .progress {
+        border-radius: 50px;
+        width: 150px;
+        overflow: inherit;
+        height: 12px;
+    }
+    .sr-nav-pills .nav-link,
+    .sr-nav-pills .nav-link.active,
+    .sr-nav-pills .show>.nav-link {
+        margin-right: 65px;
+    }
+    .prof-resimg {
+        height: 250px;
+        object-fit: cover;
+    }
+    .btn-fn {
+        font-size: 12px;
+    }
+    .profile-img img {
+        height: 206px;
+    }
+    .check-box-sec {
+        padding: 0 15px;
+    }
+    .profile-first-tab .form-group label {
+        font-size: 13px;
+    }
+    .dropzone-desc {
+        top: 24px;
+    }
+    .sr-radio .custom-control-input:checked~.custom-control-label::after {
+        background-size: 84%;
+    }
+    .btn-search {
+        background: #75BFD3;
+        color: #050A30;
+        box-shadow: 0px 3px 6px #00000029;
+        border-radius: 38px;
+        padding: 14px;
+        font-family: 'Quicksand-Bold';
+        font-size: 13px;
+        white-space: nowrap;
+        margin-left: 3px!important;
+    }
+    .search-div {
+        padding: 15px;
+    }
+    .search-bottom {
+        top: 36px;
+    }
+    .job-title {
+        font-size: 30px;
+    }
+    .cont-detail-ul .image-box img {
+        height: 16px;
+        width: 16px;
+    }
+    /* 13/10/2021 */
+    .back span i {
+        font-size: 24px;
+    }
+    .back,
+    .back a {
+        font-size: 13px;
+    }
+    .res-message .btn-profile {
+        padding: 9px 12px;
+        font-size: 13px;
+    }
+    .message-btn-profile {
+        margin-bottom: 15px!important;
+    }
+    .send img {
+        height: 17px !important;
+        width: 17px !important;
+    }
+    .message-header img {
+        height: 18px;
+        width: 17px;
+    }
+    .chat_document {
+        margin-right: 5px;
+    }
+    .chat-buttons button img {
+        width: 21px;
+        height: 21px;
+    }
+    .btn-save,
+    .btn-save:hover {
+        width: auto;
+    }
+    .personal_detail_edit {
+        padding: 50px 10px;
+    }
+    .une_h1 {
+        font-size: 24px;
+    }
+    .recruter_h4 {
+        font-size: 17px;
+    }
+    .mens-img,
+    .leffes-bg,
+    .women-img img,
+    .flower img {
+        display: none;
+    }
+    .mens-img,
+    .leffes-bg,
+    .women-img img,
+    .flower img {
+        display: none;
+    }
+    ul.ul_check,
+    ul.offer_ul {
+        max-width: 100%;
+    }
+    .access_p {
+        max-width: 100%;
+    }
+    .discover_text h4 {
+        font-size: 16px;
+    }
+    h2.confident_h2 {
+        font-size: 24px !important;
+    }
+    ul.offer_ul li {
+        font-size: 16px;
+    }
+    ul.offer_ul li::before {
+        margin-top: 3px;
+        font-size: 15px;
+    }
+    .blue_front_img {
+        top: 31px;
+        right: 16px;
+    }
+    .blue_front_img img {
+        height: 280px;
+        width: 280px;
+    }
+    .res-none {
+        display: none;
+    }
+    .footer-headings {
+        font-size: 20px;
+        padding-bottom: 23px;
+    }
+    .footer-inner {
+        min-height: auto;
+    }
+    .partner-ul li img {
+        height: 59px;
+    }
+    .footer-bottom {
+        padding: 15px 0;
+        text-align: center;
+    }
+    .copyright_text {
+        margin-bottom: 7px;
+    }
+    .resbtn-flex {
+        flex-direction: column;
+        float: right;
+    }
+    .resbtn-flex .listviewjob {
+        margin-bottom: 10px;
+    }
+    .listapply {
+        min-width: 198px;
+    }
+    ul.comment-ul.d-inline-flex li:after {
+        display: none;
+    }
+    .comment-ul li {
+        flex: 0 0 33.33%;
+        max-width: 33.33%;
+        width: 33.33%!important;
+        margin-bottom: 30px;
+    }
+}
+
+
+/*----------------------------------------------------------------------------------------------*/
+
+@media (max-width: 767px) {
+    .login {
+        display: flex;
+        justify-content: center;
+        padding: 46px 49px 23px;
+        flex-direction: column;
+    }
+    .padding_view_profile {
+        padding-left: 0px;
+    }
+    .login-back,
+    .regback {
+        display: none;
+    }
+    .register-line-tab .nav-link {
+        margin: 0 15px;
+    }
+    .pd-top {
+        padding: 50px 20px 30px;
+    }
+    .sr-nav-link.active div .regtab-border {
+        width: 82px;
+    }
+    .btn-blue {
+        background: #192842;
+        color: #fff!important;
+        box-shadow: 0px 3px 6px #00000029;
+        border-radius: 38px;
+        padding: 10px 25px;
+        font-family: 'Quicksand-Bold';
+        font-size: 18px;
+    }
+    .prof-resimg {
+        height: 300px;
+    }
+    .jus-res {
+        justify-content: center;
+    }
+    .prof-head2-inner {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    .sr-nav-pills .nav-link {
+        margin-right: 50px;
+    }
+    .sr-nav-pills .nav-link.active,
+    .sr-nav-pills .show>.nav-link {
+        margin-right: 50px;
+    }
+    .progress-main span {
+        white-space: nowrap;
+    }
+    .profile-progress .progress {
+        width: 200px;
+    }
+    .progress-main {
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+    .fileUpload span {
+        font-size: 12px;
+    }
+    .check-box-sec {
+        padding: 0 15px;
+    }
+    .dropzone-desc {
+        position: absolute;
+        left: 0;
+        right: 0;
+        text-align: center;
+        width: 101%;
+        top: 38px;
+        font-size: 16px;
+    }
+    .profile-first-tab .form-group label {
+        font-size: 13px;
+    }
+    .btn-yellow {
+        padding: 12px 31px;
+        font-size: 17px;
+    }
+    .job-title {
+        padding: 20px 0;
+        font-size: 25px;
+    }
+    .accmanage-title {
+        font-size: 16px;
+    }
+    .cus-calender .fc-unthemed .fc-toolbar h2 {
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+    }
+    .cale-modal {
+        padding: 3px 20px 20px;
+    }
+    .mw-300 {
+        min-width: 245px;
+    }
+    .job-border-ul {
+        flex-wrap: wrap;
+    }
+    .job-border-ul li {
+        border-right: 0;
+    }
+    .job-listing-flex {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .listviewjob,
+    .listapply {
+        padding: 8px 9px;
+        margin-bottom: 10px;
+    }
+    .job-listing-flex h5 {
+        font-size: 17px;
+    }
+    .search-div {
+        text-align: center;
+        background: #fff;
+        box-shadow: 0px 3px 6px #00000029;
+        border-radius: 56px;
+        padding: 10px;
+    }
+    .btn-search {
+        margin-left: 9px!important;
+        font-size: 11px;
+        padding: 15px 10px;
+    }
+    .cus-search {
+        flex: 0 0 100%!important;
+        max-width: 100%!important;
+    }
+    .list-wrap {
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+    .chat-container .mid ul li {
+        max-width: 100%;
+    }
+    /* 13/10/2021 */
+    .message-btn-profile {
+        margin-top: 15px;
+        margin-bottom: 15px!important;
+        flex-direction: column;
+    }
+    .mt-back {
+        margin-bottom: 10px;
+    }
+    .res-message {
+        margin-left: auto;
+    }
+    .profile-row-pd {
+        padding: 0px !important;
+    }
+    .res-iconitem {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .table-padd {
+        padding: 0 15px;
+    }
+    .img_content img {
+        height: 135px;
+        width: 135px;
+    }
+    .download-table {
+        white-space: nowrap;
+    }
+    .download-img {
+        margin-left: 20px;
+    }
+    .img-ul li:nth-child(2n+2) {
+        margin-right: 0px;
+    }
+    .personal_detail_edit {
+        padding: 50px 10px;
+    }
+    .btn-save,
+    .btn-save:hover {
+        width: auto;
+    }
+    .btn-outline-cancel {
+        width: auto;
+    }
+    .edit-line-tab .nav-link {
+        height: 43px;
+    }
+    .mens-img,
+    .leffes-bg,
+    .women-img img,
+    .flower img {
+        display: none;
+    }
+    .une_h1 {
+        font-size: 28px;
+    }
+    .recruter_h4 {
+        font-size: 20px;
+    }
+    ul.ul_check,
+    ul.offer_ul {
+        max-width: 100%;
+    }
+    .blue_front_img img {
+        height: 290px;
+        width: 290px;
+    }
+    .blue_front_img {
+        right: 16px;
+        top: 26px;
+    }
+    h2.confident_h2 {
+        font-size: 26px;
+        margin-top: 25px;
+    }
+    .btn-receive .btn-blue {
+        padding: 12px 13px;
+        font-size: 13px;
+    }
+    h5.vous_h5 {
+        font-size: 17px;
+    }
+    .res-mb-15 {
+        margin-bottom: 15px;
+    }
+    .publier-title h1 {
+        font-size: 24px;
+    }
+    .profile1-je {
+        font-size: 12px;
+        margin-top: 10px!important;
+    }
+    .chat-input {
+        padding: 10px 140px 10px 20px !important;
+    }
+    .copyright_text {
+        margin-bottom: 12px;
+    }
+    .res-btn-column {
+        flex-direction: column;
+        align-items: center;
+    }
+    .upload_resume {
+        width: 77%;
+    }
+    ul.sr-ul {
+        padding-left: 27px;
+    }
+    .je_btn_text .footer-btn2 {
+        width: auto;
+        max-width: initial;
+    }
+    .recrute_btn_text .footer-btn-white {
+        width: auto;
+        max-width: initial;
+    }
+    .h1_ideal h1 {
+        font-size: 33px;
+    }
+    .mans-img-index .index-rightmans {
+        width: 100%;
+        height: auto;
+        margin-top: 30px;
+    }
+    .meets_text h2 {
+        font-size: 20px;
+        max-width: 100%;
+    }
+    .meets_ul ul li {
+        max-width: 100%;
+    }
+    .access_p {
+        max-width: 90%;
+    }
+    .nos-imgs-res {
+        object-fit: cover;
+        height: 250px;
+    }
+    .mt-nos-minus {
+        margin-top: -263px;
+        margin-bottom: 80px;
+    }
+    .noscarousel {
+        margin-top: 50px!important;
+    }
+    .noscarousel .owl-nav .owl-next img,
+    .noscarousel .owl-nav .owl-prev img {
+        display: none;
+    }
+    .comment-ul li:nth-child(even),
+    .comment-ul li:nth-child(odd) {
+        margin-right: 0px;
+        width: auto;
+    }
+    ul.comment-ul.d-inline-flex li:after {
+        display: none;
+    }
+    .comment-ul {
+        display: initial!important;
+    }
+    .discover_text {
+        font-size: 31px;
+    }
+    .noscarousel .owl-nav .owl-next span {
+        bottom: -15px;
+        left: -28px!important;
+        transform: none;
+        font-weight: 600;
+    }
+    .noscarousel .owl-nav .owl-prev span {
+        bottom: -15px;
+        transform: none;
+        right: -116px!important;
+        font-weight: 600;
+    }
+    .noscarousel .owl-nav .owl-next {
+        right: 18px;
+    }
+    .middle_text h1 {
+        font-size: 30px;
+    }
+
+}
+
+@media only screen and (max-width: 576px) {
+    .text-imgs p {
+        font-size: 11px;
+    }
+    .candidate_modal_desc p {
+        font-size: 13px;
+    }
+    .resume_modal {
+        padding: 0px 20px 10px 20px;
+    }
+    .footer-ul2 {
+        padding-bottom: 11px;
+    }
+    .footer-btn-white {
+        font-size: 12px;
+    }
+    .footer-btn2 {
+        font-size: 13px;
+        margin-left: 0px;
+    }
+    .btn-footer-left {
+        flex-direction: column;
+        margin-top: 12px;
+    }
+    .footer-bottom {
+        text-align: center;
+    }
+    .partner-ul li img {
+        width: 100%;
+        height: 96px;
+    }
+    .footer-bottom p {
+        font-size: 12px;
+    }
+    .profile-img img {
+        height: 240px;
+    }
+}
+
+@media screen and (min-width: 400px) and (max-width: 414px) {
+    .profile-img img {
+        height: 265px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .blue_front_img img {
+        height: 250px;
+        width: 250px;
+    }
+    .blue_front_img {
+        top: 26px;
+        right: 14px;
+    }
+    .chat-container .mid ul li .typing-bgs {
+        margin-bottom: 0px;
+        font-size: 10px;
+        padding: 8px 10px;
+    }
+    .chat_document img {
+        height: 13px;
+        width: 13px;
+        margin-right: -4px;
+    }
+    .send {
+        height: 30px;
+        width: 30px;
+    }
+    .chat-input {
+        padding: 10px 115px 10px 20px !important;
+    }
+    .chat-buttons {
+        top: 10px;
+    }
+    .chat-input::placeholder {
+        font-size: 11px;
+    }
+    .chat-buttons button img {
+        width: 16px;
+    }
+    .partner-ul li img {
+        width: 100%;
+        height: 76px;
+    }
+    .footer-bottom p {
+        font-size: 10px;
+    }
+    .footer-bottom {
+        padding: 15px 0;
+    }
+    .mw-300 {
+        min-width: 189px;
+    }
+    .btn-apply {
+        font-size: 11px;
+    }
+    .btn-viewjob {
+        font-size: 11px;
+    }
+    .job-listing-flex h5 {
+        font-size: 13px;
+    }
+    .footer-btn2 {
+        padding: 12px 16px;
+    }
+    .footer-btn-white {
+        padding: 14px 16px;
+    }
+    .dropzone-wrapper .dropzone-desc p {
+        font-size: 12px;
+    }
+    .profile-img img {
+        height: 205px;
+    }
+    .sr-nav-pills .nav-link.active,
+    .sr-nav-pills .show>.nav-link,
+    .sr-nav-pills .nav-link {
+        margin-right: 27px;
+    }
+    .profile-progress .progress {
+        width: 175px;
+    }
+    .sr-nav-pills .nav-link,
+    .sr-nav-pills .show>.nav-link,
+    .sr-nav-pills .nav-link.active {
+        padding: 13px 0;
+    }
+    .btn-yellow {
+        padding: 12px 31px;
+        font-size: 14px;
+    }
+    .job-title {
+        padding: 20px 0;
+        font-size: 19px;
+    }
+}

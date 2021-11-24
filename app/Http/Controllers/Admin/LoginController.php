@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Widget;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use JsValidator;
 use Illuminate\Http\Request;
@@ -47,7 +48,7 @@ class LoginController extends Controller
         }
         if (auth()->guard('web')->attempt($credentials)) {
             Session::flash('success', 'Login successfuly!!...');
-            return redirect()->route('/dashboard');
+            return redirect()->route('/home');
         }
     }
     public function adminDashboard()
@@ -61,8 +62,9 @@ class LoginController extends Controller
 
     public function userDashboard()
     {
+        $data['widget'] = Widget::get();
         if (Auth::check()) {
-            return view('frontend.dashboard');
+            return view('frontend.dashboard',$data);
         } {
             return view('/login');
         }

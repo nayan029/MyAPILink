@@ -18,3 +18,9 @@
      <link rel="stylesheet" href="{{asset('admin/css/style.css')}}">
      <link rel="stylesheet" href="{{asset('admin/plugins/select2/css/select2.min.css')}}">
      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+     <!-- flag-icon-css -->
+  <link rel="stylesheet" href="{{asset('admin/plugins/flag-icon-css/css/flag-icon.min.css')}}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link href="{{asset('admin/plugins/summernote/summernote-bs4.css')}}" rel="stylesheet">
+
+

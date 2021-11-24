@@ -29,11 +29,13 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="{{asset('admin/plugins/summernote/summernote-bs4.min.js')}}"></script>
 
 <script>
     $(function() {
         //Initialize Select2 Elements
-        $('.select2').select2()
+        $('.select2').select2();
+        $('#summernote').summernote();
     });
 </script>
 <script>

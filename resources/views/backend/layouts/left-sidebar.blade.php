@@ -10,9 +10,9 @@
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <a href="javascript:void(0);">{{\Illuminate\Support\Facades\Auth::user()->name}}</a> 
+            <a href="javascript:void(0);">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
         </div>
-    
+
         <!-- SidebarSearch Form -->
         <div class="form-inline">
             <div class="input-group" data-widget="sidebar-search">
@@ -38,20 +38,51 @@
                         </p>
                     </a>
                 </li>
-       
+                @php $locale = session()->get('locale'); @endphp
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            @switch($locale)
+                                @case('en')
+                                <img height="20px" width="30px" src="{{asset('Admin\dist\img\us.jpg')}}"> English
+                                @break
+                             
+                                @case('fr')
+                                <img height="20px" width="30px" src="{{asset('\Admin\dist\img\fr.png')}}"> French
+                                @break
+                                @default
+                                <img height="20px" width="30px" src="{{asset('\Admin\dist\img\fr.png')}}"> French
+                            @endswitch
+                            <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu lang  dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{url('languagee/en')}}">&nbsp;&nbsp;<img height="20px" width="30px" src="{{asset('\Admin\dist\img\us.jpg')}}">&nbsp; English</a>
+                         <br><br>    <a class="dropdown-item" href="{{url('languagee/fr')}}">&nbsp;&nbsp;<img height="20px" width="30px" src="{{asset('\Admin\dist\img\fr.png')}}">&nbsp; French</a>
+                          
+                        </div>
+                    </li>
+                <li class="nav-item">
+                    <a href="{{route('widget.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>  
+                        <p>
+                        {{__("messages.widget")}}
+                        </p>
+                    </a>
+                </li>
+
 
                 <li class="nav-item menu-open">
-                @if(Auth::guard('admin')->check())
+                    @if(Auth::guard('admin')->check())
                     <form action="{{route('admin.logout')}}" method="POST">
                         @csrf
                         <a href="javascript:void(0);" onclick="event.preventDefault();
                                                 this.closest('form').submit();" class="nav-link">
                             <i class="nav-icon fas fa-sign-out-alt"></i>
-                            <p>Logout</p>
+                            <p>{{__("messages.logout")}}</p>
                         </a>
                     </form>
                     @else
-                    
+
                     <form action="{{route('logout')}}" method="POST">
                         @csrf
                         <a href="#" onclick="event.preventDefault();

@@ -32,14 +32,21 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin'], function ($normalAdm
 //admin with login route access
 Route::middleware(['auth:admin'])->group(function ($route) {
     $route->group(['namespace' => 'App\Http\Controllers\Admin'], function ($adminRoute) {
+        $adminRoute->get('languagee/{locale}', 'LocalizationController@index');
+
         $adminRoute->get('admin/dashborad', 'LoginController@adminDashboard')->name('admin.dashboard');
         $adminRoute->post('admin/logout', 'LoginController@adminlogout')->name('admin.logout');
+
+        $adminRoute->resource('widget','WidgetController');
+        $adminRoute->get('/getdata','WidgetController@getAjaxData')->name('widget.data');
+
     });
+
 });
 
 Route::middleware(['auth:web', 'verified'])->group(function ($route) {
     $route->group(['namespace' => 'App\Http\Controllers\Admin'], function ($adminRoute) {
-        $adminRoute->get('user/dashboard', 'LoginController@userDashboard')->name('dashboard');
+        $adminRoute->get('/home', 'LoginController@userDashboard')->name('dashboard');
         $adminRoute->post('user/logout', 'LoginController@logout')->name('logout');
     });
 });

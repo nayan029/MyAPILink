@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('', function () {
     return view('welcome');
 });
@@ -37,11 +38,9 @@ Route::middleware(['auth:admin'])->group(function ($route) {
         $adminRoute->get('admin/dashborad', 'LoginController@adminDashboard')->name('admin.dashboard');
         $adminRoute->post('admin/logout', 'LoginController@adminlogout')->name('admin.logout');
 
-        $adminRoute->resource('widget','WidgetController');
-        $adminRoute->get('/getdata','WidgetController@getAjaxData')->name('widget.data');
-
+        $adminRoute->resource('widget', 'WidgetController');
+        $adminRoute->get('/getdata', 'WidgetController@getAjaxData')->name('widget.data');
     });
-
 });
 
 Route::middleware(['auth:web', 'verified'])->group(function ($route) {

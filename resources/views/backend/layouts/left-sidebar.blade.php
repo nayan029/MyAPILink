@@ -39,37 +39,43 @@
                     </a>
                 </li>
                 @php $locale = session()->get('locale'); @endphp
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            @switch($locale)
-                                @case('en')
-                                <img height="20px" width="30px" src="{{asset('Admin\dist\img\us.jpg')}}"> English
-                                @break
-                             
-                                @case('fr')
-                                <img height="20px" width="30px" src="{{asset('\Admin\dist\img\fr.png')}}"> French
-                                @break
-                                @default
-                                <img height="20px" width="30px" src="{{asset('\Admin\dist\img\fr.png')}}"> French
-                            @endswitch
-                            <span class="caret"></span>
-                        </a>
-                        <div class="dropdown-menu lang  dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{url('languagee/en')}}">&nbsp;&nbsp;<img height="20px" width="30px" src="{{asset('\Admin\dist\img\us.jpg')}}">&nbsp; English</a>
-                         <br><br>    <a class="dropdown-item" href="{{url('languagee/fr')}}">&nbsp;&nbsp;<img height="20px" width="30px" src="{{asset('\Admin\dist\img\fr.png')}}">&nbsp; French</a>
-                          
-                        </div>
-                    </li>
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        @switch($locale)
+                        @case('en')
+                        <img height="20px" width="30px" src="{{asset('Admin\dist\img\us.jpg')}}"> English
+                        @break
+
+                        @case('fr')
+                        <img height="20px" width="30px" src="{{asset('\Admin\dist\img\fr.png')}}"> French
+                        @break
+                        @default
+                        <img height="20px" width="30px" src="{{asset('\Admin\dist\img\fr.png')}}"> French
+                        @endswitch
+                        <span class="caret"></span>
+                    </a>
+                    <div class="dropdown-menu lang  dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{url('languagee/en')}}">&nbsp;&nbsp;<img height="20px" width="30px" src="{{asset('\Admin\dist\img\us.jpg')}}">&nbsp; English</a>
+                        <br><br> <a class="dropdown-item" href="{{url('languagee/fr')}}">&nbsp;&nbsp;<img height="20px" width="30px" src="{{asset('\Admin\dist\img\fr.png')}}">&nbsp; French</a>
+
+                    </div>
+                </li>
                 <li class="nav-item">
                     <a href="{{route('widget.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>  
+                        <i class="nav-icon fas fa-th"></i>
                         <p>
-                        {{__("messages.widget")}}
+                            {{__("messages.widget")}}
                         </p>
                     </a>
                 </li>
-
+                <li class="nav-item">
+                    <a href="{{route('partner.index')}}" class="nav-link">
+                        <i class="far fa-handshake"></i>&nbsp;&nbsp;
+                        <p>
+                            {{__("messages.partner")}}
+                        </p>
+                    </a>
+                </li>
 
                 <li class="nav-item menu-open">
                     @if(Auth::guard('admin')->check())

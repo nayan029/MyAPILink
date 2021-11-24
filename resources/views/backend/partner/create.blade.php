@@ -1,0 +1,78 @@
+@extends('backend.master')
+@section('css')
+
+@endsection
+@section('content')
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Create Partner</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                {!! Form::open(['method' => 'POST', 'route' => ['partner.store'], 'files' => true,'id'=>'partner-add']) !!}
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 hideshow">
+
+                            <div class="form-group">
+                                {!! Form::label('email', 'Email') !!}
+                                {!! Form::text('email', old('email'), ['class' => 'form-control', 'placeholder' => 'Enter Email','id'=>'email']) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('facebook_link', 'Facebook Link') !!}
+                                {!! Form::text('facebook_link', old('facebook_link'), ['class' => 'form-control', 'placeholder' => 'Enter Facebook Link','id'=>'facebook_link']) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('twitter_link', 'Twitter Link') !!}
+                                {!! Form::text('twitter_link', old('twitter_link'), ['class' => 'form-control', 'placeholder' => 'Enter Twitter Link','id'=>'twitter_link']) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('address', 'Address') !!}
+                                {!! Form::textarea('address', old('address'), ['class' => 'form-control', 'placeholder' => 'Enter Address','id'=>'address']) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {!! Form::label('mobile', 'Mobile') !!}
+                                {!! Form::text('mobile', old('mobile'), ['class' => 'form-control', 'placeholder' => 'Enter Mobile','id'=>'mobile']) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('youtube_link', 'Youtube Link') !!}
+                                {!! Form::text('youtube_link', old('youtube_link'), ['class' => 'form-control', 'placeholder' => 'Enter Youtube Link','id'=>'youtube_link']) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('instagram_link', 'Instagram Link') !!}
+                                {!! Form::text('instagram_link', old('instagram_link'), ['class' => 'form-control', 'placeholder' => 'Enter Instagram Link','id'=>'instagram_link']) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('linkdein_link', 'Linkedin Link') !!}
+                                {!! Form::text('linkdein_link', old('linkdein_link'), ['class' => 'form-control', 'placeholder' => 'Enter Linkedin Link','id'=>'linkdein_link']) !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+                {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.card-body -->
+
+
+<!-- /.card -->
+</div>
+</div>
+@endsection
+@section('script')
+<script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+{!! $validator->selector('#partner-add') !!}
+
+@endsection

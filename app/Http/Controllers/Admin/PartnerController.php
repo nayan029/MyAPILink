@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 use JsValidator;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
+use App\Http\Traits\ImageUploadTrait;
 
 class PartnerController extends Controller
 {
     protected $storevalidationrules = [
-        'address' => 'required|max:255',
-        'mobile' => 'required|max:10|min:10',
-        'email' => 'required|email',
+        'link' => 'required',
+        'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ];
 
     protected $PartnerRepository = "";
@@ -68,5 +68,10 @@ class PartnerController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getPartnerData(Request $request)
+    {
+        return $this->PartnerRepository->getPartnerdata($request);
     }
 }

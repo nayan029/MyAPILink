@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\OurPartnerController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +43,12 @@ Route::middleware(['auth:admin'])->group(function ($route) {
         $adminRoute->get('/getdata', 'WidgetController@getAjaxData')->name('widget.data');
 
         $adminRoute->resource('partner', 'PartnerController');
+        $adminRoute->get('/getpartenerdata', 'PartnerController@getPartnerData')->name('partner.data');
+
+
+        $adminRoute->get('contact', 'ContactController@index')->name('contact.data');
+        $adminRoute->get('contact/{id}/edit', 'ContactController@edit')->name('contact.edit');
+        $adminRoute->post('contact/update/{id}', 'ContactController@update')->name('contact.update');
     });
 });
 

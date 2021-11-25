@@ -16,44 +16,21 @@
                 {!! Form::open(['method' => 'POST', 'route' => ['partner.store'], 'files' => true,'id'=>'partner-add']) !!}
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6 hideshow">
 
-                            <div class="form-group">
-                                {!! Form::label('email', 'Email') !!}
-                                {!! Form::text('email', old('email'), ['class' => 'form-control', 'placeholder' => 'Enter Email','id'=>'email']) !!}
-                            </div>
-
-                            <div class="form-group">
-                                {!! Form::label('facebook_link', 'Facebook Link') !!}
-                                {!! Form::text('facebook_link', old('facebook_link'), ['class' => 'form-control', 'placeholder' => 'Enter Facebook Link','id'=>'facebook_link']) !!}
-                            </div>
-                            <div class="form-group">
-                                {!! Form::label('twitter_link', 'Twitter Link') !!}
-                                {!! Form::text('twitter_link', old('twitter_link'), ['class' => 'form-control', 'placeholder' => 'Enter Twitter Link','id'=>'twitter_link']) !!}
-                            </div>
-                            <div class="form-group">
-                                {!! Form::label('address', 'Address') !!}
-                                {!! Form::textarea('address', old('address'), ['class' => 'form-control', 'placeholder' => 'Enter Address','id'=>'address']) !!}
+                        <div class="col-md-6">
+                            <div class="container">
+                                {!! Form::label('image', 'Image') !!}
+                                {!! Form::file('image', old('image'), ['class' => 'form-control','id'=>'image']) !!}
                             </div>
                         </div>
+
                         <div class="col-md-6">
                             <div class="form-group">
-                                {!! Form::label('mobile', 'Mobile') !!}
-                                {!! Form::text('mobile', old('mobile'), ['class' => 'form-control', 'placeholder' => 'Enter Mobile','id'=>'mobile']) !!}
-                            </div>
-                            <div class="form-group">
-                                {!! Form::label('youtube_link', 'Youtube Link') !!}
-                                {!! Form::text('youtube_link', old('youtube_link'), ['class' => 'form-control', 'placeholder' => 'Enter Youtube Link','id'=>'youtube_link']) !!}
-                            </div>
-                            <div class="form-group">
-                                {!! Form::label('instagram_link', 'Instagram Link') !!}
-                                {!! Form::text('instagram_link', old('instagram_link'), ['class' => 'form-control', 'placeholder' => 'Enter Instagram Link','id'=>'instagram_link']) !!}
-                            </div>
-                            <div class="form-group">
-                                {!! Form::label('linkdein_link', 'Linkedin Link') !!}
-                                {!! Form::text('linkdein_link', old('linkdein_link'), ['class' => 'form-control', 'placeholder' => 'Enter Linkedin Link','id'=>'linkdein_link']) !!}
+                                {!! Form::label('link', 'Link') !!}
+                                {!! Form::text('link', old('link'), ['class' => 'form-control', 'placeholder' => 'Enter Link','id'=>'link']) !!}
                             </div>
                         </div>
+
                     </div>
                 </div>
                 <div class="card-footer">

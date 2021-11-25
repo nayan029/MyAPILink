@@ -76,6 +76,15 @@
                         </p>
                     </a>
                 </li>
+                @php $i=1; @endphp
+                <li class="nav-item">
+                    <a href="{{route('contact.edit',$i)}}" class="nav-link">
+                        <i class="far fa-address-book"></i>&nbsp;&nbsp;
+                        <p>
+                            {{__("messages.contact")}}
+                        </p>
+                    </a>
+                </li>
 
                 <li class="nav-item menu-open">
                     @if(Auth::guard('admin')->check())

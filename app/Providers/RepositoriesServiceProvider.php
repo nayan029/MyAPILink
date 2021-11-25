@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Interfaces\ContactRepositoryInterface;
 use App\Interfaces\ForgotPasswordRepositoryInterface;
 use App\Interfaces\PartnerRepositoryInterface;
 use App\Interfaces\WidgetRepositoryInterface;
+use App\Repositories\ContactRepository;
 use App\Repositories\ForgotPasswordRepository;
 use App\Repositories\PartnerRepository;
 use App\Repositories\WidgetRepository;
@@ -29,6 +31,10 @@ class RepositoriesServiceProvider extends ServiceProvider
 
         $this->app->bind(PartnerRepositoryInterface::class, function ($app) {
             return $app->make(PartnerRepository::class);
+        });
+
+        $this->app->bind(ContactRepositoryInterface::class, function ($app) {
+            return $app->make(ContactRepository::class);
         });
     }
 

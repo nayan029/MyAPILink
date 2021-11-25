@@ -17,8 +17,8 @@
                 <table id="widget-table" class="table table-bordered table-hover" class="display" style="width:100%">
                     <thead>
                         <tr>
-                            <th>No</th>
                             <th>Image</th>
+                            <th>Link</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -37,7 +37,29 @@
 </div>
 <!-- /.row -->
 @endsection
+
 @section('script')
 <!-- DataTables  & Plugins -->
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        loadData();
+    });
 
+    function loadData() {
+        $('#widget-table').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "searching": false,
+            "ajax": {
+                url: "{{ route('partner.data') }}",
+                columns: [{
+                    data: 'action',
+                    name: 'action'
+                }],
+                method: "get"
+            }
+        });
+    }
+</script>
 @endsection

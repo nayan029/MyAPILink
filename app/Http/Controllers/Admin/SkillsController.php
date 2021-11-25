@@ -15,11 +15,16 @@ class SkillsController extends Controller
         'name' => 'required',
         'description' => 'required',
         'image' => 'required',
+        'position' => 'required',
+        'title' => 'required',
+        'desc' => 'required',
     ];
     protected $updatevalidationrules = [
         'name' => 'required',
         'description' => 'required',
     ];
+
+ 
 
     protected $SkillRepository = "";
 
@@ -56,6 +61,7 @@ class SkillsController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         $validation = Validator::make($request->all(),$this->storevalidationrules);
         if($validation->fails()){
             return redirect()->back()->withErrors($validation->errors());

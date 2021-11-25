@@ -40,72 +40,72 @@
                                 {!! Form::textarea('description', old('description'), ['class' => 'form-control', 'placeholder' => 'Enter Description','id'=>'summernote']) !!}
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {!! Form::label('my-checkbox', 'Status') !!}
-                                {!! Form::checkbox('status', '1', true , ['id' => 'status', 'name' => 'status', 'data-bootstrap-switch','data-off-color' => 'danger','data-on-color'=>'success','checked']) !!}
-                            </div>
-                        </div>
+                    
                     </div>
                     <hr>
                     <br>
                     <div class="container">
                         <label>Add Position:</label>
-                        <div class="row">
-                            <div class="col-md-3">
+                        <div class="row" id="sectionRows">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     {!! Form::label('position', 'Position') !!}
-                                    {!! Form::text('position', old('position'), ['class' => 'form-control', 'placeholder' => 'Enter position','id'=>'position']) !!}
+                                    {!! Form::text('position[]',null,['class' => 'form-control', 'placeholder' => 'Enter position','id'=>'position']) !!}
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <div class="form-group">
                                     {!! Form::label('title', 'Title') !!}
-                                    {!! Form::text('title', old('title'), ['class' => 'form-control', 'placeholder' => 'Enter Title','id'=>'title']) !!}
+                                    {!! Form::text('title[]',null, ['class' => 'form-control', 'placeholder' => 'Enter Title','id'=>'title']) !!}
                                 </div>
                             </div>
-                            <div class="col-md-4" id="sectionRows">
-                                <div class="form-group">
-                                    {!! Form::label('description', 'Description') !!}
-                                    {!! Form::textarea('description', old('description'), ['class' => 'form-control summernote', 'placeholder' => 'Enter Description']) !!}
-                                </div>
-                            </div>
-                            <div class="col-md-1 mt-3">
-                                <div class="col-sm-6">
-                                    <div class="form-group" style="display: none;">
-                                        <label class="az-content-label tx-11 tx-medium tx-gray-600">Section Name:</label>
-                                        {!! Form::text('sections[]', null, ['class'=>'form-control', 'data-validation' => 'required', 'placeholder' => "Enter Section Name"]) !!}
-                                    </div>
-                                </div>
+                            <div class="col-md-1 mb-5">
                                 <a href="javascript:void(0);" class="btn btn-success btn-xs" id="addNewRow"><i class="fa fa-plus"></i></a>
                             </div>
                         </div>
-                        <div class="row row-xs newRowTemplate" style="display: none;">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    {!! Form::text('sections[]', null, ['class'=>'form-control', 'data-validation' => 'required', 'placeholder' => "Enter Section Name"]) !!}
-                                </div>
-                            </div>
-                            <div class="col-sm-2">
-                                <a href="javascript:;" class="btn btn-danger btn-sm removeRow">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                            </div>
                         </div>
 
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {!! Form::label('desc', 'Description') !!}
+                                    {!! Form::textarea('descs[]',null, ['class' => 'form-control summernote', 'placeholder' => 'Enter desc','id'=>'desc']) !!}
+                                </div>
+                            </div>
+                          
+                        <div id="appendNrerow">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Sr</th>
+                                        <th>Position</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="skillbody">
+
+                                </tbody>
+                            </table>
+
+                        </div>
                     </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
-                    {!! Form::close() !!}
                 </div>
+
+
             </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary" id="edit">Save</button>
+            </div>
+            {!! Form::close() !!}
         </div>
     </div>
-    <!-- /.card-body -->
+</div>
+</div>
+<!-- /.card-body -->
 
 
-    <!-- /.card -->
+<!-- /.card -->
 </div>
 </div>
 @endsection
@@ -116,10 +116,34 @@
     $(function() {
         $('.summernote').summernote();
     });
+    var id=1;
+
     $(document).on('click', "#addNewRow", function() {
-        var newRowCloned = $('.newRowTemplate').last().clone();
-        newRowCloned.show();
-        $("#sectionRows").append(newRowCloned);
+        /*var newRowCloned = $('#sectionRows').last().clone();
+        newRowCloned.show();*/
+        var position = $('#position').val();
+        var title = $('#title').val();
+        var desc = $("#desc").val();
+        var html = "<tr><td>"+i+"</td><td><input type='hidden' name='position[]' pos-value='" + position + "'>" + position + "</td><td><input type='hidden' name='title[]' title-value='" + title + "'>" + title + "</td><td><input type='hidden' name='desc[]' value='" + desc + "'>" + desc + "</td><td><a href='#' onclick='edit("+id+","+position+","+title+","+desc+")'><i class='fas fa-edit'></i></a></td></tr>";
+        i++;
+        $("#skillbody").append(html);
+        
+
+    });
+  
+    $(document).on('click', ".removeRow", function() {
+        var self = $(this);
+        self.parents(".newRowTemplate").remove();
+    });
+
+    function edit(id, position, title,desc) {
+        $('#position').val(position);
+        $('#title').val(title);
+        $("#desc").val(desc);
+    }
+    $("body").on("click", "#edit", function() {
+
+
     });
 </script>
 

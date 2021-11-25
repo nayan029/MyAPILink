@@ -5,6 +5,8 @@ namespace App\Repositories;
 use App\Http\Traits\ImageUploadTrait;
 use App\Interfaces\SkillRepositoryInterface;
 use App\Models\Skill;
+use App\Models\SkillPosition;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -18,35 +20,52 @@ class SkillRepository implements SkillRepositoryInterface
     }
     public function storeSkill(Request $request)
     {
+        dd($request->all());
         $image = "";
-        if($request->hasFile('image')){
-            $image=$this->uploadImage($request->file('image'),'skills');
+        if ($request->hasFile('image')) {
+            $image = $this->uploadImage($request->file('image'), 'skills');
         }
-        $data = $request->all();
-        $data['image']=$image;
-        return Skill::create($data);
+        $data = [
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => $image,
+        ];
+        $skill = Skill::create($data);
+        $skillposition = [];
+        if (count($request->position) > 0) {
+
+            foreach ($request->position as $key => $value) {
+                $skillposition[] = [
+                        'skill_id' => $skill->id,
+                        'position' => $value,
+                        'title' => $request['title'][$key],
+                        'desc' => $request['desc'][$key],
+                    ];
+            }
+            
+           return SkillPosition::create($skillposition);
+        }
     }
     public function updateSkill(Request $request, $id)
     {
         $data = $request->all();
         $skill = $this->getSingleSkill($id);
         $image = "";
-        if($request->hasFile('image')){
-            $image = $this->uploadImage($request->file('image'),'skills');
-        }else{
+        if ($request->hasFile('image')) {
+            $image = $this->uploadImage($request->file('image'), 'skills');
+        } else {
             $image = $skill->image;
         }
         $data['image'] = $image;
         $skill->update($data);
         return $skill;
-
     }
 
     public function destroySkill($id)
     {
         $skill = $this->getSingleSkill($id);
-        if(File::exists($skill->image)){
-            unlink("".$skill->image);
+        if (File::exists($skill->image)) {
+            unlink("" . $skill->image);
         }
         $skill->delete();
         return $skill;
@@ -80,21 +99,22 @@ class SkillRepository implements SkillRepositoryInterface
             'recordsFiltered' => $recordstotal,
             'data' => [],
         );
-        $skills = $query->orderBy('created_at','desc')->get();
-        foreach($skills as $skill){
-            $url = route("skill.show",$skill->id);
-            $nameAction = "<a href='".$url."'>".$skill->name."</a>";
-            $Image= "<img src='".url($skill->image)."' height='50px' width='50px'>";
-            $status = "<input type='checkbox' name='my-checkbox' checked data-bootstrap-switch data-off-color='danger' data-on-color='success'>
-            ";
+        $skills = $query->orderBy('created_at', 'desc')->get();
+        foreach ($skills as $skill) {
+            $url = route("skill.show", $skill->id);
+            $nameAction = "<a href='" . $url . "'>" . $skill->name . "</a>";
+            $Image = "<img src='" . url($skill->image) . "' height='50px' width='50px'>";
+           
 
-            $json['data'][] =[
+            $json['data'][] = [
                 $nameAction,
                 $Image,
                 $skill->description,
-                $status,
             ];
         }
         return $json;
+
+        
     }
+
 }

@@ -127,8 +127,6 @@
         var html = "<tr><td>"+i+"</td><td><input type='hidden' name='position[]' pos-value='" + position + "'>" + position + "</td><td><input type='hidden' name='title[]' title-value='" + title + "'>" + title + "</td><td><input type='hidden' name='desc[]' value='" + desc + "'>" + desc + "</td><td><a href='#' onclick='edit("+id+","+position+","+title+","+desc+")'><i class='fas fa-edit'></i></a></td></tr>";
         i++;
         $("#skillbody").append(html);
-        
-
     });
   
     $(document).on('click', ".removeRow", function() {

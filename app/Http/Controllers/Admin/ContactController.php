@@ -20,7 +20,7 @@ class ContactController extends Controller
     }
     protected $validationRules = [
         'email' => 'required|email',
-        'mobile' => 'required|min:10|max:10',
+        'mobile' => 'required|digits:10',
         'address' => 'required',
     ];
     public function edit($id)
@@ -38,6 +38,6 @@ class ContactController extends Controller
             return redirect()->back()->withErrors($validation->errors());
         }
         $this->contactRepository->updateContact($request, $id);
-        return redirect()->back()->with(Session::flash('success', 'Record Updated Successfully'));
+        return redirect()->back()->with(Session::flash('success', 'Successfully Updated'));
     }
 }

@@ -12,5 +12,6 @@ class Contact extends Model
     use SoftDeletes;
 
     protected $guarded = ['id'];
+    protected $dates = ['deleted_at'];
     protected $table = 'contact';
 }

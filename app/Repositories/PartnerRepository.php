@@ -53,12 +53,13 @@ class PartnerRepository implements PartnerRepositoryInterface
 
         $partners = $query->orderBy('created_at', 'desc')->get();
         foreach ($partners as $partner) {
-            $url = route("widget.show", $partner->id);
+            $url = route("partner.show", $partner->id);
             $Image = "<img src='" . url($partner->image) . "' height='50px' width='50px'>";
-
+            $action = "<a href='" . $url . "'>" . "<i class='fas fa-user-edit'></i>" . "</a>" . '&nbsp;&nbsp;' . "<a href='" . $url . "'>" . "<i class='fas fa-trash-alt'></i>" . "</a>";
             $json['data'][] = [
                 $Image,
                 $partner->link,
+                $action,
             ];
         }
         return $json;
@@ -70,6 +71,7 @@ class PartnerRepository implements PartnerRepositoryInterface
 
     public function updatePartner(Request $request, $id)
     {
+        echo "&nbsp;&nbsp;";
     }
 
     public function deletePartner($id)

@@ -9,18 +9,17 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title float-left">Widget List</h3>
-                <a href="{{route('widget.create')}}" class="btn btn-block btn-success btn-flat btn-sm float-right" style="width: 10%;">Add Widget</a>
+                <h3 class="card-title float-left">Our Partner List</h3>
+                <a href="{{route('partner.create')}}" class="btn btn-block btn-success btn-flat btn-sm float-right" style="width: 10%;">Add Partner</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
                 <table id="widget-table" class="table table-bordered table-hover" class="display" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Title</th>
-                            <th>Slug</th>
                             <th>Image</th>
-                            <th>Description</th>
+                            <th>Link</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
 
@@ -38,6 +37,7 @@
 </div>
 <!-- /.row -->
 @endsection
+
 @section('script')
 <!-- DataTables  & Plugins -->
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
@@ -52,7 +52,11 @@
             "serverSide": true,
             "searching": false,
             "ajax": {
-                url: "{{ route('widget.data') }}",
+                url: "{{ route('partner.data') }}",
+                columns: [{
+                    data: 'action',
+                    name: 'action'
+                }],
                 method: "get"
             }
         });

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 Route::get('', function () {
     return view('welcome');
@@ -46,7 +48,17 @@ Route::middleware(['auth:admin'])->group(function ($route) {
         $adminRoute->get('/skilldata','SkillsController@getData')->name('skill.data');
 
     });
+        $adminRoute->resource('widget', 'WidgetController');
+        $adminRoute->get('/getdata', 'WidgetController@getAjaxData')->name('widget.data');
 
+        $adminRoute->resource('partner', 'PartnerController');
+        $adminRoute->get('/getpartenerdata', 'PartnerController@getPartnerData')->name('partner.data');
+
+
+        $adminRoute->get('contact', 'ContactController@index')->name('contact.data');
+        $adminRoute->get('contact/{id}/edit', 'ContactController@edit')->name('contact.edit');
+        $adminRoute->post('contact/update/{id}', 'ContactController@update')->name('contact.update');
+    });
 });
 
 Route::middleware(['auth:web', 'verified'])->group(function ($route) {

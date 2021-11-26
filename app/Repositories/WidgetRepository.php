@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Http\Traits\ImageUploadTrait;
 use App\Interfaces\WidgetRepositoryInterface;
 use App\Models\Widget;
-use Illuminate\Support\Facades\File; 
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Exists;
 
@@ -27,11 +27,12 @@ class WidgetRepository implements WidgetRepositoryInterface
     public function updateWidget(Request $request, $id)
     {
         $data = $request->all();
+
         $image = "";
         $widget = $this->getSingleWidget($id);
         if ($request->hasFile('image')) {
             $image = $this->uploadImage($request->file('image'), 'widgets');
-        }else{
+        } else {
             $image = $widget->image;
         }
         $data['image'] = $image;
@@ -42,8 +43,14 @@ class WidgetRepository implements WidgetRepositoryInterface
     public function deleteWidget($id)
     {
         $widget = $this->getSingleWidget($id);
+<<<<<<< HEAD
         if(File::exists($widget->image)){
         unlink("".$widget->image);
+=======
+
+        if (File::exists($widget->image)) {
+            unlink("" . $widget->image);
+>>>>>>> dfb2a761bb8716ca216c38038778240c35d93232
         }
         $widget->delete();
         return $widget;
@@ -83,16 +90,16 @@ class WidgetRepository implements WidgetRepositoryInterface
             'draw' => $draw,
             'recordsTotal' => $recordstotal,
             'recordsFiltered' => $recordstotal,
-            'data' => [],   
+            'data' => [],
         );
 
-        $widgets = $query->orderBy('created_at','desc')->get();
+        $widgets = $query->orderBy('created_at', 'desc')->get();
         foreach ($widgets as $widget) {
             $url = route("widget.show", $widget->id);
             $nameAction = "<a href='" . $url . "'>" . $widget->title . "</a>";
-            $slugCon = str_replace('_',' ',ucwords($widget->slug,'_'));
+            $slugCon = str_replace('_', ' ', ucwords($widget->slug, '_'));
             $slug = "<a href='" . $url . "'>" . $slugCon . "</a>";
-            $Image = "<img src='".url($widget->image)."' height='50px' width='50px'>";
+            $Image = "<img src='" . url($widget->image) . "' height='50px' width='50px'>";
             $json['data'][] = [
                 $nameAction,
                 $slug,

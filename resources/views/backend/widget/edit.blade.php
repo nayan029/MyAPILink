@@ -32,6 +32,10 @@
                                 {!! Form::text('title', old('title'), ['class' => 'form-control', 'placeholder' => 'Enter Title','id'=>'title']) !!}
                             </div>
                         </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> dfb2a761bb8716ca216c38038778240c35d93232
                         <div class="col-md-4">
                             <div class="form-group">
                                 {!! Form::label('image', 'Image') !!}
@@ -46,15 +50,15 @@
                         </div>
                     </div>
                 </div>
-                <!-- /.card-body -->
-
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Update</button>
-                </div>
-                {!! Form::close() !!}
             </div>
-            <!-- /.card -->
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+            {!! Form::close() !!}
         </div>
+        <!-- /.card -->
     </div>
 
     @endsection

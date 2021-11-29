@@ -52,8 +52,8 @@
                                 {!! Form::text('instagram_link', old('instagram_link'), ['class' => 'form-control', 'placeholder' => 'Enter Instagram Link','id'=>'instagram_link']) !!}
                             </div>
                             <div class="form-group">
-                                {!! Form::label('linkdein_link', 'Linkedin Link') !!}
-                                {!! Form::text('linkdein_link', old('linkdein_link'), ['class' => 'form-control', 'placeholder' => 'Enter Linkedin Link','id'=>'linkdein_link']) !!}
+                                {!! Form::label('linkedin_link', ' Linkedin Link') !!}
+                                {!! Form::text('linkedin_link', old('linkedin_link'), ['class' => 'form-control', 'placeholder' => 'Enter Linkedin Link','id'=>'linkedin_link']) !!}
                             </div>
                         </div>
                     </div>

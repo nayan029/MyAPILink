@@ -9,12 +9,18 @@ use JsValidator;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use App\Http\Traits\ImageUploadTrait;
+use App\Models\Partner;
 
 class PartnerController extends Controller
 {
     protected $storevalidationrules = [
         'link' => 'required',
         'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ];
+
+    protected $updatevalidationrules =
+    [
+        'link' => 'required',
     ];
 
     protected $PartnerRepository = "";
@@ -49,19 +55,24 @@ class PartnerController extends Controller
     }
     public function show($id)
     {
-        //
     }
 
 
     public function edit($id)
     {
-        //
+        $data['validator'] = JsValidator::make($this->updatevalidationrules);
+        $data['partner'] = $this->PartnerRepository->getSinglePartner($id);
+        return view('backend.partner.edit', $data);
     }
 
 
     public function update(Request $request, $id)
     {
-        //
+        $validation = Validator::make($request->all(), $this->updatevalidationrules);
+        if ($validation->fails()) {
+            return redirect()->back()->withErrors($validation->errors());
+        }
+        dd($request->all());
     }
 
 

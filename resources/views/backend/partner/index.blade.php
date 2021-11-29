@@ -14,7 +14,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <table id="widget-table" class="table table-bordered table-hover" class="display" style="width:100%">
+                <table id="partner-table" class="table table-bordered table-hover" class="display" style="width:100%">
                     <thead>
                         <tr>
                             <th>Image</th>
@@ -47,15 +47,16 @@
     });
 
     function loadData() {
-        $('#widget-table').DataTable({
+        $('#partner-table').DataTable({
             "processing": true,
             "serverSide": true,
             "searching": false,
             "ajax": {
                 url: "{{ route('partner.data') }}",
                 columns: [{
-                    data: 'action',
-                    name: 'action'
+                    data: 'image',
+                    name: 'link',
+                    action: 'action'
                 }],
                 method: "get"
             }

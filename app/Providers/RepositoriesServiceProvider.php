@@ -34,7 +34,7 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(SkillRepositoryInterface::class, function ($app) {
             return $app->make(SkillRepository::class);
         });
-
+        
         $this->app->bind(PartnerRepositoryInterface::class, function ($app) {
             return $app->make(PartnerRepository::class);
         });

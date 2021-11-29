@@ -15,16 +15,13 @@ class SkillsController extends Controller
         'name' => 'required',
         'description' => 'required',
         'image' => 'required',
-        'position' => 'required',
-        'title' => 'required',
-        'desc' => 'required',
     ];
     protected $updatevalidationrules = [
         'name' => 'required',
         'description' => 'required',
     ];
 
- 
+
 
     protected $SkillRepository = "";
 
@@ -50,7 +47,7 @@ class SkillsController extends Controller
     public function create()
     {
         $data['validator'] = JsValidator::make($this->storevalidationrules);
-        return view('backend.skills.create',$data);
+        return view('backend.skills.create', $data);
     }
 
     /**
@@ -61,15 +58,13 @@ class SkillsController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
-        $validation = Validator::make($request->all(),$this->storevalidationrules);
-        if($validation->fails()){
+        $validation = Validator::make($request->all(), $this->storevalidationrules);
+        if ($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors());
         }
-
-        $storeskill = $this->SkillRepository->storeSkill($request);
-        if($storeskill){
-            Session::flash('success','Successfully inseted');
+          $storeskill = $this->SkillRepository->storeSkill($request); 
+        if ($storeskill) {
+            Session::flash('success', 'Successfully inseted');
             return redirect()->route('skill.index');
         }
     }
@@ -83,7 +78,7 @@ class SkillsController extends Controller
     public function show($id)
     {
         $data['skill'] = $this->SkillRepository->getSingleSkill($id);
-        return view('backend.skills.show',$data);
+        return view('backend.skills.show', $data);
     }
 
     /**
@@ -96,7 +91,7 @@ class SkillsController extends Controller
     {
         $data['validator'] = JsValidator::make($this->updatevalidationrules);
         $data['skill'] = $this->SkillRepository->getSingleSkill($id);
-        return view('backend.skills.edit',$data);
+        return view('backend.skills.edit', $data);
     }
 
     /**
@@ -108,17 +103,16 @@ class SkillsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validation = Validator::make($request->all(),$this->updatevalidationrules);
-        if($validation->fails()){
+        $validation = Validator::make($request->all(), $this->updatevalidationrules);
+        if ($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors());
         }
 
-        $updateskill = $this->SkillRepository->updateSkill($request,$id);
-        if($updateskill){
-            Session::flash('success','Sucessfully updated');
+        $updateskill = $this->SkillRepository->updateSkill($request, $id);
+        if ($updateskill) {
+            Session::flash('success', 'Sucessfully updated');
             return redirect()->route('skill.index');
         }
-
     }
 
     /**
@@ -129,14 +123,15 @@ class SkillsController extends Controller
      */
     public function destroy($id)
     {
-        $deleteskill = $this->SkillRepository->getSingleSkill($id);
-        if($deleteskill){
-            Session::flash('succes','Successfully deleted');
+        $deleteskill = $this->SkillRepository->destroySkill($id);
+        if ($deleteskill) {
+            Session::flash('success', 'Successfully deleted');
             return redirect()->route('skill.index');
         }
     }
 
-    public function getData(Request $request){
+    public function getData(Request $request)
+    {
 
         return $this->SkillRepository->getSkillData($request);
     }

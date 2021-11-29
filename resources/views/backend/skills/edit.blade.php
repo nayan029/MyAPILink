@@ -13,7 +13,7 @@
             <!-- general form elements -->
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Edit widget</h3>
+                    <h3 class="card-title">Edit Skill</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
@@ -26,6 +26,14 @@
                                 {!! Form::text('name', old('name'), ['class' => 'form-control', 'placeholder' => 'Enter Name','id'=>'name']) !!}
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('image', 'Image') !!}
+                                {!! Form::file('image', old('image'), ['class' => 'form-control','id'=>'image']) !!}
+                            </div>
+                        </div>       
+                        </div>   
+                    <div class="row">
                         <div class="col-md-12">
                         <div class="form-group">
                             {!! Form::label('description', 'Description') !!}
@@ -33,19 +41,7 @@
                         </div>
                     </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                {!! Form::label('image', 'Image') !!}
-                                {!! Form::file('image', old('image'), ['class' => 'form-control','id'=>'image']) !!}
-                            </div>
-                        </div>     
-                        <div class="col-md-6">
-                            <div class="form-group">
-                            {!! Form::label('my-checkbox', 'Status') !!}
-                            {!! Form::checkbox('status', '1', true  , ['id' => 'status', 'name' => 'status', 'data-bootstrap-switch','data-off-color' => 'danger','data-on-color'=>'success','checked']) !!}
-                            </div>
-                        </div>            
+                         
                 </div>
                 <!-- /.card-body -->
 
@@ -64,3 +60,5 @@
     <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
     {!! $validator->selector('#skill-update') !!}
     @endsection
+
+    

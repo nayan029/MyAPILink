@@ -11,7 +11,14 @@ class Skill extends Model
     use HasFactory,SoftDeletes;
 
     protected $guarded = ['id'];
+    protected $dates = ['deleted_at'];
+   
 
     protected $table = 'skills';
+
+    public function position()
+    {
+        return $this->hasMany(SkillPosition::class,'id','skills_id');
+    }
 
 }

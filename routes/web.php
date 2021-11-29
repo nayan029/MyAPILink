@@ -47,7 +47,6 @@ Route::middleware(['auth:admin'])->group(function ($route) {
         $adminRoute->resource('skill','SkillsController');
         $adminRoute->get('/skilldata','SkillsController@getData')->name('skill.data');
 
-    });
         $adminRoute->resource('widget', 'WidgetController');
         $adminRoute->get('/getdata', 'WidgetController@getAjaxData')->name('widget.data');
 

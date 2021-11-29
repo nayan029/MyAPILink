@@ -18,8 +18,8 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Description</th>
                             <th>Image</th>
+                            <th>Description</th>
                         </tr>
                     </thead>
 
@@ -50,7 +50,7 @@
             "processing": true,
             "serverSide": true,
             "searching": false,
-            "ajax": {
+            "ajax": {   
                 url: "{{ route('skill.data') }}",
                 method: "get"
             }

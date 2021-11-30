@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Skill;
 use App\Models\Widget;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use JsValidator;
@@ -63,6 +64,7 @@ class LoginController extends Controller
     public function userDashboard()
     {
         $data['widget'] = Widget::get();
+        $data['skill'] = Skill::get();
         if (Auth::check()) {
             return view('frontend.dashboard',$data);
         } {

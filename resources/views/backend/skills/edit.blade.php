@@ -31,17 +31,77 @@
                                 {!! Form::label('image', 'Image') !!}
                                 {!! Form::file('image', old('image'), ['class' => 'form-control','id'=>'image']) !!}
                             </div>
-                        </div>       
-                        </div>   
-                    <div class="row">
-                        <div class="col-md-12">
-                        <div class="form-group">
-                            {!! Form::label('description', 'Description') !!}
-                            {!! Form::textarea('description', old('description'), ['class' => 'form-control', 'placeholder' => 'Enter Description','id'=>'summernote']) !!}
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {!! Form::label('description', 'Description') !!}
+                                {!! Form::textarea('description', old('description'), ['class' => 'form-control', 'placeholder' => 'Enter Description','id'=>'summernote']) !!}
+                            </div>
+                        </div>
                     </div>
-                         
+                    <div class="row" id="sectionRows">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {!! Form::label('position', 'Position') !!}
+                                {!! Form::text('',null,['class' => 'form-control', 'placeholder' => 'Enter position','id'=>'position']) !!}
+                                <span class="poserror"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                {!! Form::label('title', 'Title') !!}
+                                {!! Form::text('',null, ['class' => 'form-control', 'placeholder' => 'Enter Title','id'=>'title']) !!}
+                                <span class="titerror"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-1 mb-5">
+                            <a href="javascript:void(0);" class="btn btn-success btn-xs" onclick="return validation();" id="addNewRow"><i class="fa fa-plus"></i></a>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {!! Form::label('desc', 'Description') !!}
+                            {!! Form::textarea('',null, ['class' => 'form-control ', 'placeholder' => 'Enter desc','id'=>'desc']) !!}
+                            <span class="descerror"></span>
+                        </div>
+                    </div>
+                    <div id="appendNrerow">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Sr</th>
+                                    <th>Position</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+
+
+
+                            <tbody id="skillbody">
+                                @if($skill_position)
+                                @foreach($skill_position as $key=>$sk)
+                                <tr>
+                                    <td>{{$key+1}}</td>
+                                    <td>{{$sk->position}}</td>
+                                    <td>{{$sk->title}}</td>
+                                    <td>{{$sk->desc}}</td>
+                                    <td><a href='javascript:void(0);' class='edit_row'><i class='fas fa-edit'></i></a></td>
+                                </tr>
+                                @endforeach
+                                @else
+                                <tr>No Data Found</tr>
+                                @endif
+                            </tbody>
+
+                        </table>
+
+                    </div>
                 </div>
                 <!-- /.card-body -->
 
@@ -50,6 +110,8 @@
                 </div>
                 {!! Form::close() !!}
             </div>
+
+
             <!-- /.card -->
         </div>
     </div>
@@ -59,6 +121,108 @@
     @section('script')
     <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
     {!! $validator->selector('#skill-update') !!}
-    @endsection
+    <script>
+        var getAllData = '{{$skill_position}}';
+            getAllData=getAllData.replace(/&quot;/gi,"\"");
+            getAllData=getAllData.replace(/\[/gi,"");
+            getAllData=getAllData.replace(/\]/gi,"");
+            getAllData=getAllData.split(',');
 
-    
+        var id = 1;
+        $(function() {
+                    $('.summernote').summernote();
+                    $.each(getAllData, function(index, value) {
+                        console.log(value.id);
+                            }); 
+                            loadPosition(id, position, title, desc);
+                    });
+
+                function validation() {
+                    var temp = 0;
+
+                    var position = $('#position').val();
+                    if (position == "") {
+                        $('.poserror').html("*please enter your position");
+                        temp++
+                    } else {
+                        $('.poserror').html("");
+
+                    }
+
+                    var position = $('#title').val();
+                    if (position == "") {
+                        $('.titerror').html("*please enter your position");
+                        temp++
+                    } else {
+                        $('.titerror').html("");
+                    }
+
+                    var position = $('#desc').val();
+                    if (position == "") {
+                        $('.descerror').html("*please enter your position");
+                        temp++
+                    } else {
+                        $('.descerror').html("");
+
+                    }
+
+                    if (temp == 0) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+
+
+
+                $(document).on('click', "#addNewRow", function() {
+                    var position = $('#position').val();
+                    var title = $('#title').val();
+                    var desc = $("#desc").val();
+                    loadPosition(id, position, title, desc);
+                });
+
+                function loadPosition(id, position, title, desc) {
+                    var html = "<tr row_id='" + id + "'><td>" + id + "</td><td><input type='hidden' name='position[]' value='" + position + "'/>" + position + "</td><td><input type='hidden' name='title[]' value='" + title + "'/>" + title + "</td><td><input type='hidden' name='descs[]' value='" + desc + "'/>" + desc + "</td><td><a href='javascript:void(0);' row_id='" + id + "' class='edit_row'><i class='fas fa-edit'></i></a><a href='javascript:void(0);' class='btn btn-save' row_id='" + id + "'> Save</a><a href='javascript:void(0);' class='btn removeRow'  row_id='" + id + "'> Delete</a></td></tr>";
+                    id++;
+
+                    $("#skillbody").append(html);
+                    $('#position').val('');
+                    $('#title').val('');
+                    $("#desc").val('');
+                }
+                $(document).on('click', ".edit_row", function() {
+                    var tbl_row = $(this).closest('tr');
+                    var row_id = tbl_row.attr('row_id');
+
+                    var pos = tbl_row.find("td:eq(1)").text();
+                    var tit = tbl_row.find("td:eq(2)").text();
+                    var des = tbl_row.find("td:eq(3)").text();
+
+                    $('#position').val(pos);
+                    $('#title').val(tit);
+                    $('#desc').val(des);
+
+                }); $(document).on('click', ".btn-save", function() {
+
+                    var p = $('#position').val();
+                    var t = $('#title').val();
+                    var d = $('#desc').val();
+
+                    var tbl_row = $(this).closest('tr');
+                    var row_id = tbl_row.attr('row_id');
+
+                    var pos = tbl_row.find("td:eq(1)").text(p);
+                    var tit = tbl_row.find("td:eq(2)").text(t);
+                    var des = tbl_row.find("td:eq(3)").text(d);
+
+                });
+
+
+                $(document).on('click', ".removeRow", function() {
+                    var self = $(this);
+                    self.parents("#skillbody").remove();
+                });
+    </script>
+
+    @endsection

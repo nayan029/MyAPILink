@@ -61,9 +61,11 @@ Route::middleware(['auth:admin'])->group(function ($route) {
     });
 });
 
+//frontend route list
+
 Route::middleware(['auth:web', 'verified'])->group(function ($route) {
-    $route->group(['namespace' => 'App\Http\Controllers\Admin'], function ($adminRoute) {
-        $adminRoute->get('/home', 'LoginController@userDashboard')->name('dashboard');
-        $adminRoute->post('user/logout', 'LoginController@logout')->name('logout');
+    $route->group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontRoute) {
+        $frontRoute->get('/home', 'HomeController@userDashboard')->name('dashboard');
+        $frontRoute->post('user/logout', 'HomeController@logout')->name('logout');
     });
 });

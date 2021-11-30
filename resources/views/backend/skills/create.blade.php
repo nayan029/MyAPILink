@@ -1,14 +1,6 @@
 @extends('backend.master')
 @section('css')
-<style>
-    #skill-add input {
-        width: 100%;
-    }
 
-    span {
-        color: red;
-    }
-</style>
 @endsection
 @section('content')
 <div class="row">
@@ -161,9 +153,9 @@
     }
 
     var id = 1;
-   
+
     $(document).on('click', "#addNewRow", function() {
-      
+
         /*var newRowCloned = $('#sectionRows').last().clone();
         newRowCloned.show();*/
         var position = $('#position').val();
@@ -177,31 +169,29 @@
 
 
         $("#skillbody").append(html);
-        
-	    $('.btn_save').hide();
-	    $('.btn_cancel').hide(); 
+
+        $('.btn_save').hide();
+        $('.btn_cancel').hide();
         $('#position').val('');
         $('#title').val('');
         $("#desc").val('');
     });
 
-    $(document).on('click', '.row_data', function(event) 
-{
+    $(document).on('click', '.row_data', function(event) {
 
-	event.preventDefault(); 
+        event.preventDefault();
 
-	if($(this).attr('edit_type') == 'button')
-	{
-		return false; 
-	}
+        if ($(this).attr('edit_type') == 'button') {
+            return false;
+        }
 
-	//make div editable
-	$(this).closest('input').attr('contenteditable', 'true');
-	//add bg css
-	$(this).addClass('bg-warning').css('padding','5px');
+        //make div editable
+        $(this).closest('input').attr('contenteditable', 'true');
+        //add bg css
+        $(this).addClass('bg-warning').css('padding', '5px');
 
-	$(this).focus();
-})	
+        $(this).focus();
+    })
     $(document).on('click', ".edit_row", function() {
         event.preventDefault();
 
@@ -212,45 +202,42 @@
         tbl_row.find('.edit_row').hide();
 
         tbl_row.find('.row_data')
-		.attr('contenteditable', 'true')
-		.attr('edit_type', 'button')
-		.addClass('bg-warning')
-		.css('padding','3px')
+            .attr('contenteditable', 'true')
+            .attr('edit_type', 'button')
+            .addClass('bg-warning')
+            .css('padding', '3px')
 
-        tbl_row.find('.row_data').each(function(index, val) 
-		{   
-			$(this).html( $(this).attr('original_entry') ); 
-		});  
+        tbl_row.find('.row_data').each(function(index, val) {
+            $(this).html($(this).attr('original_entry'));
+        });
 
 
 
     });
-    $(document).on('click', '.btn_cancel', function(event) 
-{
-	event.preventDefault();
+    $(document).on('click', '.btn_cancel', function(event) {
+        event.preventDefault();
 
-	var tbl_row = $(this).closest('tr');
+        var tbl_row = $(this).closest('tr');
 
-	var row_id = tbl_row.attr('row_id');
+        var row_id = tbl_row.attr('row_id');
 
-	//hide save and cacel buttons
-	tbl_row.find('.btn_save').hide();
-	tbl_row.find('.btn_cancel').hide();
+        //hide save and cacel buttons
+        tbl_row.find('.btn_save').hide();
+        tbl_row.find('.btn_cancel').hide();
 
-	//show edit button
-	tbl_row.find('.btn_edit').show();
+        //show edit button
+        tbl_row.find('.btn_edit').show();
 
-	//make the whole row editable
-	tbl_row.find('.row_data')
-	.attr('edit_type', 'click')	 
-	.removeClass('bg-warning')
-	.css('padding','') 
+        //make the whole row editable
+        tbl_row.find('.row_data')
+            .attr('edit_type', 'click')
+            .removeClass('bg-warning')
+            .css('padding', '')
 
-	tbl_row.find('.row_data').each(function(index, val) 
-	{   
-		$(this).html( $(this).attr('original_entry') ); 
-	});  
-});
+        tbl_row.find('.row_data').each(function(index, val) {
+            $(this).html($(this).attr('original_entry'));
+        });
+    });
 
 
 

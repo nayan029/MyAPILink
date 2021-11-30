@@ -64,7 +64,7 @@ class LoginController extends Controller
     {
         $data['widget'] = Widget::get();
         if (Auth::check()) {
-            return view('frontend.dashboard',$data);
+            return view('frontend.dashboard', $data);
         } {
             return view('/login');
         }

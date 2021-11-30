@@ -8,6 +8,8 @@ interface SkillRepositoryInterface
 {
     public function getSingleSkill($id);
 
+    public function getSKillPosition($id);
+
     public function storeSkill(Request $request);
 
     public function updateSkill(Request $request,$id);

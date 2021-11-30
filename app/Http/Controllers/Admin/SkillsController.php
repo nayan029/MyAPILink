@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\SkillRepositoryInterface;
+use App\Models\SkillPosition;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -90,6 +91,7 @@ class SkillsController extends Controller
     public function edit($id)
     {
         $data['validator'] = JsValidator::make($this->updatevalidationrules);
+        $data['skill_position'] = SkillPosition::where('skills_id',$id)->get();
         $data['skill'] = $this->SkillRepository->getSingleSkill($id);
         return view('backend.skills.edit', $data);
     }
@@ -102,7 +104,9 @@ class SkillsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+        
+        dd($request->all(),$id);
         $validation = Validator::make($request->all(), $this->updatevalidationrules);
         if ($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors());

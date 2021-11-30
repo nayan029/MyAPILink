@@ -44,7 +44,7 @@ Route::middleware(['auth:admin'])->group(function ($route) {
         $adminRoute->get('/getdata', 'WidgetController@getAjaxData')->name('widget.data');
 
         //Skills module
-        $adminRoute->resource('skill', 'SkillsController');
+        $adminRoute->resource('skill','SkillsController');
         $adminRoute->get('/skilldata', 'SkillsController@getData')->name('skill.data');
 
 
@@ -61,9 +61,13 @@ Route::middleware(['auth:admin'])->group(function ($route) {
     });
 });
 
+
+//frontend route list
+
 Route::middleware(['auth:web', 'verified'])->group(function ($route) {
-    $route->group(['namespace' => 'App\Http\Controllers\Admin'], function ($adminRoute) {
-        $adminRoute->get('/home', 'LoginController@userDashboard')->name('dashboard');
-        $adminRoute->post('user/logout', 'LoginController@logout')->name('logout');
+    $route->group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontRoute) {
+        $frontRoute->get('/home', 'HomeController@userDashboard')->name('dashboard');
+        $frontRoute->post('user/logout', 'HomeController@logout')->name('logout');
     });
+
 });

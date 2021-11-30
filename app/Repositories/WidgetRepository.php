@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Http\Traits\ImageUploadTrait;
+use App\Http\Traits\ImageuploadTrait;
 use App\Interfaces\WidgetRepositoryInterface;
 use App\Models\Widget;
 use Illuminate\Support\Facades\File;
@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class WidgetRepository implements WidgetRepositoryInterface
 {
-    use ImageUploadTrait;
+    use ImageuploadTrait;
 
     public function storeWidget(Request $request)
     {

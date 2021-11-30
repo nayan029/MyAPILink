@@ -86,12 +86,15 @@
                             <tbody id="skillbody">
                                 @if($skill_position)
                                 @foreach($skill_position as $key=>$sk)
-                                <tr>
+                                <tr row_id="{{$key+1}}">
                                     <td>{{$key+1}}</td>
-                                    <td>{{$sk->position}}</td>
-                                    <td>{{$sk->title}}</td>
-                                    <td>{{$sk->desc}}</td>
-                                    <td><a href='javascript:void(0);' class='edit_row'><i class='fas fa-edit'></i></a></td>
+                                    <td class="xyz">{{$sk->position}}<input type="hidden" class="position" name="position[]" value="{{$sk->position}}"></td>
+                                    <td>{{$sk->title}}<input type="hidden" class="title" name="title[]" value="{{$sk->title}}"></td>
+                                    <td>{{$sk->desc}}<input type="hidden" class="desc" name="descs[]" value="{{$sk->desc}}"></td>
+                                    <td><a href='javascript:void(0);' class="edit_row" row_id="{{$key+1}}"><i class='fas fa-edit'></i></a>
+                                        <a href='javascript:void(0);' class="btn btn-save" data-id="{{$sk->id}}" row_id="{{$key+1}}"><i class="fas fa-save text-success"></i></i></a>
+                                        <a href='javascript:void(0);' class="btn btn-cancel" row_id="{{$key+1}}"><i class="fas fa-trash-alt text-danger"></i></i></a>
+                                    </td>
                                 </tr>
                                 @endforeach
                                 @else
@@ -122,107 +125,131 @@
     <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
     {!! $validator->selector('#skill-update') !!}
     <script>
-        var getAllData = '{{$skill_position}}';
-            getAllData=getAllData.replace(/&quot;/gi,"\"");
-            getAllData=getAllData.replace(/\[/gi,"");
-            getAllData=getAllData.replace(/\]/gi,"");
-            getAllData=getAllData.split(',');
+        // var getAllData = '{{$skill_position}}';
+        // getAllData = getAllData.replace(/&quot;/gi, "\"");
+        // getAllData = getAllData.replace(/\[/gi, "");
+        // getAllData = getAllData.replace(/\]/gi, "");
+        // getAllData = getAllData.split(',');
 
-        var id = 1;
+        var id = '{{count($skill_position)+1}}';
         $(function() {
-                    $('.summernote').summernote();
-                    $.each(getAllData, function(index, value) {
-                        console.log(value.id);
-                            }); 
-                            loadPosition(id, position, title, desc);
-                    });
+            $('.summernote').summernote();
+        });
 
-                function validation() {
-                    var temp = 0;
+        function validation() {
+            var temp = 0;
 
-                    var position = $('#position').val();
-                    if (position == "") {
-                        $('.poserror').html("*please enter your position");
-                        temp++
-                    } else {
-                        $('.poserror').html("");
+            var position = $('#position').val();
+            if (position == "") {
+                $('.poserror').html("*please enter your position");
+                temp++
+            } else {
+                $('.poserror').html("");
 
-                    }
+            }
 
-                    var position = $('#title').val();
-                    if (position == "") {
-                        $('.titerror').html("*please enter your position");
-                        temp++
-                    } else {
-                        $('.titerror').html("");
-                    }
+            var position = $('#title').val();
+            if (position == "") {
+                $('.titerror').html("*please enter your position");
+                temp++
+            } else {
+                $('.titerror').html("");
+            }
 
-                    var position = $('#desc').val();
-                    if (position == "") {
-                        $('.descerror').html("*please enter your position");
-                        temp++
-                    } else {
-                        $('.descerror').html("");
+            var position = $('#desc').val();
+            if (position == "") {
+                $('.descerror').html("*please enter your position");
+                temp++
+            } else {
+                $('.descerror').html("");
 
-                    }
+            }
 
-                    if (temp == 0) {
-                        return true;
-                    } else {
-                        return false;
+            if (temp == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+
+
+        $(document).on('click', "#addNewRow", function() {
+            var position = $('#position').val();
+            var title = $('#title').val();
+            var desc = $("#desc").val();
+            loadPosition(id, position, title, desc);
+        });
+
+        function loadPosition(id, position, title, desc) {
+            var html = "<tr row_id='" + id + "'><td>" + id + "</td><td><input type='hidden' name='position[]' value='" + position + "'/>" + position + "</td><td><input type='hidden' name='title[]' value='" + title + "'/>" + title + "</td><td><input type='hidden' name='descs[]' value='" + desc + "'/>" + desc + "</td><td><a href='javascript:void(0);' row_id='" + id + "' class='edit_row'><i class='fas fa-edit'></i></a><a href='javascript:void(0);' class='btn btn-save' row_id='" + id + "'> Save</a><a href='javascript:void(0);' class='btn removeRow'  row_id='" + id + "'> Delete</a></td></tr>";
+            id++;
+
+            $("#skillbody").append(html);
+            $('#position').val('');
+            $('#title').val('');
+            $("#desc").val('');
+        }
+        $(document).on('click', ".edit_row", function() {
+            var tbl_row = $(this).closest('tr');
+            var row_id = tbl_row.attr('row_id');
+
+            var pos = tbl_row.find("td:eq(1)").text();
+            var tit = tbl_row.find("td:eq(2)").text();
+            var des = tbl_row.find("td:eq(3)").text();
+
+            $('#position').val(pos);
+            $('#title').val(tit);
+            $('#desc').val(des);
+
+        });
+        $(document).on('click', ".btn-save", function() {
+
+
+
+            var p = $('#position').val();
+            var t = $('#title').val();
+            var d = $('#desc').val();
+
+            var tbl_row = $(this).closest('tr');
+            var row_id = tbl_row.attr('row_id');
+
+            var pos = tbl_row.find("td:eq(1)").text(p);
+            var tit = tbl_row.find("td:eq(2)").text(t);
+            var des = tbl_row.find("td:eq(3)").text(d);
+
+            
+            var title = $('.title').val();
+            var description = $('.desc').val();
+            var id = $(this).attr("data-id");
+            updateSkillPostionData(position, title, description, id);
+
+        });
+
+        function updateSkillPostionData(position, title, description, id) {
+            var path = 'skill/'+id;
+            var fullPath = AppUrl+'/'+path;
+            $.ajax({
+                type: "PUT",
+                url: fullPath,
+                data: {
+                     _token:'{{ csrf_token() }}',
+                    id: id
+                },
+                success: function(response) {
+                    if (response.status == true) {
+                      
+                        toastr.success(response.msg);
                     }
                 }
+            });
+        }
 
 
-
-                $(document).on('click', "#addNewRow", function() {
-                    var position = $('#position').val();
-                    var title = $('#title').val();
-                    var desc = $("#desc").val();
-                    loadPosition(id, position, title, desc);
-                });
-
-                function loadPosition(id, position, title, desc) {
-                    var html = "<tr row_id='" + id + "'><td>" + id + "</td><td><input type='hidden' name='position[]' value='" + position + "'/>" + position + "</td><td><input type='hidden' name='title[]' value='" + title + "'/>" + title + "</td><td><input type='hidden' name='descs[]' value='" + desc + "'/>" + desc + "</td><td><a href='javascript:void(0);' row_id='" + id + "' class='edit_row'><i class='fas fa-edit'></i></a><a href='javascript:void(0);' class='btn btn-save' row_id='" + id + "'> Save</a><a href='javascript:void(0);' class='btn removeRow'  row_id='" + id + "'> Delete</a></td></tr>";
-                    id++;
-
-                    $("#skillbody").append(html);
-                    $('#position').val('');
-                    $('#title').val('');
-                    $("#desc").val('');
-                }
-                $(document).on('click', ".edit_row", function() {
-                    var tbl_row = $(this).closest('tr');
-                    var row_id = tbl_row.attr('row_id');
-
-                    var pos = tbl_row.find("td:eq(1)").text();
-                    var tit = tbl_row.find("td:eq(2)").text();
-                    var des = tbl_row.find("td:eq(3)").text();
-
-                    $('#position').val(pos);
-                    $('#title').val(tit);
-                    $('#desc').val(des);
-
-                }); $(document).on('click', ".btn-save", function() {
-
-                    var p = $('#position').val();
-                    var t = $('#title').val();
-                    var d = $('#desc').val();
-
-                    var tbl_row = $(this).closest('tr');
-                    var row_id = tbl_row.attr('row_id');
-
-                    var pos = tbl_row.find("td:eq(1)").text(p);
-                    var tit = tbl_row.find("td:eq(2)").text(t);
-                    var des = tbl_row.find("td:eq(3)").text(d);
-
-                });
-
-
-                $(document).on('click', ".removeRow", function() {
-                    var self = $(this);
-                    self.parents("#skillbody").remove();
-                });
+        // $(document).on('click', ".removeRow", function() {
+        //     var self = $(this);
+        //     self.parents("#skillbody").remove();
+        // });
     </script>
 
     @endsection

@@ -5,7 +5,7 @@
         width: 100%;
     }
 
-    span {
+    .error{
         color: red;
     }
 </style>
@@ -55,14 +55,14 @@
                                 <div class="form-group">
                                     {!! Form::label('position', 'Position') !!}
                                     {!! Form::text('',null,['class' => 'form-control', 'placeholder' => 'Enter position','id'=>'position']) !!}
-                                    <span class="poserror"></span>
+                                    <div class="error"><span class="poserror"></span></div>
                                 </div>
                             </div>
                             <div class="col-md-5">
                                 <div class="form-group">
                                     {!! Form::label('title', 'Title') !!}
                                     {!! Form::text('',null, ['class' => 'form-control', 'placeholder' => 'Enter Title','id'=>'title']) !!}
-                                    <span class="titerror"></span>
+                                    <div class="error"><span class="titerror"></span></div>
                                 </div>
                             </div>
                             <div class="col-md-1 mb-5">
@@ -75,7 +75,7 @@
                         <div class="form-group">
                             {!! Form::label('desc', 'Description') !!}
                             {!! Form::textarea('',null, ['class' => 'form-control ', 'placeholder' => 'Enter desc','id'=>'desc']) !!}
-                            <span class="descerror"></span>
+                            <div class="error"><span class="descerror"></span></div>
                         </div>
                     </div>
 

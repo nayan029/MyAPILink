@@ -19,6 +19,9 @@ class SkillRepository implements SkillRepositoryInterface
     {
         return Skill::findorfail($id);
     }
+    public function getSKillPosition($id){
+        return SkillPosition::findorfail($id);
+    }
     public function storeSkill(Request $request)
     {
         
@@ -64,7 +67,9 @@ class SkillRepository implements SkillRepositoryInterface
         $data['image'] = $image;
         $skill->update($data);
         // return $skill;
+        
 
+        $position = $this->getSKillPosition($id);
         $n = count($data['position']);
 
         for($i=0; $i<$n; $i++)
@@ -76,8 +81,7 @@ class SkillRepository implements SkillRepositoryInterface
                 'desc' => $data['descs'][$i],
             ];
 
-           DB::table('skill_position')->update($savedata);
-            //  SkillPosition::create($savedata);
+          $position->update($savedata);
         }
         return true;
     }

@@ -7,7 +7,6 @@ use App\Interfaces\WidgetRepositoryInterface;
 use App\Models\Widget;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rules\Exists;
 
 class WidgetRepository implements WidgetRepositoryInterface
 {
@@ -43,14 +42,9 @@ class WidgetRepository implements WidgetRepositoryInterface
     public function deleteWidget($id)
     {
         $widget = $this->getSingleWidget($id);
-<<<<<<< HEAD
-        if(File::exists($widget->image)){
-        unlink("".$widget->image);
-=======
 
         if (File::exists($widget->image)) {
             unlink("" . $widget->image);
->>>>>>> dfb2a761bb8716ca216c38038778240c35d93232
         }
         $widget->delete();
         return $widget;

@@ -8,6 +8,7 @@ use App\Models\Skill;
 use App\Models\SkillPosition;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 class SkillRepository implements SkillRepositoryInterface
@@ -20,31 +21,35 @@ class SkillRepository implements SkillRepositoryInterface
     }
     public function storeSkill(Request $request)
     {
-        dd($request->all());
+        
+        $data = $request->all();
+
         $image = "";
         if ($request->hasFile('image')) {
             $image = $this->uploadImage($request->file('image'), 'skills');
         }
-        $data = [
-            'name' => $request->name,
-            'description' => $request->description,
-            'image' => $image,
+        $skillsInsertArr = [
+            "name" => $data['name'],
+            "description" => $data['description'],
+            "image" => $image,
         ];
-        $skill = Skill::create($data);
-        $skillposition = [];
-        if (count($request->position) > 0) {
+        $skill = Skill::create($skillsInsertArr);
+        $n = count($data['position']);
 
-            foreach ($request->position as $key => $value) {
-                $skillposition[] = [
-                        'skill_id' => $skill->id,
-                        'position' => $value,
-                        'title' => $request['title'][$key],
-                        'desc' => $request['desc'][$key],
-                    ];
-            }
-            
-           return SkillPosition::create($skillposition);
+        for($i=0; $i<$n; $i++)
+        {
+            $savedata = [
+                'skills_id' => $skill->id,
+                'position' => $data['position'][$i],
+                'title' => $data['title'][$i],
+                'desc' => $data['descs'][$i],
+            ];
+
+           DB::table('skill_position')->insert($savedata);
+            //  SkillPosition::create($savedata);
         }
+        return true;
+       
     }
     public function updateSkill(Request $request, $id)
     {
@@ -82,7 +87,6 @@ class SkillRepository implements SkillRepositoryInterface
             0 => 'skills.name',
             1 => 'skills.description',
             2 => 'skills.image',
-            3 => 'skills.status',
         );
 
         $query = Skill::select('*');
@@ -104,7 +108,6 @@ class SkillRepository implements SkillRepositoryInterface
             $url = route("skill.show", $skill->id);
             $nameAction = "<a href='" . $url . "'>" . $skill->name . "</a>";
             $Image = "<img src='" . url($skill->image) . "' height='50px' width='50px'>";
-           
 
             $json['data'][] = [
                 $nameAction,
@@ -113,8 +116,5 @@ class SkillRepository implements SkillRepositoryInterface
             ];
         }
         return $json;
-
-        
     }
-
 }

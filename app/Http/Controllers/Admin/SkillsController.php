@@ -63,7 +63,7 @@ class SkillsController extends Controller
         if ($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors());
         }
-          $storeskill = $this->SkillRepository->storeSkill($request); 
+        $storeskill = $this->SkillRepository->storeSkill($request);
         if ($storeskill) {
             Session::flash('success', 'Successfully inseted');
             return redirect()->route('skill.index');

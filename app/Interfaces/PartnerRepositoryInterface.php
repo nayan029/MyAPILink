@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 interface PartnerRepositoryInterface
 {
 
-    public function getPartnerdata(Request $request);
+    public function getPartnerData(Request $request);
 
     public function storePartner(Request $request);
 

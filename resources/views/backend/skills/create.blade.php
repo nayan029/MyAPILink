@@ -4,7 +4,6 @@
     #skill-add input {
         width: 100%;
     }
-
     .error{
         color: red;
     }
@@ -177,7 +176,6 @@
 
 
         $("#skillbody").append(html);
-
 
         $('#position').val('');
         $('#title').val('');

@@ -23,12 +23,11 @@
                             <div class="container">
                                 {!! Form::label('image', 'Image') !!}
 
-                                {!! Form::file('image', ['id' => 'image', 'name' => 'file', 'class' => 'file']) !!}
+                                {!! Form::file('image', ['id' => 'image', 'name' => 'image', 'class' => 'file']) !!}
 
                                 &nbsp;&nbsp;
                                 <div>
                                     <img src="{{ asset($partner->image) }}" height="100px" width="100px" />
-                                    {!! Form::hidden('hidden', 'Hidden', ['id' => 'hidden', 'name' => 'hidden', 'class' => 'text text-hidden', 'value' => '$partner->image']) !!}
                                 </div>
 
                             </div>
@@ -61,5 +60,6 @@
 @section('script')
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 {!! $validator->selector('#partner-edit') !!}
+{!! $image->selector('#partner-edit') !!}
 
 @endsection

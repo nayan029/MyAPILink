@@ -61,7 +61,6 @@ Route::middleware(['auth:admin'])->group(function ($route) {
     });
 });
 
-
 //frontend route list
 
 Route::middleware(['auth:web', 'verified'])->group(function ($route) {
@@ -69,5 +68,6 @@ Route::middleware(['auth:web', 'verified'])->group(function ($route) {
         $frontRoute->get('/home', 'HomeController@userDashboard')->name('dashboard');
         $frontRoute->post('user/logout', 'HomeController@logout')->name('logout');
     });
-
 });
+
+

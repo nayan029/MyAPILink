@@ -33,7 +33,7 @@
                 </div> -->
 
                 <div class="text-center pclogo">
-                    <a href="javascript:void(0)"><img src="images/apilink_logo_dark.png" alt="logo"></a>
+                    <a href="javascript:void(0)"><img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="logo"></a>
                 </div>
 
                 <div class="row justify-content-center">

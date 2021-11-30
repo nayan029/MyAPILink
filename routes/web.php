@@ -67,6 +67,8 @@ Route::middleware(['auth:web', 'verified'])->group(function ($route) {
     $route->group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontRoute) {
         $frontRoute->get('/home', 'HomeController@userDashboard')->name('dashboard');
         $frontRoute->post('user/logout', 'HomeController@logout')->name('logout');
+        $frontRoute->get('manager','ManagerController@index')->name('manager');
+
     });
 });
 

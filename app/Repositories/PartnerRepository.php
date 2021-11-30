@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Partner;
 use App\Http\Traits\ImageUploadTrait;
 
+use function PHPUnit\Framework\isNull;
+
 class PartnerRepository implements PartnerRepositoryInterface
 {
     use ImageUploadTrait;
@@ -23,7 +25,7 @@ class PartnerRepository implements PartnerRepositoryInterface
         return Partner::create($data);
     }
 
-    public function getPartnerdata(Request $request)
+    public function getPartnerData(Request $request)
     {
         $draw = $request->query('draw', 0);
         $start = $request->query('start', 0);
@@ -55,7 +57,9 @@ class PartnerRepository implements PartnerRepositoryInterface
         foreach ($partners as $partner) {
             $url = route("partner.show", $partner->id);
             $Image = "<img src='" . url($partner->image) . "' height='50px' width='50px'>";
-            $action = "<a href='" . route("partner.edit", $partner->id)   . "'>" . "<i class='fas fa-user-edit'></i>" . "</a>" . '&nbsp;&nbsp;' . "<a href='" . $url . "'>" . "<i class='fas fa-trash-alt'></i>" . "</a>";
+            $action = "<a href='" . route("partner.edit", $partner->id)   . "'>" . "<i class='fas fa-user-edit'></i>" . "</a>" . '&nbsp;&nbsp;' .
+                "<a href='javascript:void(0);' data-delete='" . $partner->id . "' class='delete_partner'><i class='fa fa-trash text-danger'></i></a>";
+
             $json['data'][] = [
                 $Image,
                 $partner->link,
@@ -65,16 +69,35 @@ class PartnerRepository implements PartnerRepositoryInterface
         return $json;
     }
 
+
     public function getSinglePartner($id)
     {
         return Partner::findorfail($id);
     }
 
-    public function updatePartner(Request $request, $id)
-    {
-    }
-
     public function deletePartner($id)
     {
+        $deletes = $this->getSinglePartner($id);
+        $deletes->delete();
+        return $deletes;
+    }
+
+
+    public function updatePartner(Request $request, $id)
+    {
+        $old = $this->getSinglePartner($id);
+
+        $image = "";
+        if ($request->hasFile('image')) {
+            $image = $this->uploadImage($request->file('image'), 'partner');
+            $data = $request->all();
+            $data['image'] = $image;
+            return $old->update($data);
+        } else if (isNull($request->image)) {
+
+            return $old->update($request->all());
+        } else if (isNull($request->image) && isNull($old->image)) {
+            return false;
+        }
     }
 }

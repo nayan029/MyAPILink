@@ -1,5 +1,9 @@
 <!-- Main Footer -->
 <footer class="main-footer">
+
+    <div class="container">
+
+    </div>
     <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
@@ -38,9 +42,9 @@
         //Initialize Select2 Elements
         $('.select2').select2();
         $('#summernote').summernote();
-    }); 
-    $("input[data-bootstrap-switch]").each(function(){
-      $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    });
+    $("input[data-bootstrap-switch]").each(function() {
+        $(this).bootstrapSwitch('state', $(this).prop('checked'));
     })
 </script>
 <script>

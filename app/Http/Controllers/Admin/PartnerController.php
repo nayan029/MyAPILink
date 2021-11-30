@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 use JsValidator;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
-use App\Http\Traits\ImageUploadTrait;
-use App\Models\Partner;
 
 class PartnerController extends Controller
 {
@@ -22,12 +20,16 @@ class PartnerController extends Controller
     [
         'link' => 'required',
     ];
+    protected $imagevalidationrules =
+    [
+        'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ];
 
-    protected $PartnerRepository = "";
+    protected $partnerRepository = "";
 
-    public function __construct(PartnerRepositoryInterface $PartnerRepository)
+    public function __construct(PartnerRepositoryInterface $partnerRepository)
     {
-        $this->PartnerRepository = $PartnerRepository;
+        $this->partnerRepository = $partnerRepository;
     }
 
     public function index()
@@ -38,6 +40,7 @@ class PartnerController extends Controller
     public function create()
     {
         $data['validator'] = JsValidator::make($this->storevalidationrules);
+
         return view('backend.partner.create', $data);
     }
 
@@ -47,7 +50,7 @@ class PartnerController extends Controller
         if ($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors());
         }
-        $storepartner = $this->PartnerRepository->storePartner($request);
+        $storepartner = $this->partnerRepository->storePartner($request);
         if ($storepartner) {
             Session::flash('success', 'Successfully inserted');
             return redirect()->route('partner.index');
@@ -55,13 +58,15 @@ class PartnerController extends Controller
     }
     public function show($id)
     {
+        echo "hello";
     }
 
 
     public function edit($id)
     {
         $data['validator'] = JsValidator::make($this->updatevalidationrules);
-        $data['partner'] = $this->PartnerRepository->getSinglePartner($id);
+        $data['image'] = JsValidator::make($this->imagevalidationrules);
+        $data['partner'] = $this->partnerRepository->getSinglePartner($id);
         return view('backend.partner.edit', $data);
     }
 
@@ -72,17 +77,27 @@ class PartnerController extends Controller
         if ($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors());
         }
-        dd($request->all());
+
+        $data = $this->partnerRepository->updatePartner($request, $id);
+        Session::flash('success', 'Successfully Updated');
+        return redirect()->route('partner.index');
     }
 
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+
+        $delete = $this->partnerRepository->deletePartner($request->id);
+        if ($delete) {
+            return response()->json([
+                'status' => true,
+                'msg' => 'Successfully Deleted'
+            ]);
+        }
     }
 
     public function getPartnerData(Request $request)
     {
-        return $this->PartnerRepository->getPartnerdata($request);
+        return $this->partnerRepository->getPartnerData($request);
     }
 }

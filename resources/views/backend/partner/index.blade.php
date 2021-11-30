@@ -42,6 +42,38 @@
 <!-- DataTables  & Plugins -->
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script>
+    //delete
+    $(document).on('click', '.delete_partner', function(e) {
+        e.preventDefault();
+        var id = $(this).data('delete');
+        var token = $("meta[name='csrf-token']").attr("content");
+        var deleteUrl = '{{ url("partner/destroy") }}?id=' + id;
+
+        swal({
+                title: 'Are you sure you want to delete this record?',
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: deleteUrl,
+                        data: {
+                            "_token": token,
+                        },
+                        success: function(response) {
+                            if (response.status == true) {
+                                $('#partner-table').DataTable().destroy();
+                                loadData();
+                                toastr.success(response.msg);
+                            }
+                        }
+                    });
+                }
+            });
+    });
     $(document).ready(function() {
         loadData();
     });
@@ -63,4 +95,5 @@
         });
     }
 </script>
+
 @endsection

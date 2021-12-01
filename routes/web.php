@@ -1,8 +1,4 @@
 <?php
-
-use App\Models\Contact;
-use App\Models\Partner;
-use App\Models\Widget;
 use Illuminate\Support\Facades\Route;
 
 
@@ -60,7 +56,10 @@ Route::middleware(['auth:admin'])->group(function ($route) {
 });
 
 //frontend route list
-Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontRoute) {
+
+$route->group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontRoute) {
     $frontRoute->get('/', 'HomeController@userDashboard')->name('dashboard');
     $frontRoute->post('user/logout', 'HomeController@logout')->name('logout');
+    $frontRoute->get('manager','ManagerController@index')->name('manager');
+
 });

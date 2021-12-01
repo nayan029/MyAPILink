@@ -16,7 +16,7 @@
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="establishment-registration.html">
+                        <a class="nav-link" href="{{route('manager')}}">
                             <p>Établissements</p><span class="sr-only">(current)</span>
                         </a>
                     </li>

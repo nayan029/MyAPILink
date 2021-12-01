@@ -13,7 +13,7 @@ class Manager extends Model
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $guarded = ['id'];
-    protected $table = 'skill_position';   
+    protected $table = 'manager';   
 
    
 }

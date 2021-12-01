@@ -27,12 +27,27 @@ class HomeController extends Controller
     public function userDashboard()
     {
         $data['widget'] = Widget::get();
-        if (Auth::check()) {
-            $data['contact'] = $this->homeRepository->contactFooter();
-            $data['partners'] = $this->homeRepository->partnerFooter();
-            return view('frontend.dashboard', $data);
-        } {
-            return view('/login');
-        }
+        return view('frontend.dashboard', $data);
+
+        // if (Auth::check()) {
+
+        // } {
+        //     return view('/login');
+        // }
+    }
+
+    public function ajaxDataInsert(Request $request)
+    {
+        DB::table('posts')->insert([
+            'title' => $request->Code, //This Code coming from ajax request
+            'details' => $request->Chief, //This Chief coming from ajax request
+        ]);
+
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Data inserted successfully'
+            ]
+        );
     }
 }

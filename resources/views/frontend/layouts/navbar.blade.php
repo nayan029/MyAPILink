@@ -4,8 +4,7 @@
             <a class="navbar-brand" href="index.html">
                 <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" width="170px" alt="header logo" class="header-logo">
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -28,15 +27,13 @@
                     </li>
                     <li>
                         <div class="dropdown custom-after">
-                            <button class="btn btn-secondary dropdown-toggle btn-drop" type="button"
-                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
+                            <button class="btn btn-secondary dropdown-toggle btn-drop" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Mon compte
                             </button>
                             <div class="dropdown-menu home-drop" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Modallogin2">Se
                                     Connector</a>
-                                <a class="dropdown-item" href="login1.html">S’inscrire</a>
+                                <a class="dropdown-item" href="{{ route('register') }}">S’inscrire</a>
                             </div>
                         </div>
                     </li>
@@ -68,26 +65,22 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Prénom"
-                                        class="form-control contact-input inputicon2">
+                                    <input type="text" placeholder="Prénom" class="form-control contact-input inputicon2">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Nom de famille"
-                                        class="form-control contact-input inputicon2">
+                                    <input type="text" placeholder="Nom de famille" class="form-control contact-input inputicon2">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Email"
-                                        class="form-control contact-input inputicon2">
+                                    <input type="text" placeholder="Email" class="form-control contact-input inputicon2">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <textarea name="" id="" rows="8" class="form-control contact-textarea inputicon2"
-                                        placeholder="Votre texte ici…"></textarea>
+                                    <textarea name="" id="" rows="8" class="form-control contact-textarea inputicon2" placeholder="Votre texte ici…"></textarea>
                                 </div>
                             </div>
 

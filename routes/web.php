@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Contact;
+use App\Models\Partner;
+use App\Models\Widget;
 use Illuminate\Support\Facades\Route;
 
 
@@ -13,11 +16,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
-Route::get('', function () {
-    return view('welcome');
-});
 
 
 //admin without login route
@@ -44,7 +42,7 @@ Route::middleware(['auth:admin'])->group(function ($route) {
         $adminRoute->get('/getdata', 'WidgetController@getAjaxData')->name('widget.data');
 
         //Skills module
-        $adminRoute->resource('skill','SkillsController');
+        $adminRoute->resource('skill', 'SkillsController');
         $adminRoute->get('/skilldata', 'SkillsController@getData')->name('skill.data');
 
 
@@ -62,12 +60,7 @@ Route::middleware(['auth:admin'])->group(function ($route) {
 });
 
 //frontend route list
-
-Route::middleware(['auth:web', 'verified'])->group(function ($route) {
-    $route->group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontRoute) {
-        $frontRoute->get('/home', 'HomeController@userDashboard')->name('dashboard');
-        $frontRoute->post('user/logout', 'HomeController@logout')->name('logout');
-    });
+Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontRoute) {
+    $frontRoute->get('/', 'HomeController@userDashboard')->name('dashboard');
+    $frontRoute->post('user/logout', 'HomeController@logout')->name('logout');
 });
-
-

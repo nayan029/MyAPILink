@@ -57,7 +57,7 @@ Route::middleware(['auth:admin'])->group(function ($route) {
 
 //frontend route list
 
-$route->group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontRoute) {
+Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontRoute) {
     $frontRoute->get('/', 'HomeController@userDashboard')->name('dashboard');
     $frontRoute->post('user/logout', 'HomeController@logout')->name('logout');
     $frontRoute->get('manager','ManagerController@index')->name('manager');

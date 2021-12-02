@@ -174,11 +174,6 @@
 
         function updateSkillPostionData(p, t, d, id) {
             
-            console.log(pos)
-            console.log(tit)
-            console.log(des)
-            console.log(id)
-
             var path = 'skill/' + id;
             var fullPath = AppUrl + '/' + path;
             $.ajax({

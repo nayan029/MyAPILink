@@ -58,6 +58,7 @@
                         <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="">
                     </div>
                     <div>
+                        {!! Form::open(['method' => 'POST', 'route' => ['contact-us'], 'files' => true,'id'=>'contact-us']) !!}
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <h5 class="vous_h5 contact-title">Nous contacter
@@ -65,33 +66,38 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Prénom" class="form-control contact-input inputicon2">
+                                    {!! Form::text('firstname', old('firstname'), ['class' => 'form-control view-form', 'placeholder' => 'Prénom','id'=>'firstname']) !!}
+                                    <span class="text-danger error-text firstname_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Nom de famille" class="form-control contact-input inputicon2">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="text" placeholder="Email" class="form-control contact-input inputicon2">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <textarea name="" id="" rows="8" class="form-control contact-textarea inputicon2" placeholder="Votre texte ici…"></textarea>
-                                </div>
-                            </div>
+                                    {!! Form::text('lastname', old('lastname'), ['class' => 'form-control view-form', 'placeholder' => 'Nom de famille','id'=>'lastname']) !!}
+                                    <span class="text-danger error-text lastname_error"></span>
 
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+
+                                    {!! Form::text('email', old('email'), ['class' => 'form-control view-form', 'placeholder' => 'Email','id'=>'email']) !!}
+                                    <span class="text-danger error-text email_error"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+
+                                    {!! Form::textarea('description', old('description'), ['class' => 'form-control view-form', 'placeholder' => 'Votre texte ici…','id'=>'description']) !!}
+                                    <span class="text-danger error-text description_error"></span>
+                                </div>
+                            </div>
 
                             <div class="col-md-12 text-center res-dec mt-3 mb-5 ">
-                                <a href="index.html" class="btn btn-blue w-100" style="background:#FFA500;">Poser
+                                <button type="submit" class="btn btn-blue w-100" style="background:#FFA500;">Poser
                                     une
-                                    question</a>
+                                    question</button>
                             </div>
-
-
+                            {!! Form::close() !!}
                         </div>
                     </div>
 
@@ -101,3 +107,65 @@
     </div>
 </div>
 <!-- end contact modal -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+    $(".select2").select2();
+</script>
+<script>
+    $(function() {
+
+        @if(Session::has('success'))
+        toastr.success("{{ Session::get('success') }}");
+        @endif
+
+        @if(Session::has('info'))
+        toastr.info("{{ Session::get('info') }}");
+        @endif
+
+        @if(Session::has('warning'))
+        toastr.warning("{{ Session::get('warning') }}");
+        @endif
+
+        @if(Session::has('error'))
+        toastr.error("{{ Session::get('error') }}");
+        @endif
+    });
+</script>
+<script>
+$(document).ready(function() {
+
+   $("#contact-us").on('submit', function(e){
+                  e.preventDefault(); 
+        var url = '{{ route("contact-us") }}';
+
+                  $.ajax({
+                      url:url,
+                      method:$(this).attr('method'),
+                      data:new FormData(this),
+                      processData:false,
+                      dataType:'json',
+                      contentType:false,
+                      beforeSend:function(){
+                          $(document).find('span.error-text').text('');
+                      },
+                      success:function(response){
+                          if(response.status == false){
+                              $.each(response.error,function(prefix, val){
+                                  $('span.'+prefix+'_error').text(val[0]);
+                              });
+                          }else{
+                              $('#contact-us')[0].reset();
+                              toastr.success(response.message);
+                              $('#contact').modal('hide');
+                          }
+                      }
+                  });
+              });
+}); 
+
+
+  
+</script>

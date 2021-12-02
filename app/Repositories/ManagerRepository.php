@@ -48,14 +48,19 @@ class ManagerRepository implements ManagerRepositoryInterface
             $telephone = $manager->telephone;
             $firstname = $manager->first_name;
             $organization = $manager->organization;
+            $civility = $manager->civility;
             $html = $emailtemplateid->email;
 
-            
-            $civility = $manager->civility;
+            $html = str_replace('{{FIRSTNAME}}', $firstname, $html);
+            $html = str_replace('{{TELEPHONE}}', $telephone, $html);
+            $html = str_replace('{{EMAIL}}', $mail, $html);
+            $html = str_replace('{{ORGANIZATION}}', $organization, $html);
+            $html = str_replace('{{ADDRESS}}', $address, $html);
+            $html = str_replace('{{CIVILITY}}', $civility, $html);
+        
             Mail::send(
                 'frontend.email-template.manager-mail',
                 [
-                    'organization' => $organization, 'email' => $mail, 'address' => $address, 'telephone' => $telephone, 'firstname' => $firstname,   'emailtemplate' => $html,   'civility' => $civility,
                     'emailtemplate' => $html,
                 ],
                 function ($message) use ($request) {

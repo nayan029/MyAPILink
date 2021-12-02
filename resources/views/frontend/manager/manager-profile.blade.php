@@ -73,7 +73,7 @@
                                     d'emploi</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="" href="account-setting.html">Paramètres</a>
+                                <a class="nav-link" id="" href="{{URL::to('/account-setting') }}">Paramètres</a>
                             </li>
                         </ul>
                     </div>

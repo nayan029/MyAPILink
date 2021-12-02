@@ -8,6 +8,7 @@ use App\Interfaces\HomeRepositoryInterface;
 use App\Interfaces\ManagerRepositoryInterface;
 use App\Interfaces\SkillRepositoryInterface;
 use App\Interfaces\PartnerRepositoryInterface;
+use App\Interfaces\RegistrationRepositoryInterface;
 use App\Interfaces\WidgetRepositoryInterface;
 use App\Repositories\ContactRepository;
 use App\Repositories\ForgotPasswordRepository;
@@ -15,6 +16,7 @@ use App\Repositories\HomeRepository;
 use App\Repositories\ManagerRepository;
 use App\Repositories\SkillRepository;
 use App\Repositories\PartnerRepository;
+use App\Repositories\RegistrationRepository;
 use App\Repositories\WidgetRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -54,6 +56,9 @@ class RepositoriesServiceProvider extends ServiceProvider
         
         $this->app->bind(ManagerRepositoryInterface::class, function ($app) {
             return $app->make(ManagerRepository::class);
+        });
+        $this->app->bind(RegistrationRepositoryInterface::class, function ($app) {
+            return $app->make(RegistrationRepository::class);
         });
     }
 

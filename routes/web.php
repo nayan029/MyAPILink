@@ -61,5 +61,6 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('/', 'HomeController@userDashboard')->name('dashboard');
     $frontRoute->post('user/logout', 'HomeController@logout')->name('logout');
     $frontRoute->get('manager','ManagerController@index')->name('manager');
+    $frontRoute->get('manager-profile','ManagerController@')->name('manager-profile');
 
 });

@@ -8,10 +8,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use JsValidator;
 
 class ManagerController extends Controller
 {
     protected $managerRepository = "";
+    protected $updatevalidationrules =
+    [
+        'civility' => 'required',
+        'firstname' =>"required|max:25",
+        'lastname' =>"required|max:25",
+        'email' => 'required|email|unique:manager',
+    ];
 
     public function __construct(ManagerRepositoryInterface $managerRepository)
     {
@@ -60,7 +68,20 @@ class ManagerController extends Controller
 
     public function profile()
     {
-        dd(Auth::guard('web')->user());
-        return view('frontend.manager.manager-profile');
+        $data['validator'] = JsValidator::make($this->updatevalidationrules);
+        return view('frontend.manager.manager-profile',$data);
+    }
+
+    public function updateProfile(Request $request)
+    {
+       
+        $validation = Validator::make($request->all(), $this->updatevalidationrules);
+        if ($validation->fails()) {
+            return redirect()->back()->withErrors($validation->errors());
+        }
+
+        $data = $this->managerRepository->updateProfile($request, $id="");
+        Session::flash('success', 'Successfully Updated');
+        return redirect()->route('partner.index');
     }
 }

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,10 +46,8 @@
                 </div>
                 <div class="col-md-8">
                     <div class="mb-3 mt-3 profile" id="manager-id">
-                        <h4 class="profile-name">Mairie de Montpellier <img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}"
-                                alt="edit" class="ml-1 edit-manager"></h4>
-                        <p class="mb-0 d-flex align-items-center">31 avenue de la liberté 34000 Montpellier <img
-                                src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" alt="edit" class="edit-manager ml-2"></p>
+                        <h4 class="profile-name">Mairie de Montpellier <img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" alt="edit" class="ml-1 edit-manager"></h4>
+                        <p class="mb-0 d-flex align-items-center">31 avenue de la liberté 34000 Montpellier <img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" alt="edit" class="edit-manager ml-2"></p>
                         <p class="">Municipalisé</p>
                     </div>
                     <div class="mb-3 mt-3 profile" id="manager-id2" style="display: none;">
@@ -68,12 +65,10 @@
                     <div>
                         <ul class="nav nav-pills sr-nav-pills " id="pills-tab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home"
-                                    role="tab" aria-controls="pills-home" aria-selected="true">Gestion du compte</a>
+                                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Gestion du compte</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile"
-                                    role="tab" aria-controls="pills-profile" aria-selected="false">Les offres
+                                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Les offres
                                     d'emploi</a>
                             </li>
                             <li class="nav-item">
@@ -92,82 +87,82 @@
                     <div class="container">
                         <div class="card sr-card p-4 main-card-min">
                             <div class="row">
+
                                 <div class="col-md-4 cust-manager-col4">
                                     <div class="card sr-card">
+                                        {!! Form::model(null,['method' => 'POST', 'route' => ['update-profile'], 'files' => true,'id'=>'profile-update']) !!}
+
                                         <div class="card-body">
                                             <div class="card-min-manager">
                                                 <div class="account-manager">
                                                     <h5>Profil du gestionnaire<br>de compte :</h5>
                                                 </div>
                                                 <div class="mt-4">
-                                                    <form>
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <div class="form-group pb-2">
-                                                                    <input class="form-control view-form" type="text"
-                                                                        placeholder="Civilité">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <input class="form-control view-form" type="text"
-                                                                        placeholder="Nom">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <input class="form-control view-form" type="text"
-                                                                        placeholder="Prénom">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <input class="form-control view-form" type="text"
-                                                                        placeholder="Mail">
-                                                                </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group pb-2">
+                                                                <input class="form-control view-form" type="text" id="civility" name="civility" placeholder="Civilité">
                                                             </div>
                                                         </div>
-                                                    </form>
+                                                        <div class="col-md-12 pb-2">
+                                                            <div class="form-group">
+
+
+                                                            
+                                                            {!! Form::text('lastname', old('lastname'), ['class' => 'form-control view-form', 'placeholder' => 'Nom','id'=>'lastname']) !!}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 pb-2">
+                                                            <div class="form-group">
+                                                            {!! Form::text('firstname', old('firstname'), ['class' => 'form-control view-form', 'placeholder' => 'Prénom','id'=>'firstname']) !!}
+                                                             
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 pb-2">
+                                                            <div class="form-group">
+                                                            {!! Form::text('email', old('email'), ['class' => 'form-control view-form', 'placeholder' => 'Mail','id'=>'email']) !!}
+                                                              
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
                                                 <div class="pt-5">
                                                     <div class="account-manager">
                                                         <h5>Rôle du gestionnaire <br>de compte :</h5>
                                                     </div>
                                                     <div class="mt-4">
-                                                        <form>
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <input class="form-control view-form"
-                                                                            type="text"
-                                                                            placeholder="Directrice de l'établissement">
-                                                                    </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                {!! Form::text('NULL', old('NULL'), ['class' => 'form-control view-form', 'placeholder' => "Directrice de l'établissement",'id'=>'email']) !!}
+                                                                 
                                                                 </div>
                                                             </div>
-                                                        </form>
+                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>
 
 
                                             <div class="d-flex justify-content-end">
-                                                <button
-                                                    class="btn btn-yellow d-flex align-items-center pd-btns-edit"><img
-                                                        src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" alt="edit"
-                                                        class="mr-3 edit-manager">Editer</button>
+                                                <button class="btn btn-yellow d-flex align-items-center pd-btns-edit"><img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" alt="edit" class="mr-3 edit-manager">Editer</button>
                                             </div>
                                         </div>
+                                        {!! Form::close() !!}
                                     </div>
                                 </div>
+
                                 <div class="col-md-8 cust-manager-col8">
                                     <div class="card sr-card sa-border-radius">
                                         <div class="card-body applicants-body">
                                             <div class="tab-views">
                                                 <ul class="nav nav-pills sr-nav-pills " id="pills-tab" role="tablist">
                                                     <li class="nav-item">
-                                                        <a class="nav-link active nav-custom"><img
-                                                                src="{{asset('frontend/images/project/bulid.svg')}}" class="bulid"
-                                                                alt="bulid"> Établissement</a>
+                                                        <a class="nav-link active nav-custom"><img src="{{asset('frontend/images/project/bulid.svg')}}" class="bulid" alt="bulid"> Établissement</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -177,13 +172,12 @@
 
                                     <div class="applicants-inside-details">
                                         <div class="mb-30px">
-                                            <a href="add-establishment.html">
+                                            <a href="{{URL::to('/add-establishment')}}">
                                                 <div class="card sr-card manager-card">
                                                     <div class="card-body">
 
                                                         <div class="d-flex align-items-center">
-                                                            <img src="{{asset('frontend/images/project/plus.svg')}}" alt="plus"
-                                                                class="plus-manager">
+                                                            <img src="{{asset('frontend/images/project/plus.svg')}}" alt="plus" class="plus-manager">
                                                             <p class="mb-0 un-textp">Ajouter un établissement petite
                                                                 enfance
                                                             </p>
@@ -200,17 +194,14 @@
                                                         <tr>
                                                             <td>
                                                                 <div class="d-flex align-items-center">
-                                                                    <img src="{{asset('frontend/images/project/user-detail-pro.svg')}}"
-                                                                        alt="user" class="manager-pro mr-3">
+                                                                    <img src="{{asset('frontend/images/project/user-detail-pro.svg')}}" alt="user" class="manager-pro mr-3">
                                                                     <p class="mb-0 managerp">Crèche des bambins</p>
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <div
-                                                                    class="d-flex align-items-center justify-content-end">
+                                                                <div class="d-flex align-items-center justify-content-end">
                                                                     <p class="mb-0 managerp">Montpellier</p>
-                                                                    <a href="view-establishment-account-3.html"
-                                                                        class="btn btn-blue voir-btn ml-4">Voir</a>
+                                                                    <a href="view-establishment-account-3.html" class="btn btn-blue voir-btn ml-4">Voir</a>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -237,26 +228,21 @@
                         <div>
                             <ul class="nav nav-pills tab-inside-pills" id="pills-tab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="pills-first-tab" data-toggle="pill"
-                                        href="#pills-first" role="tab" aria-controls="pills-first"
-                                        aria-selected="true">Annonces en ligne
+                                    <a class="nav-link active" id="pills-first-tab" data-toggle="pill" href="#pills-first" role="tab" aria-controls="pills-first" aria-selected="true">Annonces en ligne
                                         <span>(3)</span></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="pills-sec-tab" data-toggle="pill" href="#pills-sec"
-                                        role="tab" aria-controls="pills-sec" aria-selected="false">Annonces expirées
+                                    <a class="nav-link" id="pills-sec-tab" data-toggle="pill" href="#pills-sec" role="tab" aria-controls="pills-sec" aria-selected="false">Annonces expirées
                                         <span>(0)</span></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="pills-third-tab" data-toggle="pill" href="#pills-third"
-                                        role="tab" aria-controls="pills-third" aria-selected="false">Annonces supprimées
+                                    <a class="nav-link" id="pills-third-tab" data-toggle="pill" href="#pills-third" role="tab" aria-controls="pills-third" aria-selected="false">Annonces supprimées
                                         <span>(1)</span></a>
                                 </li>
                             </ul>
                         </div>
                         <div class="tab-content tab-inside-pills" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="pills-first" role="tabpanel"
-                                aria-labelledby="pills-first-tab">
+                            <div class="tab-pane fade show active" id="pills-first" role="tabpanel" aria-labelledby="pills-first-tab">
                                 <div class="card sr-card">
                                     <div class="card-body">
                                         <div class="row">
@@ -296,8 +282,7 @@
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mt-2">
@@ -308,13 +293,11 @@
                                                                         <p class="mb-0">51 jours restants</p>
                                                                     </div>
                                                                     <div class="mt-images-profile">
-                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}"
-                                                                                class="image-date">
+                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
                                                                             <span>60</span>
                                                                         </div>
                                                                         <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}"
-                                                                                class="image-date"><span>120</span>
+                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>120</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -360,8 +343,7 @@
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mt-2">
@@ -372,13 +354,11 @@
                                                                         <p class="mb-0">51 jours restants</p>
                                                                     </div>
                                                                     <div class="mt-images-profile">
-                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}"
-                                                                                class="image-date">
+                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
                                                                             <span>60</span>
                                                                         </div>
                                                                         <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}"
-                                                                                class="image-date"><span>120</span>
+                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>120</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -424,8 +404,7 @@
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mt-2">
@@ -436,13 +415,11 @@
                                                                         <p class="mb-0">51 jours restants</p>
                                                                     </div>
                                                                     <div class="mt-images-profile">
-                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}"
-                                                                                class="image-date">
+                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
                                                                             <span>60</span>
                                                                         </div>
                                                                         <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}"
-                                                                                class="image-date"><span>120</span>
+                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>120</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -488,8 +465,7 @@
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mt-2">
@@ -500,13 +476,11 @@
                                                                         <p class="mb-0">51 jours restants</p>
                                                                     </div>
                                                                     <div class="mt-images-profile">
-                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}"
-                                                                                class="image-date">
+                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
                                                                             <span>60</span>
                                                                         </div>
                                                                         <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}"
-                                                                                class="image-date"><span>120</span>
+                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>120</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -552,8 +526,7 @@
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mt-2">
@@ -564,13 +537,11 @@
                                                                         <p class="mb-0">51 jours restants</p>
                                                                     </div>
                                                                     <div class="mt-images-profile">
-                                                                        <div> <img src="images/project/eyes.svg"
-                                                                                class="image-date">
+                                                                        <div> <img src="images/project/eyes.svg" class="image-date">
                                                                             <span>60</span>
                                                                         </div>
                                                                         <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="images/project/users.svg"
-                                                                                class="image-date"><span>120</span>
+                                                                        <div><img src="images/project/users.svg" class="image-date"><span>120</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -587,28 +558,21 @@
                                                     <nav aria-label="Page navigation example">
                                                         <ul class="pagination justify-content-center">
                                                             <li class="page-item">
-                                                                <a class="page-link" href="javascript:void(0)"
-                                                                    tabindex="-1" id="prev">
+                                                                <a class="page-link" href="javascript:void(0)" tabindex="-1" id="prev">
                                                                     &lt; </a>
                                                             </li>
-                                                            <li class="page-item"><a class="page-link"
-                                                                    href="javascript:void(0)">1</a>
+                                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a>
                                                             </li>
-                                                            <li class="page-item"><a class="page-link"
-                                                                    href="javascript:void(0)">2</a>
+                                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a>
                                                             </li>
-                                                            <li class="page-item"><a class="page-link"
-                                                                    href="javascript:void(0)">3</a>
+                                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a>
                                                             </li>
-                                                            <li class="page-item"><a class="page-link"
-                                                                    href="javascript:void(0)">4</a>
+                                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">4</a>
                                                             </li>
-                                                            <li class="page-item"><a class="page-link"
-                                                                    href="javascript:void(0)">5</a>
+                                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">5</a>
                                                             </li>
                                                             <li class="page-item">
-                                                                <a class="page-link" href="javascript:void(0)"
-                                                                    id="next">&gt;</a>
+                                                                <a class="page-link" href="javascript:void(0)" id="next">&gt;</a>
                                                             </li>
                                                         </ul>
                                                     </nav>
@@ -650,14 +614,12 @@
                                                                     </li>
                                                                 </ul>
                                                             </div>
-                                                            <div
-                                                                class="col-md-2 d-flex align-items-end btn-modifi mb-3">
+                                                            <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
                                                                 <div class="metters-btns">
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mr-renew">
@@ -672,13 +634,11 @@
                                                             <div class="col-md-3 mt-2 pl-0">
                                                                 <div class="space-date justify-content-end">
                                                                     <div class="mt-images-profile">
-                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}"
-                                                                                class="image-date">
+                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
                                                                             <span>60</span>
                                                                         </div>
                                                                         <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}"
-                                                                                class="image-date"><span>120</span>
+                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>120</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -717,14 +677,12 @@
                                                                     </li>
                                                                 </ul>
                                                             </div>
-                                                            <div
-                                                                class="col-md-2 d-flex align-items-end btn-modifi mb-3">
+                                                            <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
                                                                 <div class="metters-btns">
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mr-renew">
@@ -739,13 +697,11 @@
                                                             <div class="col-md-3 mt-2 pl-0">
                                                                 <div class="space-date justify-content-end">
                                                                     <div class="mt-images-profile">
-                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}"
-                                                                                class="image-date">
+                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
                                                                             <span>60</span>
                                                                         </div>
                                                                         <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}"
-                                                                                class="image-date"><span>120</span>
+                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>120</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -784,14 +740,12 @@
                                                                     </li>
                                                                 </ul>
                                                             </div>
-                                                            <div
-                                                                class="col-md-2 d-flex align-items-end btn-modifi mb-3">
+                                                            <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
                                                                 <div class="metters-btns">
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mr-renew">
@@ -806,13 +760,11 @@
                                                             <div class="col-md-3 mt-2 pl-0">
                                                                 <div class="space-date justify-content-end">
                                                                     <div class="mt-images-profile">
-                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}"
-                                                                                class="image-date">
+                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
                                                                             <span>60</span>
                                                                         </div>
                                                                         <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}"
-                                                                                class="image-date"><span>120</span>
+                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>120</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -851,14 +803,12 @@
                                                                     </li>
                                                                 </ul>
                                                             </div>
-                                                            <div
-                                                                class="col-md-2 d-flex align-items-end btn-modifi mb-3">
+                                                            <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
                                                                 <div class="metters-btns">
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mr-renew">
@@ -873,13 +823,11 @@
                                                             <div class="col-md-3 mt-2 pl-0">
                                                                 <div class="space-date justify-content-end">
                                                                     <div class="mt-images-profile">
-                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}"
-                                                                                class="image-date">
+                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
                                                                             <span>60</span>
                                                                         </div>
                                                                         <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}"
-                                                                                class="image-date"><span>120</span>
+                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>120</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -918,14 +866,12 @@
                                                                     </li>
                                                                 </ul>
                                                             </div>
-                                                            <div
-                                                                class="col-md-2 d-flex align-items-end btn-modifi mb-3">
+                                                            <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
                                                                 <div class="metters-btns">
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mr-renew">
@@ -940,13 +886,11 @@
                                                             <div class="col-md-3 mt-2 pl-0">
                                                                 <div class="space-date justify-content-end">
                                                                     <div class="mt-images-profile">
-                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}"
-                                                                                class="image-date">
+                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
                                                                             <span>60</span>
                                                                         </div>
                                                                         <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}"
-                                                                                class="image-date"><span>120</span>
+                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>120</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -964,28 +908,21 @@
                                                     <nav aria-label="Page navigation example">
                                                         <ul class="pagination justify-content-center">
                                                             <li class="page-item">
-                                                                <a class="page-link" href="javascript:void(0)"
-                                                                    tabindex="-1" id="prev">
+                                                                <a class="page-link" href="javascript:void(0)" tabindex="-1" id="prev">
                                                                     &lt; </a>
                                                             </li>
-                                                            <li class="page-item"><a class="page-link"
-                                                                    href="javascript:void(0)">1</a>
+                                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a>
                                                             </li>
-                                                            <li class="page-item"><a class="page-link"
-                                                                    href="javascript:void(0)">2</a>
+                                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a>
                                                             </li>
-                                                            <li class="page-item"><a class="page-link"
-                                                                    href="javascript:void(0)">3</a>
+                                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a>
                                                             </li>
-                                                            <li class="page-item"><a class="page-link"
-                                                                    href="javascript:void(0)">4</a>
+                                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">4</a>
                                                             </li>
-                                                            <li class="page-item"><a class="page-link"
-                                                                    href="javascript:void(0)">5</a>
+                                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">5</a>
                                                             </li>
                                                             <li class="page-item">
-                                                                <a class="page-link" href="javascript:void(0)"
-                                                                    id="next">&gt;</a>
+                                                                <a class="page-link" href="javascript:void(0)" id="next">&gt;</a>
                                                             </li>
                                                         </ul>
                                                     </nav>
@@ -1027,14 +964,12 @@
                                                                     </li>
                                                                 </ul>
                                                             </div>
-                                                            <div
-                                                                class="col-md-2 d-flex align-items-end btn-modifi mb-3">
+                                                            <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
                                                                 <div class="metters-btns">
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mr-renew">
@@ -1049,13 +984,11 @@
                                                             <div class="col-md-3 mt-2 pl-0">
                                                                 <div class="space-date justify-content-end">
                                                                     <div class="mt-images-profile">
-                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}"
-                                                                                class="image-date">
+                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
                                                                             <span>60</span>
                                                                         </div>
                                                                         <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}"
-                                                                                class="image-date"><span>120</span>
+                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>120</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1094,14 +1027,12 @@
                                                                     </li>
                                                                 </ul>
                                                             </div>
-                                                            <div
-                                                                class="col-md-2 d-flex align-items-end btn-modifi mb-3">
+                                                            <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
                                                                 <div class="metters-btns">
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mr-renew">
@@ -1116,13 +1047,11 @@
                                                             <div class="col-md-3 mt-2 pl-0">
                                                                 <div class="space-date justify-content-end">
                                                                     <div class="mt-images-profile">
-                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}"
-                                                                                class="image-date">
+                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
                                                                             <span>60</span>
                                                                         </div>
                                                                         <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}"
-                                                                                class="image-date"><span>120</span>
+                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>120</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1161,14 +1090,12 @@
                                                                     </li>
                                                                 </ul>
                                                             </div>
-                                                            <div
-                                                                class="col-md-2 d-flex align-items-end btn-modifi mb-3">
+                                                            <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
                                                                 <div class="metters-btns">
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mr-renew">
@@ -1183,13 +1110,11 @@
                                                             <div class="col-md-3 mt-2 pl-0">
                                                                 <div class="space-date justify-content-end">
                                                                     <div class="mt-images-profile">
-                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}"
-                                                                                class="image-date">
+                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
                                                                             <span>60</span>
                                                                         </div>
                                                                         <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('images/project/users.svg')}}"
-                                                                                class="image-date"><span>120</span>
+                                                                        <div><img src="{{asset('images/project/users.svg')}}" class="image-date"><span>120</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1228,14 +1153,12 @@
                                                                     </li>
                                                                 </ul>
                                                             </div>
-                                                            <div
-                                                                class="col-md-2 d-flex align-items-end btn-modifi mb-3">
+                                                            <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
                                                                 <div class="metters-btns">
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mr-renew">
@@ -1250,13 +1173,11 @@
                                                             <div class="col-md-3 mt-2 pl-0">
                                                                 <div class="space-date justify-content-end">
                                                                     <div class="mt-images-profile">
-                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}"
-                                                                                class="image-date">
+                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
                                                                             <span>60</span>
                                                                         </div>
                                                                         <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}"
-                                                                                class="image-date"><span>120</span>
+                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>120</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1295,14 +1216,12 @@
                                                                     </li>
                                                                 </ul>
                                                             </div>
-                                                            <div
-                                                                class="col-md-2 d-flex align-items-end btn-modifi mb-3">
+                                                            <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
                                                                 <div class="metters-btns">
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mr-renew">
@@ -1317,13 +1236,11 @@
                                                             <div class="col-md-3 mt-2 pl-0">
                                                                 <div class="space-date justify-content-end">
                                                                     <div class="mt-images-profile">
-                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}"
-                                                                                class="image-date">
+                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
                                                                             <span>60</span>
                                                                         </div>
                                                                         <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}"
-                                                                                class="image-date"><span>120</span>
+                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>120</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1341,28 +1258,21 @@
                                                     <nav aria-label="Page navigation example">
                                                         <ul class="pagination justify-content-center">
                                                             <li class="page-item">
-                                                                <a class="page-link" href="javascript:void(0)"
-                                                                    tabindex="-1" id="prev">
+                                                                <a class="page-link" href="javascript:void(0)" tabindex="-1" id="prev">
                                                                     &lt; </a>
                                                             </li>
-                                                            <li class="page-item"><a class="page-link"
-                                                                    href="javascript:void(0)">1</a>
+                                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a>
                                                             </li>
-                                                            <li class="page-item"><a class="page-link"
-                                                                    href="javascript:void(0)">2</a>
+                                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a>
                                                             </li>
-                                                            <li class="page-item"><a class="page-link"
-                                                                    href="javascript:void(0)">3</a>
+                                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a>
                                                             </li>
-                                                            <li class="page-item"><a class="page-link"
-                                                                    href="javascript:void(0)">4</a>
+                                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">4</a>
                                                             </li>
-                                                            <li class="page-item"><a class="page-link"
-                                                                    href="javascript:void(0)">5</a>
+                                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">5</a>
                                                             </li>
                                                             <li class="page-item">
-                                                                <a class="page-link" href="javascript:void(0)"
-                                                                    id="next">&gt;</a>
+                                                                <a class="page-link" href="javascript:void(0)" id="next">&gt;</a>
                                                             </li>
                                                         </ul>
                                                     </nav>
@@ -1378,7 +1288,7 @@
 
                 </section>
             </div>
-')}}
+
 
         </div>
 
@@ -1399,12 +1309,18 @@
 <script type="text/javascript ">
     $(".select2 ").select2();
 </script>
+
+<script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+{!! $validator->selector('#profile-update') !!}
+
+
+
 <script type="text/javascript">
-    $("#bravo-btn").on('click', function () {
+    $("#bravo-btn").on('click', function() {
         $('#establishment').modal('hide');
         $('#bravo').modal('show');
     });
-    $("#cv-btn").on('click', function () {
+    $("#cv-btn").on('click', function() {
         $('#establishment').modal('hide');
         $('#cv-modal').modal('show');
     });
@@ -1413,7 +1329,7 @@
     var togglePassword = document.getElementById("toggle-password ");
 
     if (togglePassword) {
-        togglePassword.addEventListener('click ', function () {
+        togglePassword.addEventListener('click ', function() {
             var x = document.getElementById("password ");
             if (x.type === "password ") {
                 x.type = "text ";
@@ -1425,22 +1341,22 @@
 
     // -------------------
 
-    $(function () {
+    $(function() {
         $(".select-multi").multiselect({
             includeSelectAllOption: true
         });
     });
-    $(document).ready(function () {
+    $(document).ready(function() {
         $(".change-placeholder-select .multiselect").html("Type de poste");
     });
 
     // --------------------
-    $("#pills-profile-tab").on('click', function () {
+    $("#pills-profile-tab").on('click', function() {
         $("#manager-id2").show();
         $("#manager-id").hide();
         $("#bread-id").show();
     });
-    $("#pills-home-tab").on('click', function () {
+    $("#pills-home-tab").on('click', function() {
         $("#manager-id2").hide();
         $("#manager-id").show();
         $("#bread-id").hide();

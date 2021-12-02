@@ -99,7 +99,7 @@ return [
     'password' => 'The password is incorrect.',
     'present' => 'The :attribute field must be present.',
     'regex' => 'The :attribute format is invalid.',
-    'required' => ':attribute field is required.',
+    'required' => 'Entrez s`il vous plait :attribute',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_unless' => 'The :attribute field is required unless :other is in :values.',
     'required_with' => 'The :attribute field is required when :values is present.',
@@ -153,6 +153,15 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => 'Nom',
+        'password' => 'le mot de passe',
+        'email' => "Mail",
+        'first_name' => "prénom",
+        'last_name' => 'nom de famille',
+        'phone' => 'téléphone',
+        'civility' =>"Civilité",
+
+    ],
 
 ];

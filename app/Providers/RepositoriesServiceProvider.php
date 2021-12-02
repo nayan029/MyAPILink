@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Interfaces\ContactRepositoryInterface;
+use App\Interfaces\EstablishmentRepositoryInterface;
 use App\Interfaces\ForgotPasswordRepositoryInterface;
 use App\Interfaces\HomeRepositoryInterface;
 use App\Interfaces\ManagerRepositoryInterface;
@@ -11,6 +12,7 @@ use App\Interfaces\PartnerRepositoryInterface;
 use App\Interfaces\RegistrationRepositoryInterface;
 use App\Interfaces\WidgetRepositoryInterface;
 use App\Repositories\ContactRepository;
+use App\Repositories\EstablishmentRepository;
 use App\Repositories\ForgotPasswordRepository;
 use App\Repositories\HomeRepository;
 use App\Repositories\ManagerRepository;
@@ -59,6 +61,9 @@ class RepositoriesServiceProvider extends ServiceProvider
         });
         $this->app->bind(RegistrationRepositoryInterface::class, function ($app) {
             return $app->make(RegistrationRepository::class);
+        });
+        $this->app->bind(EstablishmentRepositoryInterface::class, function ($app) {
+            return $app->make(EstablishmentRepository::class);
         });
     }
 

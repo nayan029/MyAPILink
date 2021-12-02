@@ -66,4 +66,17 @@ class ManagerRepository implements ManagerRepositoryInterface
             return back()->withError($e->getMessage());
         }
     }
+    public function updateProfile(Request $request)
+    {
+        $updateData = [
+            'civility' => $request->civility,
+            'first_name' => $request->firstname,
+            'last_name' => $request->lastname,
+            'email' => $request->email,
+        ];
+
+        return Manager::where('id',auth()->user()->id)->update($updateData);
+
+    
+    }
 }

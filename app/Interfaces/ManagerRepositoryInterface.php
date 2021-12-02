@@ -7,4 +7,6 @@ interface ManagerRepositoryInterface
 {
     public function StoreProfile(Request $request);
    
+    public function updateProfile(Request $request);
+    
 }

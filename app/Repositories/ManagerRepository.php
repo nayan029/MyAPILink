@@ -49,6 +49,8 @@ class ManagerRepository implements ManagerRepositoryInterface
             $firstname = $manager->first_name;
             $organization = $manager->organization;
             $html = $emailtemplateid->email;
+
+            
             $civility = $manager->civility;
             Mail::send(
                 'frontend.email-template.manager-mail',

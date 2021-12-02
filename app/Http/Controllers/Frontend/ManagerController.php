@@ -84,4 +84,9 @@ class ManagerController extends Controller
         Session::flash('success', 'Successfully Updated');
         return redirect()->route('partner.index');
     }
+
+    public function accountSetting()
+    {
+        return view('frontend.manager.account_setting');
+    }
 }

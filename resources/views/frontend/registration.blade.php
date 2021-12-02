@@ -151,7 +151,7 @@
                     <div class="lmodal-logo">
                         <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="">
                     </div>
-                    <form action="#" method="post" id="nozel_search_form">
+                    <form action="{{route('registration.save')}}" method="post" id="nozel_search_form">
                         @csrf
                         <div class="row mt-3">
                             <div class="col-md-6">
@@ -269,6 +269,8 @@
 <script src="{{asset('frontend/js/owl.carousel.js')}} "></script>
 <script src="{{asset('frontend/js/custom.js')}} "></script>
 
+<script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+{!! $validator->selector('#nozel_search_form') !!}
 <script type="text/javascript ">
     $(".select2 ").select2();
 

@@ -16,7 +16,7 @@
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="establishment-registration.html">
+                        <a class="nav-link" href="{{route('manager')}}">
                             <p>Établissements</p><span class="sr-only">(current)</span>
                         </a>
                     </li>
@@ -33,7 +33,7 @@
                             <div class="dropdown-menu home-drop" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Modallogin2">Se
                                     Connector</a>
-                                <a class="dropdown-item" href="{{ route('register') }}">S’inscrire</a>
+                                <a class="dropdown-item" href="{{ route('registration') }}">S’inscrire</a>
                             </div>
                         </div>
                     </li>

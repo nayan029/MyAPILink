@@ -108,20 +108,20 @@
                                             <p class="mb-0 mon-text">mon role en tant que GESTIONNAIRE DE COMPTE</p>
                                             <div class="d-flex mb-4">
                                                 <div class="custom-control custom-radio sr-radio radio_profile">
-                                                    <input type="radio" class="custom-control-input" id="radio" checked="" name="radio" value="director" required="">
+                                                    <input type="radio" class="custom-control-input" id="check1" checked="" name="radio" value="director" required="">
                                                     <span class="error">@error ('radio') {{$message}} @enderror</span>
 
                                                     <label class="custom-control-label" for="check1">Directrice</label>
                                                 </div>
                                                 <div class="custom-control custom-radio sr-radio radio_profile">
-                                                    <input type="radio" class="custom-control-input" value="hr_manager" id="radio" name="radio" required="">
+                                                    <input type="radio" class="custom-control-input" value="hr_manager" id="check2" name="radio" required="">
                                                     <span class="error">@error ('radio') {{$message}} @enderror</span>
 
                                                     <label class="custom-control-label" for="check2">Responsable
                                                         RH</label>
                                                 </div>
                                                 <div class="custom-control custom-radio sr-radio radio_profile">
-                                                    <input type="radio" class="custom-control-input" value="head" id="radio" name="radio" required="">
+                                                    <input type="radio" class="custom-control-input" value="head" id="check3" name="radio" required="">
                                                     <span class="error">@error ('radio') {{$message}} @enderror</span>
 
                                                     <label class="custom-control-label" for="check3">Cheffe / Chef de
@@ -129,7 +129,7 @@
                                                         enfance</label>
                                                 </div>
                                                 <div class="custom-control custom-radio sr-radio radio_profile">
-                                                    <input type="radio" class="custom-control-input" value="others" id="radio" name="radio" required="">
+                                                    <input type="radio" class="custom-control-input" value="others" id="check4" name="radio" required="">
                                                     <span class="error">@error ('radio') {{$message}} @enderror</span>
 
                                                     <label class="custom-control-label" for="check4">Autres -
@@ -356,7 +356,7 @@
 <script src="{{asset('frontend/js/jquery-ui.min.js')}}"></script>
 <script src="{{asset('frontend/js/popper.min.js')}} "></script>
 <script type="text/javascript" src="{{asset('frontend/js/bootstrap-multiselect.js')}}"></script>
-<script src="{{asset('frontend/js/bootstrap.min.js')}} "></script>')}}
+<script src="{{asset('frontend/js/bootstrap.min.js')}} "></script>
 <script src="{{asset('frontend/js/select2.min.js')}} "></script>
 <script src="{{asset('frontend/js/jquery.magnific-popup.min.js')}} "></script>
 <script src="{{asset('frontend/js/owl.carousel.js')}} "></script>
@@ -468,41 +468,41 @@
     $('.register-yellow').on('click', function(event) {
         event.preventDefault();
         $(this).text('En traitement...');
-        $(this).prop('disabled', true);
+        // $(this).prop('disabled', true);
         var url = '{{ route("manager.store") }}';
 
         $.ajax({
-                url: url,
-                method: 'POST',
-                data: $('#regform').serialize(),
-                success: function(response) {
-                    console.log(response.success);
-                    if (response.success == true) {
-                        // $('#appointment3').modal('show');     //Message come from controller
-                        toastr.success(response.message);
-                        setTimeout(function() {
-                            $('.invisible').trigger('click');
-                            $('#regform')[0].reset();
-                        }, 2000);
-                        $(this).text("S'inscrire");
-                        $(this).prop('disabled', false);
+            url: url,
+            method: 'POST',
+            data: $('#regform').serialize(),
+            success: function(response) {
+                console.log(response.success);
+                if (response.success == true) {
+                    // $('#appointment3').modal('show');     //Message come from controller
+                    toastr.success(response.message);
+                    setTimeout(function() {
+                        $('.invisible').trigger('click');
+                        $('#regform')[0].reset();
+                    }, 2000);
+                    $(this).text("S'inscrire");
+                    $(this).prop('disabled', false);
 
-                    } else {
-                        $('.civility-error').text(response.errors.civility);
-                        $('.firstname-error').text(response.errors.firstname);
-                        $('.lastname-error').text(response.errors.lastname);
-                        $('.telephone-error').text(response.errors.telephone);
-                        $('.email-error').text(response.errors.email);
-                        $('.password-error').text(response.errors.password);
-                        $('.radio-error').text(response.errors.radio);
-                        $('.represent-error').text(response.errors.represent);
-                        $('.organization-error').text(response.errors.organization);
-                        $('.establish-error').text(response.errors.number_of_establishments);
-                        $('.address-error').text(response.errors.address);
-                        $('.postal-error').text(response.errors.postal_code);
-                        $('.city-error').text(response.errors.city);
-                    }
+                } else {
+                    $('.civility-error').text(response.errors.civility);
+                    $('.firstname-error').text(response.errors.firstname);
+                    $('.lastname-error').text(response.errors.lastname);
+                    $('.telephone-error').text(response.errors.telephone);
+                    $('.email-error').text(response.errors.email);
+                    $('.password-error').text(response.errors.password);
+                    $('.radio-error').text(response.errors.radio);
+                    $('.represent-error').text(response.errors.represent);
+                    $('.organization-error').text(response.errors.organization);
+                    $('.establish-error').text(response.errors.number_of_establishments);
+                    $('.address-error').text(response.errors.address);
+                    $('.postal-error').text(response.errors.postal_code);
+                    $('.city-error').text(response.errors.city);
                 }
+            }
         });
     });
 </script>

@@ -4,10 +4,12 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\ManagerRepositoryInterface;
+use App\Models\Manager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Redirect;
 
 class ManagerController extends Controller
 {
@@ -30,15 +32,15 @@ class ManagerController extends Controller
             'civility' => 'required',
             'firstname' => 'required',
             'lastname' => 'required',
-            'telephone' => 'required',
-            'email' => 'required|email|unique:manager',
-            'password' => 'required|confirmed',
+            'telephone' => 'required|numeric|digits:10',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed|min:6',
             'radio' => 'required',
             'represent' => 'required',
             'organization' => 'required',
             'number_of_establishments' => 'required',
             'address' => 'required',
-            'postal_code' => 'required',
+            'postal_code' => 'required|digits:6',
             'city' => 'required',
         ]);
 
@@ -47,7 +49,9 @@ class ManagerController extends Controller
         }
 
         $storeProfile = $this->managerRepository->StoreProfile($request);
+
         if ($storeProfile) {
+
             return response()->json(
                 [
                     'success' => true,
@@ -60,7 +64,6 @@ class ManagerController extends Controller
 
     public function profile()
     {
-        dd(Auth::guard('web')->user());
         return view('frontend.manager.manager-profile');
     }
 }

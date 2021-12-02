@@ -172,6 +172,32 @@
             }
         }
 
+        function updateSkillPostionData(p, t, d, id) {
+            
+            console.log(pos)
+            console.log(tit)
+            console.log(des)
+            console.log(id)
+
+            var path = 'skill/' + id;
+            var fullPath = AppUrl + '/' + path;
+            $.ajax({
+                type: "PUT",
+                url: fullPath,
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    'id': id,
+                    'pos': pos,
+                },
+                success: function(response) {
+                    if (response.status == true) {
+
+                        toastr.success(response.msg);
+                    }
+                }
+            });
+        }
+
 
 
         $(document).on('click', "#addNewRow", function() {
@@ -204,9 +230,6 @@
 
         });
         $(document).on('click', ".btn-save", function() {
-
-
-
             var p = $('#position').val();
             var t = $('#title').val();
             var d = $('#desc').val();
@@ -218,38 +241,21 @@
             var tit = tbl_row.find("td:eq(2)").text(t);
             var des = tbl_row.find("td:eq(3)").text(d);
 
-            
-            var title = $('.title').val();
-            var description = $('.desc').val();
+            var position = $('.position').val(p);
+            var title = $('.title').val(t);
+            var description = $('.desc').val(d);
             var id = $(this).attr("data-id");
-            updateSkillPostionData(position, title, description, id);
+            updateSkillPostionData(p, t, d, id);
 
         });
 
-        function updateSkillPostionData(position, title, description, id) {
-            var path = 'skill/'+id;
-            var fullPath = AppUrl+'/'+path;
-            $.ajax({
-                type: "PUT",
-                url: fullPath,
-                data: {
-                     _token:'{{ csrf_token() }}',
-                    id: id
-                },
-                success: function(response) {
-                    if (response.status == true) {
-                      
-                        toastr.success(response.msg);
-                    }
-                }
-            });
-        }
+       
 
 
-        // $(document).on('click', ".removeRow", function() {
-        //     var self = $(this);
-        //     self.parents("#skillbody").remove();
-        // });
+        $(document).on('click', ".removeRow", function() {
+            var self = $(this);
+            self.parents("#skillbody").remove();
+        });
     </script>
 
     @endsection

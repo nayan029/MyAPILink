@@ -19,7 +19,7 @@
 <body>
 
     <section class="back-f6 ">
-    {!! Form::model(null,['method' => 'POST', 'route' => ['store-establishment'], 'files' => true,'id'=>'store-establishment']) !!}
+        {!! Form::model(null,['method' => 'POST', 'route' => ['store-establishment'], 'files' => true,'id'=>'store-establishment']) !!}
         <div class="add-establish">
             <div class="container">
                 <div class="card sr-card">
@@ -32,7 +32,7 @@
 
                                             {!! Form::label('Type d’Établissement', 'Type d’Établissement') !!}
                                             {!! Form::select('type_of_establishment',['Crèche collective' => 'Crèche collective','Micro-crèche' => 'Micro-crèche','Crèche privée d’entreprise ou inter-entreprises' => 'Crèche privée d’entreprise ou inter-entreprises'] ,null, [ 'id' => 'type_of_establishment', 'class' => 'cus-drop select2 form-add-establish']) !!}
-                                         
+
                                         </div>
 
 
@@ -168,18 +168,18 @@
 
                                                 </div>
                                                 <div class="custom-control custom-checkbox profile-check">
-                                                 
+
                                                     {!! Form::checkbox('applied_pedagogy','Snoezelen',false,['class' => 'custom-control-input','id' =>'Snoezelen']) !!}
                                                     {!! Form::label('applied_pedagogy', 'Snoezelen', ['class' => 'custom-control-label pro-check']) !!}
                                                 </div>
                                                 <div class="custom-control custom-checkbox profile-check">
-            
+
                                                     {!! Form::checkbox('applied_pedagogy','Pédagogie Steiner',false,['class' => 'custom-control-input','id' =>'Steiner']) !!}
                                                     {!! Form::label('applied_pedagogy', 'Pédagogie Steiner', ['class' => 'custom-control-label pro-check']) !!}
                                                 </div>
                                                 <div class="custom-control custom-checkbox profile-check">
-                                  
-                                                        {!! Form::checkbox('applied_pedagogy','Aucune en particulier',false,['class' => 'custom-control-input','id' =>'particulier']) !!}
+
+                                                    {!! Form::checkbox('applied_pedagogy','Aucune en particulier',false,['class' => 'custom-control-input','id' =>'particulier']) !!}
                                                     {!! Form::label('applied_pedagogy', 'Aucune en particulier', ['class' => 'custom-control-label pro-check']) !!}
                                                 </div>
                                             </div>
@@ -189,7 +189,7 @@
                                                 <div class="form-group">
                                                     {!! Form::label("Nos valeurs", "Nos valeurs") !!}
                                                     {!! Form::textarea('our_values', '', ['size' => '30x4', 'id' => 'our_values', 'name' => 'our_values', 'class' => 'form-control textarea-form inputicon2']) !!}
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>
@@ -204,7 +204,7 @@
                                         <div class="fileUpload btn btn-primary attach-file">
                                             <span><i class="fa fa-paperclip mr-2"></i>Attacher un
                                                 document</span>
-                                            
+
                                             {!! Form::file('document', ['id' => 'document', 'name' => 'document', 'class' => 'upload']) !!}
                                         </div>
                                     </div>
@@ -213,42 +213,42 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <section>
-                                       
-                                                <div class="container">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="form-group mt-3">
-                                                                <label class="control-label">Attachez vos
-                                                                    documents, relatifs à votre structure pour
-                                                                    plus d’informations</label>
-                                                                <div class="preview-zone hidden">
-                                                                    <div class="box box-solid">
-                                                                        <div class="box-body"></div>
-                                                                    </div>
+
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group mt-3">
+                                                            <label class="control-label">Attachez vos
+                                                                documents, relatifs à votre structure pour
+                                                                plus d’informations</label>
+                                                            <div class="preview-zone hidden">
+                                                                <div class="box box-solid">
+                                                                    <div class="box-body"></div>
                                                                 </div>
-                                                                <div class="dropzone-wrapper">
-                                                                    <div class="dropzone-desc">
-                                                                        <img src="{{asset('frontend/images/profile-feather-upload.svg')}}" width="30px" class="mb-1">
-                                                                        <!-- <i class="glyphicon glyphicon-download-alt"></i> -->
-                                                                        <p>Drag and drop here or<span style="color:#192842;font-family: 'Quicksand-Bold'">
-                                                                                Browse</span> </p>
-                                                                    </div>
-                                                                    {!! Form::file('more_infomation', ['id' => 'more_infomation', 'name' => 'more_infomation', 'class' => 'dropzone']) !!}
-                                                                 
+                                                            </div>
+                                                            <div class="dropzone-wrapper">
+                                                                <div class="dropzone-desc">
+                                                                    <img src="{{asset('frontend/images/profile-feather-upload.svg')}}" width="30px" class="mb-1">
+                                                                    <!-- <i class="glyphicon glyphicon-download-alt"></i> -->
+                                                                    <p>Drag and drop here or<span style="color:#192842;font-family: 'Quicksand-Bold'">
+                                                                            Browse</span> </p>
                                                                 </div>
+                                                                {!! Form::file('more_infomation', ['id' => 'more_infomation', 'name' => 'more_infomation', 'class' => 'dropzone']) !!}
+
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
-                                           
+
+                                            </div>
+
                                         </section>
                                     </div>
 
 
                                     <div class="col-md-12 d-flex justify-content-end mt-5">
                                         <button class="btn btn-outline-cancel annuler-btns">Annuler</button>
-                                        <button  class="btn btn-yellow">Sauvegarder</button>
+                                        <button class="btn btn-yellow">Sauvegarder</button>
                                         <!-- href="view-establishment-account-3.html" -->
                                     </div>
 
@@ -322,4 +322,5 @@
 </script>
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 {!! $validator->selector('#store-establishment') !!}
+
 </html>

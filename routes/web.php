@@ -80,5 +80,6 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
 Route::middleware(['auth:manager'])->group(function ($route) {
     $route->group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontRoute) {
         $frontRoute->get('manager-profile', 'ManagerController@profile')->name('profile');
+        $frontRoute->resource('publish-job-offer','JobVacanciesController');
     });
 });

@@ -79,8 +79,7 @@ class ManagerRepository implements ManagerRepositoryInterface
             'civility' => $request->civility,
             'first_name' => $request->firstname,
             'last_name' => $request->lastname,
-            'email' => $request->email,
-            
+            'email' => $request->email,       
         ];
 
         return User::where('id',auth()->guard('web')->user()->id)->update($updateData);

@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use Exception;
 use App\Models\User;
-use App\Models\Manager;
 use Illuminate\Http\Request;
 use App\Models\EmailTemplate;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +24,7 @@ class ManagerRepository implements ManagerRepositoryInterface
                 'civility' => $request->civility,
                 'first_name' => $request->firstname,
                 'last_name' => $request->lastname,
-                'telephone' => $request->telephone,
+                'phone' => $request->telephone,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'roles' => $request->radio,
@@ -36,11 +35,11 @@ class ManagerRepository implements ManagerRepositoryInterface
                 'address' => $request->address,
                 'postal_code' => $request->postal_code,
                 'city' => $request->city,
+                'user_type' => 2,
             ];
-    
-            $manager = Manager::create($storeData);
-            $findUser = Manager::where('id', $manager->id)->first();
-            Auth::guard('manager')->login($findUser);
+            $manager = User::create($storeData);
+            // $findUser = Manager::where('id', $manager->id)->first();
+            Auth::guard('web')->login($manager);
 
             $emailtemplateid = EmailTemplate::where('id', 2)->first();
 

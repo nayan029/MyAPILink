@@ -19,10 +19,24 @@ class User extends Authenticatable
     use TwoFactorAuthenticatable;
 
     protected $fillable = [
-        'name',
         'email',
         'password',
-        'phone'
+        'phone',
+        'civility',
+        'first_name',
+        'last_name',
+        'email ',
+        'phone',
+        'roles',
+        'establishment_management',
+        'represent',
+        'organization',
+        'number_of_establishments',
+        'address',
+        'postal_code',
+        'city',
+        'user_type',    
+        
     ];
 
     /**

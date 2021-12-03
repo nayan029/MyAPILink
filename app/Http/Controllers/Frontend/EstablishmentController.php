@@ -39,7 +39,7 @@ class EstablishmentController extends Controller
     public function index()
     {
         $data['validator'] = JsValidator::make($this->validationrules);
-        return view('frontend.establishment.create');
+        return view('frontend.establishment.create',$data);
     }
     public function store(Request $request)
     {
@@ -47,7 +47,7 @@ class EstablishmentController extends Controller
 
         $validator = Validator::make($request->all(), $this->validationrules);
         if ($validator->fails()) {
-            return response()->json(['success' => false, 'errors' => $validator->errors()]);
+            return redirect()->back()->withErrors($validation->errors());
         }
 
         $storeProfile = $this->establishmentRepository->store($request);

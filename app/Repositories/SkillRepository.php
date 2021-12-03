@@ -19,12 +19,13 @@ class SkillRepository implements SkillRepositoryInterface
     {
         return Skill::findorfail($id);
     }
-    public function getSKillPosition($id){
+    public function getSKillPosition($id)
+    {
         return SkillPosition::findorfail($id);
     }
     public function storeSkill(Request $request)
     {
-        
+
         $data = $request->all();
 
         $image = "";
@@ -39,8 +40,7 @@ class SkillRepository implements SkillRepositoryInterface
         $skill = Skill::create($skillsInsertArr);
         $n = count($data['position']);
 
-        for($i=0; $i<$n; $i++)
-        {
+        for ($i = 0; $i < $n; $i++) {
             $savedata = [
                 'skills_id' => $skill->id,
                 'position' => $data['position'][$i],
@@ -48,15 +48,16 @@ class SkillRepository implements SkillRepositoryInterface
                 'desc' => $data['descs'][$i],
             ];
 
-           DB::table('skill_position')->insert($savedata);
+            DB::table('skill_position')->insert($savedata);
             //  SkillPosition::create($savedata);
         }
         return true;
-       
     }
     public function updateSkill(Request $request, $id)
     {
+        dd($request->all());
         $data = $request->all();
+        $getposition = $request->position;
         $skill = $this->getSingleSkill($id);
         $image = "";
         if ($request->hasFile('image')) {
@@ -67,21 +68,20 @@ class SkillRepository implements SkillRepositoryInterface
         $data['image'] = $image;
         $skill->update($data);
         // return $skill;
-        
+
 
         $position = $this->getSKillPosition($id);
         $n = count($data['position']);
 
-        for($i=0; $i<$n; $i++)
-        {
+        for ($i = 0; $i < $n; $i++) {
             $savedata = [
                 'skills_id' => $skill->id,
                 'position' => $data['position'][$i],
                 'title' => $data['title'][$i],
                 'desc' => $data['descs'][$i],
             ];
-
-          $position->update($savedata);
+            dd($savedata);
+            $position->update($savedata);
         }
         return true;
     }

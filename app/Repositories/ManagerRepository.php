@@ -4,13 +4,12 @@ namespace App\Repositories;
 
 use App\Interfaces\ManagerRepositoryInterface;
 use App\Models\EmailTemplate;
-use App\Models\Manager;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Session;
 
 
 class ManagerRepository implements ManagerRepositoryInterface
@@ -24,7 +23,7 @@ class ManagerRepository implements ManagerRepositoryInterface
                 'civility' => $request->civility,
                 'first_name' => $request->firstname,
                 'last_name' => $request->lastname,
-                'telephone' => $request->telephone,
+                'phone' => $request->telephone,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'roles' => $request->radio,
@@ -35,11 +34,11 @@ class ManagerRepository implements ManagerRepositoryInterface
                 'address' => $request->address,
                 'postal_code' => $request->postal_code,
                 'city' => $request->city,
+                'user_type' => 2,
             ];
-    
-            $manager = Manager::create($storeData);
-            $findUser = Manager::where('id', $manager->id)->first();
-            Auth::guard('manager')->login($findUser);
+            $manager = User::create($storeData);
+            // $findUser = Manager::where('id', $manager->id)->first();
+            Auth::guard('web')->login($manager);
 
             $emailtemplateid = EmailTemplate::where('id', 2)->first();
 
@@ -80,9 +79,10 @@ class ManagerRepository implements ManagerRepositoryInterface
             'first_name' => $request->firstname,
             'last_name' => $request->lastname,
             'email' => $request->email,
+            
         ];
 
-        return Manager::where('id',auth()->guard('manager')->user()->id)->update($updateData);
+        return User::where('id',auth()->guard('web')->user()->id)->update($updateData);
 
     
     }

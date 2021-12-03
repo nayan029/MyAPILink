@@ -88,8 +88,8 @@
                                 @foreach($skill_position as $key=>$sk)
                                 <tr row_id="{{$key+1}}">
                                     <td>{{$key+1}}</td>
-                                    <td class="xyz">{{$sk->position}}<input type="hidden" class="position" name="position[]" value="{{$sk->position}}"></td>
-                                    <td>{{$sk->title}}<input type="hidden" class="title" name="title[]" value="{{$sk->title}}"></td>
+                                    <td class="xyz">{{$sk->position}}<input type="hidden" class="position" name="position[]" value="{{$sk}}"></td>
+                                    <td>{{$sk->title}}<input type="hidden" class="title" name="title[]" value=""></td>
                                     <td>{{$sk->desc}}<input type="hidden" class="desc" name="descs[]" value="{{$sk->desc}}"></td>
                                     <td><a href='javascript:void(0);' class="edit_row" row_id="{{$key+1}}"><i class='fas fa-edit'></i></a>
                                         <a href='javascript:void(0);' class="btn btn-save" data-id="{{$sk->id}}" row_id="{{$key+1}}"><i class="fas fa-save text-success"></i></i></a>
@@ -172,7 +172,7 @@
             }
         }
 
-        function updateSkillPostionData(p, t, d, id) {
+        function updateSkillPostionData(position, t, d, id) {
             
             var path = 'skill/' + id;
             var fullPath = AppUrl + '/' + path;
@@ -181,8 +181,10 @@
                 url: fullPath,
                 data: {
                     _token: '{{ csrf_token() }}',
-                    'id': id,
-                    'pos': pos,
+                    id: id,
+                    p : p,
+                    t : t,
+                    d : d,
                 },
                 success: function(response) {
                     if (response.status == true) {
@@ -240,13 +242,9 @@
             var title = $('.title').val(t);
             var description = $('.desc').val(d);
             var id = $(this).attr("data-id");
-            updateSkillPostionData(p, t, d, id);
+            updateSkillPostionData(position, title, description, id);   
 
         });
-
-       
-
-
         $(document).on('click', ".removeRow", function() {
             var self = $(this);
             self.parents("#skillbody").remove();

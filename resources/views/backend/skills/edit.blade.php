@@ -172,7 +172,7 @@
             }
         }
 
-        function updateSkillPostionData(p, t, d, id) {
+        function updateSkillPostionData(position, t, d, id) {
             
             var path = 'skill/' + id;
             var fullPath = AppUrl + '/' + path;
@@ -181,8 +181,10 @@
                 url: fullPath,
                 data: {
                     _token: '{{ csrf_token() }}',
-                    'id': id,
-                    'pos': pos,
+                    id: id,
+                    p : p,
+                    t : t,
+                    d : d,
                 },
                 success: function(response) {
                     if (response.status == true) {
@@ -240,13 +242,9 @@
             var title = $('.title').val(t);
             var description = $('.desc').val(d);
             var id = $(this).attr("data-id");
-            updateSkillPostionData(p, t, d, id);
+            updateSkillPostionData(position, title, description, id);
 
         });
-
-       
-
-
         $(document).on('click', ".removeRow", function() {
             var self = $(this);
             self.parents("#skillbody").remove();

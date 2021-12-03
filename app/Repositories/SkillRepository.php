@@ -68,7 +68,7 @@ class SkillRepository implements SkillRepositoryInterface
         $skill->update($data);
         // return $skill;
         
-
+   
         $position = $this->getSKillPosition($id);
         $n = count($data['position']);
 

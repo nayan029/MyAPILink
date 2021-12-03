@@ -49,7 +49,7 @@
                 </div>
                 <div class="space-quella">
                     <div class="mt-5">
-                        <a href="profile-creation-1.html">
+                        <a href="{{route('manager')}}">
                             <div class="login-etablissement-sec">
                                 <div class="d-flex w-100">
                                     <img src="{{asset('frontend/images/imgs-svg/build-blue.svg')}}" alt="build image" class="mr-4">

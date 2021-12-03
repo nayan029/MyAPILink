@@ -168,9 +168,9 @@
                             <div class="col-md-7 profile-label">
                                 <div class="management-radios">
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio1" name="management" class="custom-control-input" checked>
+                                        <input type="radio" name="management" class="custom-control-input" value="manage_several" checked>
                                         <div class="custom-management-text">
-                                            <p class="manage-textp" for="customRadio1">Je vais gérer
+                                            <p class="manage-textp">Je vais gérer
                                                 plusieurs établissements </p>
                                             <p class="mb-0">Je suis une collectivité, une mairie ...</p>
                                         </div>
@@ -178,9 +178,9 @@
                                 </div>
                                 <div class="management-radios">
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio2" name="management" class="custom-control-input">
+                                        <input type="radio" name="management" class="custom-control-input" value="manage_single">
                                         <div class="custom-management-text">
-                                            <p class="manage-textp" for="customRadio2">Je vais gérer un seul
+                                            <p class="manage-textp">Je vais gérer un seul
                                                 établissement </p>
                                             <p class="mb-0">Je suis un établissement privé ou public</p>
                                         </div>

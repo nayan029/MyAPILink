@@ -58,7 +58,6 @@ class PartnerController extends Controller
     }
     public function show($id)
     {
-        echo "hello";
     }
 
 

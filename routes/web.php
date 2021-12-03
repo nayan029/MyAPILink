@@ -67,5 +67,5 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('manager', 'ManagerController@index')->name('manager');
     $frontRoute->get('registration', 'RegistrationController@index')->name('registration');
     $frontRoute->post('registration', 'RegistrationController@saveRegistration')->name('registration.save');
-    $frontRoute->get('varify', 'RegistrationController@accountCreatedForm')->name('account.created');
+    $frontRoute->get('varify/{test?}', 'RegistrationController@accountCreatedForm')->name('account.created');
 });

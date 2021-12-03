@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
     <style>
         .error {
             font-size: 12px;
@@ -151,7 +150,7 @@
                     <div class="lmodal-logo">
                         <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="">
                     </div>
-                    <form action="{{route('registration.save')}}" method="post" id="nozel_search_form">
+                    <form action="#" method="post" id="nozel_search_form">
                         @csrf
                         <div class="row mt-3">
                             <div class="col-md-6">
@@ -182,7 +181,7 @@
 
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="text" name="password" placeholder="Mot de passe*" class="form-control  login-input inputicon2" id="password">
+                                    <input type="password" name="password" placeholder="Mot de passe*" class="form-control  login-input inputicon2" id="password">
                                     <span class="text-danger error" id="password-error"></span>
                                 </div>
                             </div>
@@ -230,8 +229,9 @@
     </div>
 </div>
 
+<button class="invisible" type="button" data-toggle="modal" data-target="#bravo-success"></button>
 <!-- bravo modal -->
-<div class="modal fade" id="bravo" tabindex="-1">
+<div class="modal fade" id="bravo-success" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header resume_header border-0">
@@ -269,43 +269,37 @@
 <script src="{{asset('frontend/js/owl.carousel.js')}} "></script>
 <script src="{{asset('frontend/js/custom.js')}} "></script>
 
-<script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-{!! $validator->selector('#nozel_search_form') !!}
-<script type="text/javascript ">
-    $(".select2 ").select2();
 
+
+<script type="text/javascript">
     //---------------------
-    $("#bravo-btn").on('click', function() {
+    // $("#bravo-btn").on('click', function() {
 
-        $('#header-Modallogin1').modal('hide');
-        $('#bravo').modal('show');
-        setTimeout(function() {
-            $('body').addClass('modal-open');
-        }, 500);
-    });
-
-
+    //     $('#header-Modallogin1').modal('hide');
+    //     $('#bravo').modal('show');
+    //     setTimeout(function() {
+    //         $('body').addClass('modal-open');
+    //     }, 500);
+    // });
+</script>
+<script>
     $(document).on('click', '#registerUser', function() {
+
         var token = $("meta[name='csrf-token']").attr("content");
         var formData = $('#nozel_search_form').serialize();
+        $.ajax({
 
-        jQuery.ajax({
-            url: "{{ route('register') }}",
+            url: "{{ route('registration.save') }}",
             method: 'post',
             data: formData,
-            // success: function(data) {
-            //     jQuery.each(data.errors, function(key, value) {
-            //         jQuery('.alert-danger').show();
-            //         jQuery('.alert-danger').append('<p>' + value + '</p>');
-            //     });
-            // }
             success: function(response) {
-
-                console.log(response);
-                /*if (response) {
-                    //  $('#success-message').text(response.success);
-                    $("#nozel_search_form")[0].reset();
-                }*/
+                if (response.status == true) {
+                    setTimeout(function() {
+                        $('#header-Modallogin1').modal('hide');
+                        $('.invisible').trigger('click');
+                        $("#nozel_search_form")[0].reset();
+                    });
+                }
             },
             error: function(response) {
                 $('#firstname-error').text(response.responseJSON.errors.firstname);
@@ -320,7 +314,7 @@
 
     });
 </script>
-</script>
+
 
 </body>
 

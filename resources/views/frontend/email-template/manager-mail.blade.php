@@ -1,1 +1,1 @@
-{!!$emailtemplate!!}
+{!! $emailtemplate !!}

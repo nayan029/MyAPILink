@@ -9,4 +9,6 @@ interface ContactRepositoryInterface
     public function editContact($id);
 
     public function updateContact(Request $request, $id);
+
+    public function getAjaxData(Request $request);
 }

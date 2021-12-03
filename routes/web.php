@@ -76,6 +76,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('registration', 'RegistrationController@index')->name('registration');
     $frontRoute->post('registration', 'RegistrationController@saveRegistration')->name('registration.save');
 <<<<<<< HEAD
+<<<<<<< HEAD
     $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
     $frontRoute->post('contact-us','ContactUsController@storeContact')->name('contact-us');
    
@@ -89,6 +90,9 @@ Route::middleware(['auth:manager'])->group(function ($route) {
 =======
     $frontRoute->get('varify', 'RegistrationController@accountCreatedForm')->name('account.created');
 >>>>>>> 4d4efa0d694cd3eef4b8d38190d6c04963404e01
+=======
+    $frontRoute->get('varify/{test?}', 'RegistrationController@accountCreatedForm')->name('account.created');
+>>>>>>> bc4ad7de603b929c9d528649b317eba7d8c4f850
 });
 
     });

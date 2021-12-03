@@ -106,7 +106,6 @@ class SkillsController extends Controller
     public function update(Request $request, $id)
     {   
         
-        dd($request->all(),$id);
         $validation = Validator::make($request->all(), $this->updatevalidationrules);
         if ($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors());

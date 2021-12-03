@@ -52,6 +52,7 @@ class ManagerController extends Controller
             'city' => 'required',
         ]);
 
+        
         if ($validator->fails()) {
             return response()->json(['success' => false, 'errors' => $validator->errors()]);
         }

@@ -2,10 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\ManagerRepositoryInterface;
-use App\Models\EmailTemplate;
-use App\Models\User;
 use Exception;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;

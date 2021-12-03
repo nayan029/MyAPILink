@@ -62,37 +62,20 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
 
     $frontRoute->get('/', 'HomeController@userDashboard')->name('dashboard');
     $frontRoute->post('user/logout', 'HomeController@logout')->name('logout');
-<<<<<<< HEAD
-    $frontRoute->post('manager/store','ManagerController@storeData')->name('manager.store');
-    $frontRoute->get('manager-profile','ManagerController@profile')->name('profile');
-    $frontRoute->post('update-profile','ManagerController@updateProfile')->name('update-profile');
-    $frontRoute->get('account-setting','ManagerController@accountSetting')->name('account-setting');
-=======
     $frontRoute->post('manager/store', 'ManagerController@storeData')->name('manager.store');
     $frontRoute->get('manager-profile', 'ManagerController@profile')->name('profile');
->>>>>>> 4d4efa0d694cd3eef4b8d38190d6c04963404e01
+    $frontRoute->post('update-profile', 'ManagerController@updateProfile')->name('update-profile');
+    $frontRoute->get('account-setting', 'ManagerController@accountSetting')->name('account-setting');
 
     $frontRoute->get('manager', 'ManagerController@index')->name('manager');
     $frontRoute->get('registration', 'RegistrationController@index')->name('registration');
     $frontRoute->post('registration', 'RegistrationController@saveRegistration')->name('registration.save');
-<<<<<<< HEAD
-<<<<<<< HEAD
     $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
-    $frontRoute->post('contact-us','ContactUsController@storeContact')->name('contact-us');
-   
-    
+    $frontRoute->post('contact-us', 'ContactUsController@storeContact')->name('contact-us');
 });
 
 Route::middleware(['auth:manager'])->group(function ($route) {
     $route->group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontRoute) {
-    $frontRoute->get('manager-profile','ManagerController@profile')->name('profile');
-
-=======
-    $frontRoute->get('varify', 'RegistrationController@accountCreatedForm')->name('account.created');
->>>>>>> 4d4efa0d694cd3eef4b8d38190d6c04963404e01
-=======
-    $frontRoute->get('varify/{test?}', 'RegistrationController@accountCreatedForm')->name('account.created');
->>>>>>> bc4ad7de603b929c9d528649b317eba7d8c4f850
-});
-
+        $frontRoute->get('manager-profile', 'ManagerController@profile')->name('profile');
     });
+});

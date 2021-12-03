@@ -23,8 +23,7 @@ class RegistrationRepository implements RegistrationRepositoryInterface
 
         $emailtemplate = EmailTemplate::where('id', 2)->first();
         $html = $emailtemplate->email;
-        $link = route('account.created');
-        $html = str_replace('{{LINK}}', $link, $html);
+        $html = str_replace('{{LINK}}',"", $html);
         Mail::send(
             'frontend.email-template.accountcreate',
             ['emailtemplate' => $html],

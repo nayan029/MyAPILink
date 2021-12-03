@@ -3,6 +3,15 @@
 <title>ApiLink | Dashboard</title>
 @endsection
 @section('content')
+  @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
 <section class="hero-index" style="background-image: linear-gradient(180deg, rgb(0 0 0 / 70%), rgb(0 0 0 / 70%)), url('frontend/images/index-bg.png');opacity: 0.8;">
             <div class="index-gradient"></div>
             <div class="container">
@@ -257,17 +266,23 @@
                     <div class="row justify-content-center">
                         <div class="col-md-10">
                             <div class="sub-input">
-                                <div class="form-group">
-                                    <input value="" class="inputicon2" placeholder="Inscrivez-vous pour des offres spéciales">
-                                    <div class="btn-subscribe">
-                                        <button class="btn btn-blue">S'ABONNER</button>
+                                <form id="newsletterform" method="POST" action="{{route('addnewsletter')}}">
+                                    @csrf
+                                    <div class="form-group">
+                                        <input type="text" name="email" class="inputicon2" placeholder="Inscrivez-vous pour des offres spéciales">
+                                        <div class="btn-subscribe">
+                                            <button type="submit"  class="btn btn-blue">S'ABONNER</button>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
+  
+@endsection
+@section('page-js')
+      {!! $newslettervalidator->selector('#newsletterform') !!}
 @endsection

@@ -146,6 +146,7 @@
 </div>
 </div>
 </body>
+ @yield('page-js')
 
 <script src="{{asset('frontend/js/jquery.min.js')}} "></script>
 <script src="{{asset('frontend/js/popper.min.js')}} "></script>
@@ -191,7 +192,7 @@
         });
     }
 </script>
-
+<script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 <script>
     $(function() {
 

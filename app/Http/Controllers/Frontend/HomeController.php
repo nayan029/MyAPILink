@@ -67,10 +67,8 @@ class HomeController extends Controller
             return response()->json(['success' => false, 'errors' => $validator->errors()]);
         }
 
-        // Auth::guard('admin')->attempt($request->only('email', 'password'));
         if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password, 'deleted_at' => NULL])) {
 
-            // return redirect('manager-profile');
             return response()->json(['success' => true, 'message' =>'Connexion réussie']);
         }
         return response()->json(['success' => false, 'errors' => array('invalid'=>'Email et le mot de passe sont erronés')]);

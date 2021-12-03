@@ -4,6 +4,7 @@
     <div id="before-header">
         @include('frontend.layouts.navbar')
 
+        
         <div class="content">
                 @yield('content')
             </div>

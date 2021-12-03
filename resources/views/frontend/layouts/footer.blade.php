@@ -191,6 +191,7 @@
             }
         });
     }
+    
 </script>
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 <script>

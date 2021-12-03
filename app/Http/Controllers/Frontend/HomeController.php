@@ -11,6 +11,7 @@ use JsValidator;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
+
 class HomeController extends Controller
 {
     protected $newsletterValidationRules = [

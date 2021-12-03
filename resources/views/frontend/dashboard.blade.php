@@ -282,6 +282,7 @@
             </div>
         </section>
   
+        
 @endsection
 @section('page-js')
       {!! $newslettervalidator->selector('#newsletterform') !!}

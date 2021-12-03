@@ -19,6 +19,7 @@ class ManagerController extends Controller
         'civility' => 'required',
         'firstname' =>"required|max:25",
         'lastname' =>"required|max:25",
+        'roles' =>"required",
         
     ];
     public function __construct(ManagerRepositoryInterface $managerRepository)

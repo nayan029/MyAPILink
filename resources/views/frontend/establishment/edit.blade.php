@@ -19,7 +19,7 @@
 <body>
 
     <section class="back-f6 ">
-    {!! Form::model(null,['method' => 'POST', 'route' => ['store-establishment'], 'files' => true,'id'=>'store-establishment']) !!}
+    {!! Form::model(null,['method' => 'POST', 'route' => ['update-establishment',$establishment->id], 'files' => true,'id'=>'update-establishment']) !!}
         <div class="add-establish">
             <div class="container">
                 <div class="card sr-card">
@@ -31,14 +31,14 @@
                                         <div class="form-group mt-5">
 
                                             {!! Form::label('Type d’Établissement', 'Type d’Établissement') !!}
-                                            {!! Form::select('type_of_establishment',['Crèche collective' => 'Crèche collective','Micro-crèche' => 'Micro-crèche','Crèche privée d’entreprise ou inter-entreprises' => 'Crèche privée d’entreprise ou inter-entreprises'] ,null, [ 'id' => 'type_of_establishment', 'class' => 'cus-drop select2 form-add-establish']) !!}
+                                            {!! Form::select('type_of_establishment',['Crèche collective' => 'Crèche collective','Micro-crèche' => 'Micro-crèche','Crèche privée d’entreprise ou inter-entreprises' => 'Crèche privée d’entreprise ou inter-entreprises'] ,$establishment->type_of_establishment, [ 'id' => 'type_of_establishment', 'class' => 'cus-drop select2 form-add-establish']) !!}
                                          
                                         </div>
 
 
                                         <div class="form-group">
                                             {!! Form::label('A propre de notre structure', 'A propre de notre structure') !!}
-                                            {!! Form::text('own_of_our_structure',NULL, ['class' => 'form-control inputicon2 form-add-establish','id'=>'own_of_our_structure']) !!}
+                                            {!! Form::text('own_of_our_structure',$establishment->own_of_our_structure, ['class' => 'form-control inputicon2 form-add-establish','id'=>'own_of_our_structure']) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -49,13 +49,13 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            {!! Form::text('opening_date',NULL, [ 'id' => 'opening_date', 'class' => 'datepicker1 form-control  form-add-establish inputicon2 fn-family']) !!}
+                                            {!! Form::text('opening_date',$establishment->opening_date, [ 'id' => 'opening_date', 'class' => 'datepicker1 form-control  form-add-establish inputicon2 fn-family']) !!}
 
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            {!! Form::select('year',['Année' => 'Année'], null, [ 'id' => 'year', 'class' => 'cus-drop select2 form-add-establish']) !!}
+                                            {!! Form::select('year',['Année' => 'Année'], $establishment->year, [ 'id' => 'year', 'class' => 'cus-drop select2 form-add-establish']) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -63,14 +63,14 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             {!! Form::label('Direction', 'Direction') !!}
-                                            {!! Form::text('direction',NULL, ['class' => 'form-control inputicon2','id'=>'direction']) !!}
+                                            {!! Form::text('direction',$establishment->direction, ['class' => 'form-control inputicon2','id'=>'direction']) !!}
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
 
                                             {!! Form::label('Effectif', 'Effectif') !!}
-                                            {!! Form::select('effective',['1-10 personnes' => '1-10 personnes','11-20 personnes' => '11-20 personnes','21-30 personnes' => '21-30 personnes','31-40 personnes' => '31-40 personnes','41-50 personnes' => '41-50 personnes'],null, [ 'id' => 'effective' ,'class' => 'cus-drop select2 form-add-establish']) !!}
+                                            {!! Form::select('effective',['1-10 personnes' => '1-10 personnes','11-20 personnes' => '11-20 personnes','21-30 personnes' => '21-30 personnes','31-40 personnes' => '31-40 personnes','41-50 personnes' => '41-50 personnes'],$establishment->effective, [ 'id' => 'effective','placeholder'=>'' ,'class' => 'cus-drop select2 form-add-establish']) !!}
 
 
                                         </div>
@@ -78,13 +78,13 @@
                                     <div class="col-md-12">
                                         <div class="form-group ">
                                             {!! Form::label('Nombre de groupes et tranches d’âges', 'Nombre de groupes et tranches d’âges') !!}
-                                            {!! Form::select('number_of_groups_and_age_groups',['1-10 ans' => '1-10 ans','11-20 ans' => '11-20 ans','21-30 ans' => '21-30 ans','31-40 ans' => '31-40 ans','41-50 ans' => '41-50 ans'],null, [ 'id' => 'number_of_groups_and_age_groups','class' => 'cus-drop select2 form-add-establish']) !!}
+                                            {!! Form::select('number_of_groups_and_age_groups',['1-10 ans' => '1-10 ans','11-20 ans' => '11-20 ans','21-30 ans' => '21-30 ans','31-40 ans' => '31-40 ans','41-50 ans' => '41-50 ans'],$establishment->number_of_groups_and_age_groups, [ 'id' => 'number_of_groups_and_age_groups','placeholder'=>'' ,'class' => 'cus-drop select2 form-add-establish']) !!}
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group ">
                                             {!! Form::label("Capacité d'accueil", "Capacité d'accueil") !!}
-                                            {!! Form::select('accommodation_capacity',$accommodationCapacity,null, [ 'id' => 'accommodation_capacity','class' => 'cus-drop select2 form-add-establish']) !!}
+                                            {!! Form::select('accommodation_capacity',['35' => '35'],$establishment->accommodation_capacity, [ 'id' => 'accommodation_capacity','class' => 'cus-drop select2 form-add-establish']) !!}
 
                                         </div>
                                     </div>
@@ -92,7 +92,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group position-rel value-color">
                                             {!! Form::label("Superficie de l'établissement", "Superficie de l'établissement") !!}
-                                            {!! Form::text('surface_area_of_the_establishment',NULL, ['class' => ' form-control form-add-establish inputicon2','id'=>'surface_area_of_the_establishment']) !!}
+                                            {!! Form::text('surface_area_of_the_establishment',$establishment->surface_area_of_the_establishment, ['class' => ' form-control form-add-establish inputicon2','id'=>'surface_area_of_the_establishment']) !!}
 
                                             <div class="m2-label"> {!! Form::label("m²", "m²") !!}</div>
                                         </div>
@@ -188,7 +188,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     {!! Form::label("Nos valeurs", "Nos valeurs") !!}
-                                                    {!! Form::textarea('our_values', '', ['size' => '30x4', 'id' => 'our_values', 'name' => 'our_values', 'class' => 'form-control textarea-form inputicon2']) !!}
+                                                    {!! Form::textarea('our_values',$establishment->our_values, ['size' => '30x4', 'id' => 'our_values', 'name' => 'our_values', 'class' => 'form-control textarea-form inputicon2']) !!}
                                                     
                                                 </div>
                                             </div>
@@ -338,5 +338,5 @@
 </script>
 
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-{!! $validator->selector('#store-establishment') !!}
+{!! $validator->selector('#update-establishment') !!}
 </html>

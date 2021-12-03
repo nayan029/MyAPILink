@@ -37,8 +37,42 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
         return Establishment::create($storeData);
       
     }
-    public function update(Request $request)
+    public function getSingleEstablishment($id)
     {
+        return Establishment::where('created_by',auth()->guard('web')->user()->id)->where('id',$id)->firstOrFail();
+    }
+    
+    public function update(Request $request,$id)
+    {
+     
+         $updateData = [
+            'type_of_establishment' => $request->type_of_establishment,
+            'own_of_our_structure' => $request->own_of_our_structure,
+            'opening_date' => $request->opening_date,
+            'year' => $request->year,
+            'direction' => $request->direction,
+            'effective' => $request->effective,
+            'number_of_groups_and_age_groups' => $request->number_of_groups_and_age_groups,
+            'accommodation_capacity' => $request->accommodation_capacity,
+            'surface_area_of_the_establishment' => $request->surface_area_of_the_establishment,
+            'garden' => $request->garden,
+            'applied_pedagogy' => $request->applied_pedagogy,
+            'our_values' => $request->our_values,
+          
+            
+        ];
+   
+        if ($request->hasFile('document')) {
+            $document = $this->uploadImage($request->file('document'), 'Establishment/document');
+            $updateData['document'] = $document;
+        }
+        
+        if ($request->hasFile('more_infomation')) {
+            $more_infomation = $this->uploadImage($request->file('more_infomation'), 'Establishment/more_infomation');
+            $updateData['more_infomation'] = $more_infomation;
+        }
+
+        return Establishment::where('id',$id)->update($updateData);
         
     }
   

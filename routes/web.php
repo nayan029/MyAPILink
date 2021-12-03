@@ -82,6 +82,7 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
         $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');
         $frontRoute->get('view-establishment-account/{id}', 'EstablishmentController@show')->name('view-establishment-account');
-    
+        $frontRoute->get('edit-establishment/{id}', 'EstablishmentController@edit')->name('edit-establishment');
+        $frontRoute->post('update-establishment/{id}', 'EstablishmentController@update')->name('update-establishment');
     });
 });

@@ -72,7 +72,7 @@ class ManagerController extends Controller
 
     public function profile()
     {
-        $this->updatevalidationrules['email'] = "required|email|unique:user,email,".auth()->guard('manager')->user()->id.",id,deleted_at,NULL";
+        $this->updatevalidationrules['email'] = "required|email|unique:user,email,".auth()->guard('web')->user()->id.",id,deleted_at,NULL";
      
         $data['validator'] = JsValidator::make($this->updatevalidationrules);
         return view('frontend.manager.manager-profile',$data);
@@ -81,7 +81,7 @@ class ManagerController extends Controller
     public function updateProfile(Request $request)
     {
   
-        $this->updatevalidationrules['email'] = "required|email|unique:user,email,".auth()->guard('manager')->user()->id.",id,deleted_at,NULL";
+        $this->updatevalidationrules['email'] = "required|email|unique:user,email,".auth()->guard('web')->user()->id.",id,deleted_at,NULL";
       
         $validation = Validator::make($request->all(), $this->updatevalidationrules);
         if ($validation->fails()) {

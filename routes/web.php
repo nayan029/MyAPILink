@@ -71,6 +71,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('registration', 'RegistrationController@index')->name('registration');
     $frontRoute->post('registration', 'RegistrationController@saveRegistration')->name('registration.save');
     $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
+    $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');
     $frontRoute->post('contact-us','ContactUsController@storeContact')->name('contact-us');
    
     

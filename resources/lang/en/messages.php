@@ -5,4 +5,5 @@ return [
     'skills' => 'Skills',
     'partner' => 'Partner',
     'contact' => 'Contact',
+    'contact us' => 'Contact Us'
 ];

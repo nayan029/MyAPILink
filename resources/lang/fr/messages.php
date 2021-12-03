@@ -5,4 +5,5 @@ return [
     'skills' => 'compétences',
     'partner' => 'Partenaire',
     'contact' => 'Contact',
+    'contact us' => 'Contactez-nous'
 ];

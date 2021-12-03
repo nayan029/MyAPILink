@@ -14,19 +14,20 @@ use JsValidator;
 class ManagerController extends Controller
 {
     protected $managerRepository = "";
-    protected $updatevalidationrules =
+    protected   $updatevalidationrules =
     [
         'civility' => 'required',
         'firstname' =>"required|max:25",
         'lastname' =>"required|max:25",
-        'email' => 'required|email|unique:manager',
+        
     ];
-
     public function __construct(ManagerRepositoryInterface $managerRepository)
     {
         $this->managerRepository = $managerRepository;
+ 
     }
 
+   
     public function index()
     {
         return view('frontend.manager.create');
@@ -71,21 +72,25 @@ class ManagerController extends Controller
 
     public function profile()
     {
+        $this->updatevalidationrules['email'] = "required|email|unique:manager,email,".auth()->guard('manager')->user()->id.",id,deleted_at,NULL";
+     
         $data['validator'] = JsValidator::make($this->updatevalidationrules);
         return view('frontend.manager.manager-profile',$data);
     }
 
     public function updateProfile(Request $request)
     {
-       
+  
+        $this->updatevalidationrules['email'] = "required|email|unique:manager,email,".auth()->guard('manager')->user()->id.",id,deleted_at,NULL";
+      
         $validation = Validator::make($request->all(), $this->updatevalidationrules);
         if ($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors());
         }
-
-        $data = $this->managerRepository->updateProfile($request, $id="");
+     
+        $data = $this->managerRepository->updateProfile($request);
         Session::flash('success', 'Successfully Updated');
-        return redirect()->route('partner.index');
+        return redirect()->back();
     }
 
     public function accountSetting()

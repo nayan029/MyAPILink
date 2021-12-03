@@ -82,7 +82,7 @@ class ManagerRepository implements ManagerRepositoryInterface
             'email' => $request->email,
         ];
 
-        return Manager::where('id',auth()->user()->id)->update($updateData);
+        return Manager::where('id',auth()->guard('manager')->user()->id)->update($updateData);
 
     
     }

@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+   <style>
         .navbar-collapse {
             display: none !important;
         }
@@ -72,7 +73,7 @@
                                     d'emploi</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="" href="account-setting.html">Paramètres</a>
+                                <a class="nav-link" id="" href="{{URL::to('/account-setting') }}">Paramètres</a>
                             </li>
                         </ul>
                     </div>
@@ -102,7 +103,8 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="form-group pb-2">
-                                                                <input class="form-control view-form" type="text" id="civility" name="civility" placeholder="Civilité">
+                                                               
+                                                                {!! Form::text('civility', auth()->guard('manager')->user()->civility, ['class' => 'form-control view-form', 'placeholder' => 'Civilité','id'=>'civility']) !!}
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12 pb-2">
@@ -110,18 +112,18 @@
 
 
                                                             
-                                                            {!! Form::text('lastname', old('lastname'), ['class' => 'form-control view-form', 'placeholder' => 'Nom','id'=>'lastname']) !!}
+                                                            {!! Form::text('lastname', auth()->guard('manager')->user()->last_name, ['class' => 'form-control view-form', 'placeholder' => 'Nom','id'=>'lastname']) !!}
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12 pb-2">
                                                             <div class="form-group">
-                                                            {!! Form::text('firstname', old('firstname'), ['class' => 'form-control view-form', 'placeholder' => 'Prénom','id'=>'firstname']) !!}
+                                                            {!! Form::text('firstname',auth()->guard('manager')->user()->first_name, ['class' => 'form-control view-form', 'placeholder' => 'Prénom','id'=>'firstname']) !!}
                                                              
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12 pb-2">
                                                             <div class="form-group">
-                                                            {!! Form::text('email', old('email'), ['class' => 'form-control view-form', 'placeholder' => 'Mail','id'=>'email']) !!}
+                                                            {!! Form::text('email',auth()->guard('manager')->user()->email, ['class' => 'form-control view-form', 'placeholder' => 'Mail','id'=>'email']) !!}
                                                               
                                                             </div>
                                                         </div>
@@ -1306,6 +1308,7 @@
 <script src="{{asset('frontend/js/jquery.magnific-popup.min.js')}}"></script>
 <script src="{{asset('frontend/js/owl.carousel.js')}} "></script>
 <script src="{{asset('frontend/js/custom.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script type="text/javascript ">
     $(".select2 ").select2();
 </script>
@@ -1362,5 +1365,24 @@
         $("#bread-id").hide();
     });
 </script>
+<script>
+    $(function() {
 
+        @if(Session::has('success'))
+        toastr.success("{{ Session::get('success') }}");
+        @endif
+
+        @if(Session::has('info'))
+        toastr.info("{{ Session::get('info') }}");
+        @endif
+
+        @if(Session::has('warning'))
+        toastr.warning("{{ Session::get('warning') }}");
+        @endif
+
+        @if(Session::has('error'))
+        toastr.error("{{ Session::get('error') }}");
+        @endif
+    });
+</script>
 </html>

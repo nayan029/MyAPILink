@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\EstablishmentRepositoryInterface;
 use App\Models\EmailTemplate;
-use App\Models\Manager;
+use App\Models\Establishment;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,46 +19,26 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
     public function store(Request $request)
     {
         $storeData = [
-            'civility' => $request->civility,
-            'first_name' => $request->firstname,
-            'last_name' => $request->lastname,
-            'telephone' => $request->telephone,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'roles' => $request->radio,
-            'establishment_management' => $request->management,
-            'represent' => $request->represent,
-            'organization' => $request->organization,
-            'number_of_establishments' => $request->number_of_establishments,
-            'address' => $request->address,
-            'postal_code' => $request->postal_code,
-            'city' => $request->city,
+            'type_of_establishment' => $request->type_of_establishment,
+            'own_of_our_structure' => $request->own_of_our_structure,
+            'opening_date' => $request->opening_date,
+            'year' => $request->year,
+            'direction' => $request->direction,
+            'effective' => $request->effective,
+            'number_of_groups_and_age_groups' => $request->number_of_groups_and_age_groups,
+            'accommodation_capacity' => $request->accommodation_capacity,
+            'surface_area_of_the_establishment' => $request->surface_area_of_the_establishment,
+            'garden' => $request->garden,
+            'applied_pedagogy' => $request->applied_pedagogy,
+            'our_values' => $request->our_values,
+            'document' => $request->document,
+            'more_infomation' => $request->more_infomation,
+            'created_by' => $request->created_by,
+            
         ];
 
-        $manager = Manager::create($storeData);
-
-        try {
-            $emailtemplateid = EmailTemplate::where('id', 2)->first();
-            $html = $emailtemplateid->email;
-            Mail::send(
-                'frontend.email-template.manager-mail',
-                [
-                    'organization' => $manager->organization,
-                    'email' => $manager->email,
-                    'address' => $manager->address,
-                    'telephone' => $manager->telephone,
-                    'firstname' => $manager->firstname,
-                    'emailtemplate' => $html,
-                ],
-                function ($message) use ($request) {
-                    $message->to($request->email);
-                    $message->subject('Telephone appointment');
-                }
-            );
-            return true;
-        } catch (Exception $e) {
-            return back()->withError($e->getMessage());
-        }
+        $manager = Establishment::create($storeData);
+      
     }
     public function update(Request $request)
     {

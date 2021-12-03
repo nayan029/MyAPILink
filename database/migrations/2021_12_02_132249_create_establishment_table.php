@@ -29,6 +29,7 @@ class CreateEstablishmentTable extends Migration
             $table->string('our_values')->nullable();
             $table->string('document')->nullable();
             $table->string('more_infomation')->nullable();
+            $table->integer('created_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

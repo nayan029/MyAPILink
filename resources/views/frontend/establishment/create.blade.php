@@ -19,6 +19,7 @@
 <body>
 
     <section class="back-f6 ">
+    {!! Form::model(null,['method' => 'POST', 'route' => ['store-establishment'], 'files' => true,'id'=>'store-establishment']) !!}
         <div class="add-establish">
             <div class="container">
                 <div class="card sr-card">
@@ -28,99 +29,89 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group mt-5">
-                                            <label>Type d’Établissement</label>
-                                            <select class="cus-drop select2 form-add-establish" id="cmbIdioma1"
-                                                style="width: 100%;">
-                                                <option value="" selected></option>
-                                                <option value="">Crèche collective</option>
-                                                <option value="">Micro-crèche</option>
-                                                <option value="">Crèche privée d’entreprise ou inter-entreprises
-                                                </option>
-                                            </select>
+
+                                            {!! Form::label('Type d’Établissement', 'Type d’Établissement') !!}
+                                            {!! Form::select('type_of_establishment',['Crèche collective' => 'Crèche collective','Micro-crèche' => 'Micro-crèche','Crèche privée d’entreprise ou inter-entreprises' => 'Crèche privée d’entreprise ou inter-entreprises'] ,null, [ 'id' => 'type_of_establishment', 'class' => 'cus-drop select2 form-add-establish']) !!}
+                                         
                                         </div>
 
 
                                         <div class="form-group">
-                                            <label>A propre de notre structure</label>
-                                            <input type="text" name=""
-                                                class=" form-control inputicon2 form-add-establish">
+                                            {!! Form::label('A propre de notre structure', 'A propre de notre structure') !!}
+                                            {!! Form::text('own_of_our_structure',NULL, ['class' => 'form-control inputicon2 form-add-establish','id'=>'own_of_our_structure']) !!}
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <label>Date d’ouverture</label>
+                                        {!! Form::label('Date d’ouverture', 'Date d’ouverture') !!}
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <select class="cus-drop select2 form-add-establish" style="width: 100%;">
-                                                <option value="">Date</option>
-                                            </select>
+                                            {!! Form::select('opening_date', ['Date' => 'Date'], null, [ 'id' => 'opening_date', 'class' => 'cus-drop select2 form-add-establish']) !!}
+
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <select class="cus-drop select2 form-add-establish" style="width: 100%;">
-                                                <option value="">Année</option>
-                                            </select>
+                                            {!! Form::select('year',['Année' => 'Année'], null, [ 'id' => 'year', 'class' => 'cus-drop select2 form-add-establish']) !!}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Direction</label>
-                                            <input type="text" name=""
-                                                class=" form-control form-add-establish inputicon2">
+                                            {!! Form::label('Direction', 'Direction') !!}
+                                            {!! Form::text('direction',NULL, ['class' => 'form-control inputicon2','id'=>'direction']) !!}
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Effectif</label>
-                                            <select class="cus-drop select2 form-add-establish" style="width: 100%;">
-                                                <option value=""></option>
-                                            </select>
+
+                                            {!! Form::label('Effectif', 'Effectif') !!}
+                                            {!! Form::select('effective',['effective' => 'effective'],null, [ 'id' => 'effective','placeholder'=>'' ,'class' => 'cus-drop select2 form-add-establish']) !!}
+
 
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group ">
-                                            <label>Nombre de groupes et tranches d’âges</label>
-                                            <select class="cus-drop select2 form-add-establish" style="width: 100%;">
-                                                <option value=""></option>
-                                            </select>
+                                            {!! Form::label('Nombre de groupes et tranches d’âges', 'Nombre de groupes et tranches d’âges') !!}
+                                            {!! Form::select('number_of_groups_and_age_groups',['number_of_groups_and_age_groups' => 'number_of_groups_and_age_groups'],null, [ 'id' => 'number_of_groups_and_age_groups','placeholder'=>'' ,'class' => 'cus-drop select2 form-add-establish']) !!}
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group ">
-                                            <label>Capacité d'accueil</label>
-                                            <select class="cus-drop select2 form-add-establish" style="width: 100%;">
-                                                <option value="">35</option>
-                                            </select>
+                                            {!! Form::label("Capacité d'accueil", "Capacité d'accueil") !!}
+                                            {!! Form::select('accommodation_capacity',['35' => '35'],null, [ 'id' => 'accommodation_capacity','class' => 'cus-drop select2 form-add-establish']) !!}
+
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group position-rel value-color">
-                                            <label>Superficie de l'établissement</label>
-                                            <input type="text" name="" value="35"
-                                                class=" form-control form-add-establish inputicon2">
-                                            <div class="m2-label"><label>m²</label></div>
+                                            {!! Form::label("Superficie de l'établissement", "Superficie de l'établissement") !!}
+                                            {!! Form::text('surface_area_of_the_establishment',NULL, ['class' => ' form-control form-add-establish inputicon2','id'=>'surface_area_of_the_establishment']) !!}
+
+                                            <div class="m2-label"> {!! Form::label("m²", "m²") !!}</div>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label>Votre établissement possède t-il un jardin ?</label>
+                                        {!! Form::label('Votre établissement possède t-il un jardin ?', 'Votre établissement possède t-il un jardin ?') !!}
+
                                         <div>
                                             <div class="radio-custom ">
                                                 <div class=" position-rel w-120px">
-                                                    <input type="radio" name="sd" id="" class="radio-yes-no" checked>
-                                                    <label class="label-radios">Oui</label>
+                                                    {!! Form::radio('garden', 'Yes', true, ['id' => 'garden', 'name' => 'garden', 'class' => 'radio-yes-no']) !!}
+                                                    {!! Form::label('Oui', 'Oui', ['class' => 'label-radios']) !!}
+
                                                 </div>
                                                 <div class=" position-rel w-120px">
-                                                    <input type="radio" name="sd" id="" class="radio-yes-no">
-                                                    <label class="label-radios">Non</label>
+                                                    {!! Form::radio('garden', 'No',NULL, ['id' => 'garden', 'name' => 'garden', 'class' => 'radio-yes-no']) !!}
+                                                    {!! Form::label('Non', 'Non', ['class' => 'label-radios']) !!}
+
                                                 </div>
                                             </div>
                                         </div>
@@ -132,87 +123,73 @@
 
 
                                 <div class="form-group">
-                                    <label>Pédagogie appliquée</label>
+                                    {!! Form::label('Pédagogie appliquée', 'Pédagogie appliquée') !!}
+
                                     <div>
                                         <div class="row check-box-sec check-form mb-4 m-0">
                                             <div class="col-md-6">
                                                 <div class="custom-control custom-checkbox profile-check">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                        id="Maria Montessori" checked>
-                                                    <label class="custom-control-label pro-check"
-                                                        for="Maria Montessori">Maria Montessori</label>
-                                                </div>
-                                                <div class="custom-control custom-checkbox profile-check">
-                                                    <input type="checkbox" class="custom-control-input" id="Pédagogie">
-                                                    <label class="custom-control-label pro-check"
-                                                        for="Pédagogie">Pédagogie Faber et Mazlish</label>
-                                                </div>
-                                                <div class="custom-control custom-checkbox profile-check">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                        id="Pédagogie Reggio">
-                                                    <label class="custom-control-label pro-check"
-                                                        for="Pédagogie Reggio">Pédagogie Reggio</label>
-                                                </div>
-                                                <div class="custom-control custom-checkbox profile-check">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                        id="Parler Bambin">
-                                                    <label class="custom-control-label pro-check"
-                                                        for="Parler Bambin">Parler Bambin</label>
-                                                </div>
-                                                <div class="custom-control custom-checkbox profile-check">
-                                                    <input type="checkbox" class="custom-control-input" id="Autres">
-                                                    <label class="custom-control-label pro-check"
-                                                        for="Autres">Autres</label>
+                                                    {!! Form::checkbox('applied_pedagogy','Maria Montessori',false,['class' => 'custom-control-input','id' =>'applied_pedagogy']) !!}
+                                                    {!! Form::label('applied_pedagogy', 'Maria Montessori', ['class' => 'custom-control-label pro-check']) !!}
 
+                                                </div>
+                                                <div class="custom-control custom-checkbox profile-check">
+                                                    {!! Form::checkbox('applied_pedagogy','Pédagogie',false,['class' => 'custom-control-input','id' =>'Pédagogie']) !!}
+                                                    {!! Form::label('applied_pedagogy', 'Pédagogie Faber et Mazlish', ['class' => 'custom-control-label pro-check']) !!}
 
+                                                </div>
+                                                <div class="custom-control custom-checkbox profile-check">
+                                                    {!! Form::checkbox('applied_pedagogy','Pédagogie Reggio',false,['class' => 'custom-control-input','id' =>'Reggio']) !!}
+                                                    {!! Form::label('applied_pedagogy', 'Pédagogie Reggio', ['class' => 'custom-control-label pro-check']) !!}
+
+                                                </div>
+                                                <div class="custom-control custom-checkbox profile-check">
+                                                    {!! Form::checkbox('applied_pedagogy','Parler Bambin',false,['class' => 'custom-control-input','id' =>'Parler']) !!}
+                                                    {!! Form::label('applied_pedagogy', 'Parler Bambin', ['class' => 'custom-control-label pro-check']) !!}
+
+                                                </div>
+                                                <div class="custom-control custom-checkbox profile-check">
+                                                    {!! Form::checkbox('applied_pedagogy','Autres',false,['class' => 'custom-control-input','id' =>'Autres']) !!}
+                                                    {!! Form::label('applied_pedagogy', 'Autres', ['class' => 'custom-control-label pro-check']) !!}
 
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="custom-control custom-checkbox profile-check">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                        id="Pédagogie Interactive">
-                                                    <label class="custom-control-label pro-check"
-                                                        for="Pédagogie Interactive">Pédagogie
+                                                    <input type="checkbox" class="custom-control-input" id="Pédagogie Interactive">
+                                                    <label class="custom-control-label pro-check" for="Pédagogie Interactive">Pédagogie
                                                         Interactive</label>
+                                                    {!! Form::checkbox('applied_pedagogy','Pédagogie Interactive',false,['class' => 'custom-control-input','id' =>'Interactive']) !!}
+                                                    {!! Form::label('applied_pedagogy', 'Pédagogie Interactive', ['class' => 'custom-control-label pro-check']) !!}
                                                 </div>
                                                 <div class="custom-control custom-checkbox profile-check">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                        id="Pickler Loczy">
-                                                    <label class="custom-control-label pro-check"
-                                                        for="Pickler Loczy">Pickler Loczy</label>
-                                                </div>
-                                                <div class="custom-control custom-checkbox profile-check">
-                                                    <input type="checkbox" class="custom-control-input" id="Snoezelen">
-                                                    <label class="custom-control-label pro-check"
-                                                        for="Snoezelen">Snoezelen</label>
-                                                </div>
-                                                <div class="custom-control custom-checkbox profile-check">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                        id="Pédagogie Steiner">
-                                                    <label class="custom-control-label pro-check"
-                                                        for="Pédagogie Steiner">Pédagogie
-                                                        Steiner-Waldorf</label>
-                                                </div>
-                                                <div class="custom-control custom-checkbox profile-check">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                        id="Aucune en particulier">
-                                                    <label class="custom-control-label pro-check"
-                                                        for="Aucune en particulier">Aucune en
-                                                        particulier</label>
+                                                    {!! Form::checkbox('applied_pedagogy','Pickler Loczy',false,['class' => 'custom-control-input','id' =>'Pickler']) !!}
+                                                    {!! Form::label('applied_pedagogy', 'Pickler Loczy', ['class' => 'custom-control-label pro-check']) !!}
 
-
-
+                                                </div>
+                                                <div class="custom-control custom-checkbox profile-check">
+                                                 
+                                                    {!! Form::checkbox('applied_pedagogy','Snoezelen',false,['class' => 'custom-control-input','id' =>'Snoezelen']) !!}
+                                                    {!! Form::label('applied_pedagogy', 'Snoezelen', ['class' => 'custom-control-label pro-check']) !!}
+                                                </div>
+                                                <div class="custom-control custom-checkbox profile-check">
+            
+                                                    {!! Form::checkbox('applied_pedagogy','Pédagogie Steiner',false,['class' => 'custom-control-input','id' =>'Steiner']) !!}
+                                                    {!! Form::label('applied_pedagogy', 'Pédagogie Steiner', ['class' => 'custom-control-label pro-check']) !!}
+                                                </div>
+                                                <div class="custom-control custom-checkbox profile-check">
+                                  
+                                                        {!! Form::checkbox('applied_pedagogy','Aucune en particulier',false,['class' => 'custom-control-input','id' =>'particulier']) !!}
+                                                    {!! Form::label('applied_pedagogy', 'Aucune en particulier', ['class' => 'custom-control-label pro-check']) !!}
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label>Nos valeurs</label>
-                                                    <textarea name="" id="" cols="30" rows="4"
-                                                        class="form-control textarea-form inputicon2"></textarea>
-                                                    <!-- <input type="text" name="" class="form-add-establish form-control inputicon2"> -->
+                                                    {!! Form::label("Nos valeurs", "Nos valeurs") !!}
+                                                    {!! Form::textarea('our_values', '', ['size' => '30x4', 'id' => 'our_values', 'name' => 'our_values', 'class' => 'form-control textarea-form inputicon2']) !!}
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -221,12 +198,14 @@
 
                                 <div class="form-group sr-pos">
                                     <div class="upload-file-input">
-                                        <label>Notre projet pédagogique</label>
+                                        {!! Form::label("Notre projet pédagogique", "Notre projet pédagogique") !!}
+
                                         <input id="uploadFile" value="" class="form-add-establish w-100 inputicon2">
                                         <div class="fileUpload btn btn-primary attach-file">
                                             <span><i class="fa fa-paperclip mr-2"></i>Attacher un
                                                 document</span>
-                                            <input id="uploadBtn" type="file" class="upload">
+                                            
+                                            {!! Form::file('document', ['id' => 'document', 'name' => 'document', 'class' => 'upload']) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -234,7 +213,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <section>
-                                            <form action="" method="POST" enctype="multipart/form-data">
+                                       
                                                 <div class="container">
                                                     <div class="row">
                                                         <div class="col-md-12">
@@ -249,29 +228,28 @@
                                                                 </div>
                                                                 <div class="dropzone-wrapper">
                                                                     <div class="dropzone-desc">
-                                                                        <img src="{{asset('frontend/images/profile-feather-upload.svg')}}"
-                                                                            width="30px" class="mb-1">
+                                                                        <img src="{{asset('frontend/images/profile-feather-upload.svg')}}" width="30px" class="mb-1">
                                                                         <!-- <i class="glyphicon glyphicon-download-alt"></i> -->
-                                                                        <p>Drag and drop here or<span
-                                                                                style="color:#192842;font-family: 'Quicksand-Bold'">
+                                                                        <p>Drag and drop here or<span style="color:#192842;font-family: 'Quicksand-Bold'">
                                                                                 Browse</span> </p>
                                                                     </div>
-                                                                    <input type="file" name="img_logo" class="dropzone">
+                                                                    {!! Form::file('more_infomation', ['id' => 'more_infomation', 'name' => 'more_infomation', 'class' => 'dropzone']) !!}
+                                                                 
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                 </div>
-                                            </form>
+                                           
                                         </section>
                                     </div>
 
 
                                     <div class="col-md-12 d-flex justify-content-end mt-5">
                                         <button class="btn btn-outline-cancel annuler-btns">Annuler</button>
-                                        <a href="view-establishment-account-3.html"
-                                            class="btn btn-yellow">Sauvegarder</a>
+                                        <button  class="btn btn-yellow">Sauvegarder</button>
+                                        <!-- href="view-establishment-account-3.html" -->
                                     </div>
 
 
@@ -282,6 +260,7 @@
                 </div>
             </div>
         </div>
+        {!! Form::close() !!}
     </section>
 </body>
 
@@ -298,11 +277,11 @@
     $(".select2 ").select2();
 </script>
 <script type="text/javascript">
-    $("#bravo-btn").on('click', function () {
+    $("#bravo-btn").on('click', function() {
         $('#establishment').modal('hide');
         $('#bravo').modal('show');
     });
-    $("#cv-btn").on('click', function () {
+    $("#cv-btn").on('click', function() {
         $('#establishment').modal('hide');
         $('#cv-modal').modal('show');
     });
@@ -311,7 +290,7 @@
     var togglePassword = document.getElementById("toggle-password ");
 
     if (togglePassword) {
-        togglePassword.addEventListener('click ', function () {
+        togglePassword.addEventListener('click ', function() {
             var x = document.getElementById("password ");
             if (x.type === "password ") {
                 x.type = "text ";
@@ -323,23 +302,24 @@
 
     // -------------------
 
-    $(function () {
+    $(function() {
         $(".select-multi").multiselect({
             includeSelectAllOption: true
         });
     });
-    $(document).ready(function () {
+    $(document).ready(function() {
         $(".change-placeholder-select .multiselect").html("Type de poste");
     });
 
     // ----------------------------
 
-    $('#cmbIdioma1').on('select2:open', function () {
+    $('#cmbIdioma1').on('select2:open', function() {
         $("body").addClass('select2-open1');
     });
-    $('#cmbIdioma1').on('select2:close', function () {
+    $('#cmbIdioma1').on('select2:close', function() {
         $("body").removeClass('select2-open1');
     });
 </script>
-
+<script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+{!! $validator->selector('#store-establishment') !!}
 </html>

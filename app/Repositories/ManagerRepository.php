@@ -2,15 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\ManagerRepositoryInterface;
-use App\Models\EmailTemplate;
-use App\Models\Manager;
 use Exception;
+use App\Models\User;
+use App\Models\Manager;
 use Illuminate\Http\Request;
+use App\Models\EmailTemplate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use App\Interfaces\ManagerRepositoryInterface;
 
 
 class ManagerRepository implements ManagerRepositoryInterface
@@ -80,9 +81,10 @@ class ManagerRepository implements ManagerRepositoryInterface
             'first_name' => $request->firstname,
             'last_name' => $request->lastname,
             'email' => $request->email,
+            
         ];
 
-        return Manager::where('id',auth()->guard('manager')->user()->id)->update($updateData);
+        return User::where('id',auth()->guard('web')->user()->id)->update($updateData);
 
     
     }

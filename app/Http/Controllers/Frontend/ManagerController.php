@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use JsValidator;
+use App\Models\Job;
+
 
 class ManagerController extends Controller
 {
@@ -76,6 +78,8 @@ class ManagerController extends Controller
         $this->updatevalidationrules['email'] = "required|email|unique:user,email,".auth()->guard('web')->user()->id.",id,deleted_at,NULL";
      
         $data['validator'] = JsValidator::make($this->updatevalidationrules);
+        $data['myJobList']=Job::where('user_id',1)->paginate(1);
+
         return view('frontend.manager.manager-profile',$data);
     }
 

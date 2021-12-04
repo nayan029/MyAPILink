@@ -65,7 +65,6 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->post('addnewsletter', 'HomeController@addNewsletter')->name('addnewsletter');
     
     $frontRoute->post('manager/store', 'ManagerController@storeData')->name('manager.store');
-    $frontRoute->get('manager-profile', 'ManagerController@profile')->name('profile');
     $frontRoute->post('update-profile', 'ManagerController@updateProfile')->name('update-profile');
     $frontRoute->get('account-setting', 'ManagerController@accountSetting')->name('account-setting');
 
@@ -76,11 +75,15 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');
     $frontRoute->post('contact-us','ContactUsController@storeContact')->name('contact-us');
    
+    $frontRoute->get('addjob','JobController@index')->name('addjob');
+    $frontRoute->post('addorupdatejob','JobController@addOrUpdateJob')->name('addorupdatejob');
+    $frontRoute->get('editjob','JobController@editJob')->name('editjob');
     
+    $frontRoute->get('manager-profile', 'ManagerController@profile')->name('profile');
 });
 
 Route::middleware(['auth:manager'])->group(function ($route) {
     $route->group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontRoute) {
-        $frontRoute->get('manager-profile', 'ManagerController@profile')->name('profile');
+    
     });
 });

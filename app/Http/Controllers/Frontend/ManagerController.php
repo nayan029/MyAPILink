@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use JsValidator;
 use App\Models\Job;
+use App\Models\Establishment;
 
 
 class ManagerController extends Controller
@@ -79,6 +80,8 @@ class ManagerController extends Controller
      
         $data['validator'] = JsValidator::make($this->updatevalidationrules);
         $data['myJobList']=Job::where('user_id',1)->paginate(1);
+        $data['myEstablishmentList']=Establishment::where('user_id',1)->get();
+        
 
         return view('frontend.manager.manager-profile',$data);
     }

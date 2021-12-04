@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Establishment;
 use JsValidator;
 
 class EstablishmentController extends Controller
@@ -44,7 +45,6 @@ class EstablishmentController extends Controller
     public function store(Request $request)
     {
 
-
         $validator = Validator::make($request->all(), $this->validationrules);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validation->errors());
@@ -59,4 +59,5 @@ class EstablishmentController extends Controller
         Session::flash('error', 'Sorry, something went wrong. please try again.');
         return redirect()->back();
     }
+    
 }

@@ -192,20 +192,22 @@
                                             <div class="card sr-card manager-card">
                                                 <div class="card-body">
                                                     <table class="manager-table">
+                                                        @foreach($myEstablishmentList as $value)
                                                         <tr>
                                                             <td>
                                                                 <div class="d-flex align-items-center">
-                                                                    <img src="{{asset('frontend/images/project/user-detail-pro.svg')}}" alt="user" class="manager-pro mr-3">
-                                                                    <p class="mb-0 managerp">Crèche des bambins</p>
+                                                                    <img src="{{url(''.$value->more_infomation)}}" alt="user" class="manager-pro mr-3">
+                                                                    <p class="mb-0 managerp">{{$value->type_of_establishment}}</p>
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="d-flex align-items-center justify-content-end">
-                                                                    <p class="mb-0 managerp">Montpellier</p>
+                                                                    <p class="mb-0 managerp">{{$value->direction}}</p>
                                                                     <a href="view-establishment-account-3.html" class="btn btn-blue voir-btn ml-4">Voir</a>
                                                                 </div>
                                                             </td>
                                                         </tr>
+                                                        @endforeach
                                                     </table>
                                                 </div>
                                             </div>

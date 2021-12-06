@@ -40,18 +40,18 @@
                 </div>
                 <div class="communication-switch">
                     <div>
-                        <div class="custom-control custom-switch">
+                        <!-- <div class="custom-control custom-switch">
                             <input type="checkbox" class="custom-control-input custom-text-input" id="customSwitch1" checked>
 
                             <label class="custom-control-label switch-text" for="customSwitch1">recevoir les offres et
                                 les notifications par emails</label>
 
 
-                        </div>
+                        </div> -->
                     </div>
                     <div>
                         <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input custom-text-input" id="customSwitch2">
+                            <input type="checkbox" id="notification-email" onchange="notificationEmail()" @if(auth()->guard('web')->user()->notifications_email=='on') checked @endif class="custom-control-input custom-text-input" id="customSwitch2">
                             <label class="custom-control-label switch-text" for="customSwitch2">recevoir les offres et
                                 les notifications par emails</label>
                         </div>
@@ -67,7 +67,7 @@
                     <ul>
                         <li data-toggle="modal" data-target="#exampleModal"><img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" class="mr-4"><span>Modifier mon mot de passe</span></li>
                         <li data-toggle="modal" data-target="#email-modal"><img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" class="mr-4"><span>Modifier mon email de connexion</span></li>
-                        <li><img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" class="mr-4"><span>Demander la suppression de mon
+                        <li id="delete-account"><img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" class="mr-4"><span>Demander la suppression de mon
                                 compte</span></li>
                     </ul>
                 </div>
@@ -170,6 +170,7 @@
 <script src="{{asset('frontend/js/owl.carousel.js')}}"></script>
 <script src="{{asset('frontend/js/custom.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
 <script type="text/javascript ">
     $(".select2 ").select2();
 </script>
@@ -246,6 +247,60 @@
     function passwordModalClose() {
         $('#exampleModal').modal('hide');
     }
+
+    function notificationEmail() {
+        if ($('#notification-email').prop('checked') == true) {
+            var flag = 'on';
+        } else {
+            var flag = 'off';
+        }
+        $.ajax({
+            url: '{{ route("update-notifications-flag") }}',
+            method: 'POST',
+            data: {
+                flag: flag,
+                _token: "{{csrf_token()}}"
+            },
+            success: function(response) {
+                if (response.success == true) {
+
+                    toastr.success(response.message);
+
+                }
+            }
+        });
+    }
+
+    //delete
+    $(document).on('click', '#delete-account', function(e) {
+        e.preventDefault();
+        swal({
+                title: 'Êtes-vous sûr de vouloir demander la suppression du compte ?',
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'Cancel',
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        method: 'POST',
+                        url:'{{ route("update-delete-flag") }}',
+                        data: {
+                            "_token":  "{{csrf_token()}}",
+                            "delete_account_flag" :"request",
+                        },
+                        success: function(response) {
+                            if (response.status == true) {
+
+                                toastr.success(response.msg);
+                            }
+                        }
+                    });
+                }
+            });
+    });
 </script>
 <script>
     $(function() {

@@ -110,4 +110,24 @@ class ManagerRepository implements ManagerRepositoryInterface
     {
         return User::findorfail($id);
     }
+    public function changeNotificationFlag(Request $request)
+    {
+        $updateData = [
+            'notifications_email' => $request->flag,
+        ];
+
+        return User::where('id', auth()->guard('web')->user()->id)->update($updateData);
+    }
+
+    public function changeDeleteAccountFlag(Request $request)
+    {
+        $updateData = [
+            'delete_account_flag' => $request->delete_account_flag,
+        ];
+
+        return User::where('id', auth()->guard('web')->user()->id)->update($updateData);
+    }
+
+    
+    
 }

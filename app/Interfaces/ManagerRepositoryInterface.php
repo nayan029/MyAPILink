@@ -15,6 +15,13 @@ interface ManagerRepositoryInterface
 
     public function getSingleUser($id);
 
+    public function changeNotificationFlag(Request $request);
+
+    public function changeDeleteAccountFlag(Request $request);
+
+    
+    
+
     
     
 

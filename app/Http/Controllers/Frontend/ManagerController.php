@@ -152,5 +152,28 @@ class ManagerController extends Controller
         }
         return response()->json(['success' => false, 'message' => 'Sorry, something went wrong. please try again.']);
     }
+    public function updateNotificationsFlag(Request $request)
+    {
+     
+        $update = $this->managerRepository->changeNotificationFlag($request);
+      
+        if ($update) {
+              
+            return response()->json(['success' => true, 'message' => 'Successfully Updated']);
+        }
+        return response()->json(['success' => false, 'message' => 'Sorry, something went wrong. please try again.']);
+    }
+    
+    public function updateDeleteAccountFlag(Request $request)
+    {
+
+        $update = $this->managerRepository->changeDeleteAccountFlag($request);
+      
+        if ($update) {
+              
+            return response()->json(['success' => true, 'message' => 'Successfully Updated']);
+        }
+        return response()->json(['success' => false, 'message' => 'Sorry, something went wrong. please try again.']);
+    }
     
 }

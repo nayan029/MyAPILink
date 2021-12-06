@@ -99,6 +99,8 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->get('account-setting', 'ManagerController@accountSetting')->name('account-setting');
         $frontRoute->post('update-password', 'ManagerController@updatePassowrd')->name('update-password');
         $frontRoute->post('update-email', 'ManagerController@updateEmail')->name('update-email');
+        $frontRoute->post('update-notifications-flag', 'ManagerController@updateNotificationsFlag')->name('update-notifications-flag');
+        $frontRoute->post('update-delete-flag', 'ManagerController@updateDeleteAccountFlag')->name('update-delete-flag');
         
         $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
         $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');

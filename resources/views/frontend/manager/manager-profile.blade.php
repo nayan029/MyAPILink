@@ -204,7 +204,7 @@
                                                             <td>
                                                                 <div class="d-flex align-items-center justify-content-end">
                                                                     <p class="mb-0 managerp">{{$value->direction}}</p>
-                                                                    <a href="view-establishment-account-3.html" class="btn btn-blue voir-btn ml-4">Voir</a>
+                                                                    <a href="{{URL::to('/view-establishment-account')}}/{{$value->id}}" class="btn btn-blue voir-btn ml-4">Voir</a>
                                                                 </div>
                                                             </td>
                                                         </tr>

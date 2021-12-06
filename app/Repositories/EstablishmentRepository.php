@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Interfaces\EstablishmentRepositoryInterface;
-use App\Models\EmailTemplate;
+use App\Models\EstablishmentGallery;
 use App\Models\Establishment;
 use Exception;
 use Illuminate\Http\Request;
@@ -31,21 +31,20 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
         $storeData = $request->all();
         $storeData['document'] = $document;
         $storeData['more_infomation'] = $more_infomation;
-        $storeData['created_by'] =auth()->guard('web')->user()->id;
+        $storeData['created_by'] = auth()->guard('web')->user()->id;
 
 
         return Establishment::create($storeData);
-      
     }
     public function getSingleEstablishment($id)
     {
-        return Establishment::where('created_by',auth()->guard('web')->user()->id)->where('id',$id)->firstOrFail();
+        return Establishment::where('created_by', auth()->guard('web')->user()->id)->where('id', $id)->firstOrFail();
     }
-    
-    public function update(Request $request,$id)
+
+    public function update(Request $request, $id)
     {
-     
-         $updateData = [
+
+        $updateData = [
             'type_of_establishment' => $request->type_of_establishment,
             'own_of_our_structure' => $request->own_of_our_structure,
             'opening_date' => $request->opening_date,
@@ -58,22 +57,45 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
             'garden' => $request->garden,
             'applied_pedagogy' => $request->applied_pedagogy,
             'our_values' => $request->our_values,
-          
-            
+
+
         ];
-   
+
         if ($request->hasFile('document')) {
             $document = $this->uploadImage($request->file('document'), 'Establishment/document');
             $updateData['document'] = $document;
         }
-        
+
         if ($request->hasFile('more_infomation')) {
             $more_infomation = $this->uploadImage($request->file('more_infomation'), 'Establishment/more_infomation');
             $updateData['more_infomation'] = $more_infomation;
         }
 
-        return Establishment::where('id',$id)->update($updateData);
-        
+        return Establishment::where('id', $id)->update($updateData);
     }
-  
+    public function uploadEstablishmentImage(Request $request)
+    {
+        $image = "";
+        if ($request->hasFile('image')) {
+            $image = $this->uploadImage($request->file('image'), 'Establishment/gallery');
+        }
+
+        $storeData['image'] = $image;
+        $storeData['establishment_id'] = $request->establishment_id;
+        $storeData['created_by'] = auth()->guard('web')->user()->id;
+
+
+        return EstablishmentGallery::create($storeData);
+    }
+    public function getEstablishmentGallery($id)
+    {
+        return EstablishmentGallery::where('establishment_id', $id)->where('deleted_at', NULL)->get();
+    }
+
+    public function deleteImage($id)
+    {
+        $id = EstablishmentGallery::find($id);
+        $id->delete();
+        return $id;
+    }
 }

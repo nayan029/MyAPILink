@@ -33,6 +33,13 @@ class EstablishmentController extends Controller
 
 
     ];
+    protected   $imageValidationRules =
+    [
+        
+        'image' => 'required|mimes:jpeg,png,jpg|max:2048',
+
+    ];
+   
     public function __construct(EstablishmentRepositoryInterface $establishmentRepository)
     {
         $this->establishmentRepository = $establishmentRepository;
@@ -48,13 +55,13 @@ class EstablishmentController extends Controller
 
         $validator = Validator::make($request->all(), $this->validationrules);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validation->errors());
+            return redirect()->back()->withErrors($validator->errors());
         }
 
         $storeProfile = $this->establishmentRepository->store($request);
 
         if ($storeProfile) {
-            Session::flash('success', 'Successfully Updated');
+            Session::flash('success', 'Successfully Inserted');
             return redirect('/view-establishment-account/'.$storeProfile->id);
         }
         Session::flash('error', 'Sorry, something went wrong. please try again.');
@@ -62,6 +69,8 @@ class EstablishmentController extends Controller
     }
     public function show(Request $request,$id)
     {
+        $data['imageValidator'] = JsValidator::make($this->imageValidationRules);
+        $data['images'] = $this->establishmentRepository->getEstablishmentGallery($id);
         $data['establishment'] = $this->establishmentRepository->getSingleEstablishment($id);
        
         return view('frontend.establishment.show',$data);
@@ -91,5 +100,33 @@ class EstablishmentController extends Controller
         Session::flash('error', 'Sorry, something went wrong. please try again.');
         return redirect()->back();
     }
+
+    public function uploadImage(Request $request)
+    {
+
+
+        $validator = Validator::make($request->all(), $this->imageValidationRules);
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => $validator->errors()]);
+        }
+
+        $store = $this->establishmentRepository->uploadEstablishmentImage($request);
+
+        if ($store) {
+            return response()->json(['success' => true, 'message' => 'Successfully Inserted','data' => $store]);
+        }
+        return response()->json(['success' => false, 'message' => 'Sorry, something went wrong. please try again.']);
+    }
+    public function removeImage(Request $request)
+    {
+        $delete = $this->establishmentRepository->deleteImage($request->id);
+      
+        if ($delete) {
+            return response()->json(['success' => true, 'message' => 'Successfully Deleted','data' => $delete]);
+        }
+        return response()->json(['success' => false, 'message' => 'Sorry, something went wrong. please try again.']);
+    }
+    
+    
     
 }

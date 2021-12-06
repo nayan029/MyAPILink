@@ -211,12 +211,10 @@
                                                 <div class="mt-4">
                                                     <div class="">
                                                         <div class="applicants-veri">
-                                                            <span> <img src="{{asset('frontend/images/imgs-svg/green-check.svg')}}"
-                                                                    alt="check"></span>Etablissement
+                                                            <span> <img src="{{asset('frontend/images/imgs-svg/green-check.svg')}}" alt="check"></span>Etablissement
                                                         </div>
                                                         <div class="applicants-veri">
-                                                            <span> <img src="{{asset('frontend/images/imgs-svg/green-check.svg')}}"
-                                                                    alt="check"></span> E-mail
+                                                            <span> <img src="{{asset('frontend/images/imgs-svg/green-check.svg')}}" alt="check"></span> E-mail
                                                         </div>
                                                     </div>
                                                 </div>
@@ -247,7 +245,7 @@
                                                 <div class="card-body">
                                                     <h5 class="propos">À propos de la structure</h5>
                                                     <p class="propos-text">
-                                                    {{$establishment->own_of_our_structure}}
+                                                        {{$establishment->own_of_our_structure}}
                                                     </p>
                                                 </div>
                                             </div>
@@ -318,7 +316,7 @@
                                                 <div class="card-body">
                                                     <h5 class="propos">Nos valeurs :</h5>
                                                     <p class="propos-text">
-                                                    {{$establishment->our_values}}
+                                                        {{$establishment->our_values}}
                                                     </p>
                                                 </div>
                                             </div>
@@ -360,86 +358,40 @@
                                     </div>
 
                                     <div class="portfolio-inside-details">
-                                        <ul class="applicants-img-ul">
-                                            <li>
+                                        <ul class="applicants-img-ul " id="appendid">
+                                            @foreach($images as $image)
+                                            <li id="image{{$image->id}}">
                                                 <div class="img_content_pro">
-                                                    <img src="{{asset('frontend/images/imgs-svg/unsplash.svg')}}">
+                                                    <img src='{{asset("$image->image")}}'>
                                                     <div>
-                                                        <img src="{{asset('frontend/images/project/cancel-red.svg')}}" width="12px" height="12px" class="unplash-closeimg">
+                                                        <img onclick="removeImage({{$image->id}})"  src="{{asset('frontend/images/project/cancel-red.svg')}}" width="12px" height="12px" class="unplash-closeimg">
                                                     </div>
                                                 </div>
                                             </li>
+                                            @endforeach
                                             <li>
-                                                <div class="img_content_pro">
-                                                    <img src="{{asset('frontend/images/imgs-svg/unsplash5.svg')}}">
-                                                    <div>
-                                                        <img src="{{asset('frontend/images/project/cancel-red.svg')}}" width="12px" height="12px" class="unplash-closeimg">
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="img_content_pro">
-                                                    <img src="{{asset('frontend/images/imgs-svg/unsplash7.svg')}}">
-                                                    <div>
-                                                        <img src="{{asset('frontend/images/project/cancel-red.svg')}}" width="12px" height="12px" class="unplash-closeimg">
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="img_content_pro">
-                                                    <img src="{{asset('frontend/images/imgs-svg/unsplash6.svg')}}">
-                                                    <div>
-                                                        <img src="{{asset('frontend/images/project/cancel-red.svg')}}" width="12px" height="12px" class="unplash-closeimg">
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="img_content_pro">
-                                                    <img src="{{asset('frontend/images/imgs-svg/unsplash11.svg')}}">
-                                                    <div>
-                                                        <img src="{{asset('frontend/images/project/cancel-red.svg')}}" width="12px" height="12px" class="unplash-closeimg">
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="img_content_pro">
-                                                    <img src="{{asset('frontend/images/imgs-svg/unsplash3.svg')}}">
-                                                    <div>
-                                                        <img src="{{asset('frontend/images/project/cancel-red.svg')}}" width="12px" height="12px" class="unplash-closeimg">
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="img_content_pro">
-                                                    <img src="{{asset('frontend/images/imgs-svg/unsplash.svg')}}">
-                                                    <div>
-                                                        <img src="{{asset('frontend/images/project/cancel-red.svg')}}" width="12px" height="12px" class="unplash-closeimg">
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="img_content_pro">
-                                                    <img src="{{asset('frontend/images/imgs-svg/unsplash5.svg')}}">
-                                                    <div>
-                                                        <img src="{{asset('frontend/images/project/cancel-red.svg')}}" width="12px" height="12px" class="unplash-closeimg">
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="img_content_pro">
-                                                    <div class="view-image-upload">
-                                                        <div class="upload-div">
-                                                            <div><img src="{{asset('frontend/images/project/download.svg')}}" alt="upload-profile" class="view-upload-img1">
+                                                <form method="post" enctype="multipart/form-data" name="myForm" id="myForm">
+                                                    @csrf
+                                                    <div class="img_content_pro">
+                                                        <div class="view-image-upload">
+                                                            <div class="upload-div">
+                                                                <div><img src="{{asset('frontend/images/project/download.svg')}}" alt="upload-profile" class="view-upload-img1">
+                                                                </div>
+                                                                <p class="mb-0">Télécharger une image</p>
                                                             </div>
-                                                            <p class="mb-0">Télécharger une image</p>
+
+                                                            <input type="file" id="imageUpload" name="image" accept=".png, .jpg, .jpeg" onchange="imageUploadGallery();" class="views-upload-input1">
+                                                            <input type="hidden" value="{{$establishment->id}}" name="establishment_id">
+
+
                                                         </div>
-                                                        <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg" class="views-upload-input1">
                                                     </div>
-                                                </div>
+                                                    <span class="image-upload-error text-danger">@error ('image') {{$message}} @enderror</span>
+                                                </form>
                                             </li>
 
                                         </ul>
-                                       
+
                                     </div>
                                 </div>
                             </div>
@@ -510,8 +462,7 @@
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mt-2">
@@ -573,8 +524,7 @@
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mt-2">
@@ -636,8 +586,7 @@
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mt-2">
@@ -699,8 +648,7 @@
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mt-2">
@@ -762,8 +710,7 @@
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mt-2">
@@ -857,8 +804,7 @@
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mr-renew">
@@ -922,8 +868,7 @@
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mr-renew">
@@ -987,8 +932,7 @@
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mr-renew">
@@ -1052,8 +996,7 @@
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mr-renew">
@@ -1117,8 +1060,7 @@
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mr-renew">
@@ -1217,8 +1159,7 @@
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mr-renew">
@@ -1282,8 +1223,7 @@
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mr-renew">
@@ -1347,8 +1287,7 @@
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mr-renew">
@@ -1412,8 +1351,7 @@
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mr-renew">
@@ -1477,8 +1415,7 @@
                                                                     <button class="btn btn btn-met">
                                                                         Modifier
                                                                     </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o"
-                                                                            aria-hidden="true"></i></a>
+                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mr-renew">
@@ -1705,10 +1642,55 @@
         $("#profile-id").hide();
         $("#profile-id2").show();
     });
+    //upload Image
+    function imageUploadGallery() {
+        $('.image-upload-error').text('');
+        event.preventDefault();
+        $.ajax({
+            url: '{{ route("upload-image") }}',
+            method: 'POST',
+            data: new FormData(myForm),
+            _token: '{{ csrf_token() }}',
+            dataType: 'JSON',
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                if (response.success == true) {
+                    toastr.success(response.message);
+                    $("#appendid").prepend("<li><div class='img_content_pro'><img src='{{asset('/')}}" + response.data.image + "'><div><img imageId=" + response.data.id + " src='{{asset('frontend/images/project/cancel-red.svg')}}' width='12px' height='12px' class='unplash-closeimg'></div></div></li>");
+                } else {
+                    $('.image-upload-error').text(response.errors.image);
+                }
+            }
+        });
+    }
+    //Remove Image
+    function removeImage(id) {
+        $.ajax({
+            url: "{{ route('remove-image') }}",
+            type: "POST",
+            data: {
+                id: id,
+                _token: "{{csrf_token()}}"
+            },
+            success: function(response) {
+                if (response.success == true) {
+                    toastr.success(response.message);
+                    
+                    $( "#image"+id ).remove();
 
-   
+                } else {
+                    toastr.error(response.message);
+                }
 
+            }
+        });
+    }
 </script>
+
+<script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+{!! $imageValidator->selector('#upload-image') !!}
 
 <script>
     $(function() {
@@ -1717,17 +1699,11 @@
         toastr.success("{{ Session::get('success') }}");
         @endif
 
-        @if(Session::has('info'))
-        toastr.info("{{ Session::get('info') }}");
-        @endif
-
-        @if(Session::has('warning'))
-        toastr.warning("{{ Session::get('warning') }}");
-        @endif
 
         @if(Session::has('error'))
         toastr.error("{{ Session::get('error') }}");
         @endif
     });
 </script>
+
 </html>

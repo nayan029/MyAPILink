@@ -85,9 +85,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('addjob','JobController@index')->name('addjob');
     $frontRoute->post('addorupdatejob','JobController@addOrUpdateJob')->name('addorupdatejob');
     $frontRoute->get('editjob','JobController@editJob')->name('editjob');
-    
-    $frontRoute->get('manager-profile', 'ManagerController@profile')->name('profile');
-});
+    });
 
 Route::middleware(['auth:web'])->group(function ($route) {
     $route->group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontRoute) {

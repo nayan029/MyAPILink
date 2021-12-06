@@ -15,7 +15,7 @@ class ManagerRepository implements ManagerRepositoryInterface
 {
     public function StoreProfile(Request $request)
     {
-        
+
 
         try {
             $storeData = [
@@ -55,7 +55,7 @@ class ManagerRepository implements ManagerRepositoryInterface
             $html = str_replace('{{ORGANIZATION}}', $organization, $html);
             $html = str_replace('{{ADDRESS}}', $address, $html);
             $html = str_replace('{{CIVILITY}}', $civility, $html);
-        
+
             Mail::send(
                 'frontend.email-template.manager-mail',
                 [
@@ -79,11 +79,35 @@ class ManagerRepository implements ManagerRepositoryInterface
             'last_name' => $request->lastname,
             'email' => $request->email,
             'roles' => $request->roles,
-            
+
         ];
 
-        return User::where('id',auth()->guard('web')->user()->id)->update($updateData);
+        return User::where('id', auth()->guard('web')->user()->id)->update($updateData);
+    }
+    public function changePassword(Request $request)
+    {
+        $updateData = [
+            'password' => Hash::make($request->password),
+        ];
+        $request->session()->forget('password_hash_web');
+        $user = $this->getSingleUser(auth()->guard('web')->user()->id);
+        Auth::guard('web')->login($user);
 
-    
+        return User::where('id', auth()->guard('web')->user()->id)->update($updateData);
+    }
+
+    public function changeEmail(Request $request)
+    {
+        $updateData = [
+            'email' => $request->email,
+        ];
+
+        return User::where('id', auth()->guard('web')->user()->id)->update($updateData);
+    }
+
+
+    public function getSingleUser($id)
+    {
+        return User::findorfail($id);
     }
 }

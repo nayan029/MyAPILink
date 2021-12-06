@@ -25,6 +25,14 @@ class ManagerController extends Controller
         'roles' =>"required",
         
     ];
+    protected   $passwordValidationRules =
+    [
+        'password' => 'required|min:8',
+        'confirm_password' =>"required|same:password",
+    
+    ];
+   
+    
     public function __construct(ManagerRepositoryInterface $managerRepository)
     {
         $this->managerRepository = $managerRepository;
@@ -81,7 +89,7 @@ class ManagerController extends Controller
         
         $id = auth()->guard('web')->user()->id;
         $data['validator'] = JsValidator::make($this->updatevalidationrules);
-        $data['myJobList']=Job::where('user_id',1)->paginate(10);
+        $data['myJobList']=Job::where('user_id',$id)->paginate(10);
         $data['myEstablishmentList']=Establishment::where('created_by',$id)->get();
         
 
@@ -105,6 +113,44 @@ class ManagerController extends Controller
 
     public function accountSetting()
     {
+
         return view('frontend.manager.account_setting');
     }
+    
+    public function updatePassowrd(Request $request)
+    {
+        $validator = Validator::make($request->all(), $this->passwordValidationRules);
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => $validator->errors()]);
+        }
+
+        $update = $this->managerRepository->changePassword($request);
+      
+        if ($update) {
+              
+            return response()->json(['success' => true, 'message' => 'Successfully Updated']);
+        }
+        return response()->json(['success' => false, 'message' => 'Sorry, something went wrong. please try again.']);
+    }
+
+    public function updateEmail(Request $request)
+    {
+     
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|unique:users,email,'.auth()->guard('web')->user()->id.',id,deleted_at,NULL',
+            'confirm_email' =>"required|email|same:email",
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => $validator->errors()]);
+        }
+
+        $update = $this->managerRepository->changeEmail($request);
+      
+        if ($update) {
+              
+            return response()->json(['success' => true, 'message' => 'Successfully Updated']);
+        }
+        return response()->json(['success' => false, 'message' => 'Sorry, something went wrong. please try again.']);
+    }
+    
 }

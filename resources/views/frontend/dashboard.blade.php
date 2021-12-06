@@ -373,7 +373,7 @@
                     if(response.user.user_type==2){
                     window.location.href ='{{ route("profile") }}';
                     }else{
-                    window.location.href ='{{ route("profile") }}';
+                    window.location.href ='{{ route("mycandidate-profile") }}';
                     }
                 } else {
                     $('.email-error').text(response.errors.email);

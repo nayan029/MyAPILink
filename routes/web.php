@@ -109,6 +109,8 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->post('update-establishment/{id}', 'EstablishmentController@update')->name('update-establishment');
         $frontRoute->post('upload-image', 'EstablishmentController@uploadImage')->name('upload-image');
         $frontRoute->post('remove-image', 'EstablishmentController@removeImage')->name('remove-image');
+
+        $frontRoute->get('mycandidate-profile', 'EstablishmentController@index')->name('mycandidate-profile');
         
     });
 });

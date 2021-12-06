@@ -29,8 +29,10 @@ class ContactRepository implements ContactRepositoryInterface
 
 
         $sortcolumns = array(
-            0 => 'contact_us.firstname',
-            1 => 'contact_us.lastname',
+            0 => 'contact_us.id',
+            1 => 'contact_us.firstname',
+            2 => 'contact_us.lastname',
+            3 => 'contact_us.description',
 
         );
 
@@ -50,16 +52,22 @@ class ContactRepository implements ContactRepositoryInterface
 
         $contactus = $query->orderBy('created_at', 'desc')->get();
         foreach ($contactus as $contact) {
-                "<a href='javascript:void(0);' data-delete='" . $contact->id . "' class='delete_partner'><i class='fa fa-trash text-danger'></i></a>";
-
+        $action  = "<a href='' data-delete='" . $contact->id . "' class='delete_contact'><i class='fa fa-trash text-danger'></i></a>";
             $json['data'][] = [
+                $contact->id,
                 $contact->firstname,
                 $contact->lastname,
                 $contact->description,
+                $action,
             ];
         }
         return $json;
     }
-   
+    public function deleteContactUs($id)
+    {
+        $deletes = ContactUs::find($id);
+        $deletes->delete();
+        return $deletes;
+    }
     }
 

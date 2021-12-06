@@ -12,13 +12,11 @@ class Skill extends Model
 
     protected $guarded = ['id'];
     protected $dates = ['deleted_at'];
-   
-
     protected $table = 'skills';
 
-    public function position()
+    public function positions()
     {
-        return $this->hasMany(SkillPosition::class,'id','skills_id');
+        return $this->hasMany(SkillPosition::class);
     }
 
 }

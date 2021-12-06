@@ -288,10 +288,6 @@
                 </div>
             </div>
         </section>
-  
-        
-@endsection
-
 
         </div>
     </div>

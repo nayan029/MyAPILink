@@ -53,6 +53,10 @@ Route::middleware(['auth:admin'])->group(function ($route) {
         $adminRoute->get('contact', 'ContactController@index')->name('contact.data');
         $adminRoute->get('contact/{id}/edit', 'ContactController@edit')->name('contact.edit');
         $adminRoute->post('contact/update/{id}', 'ContactController@update')->name('contact.update');
+
+        //User module route
+        $adminRoute->resource('user', 'UserController');
+        $adminRoute->get('/getdata', 'UserController@getAjaxData')->name('user.data');
     });
 });
 

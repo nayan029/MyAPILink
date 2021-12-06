@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Interfaces\ManagerRepositoryInterface;
+use App\Models\EmailTemplate;
 
 class ManagerRepository implements ManagerRepositoryInterface
 {

@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use JsValidator;
 use App\Models\Widget;
 use App\Models\Newsletter;
-use JsValidator;
-use Illuminate\Support\Facades\Validator;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;

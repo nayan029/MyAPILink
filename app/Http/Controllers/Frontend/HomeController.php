@@ -91,10 +91,10 @@ class HomeController extends Controller
         if ($validator->fails()) {
             return response()->json(['success' => false, 'errors' => $validator->errors()]);
         }
+        $user=Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password, 'deleted_at' => NULL,'verify_email' =>'accept']);
+        if($user) {
 
-        if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password, 'deleted_at' => NULL])) {
-
-            return response()->json(['success' => true, 'message' => 'Connexion réussie']);
+            return response()->json(['success' => true, 'message' => 'Connexion réussie','user'=>$user]);
         }
         return response()->json(['success' => false, 'errors' => array('invalid' => 'Email et le mot de passe sont erronés')]);
     }

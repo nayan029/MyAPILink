@@ -84,6 +84,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('job.index')}}" class="nav-link">
+                        <i class="far fa-user"></i>&nbsp;&nbsp;
+                        <p>
+                            Jobs
+                        </p>
+                    </a>
+                </li>
                 @php $i=1; @endphp
                 <li class="nav-item">
                     <a href="{{route('contact.edit',$i)}}" class="nav-link">

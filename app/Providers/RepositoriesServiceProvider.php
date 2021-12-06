@@ -6,6 +6,7 @@ use App\Interfaces\ContactRepositoryInterface;
 use App\Interfaces\EstablishmentRepositoryInterface;
 use App\Interfaces\ForgotPasswordRepositoryInterface;
 use App\Interfaces\HomeRepositoryInterface;
+use App\Interfaces\JobVacanciesRepositoryInterface;
 use App\Interfaces\ManagerRepositoryInterface;
 use App\Interfaces\SkillRepositoryInterface;
 use App\Interfaces\PartnerRepositoryInterface;
@@ -15,6 +16,7 @@ use App\Repositories\ContactRepository;
 use App\Repositories\EstablishmentRepository;
 use App\Repositories\ForgotPasswordRepository;
 use App\Repositories\HomeRepository;
+use App\Repositories\JobVacanciesRepository;
 use App\Repositories\ManagerRepository;
 use App\Repositories\SkillRepository;
 use App\Repositories\PartnerRepository;
@@ -64,6 +66,10 @@ class RepositoriesServiceProvider extends ServiceProvider
         });
         $this->app->bind(EstablishmentRepositoryInterface::class, function ($app) {
             return $app->make(EstablishmentRepository::class);
+        });
+
+        $this->app->bind(JobVacanciesRepositoryInterface::class, function ($app) {
+            return $app->make(JobVacanciesRepository::class);
         });
     }
 

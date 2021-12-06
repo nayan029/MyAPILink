@@ -22,6 +22,7 @@ class ManagerController extends Controller
         'civility' => 'required',
         'firstname' =>"required|max:25",
         'lastname' =>"required|max:25",
+        'roles' =>"required",
         
     ];
     public function __construct(ManagerRepositoryInterface $managerRepository)
@@ -76,7 +77,7 @@ class ManagerController extends Controller
 
     public function profile()
     {
-        $this->updatevalidationrules['email'] = "required|email|unique:user,email,".auth()->guard('web')->user()->id.",id,deleted_at,NULL";
+        $this->updatevalidationrules['email'] = "required|email|unique:users,email,".auth()->guard('web')->user()->id.",id,deleted_at,NULL";
      
         $data['validator'] = JsValidator::make($this->updatevalidationrules);
         $data['myJobList']=Job::where('user_id',1)->paginate(1);
@@ -89,7 +90,7 @@ class ManagerController extends Controller
     public function updateProfile(Request $request)
     {
   
-        $this->updatevalidationrules['email'] = "required|email|unique:user,email,".auth()->guard('web')->user()->id.",id,deleted_at,NULL";
+        $this->updatevalidationrules['email'] = "required|email|unique:users,email,".auth()->guard('web')->user()->id.",id,deleted_at,NULL";
       
         $validation = Validator::make($request->all(), $this->updatevalidationrules);
         if ($validation->fails()) {

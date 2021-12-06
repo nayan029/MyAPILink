@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
-use App\Interfaces\HomeRepositoryInterface;
-use Illuminate\Http\Request;
+use JsValidator;
 use App\Models\Widget;
 use App\Models\Newsletter;
 use JsValidator;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use App\Interfaces\HomeRepositoryInterface;
 
 
 class HomeController extends Controller
@@ -18,7 +20,12 @@ class HomeController extends Controller
         'email' => 'required|email|unique:newsletter,email,NULL,id,deleted_at,NULL'
     ];
     protected $homeRepository = "";
-  
+
+    protected   $loginValidationRules =
+    [
+        'email' => 'required|email',
+        'password' => "required",
+    ];
 
     public function __construct(HomeRepositoryInterface $homeRepository)
     {
@@ -36,7 +43,7 @@ class HomeController extends Controller
     {
         $data['newslettervalidator'] = JsValidator::make($this->newsletterValidationRules);
         $data['widget'] = Widget::get();
-        return view('frontend.dashboard',$data);
+        return view('frontend.dashboard', $data);
     }
 
 
@@ -57,7 +64,7 @@ class HomeController extends Controller
     }
 
 
-     public function addNewsletter(Request $request)
+    public function addNewsletter(Request $request)
     {
 
         $validation = Validator::make($request->all(), $this->newsletterValidationRules);
@@ -66,15 +73,31 @@ class HomeController extends Controller
 
             return redirect()->back()->withErrors($validation->errors());
         }
-        $instArray = array('email' =>request('email'),
-                           'created_at' =>date('Y-m-d H:i:s'),
-                           );
-        $inasert=new Newsletter($instArray);
+        $instArray = array(
+            'email' => request('email'),
+            'created_at' => date('Y-m-d H:i:s'),
+        );
+        $inasert = new Newsletter($instArray);
         $inasert->save();
-      
+
         //   ---------------
         session()->flash('message-type', 'success');
-        session()->flash('message','Add Newsletter successfully');
+        session()->flash('message', 'Add Newsletter successfully');
         return redirect('/');
+    }
+    public function userLogin(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), $this->loginValidationRules);
+
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => $validator->errors()]);
+        }
+
+        if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password, 'deleted_at' => NULL])) {
+
+            return response()->json(['success' => true, 'message' => 'Connexion réussie']);
+        }
+        return response()->json(['success' => false, 'errors' => array('invalid' => 'Email et le mot de passe sont erronés')]);
     }
 }

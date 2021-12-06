@@ -74,7 +74,13 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
     $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');
     
+    $frontRoute->post('user-auth', 'HomeController@userLogin')->name('user-auth');
+    $frontRoute->post('manager/store', 'ManagerController@storeData')->name('manager.store');
+    $frontRoute->get('manager', 'ManagerController@index')->name('manager');
+    $frontRoute->get('registration', 'RegistrationController@index')->name('registration');
+    $frontRoute->post('registration', 'RegistrationController@saveRegistration')->name('registration.save');
     $frontRoute->post('contact-us','ContactUsController@storeContact')->name('contact-us');
+    
    
     $frontRoute->get('addjob','JobController@index')->name('addjob');
     $frontRoute->post('addorupdatejob','JobController@addOrUpdateJob')->name('addorupdatejob');
@@ -83,8 +89,17 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('manager-profile', 'ManagerController@profile')->name('profile');
 });
 
-Route::middleware(['auth:manager'])->group(function ($route) {
+Route::middleware(['auth:web'])->group(function ($route) {
     $route->group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontRoute) {
     
+        $frontRoute->get('manager-profile', 'ManagerController@profile')->name('profile');
+        $frontRoute->post('update-profile', 'ManagerController@updateProfile')->name('update-profile');
+        $frontRoute->get('account-setting', 'ManagerController@accountSetting')->name('account-setting');
+
+        $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
+        $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');
+        $frontRoute->get('view-establishment-account/{id}', 'EstablishmentController@show')->name('view-establishment-account');
+        $frontRoute->get('edit-establishment/{id}', 'EstablishmentController@edit')->name('edit-establishment');
+        $frontRoute->post('update-establishment/{id}', 'EstablishmentController@update')->name('update-establishment');
     });
 });

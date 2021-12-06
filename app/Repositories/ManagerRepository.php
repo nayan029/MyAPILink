@@ -78,6 +78,7 @@ class ManagerRepository implements ManagerRepositoryInterface
             'first_name' => $request->firstname,
             'last_name' => $request->lastname,
             'email' => $request->email,
+            'roles' => $request->roles,
             
         ];
 

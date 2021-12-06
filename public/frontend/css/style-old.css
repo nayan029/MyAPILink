@@ -8639,8 +8639,7 @@ h4.ou_text {
 /* Chrome, Safari, Edge, Opera */
 
 .num-input::-webkit-outer-spin-button,
-.num-input::-webkit-inner-spin-button,
-.inputicon2::-webkit-inner-spin-button {
+.num-input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
@@ -8734,24 +8733,4 @@ ul.multiselect-container.dropdown-menu.show {
 
 .fn-family {
     font-family: 'Quicksand-Regular';
-}
-
-.value-input:last-child {
-    margin-top: -15px;
-    font-family: 'Quicksand-Medium';
-    color: #192842;
-    font-size: 15px!important;
-    padding: 3px!important;
-}
-
-.pd-date {
-    padding: 0px 25px;
-}
-
-.edit-textarea {
-    padding: 10px;
-    border-radius: 17px!important;
-    width: 100%;
-    resize: none;
-    outline: none;
 }

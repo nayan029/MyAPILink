@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Session;
 class RegistrationController extends Controller
 {
     protected $registrationRepository = "";
+   
 
     public function __construct(RegistrationRepositoryInterface $registrationRepository)
     {
@@ -52,4 +53,5 @@ class RegistrationController extends Controller
 
         return view('frontend.email-template.accountcreate');
     }
+   
 }

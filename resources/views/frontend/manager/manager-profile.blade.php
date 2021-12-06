@@ -138,7 +138,7 @@
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
-                                                                {!! Form::text('NULL', old('NULL'), ['class' => 'form-control view-form', 'placeholder' => "Directrice de l'établissement",'id'=>'email']) !!}
+                                                                {!! Form::text('roles',auth()->guard('web')->user()->roles, ['class' => 'form-control view-form', 'placeholder' => "Directrice de l'établissement",'id'=>'roles']) !!}
                                                                  
                                                                 </div>
                                                             </div>

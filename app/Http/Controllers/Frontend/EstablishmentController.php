@@ -28,8 +28,8 @@ class EstablishmentController extends Controller
         'garden' => 'required',
         'applied_pedagogy' => 'required',
         'our_values' => 'required',
-        'document' => 'required',
-        'more_infomation' => 'required',
+        // 'document' => 'required',
+        // 'more_infomation' => 'required',
 
 
     ];
@@ -39,6 +39,7 @@ class EstablishmentController extends Controller
     }
     public function index()
     {
+        $data['accommodationCapacity'] = array (1=>1 );
         $data['validator'] = JsValidator::make($this->validationrules);
         return view('frontend.establishment.create',$data);
     }
@@ -54,7 +55,38 @@ class EstablishmentController extends Controller
 
         if ($storeProfile) {
             Session::flash('success', 'Successfully Updated');
-            return redirect('/manager-profile');
+            return redirect('/view-establishment-account/'.$storeProfile->id);
+        }
+        Session::flash('error', 'Sorry, something went wrong. please try again.');
+        return redirect()->back();
+    }
+    public function show(Request $request,$id)
+    {
+        $data['establishment'] = $this->establishmentRepository->getSingleEstablishment($id);
+       
+        return view('frontend.establishment.show',$data);
+    }
+    public function edit($id)
+    {
+        
+        $data['validator'] = JsValidator::make($this->validationrules);
+        $data['establishment'] = $this->establishmentRepository->getSingleEstablishment($id);
+        return view('frontend.establishment.edit',$data);
+    }
+    public function update(Request $request,$id)
+    {
+
+
+        $validator = Validator::make($request->all(), $this->validationrules);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors());
+        }
+
+        $update = $this->establishmentRepository->update($request,$id);
+
+        if ($update) {
+            Session::flash('success', 'Successfully Updated');
+            return redirect('/view-establishment-account/'.$id);
         }
         Session::flash('error', 'Sorry, something went wrong. please try again.');
         return redirect()->back();

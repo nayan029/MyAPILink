@@ -98,15 +98,4 @@ class JobController extends Controller{
         return redirect('manager-profile');
     }
 
-    
-    public function getServiceById(Request $request)
-
-    {
-
-        $id=request('editId');
-
-        $editData=Mh_services::find($id);
-        echo json_encode($editData);
-
-    }
 }

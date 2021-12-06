@@ -24,7 +24,7 @@
                 <div class="card-body">
                     <form action="{{route('addorupdatejob')}}" id="jobadd" method="POST">
                         @csrf
-                        <input type="hidden"  value="{{$jobDetails->id}}" name="edit_id">
+                        <input type="hidden"  value="{{$jobDetails['id']}}" name="edit_id">
                         <div class="row d-flex justify-content-center ">
                             <div class="col-xl-10 col-lg-10 col-md-11">
                                 <div class="row">
@@ -58,7 +58,7 @@
                                                         <label class="publish-smalllabel">Ville</label>
                                                         <select name="city" class="cus-drop select2 form-publish" style="width: 100%;">
                                                             <option value=""></option>
-                                                            <option value="Micro-crèche">Micro-crèche</option>
+                                                            <option value="{{$jobDetails->city}}">Micro-crèche</option>
                                                             <option value="Crèche privée d’entreprise ou
                                                                 inter-entreprises">Crèche privée d’entreprise ou
                                                                 inter-entreprises
@@ -102,11 +102,11 @@
                                                 <div class="col-md-6 pb-2">
                                                     <h5 class="publish-labeldark">Type d'emploi</h5>
                                                     <div class="custom-control custom-checkbox profile-check ">
-                                                        <input type="checkbox" name="type_of_employment[]"  class="custom-control-input" id="Temps plein">
+                                                        <input type="checkbox" name="type_of_employment[]"  class="custom-control-input" value="{{$jobDetails->type_of_employment}}" id="Temps plein">
                                                         <label class="custom-control-label pro-check publish-check" for="Temps plein">Temps plein</label>
                                                     </div>
                                                     <div class="custom-control custom-checkbox profile-check">
-                                                        <input type="checkbox" name="type_of_employment[]" class="custom-control-input" id="Temps partiel">
+                                                        <input type="checkbox" name="type_of_employment[]" class="custom-control-input" value="{{$jobDetails->type_of_employment}}" id="Temps partiel">
                                                         <label class="custom-control-label pro-check publish-check" for="Temps partiel">Temps partiel</label>
                                                     </div>
 

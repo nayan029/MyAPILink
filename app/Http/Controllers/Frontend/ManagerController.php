@@ -78,10 +78,11 @@ class ManagerController extends Controller
     public function profile()
     {
         $this->updatevalidationrules['email'] = "required|email|unique:users,email,".auth()->guard('web')->user()->id.",id,deleted_at,NULL";
-     
+        
+        $id = auth()->guard('web')->user()->id;
         $data['validator'] = JsValidator::make($this->updatevalidationrules);
-        $data['myJobList']=Job::where('user_id',1)->paginate(1);
-        $data['myEstablishmentList']=Establishment::where('user_id',1)->get();
+        $data['myJobList']=Job::where('user_id',1)->paginate(10);
+        $data['myEstablishmentList']=Establishment::where('created_by',$id)->get();
         
 
         return view('frontend.manager.manager-profile',$data);

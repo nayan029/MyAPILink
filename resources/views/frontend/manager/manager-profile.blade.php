@@ -188,6 +188,7 @@
 
                                             </a>
                                         </div>
+                                        @if($myEstablishmentList)
                                         <div class="mb-30px">
                                             <div class="card sr-card manager-card">
                                                 <div class="card-body">
@@ -212,6 +213,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -226,7 +228,7 @@
                 <section class="prof-backsec">
                     <div class="container">
                         <div class="post-right">
-                            <a href="{{route('publish-job-offer.create')}}" class="btn post-an-btn">Publier une offre</a>
+                            <a href="{{route('addjob')}}" class="btn post-an-btn">Publier une offre</a>
                         </div>
                         <div>
                             <ul class="nav nav-pills tab-inside-pills" id="pills-tab" role="tablist">
@@ -302,8 +304,8 @@
                                                                 </div>
 
                                                                 <div class="button-voir">
-                                                                    <button class="btn btn-blue">Voir les postulants
-                                                                    </button>
+                                                                    <a href="{{route('see-applicants')}}"> <button class="btn btn-blue">Voir les postulants
+                                                                    </button></a>
                                                                 </div>
                                                             </div>
                                                         </div>

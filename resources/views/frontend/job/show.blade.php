@@ -6,13 +6,13 @@
     <title>MyApi Link</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="images/favicon.ico" type="image/png" sizes="16x16">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/magnific-popup.css">
-    <link rel="stylesheet" href="css/owl.carousel.css">
-    <link rel="stylesheet" href="css/select2.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="{{asset('frontend/images/favicon.ico')}}" type="image/png" sizes="16x16">
+    <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="css/magnific-popup.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/owl.carousel.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .navbar-collapse {
@@ -45,32 +45,32 @@
                                         </div>
 
                                         <span class="public-span mr-4">Publié il y a 5 jours<img
-                                                src="images/bookmark.svg " alt="bookmark image "
+                                                src="{{asset('frontend/images/bookmark.svg')}}" alt="bookmark image "
                                                 class="ml-3 bookmark-img"></span>
                                     </div>
-
+                                    @foreach($showwpost as $show)
                                     <div class="job-information">
                                         <h4 class="job-info-text">Informations sur le poste</h4>
                                         <ul class="search-image-ul">
 
                                             <li>
-                                                <p class="mb-0 ">1 350 € par mois</p>
+                                                <p class="mb-0 ">{{$show->minimum_gross_salary}}</p>
                                             </li>
                                             <li>
-                                                <p class="mb-0 ">Expérience : Minimum 2 ans</p>
+                                                <p class="mb-0 ">Expérience : {{$show->minimum_experience}}</p>
                                             </li>
                                             <li>
-                                                <p class="mb-0 ">Durée du contrat : 2 ans et plus</p>
+                                                <p class="mb-0 ">Durée du contrat : {{$show->contract_length}}</p>
                                             </li>
                                             <li>
-                                                <p class="mb-0 "> Type d 'emploi : temps plein</p>
+                                                <p class="mb-0 "> Type d 'emploi : {{$show->type_of_employment}}</p>
                                             </li>
                                         </ul>
 
                                         <div class="d-flex justify-content-between align-items-center mb-4 pt-5">
                                             <div>
                                                 <h5 class="mb-0 ul_check_color ">Site internet</h5>
-                                                <p class="mb-0 www-text mb-2 ">www. crechedubonheur.fr</p>
+                                                <p class="mb-0 www-text mb-2 ">{{$show->website}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -79,51 +79,25 @@
                                 <div class="pb-4 listing-side-pd ">
                                     <div class="job-infosdetail mb-4 ">
                                         <h5 class="job-infos-title ">Description</h5>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                            Lorem Ipsum has been the industry's standard dummy text ever since the
-                                            1500s,</p>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                            Lorem Ipsum has been the industry's standard dummy text ever since the
-                                            1500s, when an unknown printer took a galley of type and scrambled
-                                            it to make a type specimen book. It has survived not only five centuries,
-                                            but also the leap into electronic typesetting, remaining essentially
-                                            unchanged. It was popularised in the 1960s with the release of Letraset
-                                            sheets containing Lorem Ipsum passages, and more recently with desktop
-                                            publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                        <p>{{$show->job_description}}
                                         </p>
                                     </div>
                                     <div class="job-infosdetail mb-4 ">
                                         <h5 class="job-infos-title ">Mission</h5>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                            Lorem Ipsum has been the industry's standard dummy text ever since the
-                                            1500s,</p>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                            Lorem Ipsum has been the industry's standard dummy text ever since the
-                                            1500s, when an unknown printer took a galley of type and scrambled
-                                            it to make a type specimen book. It has survived not only five centuries,
-                                            but also the leap into electronic typesetting, remaining essentially
-                                            unchanged.
+                                        <p>{{$show->employment_mission}}
                                         </p>
-                                        <ul class="job-infos-li ">
+                                        <!-- <ul class="job-infos-li ">
                                             <li>Lorem Ipsum is simply dummy text</li>
                                             <li>Lorem Ipsum is simply dummy </li>
                                             <li>Lorem Ipsum is simply dummy </li>
                                             <li>Lorem Ipsum is simply dummy text of the printing and</li>
-                                        </ul>
+                                        </ul> -->
                                     </div>
                                     <div class="job-infosdetail mb-4 ">
                                         <h5 class="job-infos-title ">Que recherchons-nous ?</h5>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                            Lorem Ipsum has been the industry's standard dummy text ever since the
-                                            1500s,</p>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                            Lorem Ipsum has been the industry's standard dummy text ever since the
-                                            1500s, when an unknown printer took a galley of type and scrambled
-                                            it to make a type specimen book. It has survived not only five centuries,
-                                            but also the leap into electronic typesetting, remaining essentially
-                                            unchanged.
+                                        <p>{{$show->what_you_are_looking}}
                                         </p>
-                                        <ul class="job-infos-li ">
+                                        <!-- <ul class="job-infos-li ">
                                             <li>Lorem Ipsum is simply dummy text</li>
                                             <li>Lorem Ipsum is simply dummy </li>
                                             <li>Lorem Ipsum is simply dummy </li>
@@ -133,10 +107,10 @@
                                             Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                             Lorem Ipsum has been the industry's standard dummy text ever since the
                                             1500s,
-                                        </p>
+                                        </p> -->
                                     </div>
                                 </div>
-
+                                @endforeach
                                 <div class="d-flex justify-content-between listing-side-pd mb-4 ">
                                     <div class="pb-5 ">
                                         <h5 class="mb-0 job-location fn-19 ">Lieu du poste</h5>
@@ -146,7 +120,7 @@
                                 </div>
 
                                 <div class="d-flex justify-content-end listing-side-pd pb-4 offer-prs ">
-                                    <a href="publish-job-offer.html" class="btn btn-yellow ">Modifier mon offre</a>
+                                    <a href="{{route('editjob')}}" class="btn btn-yellow ">Modifier mon offre</a>
                                 </div>
                             </div>
                         </div>

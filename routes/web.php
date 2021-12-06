@@ -63,7 +63,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('/', 'HomeController@userDashboard')->name('dashboard');
     $frontRoute->post('user/logout', 'HomeController@logout')->name('logout');
     $frontRoute->post('addnewsletter', 'HomeController@addNewsletter')->name('addnewsletter');
-    
+
     $frontRoute->post('manager/store', 'ManagerController@storeData')->name('manager.store');
     $frontRoute->post('update-profile', 'ManagerController@updateProfile')->name('update-profile');
     $frontRoute->get('account-setting', 'ManagerController@accountSetting')->name('account-setting');
@@ -73,23 +73,27 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->post('registration', 'RegistrationController@saveRegistration')->name('registration.save');
     $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
     $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');
-    
+
     $frontRoute->post('user-auth', 'HomeController@userLogin')->name('user-auth');
     $frontRoute->post('manager/store', 'ManagerController@storeData')->name('manager.store');
     $frontRoute->get('manager', 'ManagerController@index')->name('manager');
     $frontRoute->get('registration', 'RegistrationController@index')->name('registration');
     $frontRoute->post('registration', 'RegistrationController@saveRegistration')->name('registration.save');
-    $frontRoute->post('contact-us','ContactUsController@storeContact')->name('contact-us');
-    
-   
-    $frontRoute->get('addjob','JobController@index')->name('addjob');
-    $frontRoute->post('addorupdatejob','JobController@addOrUpdateJob')->name('addorupdatejob');
-    $frontRoute->get('editjob','JobController@editJob')->name('editjob');
-    });
+    $frontRoute->post('contact-us', 'ContactUsController@storeContact')->name('contact-us');
+
+
+    $frontRoute->get('addjob', 'JobController@index')->name('addjob');
+    $frontRoute->post('addorupdatejob', 'JobController@addOrUpdateJob')->name('addorupdatejob');
+    $frontRoute->get('job/{id}', 'JobController@show')->name('job');
+
+    $frontRoute->get('editjob', 'JobController@editJob')->name('editjob');
+    $frontRoute->get('see-applicants', 'JobController@viewApplcants')->name('see-applicants');
+    $frontRoute->get('edit-applicants', 'JobController@viewApplcants')->name('edit-applicants');
+});
 
 Route::middleware(['auth:web'])->group(function ($route) {
     $route->group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontRoute) {
-    
+
         $frontRoute->get('manager-profile', 'ManagerController@profile')->name('profile');
         $frontRoute->post('update-profile', 'ManagerController@updateProfile')->name('update-profile');
         $frontRoute->get('account-setting', 'ManagerController@accountSetting')->name('account-setting');

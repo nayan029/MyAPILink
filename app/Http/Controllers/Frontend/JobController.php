@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\Models\Job;
+use Illuminate\Support\Facades\Auth;
 use JsValidator;
 
 class JobController extends Controller{
@@ -39,11 +40,18 @@ class JobController extends Controller{
         $this->data['jobvalidator'] = JsValidator::make($this->jobValidationRules);
         return view('frontend.job.index',$this->data);
     }
+
+    public function show($id){
+        $data['showwpost'] = Job::where('id',$id)->get();
+        return view('frontend.job.show',$data);
+    }
+
     public function editJob(Request $request)
     {  
         $this->data['jobvalidator'] = JsValidator::make($this->jobValidationRules);
         $id=request('id');
         $this->data['jobDetails']=Job::find($id);
+        dd($this->data['jobDetails']);
         return view('frontend.job.editjob',$this->data);
     }
     
@@ -58,8 +66,9 @@ class JobController extends Controller{
         if (!empty(request('type_of_employment'))) {
             $typeOfEmployment=implode(',',request('type_of_employment'));
         }
+        $id = Auth::user()->id;
         $certificationArray = array(
-                'user_id' =>1,
+                'user_id' =>$id,
                 'title' => request('title'),
                 'address' =>request('address'),
                 'zip_code' =>request('zip_code'),
@@ -83,7 +92,7 @@ class JobController extends Controller{
                 'employment_mission' => request('employment_mission'),
                 'what_you_are_looking' => request('what_you_are_looking'),
         );
-      
+        
         if (!empty($editId)) {
             $certificationArray['updated_at'] = date('Y-m-d H:i:s');
             Job::where("id", $editId)->update($certificationArray);
@@ -92,10 +101,23 @@ class JobController extends Controller{
             $EducationArray['created_at'] = date('Y-m-d H:i:s');
             $instert = new Job($certificationArray);
             $instert->save();
-            session()->flash('message','Successfully creted');
+            $id = $instert->id;
+            session()->flash('message','Successfully creted');   
+            return redirect()->route('job',$id);
         }
         session()->flash('message-type', 'success');
-        return redirect('manager-profile');
+        // return redirect()->route('job',$id);
     }
+
+    public function destroy($id){
+        $id = Job::findorfail($id);
+         $id->delete();   
+    }
+
+    public function viewApplcants(){
+        $data['applicants']=Job::where('user_id',1)->paginate(10);
+        return view('frontend.job.view-applicants',$data);
+    }
+
 
 }

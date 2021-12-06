@@ -93,11 +93,14 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->get('manager-profile', 'ManagerController@profile')->name('profile');
         $frontRoute->post('update-profile', 'ManagerController@updateProfile')->name('update-profile');
         $frontRoute->get('account-setting', 'ManagerController@accountSetting')->name('account-setting');
-
+        
         $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
         $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');
         $frontRoute->get('view-establishment-account/{id}', 'EstablishmentController@show')->name('view-establishment-account');
         $frontRoute->get('edit-establishment/{id}', 'EstablishmentController@edit')->name('edit-establishment');
         $frontRoute->post('update-establishment/{id}', 'EstablishmentController@update')->name('update-establishment');
+        $frontRoute->post('upload-image', 'EstablishmentController@uploadImage')->name('upload-image');
+        $frontRoute->post('remove-image', 'EstablishmentController@removeImage')->name('remove-image');
+        
     });
 });

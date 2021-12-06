@@ -32,6 +32,22 @@ class JobRepository implements JobRepositoryInterface
         );
 
         $query = Job::select('*');
+        if($request->query('title') != ''){
+            $query->whereRaw('title LIKE "%'.$request->query('title').'%"');
+        }
+
+        if($request->query('type_of_contract') != ''){
+            $query->whereRaw('type_of_contract LIKE "%'.$request->query('type_of_contract').'%"');
+        }
+        /*
+        if($request->query('contract_start_date') != ''){
+            $query->where('contract_start_date',date('Y-m-d',strtotime($request->query('contract_start_date'))));
+        }
+        */
+        if($request->query('minimum_experience') != ''){
+            $query->whereRaw('minimum_experience LIKE "%'.$request->query('minimum_experience').'%"');
+        }
+
         $recordstotal = $query->count();
         $sortColumnName = $sortcolumns[$order[0]['column']];
 

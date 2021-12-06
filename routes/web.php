@@ -56,7 +56,7 @@ Route::middleware(['auth:admin'])->group(function ($route) {
 
         //User module route
         $adminRoute->resource('user', 'UserController');
-        $adminRoute->get('/getdata', 'UserController@getAjaxData')->name('user.data');
+        $adminRoute->get('/getUserData', 'UserController@getAjaxData');
 
         //Job module route
         $adminRoute->resource('job', 'JobController');

@@ -89,8 +89,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->post('user-auth', 'HomeController@userLogin')->name('user-auth');
     $frontRoute->post('manager/store', 'ManagerController@storeData')->name('manager.store');
     $frontRoute->get('manager', 'ManagerController@index')->name('manager');
-    $frontRoute->get('registration', 'RegistrationController@index')->name('registration');
-    $frontRoute->post('registration', 'RegistrationController@saveRegistration')->name('registration.save');
+    // $frontRoute->get('registration', 'RegistrationController@index')->name('registration');
+    // $frontRoute->post('registration', 'RegistrationController@saveRegistration')->name('registration.save');
     $frontRoute->post('contact-us', 'ContactUsController@storeContact')->name('contact-us');
 
 

@@ -1,7 +1,59 @@
 <header>
+    @if(Auth::guard('web')->user())
+    <nav class="navbar navbar-expand-lg navbar-light header-bg1">
+        <div class="container">
+            <a class="navbar-brand" href="{{URL::to('/')}}">
+                <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" width="170px" alt="header logo" class="header-logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav header-ul ml-auto">
+                    <li class="nav-item ">
+                        <!--active-->
+                        <a class="nav-link" href="search-for-ad.html">Rechercher un emploi<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="modal" data-target="#contact">Contact</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav header-ul custom-header-drop  ml-0">
+                    <li class="nav-item">
+                        <img src="{{asset('frontend/images/line2.svg')}}" alt="message" class="line-header" />
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="candidate-message.html">
+                            <img src="{{asset('frontend/images/material-message.svg')}}" alt="message" class="img-header-sec" />
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0)"><img src="{{asset('frontend/images/notifications-outline.svg')}}" alt="notification" class="img-header-sec"></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="{{asset('frontend/images/profile-change.svg')}}" class="profile-change-job job-border" alt="porfile">
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="@if(Auth::guard('web')->user()->user_type==1) {{URL::to('/mycandidate-profile')}} @else {{URL::to('/manager-profile')}} @endif"><img src="{{asset('frontend/images/project/user.svg')}}">Mon compte</a>
+                            <a class="dropdown-item" href="establish-message.html"> <img src="{{asset('frontend/images/project/message.svg')}}">Messages</a>
+                            <a class="dropdown-item" href="search-for-ad.html"> <img src="{{asset('frontend/images/project/search.svg')}}">Rechercher un
+                                job</a>
+                            <a class="dropdown-item" href="{{URL::to('/account-setting')}}"><img src="{{asset('frontend/images/project/setting.svg')}}">Mes paramètres</a>
+                            <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><img src="{{asset('frontend/images/project/logout.svg')}}">Déconnexion</a>
+                        </div>
+                    </li>
+                </ul>
+                <form id="logout-form" action="{{ route('user-logout') }}" method="POST">
+                    @csrf
+                </form>
+            </div>
+        </div>
+    </nav>
+    @else
     <nav class="navbar navbar-expand-lg navbar-light header-bg1">
         <div class="container px-0">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="{{URL::to('/')}}">
                 <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" width="170px" alt="header logo" class="header-logo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,6 +93,10 @@
             </div>
         </div>
     </nav>
+    @endif
+
+
+
 </header>
 
 <!-- contact-modal -->

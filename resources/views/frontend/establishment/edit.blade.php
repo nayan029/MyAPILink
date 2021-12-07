@@ -1,22 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('frontend.master')
+@section('title')
+<title>ApiLink |</title>
+@endsection
 
-<head>
-    <title>MyApi Link</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="{{asset('frontend/images/favicon.ico')}}" type="image/png" sizes="16x16">
-    <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/magnific-popup.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/owl.carousel.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/select2.min.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-</head>
-
-<body>
+@section('content')
 
     <section class="back-f6 ">
     {!! Form::model(null,['method' => 'POST', 'route' => ['update-establishment',$establishment->id], 'files' => true,'id'=>'update-establishment']) !!}
@@ -260,17 +247,8 @@
         </div>
         {!! Form::close() !!}
     </section>
-</body>
-
-<script src="{{asset('frontend/js/jquery.min.js')}} "></script>
-<script src="{{asset('frontend/js/jquery-ui.min.js')}}"></script>
-<script src="{{asset('frontend/js/popper.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('frontend/js/bootstrap-multiselect.js')}}"></script>
-<script src="{{asset('frontend/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('frontend/js/select2.min.js')}}"></script>
-<script src="{{asset('frontend/js/jquery.magnific-popup.min.js')}}"></script>
-<script src="{{asset('frontend/js/owl.carousel.js')}}"></script>
-<script src="{{asset('frontend/js/custom.js')}}"></script>
+    @endsection
+@section('script')
 <script type="text/javascript ">
     $(".select2 ").select2();
 </script>
@@ -337,4 +315,6 @@
 
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 {!! $validator->selector('#update-establishment') !!}
+@endsection
+</body>
 </html>

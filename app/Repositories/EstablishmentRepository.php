@@ -11,12 +11,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
-use App\Http\Traits\ImageUploadTrait;
+use App\Http\Traits\ImageuploadTrait;
 
 
 class EstablishmentRepository implements EstablishmentRepositoryInterface
 {
-    use ImageUploadTrait;
+    use ImageuploadTrait;
 
     public function store(Request $request)
     {

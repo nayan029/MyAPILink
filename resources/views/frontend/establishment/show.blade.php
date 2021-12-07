@@ -1,30 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('frontend.master')
+@section('title')
+<title>ApiLink |</title>
+@endsection
 
-<head>
-    <title>MyApi Link</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="{{asset('frontend/images/favicon.ico')}}" type="image/png" sizes="16x16">
-    <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/magnific-popup.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/owl.carousel.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/select2.min.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
-</head>
-
-<body>
-
-    <div id="after-header"></div>
+@section('content')
 
     <section>
         <div class="atext-pos pt-90px">
             <img src="{{asset('frontend/images/profile-background.png')}}" alt="profile page background image" class="w-100 prof-resimg">
-            <a href="manager-profile.html" class="back link_a pos-img-link">
+            <a href="{{URL::to('/manager-profile')}}" class="back link_a pos-img-link">
                 <span><i class="fa fa-angle-left mr-2"></i></span>breadcrumb
             </a>
         </div>
@@ -1553,17 +1537,8 @@
 
 
     </section>
-</body>
-
-<script src="{{asset('frontend/js/jquery.min.js')}}"></script>
-<script src="{{asset('frontend/js/jquery-ui.min.js')}}"></script>
-<script src="{{asset('frontend/js/popper.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('frontend/js/bootstrap-multiselect.js')}}"></script>
-<script src="{{asset('frontend/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('frontend/js/select2.min.js')}}"></script>
-<script src="{{asset('frontend/js/jquery.magnific-popup.min.js')}}"></script>
-<script src="{{asset('frontend/js/owl.carousel.js')}}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    @endsection
+@section('script')
 
 <script type="text/javascript ">
     $(".select2 ").select2();
@@ -1685,19 +1660,6 @@
 
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 {!! $imageValidator->selector('#upload-image') !!}
-
-<script>
-    $(function() {
-
-        @if(Session::has('success'))
-        toastr.success("{{ Session::get('success') }}");
-        @endif
-
-
-        @if(Session::has('error'))
-        toastr.error("{{ Session::get('error') }}");
-        @endif
-    });
-</script>
-
+@endsection
+</body>
 </html>

@@ -98,7 +98,7 @@
     <div class="modal-dialog login-modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body login-modal-body">
-            <form id="manager-login" method="post" action="#">
+                <form id="manager-login" method="post" action="#">
                     @csrf
                 <div class="">
                     <div class="lmodal-logo mb-20">
@@ -125,21 +125,21 @@
                             <img src="{{asset('frontend/images/about/eye.svg')}}" alt="" class="sr-eye" id="toggle-password">
                             <span class="password-error text-danger">@error ('password') {{$message}} @enderror</span>
                                 <span class="invalid-error text-danger">@error ('invalid') {{$message}} @enderror</span>
-                                
+
+                            </div>
+                        </div>
+
+                        <div class="mb-20 text-right">
+                            <a href="" class="forgot-link">J'ai perdu mon mot de passe?</a>
+                        </div>
+                        <div class="col-md-12 text-center res-dec mb-3 ">
+                            <button id="loginbtn" onclick="userLogin();" type="button" class="btn btn-blue w-100">Connexion</button>
+                        </div>
+                        <div class=" meconnecter">
+                            <p class="proxima-nove">Pas encore membre?<a href="#" class=""> Inscrivez-vous</a></p>
                         </div>
                     </div>
-
-                    <div class="mb-20 text-right">
-                        <a href="" class="forgot-link">J'ai perdu mon mot de passe?</a>
-                    </div>
-                    <div class="col-md-12 text-center res-dec mb-3 ">
-                    <button id="loginbtn" onclick="userLogin();" type="button" class="btn btn-blue w-100">Connexion</button>
-                    </div>
-                    <div class=" meconnecter">
-                        <p class="proxima-nove">Pas encore membre?<a href="#" class=""> Inscrivez-vous</a></p>
-                    </div>
-                </div>
-            </form>
+                </form>
             </div>
         </div>
     </div>
@@ -332,5 +332,4 @@
 @include('frontend.layouts.login_script')
 
 </body>
-
 </html>

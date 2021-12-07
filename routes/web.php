@@ -50,7 +50,7 @@ Route::middleware(['auth:admin'])->group(function ($route) {
 
         $adminRoute->get('contact-us', 'ContactController@index')->name('contact.index');
         $adminRoute->get('contact-us-data', 'ContactController@getContactUsData')->name('contact.data');
-       $adminRoute->DELETE('contact/destroy','ContactController@destroy')->name('contact/destroy');
+        $adminRoute->DELETE('contact/destroy', 'ContactController@destroy')->name('contact/destroy');
 
         $adminRoute->get('contact/{id}/edit', 'ContactController@edit')->name('contact.edit');
         $adminRoute->post('contact/update/{id}', 'ContactController@update')->name('contact.update');
@@ -116,7 +116,7 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->post('update-email', 'ManagerController@updateEmail')->name('update-email');
         $frontRoute->post('update-notifications-flag', 'ManagerController@updateNotificationsFlag')->name('update-notifications-flag');
         $frontRoute->post('update-delete-flag', 'ManagerController@updateDeleteAccountFlag')->name('update-delete-flag');
-        
+
         $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
         $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');
         $frontRoute->get('view-establishment-account/{id}', 'EstablishmentController@show')->name('view-establishment-account');
@@ -129,5 +129,6 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->get('candidate-profile-edit', 'CandidateController@edit')->name('candidate-profile-edit');
         
         $frontRoute->post('user/logout', 'HomeController@logout')->name('user-logout');
+        $frontRoute->get('applyJob', 'SearchAdController@index')->name('applyJob');
     });
 });

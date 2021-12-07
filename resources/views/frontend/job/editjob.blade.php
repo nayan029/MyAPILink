@@ -24,7 +24,7 @@
                 <div class="card-body">
                     <form action="{{route('addorupdatejob')}}" id="jobadd" method="POST">
                         @csrf
-                        <input type="hidden"  value="{{$jobDetails['id']}}" name="edit_id">
+                        <input type="hidden"  value="{{$jobDetails->id}}" name="edit_id">
                         <div class="row d-flex justify-content-center ">
                             <div class="col-xl-10 col-lg-10 col-md-11">
                                 <div class="row">

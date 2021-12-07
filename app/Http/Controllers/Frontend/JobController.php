@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\Models\Job;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use JsValidator;
 
 class JobController extends Controller{
@@ -46,12 +48,12 @@ class JobController extends Controller{
         return view('frontend.job.show',$data);
     }
 
-    public function editJob(Request $request)
+    public function editJob(Request $request,$id)
     {  
         $this->data['jobvalidator'] = JsValidator::make($this->jobValidationRules);
         $id=request('id');
         $this->data['jobDetails']=Job::find($id);
-        dd($this->data['jobDetails']);
+
         return view('frontend.job.editjob',$this->data);
     }
     
@@ -96,26 +98,31 @@ class JobController extends Controller{
         if (!empty($editId)) {
             $certificationArray['updated_at'] = date('Y-m-d H:i:s');
             Job::where("id", $editId)->update($certificationArray);
-            session()->flash('message','Successfully edited');
+            Session::flash('success','Successfully Updated');   
+            return redirect()->route('profile');
         } else {
             $EducationArray['created_at'] = date('Y-m-d H:i:s');
             $instert = new Job($certificationArray);
             $instert->save();
             $id = $instert->id;
-            session()->flash('message','Successfully creted');   
+            Session::flash('success','Successfully Inserted');   
             return redirect()->route('job',$id);
         }
-        session()->flash('message-type', 'success');
-        // return redirect()->route('job',$id);
+        // session()->flash('message-type', 'success');
+        // // return redirect()->route('job',$id);
     }
 
     public function destroy($id){
         $id = Job::findorfail($id);
-         $id->delete();   
+        $id->delete();  
+        Session::flash('success','Successfully deleted');   
+        return redirect()->route('profile'); 
     }
 
     public function viewApplcants(){
         $data['applicants']=Job::where('user_id',1)->paginate(10);
+        $id = Auth::user()->id;
+        $data['user']=User::where('id',$id)->paginate(10);
         return view('frontend.job.view-applicants',$data);
     }
 

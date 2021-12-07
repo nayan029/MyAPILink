@@ -42,7 +42,7 @@ class SkillRepository implements SkillRepositoryInterface
 
         for ($i = 0; $i < $n; $i++) {
             $savedata = [
-                'skills_id' => $skill->id,
+                'skill_id' => $skill->id,
                 'position' => $data['position'][$i],
                 'title' => $data['title'][$i],
                 'desc' => $data['descs'][$i],
@@ -55,9 +55,9 @@ class SkillRepository implements SkillRepositoryInterface
     }
     public function updateSkill(Request $request, $id)
     {
-        dd($request->all());
+       
         $data = $request->all();
-        $getposition = $request->position;
+       
         $skill = $this->getSingleSkill($id);
         $image = "";
         if ($request->hasFile('image')) {
@@ -71,17 +71,17 @@ class SkillRepository implements SkillRepositoryInterface
 
 
         $position = $this->getSKillPosition($id);
+        
+        $position->delete();
         $n = count($data['position']);
-
         for ($i = 0; $i < $n; $i++) {
             $savedata = [
-                'skills_id' => $skill->id,
+                'skill_id' => $skill->id,
                 'position' => $data['position'][$i],
                 'title' => $data['title'][$i],
                 'desc' => $data['descs'][$i],
             ];
-            dd($savedata);
-            $position->update($savedata);
+            $position->insert($savedata);
         }
         return true;
     }

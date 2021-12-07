@@ -146,7 +146,7 @@
 </div>
 </div>
 </body>
- @yield('page-js')
+ @yield('script')
 
 <script src="{{asset('frontend/js/jquery.min.js')}} "></script>
 <script src="{{asset('frontend/js/popper.min.js')}} "></script>

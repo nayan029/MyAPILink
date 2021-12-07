@@ -11,4 +11,6 @@ interface ContactRepositoryInterface
     public function updateContact(Request $request, $id);
 
     public function getAjaxData(Request $request);
+
+    public function deleteContactUs($id);
 }

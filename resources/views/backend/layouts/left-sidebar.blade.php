@@ -94,7 +94,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('skill.index')}}" class="nav-link">
+                    <a href="{{route('contact.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-cogs"></i>  
                         <p>
                         {{__("messages.contact us")}}

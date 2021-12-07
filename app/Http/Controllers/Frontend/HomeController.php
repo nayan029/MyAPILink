@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Interfaces\HomeRepositoryInterface;
 use Illuminate\Support\Facades\DB;
+use App\Models\Skill;
+use App\Models\SkillPosition;
 
 class HomeController extends Controller
 {
@@ -41,6 +43,7 @@ class HomeController extends Controller
     {
         $data['newslettervalidator'] = JsValidator::make($this->newsletterValidationRules);
         $data['widget'] = Widget::get();
+        $data['skill'] = Skill::get();
         return view('frontend.dashboard', $data);
     }
 

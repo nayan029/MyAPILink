@@ -68,4 +68,9 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public static function getData(){
+       $data =  Skill::get();
+        $skill = SkillPosition::get();
+    }
 }

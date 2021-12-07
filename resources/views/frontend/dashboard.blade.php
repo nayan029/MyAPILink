@@ -185,69 +185,47 @@
     </div>
 
 </section>
-<!-- <section style="background-image: url(images/group7173.png);" class="index-nous-sec">
-        <div class="container">
-            <ul class="index-nous1-ul">
-                <li>
-                    <h4>Nous vous offrons la possibilité de mettre en valeur vos compétences </h4>
-                    <p>et de rentrer en contact
-                        avec des établissements d’accueil du jeune enfant, proche de chez vous.</p>
-                </li>
-                <li>
-                    <h4>Nous vous offrons la possibilité de mettre en valeur vos compétences </h4>
-                    <p>et de rentrer en contact
-                        avec des établissements d’accueil du jeune enfant, proche de chez vous.</p>
-                </li>
-                <li>
-                    <h4>Nous vous offrons la possibilité de mettre en valeur vos compétences </h4>
-                    <p>et de rentrer en contact
-                        avec des établissements d’accueil du jeune enfant, proche de chez vous.</p>
-                </li>
-
-            </ul>
-        </div>
-    </section> -->
 
 <div class="modal fade modal-back-blue" id="Modaljob-desc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog center-modal-dialog modal-xl" role="document">
-            <div class="modal-content m-32">
-                <div class="modal-header resume_header border-0">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><img src="images/material-close.svg"></span>
-                    </button>
-                </div>
-                <div class="modal-body resume_modal">
-                    <div class="candidate_modal">
-                        <h4 class="mb-3 main_title">Directrice - Directeur de crèche</h4>
-                        <div class="candidate_modal_title">
-                            <h5 class="candidate_modal_text pb-2">Description</h5>
-                            <div class="candidate_modal_desc">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                </p>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                    containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                    containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                    make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                    containing Lorem Ipsum passages, and more recently with desktop publishing software
-                                </p>
-                            </div>
-                            <div class="text-center pt-4 pb-3">
-                                <button class="btn btn-blue btn-skyblue ml-auto" type="button" id="new-industry">Je crée
-                                    mon
-                                    profil
-                                    professionnel pour ce poste</button>
-                            </div>
+    <div class="modal-dialog center-modal-dialog modal-xl" role="document">
+        <div class="modal-content m-32">
+            <div class="modal-header resume_header border-0">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><img src="images/material-close.svg"></span>
+                </button>
+            </div>
+            <div class="modal-body resume_modal">
+                <div class="candidate_modal">
+                    <h4 class="mb-3 main_title">Directrice - Directeur de crèche</h4>
+                    <div class="candidate_modal_title">
+                        <h5 class="candidate_modal_text pb-2">Description</h5>
+                        <div class="candidate_modal_desc">
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                            </p>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+                                make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+                                containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+                                make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+                                containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+                                make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+                                containing Lorem Ipsum passages, and more recently with desktop publishing software
+                            </p>
+                        </div>
+                        <div class="text-center pt-4 pb-3">
+                            <button class="btn btn-blue btn-skyblue ml-auto" type="button" id="new-industry">Je crée
+                                mon
+                                profil
+                                professionnel pour ce poste</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--end job-desc modal  -->
+</div>
+<!--end job-desc modal  -->
 
 
 <section class="subscribe_pd index-nous-sec" style="background-image: url('frontend/images/group7173.png');">
@@ -285,26 +263,13 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="row justify-content-center">
-                            <div class="col-md-10">
-                                <div class="sub-input">
-                                    <div class="form-group">
-                                        <input value="" class="inputicon2" placeholder="Inscrivez-vous pour des offres spéciales">
-                                        <div class="btn-subscribe">
-                                            <button class="btn btn-blue">S'ABONNER</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
-        </section>
-
-</div>
-</div>
+        </div>
+    </div>
 </section>
+
 <!-- header modal1 -->
 
 <div class="modal fade" id="Modallogin2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -357,6 +322,7 @@
         </div>
     </div>
 </div>
+@endsection
 @section('script')
 {!! $newslettervalidator->selector('#newsletterform') !!}
 <script>
@@ -374,14 +340,14 @@
             success: function(response) {
                 console.log(response.success);
                 if (response.success == true) {
-                   
+
                     toastr.success(response.message);
 
                     $('#loginbtn').prop('disabled', false);
-                    if(response.user.user_type==2){
-                    window.location.href ='{{ route("profile") }}';
-                    }else{
-                    window.location.href ='{{ route("mycandidate-profile") }}';
+                    if (response.user.user_type == 2) {
+                        window.location.href = '{{ route("profile") }}';
+                    } else {
+                        window.location.href = '{{ route("mycandidate-profile") }}';
                     }
                 } else {
                     $('.email-error').text(response.errors.email);
@@ -393,11 +359,11 @@
             }
         });
     }
-    $(document).on('click','.btn-show',function() {
-        var id = $(this).attr("data-id"); 
+    $(document).on('click', '.btn-show', function() {
+        var id = $(this).attr("data-id");
 
         $.ajax({
-            
+
         });
     });
 </script>

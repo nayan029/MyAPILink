@@ -146,7 +146,7 @@
 </div>
 </div>
 
- @yield('script')
+
 
 <script src="{{asset('frontend/js/jquery.min.js')}} "></script>
 <script src="{{asset('frontend/js/popper.min.js')}} "></script>
@@ -248,5 +248,6 @@
         });
     });
 </script>
+@yield('script')
 </body>
 </html>

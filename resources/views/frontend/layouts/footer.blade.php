@@ -6,10 +6,13 @@
                 <div class="container">
                     <div class="d-flex justify-content-between res-btn-column">
                         <img src="{{asset('frontend/images/footer/apilink_logo_dark.svg')}}" width="150px">
+                        @if(!Auth::guard('web')->user())
+                        
                         <div class="btn-footer-left">
                             <button class="btn footer-btn-white">INSCRIVEZ-VOUS</button>
                             <button class="btn footer-btn2">SE CONNECTER</button>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -181,6 +184,7 @@
 </script>
 
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
 <script>
     $(function() {
 

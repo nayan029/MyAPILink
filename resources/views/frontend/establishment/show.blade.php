@@ -1,30 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('frontend.master')
+@section('title')
+<title>ApiLink |</title>
+@endsection
 
-<head>
-    <title>MyApi Link</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="{{asset('frontend/images/favicon.ico')}}" type="image/png" sizes="16x16">
-    <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/magnific-popup.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/owl.carousel.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/select2.min.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
-</head>
-
-<body>
-
-    <div id="after-header"></div>
+@section('content')
 
     <section>
         <div class="atext-pos pt-90px">
             <img src="{{asset('frontend/images/profile-background.png')}}" alt="profile page background image" class="w-100 prof-resimg">
-            <a href="manager-profile.html" class="back link_a pos-img-link">
+            <a href="{{URL::to('/manager-profile')}}" class="back link_a pos-img-link">
                 <span><i class="fa fa-angle-left mr-2"></i></span>breadcrumb
             </a>
         </div>
@@ -42,16 +26,26 @@
                 <div class="col-md-9">
                     <div class="full-divmain" id="view-account1">
                         <div class="mb-3 mt-5 profile">
-                            <h4 class="profile-name">Crèche des bambins</h4>
-                            <p class="mb-0">Type de structure : crèche</p>
-                            <p class="">Municipalisé</p>
+                            <h4 class="profile-name">{{auth()->guard('web')->user()->organization}}</h4>
+                            <p class="mb-0">{{auth()->guard('web')->user()->address}}</p>
+                            <p class="">
+                            @if(auth()->guard('web')->user()->represent=="municipality")Une municipalité @endif
+                            @if(auth()->guard('web')->user()->represent=="private_structure")Une structure privée @endif
+                            @if(auth()->guard('web')->user()->represent=="associative_structure")Une structure associative @endif
+                            @if(auth()->guard('web')->user()->represent=="other") Autre @endif
+                            </p>
                         </div>
                     </div>
                     <div class="full-divmain" id="view-account2" style="display: none;">
                         <div class="mb-3 mt-5 profile">
-                            <h4 class="profile-name">Crèche XXXXX</h4>
-                            <p class="mb-0">Garderie</p>
-                            <p class="">Municipalisé</p>
+                            <h4 class="profile-name">{{auth()->guard('web')->user()->organization}}</h4>
+                            <p class="mb-0">{{auth()->guard('web')->user()->address}}</p>
+                            <p class="">
+                            @if(auth()->guard('web')->user()->represent=="municipality")Une municipalité @endif
+                            @if(auth()->guard('web')->user()->represent=="private_structure")Une structure privée @endif
+                            @if(auth()->guard('web')->user()->represent=="associative_structure")Une structure associative @endif
+                            @if(auth()->guard('web')->user()->represent=="other") Autre @endif
+                            </p>
                         </div>
                         <div>
                             <a href="find-candidate.html" class="btn-recruit btn">RECRUTER</a>
@@ -82,9 +76,10 @@
                             <div class="form-group custom-drop-paris mb-3">
                                 <img src="{{asset('frontend/images/home.svg')}}" class="drop-icon">
                                 <div class="applicants-drop bg-dropdown">
-                                    <select class="form-control input-drop bg-transparent">
-                                        <option value="">Paris</option>
-                                    </select>
+                                    <!-- <select class="form-control input-drop bg-transparent">
+                                        <option value=""></option>
+                                    </select> -->
+                                    <input type="text" class="form-control input-drop bg-transparent" readonly  value="{{auth()->guard('web')->user()->city}}">
                                 </div>
                             </div>
                             <div class="form-group custom-drop-paris mb-3">
@@ -92,9 +87,10 @@
                                     <img src="{{asset('frontend/images/group100.svg')}}" class="house-drop-icon">
                                 </div>
                                 <div class="applicants-drop bg-dropdown">
-                                    <select class="form-control input-drop bg-transparent">
+                                    <!-- <select class="form-control input-drop bg-transparent">
                                         <option value="">Île de France</option>
-                                    </select>
+                                    </select> -->
+                                    <input type="text" class="form-control input-drop bg-transparent" readonly  value="Île de France">
                                 </div>
                             </div>
                         </div>
@@ -232,7 +228,7 @@
                                                     </li>
                                                 </ul>
                                                 <div>
-                                                    <p class="mb-0 ouvert-p mr-3">Ouvert depuis le 15 Février 1999</p>
+                                                    <p class="mb-0 ouvert-p mr-3">Ouvert depuis le {{$establishment->opening_date}} {{$establishment->year}}</p>
                                                 </div>
                                             </div>
 
@@ -364,7 +360,7 @@
                                                 <div class="img_content_pro">
                                                     <img src='{{asset("$image->image")}}'>
                                                     <div>
-                                                        <img onclick="removeImage({{$image->id}})"  src="{{asset('frontend/images/project/cancel-red.svg')}}" width="12px" height="12px" class="unplash-closeimg">
+                                                        <img onclick="removeImage({{$image->id}})" src="{{asset('frontend/images/project/cancel-red.svg')}}" width="12px" height="12px" class="unplash-closeimg">
                                                     </div>
                                                 </div>
                                             </li>
@@ -1505,6 +1501,8 @@
                                         <div class="overflow-auto">
                                             <table class="download-table w-100">
                                                 <tbody>
+                                                    @php $documents=explode(",",$establishment->document); @endphp
+                                                            @foreach($documents as $document)
                                                     <tr>
                                                         <td>
                                                             <div class="d-flex">
@@ -1513,11 +1511,13 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <a href="{{URL::to('/')}}/{{$establishment->document}}" download="{{$establishment->document}}"><img src="{{asset('frontend/images/feather-download.svg')}}" class="download-img"></a>
+                                                            
+                                                            <a href="{{URL::to('/')}}/{{$document}}" download="{{$document}}"><img src="{{asset('frontend/images/feather-download.svg')}}" class="download-img"></a>
+                                                        
                                                         </td>
                                                     </tr>
-                                                    
-                                                
+                                                    @endforeach
+
                                                 </tbody>
                                             </table>
                                         </div>
@@ -1537,17 +1537,8 @@
 
 
     </section>
-</body>
-
-<script src="{{asset('frontend/js/jquery.min.js')}}"></script>
-<script src="{{asset('frontend/js/jquery-ui.min.js')}}"></script>
-<script src="{{asset('frontend/js/popper.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('frontend/js/bootstrap-multiselect.js')}}"></script>
-<script src="{{asset('frontend/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('frontend/js/select2.min.js')}}"></script>
-<script src="{{asset('frontend/js/jquery.magnific-popup.min.js')}}"></script>
-<script src="{{asset('frontend/js/owl.carousel.js')}}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    @endsection
+@section('script')
 
 <script type="text/javascript ">
     $(".select2 ").select2();
@@ -1636,7 +1627,7 @@
             success: function(response) {
                 if (response.success == true) {
                     toastr.success(response.message);
-                    $("#appendid").prepend("<li id='image"+response.data.id+"'><div class='img_content_pro'><img src='{{asset('/')}}" + response.data.image + "'><div><img imageId=" + response.data.id + " onclick='removeImage("+ response.data.id +")'  src='{{asset('frontend/images/project/cancel-red.svg')}}' width='12px' height='12px' class='unplash-closeimg'></div></div></li>");
+                    $("#appendid").prepend("<li id='image" + response.data.id + "'><div class='img_content_pro'><img src='{{asset('/')}}" + response.data.image + "'><div><img imageId=" + response.data.id + " onclick='removeImage(" + response.data.id + ")'  src='{{asset('frontend/images/project/cancel-red.svg')}}' width='12px' height='12px' class='unplash-closeimg'></div></div></li>");
                 } else {
                     $('.image-upload-error').text(response.errors.image);
                 }
@@ -1655,8 +1646,8 @@
             success: function(response) {
                 if (response.success == true) {
                     toastr.success(response.message);
-                    
-                    $( "#image"+id ).remove();
+
+                    $("#image" + id).remove();
 
                 } else {
                     toastr.error(response.message);
@@ -1669,19 +1660,6 @@
 
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 {!! $imageValidator->selector('#upload-image') !!}
-
-<script>
-    $(function() {
-
-        @if(Session::has('success'))
-        toastr.success("{{ Session::get('success') }}");
-        @endif
-
-
-        @if(Session::has('error'))
-        toastr.error("{{ Session::get('error') }}");
-        @endif
-    });
-</script>
-
+@endsection
+</body>
 </html>

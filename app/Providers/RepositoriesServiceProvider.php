@@ -7,6 +7,7 @@ use App\Interfaces\EstablishmentRepositoryInterface;
 use App\Interfaces\ForgotPasswordRepositoryInterface;
 use App\Interfaces\HomeRepositoryInterface;
 use App\Interfaces\JobVacanciesRepositoryInterface;
+use App\Interfaces\CandidateRepositoryInterface;
 use App\Interfaces\ManagerRepositoryInterface;
 use App\Interfaces\SkillRepositoryInterface;
 use App\Interfaces\PartnerRepositoryInterface;
@@ -26,6 +27,7 @@ use App\Repositories\RegistrationRepository;
 use App\Repositories\WidgetRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\JobRepository;
+use App\Repositories\CandidateRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoriesServiceProvider extends ServiceProvider
@@ -82,6 +84,11 @@ class RepositoriesServiceProvider extends ServiceProvider
 
         $this->app->bind(JobRepositoryInterface::class, function ($app) {
             return $app->make(JobRepository::class);
+        });
+
+        
+        $this->app->bind(CandidateRepositoryInterface::class, function ($app) {
+            return $app->make(CandidateRepository::class);
         });
     }
 

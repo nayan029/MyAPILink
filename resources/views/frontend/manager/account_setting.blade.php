@@ -1,19 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('frontend.master')
+@section('title')
+<title>ApiLink |</title>
+@endsection
 
-<head>
-    <title>MyApi Link</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="{{asset('frontend/images/favicon.ico')}}" type="image/png" sizes="16x16">
-    <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/magnific-popup.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/owl.carousel.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/select2.min.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
     <style>
         .navbar-collapse {
             display: none !important;
@@ -24,10 +14,8 @@
         }
     </style>
 
-</head>
-
-<body>
-    <div id="after-header"></div>
+@section('content')
+ 
     <section class="back-f6">
         <div class="container">
             <div class="account-setting-title">
@@ -160,21 +148,43 @@
 
 
     </div>
-</body>
-
-<script src="{{asset('frontend/js/jquery.min.js')}}"></script>
-<script src="{{asset('frontend/js/popper.min.js')}}"></script>
-<script src="{{asset('frontend/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('frontend/js/select2.min.js')}}"></script>
-<script src="{{asset('frontend/js/jquery.magnific-popup.min.js')}}"></script>
-<script src="{{asset('frontend/js/owl.carousel.js')}}"></script>
-<script src="{{asset('frontend/js/custom.js')}}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+@endsection
+@section('script')
 <script type="text/javascript ">
     $(".select2 ").select2();
 </script>
 <script>
+     //delete
+     $(document).on('click', '#delete-account', function(e) {
+   
+   e.preventDefault();
+   swal({
+           title: 'Êtes-vous sûr de vouloir demander la suppression du compte ?',
+           icon: "warning",
+           buttons: true,
+           dangerMode: true,
+           confirmButtonText: 'Yes',
+           cancelButtonText: 'Cancel',
+       })
+       .then((willDelete) => {
+           if (willDelete) {
+               $.ajax({
+                   method: 'POST',
+                   url:'{{ route("update-delete-flag") }}',
+                   data: {
+                       "_token":  "{{csrf_token()}}",
+                       "delete_account_flag" :"request",
+                   },
+                   success: function(response) {
+                       if (response.status == true) {
+
+                           toastr.success(response.msg);
+                       }
+                   }
+               });
+           }
+       });
+});
     var togglePassword = document.getElementById("toggle-password");
 
     if (togglePassword) {
@@ -271,48 +281,8 @@
         });
     }
 
-    //delete
-    $(document).on('click', '#delete-account', function(e) {
-        e.preventDefault();
-        swal({
-                title: 'Êtes-vous sûr de vouloir demander la suppression du compte ?',
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-                confirmButtonText: 'Yes',
-                cancelButtonText: 'Cancel',
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    $.ajax({
-                        method: 'POST',
-                        url:'{{ route("update-delete-flag") }}',
-                        data: {
-                            "_token":  "{{csrf_token()}}",
-                            "delete_account_flag" :"request",
-                        },
-                        success: function(response) {
-                            if (response.status == true) {
-
-                                toastr.success(response.msg);
-                            }
-                        }
-                    });
-                }
-            });
-    });
+   
 </script>
-<script>
-    $(function() {
-
-        @if(Session::has('success'))
-        toastr.success("{{ Session::get('success') }}");
-        @endif
-
-        @if(Session::has('error'))
-        toastr.error("{{ Session::get('error') }}");
-        @endif
-    });
-</script>
-
+@endsection
+</body>
 </html>

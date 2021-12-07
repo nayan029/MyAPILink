@@ -69,7 +69,7 @@ Route::middleware(['auth:admin'])->group(function ($route) {
 Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontRoute) {
 
     $frontRoute->get('/', 'HomeController@userDashboard')->name('dashboard');
-    $frontRoute->post('user/logout', 'HomeController@logout')->name('logout');
+    
     $frontRoute->post('addnewsletter', 'HomeController@addNewsletter')->name('addnewsletter');
 
     $frontRoute->post('manager/store', 'ManagerController@storeData')->name('manager.store');
@@ -119,7 +119,9 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->post('upload-image', 'EstablishmentController@uploadImage')->name('upload-image');
         $frontRoute->post('remove-image', 'EstablishmentController@removeImage')->name('remove-image');
 
-        $frontRoute->get('mycandidate-profile', 'EstablishmentController@index')->name('mycandidate-profile');
+        $frontRoute->get('mycandidate-profile', 'CandidateController@index')->name('mycandidate-profile');
+        $frontRoute->get('candidate-profile-edit', 'CandidateController@edit')->name('candidate-profile-edit');
         
+        $frontRoute->post('user/logout', 'HomeController@logout')->name('user-logout');
     });
 });

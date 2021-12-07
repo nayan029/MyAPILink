@@ -11,30 +11,49 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
-use App\Http\Traits\ImageUploadTrait;
+use App\Http\Traits\ImageuploadTrait;
 
 
 class EstablishmentRepository implements EstablishmentRepositoryInterface
 {
-    use ImageUploadTrait;
+    use ImageuploadTrait;
 
     public function store(Request $request)
     {
-        $document = "";
+        $documents = array();
+
         if ($request->hasFile('document')) {
-            $document = $this->uploadImage($request->file('document'), 'Establishment/document');
+            $files = $request->file('document');
+            foreach ($files as $file) {
+                $documents[] = $this->uploadImage($file, 'Establishment/document');
+            }
         }
-        $more_infomation = "";
-        if ($request->hasFile('more_infomation')) {
-            $more_infomation = $this->uploadImage($request->file('more_infomation'), 'Establishment/more_infomation');
-        }
+
+
+        $applied_pedagogy = implode(",", $request->applied_pedagogy);
+        $document = implode(",", $documents);
         $storeData = $request->all();
+        $storeData['applied_pedagogy'] = $applied_pedagogy;
         $storeData['document'] = $document;
-        $storeData['more_infomation'] = $more_infomation;
+        //  $storeData['more_infomation'] = $more_infomation;
         $storeData['created_by'] = auth()->guard('web')->user()->id;
 
+        $establishment = Establishment::create($storeData);
+        $more_infomation = "";
+        if ($request->hasFile('more_infomation')) {
+            $files = $request->file('more_infomation');
+            foreach ($files as $file) {
+                $more_infomation  = $this->uploadImage($file, 'Establishment/gallery');;
+                $storeData['image'] = $more_infomation;
+                $storeData['establishment_id'] = $establishment->id;
+                $storeData['created_by'] = auth()->guard('web')->user()->id;
 
-        return Establishment::create($storeData);
+
+                EstablishmentGallery::create($storeData);
+            }
+        }
+
+        return $establishment;
     }
     public function getSingleEstablishment($id)
     {
@@ -43,7 +62,8 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
 
     public function update(Request $request, $id)
     {
-
+        $applied_pedagogy = implode(",", $request->applied_pedagogy);
+      
         $updateData = [
             'type_of_establishment' => $request->type_of_establishment,
             'own_of_our_structure' => $request->own_of_our_structure,
@@ -55,20 +75,38 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
             'accommodation_capacity' => $request->accommodation_capacity,
             'surface_area_of_the_establishment' => $request->surface_area_of_the_establishment,
             'garden' => $request->garden,
-            'applied_pedagogy' => $request->applied_pedagogy,
+            'applied_pedagogy' => $applied_pedagogy,
             'our_values' => $request->our_values,
 
 
         ];
-
+      
         if ($request->hasFile('document')) {
-            $document = $this->uploadImage($request->file('document'), 'Establishment/document');
+            $files = $request->file('document');
+            foreach ($files as $file) {
+                $documents[] = $this->uploadImage($file, 'Establishment/document');
+            }
+            $document = implode(",", $documents);
             $updateData['document'] = $document;
         }
 
         if ($request->hasFile('more_infomation')) {
-            $more_infomation = $this->uploadImage($request->file('more_infomation'), 'Establishment/more_infomation');
-            $updateData['more_infomation'] = $more_infomation;
+            $images = $this->getEstablishmentGallery($id);
+            if (count($images) != 0) {
+                foreach ($images as $image) {
+                    $galleryId = EstablishmentGallery::find($image->id);
+                    $galleryId->delete();
+                }
+            }
+
+            $files = $request->file('more_infomation');
+            foreach ($files as $file) {
+                $more_infomation  = $this->uploadImage($file, 'Establishment/gallery');;
+                $storeData['image'] = $more_infomation;
+                $storeData['establishment_id'] = $id;
+                $storeData['created_by'] = auth()->guard('web')->user()->id;
+                EstablishmentGallery::create($storeData);
+            }
         }
 
         return Establishment::where('id', $id)->update($updateData);

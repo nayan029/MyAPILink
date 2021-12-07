@@ -28,8 +28,7 @@ class EstablishmentController extends Controller
         'garden' => 'required',
         'applied_pedagogy' => 'required',
         'our_values' => 'required',
-         'document' => 'required|mimes:pdf',
-        'more_infomation' => 'required|mimes:jpeg,png,jpg|max:2048',
+        
 
 
     ];
@@ -52,9 +51,12 @@ class EstablishmentController extends Controller
     }
     public function store(Request $request)
     {
-
+        $validationrules['document']='required|mimes:pdf';
+        $validationrules['more_infomation'] = 'required|mimes:jpeg,png,jpg|max:2048';
         $validator = Validator::make($request->all(), $this->validationrules);
         if ($validator->fails()) {
+           print_r($validator->errors());
+           die;
             return redirect()->back()->withErrors($validator->errors());
         }
 

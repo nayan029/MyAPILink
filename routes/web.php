@@ -37,15 +37,11 @@ Route::middleware(['auth:admin'])->group(function ($route) {
 
         //Widget module
         $adminRoute->resource('widget', 'WidgetController');
-        $adminRoute->get('/getdata', 'WidgetController@getAjaxData')->name('widget.data');
+        $adminRoute->get('/filter/getdata', 'WidgetController@getAjaxData')->name('widget.data');
 
         //Skills module
         $adminRoute->resource('skill', 'SkillsController');
         $adminRoute->get('/skilldata', 'SkillsController@getData')->name('skill.data');
-
-
-        $adminRoute->resource('widget', 'WidgetController');
-        $adminRoute->get('/getdata', 'WidgetController@getAjaxData')->name('widget.data');
 
         $adminRoute->resource('partner', 'PartnerController');
         $adminRoute->get('/getpartenerdata', 'PartnerController@getPartnerData')->name('partner.data');

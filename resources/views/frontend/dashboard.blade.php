@@ -340,3 +340,4 @@
 @section('page-js')
       {!! $newslettervalidator->selector('#newsletterform') !!}
 @endsection
+@include('frontend.layouts.login_script')

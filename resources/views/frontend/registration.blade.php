@@ -97,28 +97,34 @@
     <div class="modal-dialog login-modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body login-modal-body">
+            <form id="manager-login" method="post" action="#">
+                    @csrf
                 <div class="">
                     <div class="lmodal-logo mb-20">
-                        <img src="images/apilink_logo_dark.png" alt="">
+                        <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="">
                     </div>
                     <button class="btn social-btn facebook mb-20">
-                        <img src="images/imgs-svg/facebook-f.svg"> Connexion avec
+                        <img src="{{asset('frontend/images/imgs-svg/facebook-f.svg')}}"> Connexion avec
                         Facebook
                     </button>
                     <button class="btn social-btn google mb-20">
-                        <img src="images/imgs-svg/google.svg"> Connexion avec
+                        <img src="{{asset('frontend/images/imgs-svg/google.svg')}}"> Connexion avec
                         Google
                     </button>
                     <div class="ordiv mb-20"><span>OU</span></div>
                     <div class="mb-20">
                         <div class="form-group">
                             <input type="text" placeholder="Email / Nom d'utilisateur*" class="form-control email-place login-input inputicon2">
+                            <span class="email-error text-danger">@error ('email') {{$message}} @enderror</span>
                         </div>
                     </div>
                     <div class="mb-20">
                         <div class="form-group sr-rel">
                             <input type="password" placeholder="Mot de passe*" class="form-control  email-place login-input inputicon2 sr-rel" id="password">
-                            <img src="images/about/eye.svg" alt="" class="sr-eye" id="toggle-password">
+                            <img src="{{asset('frontend/images/about/eye.svg')}}" alt="" class="sr-eye" id="toggle-password">
+                            <span class="password-error text-danger">@error ('password') {{$message}} @enderror</span>
+                                <span class="invalid-error text-danger">@error ('invalid') {{$message}} @enderror</span>
+                                
                         </div>
                     </div>
 
@@ -126,12 +132,13 @@
                         <a href="" class="forgot-link">J'ai perdu mon mot de passe?</a>
                     </div>
                     <div class="col-md-12 text-center res-dec mb-3 ">
-                        <button class="btn btn-blue w-100">Connexion</button>
+                    <button id="loginbtn" onclick="userLogin();" type="button" class="btn btn-blue w-100">Connexion</button>
                     </div>
                     <div class=" meconnecter">
                         <p class="proxima-nove">Pas encore membre?<a href="#" class=""> Inscrivez-vous</a></p>
                     </div>
                 </div>
+            </form>
             </div>
         </div>
     </div>
@@ -317,5 +324,5 @@
 
 
 </body>
-
+@include('frontend.layouts.login_script')
 </html>

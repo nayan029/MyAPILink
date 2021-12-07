@@ -178,21 +178,7 @@
         }
     })
 </script>
-<script>
-    var togglePassword = document.getElementById("toggle-password");
 
-    if (togglePassword) {
-        togglePassword.addEventListener('click', function() {
-            var x = document.getElementById("password");
-            if (x.type === "password") {
-                x.type = "text";
-            } else {
-                x.type = "password";
-            }
-        });
-    }
-    
-</script>
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 <script>
     $(function() {
@@ -214,5 +200,6 @@
         @endif
     });
 </script>
+
 
 </html>

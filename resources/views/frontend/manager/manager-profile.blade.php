@@ -47,14 +47,24 @@
                 </div>
                 <div class="col-md-8">
                     <div class="mb-3 mt-3 profile" id="manager-id">
-                        <h4 class="profile-name">Mairie de Montpellier <img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" alt="edit" class="ml-1 edit-manager"></h4>
-                        <p class="mb-0 d-flex align-items-center">31 avenue de la liberté 34000 Montpellier <img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" alt="edit" class="edit-manager ml-2"></p>
-                        <p class="">Municipalisé</p>
+                        <h4 class="profile-name">{{auth()->guard('web')->user()->organization}} <img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" alt="edit" class="ml-1 edit-manager"></h4>
+                        <p class="mb-0 d-flex align-items-center">{{auth()->guard('web')->user()->address}} <img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" alt="edit" class="edit-manager ml-2"></p>
+                        <p class=""> 
+                            @if(auth()->guard('web')->user()->represent=="municipality")Une municipalité @endif
+                            @if(auth()->guard('web')->user()->represent=="private_structure")Une structure privée @endif
+                            @if(auth()->guard('web')->user()->represent=="associative_structure")Une structure associative @endif
+                            @if(auth()->guard('web')->user()->represent=="other") Autre @endif
+                        </p>
                     </div>
                     <div class="mb-3 mt-3 profile" id="manager-id2" style="display: none;">
-                        <h4 class="profile-name">Mairie de Montpellier</h4>
-                        <p class="mb-0 d-flex align-items-center">31 avenue de la liberté 34000 Montpellier</p>
-                        <p class="">Municipalisé</p>
+                        <h4 class="profile-name">{{auth()->guard('web')->user()->organization}}</h4>
+                        <p class="mb-0 d-flex align-items-center">{{auth()->guard('web')->user()->address}}</p>
+                        <p class="">
+                        @if(auth()->guard('web')->user()->represent=="municipality")Une municipalité @endif
+                            @if(auth()->guard('web')->user()->represent=="private_structure")Une structure privée @endif
+                            @if(auth()->guard('web')->user()->represent=="associative_structure")Une structure associative @endif
+                            @if(auth()->guard('web')->user()->represent=="other") Autre @endif
+                        </p>
                     </div>
                 </div>
             </div>

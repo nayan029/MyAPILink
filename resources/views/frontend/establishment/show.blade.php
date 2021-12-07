@@ -1636,7 +1636,7 @@
             success: function(response) {
                 if (response.success == true) {
                     toastr.success(response.message);
-                    $("#appendid").prepend("<li><div class='img_content_pro'><img src='{{asset('/')}}" + response.data.image + "'><div><img imageId=" + response.data.id + " src='{{asset('frontend/images/project/cancel-red.svg')}}' width='12px' height='12px' class='unplash-closeimg'></div></div></li>");
+                    $("#appendid").prepend("<li id='image"+response.data.id+"'><div class='img_content_pro'><img src='{{asset('/')}}" + response.data.image + "'><div><img imageId=" + response.data.id + " onclick='removeImage("+ response.data.id +")'  src='{{asset('frontend/images/project/cancel-red.svg')}}' width='12px' height='12px' class='unplash-closeimg'></div></div></li>");
                 } else {
                     $('.image-upload-error').text(response.errors.image);
                 }

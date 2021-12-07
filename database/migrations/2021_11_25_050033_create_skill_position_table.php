@@ -18,7 +18,7 @@ class CreateSkillPositionTable extends Migration
             $table->bigInteger('skill_id')->index()->nullable();
             $table->string('position')->nullable();
             $table->string('title')->nullable();
-            $table->longText('description')->nullable();
+            $table->longText('desc')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

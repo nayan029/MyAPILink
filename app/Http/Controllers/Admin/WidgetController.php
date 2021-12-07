@@ -28,7 +28,7 @@ class WidgetController extends Controller
     ];
 
     protected $slugvalidationrules = [
-        'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+       'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'description' => 'required',
         'slug' => 'required',
     ];
@@ -117,7 +117,7 @@ class WidgetController extends Controller
      */
     public function edit($id)
     {
-        $data['validator'] = JsValidator::make($this->updatevalidationrules);
+        $data['validator'] = JsValidator::make([]);
         $data['widget'] = $this->widgetRepository->getSingleWidget($id);
         $data['widgets'] = ['our_advantages' => 'OUR ADVANTAGES', 'our_added_value' => 'OUR ADDED VALUE', 'how_it_works' => 'HOW IT WORKS'];
         return view('backend.widget.edit', $data);
@@ -136,7 +136,7 @@ class WidgetController extends Controller
         {
             $validation = Validator::make($request->all(), $this->slugupdaterules);
         }else{
-            $validation = Validator::make($request->all(), $this->slugvalidationrules);
+            $validation = Validator::make($request->all(), $this->updatevalidationrules);
         }
         
         if ($validation->fails()) {

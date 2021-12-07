@@ -91,7 +91,7 @@ class SkillsController extends Controller
     public function edit($id)
     {
         $data['validator'] = JsValidator::make($this->updatevalidationrules);
-        $data['skill_position'] = SkillPosition::where('skills_id',$id)->where('deleted_at',NULL)->get();
+        $data['skill_position'] = SkillPosition::where('skill_id',$id)->where('deleted_at',NULL)->get();
         $data['skill'] = $this->SkillRepository->getSingleSkill($id);
         // dd( $data['skill_position']);
         return view('backend.skills.edit', $data);

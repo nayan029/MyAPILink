@@ -10,8 +10,9 @@
 @section('content')
 <!-- Main content -->
 <div class="row">
-		<form action="#" class="job_form">
+		
 			<div class="col-md-12">
+                <form action="#" class="job_form">
 				<div class="card">
 					<div class="card-body">
 						<div class="row">
@@ -54,8 +55,9 @@
 						</div>
 					</div>
 				 </div>
+                 </form>
 			</div>
-        </form>
+        
 </div>
 <div class="row">
     <div class="col-12">

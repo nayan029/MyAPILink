@@ -124,62 +124,60 @@
 
                                 <div class="form-group">
                                     {!! Form::label('Pédagogie appliquée', 'Pédagogie appliquée') !!}
-
+                                    @php $applied_pedagogy=explode(",",$establishment->applied_pedagogy); @endphp
                                     <div>
                                         <div class="row check-box-sec check-form mb-4 m-0">
                                             <div class="col-md-6">
                                                 <div class="custom-control custom-checkbox profile-check">
-                                                    {!! Form::checkbox('applied_pedagogy','Maria Montessori',false,['class' => 'custom-control-input','id' =>'applied_pedagogy']) !!}
+                                                    {!! Form::checkbox('applied_pedagogy[]','Maria Montessori',in_array("Maria Montessori",$applied_pedagogy),['class' => 'custom-control-input','id' =>'applied_pedagogy']) !!}
                                                     {!! Form::label('applied_pedagogy', 'Maria Montessori', ['class' => 'custom-control-label pro-check']) !!}
 
                                                 </div>
                                                 <div class="custom-control custom-checkbox profile-check">
-                                                    {!! Form::checkbox('applied_pedagogy','Pédagogie',false,['class' => 'custom-control-input','id' =>'Pédagogie']) !!}
+                                                    {!! Form::checkbox('applied_pedagogy[]','Pédagogie',in_array("Pédagogie",$applied_pedagogy),['class' => 'custom-control-input','id' =>'Pédagogie']) !!}
                                                     {!! Form::label('Pédagogie', 'Pédagogie Faber et Mazlish', ['class' => 'custom-control-label pro-check']) !!}
 
                                                 </div>
                                                 <div class="custom-control custom-checkbox profile-check">
-                                                    {!! Form::checkbox('applied_pedagogy','Pédagogie Reggio',false,['class' => 'custom-control-input','id' =>'Reggio']) !!}
+                                                    {!! Form::checkbox('applied_pedagogy[]','Pédagogie Reggio',in_array("Pédagogie Reggio",$applied_pedagogy),['class' => 'custom-control-input','id' =>'Reggio']) !!}
                                                     {!! Form::label('Reggio', 'Pédagogie Reggio', ['class' => 'custom-control-label pro-check']) !!}
 
                                                 </div>
                                                 <div class="custom-control custom-checkbox profile-check">
-                                                    {!! Form::checkbox('applied_pedagogy','Parler Bambin',false,['class' => 'custom-control-input','id' =>'Parler']) !!}
+                                                    {!! Form::checkbox('applied_pedagogy[]','Parler Bambin',in_array("Parler Bambin",$applied_pedagogy),['class' => 'custom-control-input','id' =>'Parler']) !!}
                                                     {!! Form::label('Parler', 'Parler Bambin', ['class' => 'custom-control-label pro-check']) !!}
 
                                                 </div>
                                                 <div class="custom-control custom-checkbox profile-check">
-                                                    {!! Form::checkbox('applied_pedagogy','Autres',false,['class' => 'custom-control-input','id' =>'Autres']) !!}
+                                                    {!! Form::checkbox('applied_pedagogy[]','Autres',in_array("Autres",$applied_pedagogy),['class' => 'custom-control-input','id' =>'Autres']) !!}
                                                     {!! Form::label('Autres', 'Autres', ['class' => 'custom-control-label pro-check']) !!}
 
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="custom-control custom-checkbox profile-check">
-                                                    <input type="checkbox" class="custom-control-input" id="Pédagogie Interactive">
-                                                    <label class="custom-control-label pro-check" for="Pédagogie Interactive">Pédagogie
-                                                        Interactive</label>
-                                                    {!! Form::checkbox('applied_pedagogy','Pédagogie Interactive',false,['class' => 'custom-control-input','id' =>'Interactive']) !!}
+                                                   
+                                                    {!! Form::checkbox('applied_pedagogy[]','Pédagogie Interactive',in_array("Pédagogie Interactive",$applied_pedagogy),['class' => 'custom-control-input','id' =>'Interactive']) !!}
                                                     {!! Form::label('Interactive', 'Pédagogie Interactive', ['class' => 'custom-control-label pro-check']) !!}
                                                 </div>
                                                 <div class="custom-control custom-checkbox profile-check">
-                                                    {!! Form::checkbox('applied_pedagogy','Pickler Loczy',false,['class' => 'custom-control-input','id' =>'Pickler']) !!}
+                                                    {!! Form::checkbox('applied_pedagogy[]','Pickler Loczy',in_array("Pickler Loczy",$applied_pedagogy),['class' => 'custom-control-input','id' =>'Pickler']) !!}
                                                     {!! Form::label('Pickler', 'Pickler Loczy', ['class' => 'custom-control-label pro-check']) !!}
 
                                                 </div>
                                                 <div class="custom-control custom-checkbox profile-check">
                                                  
-                                                    {!! Form::checkbox('applied_pedagogy','Snoezelen',false,['class' => 'custom-control-input','id' =>'Snoezelen']) !!}
+                                                    {!! Form::checkbox('applied_pedagogy[]','Snoezelen',in_array("Snoezelen",$applied_pedagogy),['class' => 'custom-control-input','id' =>'Snoezelen']) !!}
                                                     {!! Form::label('Snoezelen', 'Snoezelen', ['class' => 'custom-control-label pro-check']) !!}
                                                 </div>
                                                 <div class="custom-control custom-checkbox profile-check">
             
-                                                    {!! Form::checkbox('applied_pedagogy','Pédagogie Steiner',false,['class' => 'custom-control-input','id' =>'Steiner']) !!}
+                                                    {!! Form::checkbox('applied_pedagogy[]','Pédagogie Steiner',in_array("Pédagogie Steiner",$applied_pedagogy),['class' => 'custom-control-input','id' =>'Steiner']) !!}
                                                     {!! Form::label('Steiner', 'Pédagogie Steiner', ['class' => 'custom-control-label pro-check']) !!}
                                                 </div>
                                                 <div class="custom-control custom-checkbox profile-check">
                                   
-                                                        {!! Form::checkbox('applied_pedagogy','Aucune en particulier',false,['class' => 'custom-control-input','id' =>'particulier']) !!}
+                                                        {!! Form::checkbox('applied_pedagogy[]','Aucune en particulier',in_array("Aucune en particulier",$applied_pedagogy),['class' => 'custom-control-input','id' =>'particulier']) !!}
                                                     {!! Form::label('particulier', 'Aucune en particulier', ['class' => 'custom-control-label pro-check']) !!}
                                                 </div>
                                             </div>
@@ -205,7 +203,7 @@
                                             <span><i class="fa fa-paperclip mr-2"></i>Attacher un
                                                 document</span>
                                                 
-                                            {!! Form::file('document', ['id' => 'document', 'name' => 'document', 'class' => 'upload']) !!}
+                                            {!! Form::file('document[]', ['id' => 'document', 'name' => 'document[]', 'class' => 'upload','multiple' => true]) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -233,7 +231,7 @@
                                                                         <p>Drag and drop here or<span style="color:#192842;font-family: 'Quicksand-Bold'">
                                                                                 Browse</span> </p>
                                                                     </div>
-                                                                    {!! Form::file('more_infomation', ['id' => 'more_infomation', 'name' => 'more_infomation', 'class' => 'dropzone']) !!}
+                                                                    {!! Form::file('more_infomation[]', ['id' => 'more_infomation', 'name' => 'more_infomation[]', 'class' => 'dropzone','multiple' => true]) !!}
                                                                  
                                                                 </div>
                                                             </div>

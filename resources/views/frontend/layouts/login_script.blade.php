@@ -30,13 +30,13 @@
                 if (response.success == true) {
                    
                     toastr.success(response.message);
-
-                    $('#loginbtn').prop('disabled', false);
                     if(response.user==2){
                     window.location.href ='{{ route("profile") }}';
                     }else{
                     window.location.href ='{{ route("mycandidate-profile") }}';
                     }
+                    $('#loginbtn').prop('disabled', false);
+                   
                 } else {
                     $('.email-error').text(response.errors.email);
                     $('.password-error').text(response.errors.password);

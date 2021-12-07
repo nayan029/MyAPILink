@@ -32,7 +32,7 @@
                     toastr.success(response.message);
 
                     $('#loginbtn').prop('disabled', false);
-                    if(response.user.user_type==2){
+                    if(response.user==2){
                     window.location.href ='{{ route("profile") }}';
                     }else{
                     window.location.href ='{{ route("mycandidate-profile") }}';

@@ -121,7 +121,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('contact.index')}}" class="nav-link {{ request()->is('contact*') ? 'active' : '' }}">
+                    <a href="{{route('contact.index')}}" class="nav-link {{ request()->is('contact-us') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-cogs"></i>
                         <p>
                             {{__("messages.contact us")}}

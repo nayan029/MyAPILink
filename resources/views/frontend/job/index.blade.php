@@ -3,15 +3,6 @@
 <title>ApiLink | Dashboard</title>
 @endsection
 @section('content')
-@if ($errors->any())
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
 
 <section class="back-f6 pb-5">
     <div class="container">
@@ -228,6 +219,6 @@
             </div>
 </section>
 @endsection
-@section('page-js')
+@section('script')
 {!! $jobvalidator->selector('#jobadd') !!}
 @endsection

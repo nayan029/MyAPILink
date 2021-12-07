@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-   <style>
+    <style>
         .navbar-collapse {
             display: none !important;
         }
@@ -102,7 +102,7 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="form-group pb-2">
-                                                               
+
                                                                 {!! Form::text('civility', auth()->guard('web')->user()->civility, ['class' => 'form-control view-form', 'placeholder' => 'Civilité','id'=>'civility']) !!}
                                                             </div>
                                                         </div>
@@ -110,20 +110,20 @@
                                                             <div class="form-group">
 
 
-                                                            
-                                                            {!! Form::text('lastname', auth()->guard('web')->user()->last_name, ['class' => 'form-control view-form', 'placeholder' => 'Nom','id'=>'lastname']) !!}
+
+                                                                {!! Form::text('lastname', auth()->guard('web')->user()->last_name, ['class' => 'form-control view-form', 'placeholder' => 'Nom','id'=>'lastname']) !!}
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12 pb-2">
                                                             <div class="form-group">
-                                                            {!! Form::text('firstname',auth()->guard('web')->user()->first_name, ['class' => 'form-control view-form', 'placeholder' => 'Prénom','id'=>'firstname']) !!}
-                                                             
+                                                                {!! Form::text('firstname',auth()->guard('web')->user()->first_name, ['class' => 'form-control view-form', 'placeholder' => 'Prénom','id'=>'firstname']) !!}
+
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12 pb-2">
                                                             <div class="form-group">
-                                                            {!! Form::text('email',auth()->guard('web')->user()->email, ['class' => 'form-control view-form', 'placeholder' => 'Mail','id'=>'email']) !!}
-                                                              
+                                                                {!! Form::text('email',auth()->guard('web')->user()->email, ['class' => 'form-control view-form', 'placeholder' => 'Mail','id'=>'email']) !!}
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -138,8 +138,8 @@
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
-                                                                {!! Form::text('roles',auth()->guard('web')->user()->roles, ['class' => 'form-control view-form', 'placeholder' => "Directrice de l'établissement",'id'=>'roles']) !!}
-                                                                 
+                                                                    {!! Form::text('roles',auth()->guard('web')->user()->roles, ['class' => 'form-control view-form', 'placeholder' => "Directrice de l'établissement",'id'=>'roles']) !!}
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -253,9 +253,9 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="border-job">
-                                                  
-                                                @foreach($myJobList as $value)
-                                                 <div class="job-card manager-job-pd">
+
+                                                    @foreach($myJobList as $value)
+                                                    <div class="job-card manager-job-pd">
                                                         <div class="row mb-3 ">
                                                             <div class="col-md-4">
                                                                 <ul class="search-image-ul">
@@ -291,27 +291,28 @@
                                                                     <div class="text-center date-details">
                                                                         <p class="mb-0">Date</p>
                                                                         <p class="mb-0">{{$value->contract_start_date}}</p>
-                                                                        <p class="mb-0">51 jours restants</p>
+                                                                        <p class="mb-0"></p>
+                                                                        
                                                                     </div>
                                                                     <div class="mt-images-profile">
                                                                         <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
-                                                                            <span>60</span>
+                                                                            <span>{{$value->total_view}}</span>
                                                                         </div>
                                                                         <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>120</span>
+                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>{{$value->total_reg}}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="button-voir">
                                                                     <a href="{{route('see-applicants')}}"> <button class="btn btn-blue">Voir les postulants
-                                                                    </button></a>
+                                                                        </button></a>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
 
-                                                   @endforeach
+                                                    @endforeach
                                                 </div>
                                                 <div class="custom-pagination pt-5 pb-3">
                                                     <nav aria-label="Page navigation example">
@@ -331,38 +332,35 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="border-job">
+                                                @foreach($remaining as $remain)
                                                     <div class="job-card manager-job-pd">
                                                         <div class="row mb-3 ">
                                                             <div class="col-md-3 pr-0">
                                                                 <ul class="search-image-ul">
                                                                     <li>
-                                                                        <h5 class="mb-0 job_aux_text fn-19">Auxiliaire
-                                                                            Puéricultrice
+                                                                        <h5 class="mb-0 job_aux_text fn-19">{{$remain->title}}
                                                                         </h5>
                                                                     </li>
                                                                     <li>
-                                                                        <p class="manage-crep job_cre_text fn-21">Crèche
-                                                                            du
-                                                                            bonheur
+                                                                        <p class="manage-crep job_cre_text fn-21">{{$remain->job_description}}
                                                                         </p>
                                                                     </li>
                                                                     <li>
-                                                                        <p class="mb-0 ">Montpellier (34)</p>
+                                                                        <p class="mb-0 ">{{$remain->city}}</p>
                                                                     </li>
                                                                     <li>
-                                                                        <p class="mb-0 ">1 350 € par mois</p>
+                                                                        <p class="mb-0 ">{{$remain->minimum_gross_salary}}</p>
                                                                     </li>
                                                                     <li>
-                                                                        <p class="mb-0 ">Expérience : Minimum 2 ans</p>
+                                                                        <p class="mb-0 ">{{$remain->minimum_experience}}</p>
                                                                     </li>
                                                                 </ul>
                                                             </div>
                                                             <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
                                                                 <div class="metters-btns">
-                                                                    <button class="btn btn btn-met">
-                                                                        Modifier
-                                                                    </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                                <a href="{{route('editjob',$remain->id)}}" class="btn btn btn-met">
+                                                                        Modifier</a>
+                                                                    <a href="{{route('destroy',$remain->id)}}" class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mr-renew">
@@ -378,10 +376,11 @@
                                                                 <div class="space-date justify-content-end">
                                                                     <div class="mt-images-profile">
                                                                         <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
-                                                                            <span>60</span>
+                                                                            <span>{{$remain->total_view}}</span>
                                                                         </div>
                                                                         <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>120</span>
+                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>{{$remain->total_reg}}</span>
+
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -394,284 +393,8 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="job-card manager-job-pd">
-                                                        <div class="row mb-3 ">
-                                                            <div class="col-md-3 pr-0">
-                                                                <ul class="search-image-ul">
-                                                                    <li>
-                                                                        <h5 class="mb-0 job_aux_text fn-19">Auxiliaire
-                                                                            Puéricultrice
-                                                                        </h5>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="manage-crep job_cre_text fn-21">Crèche
-                                                                            du
-                                                                            bonheur
-                                                                        </p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="mb-0 ">Montpellier (34)</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="mb-0 ">1 350 € par mois</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="mb-0 ">Expérience : Minimum 2 ans</p>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
-                                                                <div class="metters-btns">
-                                                                    <button class="btn btn btn-met">
-                                                                        Modifier
-                                                                    </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 mr-renew">
-                                                                <div>
-                                                                    <div class="renew-top">
-                                                                        <button class="btn btn-outline-renew">Renouveler
-                                                                            l'annonce
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3 mt-2 pl-0">
-                                                                <div class="space-date justify-content-end">
-                                                                    <div class="mt-images-profile">
-                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
-                                                                            <span>60</span>
-                                                                        </div>
-                                                                        <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>120</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="button-voir text-right-voir">
-                                                                    <a href="applicarion-offer.html" class="btn btn-blue w-95">Voir les
-                                                                        postulants
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="job-card manager-job-pd">
-                                                        <div class="row mb-3 ">
-                                                            <div class="col-md-3 pr-0">
-                                                                <ul class="search-image-ul">
-                                                                    <li>
-                                                                        <h5 class="mb-0 job_aux_text fn-19">Auxiliaire
-                                                                            Puéricultrice
-                                                                        </h5>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="manage-crep job_cre_text fn-21">Crèche
-                                                                            du
-                                                                            bonheur
-                                                                        </p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="mb-0 ">Montpellier (34)</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="mb-0 ">1 350 € par mois</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="mb-0 ">Expérience : Minimum 2 ans</p>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
-                                                                <div class="metters-btns">
-                                                                    <button class="btn btn btn-met">
-                                                                        Modifier
-                                                                    </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 mr-renew">
-                                                                <div>
-                                                                    <div class="renew-top">
-                                                                        <button class="btn btn-outline-renew">Renouveler
-                                                                            l'annonce
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3 mt-2 pl-0">
-                                                                <div class="space-date justify-content-end">
-                                                                    <div class="mt-images-profile">
-                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
-                                                                            <span>60</span>
-                                                                        </div>
-                                                                        <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>120</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="button-voir text-right-voir">
-                                                                    <a href="applicarion-offer.html" class="btn btn-blue w-95">Voir les
-                                                                        postulants
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="job-card manager-job-pd">
-                                                        <div class="row mb-3 ">
-                                                            <div class="col-md-3 pr-0">
-                                                                <ul class="search-image-ul">
-                                                                    <li>
-                                                                        <h5 class="mb-0 job_aux_text fn-19">Auxiliaire
-                                                                            Puéricultrice
-                                                                        </h5>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="manage-crep job_cre_text fn-21">Crèche
-                                                                            du
-                                                                            bonheur
-                                                                        </p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="mb-0 ">Montpellier (34)</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="mb-0 ">1 350 € par mois</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="mb-0 ">Expérience : Minimum 2 ans</p>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
-                                                                <div class="metters-btns">
-                                                                    <button class="btn btn btn-met">
-                                                                        Modifier
-                                                                    </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 mr-renew">
-                                                                <div>
-                                                                    <div class="renew-top">
-                                                                        <button class="btn btn-outline-renew">Renouveler
-                                                                            l'annonce
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3 mt-2 pl-0">
-                                                                <div class="space-date justify-content-end">
-                                                                    <div class="mt-images-profile">
-                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
-                                                                            <span>60</span>
-                                                                        </div>
-                                                                        <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>120</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="button-voir text-right-voir">
-                                                                    <a href="applicarion-offer.html" class="btn btn-blue w-95">Voir les
-                                                                        postulants
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="job-card manager-job-pd">
-                                                        <div class="row mb-3 ">
-                                                            <div class="col-md-3 pr-0">
-                                                                <ul class="search-image-ul">
-                                                                    <li>
-                                                                        <h5 class="mb-0 job_aux_text fn-19">Auxiliaire
-                                                                            Puéricultrice
-                                                                        </h5>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="manage-crep job_cre_text fn-21">Crèche
-                                                                            du
-                                                                            bonheur
-                                                                        </p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="mb-0 ">Montpellier (34)</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="mb-0 ">1 350 € par mois</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="mb-0 ">Expérience : Minimum 2 ans</p>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
-                                                                <div class="metters-btns">
-                                                                    <button class="btn btn btn-met">
-                                                                        Modifier
-                                                                    </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 mr-renew">
-                                                                <div>
-                                                                    <div class="renew-top">
-                                                                        <button class="btn btn-outline-renew">Renouveler
-                                                                            l'annonce
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3 mt-2 pl-0">
-                                                                <div class="space-date justify-content-end">
-                                                                    <div class="mt-images-profile">
-                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
-                                                                            <span>60</span>
-                                                                        </div>
-                                                                        <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>120</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="button-voir text-right-voir">
-                                                                    <a href="applicarion-offer.html" class="btn btn-blue w-95">Voir les
-                                                                        postulants
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="custom-pagination pt-5 pb-3">
-                                                    <nav aria-label="Page navigation example">
-                                                        <ul class="pagination justify-content-center">
-                                                            <li class="page-item">
-                                                                <a class="page-link" href="javascript:void(0)" tabindex="-1" id="prev">
-                                                                    &lt; </a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">4</a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">5</a>
-                                                            </li>
-                                                            <li class="page-item">
-                                                                <a class="page-link" href="javascript:void(0)" id="next">&gt;</a>
-                                                            </li>
-                                                        </ul>
-                                                    </nav>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                @endforeach                                       
+                                             </div>
                                     </div>
                                 </div>
                             </div>
@@ -681,38 +404,35 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="border-job">
+                                                    @foreach($deleted as $delete)
                                                     <div class="job-card manager-job-pd">
                                                         <div class="row mb-3 ">
                                                             <div class="col-md-3 pr-0">
                                                                 <ul class="search-image-ul">
                                                                     <li>
-                                                                        <h5 class="mb-0 job_aux_text fn-19">Auxiliaire
-                                                                            Puéricultrice
+                                                                        <h5 class="mb-0 job_aux_text fn-19">{{$delete->title}}
                                                                         </h5>
                                                                     </li>
                                                                     <li>
-                                                                        <p class="manage-crep job_cre_text fn-21">Crèche
-                                                                            du
-                                                                            bonheur
+                                                                        <p class="manage-crep job_cre_text fn-21">{{$delete->job_description}}
                                                                         </p>
                                                                     </li>
                                                                     <li>
-                                                                        <p class="mb-0 ">Montpellier (34)</p>
+                                                                        <p class="mb-0 ">{{$delete->city}}</p>
                                                                     </li>
                                                                     <li>
-                                                                        <p class="mb-0 ">1 350 € par mois</p>
+                                                                        <p class="mb-0 ">{{$delete->minimum_gross_salary}} € par mois</p>
                                                                     </li>
                                                                     <li>
-                                                                        <p class="mb-0 ">Expérience : Minimum 2 ans</p>
+                                                                        <p class="mb-0 ">Expérience : {{$delete->minimum_experience}}</p>
                                                                     </li>
                                                                 </ul>
                                                             </div>
                                                             <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
                                                                 <div class="metters-btns">
-                                                                    <button class="btn btn btn-met">
-                                                                        Modifier
-                                                                    </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                                <a href="{{route('editjob',$delete->id)}}" class="btn btn btn-met">
+                                                                        Modifier</a>
+                                                                    <a href="{{route('destroy',$delete->id)}}" class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mr-renew">
@@ -728,10 +448,10 @@
                                                                 <div class="space-date justify-content-end">
                                                                     <div class="mt-images-profile">
                                                                         <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
-                                                                            <span>60</span>
+                                                                            <span></span>
                                                                         </div>
                                                                         <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>120</span>
+                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -744,258 +464,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="job-card manager-job-pd">
-                                                        <div class="row mb-3 ">
-                                                            <div class="col-md-3 pr-0">
-                                                                <ul class="search-image-ul">
-                                                                    <li>
-                                                                        <h5 class="mb-0 job_aux_text fn-19">Auxiliaire
-                                                                            Puéricultrice
-                                                                        </h5>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="manage-crep job_cre_text fn-21">Crèche
-                                                                            du
-                                                                            bonheur
-                                                                        </p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="mb-0 ">Montpellier (34)</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="mb-0 ">1 350 € par mois</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="mb-0 ">Expérience : Minimum 2 ans</p>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
-                                                                <div class="metters-btns">
-                                                                    <button class="btn btn btn-met">
-                                                                        Modifier
-                                                                    </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 mr-renew">
-                                                                <div>
-                                                                    <div class="renew-top">
-                                                                        <button class="btn btn-outline-renew">Renouveler
-                                                                            l'annonce
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3 mt-2 pl-0">
-                                                                <div class="space-date justify-content-end">
-                                                                    <div class="mt-images-profile">
-                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
-                                                                            <span>60</span>
-                                                                        </div>
-                                                                        <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>120</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="button-voir text-right-voir">
-                                                                    <a href="applicarion-offer.html" class="btn btn-blue w-95">Voir les
-                                                                        postulants
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="job-card manager-job-pd">
-                                                        <div class="row mb-3 ">
-                                                            <div class="col-md-3 pr-0">
-                                                                <ul class="search-image-ul">
-                                                                    <li>
-                                                                        <h5 class="mb-0 job_aux_text fn-19">Auxiliaire
-                                                                            Puéricultrice
-                                                                        </h5>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="manage-crep job_cre_text fn-21">Crèche
-                                                                            du
-                                                                            bonheur
-                                                                        </p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="mb-0 ">Montpellier (34)</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="mb-0 ">1 350 € par mois</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="mb-0 ">Expérience : Minimum 2 ans</p>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
-                                                                <div class="metters-btns">
-                                                                    <button class="btn btn btn-met">
-                                                                        Modifier
-                                                                    </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 mr-renew">
-                                                                <div>
-                                                                    <div class="renew-top">
-                                                                        <button class="btn btn-outline-renew">Renouveler
-                                                                            l'annonce
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3 mt-2 pl-0">
-                                                                <div class="space-date justify-content-end">
-                                                                    <div class="mt-images-profile">
-                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
-                                                                            <span>60</span>
-                                                                        </div>
-                                                                        <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('images/project/users.svg')}}" class="image-date"><span>120</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="button-voir text-right-voir">
-                                                                    <a href="applicarion-offer.html" class="btn btn-blue w-95">Voir les
-                                                                        postulants
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="job-card manager-job-pd">
-                                                        <div class="row mb-3 ">
-                                                            <div class="col-md-3 pr-0">
-                                                                <ul class="search-image-ul">
-                                                                    <li>
-                                                                        <h5 class="mb-0 job_aux_text fn-19">Auxiliaire
-                                                                            Puéricultrice
-                                                                        </h5>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="manage-crep job_cre_text fn-21">Crèche
-                                                                            du
-                                                                            bonheur
-                                                                        </p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="mb-0 ">Montpellier (34)</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="mb-0 ">1 350 € par mois</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="mb-0 ">Expérience : Minimum 2 ans</p>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
-                                                                <div class="metters-btns">
-                                                                    <button class="btn btn btn-met">
-                                                                        Modifier
-                                                                    </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 mr-renew">
-                                                                <div>
-                                                                    <div class="renew-top">
-                                                                        <button class="btn btn-outline-renew">Renouveler
-                                                                            l'annonce
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3 mt-2 pl-0">
-                                                                <div class="space-date justify-content-end">
-                                                                    <div class="mt-images-profile">
-                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
-                                                                            <span>60</span>
-                                                                        </div>
-                                                                        <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>120</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="button-voir text-right-voir">
-                                                                    <a href="applicarion-offer.html" class="btn btn-blue w-95">Voir les
-                                                                        postulants
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="job-card manager-job-pd">
-                                                        <div class="row mb-3 ">
-                                                            <div class="col-md-3 pr-0">
-                                                                <ul class="search-image-ul">
-                                                                    <li>
-                                                                        <h5 class="mb-0 job_aux_text fn-19">Auxiliaire
-                                                                            Puéricultrice
-                                                                        </h5>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="manage-crep job_cre_text fn-21">Crèche
-                                                                            du
-                                                                            bonheur
-                                                                        </p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="mb-0 ">Montpellier (34)</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="mb-0 ">1 350 € par mois</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p class="mb-0 ">Expérience : Minimum 2 ans</p>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
-                                                                <div class="metters-btns">
-                                                                    <button class="btn btn btn-met">
-                                                                        Modifier
-                                                                    </button>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 mr-renew">
-                                                                <div>
-                                                                    <div class="renew-top">
-                                                                        <button class="btn btn-outline-renew">Renouveler
-                                                                            l'annonce
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3 mt-2 pl-0">
-                                                                <div class="space-date justify-content-end">
-                                                                    <div class="mt-images-profile">
-                                                                        <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
-                                                                            <span>60</span>
-                                                                        </div>
-                                                                        <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                        <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>120</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="button-voir text-right-voir">
-                                                                    <a href="applicarion-offer.html" class="btn btn-blue w-95">Voir les
-                                                                        postulants
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                 @endforeach
                                                 </div>
                                                 <div class="custom-pagination pt-5 pb-3">
                                                     <nav aria-label="Page navigation example">
@@ -1107,8 +576,21 @@
     });
 </script>
 <script>
-    $(function() {
 
+
+$(document).on('click', '#pills-sec-tab', function() {
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    var url = "{{route('profile')}}"
+    $.ajax({
+            url: url,
+            method: 'POST',
+            data: {
+                _token: CSRF_TOKEN,
+            }
+            });
+    });
+
+    $(function() {        
         @if(Session::has('success'))
         toastr.success("{{ Session::get('success') }}");
         @endif
@@ -1125,5 +607,8 @@
         toastr.error("{{ Session::get('error') }}");
         @endif
     });
+
+
 </script>
+
 </html>

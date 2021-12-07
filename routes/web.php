@@ -96,12 +96,15 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
 
     $frontRoute->get('addjob', 'JobController@index')->name('addjob');
     $frontRoute->post('addorupdatejob', 'JobController@addOrUpdateJob')->name('addorupdatejob');
-    $frontRoute->get('job/{id}', 'JobController@show')->name('job');
+    $frontRoute->get('job/show/{id}', 'JobController@show')->name('job.show');
 
     $frontRoute->get('editjob/{id}', 'JobController@editJob')->name('editjob');
     $frontRoute->get('destroy/{id}', 'JobController@destroy')->name('destroy');
     $frontRoute->get('see-applicants', 'JobController@viewApplcants')->name('see-applicants');
     $frontRoute->get('edit-applicants', 'JobController@viewApplcants')->name('edit-applicants');
+
+    
+    $frontRoute->post('getAjaxSkill','HomeController@getAjaxSkill')->name('getAjaxSkill');
 });
 
 Route::middleware(['auth:web'])->group(function ($route) {

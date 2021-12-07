@@ -448,9 +448,9 @@
                                                             <div class="col-md-4 mr-renew">
                                                                 <div>
                                                                     <div class="renew-top">
-                                                                        <button class="btn btn-outline-renew">Renouveler
+                                                                        <a href="{{route('users.restore',$delete->id)}}" class="btn btn-outline-renew">Renouveler
                                                                             l'annonce
-                                                                        </button>
+                                                                        </a>
                                                                     </div>
                                                                 </div>
                                                             </div>

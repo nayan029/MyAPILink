@@ -126,5 +126,10 @@ class JobController extends Controller{
         return view('frontend.job.view-applicants',$data);
     }
 
+    public function restoreUser($id){
+        Job::withTrashed()->find($id)->restore();
+        return back();
+    }
+
 
 }

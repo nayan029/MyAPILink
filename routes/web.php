@@ -25,6 +25,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin'], function ($normalAdm
     $normalAdminRoute->post('forgot-password', 'ForgotPasswordController@store')->name('password.save');
     $normalAdminRoute->get('reset-password/{token}', 'ForgotPasswordController@ResetPasswordForm')->name('reset.password');
     $normalAdminRoute->post('reset-password', 'ForgotPasswordController@ResetPassword')->name('reset.save');
+    
 });
 
 //admin with login route access
@@ -79,6 +80,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('manager', 'ManagerController@index')->name('manager');
     $frontRoute->get('registration', 'RegistrationController@index')->name('registration');
     $frontRoute->post('registration', 'RegistrationController@saveRegistration')->name('registration.save');
+    $frontRoute->get('email-verify/{email}','RegistrationController@getEmailVerify')->name('email.verify');
     $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
     $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');
 
@@ -93,6 +95,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('addjob', 'JobController@index')->name('addjob');
     $frontRoute->post('addorupdatejob', 'JobController@addOrUpdateJob')->name('addorupdatejob');
     $frontRoute->get('job/show/{id}', 'JobController@show')->name('job.show');
+    $frontRoute->get('users/restore/{id}','JobController@restoreUser')->name('users.restore');
 
     $frontRoute->get('editjob/{id}', 'JobController@editJob')->name('editjob');
     $frontRoute->get('destroy/{id}', 'JobController@destroy')->name('destroy');

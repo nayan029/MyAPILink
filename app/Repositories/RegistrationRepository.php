@@ -8,12 +8,15 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use App\Models\EmailTemplate;
 use App\Models\User;
-
+use Exception;
+use Illuminate\Support\Facades\Session;
 
 class RegistrationRepository implements RegistrationRepositoryInterface
 {
     public function createRegistration($request)
     {
+        try {
+
         $data = [
             'first_name' => $request->firstname,
             'last_name' => $request->lastname,
@@ -21,28 +24,42 @@ class RegistrationRepository implements RegistrationRepositoryInterface
             'password' => Hash::make($request->password),
             'phone' => $request->phone
         ];
-
-        $emailtemplate = EmailTemplate::where('id', 2)->first();
-        if($emailtemplate)
-        {
-            $html = $emailtemplate['email'];
-            $html = str_replace('{{LINK}}',"", $html);
+        $user = User::create($data);
+       
+        $emailtemplate = EmailTemplate::where('id', 4)->first();
+        if ($emailtemplate) {
+            $email = $user->email;
+            $html = $emailtemplate->email;
+            $link = route('email.verify',$email);
+            $html = str_replace('{{LINK}}',$link, $html);
             Mail::send(
-                'frontend.email-template.accountcreate',
-                ['emailtemplate' => $html],
+                'frontend.email-template.email-verify',
+                ['email' => $email,'emailtemplate'=>$html],
                 function ($message) use ($request) {
-                    $message->to($request['email']);
+                    $message->to($request->email);
                     $message->subject('Account Created Succesfully');
-                }
-            );
-        }
-      
-        User::create($data);
-        if ($data) {
-            return response()->json([
+                });
+              return response()->json([
                 'status' => true,
-                'msg' => 'Successfully Created'
+                'msg' => 'Successfully sent'
             ]);
+            }
+            } catch (Exception $e) {
+                return back()->withError($e->getMessage());
+            } 
+        
+    }
+
+    public function verifyEmail($email)
+    {
+        $verifyUser = User::where('email', $email)->where('verify_email', 'pending')->first();
+        if ($verifyUser) {
+                $verifyUser->verify_email = 'accept';
+                $verifyUser->update();
+                return true;
+            }else{
+                return false;
         }
+    
     }
 }

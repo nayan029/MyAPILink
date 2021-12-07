@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Interfaces\ApplyJobRepositoryInterface;
 use App\Interfaces\ContactRepositoryInterface;
 use App\Interfaces\EstablishmentRepositoryInterface;
 use App\Interfaces\ForgotPasswordRepositoryInterface;
@@ -14,6 +15,7 @@ use App\Interfaces\RegistrationRepositoryInterface;
 use App\Interfaces\WidgetRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
 use App\Interfaces\JobRepositoryInterface;
+use App\Repositories\ApplyJobRepository;
 use App\Repositories\ContactRepository;
 use App\Repositories\EstablishmentRepository;
 use App\Repositories\ForgotPasswordRepository;
@@ -61,7 +63,7 @@ class RepositoriesServiceProvider extends ServiceProvider
             return $app->make(HomeRepository::class);
         });
 
-        
+
         $this->app->bind(ManagerRepositoryInterface::class, function ($app) {
             return $app->make(ManagerRepository::class);
         });
@@ -82,6 +84,10 @@ class RepositoriesServiceProvider extends ServiceProvider
 
         $this->app->bind(JobRepositoryInterface::class, function ($app) {
             return $app->make(JobRepository::class);
+        });
+
+        $this->app->bind(ApplyJobRepositoryInterface::class, function ($app) {
+            return $app->make(ApplyJobRepository::class);
         });
     }
 

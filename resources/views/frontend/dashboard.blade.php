@@ -3,15 +3,6 @@
 <title>ApiLink | Dashboard</title>
 @endsection
 @section('content')
-@if ($errors->any())
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
 <section class="hero-index" style="background-image: linear-gradient(180deg, rgb(0 0 0 / 70%), rgb(0 0 0 / 70%)), url('frontend/images/index-bg.png');opacity: 0.8;">
     <div class="index-gradient"></div>
     <div class="container">
@@ -185,28 +176,6 @@
     </div>
 
 </section>
-<!-- <section style="background-image: url(images/group7173.png);" class="index-nous-sec">
-        <div class="container">
-            <ul class="index-nous1-ul">
-                <li>
-                    <h4>Nous vous offrons la possibilité de mettre en valeur vos compétences </h4>
-                    <p>et de rentrer en contact
-                        avec des établissements d’accueil du jeune enfant, proche de chez vous.</p>
-                </li>
-                <li>
-                    <h4>Nous vous offrons la possibilité de mettre en valeur vos compétences </h4>
-                    <p>et de rentrer en contact
-                        avec des établissements d’accueil du jeune enfant, proche de chez vous.</p>
-                </li>
-                <li>
-                    <h4>Nous vous offrons la possibilité de mettre en valeur vos compétences </h4>
-                    <p>et de rentrer en contact
-                        avec des établissements d’accueil du jeune enfant, proche de chez vous.</p>
-                </li>
-
-            </ul>
-        </div>
-    </section> -->
 
 <div class="modal fade modal-back-blue" id="Modaljob-desc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog center-modal-dialog modal-xl" role="document">
@@ -276,26 +245,13 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="row justify-content-center">
-                            <div class="col-md-10">
-                                <div class="sub-input">
-                                    <div class="form-group">
-                                        <input value="" class="inputicon2" placeholder="Inscrivez-vous pour des offres spéciales">
-                                        <div class="btn-subscribe">
-                                            <button class="btn btn-blue">S'ABONNER</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 </section>
 
-</div>
-</div>
-</section>
 <!-- header modal1 -->
 
 <div class="modal fade" id="Modallogin2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -420,3 +376,5 @@
 
 </script>
 @endsection
+@endsection
+@include('frontend.layouts.login_script')

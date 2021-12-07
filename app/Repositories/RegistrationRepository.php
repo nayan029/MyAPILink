@@ -15,23 +15,28 @@ class RegistrationRepository implements RegistrationRepositoryInterface
     public function createRegistration($request)
     {
         $data = [
-            'name' => $request->firstname . $request->lastname,
-            'email' => $request->email,
+            'first_name' => $request->firstname,
+            'last_name' => $request->lastname,
+            'email' => $request['email'],
             'password' => Hash::make($request->password),
             'phone' => $request->phone
         ];
 
         $emailtemplate = EmailTemplate::where('id', 2)->first();
-        $html = $emailtemplate->email;
-        $html = str_replace('{{LINK}}',"", $html);
-        Mail::send(
-            'frontend.email-template.accountcreate',
-            ['emailtemplate' => $html],
-            function ($message) use ($request) {
-                $message->to($request->email);
-                $message->subject('Account Created Succesfully');
-            }
-        );
+        if($emailtemplate)
+        {
+            $html = $emailtemplate['email'];
+            $html = str_replace('{{LINK}}',"", $html);
+            Mail::send(
+                'frontend.email-template.accountcreate',
+                ['emailtemplate' => $html],
+                function ($message) use ($request) {
+                    $message->to($request['email']);
+                    $message->subject('Account Created Succesfully');
+                }
+            );
+        }
+      
         User::create($data);
         if ($data) {
             return response()->json([

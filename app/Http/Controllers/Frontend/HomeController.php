@@ -103,7 +103,7 @@ class HomeController extends Controller
         $user=Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password, 'deleted_at' => NULL,'verify_email' =>'accept']);
         if($user) {
 
-            return response()->json(['success' => true, 'message' => 'Connexion réussie','user'=>$user]);
+            return response()->json(['success' => true, 'message' => 'Connexion réussie','user'=>Auth::guard('web')->user()->user_type]);
         }
         return response()->json(['success' => false, 'errors' => array('invalid' => 'Email et le mot de passe sont erronés')]);
     }

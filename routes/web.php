@@ -37,15 +37,11 @@ Route::middleware(['auth:admin'])->group(function ($route) {
 
         //Widget module
         $adminRoute->resource('widget', 'WidgetController');
-        $adminRoute->get('/getdata', 'WidgetController@getAjaxData')->name('widget.data');
+        $adminRoute->get('/filter/getdata', 'WidgetController@getAjaxData')->name('widget.data');
 
         //Skills module
         $adminRoute->resource('skill', 'SkillsController');
         $adminRoute->get('/skilldata', 'SkillsController@getData')->name('skill.data');
-
-
-        $adminRoute->resource('widget', 'WidgetController');
-        $adminRoute->get('/getdata', 'WidgetController@getAjaxData')->name('widget.data');
 
         $adminRoute->resource('partner', 'PartnerController');
         $adminRoute->get('/getpartenerdata', 'PartnerController@getPartnerData')->name('partner.data');
@@ -89,8 +85,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->post('user-auth', 'HomeController@userLogin')->name('user-auth');
     $frontRoute->post('manager/store', 'ManagerController@storeData')->name('manager.store');
     $frontRoute->get('manager', 'ManagerController@index')->name('manager');
-    $frontRoute->get('registration', 'RegistrationController@index')->name('registration');
-    $frontRoute->post('registration', 'RegistrationController@saveRegistration')->name('registration.save');
+    // $frontRoute->get('registration', 'RegistrationController@index')->name('registration');
+    // $frontRoute->post('registration', 'RegistrationController@saveRegistration')->name('registration.save');
     $frontRoute->post('contact-us', 'ContactUsController@storeContact')->name('contact-us');
 
 

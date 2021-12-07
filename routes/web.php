@@ -110,6 +110,10 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->get('manager-profile', 'ManagerController@profile')->name('profile');
         $frontRoute->post('update-profile', 'ManagerController@updateProfile')->name('update-profile');
         $frontRoute->get('account-setting', 'ManagerController@accountSetting')->name('account-setting');
+        $frontRoute->post('update-password', 'ManagerController@updatePassowrd')->name('update-password');
+        $frontRoute->post('update-email', 'ManagerController@updateEmail')->name('update-email');
+        $frontRoute->post('update-notifications-flag', 'ManagerController@updateNotificationsFlag')->name('update-notifications-flag');
+        $frontRoute->post('update-delete-flag', 'ManagerController@updateDeleteAccountFlag')->name('update-delete-flag');
         
         $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
         $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');
@@ -118,6 +122,8 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->post('update-establishment/{id}', 'EstablishmentController@update')->name('update-establishment');
         $frontRoute->post('upload-image', 'EstablishmentController@uploadImage')->name('upload-image');
         $frontRoute->post('remove-image', 'EstablishmentController@removeImage')->name('remove-image');
+
+        $frontRoute->get('mycandidate-profile', 'EstablishmentController@index')->name('mycandidate-profile');
         
     });
 });

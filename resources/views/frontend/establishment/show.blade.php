@@ -1500,9 +1500,7 @@
                                             </div>
                                         </div>
                                         <div class="educational-details">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting
-                                                industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
-                                                dummy text ever since the 1500s</p>
+                                            <p>{{$establishment->our_values}}</p>
                                         </div>
                                         <div class="overflow-auto">
                                             <table class="download-table w-100">
@@ -1515,31 +1513,11 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <a href=""><img src="{{asset('frontend/images/feather-download.svg')}}" class="download-img"></a>
+                                                            <a href="{{URL::to('/')}}/{{$establishment->document}}" download="{{$establishment->document}}"><img src="{{asset('frontend/images/feather-download.svg')}}" class="download-img"></a>
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="d-flex">
-                                                                <img src="{{asset('frontend/images/pdf.svg')}}" width="30px" class="mr-3">
-                                                                <p class="mb-0">Uploaded projet pédagogique</p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <a href=""><img src="{{asset('frontend/images/feather-download.svg')}}" class="download-img"></a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="d-flex">
-                                                                <img src="{{asset('frontend/images/pdf.svg')}}" width="30px" class="mr-3">
-                                                                <p class="mb-0">Uploaded projet pédagogique</p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <a href=""><img src="{{asset('frontend/images/feather-download.svg')}}" class="download-img"></a>
-                                                        </td>
-                                                    </tr>
+                                                    
+                                                
                                                 </tbody>
                                             </table>
                                         </div>

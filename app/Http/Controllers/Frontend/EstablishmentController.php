@@ -28,8 +28,8 @@ class EstablishmentController extends Controller
         'garden' => 'required',
         'applied_pedagogy' => 'required',
         'our_values' => 'required',
-        // 'document' => 'required',
-        // 'more_infomation' => 'required',
+         'document' => 'required|mimes:pdf',
+        'more_infomation' => 'required|mimes:jpeg,png,jpg|max:2048',
 
 
     ];

@@ -106,7 +106,7 @@ class JobController extends Controller{
             $instert->save();
             $id = $instert->id;
             Session::flash('success','Successfully Inserted');   
-            return redirect()->route('job',$id);
+            return redirect()->route('job.show',$id);
         }
         // session()->flash('message-type', 'success');
         // // return redirect()->route('job',$id);
@@ -118,12 +118,17 @@ class JobController extends Controller{
         Session::flash('success','Successfully deleted');   
         return redirect()->route('profile'); 
     }
-
+    
     public function viewApplcants(){
         $data['applicants']=Job::where('user_id',1)->paginate(10);
         $id = Auth::user()->id;
         $data['user']=User::where('id',$id)->paginate(10);
         return view('frontend.job.view-applicants',$data);
+    }
+
+    public function restoreUser($id){
+        Job::withTrashed()->find($id)->restore();
+        return back();
     }
 
 

@@ -44,7 +44,13 @@ class HomeController extends Controller
         $data['newslettervalidator'] = JsValidator::make($this->newsletterValidationRules);
         $data['widget'] = Widget::get();
         $data['skill'] = Skill::get();
+        
         return view('frontend.dashboard', $data);
+    }
+
+    public function getAjaxSkill(Request $request){
+        $data = SkillPosition::findorfail($request->id);
+        return response()->json(["success"=>true,"skillData"=>$data]);
     }
 
 

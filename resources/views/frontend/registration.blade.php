@@ -277,19 +277,25 @@
 <script src="{{asset('frontend/js/owl.carousel.js')}} "></script>
 <script src="{{asset('frontend/js/custom.js')}} "></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+    $(function() {
 
+        @if(Session::has('success'))
+        toastr.success("{{ Session::get('success') }}");
+        @endif
 
+        @if(Session::has('info'))
+        toastr.info("{{ Session::get('info') }}");
+        @endif
 
-<script type="text/javascript">
-    //---------------------
-    // $("#bravo-btn").on('click', function() {
+        @if(Session::has('warning'))
+        toastr.warning("{{ Session::get('warning') }}");
+        @endif
 
-    //     $('#header-Modallogin1').modal('hide');
-    //     $('#bravo').modal('show');
-    //     setTimeout(function() {
-    //         $('body').addClass('modal-open');
-    //     }, 500);
-    // });
+        @if(Session::has('error'))
+        toastr.error("{{ Session::get('error') }}");
+        @endif
+    });
 </script>
 <script>
     $(document).on('click', '#registerUser', function() {

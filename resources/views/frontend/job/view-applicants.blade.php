@@ -46,7 +46,7 @@
                 <div class="col-md-9">
                     <div class="full-divmain">
                         <div class="mb-3 mt-5 profile">
-                            <h4 class="profile-name">Crèche XXXXX</h4>
+                            <h4 class="profile-name"></h4>
                             <p class="mb-0">Type de structure : garderie</p>
                             <p class="">Municipalisé</p>
                         </div>
@@ -61,7 +61,7 @@
                                 <img src="images/home.svg" class="drop-icon">
                                 <div class="applicants-drop bg-dropdown">
                                     <select class="form-control input-drop bg-transparent">
-                                        <option value="{{$key}}">{{$value->city}}</option>       
+                                        <option value="{{$key}}">{{$value->country}}</option>       
                                     </select>
                                 </div>
                             </div>
@@ -71,7 +71,7 @@
                                 <img src="images/group100.svg" class="drop-icon">
                                 <div class="applicants-drop bg-dropdown">
                                     <select class="form-control input-drop bg-transparent">
-                                        <option value="">Île de France</option>
+                                        <option value="{{$key}}">{{$value->city}}</option>
                                     </select>
                                 </div>
                             </div>

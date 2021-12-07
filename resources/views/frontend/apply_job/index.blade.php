@@ -140,11 +140,12 @@
                 <div class="col-md-10 padding-search">
                     <div class="">
                         <div class="card-pd">
-                            <div class="job-card ">
+                            <div class="job-card">
+                                @foreach($list as $data)
                                 <div class="d-flex justify-content-between mb-4 ">
                                     <div>
-                                        <h5 class="mb-0 job_aux_text">Auxiliaire Puéricultrice</h5>
-                                        <p class="mb-0 job_cre_text">Crèche du bonheur</p>
+                                        <h5 class="mb-0 job_aux_text">{{$data->title}}</h5>
+                                        <p class="mb-0 job_cre_text">{{$data->address}}</p>
                                     </div>
 
                                     <div class="d-flex">
@@ -161,10 +162,10 @@
                                                 <p class="mb-0 ">Montpellier (34)</p>
                                             </li>
                                             <li>
-                                                <p class="mb-0 ">1 350 € par mois</p>
+                                                <p class="mb-0 ">{{$data->minimum_gross_salary}}€ par mois</p>
                                             </li>
                                             <li>
-                                                <p class="mb-0 ">Expérience : Minimum 2 ans</p>
+                                                <p class="mb-0 ">Expérience : {{$data->minimum_experience}}</p>
                                             </li>
                                         </ul>
                                     </div>
@@ -175,177 +176,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
                             </div>
-                            <div class="job-card ">
-                                <div class="d-flex justify-content-between mb-4 ">
-                                    <div>
-                                        <h5 class="mb-0 job_aux_text">Auxiliaire Puéricultrice</h5>
-                                        <p class="mb-0 job_cre_text">Crèche du bonheur</p>
-                                    </div>
 
-                                    <div class="d-flex">
-                                        <span class="public-span">Publié il y a 5 jours</span>
-                                        <button class="btn fav-btn" type="button" id="book1"><img src="frontend/images/bookmark.svg " alt="bookmark image " class="b1 bookmark-img"><img src="frontend/images/imgs-svg/book-mark-yellow.svg " alt="bookmark image " class="b2 bookmark-img"></button>
-                                    </div>
-                                </div>
-                                <div class="row mb-3 ">
-                                    <div class="col-md-8 ">
-                                        <ul class="search-image-ul">
-                                            <li>
-                                                <p class="mb-0 ">Montpellier (34)</p>
-                                            </li>
-                                            <li>
-                                                <p class="mb-0 ">1 350 € par mois</p>
-                                            </li>
-                                            <li>
-                                                <p class="mb-0 ">Expérience : Minimum 2 ans</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-4 mt-2 align-items-end d-flex justify-content-end">
-                                        <div class="d-flex">
-                                            <a href="listing-details.html" class="btn btn-viewjob ">Voir l’offre</a>
-                                            <button data-toggle="modal" data-target="#establishment" class="btn btn-apply ">Postuler</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="job-card ">
-                                <div class="d-flex justify-content-between mb-4 ">
-                                    <div>
-                                        <h5 class="mb-0 job_aux_text">Auxiliaire Puéricultrice</h5>
-                                        <p class="mb-0 job_cre_text">Crèche du bonheur</p>
-                                    </div>
-
-                                    <div class="d-flex">
-                                        <span class="public-span">Publié il y a 5 jours</span>
-                                        <button class="btn fav-btn" type="button" id="book1"><img src="frontend/images/bookmark.svg " alt="bookmark image " class="b1 bookmark-img"><img src="frontend/images/imgs-svg/book-mark-yellow.svg " alt="bookmark image " class="b2 bookmark-img"></button>
-                                    </div>
-                                </div>
-                                <div class="row mb-3 ">
-                                    <div class="col-md-8 ">
-                                        <ul class="search-image-ul">
-                                            <li>
-                                                <p class="mb-0 ">Montpellier (34)</p>
-                                            </li>
-                                            <li>
-                                                <p class="mb-0 ">1 350 € par mois</p>
-                                            </li>
-                                            <li>
-                                                <p class="mb-0 ">Expérience : Minimum 2 ans</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-4 mt-2 align-items-end d-flex justify-content-end">
-                                        <div class="d-flex">
-                                            <a href="listing-details.html" class="btn btn-viewjob ">Voir l’offre</a>
-                                            <button data-toggle="modal" data-target="#establishment" class="btn btn-apply ">Postuler</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="job-card ">
-                                <div class="d-flex justify-content-between mb-4 ">
-                                    <div>
-                                        <h5 class="mb-0 job_aux_text">Auxiliaire Puéricultrice</h5>
-                                        <p class="mb-0 job_cre_text">Crèche du bonheur</p>
-                                    </div>
-
-                                    <div class="d-flex">
-                                        <span class="public-span">Publié il y a 5 jours</span>
-                                        <button class="btn fav-btn" type="button" id="book1"><img src="frontend/images/bookmark.svg " alt="bookmark image " class="b1 bookmark-img"><img src="frontend/images/imgs-svg/book-mark-yellow.svg " alt="bookmark image " class="b2 bookmark-img"></button>
-                                    </div>
-                                </div>
-                                <div class="row mb-3 ">
-                                    <div class="col-md-8 ">
-                                        <ul class="search-image-ul">
-                                            <li>
-                                                <p class="mb-0 ">Montpellier (34)</p>
-                                            </li>
-                                            <li>
-                                                <p class="mb-0 ">1 350 € par mois</p>
-                                            </li>
-                                            <li>
-                                                <p class="mb-0 ">Expérience : Minimum 2 ans</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-4 mt-2 align-items-end d-flex justify-content-end">
-                                        <div class="d-flex">
-                                            <a href="listing-details.html" class="btn btn-viewjob ">Voir l’offre</a>
-                                            <button data-toggle="modal" data-target="#establishment" class="btn btn-apply ">Postuler</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="job-card ">
-                                <div class="d-flex justify-content-between mb-4 ">
-                                    <div>
-                                        <h5 class="mb-0 job_aux_text">Auxiliaire Puéricultrice</h5>
-                                        <p class="mb-0 job_cre_text">Crèche du bonheur</p>
-                                    </div>
-
-                                    <div class="d-flex">
-                                        <span class="public-span">Publié il y a 5 jours</span>
-                                        <button class="btn fav-btn" type="button" id="book1"><img src="frontend/images/bookmark.svg " alt="bookmark image " class="b1 bookmark-img"><img src="frontend/images/imgs-svg/book-mark-yellow.svg " alt="bookmark image " class="b2 bookmark-img"></button>
-                                    </div>
-                                </div>
-                                <div class="row mb-3 ">
-                                    <div class="col-md-8 ">
-                                        <ul class="search-image-ul">
-                                            <li>
-                                                <p class="mb-0 ">Montpellier (34)</p>
-                                            </li>
-                                            <li>
-                                                <p class="mb-0 ">1 350 € par mois</p>
-                                            </li>
-                                            <li>
-                                                <p class="mb-0 ">Expérience : Minimum 2 ans</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-4 mt-2 align-items-end d-flex justify-content-end">
-                                        <div class="d-flex">
-                                            <a href="listing-details.html" class="btn btn-viewjob ">Voir l’offre</a>
-                                            <button data-toggle="modal" data-target="#establishment" class="btn btn-apply ">Postuler</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="job-card ">
-                                <div class="d-flex justify-content-between mb-4 ">
-                                    <div>
-                                        <h5 class="mb-0 job_aux_text">Auxiliaire Puéricultrice</h5>
-                                        <p class="mb-0 job_cre_text">Crèche du bonheur</p>
-                                    </div>
-
-                                    <div class="d-flex">
-                                        <span class="public-span">Publié il y a 5 jours</span>
-                                        <button class="btn fav-btn" type="button" id="book1"><img src="frontend/images/bookmark.svg " alt="bookmark image " class="b1 bookmark-img"><img src="frontend/images/imgs-svg/book-mark-yellow.svg " alt="bookmark image " class="b2 bookmark-img"></button>
-                                    </div>
-                                </div>
-                                <div class="row mb-3 ">
-                                    <div class="col-md-8 ">
-                                        <ul class="search-image-ul">
-                                            <li>
-                                                <p class="mb-0 ">Montpellier (34)</p>
-                                            </li>
-                                            <li>
-                                                <p class="mb-0 ">1 350 € par mois</p>
-                                            </li>
-                                            <li>
-                                                <p class="mb-0 ">Expérience : Minimum 2 ans</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-4 mt-2 align-items-end d-flex justify-content-end">
-                                        <div class="d-flex">
-                                            <a href="listing-details.html" class="btn btn-viewjob ">Voir l’offre</a>
-                                            <button data-toggle="modal" data-target="#establishment" class="btn btn-apply ">Postuler</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
 
 
@@ -376,13 +209,9 @@
         </div>
     </div>
 </section>
-<script src="{{asset('frontend/js/jquery.min.js')}} "></script>
-
-<script type="text/javascript ">
-    $(".select2").select2({
-        placeholder: "Select a state"
-    });
-</script>
+@endsection
+@section('script')
+<script type="text/javascript" src="{{asset('frontend/js/bootstrap-multiselect.js')}}"></script>
 <script type="text/javascript">
     $(function() {
         $(".select-multi").multiselect({
@@ -390,69 +219,7 @@
         });
     });
 </script>
-<script>
-    $('.noscarousel').owlCarousel({
-        loop: true,
-        margin: 15,
-        nav: true,
-        navText: ["<img src='images/left-arrow-owl.svg'><span>Previous</span>", "<img src='images/owl-arrow-right.svg'><span>Next</span>"],
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 2
-            },
-            1000: {
-                items: 3
-            }
-        }
-    })
-</script>
-<script>
-    var togglePassword = document.getElementById("toggle-password");
-
-    if (togglePassword) {
-        togglePassword.addEventListener('click', function() {
-            var x = document.getElementById("password");
-            if (x.type === "password") {
-                x.type = "text";
-            } else {
-                x.type = "password";
-            }
-        });
-    }
-
-    // -----------------
-    $(".bravo-btn").on('click', function() {
-        $('#establishment').modal('hide');
-        $('#bravo').modal('show');
-    });
-    $("#cv-btn").on('click', function() {
-        $('#establishment').modal('hide');
-        $('#cv-modal').modal('show');
-        setTimeout(function() {
-            $('body').addClass('modal-open');
-        }, 500);
-
-    });
-    $(".tele-modal-btn").on('click', function() {
-        $('#cv-modal').modal('hide');
-        $('#tele-modal').modal('show');
-        setTimeout(function() {
-            $('body').addClass('modal-open');
-        }, 500);
-
-    });
-    $(".bravo-btn").on('click', function() {
-        $('#tele-modal').modal('hide');
-        $('#bravo').modal('show');
-        setTimeout(function() {
-            $('body').addClass('modal-open');
-        }, 500);
-
-    });
-</script>
-
-
 @endsection
+</body>
+
+</html>

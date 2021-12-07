@@ -88,9 +88,9 @@
                                 @foreach($skill_position as $key=>$sk)
                                 <tr row_id="{{$key+1}}">
                                     <td>{{$key+1}}</td>
-                                    <td class="xyz">{{$sk->position}}<input type="hidden" class="position" name="position[]" value="{{$sk}}"></td>
-                                    <td>{{$sk->title}}<input type="hidden" class="title" name="title[]" value=""></td>
-                                    <td>{{$sk->desc}}<input type="hidden" class="desc" name="descs[]" value="{{$sk->desc}}"></td>
+                                    <td id="position{{$key+1}}">{{$sk->position}}<input type="hidden" class="position" name="position[]" value="{{$sk->position}}"></td>
+                                    <td id="title{{$key+1}}">{{$sk->title}}<input type="hidden" class="title" name="title[]" value="{{$sk->title}}"></td>
+                                    <td id="desc{{$key+1}}">{{$sk->desc}}<input type="hidden" class="desc" name="descs[]" value="{{$sk->desc}}"></td>
                                     <td><a href='javascript:void(0);' class="edit_row" row_id="{{$key+1}}"><i class='fas fa-edit'></i></a>
                                         <a href='javascript:void(0);' class="btn btn-save" data-id="{{$sk->id}}" row_id="{{$key+1}}"><i class="fas fa-save text-success"></i></i></a>
                                         <a href='javascript:void(0);' class="btn btn-cancel" row_id="{{$key+1}}"><i class="fas fa-trash-alt text-danger"></i></i></a>
@@ -173,7 +173,7 @@
         }
 
         function updateSkillPostionData(position, t, d, id) {
-            
+
             var path = 'skill/' + id;
             var fullPath = AppUrl + '/' + path;
             $.ajax({
@@ -182,9 +182,9 @@
                 data: {
                     _token: '{{ csrf_token() }}',
                     id: id,
-                    p : p,
-                    t : t,
-                    d : d,
+                    p: p,
+                    t: t,
+                    d: d,
                 },
                 success: function(response) {
                     if (response.status == true) {
@@ -234,15 +234,17 @@
             var tbl_row = $(this).closest('tr');
             var row_id = tbl_row.attr('row_id');
 
-            var pos = tbl_row.find("td:eq(1)").text(p);
-            var tit = tbl_row.find("td:eq(2)").text(t);
-            var des = tbl_row.find("td:eq(3)").text(d);
+            var position = $('#position' + row_id).html(p + '<input type="hidden"  class="position" name="position[]" value="' + p + '">');
 
-            var position = $('.position').val(p);
+            var title = $('#title' + row_id).html(t + '<input type="hidden"  class="title" name="title[]" value="' + t + '">');
+
+            var description = $('#desc' + row_id).html(d + '<input type="hidden"  class="desc" name="descs[]" value="' + d + '">');
+
+            /*  var position = $('.position').val(p);
             var title = $('.title').val(t);
-            var description = $('.desc').val(d);
+            var description = $('.desc').val(d);*/
             var id = $(this).attr("data-id");
-            updateSkillPostionData(position, title, description, id);   
+            updateSkillPostionData(position, title, description, id);
 
         });
         $(document).on('click', ".removeRow", function() {

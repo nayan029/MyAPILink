@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ContactController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -50,9 +51,20 @@ Route::middleware(['auth:admin'])->group(function ($route) {
         $adminRoute->get('/getpartenerdata', 'PartnerController@getPartnerData')->name('partner.data');
 
 
-        $adminRoute->get('contact', 'ContactController@index')->name('contact.data');
+        $adminRoute->get('contact-us', 'ContactController@index')->name('contact.index');
+        $adminRoute->get('contact-us-data', 'ContactController@getContactUsData')->name('contact.data');
+       $adminRoute->DELETE('contact/destroy','ContactController@destroy')->name('contact/destroy');
+
         $adminRoute->get('contact/{id}/edit', 'ContactController@edit')->name('contact.edit');
         $adminRoute->post('contact/update/{id}', 'ContactController@update')->name('contact.update');
+
+        //User module route
+        $adminRoute->resource('user', 'UserController');
+        $adminRoute->get('/getUserData', 'UserController@getAjaxData');
+
+        //Job module route
+        $adminRoute->resource('job', 'JobController');
+        $adminRoute->get('/getdata', 'JobController@getAjaxData')->name('job.data');
     });
 });
 
@@ -77,8 +89,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->post('user-auth', 'HomeController@userLogin')->name('user-auth');
     $frontRoute->post('manager/store', 'ManagerController@storeData')->name('manager.store');
     $frontRoute->get('manager', 'ManagerController@index')->name('manager');
-    $frontRoute->get('registration', 'RegistrationController@index')->name('registration');
-    $frontRoute->post('registration', 'RegistrationController@saveRegistration')->name('registration.save');
+    // $frontRoute->get('registration', 'RegistrationController@index')->name('registration');
+    // $frontRoute->post('registration', 'RegistrationController@saveRegistration')->name('registration.save');
     $frontRoute->post('contact-us', 'ContactUsController@storeContact')->name('contact-us');
 
 
@@ -86,7 +98,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->post('addorupdatejob', 'JobController@addOrUpdateJob')->name('addorupdatejob');
     $frontRoute->get('job/{id}', 'JobController@show')->name('job');
 
-    $frontRoute->get('editjob', 'JobController@editJob')->name('editjob');
+    $frontRoute->get('editjob/{id}', 'JobController@editJob')->name('editjob');
+    $frontRoute->get('destroy/{id}', 'JobController@destroy')->name('destroy');
     $frontRoute->get('see-applicants', 'JobController@viewApplcants')->name('see-applicants');
     $frontRoute->get('edit-applicants', 'JobController@viewApplcants')->name('edit-applicants');
 });

@@ -145,17 +145,18 @@
 
 </div>
 </div>
-</body>
- @yield('page-js')
+
+
 
 <script src="{{asset('frontend/js/jquery.min.js')}} "></script>
 <script src="{{asset('frontend/js/popper.min.js')}} "></script>
 <script src="{{asset('frontend/js/bootstrap.min.js ')}}"></script>
-<script src="{{asset('frontend/js/select2.min.js')}} "></script>
 <script src="{{asset('frontend/js/jquery.magnific-popup.min.js')}} "></script>
 <script src="{{asset('frontend/js/owl.carousel.js')}} "></script>
 <script src="{{asset('frontend/js/custom.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="{{asset('frontend/js/select2.min.js')}} "></script>
+
 <script>
     $(".select2 ").select2();
 </script>
@@ -201,5 +202,38 @@
     });
 </script>
 
+<script>
+    $(document).ready(function() {
 
+        $("#contact-us").on('submit', function(e) {
+            e.preventDefault();
+            var url = '{{ route("contact-us") }}';
+
+            $.ajax({
+                url: url,
+                method: $(this).attr('method'),
+                data: new FormData(this),
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                beforeSend: function() {
+                    $(document).find('span.error-text').text('');
+                },
+                success: function(response) {
+                    if (response.status == false) {
+                        $.each(response.error, function(prefix, val) {
+                            $('span.' + prefix + '_error').text(val[0]);
+                        });
+                    } else {
+                        $('#contact-us')[0].reset();
+                        toastr.success(response.message);
+                        $('#contact').modal('hide');
+                    }
+                }
+            });
+        });
+    });
+</script>
+@yield('script')
+</body>
 </html>

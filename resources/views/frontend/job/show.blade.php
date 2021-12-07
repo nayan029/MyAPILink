@@ -54,7 +54,7 @@
                                         <ul class="search-image-ul">
 
                                             <li>
-                                                <p class="mb-0 ">{{$show->minimum_gross_salary}}</p>
+                                                <p class="mb-0 ">{{$show->minimum_gross_salary}} per month</p>
                                             </li>
                                             <li>
                                                 <p class="mb-0 ">Expérience : {{$show->minimum_experience}}</p>
@@ -120,7 +120,7 @@
                                 </div>
 
                                 <div class="d-flex justify-content-end listing-side-pd pb-4 offer-prs ">
-                                    <a href="{{route('editjob')}}" class="btn btn-yellow ">Modifier mon offre</a>
+                                    <a href="{{route('editjob',$show->id)}}" class="btn btn-yellow ">Modifier mon offre</a>
                                 </div>
                             </div>
                         </div>

@@ -291,9 +291,9 @@
                                                                     <button class="btn btn-met">
                                                                         Mettre en pause
                                                                     </button>
-                                                                    <a href="{{url('editjob?id='.$value->id)}}" class="btn btn btn-met">
+                                                                    <a href="{{route('editjob',$value->id)}}" class="btn btn btn-met">
                                                                         Modifier</a>
-                                                                    <a class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                                    <a href="{{route('destroy',$value->id)}}" class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mt-2">

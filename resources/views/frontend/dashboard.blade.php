@@ -3,15 +3,6 @@
 <title>ApiLink | Dashboard</title>
 @endsection
 @section('content')
-  @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
 <section class="hero-index" style="background-image: linear-gradient(180deg, rgb(0 0 0 / 70%), rgb(0 0 0 / 70%)), url('frontend/images/index-bg.png');opacity: 0.8;">
     <div class="index-gradient"></div>
     <div class="container">
@@ -144,57 +135,28 @@
                 </div>
             </div>
             <div class="row les-professional-sec">
-                <div class="col-md-4">
-                    <div class="card sr-card">
-                        <img class="card-img-top nos_card_image" src="{{asset('frontend/images/card-1img.png')}}" alt="man-writing">
-                        <div class="card-body sheight">
-                            <a href="#" data-toggle="modal" data-target="#Modaljob-desc">
-                                <h6 class="card-title color1">COMPÉTENCES PLURIDISCIPLINAIRES</h6>
-                                <ul class="les-professional-ul">
-                                    <li>- Directrice - Directeur de crèche </li>
-                                    <li>- Directrice - Directeur adjoint</li>
-                                    <li>- Coordinatrice - coordinateur de crèche</li>
-                                    <li>- Auxiliaire de puériculture - Auxiliaire de crèche </li>
-                                    <li>- Auxiliaire petite enfance (APE)</li>
-                                    <li> - Educateur de jeunes enfants (EJE) Puéricultrice
-                                    </li>
-                                </ul>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card sr-card">
-                        <img class="card-img-top nos_card_image" src="{{asset('frontend/images/card-2img.png')}}" alt="man-writing">
-                        <div class="card-body sheight">
-                            <a href="#">
-                                <h6 class="card-title color1">PROFESSIONNELS DE SANTÉ</h6>
-                                <ul class="les-professional-ul">
-                                    <li>- Pédiatre </li>
-                                    <li>- Psychologue </li>
-                                    <li>- Psychométricien </li>
-                                    <li>- Infirmière - infirmier</li>
 
-                                </ul>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                @foreach($skill as $sk)
                 <div class="col-md-4">
                     <div class="card sr-card">
-                        <img class="card-img-top nos_card_image" src="{{asset('frontend/images/card1-new.png')}}" alt="man-writing">
+
+                        <img class="card-img-top nos_card_image" src="{{asset($sk->image)}}" alt="man-writing">
                         <div class="card-body sheight">
-                            <a href="#">
-                                <h6 class="card-title color1">AGENTS TECHNIQUE</h6>
+                            <a href="javascript:void(0);" class="btn-show" data-id="{{$sk->id}}">
+                                <h6 class="card-title color1m main_title">{{$sk->name}}</h6>
+                                @if($sk->positions)
+                                @foreach($sk->positions as $position)
                                 <ul class="les-professional-ul">
-                                    <li>- Cuisinière - Cuisinier </li>
-                                    <li>- Agents d'entretien </li>
-                                    <li>- Lingère, blanchisserie, couture</li>
+                                    <li>- {{$position->position}} - {{$position->title}}</li>
                                 </ul>
+                                @endforeach
+                                @endif
                             </a>
                         </div>
+
                     </div>
                 </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -214,30 +176,47 @@
     </div>
 
 </section>
-<!-- <section style="background-image: url(images/group7173.png);" class="index-nous-sec">
-        <div class="container">
-            <ul class="index-nous1-ul">
-                <li>
-                    <h4>Nous vous offrons la possibilité de mettre en valeur vos compétences </h4>
-                    <p>et de rentrer en contact
-                        avec des établissements d’accueil du jeune enfant, proche de chez vous.</p>
-                </li>
-                <li>
-                    <h4>Nous vous offrons la possibilité de mettre en valeur vos compétences </h4>
-                    <p>et de rentrer en contact
-                        avec des établissements d’accueil du jeune enfant, proche de chez vous.</p>
-                </li>
-                <li>
-                    <h4>Nous vous offrons la possibilité de mettre en valeur vos compétences </h4>
-                    <p>et de rentrer en contact
-                        avec des établissements d’accueil du jeune enfant, proche de chez vous.</p>
-                </li>
 
-            </ul>
+<div class="modal fade modal-back-blue" id="Modaljob-desc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog center-modal-dialog modal-xl" role="document">
+        <div class="modal-content m-32">
+            <div class="modal-header resume_header border-0">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><img src="images/material-close.svg"></span>
+                </button>
+            </div>
+            <div class="modal-body resume_modal">
+                <div class="candidate_modal">
+                    <h4 class="mb-3 main_title">Directrice - Directeur de crèche</h4>
+                    <div class="candidate_modal_title">
+                        <h5 class="candidate_modal_text pb-2">Description</h5>
+                        <div class="candidate_modal_desc">
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                            </p>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+                                make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+                                containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+                                make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+                                containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+                                make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+                                containing Lorem Ipsum passages, and more recently with desktop publishing software
+                            </p>
+                        </div>
+                        <div class="text-center pt-4 pb-3">
+                            <button class="btn btn-blue btn-skyblue ml-auto" type="button" id="new-industry">Je crée
+                                mon
+                                profil
+                                professionnel pour ce poste</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section> -->
-
-
+    </div>
+</div>
+<!--end job-desc modal  -->
 
 
 <section class="subscribe_pd index-nous-sec" style="background-image: url('frontend/images/group7173.png');">
@@ -263,28 +242,25 @@
             <h1 class="subscribe_h1 mb-3">Abonnez-vous à notre newsletter</h1>
             <!-- <p class="subscribe_p pb-4">Annoncez vos offres d'emploi à des millions d'utilisateurs mensuels <br>et
                     recherchez 15,8 millions de CV dans notre base de données.</p> -->
-                    <div class="row justify-content-center">
-                        <div class="col-md-10">
-                            <div class="sub-input">
-                                <form id="newsletterform" method="POST" action="{{route('addnewsletter')}}">
-                                    @csrf
-                                    <div class="form-group">
-                                        <input type="text" name="email" class="inputicon2" placeholder="Inscrivez-vous pour des offres spéciales">
-                                        <div class="btn-subscribe">
-                                            <button type="submit"  class="btn btn-blue">S'ABONNER</button>
-                                        </div>
-                                    </div>
-                                </form>
-            
-        </section>
-  
-        
-@endsection
-
-
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="sub-input">
+                        <form id="newsletterform" method="POST" action="{{route('addnewsletter')}}">
+                            @csrf
+                            <div class="form-group">
+                                <input type="text" name="email" class="inputicon2" placeholder="Inscrivez-vous pour des offres spéciales">
+                                <div class="btn-subscribe">
+                                    <button type="submit" class="btn btn-blue">S'ABONNER</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
+
 <!-- header modal1 -->
 
 <div class="modal fade" id="Modallogin2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -318,7 +294,7 @@
                                 <img src="{{asset('frontend/images/about/eye.svg')}}" alt="" class="sr-eye" id="toggle-password">
                                 <span class="password-error text-danger">@error ('password') {{$message}} @enderror</span>
                                 <span class="invalid-error text-danger">@error ('invalid') {{$message}} @enderror</span>
-                                
+
                             </div>
                         </div>
 
@@ -337,7 +313,5 @@
         </div>
     </div>
 </div>
-@section('page-js')
-      {!! $newslettervalidator->selector('#newsletterform') !!}
 @endsection
 @include('frontend.layouts.login_script')

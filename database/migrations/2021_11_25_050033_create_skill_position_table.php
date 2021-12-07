@@ -15,11 +15,10 @@ class CreateSkillPositionTable extends Migration
     {
         Schema::create('skill_position', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('skills_id')->unsigned()->index()->nullable();
+            $table->bigInteger('skill_id')->index()->nullable();
             $table->string('position')->nullable();
             $table->string('title')->nullable();
             $table->longText('description')->nullable();
-            $table->foreign('skills_id')->references('id')->on('skills')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

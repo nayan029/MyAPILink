@@ -15,6 +15,7 @@
     
 
     function userLogin() {
+       
         $('.email-error').text('');
         $('.password-error').text('');
         $('.invalid-error').text('');
@@ -28,13 +29,16 @@
             success: function(response) {
                 console.log(response.success);
                 if (response.success == true) {
-                   
+                    
                     toastr.success(response.message);
+                  
                     if(response.user==2){
+                     
                     window.location.href ='{{ route("profile") }}';
                     }else{
                     window.location.href ='{{ route("mycandidate-profile") }}';
                     }
+                    
                     $('#loginbtn').prop('disabled', false);
                    
                 } else {

@@ -258,7 +258,7 @@
     <div class="modal-dialog login-modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body login-modal-body">
-                <form id="manager-login" method="post" action="#">
+                <form id="manager-login" method="post">
                     @csrf
                     <div class="">
                         <div class="lmodal-logo mb-20">
@@ -293,7 +293,7 @@
                             <a href="" class="forgot-link">J'ai perdu mon mot de passe?</a>
                         </div>
                         <div class="col-md-12 text-center res-dec mb-3 ">
-                            <button id="loginbtn" onclick="userLogin();" type="button" class="btn btn-blue w-100">Connexion</button>
+                            <button id="loginbtn" type="submit" class="btn btn-blue w-100">Connexion</button>
                         </div>
                         <div class=" meconnecter">
                             <p class="proxima-nove">Pas encore membre?<a href="#" class=""> Inscrivez-vous</a></p>
@@ -307,40 +307,9 @@
 @endsection
 @section('script')
 {!! $newslettervalidator->selector('#newsletterform') !!}
+@include('frontend.layouts.login_script')
 <script>
-    function userLogin() {
-        $('.email-error').text('');
-        $('.password-error').text('');
-        $('.invalid-error').text('');
-
-        $('#loginbtn').prop('disabled', true);
-
-        $.ajax({
-            url: '{{ route("user-auth") }}',
-            method: 'POST',
-            data: $('#manager-login').serialize(),
-            success: function(response) {
-                console.log(response.success);
-                if (response.success == true) {
-
-                    toastr.success(response.message);
-
-                    $('#loginbtn').prop('disabled', false);
-                    if (response.user == 2) {
-                        window.location.href = '{{ route("profile") }}';
-                    } else {
-                        window.location.href = '{{ route("mycandidate-profile") }}';
-                    }
-                } else {
-                    $('.email-error').text(response.errors.email);
-                    $('.password-error').text(response.errors.password);
-                    $('.invalid-error').text(response.errors.invalid);
-
-                    $('#loginbtn').prop('disabled', false);
-                }
-            }
-        });
-    }
+     
     $(document).on('click', '.btn-show', function() {
         var id = $(this).attr("data-id");
         var url = "{{route('getAjaxSkill')}}";

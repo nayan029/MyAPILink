@@ -156,7 +156,7 @@
 <script src="{{asset('frontend/js/bootstrap.min.js ')}}"></script>
 <script src="{{asset('frontend/js/jquery.magnific-popup.min.js')}} "></script>
 <script src="{{asset('frontend/js/owl.carousel.js')}} "></script>
-<script src="{{asset('frontend/js/custom.js')}}"></script>
+<!-- <script src="{{asset('frontend/js/custom.js')}}"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="{{asset('frontend/js/select2.min.js')}} "></script>
 

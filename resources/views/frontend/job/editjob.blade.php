@@ -57,12 +57,10 @@
                                                     <div class="form-group">
                                                         <label class="publish-smalllabel">Ville<span class="text-danger">*</span></label>
                                                         <select name="city" class="cus-drop select2 form-publish" style="width: 100%;">
+                                                        @if($jobDetails->city)
                                                             <option value=""></option>
-                                                            <option value="{{$jobDetails->city}}">Micro-crèche</option>
-                                                            <option value="Crèche privée d’entreprise ou
-                                                                inter-entreprises">Crèche privée d’entreprise ou
-                                                                inter-entreprises
-                                                            </option>
+                                                            <option value="{{$jobDetails->city}}" selected>{{$jobDetails->city}}</option>
+                                                            @endif
                                                         </select>
                                                     </div>
 
@@ -71,9 +69,10 @@
                                                     <div class="form-group  mb-4">
                                                         <label class="publish-smalllabel">Pays<span class="text-danger">*</span></label>
                                                         <select name="country" class="cus-drop select2 form-publish" style="width: 100%;">
+                                                        @if($jobDetails->country)
                                                             <option value=""></option>
-                                                            <option value="US">US</option>
-                                                            <option value="Franch">Franch</option>
+                                                            <option value="{{$jobDetails->country}}" selected>{{$jobDetails->country}}</option>
+                                                            @endif  
                                                         </select>
                                                     </div>
                                                 </div>
@@ -81,12 +80,10 @@
                                                     <div class="form-group  mb-4 ">
                                                         <label class="publish-labeldark">Type de contrat proposé<span class="text-danger">*</span></label>
                                                         <select name="type_of_contract" class="cus-drop select2 form-publish" style="width: 100%;">
-                                                            <option value="CDI">CDI</option>
-                                                            <option value="CDD">CDD</option>
-                                                            <option value="Stage">Stage</option>
-                                                            <option value="Alternance">Alternance</option>
-                                                            <option value="Freelance / Indépendant">Freelance / Indépendant</option>
-                                                            <option value="remplaçements">remplaçements</option>
+                                                        @if($jobDetails->type_of_contract)
+                                                            <option value="{{$jobDetails->type_of_contract}}" selected>{{$jobDetails->type_of_contract}}</option>
+
+                                                            @endif  
                                                         </select>
                                                     </div>
                                                 </div>
@@ -102,11 +99,11 @@
                                                 <div class="col-md-6 pb-2">
                                                     <h5 class="publish-labeldark">Type d'emploi<span class="text-danger">*</span></h5>
                                                     <div class="custom-control custom-checkbox profile-check ">
-                                                        <input type="checkbox" name="type_of_employment[]"  class="custom-control-input" value="{{$jobDetails->type_of_employment}}" id="Temps plein">
+                                                        <input type="checkbox" name="type_of_employment[]"  class="custom-control-input" value="Part-time" {{  ($jobDetails->type_of_employment == 'Part-time'? ' checked' : '') }} id="Temps plein">
                                                         <label class="custom-control-label pro-check publish-check" for="Temps plein">Temps plein</label>
                                                     </div>
                                                     <div class="custom-control custom-checkbox profile-check">
-                                                        <input type="checkbox" name="type_of_employment[]" class="custom-control-input" value="{{$jobDetails->type_of_employment}}" id="Temps partiel">
+                                                        <input type="checkbox" name="type_of_employment[]" class="custom-control-input" value="Full-time" {{  ($jobDetails->type_of_employment == 'Full-time'? ' checked' : '') }} id="Temps partiel">
                                                         <label class="custom-control-label pro-check publish-check" for="Temps partiel">Temps partiel</label>
                                                     </div>
 
@@ -172,17 +169,17 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="custom-control custom-checkbox profile-check ">
-                                                        <input name="email_regarding" type="checkbox" class="custom-control-input " id="check1">
+                                                        <input name="email_regarding" type="checkbox" class="custom-control-input" value="email_regarding" id="check1" {{  ($jobDetails->deadline_for_receipt_of_applications == 'email_regarding'? ' checked' : '') }}>
                                                         <label class="custom-control-label pro-check publish-check" for="check1">J'autorise les candidats à me contacter par
                                                             mail au sujet de leur candidature<span class="text-danger">*</span></label>
                                                     </div>
                                                     <div class="custom-control custom-checkbox profile-check ">
-                                                        <input name="phone_regarding" type="checkbox" class="custom-control-input " id="check2">
+                                                        <input name="phone_regarding" type="checkbox" class="custom-control-input " value="phone_regarding" id="check2" {{  ($jobDetails->deadline_for_receipt_of_applications == 'phone_regarding'? ' checked' : '') }}>
                                                         <label class="custom-control-label pro-check publish-check" for="check2">J'autorise les candidats à me contacter par
                                                             téléphone au sujet de leur candidature</label>
                                                     </div>
                                                     <div class="custom-control custom-checkbox profile-check ">
-                                                        <input name="apilink_regarding" type="checkbox" class="custom-control-input " id="check3">
+                                                        <input name="apilink_regarding" type="checkbox" class="custom-control-input" value="apilink_regarding" id="check3" {{  ($jobDetails->deadline_for_receipt_of_applications == 'apilink_regarding'? ' checked' : '') }}>
                                                         <label class="custom-control-label pro-check publish-check" for="check3">Je souhaite recevoir les candidatures
                                                             uniquement via Apilink</label>
                                                     </div>

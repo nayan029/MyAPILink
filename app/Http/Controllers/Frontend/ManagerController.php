@@ -54,7 +54,6 @@ class ManagerController extends Controller
             'telephone' => 'required|numeric|digits:10',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|min:6',
-            'radio' => 'required',
             'represent' => 'required',
             'organization' => 'required',
             'number_of_establishments' => 'required',

@@ -76,6 +76,7 @@ class JobController extends Controller
             'user_id' => $id,
             'title' => request('title'),
             'address' => request('address'),
+            
             'zip_code' => request('zip_code'),
             'city' => request('city'),
             'country' => request('country'),

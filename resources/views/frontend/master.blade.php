@@ -11,4 +11,3 @@
         <!-- modal  -->
         <!-- end contact modal -->
         @include('frontend.layouts.footer')
-        @yield('script')

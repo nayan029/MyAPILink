@@ -74,7 +74,7 @@
                                     <div class="col-md-6 mb-2">
                                         <div class="form-group">
                                             <label class="">Téléphone*</label>
-                                            <input id="telephone" type="text" name="telephone" class="form-control form-add-establish pl-23">
+                                            <input id="telephone" type="text" name="telephone" onkeypress='return isNumber(event)' class="form-control form-add-establish pl-23">
                                             <span class="telephone-error text-danger">@error ('telephone') {{$message}} @enderror</span>
 
                                         </div>
@@ -256,7 +256,7 @@
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label class="">Code postal</label>
-                                            <input id="postal_code" type="text" name="postal_code" class="form-control form-add-establish pl-23">
+                                            <input id="postal_code" type="text" name="postal_code" onkeypress='return isNumber(event)' class="form-control form-add-establish pl-23">
                                             <span class="postal-error text-danger">@error ('postal_code') {{$message}} @enderror</span>
 
                                         </div>
@@ -386,6 +386,15 @@
     });
 </script>
 <script>
+
+function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
     $("#ustep1 .suiv-btn").on('click', function() {
         $("#ustep1").hide();
         $("#ustep2").show();
@@ -467,8 +476,7 @@
 
     $('.register-yellow').on('click', function(event) {
         event.preventDefault();
-        $(this).text('En traitement...');
-        // $(this).prop('disabled', true);
+       
         var url = '{{ route("manager.store") }}';
 
         $.ajax({
@@ -485,6 +493,8 @@
                         $('#regform')[0].reset();
                     }, 2000);
                     $(this).text("S'inscrire");
+                    $(this).text('En traitement...');
+                    $(this).prop('disabled', true);
                     $(this).prop('disabled', false);
 
                 } else {

@@ -23,6 +23,7 @@ class SkillRepository implements SkillRepositoryInterface
     {
         return SkillPosition::findorfail($id);
     }
+
     public function storeSkill(Request $request)
     {
 
@@ -38,6 +39,7 @@ class SkillRepository implements SkillRepositoryInterface
             "image" => $image,
         ];
         $skill = Skill::create($skillsInsertArr);
+
         $n = count($data['position']);
 
         for ($i = 0; $i < $n; $i++) {
@@ -55,9 +57,8 @@ class SkillRepository implements SkillRepositoryInterface
     }
     public function updateSkill(Request $request, $id)
     {
-       
+
         $data = $request->all();
-       
         $skill = $this->getSingleSkill($id);
         $image = "";
         if ($request->hasFile('image')) {
@@ -68,11 +69,11 @@ class SkillRepository implements SkillRepositoryInterface
         $data['image'] = $image;
         $skill->update($data);
         // return $skill;
-
-
-        $position = $this->getSKillPosition($id);
         
-        $position->delete();
+
+
+        // $position = $this->getSKillPosition($id);
+        $position = SkillPosition::where('skill_id',$id)->delete();
         $n = count($data['position']);
         for ($i = 0; $i < $n; $i++) {
             $savedata = [
@@ -80,8 +81,9 @@ class SkillRepository implements SkillRepositoryInterface
                 'position' => $data['position'][$i],
                 'title' => $data['title'][$i],
                 'desc' => $data['descs'][$i],
-            ];
-            $position->insert($savedata);
+            ];  
+            SkillPosition::create($savedata);
+
         }
         return true;
     }
@@ -136,5 +138,13 @@ class SkillRepository implements SkillRepositoryInterface
             ];
         }
         return $json;
+    }
+
+    public function destroyPos(Request $request)
+    {   
+        $data =  SkillPosition::findorfail($request->deleteId);
+        $data->delete();
+        return true;
+       
     }
 }

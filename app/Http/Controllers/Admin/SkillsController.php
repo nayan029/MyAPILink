@@ -91,7 +91,7 @@ class SkillsController extends Controller
     public function edit($id)
     {
         $data['validator'] = JsValidator::make($this->updatevalidationrules);
-        $data['skill_position'] = SkillPosition::where('skill_id',$id)->where('deleted_at',NULL)->get();
+        $data['skill_position'] = SkillPosition::where('skill_id', $id)->where('deleted_at', NULL)->get();
         $data['skill'] = $this->SkillRepository->getSingleSkill($id);
         // dd( $data['skill_position']);
         return view('backend.skills.edit', $data);
@@ -105,8 +105,7 @@ class SkillsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   
-        
+    {
         $validation = Validator::make($request->all(), $this->updatevalidationrules);
         if ($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors());
@@ -131,6 +130,14 @@ class SkillsController extends Controller
         if ($deleteskill) {
             Session::flash('success', 'Successfully deleted');
             return redirect()->route('skill.index');
+        }
+    }
+
+    public function destroyPosition(Request $request)
+    {
+        $deletePosition = $this->SkillRepository->destroyPos($request);
+        if ($deletePosition) {
+            return response()->json(["success" => true, "skillData" => $deletePosition]);   
         }
     }
 

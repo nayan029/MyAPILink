@@ -25,7 +25,6 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin'], function ($normalAdm
     $normalAdminRoute->post('forgot-password', 'ForgotPasswordController@store')->name('password.save');
     $normalAdminRoute->get('reset-password/{token}', 'ForgotPasswordController@ResetPasswordForm')->name('reset.password');
     $normalAdminRoute->post('reset-password', 'ForgotPasswordController@ResetPassword')->name('reset.save');
-    
 });
 
 //admin with login route access
@@ -70,7 +69,7 @@ Route::middleware(['auth:admin'])->group(function ($route) {
 Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontRoute) {
 
     $frontRoute->get('/', 'HomeController@userDashboard')->name('dashboard');
-    
+
     $frontRoute->post('addnewsletter', 'HomeController@addNewsletter')->name('addnewsletter');
 
     $frontRoute->post('manager/store', 'ManagerController@storeData')->name('manager.store');
@@ -80,7 +79,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('manager', 'ManagerController@index')->name('manager');
     $frontRoute->get('registration', 'RegistrationController@index')->name('registration');
     $frontRoute->post('registration', 'RegistrationController@saveRegistration')->name('registration.save');
-    $frontRoute->get('email-verify/{email}','RegistrationController@getEmailVerify')->name('email.verify');
+    $frontRoute->get('email-verify/{email}', 'RegistrationController@getEmailVerify')->name('email.verify');
     $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
     $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');
 
@@ -95,15 +94,15 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('addjob', 'JobController@index')->name('addjob');
     $frontRoute->post('addorupdatejob', 'JobController@addOrUpdateJob')->name('addorupdatejob');
     $frontRoute->get('job/show/{id}', 'JobController@show')->name('job.show');
-    $frontRoute->get('users/restore/{id}','JobController@restoreUser')->name('users.restore');
+    $frontRoute->get('users/restore/{id}', 'JobController@restoreUser')->name('users.restore');
 
     $frontRoute->get('editjob/{id}', 'JobController@editJob')->name('editjob');
     $frontRoute->get('destroy/{id}', 'JobController@destroy')->name('destroy');
     $frontRoute->get('see-applicants', 'JobController@viewApplcants')->name('see-applicants');
     $frontRoute->get('edit-applicants', 'JobController@viewApplcants')->name('edit-applicants');
 
-    
-    $frontRoute->post('getAjaxSkill','HomeController@getAjaxSkill')->name('getAjaxSkill');
+
+    $frontRoute->post('getAjaxSkill', 'HomeController@getAjaxSkill')->name('getAjaxSkill');
 });
 
 Route::middleware(['auth:web'])->group(function ($route) {
@@ -127,8 +126,10 @@ Route::middleware(['auth:web'])->group(function ($route) {
 
         $frontRoute->get('mycandidate-profile', 'CandidateController@index')->name('mycandidate-profile');
         $frontRoute->get('candidate-profile-edit', 'CandidateController@edit')->name('candidate-profile-edit');
-        
+
         $frontRoute->post('user/logout', 'HomeController@logout')->name('user-logout');
         $frontRoute->get('applyJob', 'SearchAdController@index')->name('applyJob');
+        $frontRoute->post('store-jobType', 'SearchAdController@store')->name('store-jobType');
+        $frontRoute->post('getDocumentName', 'SearchAdController@getDocumentName')->name('getDocumentName');
     });
 });

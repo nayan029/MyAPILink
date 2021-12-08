@@ -22,7 +22,8 @@ class RegistrationRepository implements RegistrationRepositoryInterface
             'last_name' => $request->lastname,
             'email' => $request['email'],
             'password' => Hash::make($request->password),
-            'phone' => $request->phone
+            'phone' => $request->phone,
+            'user_type' =>1
         ];
         $user = User::create($data);
        

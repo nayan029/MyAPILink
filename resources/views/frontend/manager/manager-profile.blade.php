@@ -1,34 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <title>MyApi Link</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="{{asset('frontend/images/favicon.ico" type="image/png')}}" sizes="16x16">
-    <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="css/magnific-popup.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/owl.carousel.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/select2.min.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <style>
-        .navbar-collapse {
-            display: none !important;
-        }
+@extends('frontend.master')
+@section('title')
+<title>ApiLink |</title>
+@endsection
+@section('content')
 
-        .navbar-expand-lg .navbar-collapse {
-            display: none !important;
-        }
-    </style>
-
-</head>
-
-<body>
-
-    <div id="after-header"></div>
 
     <section>
         <div class="atext-pos pt-90px">
@@ -517,18 +493,8 @@
 
 
     </section>
-</body>
-
-<script src="{{asset('frontend/js/jquery.min.js')}}"></script>
-<script src="{{asset('frontend/js/jquery-ui.min.js')}}"></script>
-<script src="{{asset('frontend/js/popper.min.js ')}}"></script>
-<script type="text/javascript" src="js/bootstrap-multiselect.js')}}"></script>
-<script src="{{asset('frontend/js/bootstrap.min.js')}} "></script>
-<script src="{{asset('frontend/js/select2.min.js')}} "></script>
-<script src="{{asset('frontend/js/jquery.magnific-popup.min.js')}}"></script>
-<script src="{{asset('frontend/js/owl.carousel.js')}} "></script>
-<script src="{{asset('frontend/js/custom.js')}}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+ @endsection
+@section('script')
 <script type="text/javascript ">
     $(".select2 ").select2();
 </script>
@@ -549,19 +515,7 @@
     });
 </script>
 <script>
-    var togglePassword = document.getElementById("toggle-password ");
-
-    if (togglePassword) {
-        togglePassword.addEventListener('click ', function() {
-            var x = document.getElementById("password ");
-            if (x.type === "password ") {
-                x.type = "text ";
-            } else {
-                x.type = "password ";
-            }
-        });
-    }
-
+  
     // -------------------
 
     $(function() {
@@ -585,6 +539,7 @@
         $("#bread-id").hide();
     });
 </script>
+
 <script>
 
 
@@ -600,25 +555,6 @@ $(document).on('click', '#pills-sec-tab', function() {
             });
     });
 
-    $(function() {        
-        @if(Session::has('success'))
-        toastr.success("{{ Session::get('success') }}");
-        @endif
-
-        @if(Session::has('info'))
-        toastr.info("{{ Session::get('info') }}");
-        @endif
-
-        @if(Session::has('warning'))
-        toastr.warning("{{ Session::get('warning') }}");
-        @endif
-
-        @if(Session::has('error'))
-        toastr.error("{{ Session::get('error') }}");
-        @endif
-    });
-
-
 </script>
-
+ @endsection
 </html>

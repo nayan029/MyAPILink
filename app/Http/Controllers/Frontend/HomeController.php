@@ -36,7 +36,7 @@ class HomeController extends Controller
     {
         Auth::guard('web')->logout();
         $request->session()->regenerateToken();
-        return redirect()->route('login');
+        return redirect('/');
     }
 
     public function userDashboard()

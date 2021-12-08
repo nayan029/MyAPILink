@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use App\Interfaces\ApplyJobRepositoryInterface;
 use App\Interfaces\ContactRepositoryInterface;
 use App\Interfaces\EstablishmentRepositoryInterface;
 use App\Interfaces\ForgotPasswordRepositoryInterface;
 use App\Interfaces\HomeRepositoryInterface;
 use App\Interfaces\JobVacanciesRepositoryInterface;
+use App\Interfaces\CandidateRepositoryInterface;
 use App\Interfaces\ManagerRepositoryInterface;
 use App\Interfaces\SkillRepositoryInterface;
 use App\Interfaces\PartnerRepositoryInterface;
@@ -14,6 +16,7 @@ use App\Interfaces\RegistrationRepositoryInterface;
 use App\Interfaces\WidgetRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
 use App\Interfaces\JobRepositoryInterface;
+use App\Repositories\ApplyJobRepository;
 use App\Repositories\ContactRepository;
 use App\Repositories\EstablishmentRepository;
 use App\Repositories\ForgotPasswordRepository;
@@ -26,6 +29,7 @@ use App\Repositories\RegistrationRepository;
 use App\Repositories\WidgetRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\JobRepository;
+use App\Repositories\CandidateRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoriesServiceProvider extends ServiceProvider
@@ -61,7 +65,7 @@ class RepositoriesServiceProvider extends ServiceProvider
             return $app->make(HomeRepository::class);
         });
 
-        
+
         $this->app->bind(ManagerRepositoryInterface::class, function ($app) {
             return $app->make(ManagerRepository::class);
         });
@@ -82,6 +86,15 @@ class RepositoriesServiceProvider extends ServiceProvider
 
         $this->app->bind(JobRepositoryInterface::class, function ($app) {
             return $app->make(JobRepository::class);
+        });
+
+        
+        $this->app->bind(CandidateRepositoryInterface::class, function ($app) {
+            return $app->make(CandidateRepository::class);
+        });
+        
+        $this->app->bind(ApplyJobRepositoryInterface::class, function ($app) {
+            return $app->make(ApplyJobRepository::class);
         });
     }
 

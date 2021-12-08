@@ -46,13 +46,12 @@
                         </div>
                     </div>
                 </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+                {!! Form::close() !!}
             </div>
             <!-- /.card-body -->
-
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Update</button>
-            </div>
-            {!! Form::close() !!}
         </div>
         <!-- /.card -->
     </div>
@@ -63,13 +62,13 @@
     <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
     {!! $validator->selector('#widget-update') !!}
     <script>
-        var slug = $('#slug').val();
-        alert
-        if (slug == 'how_it_works') {
-            $('.slug').hide();
-        } else {
-            $('.slug').show();
-
-        }
+        $('#slug').on('change', function() {
+            var slug = $('#slug').val();
+            if (slug == 'how_it_works') {
+                $('.slug').hide();
+            } else {
+                $('.slug').show();
+            }
+        });
     </script>
     @endsection

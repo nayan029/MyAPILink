@@ -4999,7 +4999,8 @@ ul.prof-viewcheck-ul {
 }
 
 .can-download-btn {
-    min-height: calc(100vh - -85px);
+    position: relative;
+    /* min-height: calc(100vh - -85px); */
 }
 
 .profile-tab2 li {
@@ -7937,7 +7938,7 @@ label.form-label {
 
 .select2-open .select2-container--default .select2-results>.select2-results__options {
     background: #F6F6F6;
-    overflow: hidden;
+    /* overflow: hidden; */
     text-align: center;
     /* margin-top: -9px; */
     margin-top: 1px;
@@ -8711,13 +8712,6 @@ ul.multiselect-container.dropdown-menu.show {
     margin-right: 10px;
 }
 
-
-/* .datepicker table tr td.active.active,
-.datepicker table tr td:hover {
-    background-color: #192842!important;
-    background-image: none;
-} */
-
 .datepicker td,
 .datepicker th {
     font-family: 'Quicksand-Regular';
@@ -8745,7 +8739,7 @@ ul.multiselect-container.dropdown-menu.show {
 }
 
 .pd-date {
-    padding: 0px 25px;
+    padding: 0px 19px;
 }
 
 .edit-textarea {
@@ -8754,4 +8748,109 @@ ul.multiselect-container.dropdown-menu.show {
     width: 100%;
     resize: none;
     outline: none;
+}
+
+.arrow-change+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    display: none;
+}
+
+.auth-text .arrow-change+.select2-container--default.select2-container--open.select2-container--below .select2-selection--single,
+.select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple {
+    border: 0px;
+    border-radius: 50px;
+}
+
+.auth-text .arrow-change+.select2-container--default.select2-container--focus .select2-selection--multiple {
+    outline: 0;
+    border: 0px;
+    background: #f6f6f6 !important;
+    box-shadow: 0px 3px 6px #00000021 !important;
+    height: 50px;
+    font-family: 'Quicksand-Medium';
+    font-size: 15px !important;
+    padding-left: 23px;
+    border-radius: 150px;
+}
+
+.auth-text .arrow-change+.select2-container--default .select2-selection--multiple {
+    background-color: white;
+    border: 0px;
+    border-radius: 50px;
+    cursor: text;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    background: #f6f6f6 !important;
+    box-shadow: 0px 3px 6px #00000021 !important;
+    height: 50px;
+    font-family: 'Quicksand-Medium';
+    font-size: 15px !important;
+    padding-left: 23px;
+    display: flex;
+    align-items: center;
+}
+
+.auth-text .arrow-change+.select2-container .select2-selection--multiple .select2-selection__rendered {
+    margin-bottom: 0px;
+}
+
+.view-civilite .select2-container--default .select2-selection--single {
+    border-radius: 35px !important;
+    background: #FCFDFD !important;
+    box-shadow: 0px 3px 6px #00000029 !important;
+    font-family: 'Quicksand-Medium';
+}
+
+.edit-select+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #000;
+    line-height: 49px;
+    font-family: 'Quicksand-Regular';
+    padding-right: 40px;
+}
+
+.icon-none .select2-selection__arrow:before {
+    display: none;
+}
+
+.select2-open1 .select2-container--default .select2-results>.select2-results__options .select2-results__option:first-child {
+    display: none;
+}
+
+.select1-open .select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+/* Track */
+
+.select1-open .select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 27px;
+}
+
+
+/* Handle */
+
+.select1-open .select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 27px;
+}
+
+.select1-open .select2-container--default .select2-results>.select2-results__options::-webkit-scrollbar-thumb:hover {
+    background: #c1c1c1;
+    border-radius: 27px;
+}
+
+.select2-open .select2-results__option {
+    line-height: 16px;
+}
+
+.cv_set_pos {
+    position: absolute;
+    bottom: 34px;
+    right: 20px;
+}
+
+.month-check {
+    min-height: 78px;
+    margin-top: 22px;
 }

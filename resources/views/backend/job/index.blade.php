@@ -19,14 +19,14 @@
                             
 							<div class="col-md-3">
 							  <div class="form-group">
-								<label for="name">Job Title</label>
+								<label for="name">{{__("messages.title")}}</label>
 								<input class="form-control"  name="title" type="text" placeholder="Job Title" id="title">
 							 </div>
 							</div>
 						
 							<div class="col-md-3">
 							  <div class="form-group">
-								<label for="name">Type of Contract</label>
+								<label for="name">	{{__("messages.jobsgroup.type_of_contract")}}</label>
 								<input class="form-control"  name="type_of_contract" type="text" placeholder="Type of Contract" id="type_of_contract">
 							 </div>
 							</div>
@@ -40,7 +40,7 @@
                             -->
                             <div class="col-md-3">
 							  <div class="form-group">
-								<label for="name">Min Experience</label>
+								<label for="name">{{__("messages.jobsgroup.min_experience")}}</label>
 								<input class="form-control"  name="minimum_experience" type="text" placeholder="Min Experience" id="minimum_experience">
 							 </div>
 							</div>
@@ -48,9 +48,9 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12">
-								<button type="button" class="btn btn-primary" id="search_Id" >Filter</button>
+								<button type="button" class="btn btn-primary" id="search_Id" >{{__("messages.filter")}}</button>
 								<!-- <input class="btn btn-warning" type="submit" name="Export" value="Export"> -->
-								<a href="{{url('job')}}"> <button type="button" class="btn btn-default">Reset</button></a>
+								<a href="{{url('job')}}"> <button type="button" class="btn btn-default">{{__("messages.reset")}}</button></a>
 							</div>
 						</div>
 					</div>
@@ -68,10 +68,10 @@
                 <table id="job-table" class="table table-bordered table-hover" class="display" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Title</th>
-                            <th>Type of Contract</th>
-                            <th>Start Date</th>
-                            <th>Min. Experience</th>
+                            <th>{{__("messages.title")}}</th>
+                            <th>{{__("messages.jobsgroup.type_of_contract")}}</th>
+                            <th>{{__("messages.jobsgroup.startdate")}}</th>
+                            <th>{{__("messages.jobsgroup.min_experience")}}</th>
                         </tr>
                     </thead>
 

@@ -9,17 +9,17 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title float-left">Our Partner List</h3>
-                <a href="{{route('partner.create')}}" class="btn btn-block btn-success btn-flat btn-sm float-right" style="width: 10%;">Add Partner</a>
+                <h3 class="card-title float-left">{{__("messages.partnergroup.list")}}</h3>
+                <a href="{{route('partner.create')}}" class="btn btn-block btn-success btn-flat btn-sm float-right" style="width: 14%;">{{__("messages.partnergroup.btnadd")}}</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
                 <table id="partner-table" class="table table-bordered table-hover" class="display" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Image</th>
-                            <th>Link</th>
-                            <th>Actions</th>
+                            <th>{{__("messages.partnergroup.image")}}</th>
+                            <th>{{__("messages.partnergroup.link")}}</th>
+                            <th>{{__("messages.partnergroup.actions")}}</th>
                         </tr>
                     </thead>
 

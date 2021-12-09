@@ -4,7 +4,8 @@
     #skill-add input {
         width: 100%;
     }
-    .error{
+
+    .error {
         color: red;
     }
 </style>
@@ -93,16 +94,16 @@
 
                             </tbody>
                         </table>
-
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">{{__("messages.save")}}</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
 
         </div>
-        <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Save</button>
-        </div>
+
         {!! Form::close() !!}
     </div>
 </div>

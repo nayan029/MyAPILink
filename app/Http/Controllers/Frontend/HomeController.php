@@ -48,8 +48,9 @@ class HomeController extends Controller
         return view('frontend.dashboard', $data);
     }
 
-    public function getAjaxSkill(Request $request){
-        $data = SkillPosition::findorfail($request->id);
+    public function getAjaxSkill(Request $request)
+    {
+        $data = Skill::with('positions')->where('id',$request->id)->get();
         return response()->json(["success"=>true,"skillData"=>$data]);
     }
 

@@ -100,7 +100,7 @@
                                 </div>
                                 <p class="ptext_un_api mb-3 text-center">Un conseiller Apilink vous recontacte</p>
                                 <div class="text-center">
-                                    <a href="javascript:void(0)" class="btn btn-blue si-login">S’INSCRIRE </a>
+                                    <a href="{{route('registration')}}" class="btn btn-blue si-login">S’INSCRIRE </a>
                                 </div>
 
 

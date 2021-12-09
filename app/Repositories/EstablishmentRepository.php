@@ -36,7 +36,7 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
         $storeData['applied_pedagogy'] = $applied_pedagogy;
         $storeData['document'] = $document;
         //  $storeData['more_infomation'] = $more_infomation;
-        $storeData['created_by'] = auth()->guard('web')->user()->id;
+        $storeData['user_id'] = auth()->guard('web')->user()->id;
 
         $establishment = Establishment::create($storeData);
         $more_infomation = "";
@@ -46,7 +46,7 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
                 $more_infomation  = $this->uploadImage($file, 'Establishment/gallery');;
                 $storeData['image'] = $more_infomation;
                 $storeData['establishment_id'] = $establishment->id;
-                $storeData['created_by'] = auth()->guard('web')->user()->id;
+                $storeData['user_id'] = auth()->guard('web')->user()->id;
 
 
                 EstablishmentGallery::create($storeData);
@@ -57,7 +57,7 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
     }
     public function getSingleEstablishment($id)
     {
-        return Establishment::where('created_by', auth()->guard('web')->user()->id)->where('id', $id)->firstOrFail();
+        return Establishment::where('user_id', auth()->guard('web')->user()->id)->where('id', $id)->firstOrFail();
     }
 
     public function update(Request $request, $id)
@@ -104,7 +104,7 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
                 $more_infomation  = $this->uploadImage($file, 'Establishment/gallery');;
                 $storeData['image'] = $more_infomation;
                 $storeData['establishment_id'] = $id;
-                $storeData['created_by'] = auth()->guard('web')->user()->id;
+                $storeData['user_id'] = auth()->guard('web')->user()->id;
                 EstablishmentGallery::create($storeData);
             }
         }
@@ -120,7 +120,7 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
 
         $storeData['image'] = $image;
         $storeData['establishment_id'] = $request->establishment_id;
-        $storeData['created_by'] = auth()->guard('web')->user()->id;
+        $storeData['user_id'] = auth()->guard('web')->user()->id;
 
 
         return EstablishmentGallery::create($storeData);

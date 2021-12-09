@@ -91,7 +91,7 @@ class ManagerController extends Controller
         $data['myJobList'] = Job::where('user_id', $id)->paginate(10);
         $data['remaining'] = Job::where('created_at', '>=', Carbon::now())->get();
         $data['deleted'] = Job::onlyTrashed()->get();
-        $data['myEstablishmentList'] = Establishment::where('created_by', $id)->get();
+        $data['myEstablishmentList'] = Establishment::where('user_id', $id)->get();
         if($userType==2)
         {
             return view('frontend.manager.manager-profile', $data);

@@ -72,7 +72,7 @@ class SkillRepository implements SkillRepositoryInterface
         
 
 
-        // $position = $this->getSKillPosition($id);
+        // $position = $this->getSKillPosition($id);    
         $position = SkillPosition::where('skill_id',$id)->delete();
         $n = count($data['position']);
         for ($i = 0; $i < $n; $i++) {
@@ -83,7 +83,6 @@ class SkillRepository implements SkillRepositoryInterface
                 'desc' => $data['descs'][$i],
             ];  
             SkillPosition::create($savedata);
-
         }
         return true;
     }

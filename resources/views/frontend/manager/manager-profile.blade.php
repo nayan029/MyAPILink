@@ -132,8 +132,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-
                                         <div class="d-flex justify-content-end">
                                             <button class="btn btn-yellow d-flex align-items-center pd-btns-edit"><img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" alt="edit" class="mr-3 edit-manager">Editer</button>
                                         </div>
@@ -219,15 +217,15 @@
                         <ul class="nav nav-pills tab-inside-pills" id="pills-tab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="pills-first-tab" data-toggle="pill" href="#pills-first" role="tab" aria-controls="pills-first" aria-selected="true">Annonces en ligne
-                                    <span>(3)</span></a>
+                                    <span>({{$myJobList ? count($myJobList):'0'}})</span></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="pills-sec-tab" data-toggle="pill" href="#pills-sec" role="tab" aria-controls="pills-sec" aria-selected="false">Annonces expirées
-                                    <span>(0)</span></a>
+                                    <span>({{$remaining ? count($remaining):'0'}})</span></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="pills-third-tab" data-toggle="pill" href="#pills-third" role="tab" aria-controls="pills-third" aria-selected="false">Annonces supprimées
-                                    <span>(1)</span></a>
+                                    <span>({{$deleted ? count($deleted):'0'}})</span></a>
                             </li>
                         </ul>
                     </div>
@@ -276,7 +274,9 @@
                                                                 <div class="text-center date-details">
                                                                     <p class="mb-0">Date</p>
                                                                     <p class="mb-0">{{$value->contract_start_date}}</p>
-                                                                    <p class="mb-0"></p>
+                                                                    <p class="mb-0">51 jours restants
+
+                                                                    </p>
 
                                                                 </div>
                                                                 <div class="mt-images-profile">
@@ -301,13 +301,7 @@
                                                 <p class="text-center">No Job Data Found!..</p>
                                                 @endif
                                             </div>
-                                            <div class="custom-pagination pt-5 pb-3">
-                                                <nav aria-label="Page navigation example">
-                                                    <ul class="pagination justify-content-center">
-                                                        {!! $myJobList->appends(request()->input())->links(); !!}
-                                                    </ul>
-                                                </nav>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>

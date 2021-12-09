@@ -88,9 +88,9 @@ class ManagerController extends Controller
         $id = auth()->guard('web')->user()->id;
         $userType = auth()->guard('web')->user()->user_type;
         $data['validator'] = JsValidator::make($this->updatevalidationrules);
-        $data['myJobList'] = Job::where('user_id', $id)->paginate(10);
-        $data['remaining'] = Job::where('created_at', '>=', Carbon::now())->get();
-        $data['deleted'] = Job::onlyTrashed()->get();
+        $data['myJobList'] = Job::where('user_id', $id)->get();
+        $data['remaining'] = Job::where('created_at', '>=', Carbon::now())->where('user_id', $id)->get();
+        $data['deleted'] = Job::where('user_id', $id)->onlyTrashed()->get();
         $data['myEstablishmentList'] = Establishment::where('created_by', $id)->get();
         if($userType==2)
         {

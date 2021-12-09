@@ -330,8 +330,8 @@
                 pos: pos,
             },
             success: function(data) {
-                $('.main-title').text(data.skillData.position);
-                $('.desc').text(data.skillData.desc);
+                $('.main-title').text(data.skillData.name);
+                $('.desc').text(data.skillData.description);
                 $('.position').text(data.skillData.title);
                 $('#Modaljob-desc').modal('show');
             },
@@ -348,3 +348,4 @@
 @endsection
 
 
+    

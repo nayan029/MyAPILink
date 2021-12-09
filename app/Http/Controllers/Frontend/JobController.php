@@ -9,12 +9,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Job;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use JsValidator;
 
 class JobController extends Controller
 {
-
 
     protected $jobValidationRules = [
         'title' => 'required',
@@ -55,10 +55,13 @@ class JobController extends Controller
         $this->data['jobvalidator'] = JsValidator::make($this->jobValidationRules);
         $id = request('id');
         $this->data['jobDetails'] = Job::find($id);
-
         return view('frontend.job.editjob', $this->data);
     }
-
+    public function admin()
+    {       
+        $count = User::where('user_type',1)->get();
+        return view('frontend.manager.manager-profile', ['count' => $count[0]->total]);
+    }
 
     public function addOrUpdateJob(Request $request)
     {
@@ -74,6 +77,7 @@ class JobController extends Controller
         if (!empty(request('contact_thorugh'))) {
             $contactThrough = implode(',', request('contact_thorugh'));
         }
+      
         $id = Auth::guard('web')->user()->id;
         $certificationArray = array(
             'user_id' => $id,
@@ -91,7 +95,7 @@ class JobController extends Controller
             'minimum_experience' => request('minimum_experience'),
             'deadline_for_receipt_of_applications' => request('deadline_for_receipt_of_applications'),
             'email' => request('email'),
-            'phone' => request('phone'),    
+            'phone' => request('phone'),
             'contact_thorugh' => $contactThrough,
             'website' => request('website'),
             'job_description' => request('job_description'),

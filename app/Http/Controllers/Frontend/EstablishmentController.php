@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Establishment;
+use App\Models\Job;
 use JsValidator;
 
 class EstablishmentController extends Controller
@@ -74,6 +75,9 @@ class EstablishmentController extends Controller
         $data['imageValidator'] = JsValidator::make($this->imageValidationRules);
         $data['images'] = $this->establishmentRepository->getEstablishmentGallery($id);
         $data['establishment'] = $this->establishmentRepository->getSingleEstablishment($id);
+        $data['jobListing'] = $this->establishmentRepository->getPostsData($id);
+        
+
        
         return view('frontend.establishment.show',$data);
     }

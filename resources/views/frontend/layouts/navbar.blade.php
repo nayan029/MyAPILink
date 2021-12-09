@@ -12,7 +12,7 @@
                 <ul class="navbar-nav header-ul ml-auto">
                     <li class="nav-item ">
                         <!--active-->
-                        <a class="nav-link" href="javascript:void(0);">Rechercher un emploi<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{route('applyJob')}}">Rechercher un emploi<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="modal" data-target="#contact">Contact</a>
@@ -37,7 +37,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="@if(Auth::guard('web')->user()->user_type==1) {{URL::to('/mycandidate-profile')}} @else {{URL::to('/manager-profile')}} @endif"><img src="{{asset('frontend/images/project/user.svg')}}">Mon compte</a>
                             <a class="dropdown-item" href="javascript:void(0);"> <img src="{{asset('frontend/images/project/message.svg')}}">Messages</a>
-                            <a class="dropdown-item" href="javascript:void(0);"> <img src="{{asset('frontend/images/project/search.svg')}}">Rechercher un
+                            <a class="dropdown-item" href="{{route('applyJob')}}"> <img src="{{asset('frontend/images/project/search.svg')}}">Rechercher un
                                 job</a>
                             <a class="dropdown-item" href="{{URL::to('/account-setting')}}"><img src="{{asset('frontend/images/project/setting.svg')}}">Mes paramètres</a>
                             <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><img src="{{asset('frontend/images/project/logout.svg')}}">Déconnexion</a>

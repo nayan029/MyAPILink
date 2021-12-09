@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -24,7 +24,12 @@
     </style>
 </head>
 
-<body>
+<body> -->
+@extends('frontend.master')
+@section('title')
+<title>ApiLink | Dashboard</title>
+@endsection
+@section('content')
     <div id="after-header"></div>
 
     <section class="back-f6 pt-5 pb-5">
@@ -1246,18 +1251,9 @@
             </div>
         </div>
     </div>
-</body>
-
-<script src="{{asset('frontend/js/jquery.min.js')}}"></script>
-<script src="{{asset('frontend/js/popper.min.js')}}"></script>
-<script src="{{asset('frontend/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('frontend/js/select2.min.js')}}"></script>
-<script src="{{asset('frontend/js/jquery.magnific-popup.min.js')}}"></script>
-<script src="{{asset('frontend/js/owl.carousel.js')}}"></script>
-<script src="{{asset('frontend/js/custom.js')}}"></script>
-<script type="text/javascript ">
-    $(".select2 ").select2();
-</script>
+<!-- </body> -->
+@endsection
+@section('script')
 <script type="text/javascript">
     $(document).ready(function() {
         $("#lettrebtn1").on('click', function() {
@@ -1292,6 +1288,18 @@
 
     });
 </script>
+@endsection
+<!-- <script src="{{asset('frontend/js/jquery.min.js')}}"></script>
+<script src="{{asset('frontend/js/popper.min.js')}}"></script>
+<script src="{{asset('frontend/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('frontend/js/select2.min.js')}}"></script>
+<script src="{{asset('frontend/js/jquery.magnific-popup.min.js')}}"></script>
+<script src="{{asset('frontend/js/owl.carousel.js')}}"></script>
+<script src="{{asset('frontend/js/custom.js')}}"></script>
+<script type="text/javascript ">
+    $(".select2 ").select2();
+</script> -->
 
 
+</body>
 </html>

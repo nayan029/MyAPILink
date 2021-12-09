@@ -54,7 +54,6 @@ class ManagerController extends Controller
             'telephone' => 'required|numeric|digits:10',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|min:6',
-            'radio' => 'required',
             'represent' => 'required',
             'organization' => 'required',
             'number_of_establishments' => 'required',
@@ -87,12 +86,19 @@ class ManagerController extends Controller
         $this->updatevalidationrules['email'] = "required|email|unique:users,email," . auth()->guard('web')->user()->id . ",id,deleted_at,NULL";
 
         $id = auth()->guard('web')->user()->id;
+        $userType = auth()->guard('web')->user()->user_type;
         $data['validator'] = JsValidator::make($this->updatevalidationrules);
         $data['myJobList'] = Job::where('user_id', $id)->paginate(10);
         $data['remaining'] = Job::where('created_at', '>=', Carbon::now())->get();
         $data['deleted'] = Job::onlyTrashed()->get();
         $data['myEstablishmentList'] = Establishment::where('created_by', $id)->get();
-        return view('frontend.manager.manager-profile', $data);
+        if($userType==2)
+        {
+            return view('frontend.manager.manager-profile', $data);
+        }else{
+            return redirect()->route('mycandidate-profile');
+        }
+       
     }
 
     public function updateProfile(Request $request)

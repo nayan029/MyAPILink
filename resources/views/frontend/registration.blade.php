@@ -98,7 +98,7 @@
     <div class="modal-dialog login-modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body login-modal-body">
-                <form id="manager-login" method="post" action="#">
+                <form id="manager-login" method="post">
                     @csrf
                 <div class="">
                     <div class="lmodal-logo mb-20">
@@ -133,7 +133,7 @@
                             <a href="" class="forgot-link">J'ai perdu mon mot de passe?</a>
                         </div>
                         <div class="col-md-12 text-center res-dec mb-3 ">
-                            <button id="loginbtn" onclick="userLogin();" type="button" class="btn btn-blue w-100">Connexion</button>
+                            <button id="loginbtn" type="submit"  class="btn btn-blue w-100">Connexion</button>
                         </div>
                         <div class=" meconnecter">
                             <p class="proxima-nove">Pas encore membre?<a href="#" class=""> Inscrivez-vous</a></p>

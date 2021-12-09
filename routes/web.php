@@ -42,6 +42,7 @@ Route::middleware(['auth:admin'])->group(function ($route) {
         //Skills module
         $adminRoute->resource('skill', 'SkillsController');
         $adminRoute->get('/skilldata', 'SkillsController@getData')->name('skill.data');
+        $adminRoute->post('/destroyPosition','SkillsController@destroyPosition')->name('destroy.position');
 
         $adminRoute->resource('partner', 'PartnerController');
         $adminRoute->get('/getpartenerdata', 'PartnerController@getPartnerData')->name('partner.data');

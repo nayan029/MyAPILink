@@ -250,13 +250,13 @@
     </div>
 </body>
 
-<script src="js/jquery.min.js "></script>
-<script src="js/popper.min.js "></script>
-<script src="js/bootstrap.min.js "></script>
-<script src="js/select2.min.js "></script>
-<script src="js/jquery.magnific-popup.min.js "></script>
-<script src="js/owl.carousel.js "></script>
-<script src="js/custom.js "></script>
+<script src="{{asset('frontend/js/jquery.min.js')}}"></script>
+<script src="{{asset('frontend/js/popper.min.js')}} "></script>
+<script src="{{asset('frontend/js/bootstrap.min.js')}} "></script>
+<script src="{{asset('frontend/js/select2.min.js ')}}"></script>
+<script src="{{asset('frontend/js/jquery.magnific-popup.min.js')}} "></script>
+<script src="{{asset('frontend/js/owl.carousel.js')}} "></script>
+<script src="{{asset('frontend/js/custom.js')}} "></script>
 <script type="text/javascript ">
     $(".select2 ").select2();
 </script>

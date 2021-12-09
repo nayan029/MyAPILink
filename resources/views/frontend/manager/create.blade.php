@@ -50,14 +50,14 @@
                                 <div class="row">
                                     <div class="col-md-2 mb-2">
                                         <div class="form-group">
-                                            <label class="">Civilité*</label>
+                                            <label class="">Civilité<span class="text-danger">*</span></label>
                                             <input id="civility" type="text" name="civility" class="form-control form-add-establish pl-23">
                                             <span class="civility-error text-danger">@error ('civility') {{$message}} @enderror</span>
                                         </div>
                                     </div>
                                     <div class="col-md-5 mb-2">
                                         <div class="form-group">
-                                            <label class="">Prénom*</label>
+                                            <label class="">Prénom<span class="text-danger">*</span></label>
                                             <input id="firstname" type="text" name="firstname" class="form-control form-add-establish pl-23">
                                             <span class="firstname-error text-danger">@error ('firstname') {{$message}} @enderror</span>
 
@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="col-md-5 mb-2">
                                         <div class="form-group">
-                                            <label class="">Nom de famille*</label>
+                                            <label class="">Nom de famille<span class="text-danger">*</span></label>
                                             <input id="lastname" type="text" name="lastname" class="form-control form-add-establish pl-23">
                                             <span class="lastname-error text-danger">@error ('lastname') {{$message}} @enderror</span>
 
@@ -73,15 +73,15 @@
                                     </div>
                                     <div class="col-md-6 mb-2">
                                         <div class="form-group">
-                                            <label class="">Téléphone*</label>
-                                            <input id="telephone" type="text" name="telephone" class="form-control form-add-establish pl-23">
+                                            <label class="">Téléphone<span class="text-danger">*</span></label>
+                                            <input id="telephone" type="text" name="telephone" onkeypress='return isNumber(event)' class="form-control form-add-establish pl-23">
                                             <span class="telephone-error text-danger">@error ('telephone') {{$message}} @enderror</span>
 
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-2">
                                         <div class="form-group">
-                                            <label class="">Adresse e-mail*</label>
+                                            <label class="">Adresse e-mail<span class="text-danger">*</span></label>
                                             <input id="email" type="text" name="email" class="form-control form-add-establish pl-23">
                                             <span class="email-error text-danger">@error ('email') {{$message}} @enderror</span>
 
@@ -89,7 +89,7 @@
                                     </div>
                                     <div class="col-md-12 mb-2">
                                         <div class="form-group">
-                                            <label class="">Mot de passe*</label>
+                                            <label class="">Mot de passe<span class="text-danger">*</span></label>
                                             <input id="password" type="password" name="password" class="form-control form-add-establish pl-23">
                                             <span class="password-error text-danger">@error ('password') {{$message}} @enderror</span>
 
@@ -97,7 +97,7 @@
                                     </div>
                                     <div class="col-md-12 mb-2">
                                         <div class="form-group">
-                                            <label class="">Confirmer le mot de passe*</label>
+                                            <label class="">Confirmer le mot de passe<span class="text-danger">*</span></label>
                                             <input id="password_confirmation" type="password" name="password_confirmation" class="form-control form-add-establish pl-23">
                                             <span class="password_confirmation-error text-danger">@error ('password_confirmation') {{$message}} @enderror</span>
 
@@ -218,7 +218,7 @@
                                 <div class="row">
                                     <div class="col-md-12 mb-2">
                                         <div class="form-group">
-                                            <label class="">Je représente </label>
+                                            <label class="">Je représente <span class="text-danger">*</span></label>
                                             <select class="cus-drop pl-23 select2 form-add-establish" name="represent" style="width: 100%;">
                                                 <option value="municipality">Une municipalité</option>
                                                 <option value="private_structure">Une structure privée </option>
@@ -231,7 +231,7 @@
                                     </div>
                                     <div class="col-md-12 mb-2">
                                         <div class="form-group">
-                                            <label class="">Nom de notre organisation</label>
+                                            <label class="">Nom de notre organisation<span class="text-danger">*</span></label>
                                             <input id="organization" type="text" name="organization" class="form-control form-add-establish pl-23">
                                             <span class="organization-error text-danger">@error ('organization') {{$message}} @enderror</span>
 
@@ -239,7 +239,7 @@
                                     </div>
                                     <div class="col-md-12 mb-2">
                                         <div class="form-group">
-                                            <label class="">Nombre d'établissements dans l'organisation</label>
+                                            <label class="">Nombre d'établissements dans l'organisation<span class="text-danger">*</span></label>
                                             <input id="number_of_establishments" type="text" name="number_of_establishments" class="form-control form-add-establish pl-23">
                                             <span class="establish-error text-danger">@error ('number_of_establishments') {{$message}} @enderror</span>
 
@@ -247,7 +247,7 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="form-group">
-                                            <label class="">Adresse de l'organisation</label>
+                                            <label class="">Adresse de l'organisation<span class="text-danger">*</span></label>
                                             <input id="address" type="text" name="address" class="form-control form-add-establish pl-23">
                                             <span class="address-error text-danger">@error ('address') {{$message}} @enderror</span>
 
@@ -255,15 +255,15 @@
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <label class="">Code postal</label>
-                                            <input id="postal_code" type="text" name="postal_code" class="form-control form-add-establish pl-23">
+                                            <label class="">Code postal<span class="text-danger">*</span></label>
+                                            <input id="postal_code" type="text" name="postal_code" onkeypress='return isNumber(event)' class="form-control form-add-establish pl-23">
                                             <span class="postal-error text-danger">@error ('postal_code') {{$message}} @enderror</span>
 
                                         </div>
                                     </div>
                                     <div class="col-md-5">
                                         <div class="form-group">
-                                            <label class="">Ville</label>
+                                            <label class="">Ville<span class="text-danger">*</span></label>
                                             <input id="city" type="text" name="city" class="form-control form-add-establish pl-23">
                                             <span class="city-error text-danger">@error ('city') {{$message}} @enderror</span>
 
@@ -386,6 +386,15 @@
     });
 </script>
 <script>
+
+function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
     $("#ustep1 .suiv-btn").on('click', function() {
         $("#ustep1").hide();
         $("#ustep2").show();
@@ -467,8 +476,7 @@
 
     $('.register-yellow').on('click', function(event) {
         event.preventDefault();
-        $(this).text('En traitement...');
-        // $(this).prop('disabled', true);
+       
         var url = '{{ route("manager.store") }}';
 
         $.ajax({
@@ -485,6 +493,8 @@
                         $('#regform')[0].reset();
                     }, 2000);
                     $(this).text("S'inscrire");
+                    $(this).text('En traitement...');
+                    $(this).prop('disabled', true);
                     $(this).prop('disabled', false);
 
                 } else {

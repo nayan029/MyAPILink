@@ -13,9 +13,8 @@
         });
     }
     
-
-    function userLogin() {
-       
+    $('#manager-login').on('submit',function(e){
+        e.preventDefault();
         $('.email-error').text('');
         $('.password-error').text('');
         $('.invalid-error').text('');
@@ -29,26 +28,60 @@
             success: function(response) {
                 console.log(response.success);
                 if (response.success == true) {
-                    
+
                     toastr.success(response.message);
-                  
-                    if(response.user==2){
-                     
-                    window.location.href ='{{ route("profile") }}';
-                    }else{
-                    window.location.href ='{{ route("mycandidate-profile") }}';
-                    }
-                    
+
                     $('#loginbtn').prop('disabled', false);
-                   
+                    if (response.user == 2) {
+                        window.location.href = '{{ route("profile") }}';
+                    } else {
+                        window.location.href = '{{ route("mycandidate-profile") }}';
+                    }
                 } else {
                     $('.email-error').text(response.errors.email);
                     $('.password-error').text(response.errors.password);
                     $('.invalid-error').text(response.errors.invalid);
-                    
+
                     $('#loginbtn').prop('disabled', false);
                 }
             }
         });
-    }
+    });
+    // function userLogin() {
+       
+    //     $('.email-error').text('');
+    //     $('.password-error').text('');
+    //     $('.invalid-error').text('');
+
+    //     $('#loginbtn').prop('disabled', true);
+
+    //     $.ajax({
+    //         url: '{{ route("user-auth") }}',
+    //         method: 'POST',
+    //         data: $('#manager-login').serialize(),
+    //         success: function(response) {
+    //             console.log(response.success);
+    //             if (response.success == true) {
+                    
+    //                 toastr.success(response.message);
+                  
+    //                 if(response.user==2){
+                     
+    //                 window.location.href ='{{ route("profile") }}';
+    //                 }else{
+    //                 window.location.href ='{{ route("mycandidate-profile") }}';
+    //                 }
+                    
+    //                 $('#loginbtn').prop('disabled', false);
+                   
+    //             } else {
+    //                 $('.email-error').text(response.errors.email);
+    //                 $('.password-error').text(response.errors.password);
+    //                 $('.invalid-error').text(response.errors.invalid);
+                    
+    //                 $('#loginbtn').prop('disabled', false);
+    //             }
+    //         }
+    //     });
+    // }
 </script>

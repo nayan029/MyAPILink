@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Interfaces\EstablishmentRepositoryInterface;
-use App\Http\Controllers\Controller;
+use JsValidator;
+use App\Models\Skill;
+use App\Models\Widget;
 use Illuminate\Http\Request;
+use App\Models\Establishment;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Establishment;
-use JsValidator;
+use App\Interfaces\EstablishmentRepositoryInterface;
 
 class EstablishmentController extends Controller
 {
@@ -37,6 +39,9 @@ class EstablishmentController extends Controller
         
         'image' => 'required|mimes:jpeg,png,jpg|max:2048',
 
+    ];
+    protected $newsletterValidationRules = [
+        'email' => 'required|email|unique:newsletter,email,NULL,id,deleted_at,NULL'
     ];
    
     public function __construct(EstablishmentRepositoryInterface $establishmentRepository)
@@ -127,6 +132,15 @@ class EstablishmentController extends Controller
             return response()->json(['success' => true, 'message' => 'Successfully Deleted','data' => $delete]);
         }
         return response()->json(['success' => false, 'message' => 'Sorry, something went wrong. please try again.']);
+    }
+
+    
+    public function dashborad()
+    {
+        $data['newslettervalidator'] = JsValidator::make($this->newsletterValidationRules);
+        $data['widget'] = Widget::get();
+        $data['skill'] = Skill::get();
+        return view('frontend.establishment.dashborad',$data);
     }
     
     

@@ -1,30 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <title>MyApi Link</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="{{asset('frontend/images/favicon.ico')}}" type="image/png" sizes="16x16">
-    <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/magnific-popup.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/owl.carousel.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/select2.min.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        .navbar-collapse {
-            display: none !important;
-        }
-        
-        .navbar-expand-lg .navbar-collapse {
-            display: none !important;
-        }
-    </style>
-</head>
-
-<body> -->
 @extends('frontend.master')
 @section('title')
 <title>ApiLink | Dashboard</title>
@@ -1289,16 +1263,7 @@
     });
 </script>
 @endsection
-<!-- <script src="{{asset('frontend/js/jquery.min.js')}}"></script>
-<script src="{{asset('frontend/js/popper.min.js')}}"></script>
-<script src="{{asset('frontend/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('frontend/js/select2.min.js')}}"></script>
-<script src="{{asset('frontend/js/jquery.magnific-popup.min.js')}}"></script>
-<script src="{{asset('frontend/js/owl.carousel.js')}}"></script>
-<script src="{{asset('frontend/js/custom.js')}}"></script>
-<script type="text/javascript ">
-    $(".select2 ").select2();
-</script> -->
+
 
 
 </body>

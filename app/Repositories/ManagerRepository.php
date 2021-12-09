@@ -33,8 +33,8 @@ class ManagerRepository implements ManagerRepositoryInterface
                 'address' => $request->address,
                 'postal_code' => $request->postal_code,
                 'city' => $request->city,
-                'user_type' => '2',
-                'verify_email' => 'accept'
+                'user_type' => 2,
+                'verify_email' => "accept",
             ];
             //dd($storeData);
             $manager = User::create($storeData);

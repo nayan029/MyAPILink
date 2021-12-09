@@ -10,7 +10,7 @@
                         
                         <div class="btn-footer-left">
                             <button class="btn footer-btn-white">INSCRIVEZ-VOUS</button>
-                            <button class="btn footer-btn2">SE CONNECTER</button>
+                            <button class="btn footer-btn2" data-toggle="modal" data-target="#Modallogin2">SE CONNECTER</button>
                         </div>
                         @endif
                     </div>

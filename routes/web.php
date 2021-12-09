@@ -101,9 +101,9 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('destroy/{id}', 'JobController@destroy')->name('destroy');
     $frontRoute->get('see-applicants', 'JobController@viewApplcants')->name('see-applicants');
     $frontRoute->get('edit-applicants', 'JobController@viewApplcants')->name('edit-applicants');
-
-
     $frontRoute->post('getAjaxSkill', 'HomeController@getAjaxSkill')->name('getAjaxSkill');
+
+    $frontRoute->get('establishment-dashborad', 'EstablishmentController@dashborad')->name('establishment-dashborad');
 });
 
 Route::middleware(['auth:web'])->group(function ($route) {
@@ -116,7 +116,7 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->post('update-email', 'ManagerController@updateEmail')->name('update-email');
         $frontRoute->post('update-notifications-flag', 'ManagerController@updateNotificationsFlag')->name('update-notifications-flag');
         $frontRoute->post('update-delete-flag', 'ManagerController@updateDeleteAccountFlag')->name('update-delete-flag');
-
+        
         $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
         $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');
         $frontRoute->get('view-establishment-account/{id}', 'EstablishmentController@show')->name('view-establishment-account');

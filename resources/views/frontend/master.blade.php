@@ -4,10 +4,10 @@
     <div id="before-header">
         @include('frontend.layouts.navbar')
 
-        
+
         <div class="content">
-                @yield('content')
-            </div>
+            @yield('content')
+        </div>
         <!-- modal  -->
         <!-- end contact modal -->
         @include('frontend.layouts.footer')

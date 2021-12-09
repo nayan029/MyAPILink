@@ -6,9 +6,6 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Interfaces\ApplyJobRepositoryInterface;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
-
-use Illuminate\Support\Facades\Validator;
 
 class SearchAdController extends Controller
 {

@@ -8,13 +8,14 @@ use App\Models\ApplyJob;
 use App\Models\SavedJobs;
 use Illuminate\Http\Request;
 use App\Http\Traits\ImageuploadTrait;
+use App\Models\User;
 
 class ApplyJobRepository implements ApplyJobRepositoryInterface
 {
     use ImageuploadTrait;
     public function getCandidateData()
     {
-        return Job::with('applyJob')->where('deleted_at', NULL)->get();
+        return Job::with('applyJob', 'saveJob')->where('deleted_at', NULL)->get();
     }
     public function store(Request $request)
     {
@@ -38,12 +39,20 @@ class ApplyJobRepository implements ApplyJobRepositoryInterface
     }
     public function insertPosts(Request $request)
     {
-        $inputs['job_id'] = $request->jobid;
-        $inputs['user_id'] = $request->userid;
-        $inputs['job_save'] = $request->save_type;
+        $inputs['job_id'] = $request->job_id;
+        $inputs['user_id'] = $request->user_id;
+        $inputs['job_save'] = $request->saveType;
 
         $saveJob = SavedJobs::create($inputs);
 
         return $saveJob;
+    }
+    public function getSingleCandidatedata($id)
+    {
+        return Job::with('applyJob')->where('deleted_at', NULL)->where('id', $id)->first();
+    }
+    public function getCompanyData($id)
+    {
+        return User::findorfail($id);
     }
 }

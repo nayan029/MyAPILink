@@ -141,6 +141,7 @@
                     <div class="">
                         <div class="card-pd">
                             <div class="job-card">
+
                                 @if($list)
                                 @foreach($list as $data)
                                 @php
@@ -160,7 +161,11 @@
                                         <span class="public-span">Publié il y a {{$finalDays}} jours</span>
                                         <input type="hidden" name="job_id" id="job_id">
                                         <input type="hidden" name="user_id" id="user_id">
-                                        <button class="btn fav-btn" type="button" id="book1" data-job="{{$data->id}}" data-user="{{$data->user_id}}"><img src="frontend/images/bookmark.svg " alt="bookmark image " class="b1 bookmark-img" id="img1" data-value="0"><img src="frontend/images/imgs-svg/book-mark-yellow.svg " alt="bookmark image " class="b2 bookmark-img" id="img2" data-value="1"></button>
+                                        <button class="btn fav-btn save-fav" type="button" data-job="{{$data->id}}" data-user="{{$data->user_id}}">
+
+                                            <img src="{{count($data->saveJob) > 0 ? 'frontend/images/imgs-svg/book-mark-yellow.svg' : 'frontend/images/bookmark.svg'}} " alt="bookmark image " class="b1 bookmark-img" id="img1">
+
+                                        </button>
                                     </div>
 
 
@@ -182,7 +187,7 @@
 
                                     <div class="col-md-4 mt-2 align-items-end d-flex justify-content-end">
                                         <div class="d-flex">
-                                            <a href="{{route('seeJob')}}" class="btn btn-viewjob ">Voir l’offre</a>
+                                            <a href="{{route('details-job',$data->id)}}" class="btn btn-viewjob ">Voir l’offre</a>
                                             <button class="btn btn-apply" @if($data->applyJob != '') @else onclick="openJobModal('{{$data->id}}','{{$data->user_id}}')" @endif {{$isApplyed}}>Postuler</button>
                                         </div>
                                     </div>
@@ -498,37 +503,27 @@
     $('.fav-btn').click(function() {
         $(this).toggleClass('active');
     });
-    $(document).on("click", "#book1", function() {
-        var dataVal = $(this).hasClass('active') == true ? 1 : 0;
-        var job = $("#book1").data('job');
-        var user = $("#book1").data('user');
+    $(document).on("click", ".save-fav", function() {
+        var saveType = $(this).hasClass('active') == true ? 1 : 0;
+        var job_id = $(this).data('job');
+        var user_id = $(this).data('user');
+
+        $.ajax({
+            url: "{{route('store-savedjobs')}}",
+            method: "POST",
+            data: {
+                'job_id': job_id,
+                'user_id': user_id,
+                'saveType': saveType,
+                _token: '{{ csrf_token() }}',
+            },
+            success: function(response) {
+                if (response) {
+
+                }
+            }
+        });
     });
-
-    function savePosts(job_id, user_id) {
-
-        $('#job_id').val(job_id);
-        $('#user_id').val(user_id);
-
-        var job_id = $('#job_id').val();
-        var user_id = $('#user_id').val();
-        var image = $("#img1").data('value');
-        /* 
-                $.ajax({
-                    url: "{{route('store-savedJobs')}}",
-                    method: "POST",
-                    data: {
-                        'job_id': job_id,
-                        'user_id': user_id,
-                        _token: '{{ csrf_token() }}',
-                    },
-                    success: function(response) {
-                        if (response) {
-
-                        }
-                    }
-                }); */
-
-    }
 </script>
 @endsection
 </body>

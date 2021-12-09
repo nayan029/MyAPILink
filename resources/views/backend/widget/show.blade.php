@@ -15,12 +15,12 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Widget Detail</h3>
+          <h3 class="card-title">{{__("messages.widgetgroup.show")}}</h3>
 
           <div class="card-tools">
             <div class="text-center mt-0 mb-3">
-              <a href="{{route('widget.edit',$widget->id)}}" class="btn btn-sm btn-primary">Edit</a>
-              <a id="delete" href="javascript:void(0);" class="btn btn-sm btn-danger">Delete</a>
+              <a href="{{route('widget.edit',$widget->id)}}" class="btn btn-sm btn-primary">{{__("messages.widgetgroup.btnedit")}}</a>
+              <a id="delete" href="javascript:void(0);" class="btn btn-sm btn-danger">{{__("messages.widgetgroup.btndelete")}}</a>
               <form action="{{ route('widget.destroy', $widget->id)}}" method="POST" id="deleteForm">
                   @csrf
                   <input name="_method" type="hidden" value="DELETE">           

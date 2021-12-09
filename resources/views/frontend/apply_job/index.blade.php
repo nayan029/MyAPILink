@@ -220,7 +220,7 @@
     </div>
 </section>
 <!-- See the establishment's file Modal -->
-<div class="modal fade modal-back-blue" id="establishment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade modal-back-blue" id="establishment" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog center-modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content m-32">
             <div class="modal-header resume_header border-0">

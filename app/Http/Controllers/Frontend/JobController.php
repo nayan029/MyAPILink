@@ -110,7 +110,7 @@ class JobController extends Controller
             $instert->save();
             $id = $instert->id;
             Session::flash('success', 'Successfully Inserted');
-            return redirect()->route('job.show', $id);
+            return redirect()->route('joblist', $id);
         }
         // session()->flash('message-type', 'success');
         // // return redirect()->route('job',$id);

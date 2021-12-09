@@ -41,4 +41,23 @@ class SearchAdController extends Controller
     {
         return $this->applyJobRepository->getDocumentName($request);
     }
+    public function showJob()
+    {
+        return view('frontend.apply_job.show');
+    }
+    public function insertPosts(Request $request)
+    {
+        $insertSavedPosts = $this->applyJobRepository->store($request);
+
+        if ($insertSavedPosts) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Successfully Inserted'
+            ]);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Sorry, something went wrong. please try again.'
+        ]);
+    }
 }

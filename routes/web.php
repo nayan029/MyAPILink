@@ -42,7 +42,7 @@ Route::middleware(['auth:admin'])->group(function ($route) {
         //Skills module
         $adminRoute->resource('skill', 'SkillsController');
         $adminRoute->get('/skilldata', 'SkillsController@getData')->name('skill.data');
-        $adminRoute->post('/destroyPosition','SkillsController@destroyPosition')->name('destroy.position');
+        $adminRoute->post('/destroyPosition', 'SkillsController@destroyPosition')->name('destroy.position');
 
         $adminRoute->resource('partner', 'PartnerController');
         $adminRoute->get('/getpartenerdata', 'PartnerController@getPartnerData')->name('partner.data');
@@ -129,8 +129,10 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->get('candidate-profile-edit', 'CandidateController@edit')->name('candidate-profile-edit');
 
         $frontRoute->post('user/logout', 'HomeController@logout')->name('user-logout');
-        $frontRoute->get('applyJob', 'SearchAdController@index')->name('applyJob');
+        $frontRoute->get('searchJob', 'SearchAdController@index')->name('applyJob');
         $frontRoute->post('store-jobType', 'SearchAdController@store')->name('store-jobType');
         $frontRoute->post('getDocumentName', 'SearchAdController@getDocumentName')->name('getDocumentName');
+        $frontRoute->post('store-savedJobs', 'SearchAdController@insertPosts')->name('store-savedJobs');
+        $frontRoute->get('seeJob', 'SearchAdController@showJob')->name('seeJob');
     });
 });

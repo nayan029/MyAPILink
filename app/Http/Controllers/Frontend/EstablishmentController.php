@@ -139,7 +139,7 @@ class EstablishmentController extends Controller
     {
         $data['newslettervalidator'] = JsValidator::make($this->newsletterValidationRules);
         $data['widget'] = Widget::get();
-        $data['skill'] = Skill::get();
+
         return view('frontend.establishment.dashborad',$data);
     }
     

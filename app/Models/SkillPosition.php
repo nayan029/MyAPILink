@@ -11,7 +11,8 @@ class SkillPosition extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $dates = ['deleted_at'];
+    
     protected $guarded = ['id'];
+    protected $dates = ['deleted_at'];
     protected $table = 'skill_position';
 }

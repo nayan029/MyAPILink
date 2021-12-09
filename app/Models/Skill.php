@@ -19,4 +19,9 @@ class Skill extends Model
         return $this->hasMany(SkillPosition::class);
     }
 
+    public static function getAjaxData($id){
+        $data['skillpos'] = Skill::where('id',$id)->get();
+        return response()->json($data,200);
+    }
+
 }

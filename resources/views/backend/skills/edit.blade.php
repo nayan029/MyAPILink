@@ -4,6 +4,11 @@
     #skill-update input {
         width: 100%;
     }
+
+    .selected {
+        color: red;
+        background-color: yellow;
+    }
 </style>
 @endsection
 @section('content')
@@ -13,7 +18,7 @@
             <!-- general form elements -->
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Edit Skill</h3>
+                    <h3 class="card-title">{{__("messages.skillgroup.edit")}}</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
@@ -93,7 +98,7 @@
                                     <td id="desc{{$key+1}}">{{$sk->desc}}<input type="hidden" class="desc" name="descs[]" value="{{$sk->desc}}"></td>
                                     <td><a href='javascript:void(0);' class="edit_row" row_id="{{$key+1}}"><i class='fas fa-edit'></i></a>
                                         <a href='javascript:void(0);' class="btn btn-save" data-id="{{$sk->id}}" row_id="{{$key+1}}"><i class="fas fa-save text-success"></i></i></a>
-                                        <a href='javascript:void(0);' class="btn btn-cancel" row_id="{{$key+1}}"><i class="fas fa-trash-alt text-danger"></i></i></a>
+                                        <a href='javascript:void(0);' class="btn btn-cancel btn delete" remove-id="{{$sk->id}}" row_id="{{$key+1}}"><i class="fas fa-trash-alt text-danger"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -166,7 +171,23 @@
             }
 
             if (temp == 0) {
-                return true;
+               
+        $(document).on('click', "#addNewRow", function() {
+            var position = $('#position').val();
+            var title = $('#title').val();
+            var desc = $("#desc").val();
+            loadPosition(id, position, title, desc);
+        });
+
+        function loadPosition(id, position, title, desc) {
+            var html = "<tr row_id='" + id + "'><td>" + id + "</td><td><input type='hidden' name='position[]' value='" + position + "'/>" + position + "</td><td><input type='hidden' name='title[]' value='" + title + "'/>" + title + "</td><td><input type='hidden' name='descs[]' value='" + desc + "'/>" + desc + "</td><td><a href='javascript:void(0);' row_id='" + id + "' class='edit_row'><i class='fas fa-edit'></i></a><a href='javascript:void(0);' class='btn btn-save' row_id='" + id + "'> <i class='fas fa-save text-success'></i></a><a href='javascript:void(0);' class='btn removeRow'  row_id='" + id + "'> <i class='fas fa-trash-alt text-danger'></i></a></td></tr>";
+            id++;
+
+            $("#skillbody").append(html);
+            $('#position').val('');
+            $('#title').val('');
+            $("#desc").val('');
+        }
             } else {
                 return false;
             }
@@ -197,23 +218,8 @@
 
 
 
-        $(document).on('click', "#addNewRow", function() {
-            var position = $('#position').val();
-            var title = $('#title').val();
-            var desc = $("#desc").val();
-            loadPosition(id, position, title, desc);
-        });
-
-        function loadPosition(id, position, title, desc) {
-            var html = "<tr row_id='" + id + "'><td>" + id + "</td><td><input type='hidden' name='position[]' value='" + position + "'/>" + position + "</td><td><input type='hidden' name='title[]' value='" + title + "'/>" + title + "</td><td><input type='hidden' name='descs[]' value='" + desc + "'/>" + desc + "</td><td><a href='javascript:void(0);' row_id='" + id + "' class='edit_row'><i class='fas fa-edit'></i></a><a href='javascript:void(0);' class='btn btn-save' row_id='" + id + "'> Save</a><a href='javascript:void(0);' class='btn removeRow'  row_id='" + id + "'> Delete</a></td></tr>";
-            id++;
-
-            $("#skillbody").append(html);
-            $('#position').val('');
-            $('#title').val('');
-            $("#desc").val('');
-        }
         $(document).on('click', ".edit_row", function() {
+            $(this).closest('tr').css('background-color', '#ddd');
             var tbl_row = $(this).closest('tr');
             var row_id = tbl_row.attr('row_id');
 
@@ -234,11 +240,11 @@
             var tbl_row = $(this).closest('tr');
             var row_id = tbl_row.attr('row_id');
 
-            var position = $('#position' + row_id).html(p + '<input type="hidden"  class="position" name="position[]" value="' + p + '">');
+            var position = $('#position' + row_id).html(p + '<input type="hidden"  class="position" name="position" value="' + p + '">');
 
-            var title = $('#title' + row_id).html(t + '<input type="hidden"  class="title" name="title[]" value="' + t + '">');
+            var title = $('#title' + row_id).html(t + '<input type="hidden"  class="title" name="title" value="' + t + '">');
 
-            var description = $('#desc' + row_id).html(d + '<input type="hidden"  class="desc" name="descs[]" value="' + d + '">');
+            var description = $('#desc' + row_id).html(d + '<input type="hidden"  class="desc" name="descs" value="' + d + '">');
 
             /*  var position = $('.position').val(p);
             var title = $('.title').val(t);
@@ -247,10 +253,39 @@
             updateSkillPostionData(position, title, description, id);
 
         });
-        $(document).on('click', ".removeRow", function() {
-            var self = $(this);
-            self.parents("#skillbody").remove();
+        $(document).on('click', ".delete", function() {
+            var p = $('#position').val();
+            var t = $('#title').val();
+            var d = $('#desc').val();
+
+            var tbl_row = $(this).closest('tr');
+            var row_id = tbl_row.attr('row_id');
+            var deleteId = $(this).attr('remove-id');
+
+            deleteSkillPostionData(deleteId);
+
         });
+
+        function deleteSkillPostionData(deleteId) {
+            var url = "{{route('destroy.position')}}";
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    deleteId: deleteId,
+                },
+                success: function(response) {
+                    if (response.status == true) {
+                        var tbl_row = $('.edit_row').closest('tr');
+                        var row_id = tbl_row.attr('row_id');
+                        $(row_id).remove();
+                        toastr.success(response.msg);
+                    }
+                }
+            });
+        }
     </script>
 
     @endsection

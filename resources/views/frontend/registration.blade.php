@@ -98,7 +98,7 @@
     <div class="modal-dialog login-modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body login-modal-body">
-            <form id="manager-login" method="post" action="#">
+                <form id="manager-login" method="post">
                     @csrf
                 <div class="">
                     <div class="lmodal-logo mb-20">
@@ -125,21 +125,21 @@
                             <img src="{{asset('frontend/images/about/eye.svg')}}" alt="" class="sr-eye" id="toggle-password">
                             <span class="password-error text-danger">@error ('password') {{$message}} @enderror</span>
                                 <span class="invalid-error text-danger">@error ('invalid') {{$message}} @enderror</span>
-                                
+
+                            </div>
+                        </div>
+
+                        <div class="mb-20 text-right">
+                            <a href="" class="forgot-link">J'ai perdu mon mot de passe?</a>
+                        </div>
+                        <div class="col-md-12 text-center res-dec mb-3 ">
+                            <button id="loginbtn" type="submit"  class="btn btn-blue w-100">Connexion</button>
+                        </div>
+                        <div class=" meconnecter">
+                            <p class="proxima-nove">Pas encore membre?<a href="#" class=""> Inscrivez-vous</a></p>
                         </div>
                     </div>
-
-                    <div class="mb-20 text-right">
-                        <a href="" class="forgot-link">J'ai perdu mon mot de passe?</a>
-                    </div>
-                    <div class="col-md-12 text-center res-dec mb-3 ">
-                    <button id="loginbtn" onclick="userLogin();" type="button" class="btn btn-blue w-100">Connexion</button>
-                    </div>
-                    <div class=" meconnecter">
-                        <p class="proxima-nove">Pas encore membre?<a href="#" class=""> Inscrivez-vous</a></p>
-                    </div>
-                </div>
-            </form>
+                </form>
             </div>
         </div>
     </div>
@@ -277,19 +277,25 @@
 <script src="{{asset('frontend/js/owl.carousel.js')}} "></script>
 <script src="{{asset('frontend/js/custom.js')}} "></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+    $(function() {
 
+        @if(Session::has('success'))
+        toastr.success("{{ Session::get('success') }}");
+        @endif
 
+        @if(Session::has('info'))
+        toastr.info("{{ Session::get('info') }}");
+        @endif
 
-<script type="text/javascript">
-    //---------------------
-    // $("#bravo-btn").on('click', function() {
+        @if(Session::has('warning'))
+        toastr.warning("{{ Session::get('warning') }}");
+        @endif
 
-    //     $('#header-Modallogin1').modal('hide');
-    //     $('#bravo').modal('show');
-    //     setTimeout(function() {
-    //         $('body').addClass('modal-open');
-    //     }, 500);
-    // });
+        @if(Session::has('error'))
+        toastr.error("{{ Session::get('error') }}");
+        @endif
+    });
 </script>
 <script>
     $(document).on('click', '#registerUser', function() {
@@ -326,5 +332,4 @@
 @include('frontend.layouts.login_script')
 
 </body>
-
 </html>

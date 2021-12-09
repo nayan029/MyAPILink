@@ -24,7 +24,7 @@
             <div class="col-12 col-md-12 col-lg-12 order-2 order-md-1">
               <div class="row">
               
-                <div class="col-12 col-sm-6">
+                <div class="col-6 col-sm-6">
                   <ul class="list-group list-group-unbordered mb-3">
                     <li class="list-group-item">
                       <b>Name</b> <span class="widget-section">{{ucfirst($user->civility)}} {{ucfirst($user->first_name)}} {{ucfirst($user->last_name)}}</span>
@@ -35,9 +35,23 @@
                     <li class="list-group-item">
                       <b>Phone</b> <span class="widget-section">{{$user->phone !="" ? $user->phone : '---'}}</span>
                     </li>
+                    
+                  </ul>
+                </div>
+                <div class="col-6 col-sm-6">
+                  <ul class="list-group list-group-unbordered mb-3">
                     @if($user->user_type == 2)
                     <li class="list-group-item">
-                      <b>Phone</b> <span class="widget-section">{{$user->establishment_management != "" ? $user->establishment_management : '---'}}</span>
+                      <b>Address</b> <span class="widget-section">{{$user->address != "" ? $user->address : '---'}}</span>
+                    </li>
+                    <li class="list-group-item">
+                      <b>Postcode</b> <span class="widget-section">{{$user->postal_code != "" ? $user->postal_code : '---'}}</span>
+                    </li>
+                    <li class="list-group-item">
+                      <b>City</b> <span class="widget-section">{{$user->city != "" ? $user->city : '---'}}</span>
+                    </li>
+                    <li class="list-group-item">
+                      <b>Establishment management</b> <span class="widget-section">{{$user->establishment_management != "" ? $user->establishment_management : '---'}}</span>
                     </li>
                     <li class="list-group-item">
                       <b>Represent</b> <span class="widget-section">{{$user->represent != "" ? $user->represent : '---'}}</span>
@@ -48,19 +62,12 @@
                     <li class="list-group-item">
                       <b>No. of Establishments</b> <span class="widget-section">{{$user->number_of_establishments != "" ? $user->number_of_establishments : '---'}}</span>
                     </li>
-                    <li class="list-group-item">
-                      <b>Address</b> <span class="widget-section">{{$user->address != "" ? $user->address : '---'}}</span>
-                    </li>
-                    <li class="list-group-item">
-                      <b>Postcode</b> <span class="widget-section">{{$user->postal_code != "" ? $user->postal_code : '---'}}</span>
-                    </li>
-                    <li class="list-group-item">
-                      <b>City</b> <span class="widget-section">{{$user->city != "" ? $user->city : '---'}}</span>
-                    </li>
+                    
                     
                     @endif
                   </ul>
-            </div>
+                </div>
+
           </div>
         </div>
         <!-- /.card-body -->

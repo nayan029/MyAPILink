@@ -5,13 +5,13 @@ namespace App\Repositories;
 use App\Interfaces\PartnerRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Models\Partner;
-use App\Http\Traits\ImageUploadTrait;
+use App\Http\Traits\ImageuploadTrait;
 
 use function PHPUnit\Framework\isNull;
 
 class PartnerRepository implements PartnerRepositoryInterface
 {
-    use ImageUploadTrait;
+    use ImageuploadTrait;
 
     public function storePartner(Request $request)
     {
@@ -57,7 +57,7 @@ class PartnerRepository implements PartnerRepositoryInterface
         foreach ($partners as $partner) {
             $url = route("partner.show", $partner->id);
             $Image = "<img src='" . url($partner->image) . "' height='50px' width='50px'>";
-            $action = "<a href='" . route("partner.edit", $partner->id)   . "'>" . "<i class='fas fa-user-edit'></i>" . "</a>" . '&nbsp;&nbsp;' .
+            $action = "<a href='" . route("partner.edit", $partner->id)   . "'>" . "<i class='fas fa-edit'></i>" . "</a>" . '&nbsp;&nbsp;' .
                 "<a href='javascript:void(0);' data-delete='" . $partner->id . "' class='delete_partner'><i class='fa fa-trash text-danger'></i></a>";
 
             $json['data'][] = [

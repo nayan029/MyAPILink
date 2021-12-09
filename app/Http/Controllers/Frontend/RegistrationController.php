@@ -48,6 +48,17 @@ class RegistrationController extends Controller
         }
     }
 
+    public function getEmailVerify($email){
+        $update =  $this->registrationRepository->verifyEmail($email);
+        if($update){
+            Session::flash('success','Your Email has been verified');
+            return redirect()->route('registration');
+        }else{
+            Session::flash('error','Your e-mail is already verified. You can now login.');
+            return redirect()->route('registration');
+        }
+    }
+
     public function accountCreatedForm()
     {
 

@@ -6,8 +6,9 @@
 @section('content')
 <!-- Main content -->
 <div class="row">
-		<form action="#" class="user_form">
+		
 			<div class="col-12">
+                <form action="#" class="user_form">
 				<div class="card">
 					<div class="card-body">
 						<div class="row">
@@ -42,8 +43,9 @@
 						</div>
 					</div>
 				 </div>
+                 </form>
 			</div>
-        </form>
+        
 </div>
 <div class="row">
     <div class="col-12">

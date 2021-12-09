@@ -9,8 +9,8 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title float-left">Skill List</h3>
-                <a href="{{route('skill.create')}}" class="btn btn-block btn-success btn-flat btn-sm float-right" style="width: 10%;">Add Skill</a>
+                <h3 class="card-title float-left">{{__("messages.skillgroup.list")}}</h3>
+                <a href="{{route('skill.create')}}" class="btn btn-block btn-success btn-flat btn-sm float-right" style="width: 14%;">{{__("messages.skillgroup.btnadd")}}</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">

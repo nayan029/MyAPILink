@@ -15,12 +15,12 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Skill Detail</h3>
+          <h3 class="card-title">{{__("messages.skillgroup.show")}}</h3>
 
           <div class="card-tools">
             <div class="text-center mt-0 mb-3">
-              <a href="{{route('skill.edit',$skill->id)}}" class="btn btn-sm btn-primary">Edit</a>
-              <a id="delete" href="javascript:void(0);" class="btn btn-sm btn-danger">Delete</a>
+              <a href="{{route('skill.edit',$skill->id)}}" class="btn btn-sm btn-primary">{{__("messages.skillgroup.btnedit")}}</a>
+              <a id="delete" href="javascript:void(0);" class="btn btn-sm btn-danger">{{__("messages.skillgroup.btndelete")}}</a>
               <form action="{{ route('skill.destroy', $skill->id)}}" method="POST" id="deleteForm">
                   @csrf
                   <input name="_method" type="hidden" value="DELETE">           

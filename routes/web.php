@@ -37,15 +37,12 @@ Route::middleware(['auth:admin'])->group(function ($route) {
 
         //Widget module
         $adminRoute->resource('widget', 'WidgetController');
-        $adminRoute->get('/getdata', 'WidgetController@getAjaxData')->name('widget.data');
+        $adminRoute->get('/filter/getdata', 'WidgetController@getAjaxData')->name('widget.data');
 
         //Skills module
         $adminRoute->resource('skill', 'SkillsController');
         $adminRoute->get('/skilldata', 'SkillsController@getData')->name('skill.data');
-
-
-        $adminRoute->resource('widget', 'WidgetController');
-        $adminRoute->get('/getdata', 'WidgetController@getAjaxData')->name('widget.data');
+        $adminRoute->post('/destroyPosition','SkillsController@destroyPosition')->name('destroy.position');
 
         $adminRoute->resource('partner', 'PartnerController');
         $adminRoute->get('/getpartenerdata', 'PartnerController@getPartnerData')->name('partner.data');
@@ -53,7 +50,7 @@ Route::middleware(['auth:admin'])->group(function ($route) {
 
         $adminRoute->get('contact-us', 'ContactController@index')->name('contact.index');
         $adminRoute->get('contact-us-data', 'ContactController@getContactUsData')->name('contact.data');
-       $adminRoute->DELETE('contact/destroy','ContactController@destroy')->name('contact/destroy');
+        $adminRoute->DELETE('contact/destroy', 'ContactController@destroy')->name('contact/destroy');
 
         $adminRoute->get('contact/{id}/edit', 'ContactController@edit')->name('contact.edit');
         $adminRoute->post('contact/update/{id}', 'ContactController@update')->name('contact.update');
@@ -73,7 +70,7 @@ Route::middleware(['auth:admin'])->group(function ($route) {
 Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontRoute) {
 
     $frontRoute->get('/', 'HomeController@userDashboard')->name('dashboard');
-    
+
     $frontRoute->post('addnewsletter', 'HomeController@addNewsletter')->name('addnewsletter');
 
     $frontRoute->post('manager/store', 'ManagerController@storeData')->name('manager.store');
@@ -83,6 +80,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('manager', 'ManagerController@index')->name('manager');
     $frontRoute->get('registration', 'RegistrationController@index')->name('registration');
     $frontRoute->post('registration', 'RegistrationController@saveRegistration')->name('registration.save');
+    $frontRoute->get('email-verify/{email}', 'RegistrationController@getEmailVerify')->name('email.verify');
     $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
     $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');
 
@@ -96,12 +94,16 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
 
     $frontRoute->get('addjob', 'JobController@index')->name('addjob');
     $frontRoute->post('addorupdatejob', 'JobController@addOrUpdateJob')->name('addorupdatejob');
-    $frontRoute->get('job/{id}', 'JobController@show')->name('job');
+    $frontRoute->get('job/show/{id}', 'JobController@show')->name('job.show');
+    $frontRoute->get('users/restore/{id}', 'JobController@restoreUser')->name('users.restore');
 
     $frontRoute->get('editjob/{id}', 'JobController@editJob')->name('editjob');
     $frontRoute->get('destroy/{id}', 'JobController@destroy')->name('destroy');
     $frontRoute->get('see-applicants', 'JobController@viewApplcants')->name('see-applicants');
     $frontRoute->get('edit-applicants', 'JobController@viewApplcants')->name('edit-applicants');
+
+
+    $frontRoute->post('getAjaxSkill', 'HomeController@getAjaxSkill')->name('getAjaxSkill');
 });
 
 Route::middleware(['auth:web'])->group(function ($route) {
@@ -114,7 +116,7 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->post('update-email', 'ManagerController@updateEmail')->name('update-email');
         $frontRoute->post('update-notifications-flag', 'ManagerController@updateNotificationsFlag')->name('update-notifications-flag');
         $frontRoute->post('update-delete-flag', 'ManagerController@updateDeleteAccountFlag')->name('update-delete-flag');
-        
+
         $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
         $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');
         $frontRoute->get('view-establishment-account/{id}', 'EstablishmentController@show')->name('view-establishment-account');
@@ -125,7 +127,10 @@ Route::middleware(['auth:web'])->group(function ($route) {
 
         $frontRoute->get('mycandidate-profile', 'CandidateController@index')->name('mycandidate-profile');
         $frontRoute->get('candidate-profile-edit', 'CandidateController@edit')->name('candidate-profile-edit');
-        
+
         $frontRoute->post('user/logout', 'HomeController@logout')->name('user-logout');
+        $frontRoute->get('applyJob', 'SearchAdController@index')->name('applyJob');
+        $frontRoute->post('store-jobType', 'SearchAdController@store')->name('store-jobType');
+        $frontRoute->post('getDocumentName', 'SearchAdController@getDocumentName')->name('getDocumentName');
     });
 });

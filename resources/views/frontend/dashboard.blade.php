@@ -182,27 +182,18 @@
         <div class="modal-content m-32">
             <div class="modal-header resume_header border-0">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><img src="images/material-close.svg"></span>
+                    <span aria-hidden="true"><img src="{{asset('frontend/images/material-close.svg')}}"></span>
                 </button>
             </div>
             <div class="modal-body resume_modal">
                 <div class="candidate_modal">
-                    <h4 class="mb-3 main_title">Directrice - Directeur de crèche</h4>
+
+                   
+                    <h4 class="mb-3 main_title main-title">-<h3 class="mb-3 position"></h3></h4>
                     <div class="candidate_modal_title">
-                        <h5 class="candidate_modal_text pb-2">Description</h5>
-                        <div class="candidate_modal_desc">
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                            </p>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                containing Lorem Ipsum passages, and more recently with desktop publishing software
-                            </p>
+                        <h5 class="candidate_modal_text pb-2 ">Description</h5>
+                        <div class="candidate_modal_desc desc">
+
                         </div>
                         <div class="text-center pt-4 pb-3">
                             <button class="btn btn-blue btn-skyblue ml-auto" type="button" id="new-industry">Je crée
@@ -267,7 +258,7 @@
     <div class="modal-dialog login-modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body login-modal-body">
-                <form id="manager-login" method="post" action="#">
+                <form id="manager-login" method="post">
                     @csrf
                     <div class="">
                         <div class="lmodal-logo mb-20">
@@ -302,7 +293,7 @@
                             <a href="" class="forgot-link">J'ai perdu mon mot de passe?</a>
                         </div>
                         <div class="col-md-12 text-center res-dec mb-3 ">
-                            <button id="loginbtn" onclick="userLogin();" type="button" class="btn btn-blue w-100">Connexion</button>
+                            <button id="loginbtn" type="submit" class="btn btn-blue w-100">Connexion</button>
                         </div>
                         <div class=" meconnecter">
                             <p class="proxima-nove">Pas encore membre?<a href="#" class=""> Inscrivez-vous</a></p>
@@ -314,4 +305,46 @@
     </div>
 </div>
 @endsection
+@section('script')
+{!! $newslettervalidator->selector('#newsletterform') !!}
 @include('frontend.layouts.login_script')
+<script>
+     
+    $(document).on('click', '.btn-show', function() {
+        var id = $(this).attr("data-id");
+        var url = "{{route('getAjaxSkill')}}";
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+        var title = $('.main-title').text();
+        var desc = $('.desc').text();
+        var pos = $('.position').text();
+
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: {
+                _token: CSRF_TOKEN,
+                id: id,
+                title: title,
+                desc: desc,
+                pos: pos,
+            },
+            success: function(data) {
+                $('.main-title').text(data.skillData.position);
+                $('.desc').text(data.skillData.desc);
+                $('.position').text(data.skillData.title);
+                $('#Modaljob-desc').modal('show');
+            },
+            error: function(data) {
+                console.log('Failed');
+                console.log(data);
+
+            }
+        });
+    });
+ 
+
+</script>
+@endsection
+
+

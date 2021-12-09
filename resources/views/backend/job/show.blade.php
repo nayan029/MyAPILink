@@ -24,7 +24,7 @@
             <div class="col-12 col-md-12 col-lg-12 order-2 order-md-1">
               <div class="row">
               
-                <div class="col-12 col-sm-6">
+                <div class="col-6 col-sm-6">
                   <ul class="list-group list-group-unbordered mb-3">
                     <li class="list-group-item">
                       <b>Title</b> <span class="widget-section">{{ucfirst($job->title)}}</span>
@@ -36,6 +36,21 @@
                       <b>ZipCode</b> <span class="widget-section">{{$job->zip_code !="" ? $job->zip_code : '---'}}</span>
                     </li>
                     
+                    <li class="list-group-item">
+                      <b>Type of Contract</b> <span class="widget-section">{{$job->type_of_contract != "" ? $job->type_of_contract : '---'}}</span>
+                    </li>
+                    <li class="list-group-item">
+                      <b>Contract Length</b> <span class="widget-section">{{$job->contract_length != "" ? $job->contract_length : '---'}}</span>
+                    </li>
+                    <li class="list-group-item">
+                      <b>Type of employment</b> <span class="widget-section">{{$job->type_of_employment != "" ? $job->type_of_employment : '---'}}</span>
+                    </li>
+                    
+                  </ul>
+                </div>
+
+                <div class="col-6 col-sm-6">
+                  <ul class="list-group list-group-unbordered mb-3">
                     <li class="list-group-item">
                       <b>Type of Contract</b> <span class="widget-section">{{$job->type_of_contract != "" ? $job->type_of_contract : '---'}}</span>
                     </li>
@@ -57,10 +72,8 @@
                     <li class="list-group-item">
                       <b>Min. Experience</b> <span class="widget-section">{{$job->minimum_experience != "" ? $job->minimum_experience : '---'}}</span>
                     </li>
-                    
-                    
                   </ul>
-            </div>
+                </div>
           </div>
         </div>
         <!-- /.card-body -->

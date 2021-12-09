@@ -38,6 +38,7 @@ class ManagerRepository implements ManagerRepositoryInterface
             ];
             //dd($storeData);
             $manager = User::create($storeData);
+            // $findUser = Manager::where('id', $manager->id)->first();
             $emailtemplateid = EmailTemplate::where('id', 2)->first();
 
             $mail = $manager->email;

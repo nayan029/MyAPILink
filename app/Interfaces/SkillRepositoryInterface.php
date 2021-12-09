@@ -17,4 +17,6 @@ interface SkillRepositoryInterface
     public function destroySkill($id);
 
     public function getSkillData(Request $request);
+
+    public function destroyPos(Request $request);
 }

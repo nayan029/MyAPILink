@@ -37,7 +37,7 @@
                                             <div class="col-md-2">
                                                 <div class="form-group  mb-4">
                                                     <label class="publish-smalllabel">Code postale<span class="text-danger">*</span></label>
-                                                    <input type="text" name="zip_code" class="form-control inputicon2 form-publish" placeholder="04300">
+                                                    <input type="text" name="zip_code" onkeypress='return isNumber(event)' class="form-control inputicon2 form-publish" placeholder="04300">
                                                 </div>
                                             </div>
                                         </div>
@@ -111,20 +111,20 @@
                                             <div class="col-md-6">
                                                 <div class="form-group  mb-4">
                                                     <label class="publish-smalllabel">Salaire brut minimum<span class="text-danger">*</span></label>
-                                                    <input type="number" name="minimum_gross_salary" class="num-input form-control inputicon2 form-publish">
+                                                    <input type="text" name="minimum_gross_salary" onkeypress='return isNumber(event)' class="num-input form-control inputicon2 form-publish">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group  mb-4">
                                                     <label class="publish-smalllabel">Salaire brut
                                                         maximum<span class="text-danger">*</span></label>
-                                                    <input type="number" name="maximum_gross_salary" class="num-input form-control inputicon2 form-publish">
+                                                    <input type="text" name="maximum_gross_salary" onkeypress='return isNumber(event)' class="num-input form-control inputicon2 form-publish">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group  mb-4">
                                                     <label class="publish-smalllabel">Expérience Minimum<span class="text-danger">*</span></label>
-                                                    <input type="text" name="minimum_experience" class="form-control inputicon2 form-publish" placeholder="2 ans">
+                                                    <input type="text" name="minimum_experience"  class="form-control inputicon2 form-publish" placeholder="2 ans">
                                                 </div>
                                             </div>
                                         </div>
@@ -137,7 +137,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group  mb-4">
-                                                    <input type="text" name="deadline_for_receipt_of_applications" class="datepicker1 form-control inputicon2 form-publish">
+                                                    <input type="date" name="deadline_for_receipt_of_applications" class="datepicker1 form-control inputicon2 form-publish">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">

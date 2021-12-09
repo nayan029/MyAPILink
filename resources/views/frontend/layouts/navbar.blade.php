@@ -68,7 +68,7 @@
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="{{route('manager')}}">
+                        <a class="nav-link" href="">
                             <p>Établissements</p><span class="sr-only">(current)</span>
                         </a>
                     </li>

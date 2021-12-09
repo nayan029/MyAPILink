@@ -127,6 +127,7 @@ Route::middleware(['auth:web'])->group(function ($route) {
 
         $frontRoute->get('mycandidate-profile', 'CandidateController@index')->name('mycandidate-profile');
         $frontRoute->get('candidate-profile-edit', 'CandidateController@edit')->name('candidate-profile-edit');
+        $frontRoute->post('update-candidate-profile', 'CandidateController@update')->name('update-candidate-profile');
 
         $frontRoute->post('user/logout', 'HomeController@logout')->name('user-logout');
         $frontRoute->get('applyJob', 'SearchAdController@index')->name('applyJob');

@@ -250,9 +250,7 @@
     @endsection
 @section('script')
 
-<script type="text/javascript ">
-    $(".select2 ").select2();
-</script>
+
 <script type="text/javascript">
     $("#bravo-btn").on('click', function() {
         $('#establishment').modal('hide');
@@ -264,18 +262,6 @@
     });
 </script>
 <script>
-    var togglePassword = document.getElementById("toggle-password ");
-
-    if (togglePassword) {
-        togglePassword.addEventListener('click ', function() {
-            var x = document.getElementById("password ");
-            if (x.type === "password ") {
-                x.type = "text ";
-            } else {
-                x.type = "password ";
-            }
-        });
-    }
 
     // -------------------
 
@@ -318,5 +304,5 @@
 {!! $validator->selector('#store-establishment') !!}
 
 @endsection
-</body>
-</html>
+
+

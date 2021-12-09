@@ -15,13 +15,13 @@
                         <div class="col-md-7">
                             <div class="c-profile-sec">
                                 <div class="d-flex align-items-center">
-                                    <img src="{{asset('frontend/images/imgs-svg/view-profile.svg')}}" alt="candidate-profile" class="c-profimage">
+                                    <img src="{{URL::to('/')}}/{{auth()->user()->profile_photo_path}}" alt="candidate-profile" class="c-profimage">
                                     <div class="pl-3">
-                                        <h5 class="dark-tit">Monsieur Paul Bertrand</h5>
+                                        <h5 class="dark-tit">{{auth()->guard('web')->user()->first_name}} {{auth()->guard('web')->user()->last_name}} </h5>
                                         <div class="c-prof-headertext">
                                             <p class="mb-0">Auxiliaire de crèche</p>
                                             <p class="mb-0">
-                                                <span><img src="{{asset('frontend/images/map.svg')}}" width="12px"></span> Montpellier, France
+                                                <span><img src="{{asset('frontend/images/map.svg')}}" width="12px"></span> {{auth()->guard('web')->user()->city}}
                                             </p>
                                         </div>
                                     </div>
@@ -138,17 +138,17 @@
                                             <div class="profile-sidebar-sec">
                                                 <div class="prof-side">
                                                     <h5 class="dark-tit profside-title">Situation actuelle :</h5>
-                                                    <p class="profside-text">En recherche active</p>
+                                                    <p class="profside-text">{{auth()->guard('web')->user()->current_situation}}</p>
                                                 </div>
                                                 <div class="prof-side">
                                                     <h5 class="dark-tit profside-title">Recherche :</h5>
-                                                    <p class="profside-text">CDI, CDD</p>
+                                                    <p class="profside-text">{{auth()->guard('web')->user()->research}}</p>
                                                 </div>
                                                 <div class="prof-side">
                                                     <h5 class="dark-tit profside-title">Disponible :</h5>
                                                     <ul class="prof-view-ul">
-                                                        <li>Dès aujourd’hui</li>
-                                                        <li>À temps plein</li>
+                                                        <li>{{auth()->guard('web')->user()->available_day}}</li>
+                                                        <li>{{auth()->guard('web')->user()->available_time}}</li>
                                                     </ul>
                                                 </div>
                                                 <div class="prof-side">
@@ -193,7 +193,7 @@
                                             <div class="prof-side mb-4">
                                                 <h5 class="dark-tit profside-title">Paul en quelques mots (OU A propos de Paul)
                                                 </h5>
-                                                <p class="profside-text">Passionné par les enfants, j’en ai fais ma vocation. Ayant terminé récemment <br>mon CDD, je suis à la recherche d’un nouvel emploi.
+                                                <p class="profside-text">{{auth()->guard('web')->user()->about_me}}
                                                 </p>
                                             </div>
 
@@ -209,28 +209,28 @@
                                                 </div>
                                                 <div class="exper">
                                                     <p class="experience-title">Pédagogies appréciées</p>
-                                                    <p class="experience-text">Maria Montessori</p>
+                                                    <p class="experience-text">{{auth()->guard('web')->user()->pedagogy}}</p>
                                                 </div>
                                             </div>
 
                                             <div class="prof-side mb-4">
                                                 <h5 class="dark-tit profside-title">Pédagogies appréciées</h5>
-                                                <p class="profside-text">Maria Montessori</p>
+                                                <p class="profside-text">{{auth()->guard('web')->user()->pedagogy}}</p>
                                             </div>
                                             <div class="prof-side mb-4">
                                                 <h5 class="dark-tit profside-title">Mes qualités</h5>
+                                                @php $qualities=explode(",",auth()->guard('web')->user()->qualities); @endphp
                                                 <ul class="prof-view-ul Mes-ul">
-                                                    <li>Bienveillant</li>
-                                                    <li>Doux</li>
-                                                    <li>Patient</li>
+                                                    @foreach($qualities as $qualitie)
+                                                    <li>{{$qualitie}}</li>
+                                                   @endforeach
                                                 </ul>
                                             </div>
                                             <div class="prof-side ">
                                                 <h5 class="dark-tit profside-title">Mes valeurs</h5>
                                                 <ul class="prof-view-ul Mes-ul">
-                                                    <li>Créativité</li>
-                                                    <li>Paix</li>
-                                                    <li>Amour</li>
+                                                    <li>{{auth()->guard('web')->user()->values}}</li>
+                                                   
                                                 </ul>
                                             </div>
 
@@ -272,7 +272,7 @@
                                                 </div>
                                                 <div class="prof-side">
                                                     <h5 class="dark-tit profside-title">Diplômes :</h5>
-                                                    <p class="profside-text">CAP AEPE</p>
+                                                    <p class="profside-text">{{auth()->guard('web')->user()->diplomas}}</p>
                                                 </div>
                                                 <div class="prof-side">
                                                     <h5 class="dark-tit profside-title">Expériences :</h5>
@@ -291,7 +291,7 @@
                                                 </div>
                                                 <div class="prof-side">
                                                     <h5 class="dark-tit profside-title">Mobilité :</h5>
-                                                    <p class="profside-text">Montpellier et 10 km autour</p>
+                                                    <p class="profside-text">{{auth()->guard('web')->user()->mobility}}</p>
                                                 </div>
                                                 <div class="prof-side mb-60">
                                                     <h5 class="dark-tit profside-title">Vérifications :</h5>
@@ -881,14 +881,15 @@
                                     <div class="card sr-card tab-hgt">
                                         <div class="card-body">
                                             <div class="dossier_sec personal_detail_edit pb-0">
-                                                <ul class="img-ul">
-                                                    <li>
+                                                <ul class="img-ul"  id="appendid">
+                                                @foreach($images as $image)
+                                                    <li id="image{{$image->id}}">
                                                         <div class="img_section">
                                                             <div class="img_content">
-                                                                <img src="{{asset('frontend/images/imgs-svg/unsplash.svg')}}" />
+                                                                <img src='{{asset("$image->image")}}' />
 
                                                             </div>
-                                                            <img src="{{asset('frontend/images/close.svg')}}" width="12px" class="c-prof-closeimg">
+                                                            <img onclick="removeImage({{$image->id}})" src="{{asset('frontend/images/close.svg')}}" width="12px" class="c-prof-closeimg">
                                                             <div class="text-imgs">
                                                                 <p class="mb-0">Project Name 1</p>
                                                                 <p class="work-from">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
@@ -896,137 +897,11 @@
                                                             </div>
                                                         </div>
                                                     </li>
+                                                    @endforeach
                                                     <li>
-                                                        <div class="img_section">
-                                                            <div class="img_content">
-                                                                <img src="{{asset('frontend/images/imgs-svg/unsplash1.svg')}}" />
-                                                            </div>
-                                                            <img src="images/close.svg" width="12px" class="c-prof-closeimg">
-                                                            <div class="text-imgs">
-                                                                <p class="mb-0">Project Name 1</p>
-                                                                <p class="work-from">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                                                <button class="btn btn-small" data-toggle="modal" data-target="#cv-modal1">view more</button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="img_section">
-                                                            <div class="img_content">
-                                                                <img src="{{asset('frontend/images/imgs-svg/unsplash2.svg')}}" />
-                                                            </div>
-                                                            <img src="{{asset('frontend/images/close.svg')}}" width="12px" class="c-prof-closeimg">
-                                                            <div class="text-imgs">
-                                                                <p class="mb-0">Project Name 1</p>
-                                                                <p class="work-from">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                                                <button class="btn btn-small" data-toggle="modal" data-target="#cv-modal1">view more</button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="img_section">
-                                                            <div class="img_content">
-                                                                <img src="{{asset('frontend/images/imgs-svg/unsplash3.svg')}}" />
-                                                            </div>
-                                                            <img src="{{asset('frontend/images/close.svg')}}" width="12px" class="c-prof-closeimg">
-                                                            <div class="text-imgs">
-                                                                <p class="mb-0">Project Name 1</p>
-                                                                <p class="work-from">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                                                <button class="btn btn-small" data-toggle="modal" data-target="#cv-modal1">view more</button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="img_section">
-                                                            <div class="img_content">
-                                                                <img src="{{asset('frontend/images/imgs-svg/unsplash4.svg')}}" />
-                                                            </div>
-                                                            <img src="{{asset('frontend/images/close.svg')}}" width="12px" class="c-prof-closeimg">
-                                                            <div class="text-imgs">
-                                                                <p class="mb-0">Project Name 1</p>
-                                                                <p class="work-from">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                                                <button class="btn btn-small" data-toggle="modal" data-target="#cv-modal1">view more</button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="img_section">
-                                                            <div class="img_content">
-                                                                <img src="{{asset('frontend/images/imgs-svg/unsplash5.svg')}}" />
-                                                            </div>
-                                                            <img src="{{asset('frontend/images/close.svg')}}" width="12px" class="c-prof-closeimg">
-                                                            <div class="text-imgs">
-                                                                <p class="mb-0">Project Name 1</p>
-                                                                <p class="work-from">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                                                <button class="btn btn-small" data-toggle="modal" data-target="#cv-modal1">view more</button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="img_section">
-                                                            <div class="img_content">
-                                                                <img src="{{asset('frontend/images/imgs-svg/unsplash6.svg')}}" />
-                                                            </div>
-                                                            <img src="{{asset('frontend/images/close.svg')}}" width="12px" class="c-prof-closeimg">
-                                                            <div class="text-imgs">
-                                                                <p class="mb-0">Project Name 1</p>
-                                                                <p class="work-from">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                                                <button class="btn btn-small" data-toggle="modal" data-target="#cv-modal1">view more</button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="img_section">
-                                                            <div class="img_content">
-                                                                <img src="{{asset('frontend/images/imgs-svg/unsplash7.svg')}}" />
-                                                            </div>
-                                                            <img src="{{asset('frontend/images/close.svg')}}" width="12px" class="c-prof-closeimg">
-                                                            <div class="text-imgs">
-                                                                <p class="mb-0">Project Name 1</p>
-                                                                <p class="work-from">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                                                <button class="btn btn-small" data-toggle="modal" data-target="#cv-modal1">view more</button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="img_section">
-                                                            <div class="img_content">
-                                                                <img src="{{asset('frontend/images/imgs-svg/unsplash8.svg')}}" />
-                                                            </div>
-                                                            <img src="{{asset('frontend/images/close.svg')}}" width="12px" class="c-prof-closeimg">
-                                                            <div class="text-imgs">
-                                                                <p class="mb-0">Project Name 1</p>
-                                                                <p class="work-from">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                                                <button class="btn btn-small" data-toggle="modal" data-target="#cv-modal1">view more</button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="img_section">
-                                                            <div class="img_content">
-                                                                <img src="{{asset('frontend/images/imgs-svg/unsplash9.svg')}}" />
-                                                            </div>
-                                                            <img src="images/close.svg" width="12px" class="c-prof-closeimg">
-                                                            <div class="text-imgs">
-                                                                <p class="mb-0">Project Name 1</p>
-                                                                <p class="work-from">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                                                <button class="btn btn-small" data-toggle="modal" data-target="#cv-modal1">view more</button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="img_section">
-                                                            <div class="img_content">
-                                                                <img src="{{asset('frontend/images/imgs-svg/unsplash10.svg')}}" />
-                                                            </div>
-                                                            <img src="{{asset('frontend/images/close.svg')}}" width="12px" class="c-prof-closeimg">
-                                                            <div class="text-imgs">
-                                                                <p class="mb-0">Project Name 1</p>
-                                                                <p class="work-from">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                                                <button class="btn btn-small" data-toggle="modal" data-target="#cv-modal1">view more</button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
+                                                        
+                                                <form method="post" enctype="multipart/form-data" name="myForm" id="myForm">
+                                                    @csrf
                                                         <div class="img_section">
                                                             <div class="profimage-upload">
                                                                 <div class="upload-div">
@@ -1034,13 +909,12 @@
                                                                     </div>
                                                                     <p class="mb-0">Télécharger <br>une image</p>
                                                                 </div>
-                                                                <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg" class="upload-input1">
+                                                                <input type="file" id="imageUpload" name="image" accept=".png, .jpg, .jpeg" onchange="imageUploadGallery();"class="upload-input1">
                                                             </div>
-
-
                                                         </div>
+                                                        <span class="image-upload-error text-danger">@error ('image') {{$message}} @enderror</span>
+                                                        </form>
                                                     </li>
-
                                                 </ul>
                                                 <div class="d-flex justify-content-end btn-image-view mt-4">
                                                     <a class="btn btn-blue d-flex"><img src="{{asset('frontend/images/imgs-svg/ionic-md-eye.svg')}}" class="mr-4" alt="eye-icon">Plus ...</a>
@@ -1261,7 +1135,57 @@
         }, 500);
 
     });
+
+    // upload image
+    function imageUploadGallery() {
+        $('.image-upload-error').text('');
+        event.preventDefault();
+        $.ajax({
+            url: '{{ route("upload-image") }}',
+            method: 'POST',
+            data: new FormData(myForm),
+            _token: '{{ csrf_token() }}',
+            dataType: 'JSON',
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                if (response.success == true) {
+                    toastr.success(response.message);
+                    
+                    $("#appendid").prepend("<li id='image" + response.data.id + "'><div class='img_section'><div class='img_content'><img src='{{asset('/')}}" + response.data.image + "' /></div><img imageId=" + response.data.id + " onclick='removeImage(" + response.data.id + ")'  src='{{asset('frontend/images/project/cancel-red.svg')}}' width='12px' class='c-prof-closeimg'><div class='text-imgs'><p class='mb-0'>Project Name 1</p><p class='work-from'>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p><button class='btn btn-small' data-toggle='modal' data-target='#cv-modal1'>view more</button></div></div></li>");
+                } else {
+                    $('.image-upload-error').text(response.errors.image);
+                }
+            }
+        });
+    }
+    //Remove Image
+    function removeImage(id) {
+        $.ajax({
+            url: "{{ route('remove-image') }}",
+            type: "POST",
+            data: {
+                id: id,
+                _token: "{{csrf_token()}}"
+            },
+            success: function(response) {
+                if (response.success == true) {
+                    toastr.success(response.message);
+
+                    $("#image" + id).remove();
+
+                } else {
+                    toastr.error(response.message);
+                }
+
+            }
+        });
+    }
 </script>
+
+<script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+{!! $validator->selector('#upload-image') !!}
 @endsection
 
 

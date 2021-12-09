@@ -130,6 +130,11 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
         return EstablishmentGallery::where('establishment_id', $id)->where('deleted_at', NULL)->get();
     }
 
+    public function getCandidateGallery()
+    {
+        $query = EstablishmentGallery::where('deleted_at', NULL)->where('created_by',auth()->guard('web')->user()->id)->get();
+        return  $query;
+    }
     public function deleteImage($id)
     {
         $id = EstablishmentGallery::find($id);

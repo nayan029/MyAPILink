@@ -157,8 +157,12 @@
 <script src="{{asset('frontend/js/jquery.magnific-popup.min.js')}} "></script>
 <script src="{{asset('frontend/js/owl.carousel.js')}} "></script>
 <!-- <script src="{{asset('frontend/js/custom.js')}}"></script> -->
+<script src="{{asset('frontend/js/bootstrap-timepicker')}}"></script>
+<script src="{{asset('frontend/js/bootstrap-colorpicker.min')}}"></script>
+<script src="{{asset('frontend/js/bootstrap-datepicker.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="{{asset('frontend/js/select2.min.js')}} "></script>
+<script type="text/javascript" src="{{asset('frontend/js/bootstrap-multiselect.js')}}"></script>
 
 <script>
     $(".select2 ").select2();

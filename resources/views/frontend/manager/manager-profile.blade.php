@@ -182,7 +182,7 @@
                                                     <tr>
                                                         <td>
                                                             <div class="d-flex align-items-center">
-                                                                <img src="{{url(''.$value->more_infomation)}}" alt="user" class="manager-pro mr-3">
+                                                                <img src="{{url(''.'/frontend/images/project/mont1.svg')}}" alt="user" class="manager-pro mr-3">
                                                                 <p class="mb-0 managerp">{{$value->type_of_establishment}}</p>
                                                             </div>
                                                         </td>

@@ -104,6 +104,10 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->post('getAjaxSkill', 'HomeController@getAjaxSkill')->name('getAjaxSkill');
 
     $frontRoute->get('establishment-dashborad', 'EstablishmentController@dashborad')->name('establishment-dashborad');
+    $frontRoute->post('send-forgot-password-mail', 'HomeController@forgotPassword')->name('send-forgot-password-mail');
+    $frontRoute->get('forgotpassword-user/{token}', 'HomeController@resetPassword')->name('forgotpassword-user');
+    $frontRoute->post('user-reset-password', 'HomeController@updatePassword')->name('user-reset-password');
+    
 });
 
 Route::middleware(['auth:web'])->group(function ($route) {
@@ -127,6 +131,7 @@ Route::middleware(['auth:web'])->group(function ($route) {
 
         $frontRoute->get('mycandidate-profile', 'CandidateController@index')->name('mycandidate-profile');
         $frontRoute->get('candidate-profile-edit', 'CandidateController@edit')->name('candidate-profile-edit');
+        $frontRoute->post('update-candidate-profile', 'CandidateController@update')->name('update-candidate-profile');
 
         $frontRoute->post('user/logout', 'HomeController@logout')->name('user-logout');
         $frontRoute->get('search-job', 'SearchAdController@index')->name('searchjob');

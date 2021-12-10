@@ -399,14 +399,8 @@
     });
     $(document).on('click', '.btn-skyblue', function() {
         $('#Modallogin2').modal('show');
-        $('#Modaljob-desc').modal('hide');
-    
-        $('body').css('overflow','hidden')
+        $('#Modaljob-desc').modal('hide');  
     });
-
-   
-
-
 </script>
 @endsection
 

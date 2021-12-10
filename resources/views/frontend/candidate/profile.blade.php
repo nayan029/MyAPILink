@@ -396,134 +396,9 @@
                                             <div class="sr-card tab-minus">
                                                 <div class="card-body pos-card">
                                                     <div class="card-pd">
-                                                        <div class="job-card ">
-                                                            <div class="d-flex justify-content-between mb-4 ">
-                                                                <div>
-                                                                    <h5 class="mb-0 c-prof-jobtext">Auxiliaire Puéricultrice
-                                                                    </h5>
-                                                                    <p class="mb-0 job_cre_text">Crèche du bonheur</p>
-                                                                </div>
-
-                                                                <span class="c-prof-public-text mr-5">Publié il y a 5
-                                                                    jours</span>
-                                                            </div>
-                                                            <div class="row mb-3 ">
-                                                                <div class="col-md-6 ">
-                                                                    <ul class="search-image-ul">
-                                                                        <li>
-                                                                            <p class="mb-0 ">Montpellier (34)</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p class="mb-0 ">1 350 € par mois</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p class="mb-0 ">Expérience : Minimum 2 ans
-                                                                            </p>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="col-md-6 mt-2 align-items-end d-flex justify-content-end">
-                                                                    <p class="c-prof-public-text mb-0">Candidature envoyée le xx/xx/xxxx
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="job-card ">
-                                                            <div class="d-flex justify-content-between mb-4 ">
-                                                                <div>
-                                                                    <h5 class="mb-0 c-prof-jobtext">Auxiliaire Puéricultrice
-                                                                    </h5>
-                                                                    <p class="mb-0 job_cre_text">Crèche du bonheur</p>
-                                                                </div>
-
-                                                                <span class="c-prof-public-text mr-5">Publié il y a 5
-                                                                    jours</span>
-                                                            </div>
-                                                            <div class="row mb-3 ">
-                                                                <div class="col-md-6 ">
-                                                                    <ul class="search-image-ul">
-                                                                        <li>
-                                                                            <p class="mb-0 ">Montpellier (34)</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p class="mb-0 ">1 350 € par mois</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p class="mb-0 ">Expérience : Minimum 2 ans
-                                                                            </p>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="col-md-6 mt-2 align-items-end d-flex justify-content-end">
-                                                                    <p class="c-prof-public-text mb-0">Candidature envoyée le xx/xx/xxxx
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="job-card ">
-                                                            <div class="d-flex justify-content-between mb-4 ">
-                                                                <div>
-                                                                    <h5 class="mb-0 c-prof-jobtext">Auxiliaire Puéricultrice
-                                                                    </h5>
-                                                                    <p class="mb-0 job_cre_text">Crèche du bonheur</p>
-                                                                </div>
-
-                                                                <span class="c-prof-public-text mr-5">Publié il y a 5
-                                                                    jours</span>
-                                                            </div>
-                                                            <div class="row mb-3 ">
-                                                                <div class="col-md-6 ">
-                                                                    <ul class="search-image-ul">
-                                                                        <li>
-                                                                            <p class="mb-0 ">Montpellier (34)</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p class="mb-0 ">1 350 € par mois</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p class="mb-0 ">Expérience : Minimum 2 ans
-                                                                            </p>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="col-md-6 mt-2 align-items-end d-flex justify-content-end">
-                                                                    <p class="c-prof-public-text mb-0">Candidature envoyée le xx/xx/xxxx
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="job-card ">
-                                                            <div class="d-flex justify-content-between mb-4 ">
-                                                                <div>
-                                                                    <h5 class="mb-0 c-prof-jobtext">Auxiliaire Puéricultrice
-                                                                    </h5>
-                                                                    <p class="mb-0 job_cre_text">Crèche du bonheur</p>
-                                                                </div>
-
-                                                                <span class="c-prof-public-text mr-5">Publié il y a 5
-                                                                    jours</span>
-                                                            </div>
-                                                            <div class="row mb-3 ">
-                                                                <div class="col-md-6 ">
-                                                                    <ul class="search-image-ul">
-                                                                        <li>
-                                                                            <p class="mb-0 ">Montpellier (34)</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p class="mb-0 ">1 350 € par mois</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p class="mb-0 ">Expérience : Minimum 2 ans
-                                                                            </p>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="col-md-6 mt-2 align-items-end d-flex justify-content-end">
-                                                                    <p class="c-prof-public-text mb-0">Candidature envoyée le xx/xx/xxxx
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                       
+                                                       
+                                                        
                                                         <div class="job-card ">
                                                             <div class="d-flex justify-content-between mb-4 ">
                                                                 <div>
@@ -567,12 +442,14 @@
                                                 <div class="card-body pos2-card">
                                                     <div class="card-pd">
                                                         <div class="card-pd">
+                                                        
+                                                           @foreach($jobSaveData as $jobSave)
                                                             <div class="job-card ">
                                                                 <div class="d-flex justify-content-between mb-4 ">
                                                                     <div>
-                                                                        <h5 class="mb-0 c-prof-jobtext">Auxiliaire Puéricultrice
+                                                                        <h5 class="mb-0 c-prof-jobtext">{{$jobSave['job']->title}}
                                                                         </h5>
-                                                                        <p class="mb-0 job_cre_text">Crèche du bonheur
+                                                                        <p class="mb-0 job_cre_text">{{$jobSave['job']->type_of_contract}}
                                                                         </p>
                                                                     </div>
 
@@ -586,224 +463,27 @@
                                                                     <div class="col-md-8 ">
                                                                         <ul class="search-image-ul">
                                                                             <li>
-                                                                                <p class="mb-0 ">Montpellier (34)</p>
+                                                                                <!-- <p class="mb-0 ">Montpellier (34)</p> -->
                                                                             </li>
                                                                             <li>
-                                                                                <p class="mb-0 ">1 350 € par mois</p>
+                                                                                <p class="mb-0 ">{{$jobSave['job']->maximum_gross_salary}} € par mois</p>
                                                                             </li>
                                                                             <li>
-                                                                                <p class="mb-0 ">Expérience : Minimum 2 ans
+                                                                                <p class="mb-0 ">Expérience :{{$jobSave['job']->minimum_experience}}
                                                                                 </p>
                                                                             </li>
                                                                         </ul>
                                                                     </div>
                                                                     <div class="col-md-4 mt-2 align-items-end d-flex justify-content-end">
                                                                         <div class="d-flex">
-                                                                            <a href="listing-details.html" class="btn btn-viewjob mr-4">Voir
+                                                                            <a href="{{URL::to('details-job'.'/'.$jobSave['job']->id)}}" class="btn btn-viewjob mr-4">Voir
                                                                                 l’offre</a>
                                                                             <button class="btn btn-apply " data-toggle="modal" data-target="#establishment">Postuler</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="job-card ">
-                                                                <div class="d-flex justify-content-between mb-4 ">
-                                                                    <div>
-                                                                        <h5 class="mb-0 c-prof-jobtext">Auxiliaire Puéricultrice
-                                                                        </h5>
-                                                                        <p class="mb-0 job_cre_text">Crèche du bonheur
-                                                                        </p>
-                                                                    </div>
-
-                                                                    <span class="c-prof-public-text">Publié il y a 5
-                                                                        jours<img
-                                                                            src="images/imgs-svg/book-mark-yellow.svg "
-                                                                            alt="bookmark image "
-                                                                            class="ml-3 book-yellow-img"></span>
-                                                                </div>
-                                                                <div class="row mb-3 ">
-                                                                    <div class="col-md-8 ">
-                                                                        <ul class="search-image-ul">
-                                                                            <li>
-                                                                                <p class="mb-0 ">Montpellier (34)</p>
-                                                                            </li>
-                                                                            <li>
-                                                                                <p class="mb-0 ">1 350 € par mois</p>
-                                                                            </li>
-                                                                            <li>
-                                                                                <p class="mb-0 ">Expérience : Minimum 2 ans
-                                                                                </p>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="col-md-4 mt-2 align-items-end d-flex justify-content-end">
-                                                                        <div class="d-flex">
-                                                                            <a href="listing-details.html" class="btn btn-viewjob mr-4">Voir
-                                                                                l’offre</a>
-                                                                            <button class="btn btn-apply " data-toggle="modal" data-target="#establishment">Postuler</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="job-card ">
-                                                                <div class="d-flex justify-content-between mb-4 ">
-                                                                    <div>
-                                                                        <h5 class="mb-0 c-prof-jobtext">Auxiliaire Puéricultrice
-                                                                        </h5>
-                                                                        <p class="mb-0 job_cre_text">Crèche du bonheur
-                                                                        </p>
-                                                                    </div>
-
-                                                                    <span class="c-prof-public-text">Publié il y a 5
-                                                                        jours<img
-                                                                            src="images/imgs-svg/book-mark-yellow.svg "
-                                                                            alt="bookmark image "
-                                                                            class="ml-3 book-yellow-img"></span>
-                                                                </div>
-                                                                <div class="row mb-3 ">
-                                                                    <div class="col-md-8 ">
-                                                                        <ul class="search-image-ul">
-                                                                            <li>
-                                                                                <p class="mb-0 ">Montpellier (34)</p>
-                                                                            </li>
-                                                                            <li>
-                                                                                <p class="mb-0 ">1 350 € par mois</p>
-                                                                            </li>
-                                                                            <li>
-                                                                                <p class="mb-0 ">Expérience : Minimum 2 ans
-                                                                                </p>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="col-md-4 mt-2 align-items-end d-flex justify-content-end">
-                                                                        <div class="d-flex">
-                                                                            <a href="listing-details.html" class="btn btn-viewjob mr-4">Voir
-                                                                                l’offre</a>
-                                                                            <button class="btn btn-apply " data-toggle="modal" data-target="#establishment">Postuler</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="job-card ">
-                                                                <div class="d-flex justify-content-between mb-4 ">
-                                                                    <div>
-                                                                        <h5 class="mb-0 c-prof-jobtext">Auxiliaire Puéricultrice
-                                                                        </h5>
-                                                                        <p class="mb-0 job_cre_text">Crèche du bonheur
-                                                                        </p>
-                                                                    </div>
-
-                                                                    <span class="c-prof-public-text">Publié il y a 5
-                                                                        jours<img
-                                                                            src="{{asset('frontend/images/imgs-svg/book-mark-yellow.svg')}}"
-                                                                            alt="bookmark image "
-                                                                            class="ml-3 book-yellow-img"></span>
-                                                                </div>
-                                                                <div class="row mb-3 ">
-                                                                    <div class="col-md-8 ">
-                                                                        <ul class="search-image-ul">
-                                                                            <li>
-                                                                                <p class="mb-0 ">Montpellier (34)</p>
-                                                                            </li>
-                                                                            <li>
-                                                                                <p class="mb-0 ">1 350 € par mois</p>
-                                                                            </li>
-                                                                            <li>
-                                                                                <p class="mb-0 ">Expérience : Minimum 2 ans
-                                                                                </p>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="col-md-4 mt-2 align-items-end d-flex justify-content-end">
-                                                                        <div class="d-flex">
-                                                                            <a href="listing-details.html" class="btn btn-viewjob mr-4">Voir
-                                                                                l’offre</a>
-                                                                            <button class="btn btn-apply " data-toggle="modal" data-target="#establishment">Postuler</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="job-card ">
-                                                                <div class="d-flex justify-content-between mb-4 ">
-                                                                    <div>
-                                                                        <h5 class="mb-0 c-prof-jobtext">Auxiliaire Puéricultrice
-                                                                        </h5>
-                                                                        <p class="mb-0 job_cre_text">Crèche du bonheur
-                                                                        </p>
-                                                                    </div>
-
-                                                                    <span class="c-prof-public-text">Publié il y a 5
-                                                                        jours<img
-                                                                            src="images/imgs-svg/book-mark-yellow.svg "
-                                                                            alt="bookmark image "
-                                                                            class="ml-3 book-yellow-img"></span>
-                                                                </div>
-                                                                <div class="row mb-3 ">
-                                                                    <div class="col-md-8 ">
-                                                                        <ul class="search-image-ul">
-                                                                            <li>
-                                                                                <p class="mb-0 ">Montpellier (34)</p>
-                                                                            </li>
-                                                                            <li>
-                                                                                <p class="mb-0 ">1 350 € par mois</p>
-                                                                            </li>
-                                                                            <li>
-                                                                                <p class="mb-0 ">Expérience : Minimum 2 ans
-                                                                                </p>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="col-md-4 mt-2 align-items-end d-flex justify-content-end">
-                                                                        <div class="d-flex">
-                                                                            <a href="listing-details.html" class="btn btn-viewjob mr-4">Voir
-                                                                                l’offre</a>
-                                                                            <button class="btn btn-apply " data-toggle="modal" data-target="#establishment">Postuler</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="job-card ">
-                                                                <div class="d-flex justify-content-between mb-4 ">
-                                                                    <div>
-                                                                        <h5 class="mb-0 c-prof-jobtext">Auxiliaire Puéricultrice
-                                                                        </h5>
-                                                                        <p class="mb-0 job_cre_text">Crèche du bonheur
-                                                                        </p>
-                                                                    </div>
-
-                                                                    <span class="c-prof-public-text">Publié il y a 5
-                                                                        jours<img
-                                                                            src="{{asset('frontend/images/imgs-svg/book-mark-yellow.svg')}}"
-                                                                            alt="bookmark image "
-                                                                            class="ml-3 book-yellow-img"></span>
-                                                                </div>
-                                                                <div class="row mb-3 ">
-                                                                    <div class="col-md-8 ">
-                                                                        <ul class="search-image-ul">
-                                                                            <li>
-                                                                                <p class="mb-0 ">Montpellier (34)</p>
-                                                                            </li>
-                                                                            <li>
-                                                                                <p class="mb-0 ">1 350 € par mois</p>
-                                                                            </li>
-                                                                            <li>
-                                                                                <p class="mb-0 ">Expérience : Minimum 2 ans
-                                                                                </p>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div class="col-md-4 mt-2 align-items-end d-flex justify-content-end">
-                                                                        <div class="d-flex">
-                                                                            <a href="listing-details.html" class="btn btn-viewjob mr-4">Voir
-                                                                                l’offre</a>
-                                                                            <button class="btn btn-apply " data-toggle="modal" data-target="#establishment">Postuler</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-
-
+                                                      @endforeach
 
 
                                                         </div>

@@ -13,4 +13,6 @@ interface ApplyJobRepositoryInterface
     public function getSingleCandidatedata($id);
     public function getCompanyData($id);
     public function getManagerPosts($id);
+    public function getJobsaveDataByUserId();
+    
 }

@@ -59,4 +59,9 @@ class ApplyJobRepository implements ApplyJobRepositoryInterface
     {
         return Job::where('deleted_at', NULL)->where('user_id', $id)->get();
     }
+  
+    public function getJobsaveDataByUserId()
+    {
+        return  SavedJobs::with('job')->where('job_save',1)->where('deleted_at', NULL)->where('user_id',auth()->guard('web')->user()->id)->get();
+    }
 }

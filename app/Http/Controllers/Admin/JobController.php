@@ -16,6 +16,7 @@ class JobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $jobRepository="";
 
     public function __construct(JobRepositoryInterface $jobRepository)
     {

@@ -141,6 +141,7 @@
                     <div class="">
                         <div class="card-pd">
                             <div class="job-card">
+
                                 @if($list)
                                 @foreach($list as $data)
                                 @php
@@ -158,7 +159,13 @@
 
                                     <div class="d-flex">
                                         <span class="public-span">Publié il y a {{$finalDays}} jours</span>
-                                        <button class="btn fav-btn" type="button" id="book1"><img src="frontend/images/bookmark.svg " alt="bookmark image " class="b1 bookmark-img"><img src="frontend/images/imgs-svg/book-mark-yellow.svg " alt="bookmark image " class="b2 bookmark-img"></button>
+                                        <input type="hidden" name="job_id" id="job_id">
+                                        <input type="hidden" name="user_id" id="user_id">
+                                        <button id="saveclass{{$data->id}}" class="btn fav-btn save-fav" type="button" data-job="{{$data->id}}" data-user="{{$data->user_id}}" data-rowid="{{$data->id}}">
+
+                                            <img id="saveicon{{$data->id}}" src="{{count($data->saveJob) > 0 ? 'frontend/images/imgs-svg/book-mark-yellow.svg' : 'frontend/images/bookmark.svg'}} " alt="bookmark image " class="b1 bookmark-img">
+
+                                        </button>
                                     </div>
 
 
@@ -180,8 +187,8 @@
 
                                     <div class="col-md-4 mt-2 align-items-end d-flex justify-content-end">
                                         <div class="d-flex">
-                                            <a href="listing-details.html" class="btn btn-viewjob ">Voir l’offre</a>
-                                            <button data-toggle="modal" class="btn btn-apply" onclick="openJobModal('{{$data->id}}','{{$data->user_id}}')" {{$isApplyed}}>Postuler</button>
+                                            <a href="{{route('details-job',$data->id)}}" class="btn btn-viewjob ">Voir l’offre</a>
+                                            <button class="btn btn-apply" @if($data->applyJob != '') @else onclick="openJobModal('{{$data->id}}','{{$data->user_id}}')" @endif {{$isApplyed}}>Postuler</button>
                                         </div>
                                     </div>
                                 </div>
@@ -220,7 +227,7 @@
     </div>
 </section>
 <!-- See the establishment's file Modal -->
-<div class="modal fade modal-back-blue" id="establishment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade modal-back-blue" id="establishment" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog center-modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content m-32">
             <div class="modal-header resume_header border-0">
@@ -253,7 +260,7 @@
     </div>
 </div>
 <!-- bravo modal -->
-<div class="modal fade modal-back-blue" id="bravo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade modal-back-blue" id="bravo" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header resume_header border-0">
@@ -279,7 +286,7 @@
 </div>
 
 <!-- cv modal -->
-<div class="modal fade modal-back-blue" id="cv-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade modal-back-blue" id="cv-modal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog center-modal-dialog modal-xl" role="document">
         <div class="modal-content m-32">
             <div class="modal-header resume_header border-0">
@@ -321,7 +328,7 @@
 
 <!-- tele modal -->
 
-<div class="modal" id="tele-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="tele-modal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header resume_header border-0">
@@ -399,17 +406,21 @@
 @section('script')
 <script type="text/javascript" src="{{asset('frontend/js/bootstrap-multiselect.js')}}"></script>
 <script type="text/javascript">
+    $('#establishment').modal('hide');
     $(function() {
         $(".select-multi").multiselect({
             includeSelectAllOption: true
         });
     });
 
+
     function openJobModal(job_id, user_id) {
         $('#jobid').val(job_id);
         $('#userid').val(user_id);
         $('#establishment').modal('show');
     }
+
+
 
     $(document).on("change", "#document_name", function() {
         $.ajax({
@@ -488,6 +499,35 @@
             $('body').addClass('modal-open');
         }, 500);
 
+    });
+    $('.fav-btn').click(function() {
+        $(this).toggleClass('active');
+    });
+    $(document).on("click", ".save-fav", function() {
+        var saveType = $(this).hasClass('active') == true ? 1 : 0;
+        var job_id = $(this).data('job');
+        var user_id = $(this).data('user');
+        var rowid = $(this).data('rowid');
+        alert(saveType);
+
+
+        $.ajax({
+            url: "{{route('store-savedjobs')}}",
+            method: "POST",
+            data: {
+                'job_id': job_id,
+                'user_id': user_id,
+                'saveType': saveType,
+                _token: '{{ csrf_token() }}',
+            },
+            success: function(response) {
+                if (response.success == true) {
+                    $("#saveicon" + rowid).attr("src", 'frontend/images/imgs-svg/book-mark-yellow.svg');
+                    $('#saveicon' + rowid).addClass("b1 bookmark-img");
+                    $('#saveclass' + rowid).removeClass("active");
+                }
+            }
+        });
     });
 </script>
 @endsection

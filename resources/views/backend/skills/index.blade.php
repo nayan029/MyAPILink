@@ -17,9 +17,9 @@
                 <table id="skill-table" class="table table-bordered table-hover" class="display" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Image</th>
-                            <th>Description</th>
+                            <th>{{__("messages.name")}}</th>
+                            <th>{{__("messages.image")}}</th>
+                            <th>{{__("messages.description")}}</th>
                         </tr>
                     </thead>
 

@@ -15,7 +15,7 @@ class WidgetController extends Controller
 
     protected $storevalidationrules = [
         'title' => 'required|max:255',
-        'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'image' => 'required|mimes:jpeg,png,jpg,gif,svg',
         'description' => 'required',
         'slug' => 'required',
     ];
@@ -28,7 +28,7 @@ class WidgetController extends Controller
     ];
 
     protected $slugvalidationrules = [
-       'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+       'image' => 'required|mimes:jpeg,png,jpg,gif,svg',
         'description' => 'required',
         'slug' => 'required',
     ];

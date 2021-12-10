@@ -9,18 +9,18 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title float-left">Widget List</h3>
-                <a href="{{route('widget.create')}}" class="btn btn-block btn-success btn-flat btn-sm float-right" style="width: 10%;">Add Widget</a>
+                <h3 class="card-title float-left">{{__("messages.widgetgroup.list")}}</h3>
+                <a href="{{route('widget.create')}}" class="btn btn-block btn-success btn-flat btn-sm float-right" style="width: 12%;">{{__("messages.widgetgroup.btnadd")}}</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
                 <table id="widget-table" class="table table-bordered table-hover" class="display" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Title</th>
-                            <th>Slug</th>
-                            <th>Image</th>
-                            <th>Description</th>
+                            <th>{{__("messages.widgetgroup.title")}}</th>
+                            <th>{{__("messages.widgetgroup.slug")}}</th>
+                            <th>{{__("messages.widgetgroup.image")}}</th>
+                            <th>{{__("messages.widgetgroup.description")}}</th>
                         </tr>
                     </thead>
 

@@ -13,7 +13,7 @@
             <!-- general form elements -->
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Create widget</h3>
+                    <h3 class="card-title">{{__("messages.widgetgroup.create")}}</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
@@ -47,7 +47,7 @@
                         </div>
                         </div>
                         <div class="card-footer">
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary">{{__("messages.save")}}</button>
             </div>
             {!! Form::close() !!}
         </div>

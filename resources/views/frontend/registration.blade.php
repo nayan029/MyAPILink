@@ -136,7 +136,7 @@
                             <button id="loginbtn" type="submit"  class="btn btn-blue w-100">Connexion</button>
                         </div>
                         <div class=" meconnecter">
-                            <p class="proxima-nove">Pas encore membre?<a href="#" class=""> Inscrivez-vous</a></p>
+                            <p class="proxima-nove">Pas encore membre?<a href="javascript:void(0);" class="openRegister"> Inscrivez-vous</a></p>
                         </div>
                     </div>
                 </form>
@@ -228,7 +228,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="text" name="phone" placeholder="Téléphone" class="form-control login-input inputicon2" id="phone">
+                                    <input type="text" name="phone" placeholder="Téléphone" class="form-control login-input inputicon2" onkeypress="return isNumber(event)" id="phone" maxlength="10">
                                     <span class="text-danger error" id="phone-error"></span>
                                 </div>
                             </div>
@@ -271,7 +271,7 @@
 
                             <div class="col-md-12 text-center res-dec mt-3">
                                 <div class=" meconnecter Connectez-vous">
-                                    <p class="">Déjà membre?<a href="#" class=""> Connectez-vous</a></p>
+                                    <p class="">Déjà membre?<a href="javascript:void(0);" class="openLogin"> Connectez-vous</a></p>
                                 </div>
                             </div>
                         </div>
@@ -326,6 +326,14 @@
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 {!! $forgotPasswordValidator->selector('#forgotPasswordForm') !!}
 <script>
+     function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
     $(function() {
 
         @if(Session::has('success'))
@@ -346,6 +354,14 @@
     });
 </script>
 <script>
+    $(document).on('click','.openLogin',function(){
+        $("#header-Modallogin1").modal('hide');
+        $("#Modallogin2").modal('show');
+    });
+    $(document).on('click','.openRegister',function(){
+        $("#header-Modallogin1").modal('show');
+        $("#Modallogin2").modal('hide');
+    });
     $(document).on('click', '#registerUser', function() {
 
         var token = $("meta[name='csrf-token']").attr("content");

@@ -76,8 +76,13 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public static function getData(){
-       $data =  Skill::get();
+    public static function getData()
+    {
+        $data =  Skill::get();
         $skill = SkillPosition::get();
+    }
+    public function saveJob()
+    {
+        return $this->hasMany(SavedJobs::class);
     }
 }

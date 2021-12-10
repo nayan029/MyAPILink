@@ -42,7 +42,7 @@ Route::middleware(['auth:admin'])->group(function ($route) {
         //Skills module
         $adminRoute->resource('skill', 'SkillsController');
         $adminRoute->get('/skilldata', 'SkillsController@getData')->name('skill.data');
-        $adminRoute->post('/destroyPosition','SkillsController@destroyPosition')->name('destroy.position');
+        $adminRoute->post('/destroyPosition', 'SkillsController@destroyPosition')->name('destroy.position');
 
         $adminRoute->resource('partner', 'PartnerController');
         $adminRoute->get('/getpartenerdata', 'PartnerController@getPartnerData')->name('partner.data');
@@ -94,7 +94,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
 
     $frontRoute->get('addjob', 'JobController@index')->name('addjob');
     $frontRoute->post('addorupdatejob', 'JobController@addOrUpdateJob')->name('addorupdatejob');
-    $frontRoute->get('job/show/{id}', 'JobController@show')->name('job.show');
+    $frontRoute->get('joblist/{id}', 'JobController@show')->name('joblist');
     $frontRoute->get('users/restore/{id}', 'JobController@restoreUser')->name('users.restore');
 
     $frontRoute->get('editjob/{id}', 'JobController@editJob')->name('editjob');
@@ -120,7 +120,7 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->post('update-email', 'ManagerController@updateEmail')->name('update-email');
         $frontRoute->post('update-notifications-flag', 'ManagerController@updateNotificationsFlag')->name('update-notifications-flag');
         $frontRoute->post('update-delete-flag', 'ManagerController@updateDeleteAccountFlag')->name('update-delete-flag');
-        
+
         $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
         $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');
         $frontRoute->get('view-establishment-account/{id}', 'EstablishmentController@show')->name('view-establishment-account');
@@ -134,8 +134,12 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->post('update-candidate-profile', 'CandidateController@update')->name('update-candidate-profile');
 
         $frontRoute->post('user/logout', 'HomeController@logout')->name('user-logout');
-        $frontRoute->get('applyJob', 'SearchAdController@index')->name('applyJob');
+        $frontRoute->get('search-job', 'SearchAdController@index')->name('searchjob');
         $frontRoute->post('store-jobType', 'SearchAdController@store')->name('store-jobType');
         $frontRoute->post('getDocumentName', 'SearchAdController@getDocumentName')->name('getDocumentName');
+        $frontRoute->post('store-savedjobs', 'SearchAdController@insertPosts')->name('store-savedjobs');
+        $frontRoute->get('seeJob', 'SearchAdController@showJob')->name('seeJob');
+        $frontRoute->get('details-job/{id}', 'SearchAdController@showJob')->name('details-job');
+        $frontRoute->get('details-company/{id}', 'SearchAdController@showCompany')->name('details-company');
     });
 });

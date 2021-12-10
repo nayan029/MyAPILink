@@ -161,9 +161,9 @@
                                         <span class="public-span">Publié il y a {{$finalDays}} jours</span>
                                         <input type="hidden" name="job_id" id="job_id">
                                         <input type="hidden" name="user_id" id="user_id">
-                                        <button class="btn fav-btn save-fav" type="button" data-job="{{$data->id}}" data-user="{{$data->user_id}}">
+                                        <button id="saveclass{{$data->id}}" class="btn fav-btn save-fav" type="button" data-job="{{$data->id}}" data-user="{{$data->user_id}}" data-rowid="{{$data->id}}">
 
-                                            <img src="{{count($data->saveJob) > 0 ? 'frontend/images/imgs-svg/book-mark-yellow.svg' : 'frontend/images/bookmark.svg'}} " alt="bookmark image " class="b1 bookmark-img" id="img1">
+                                            <img id="saveicon{{$data->id}}" src="{{count($data->saveJob) > 0 ? 'frontend/images/imgs-svg/book-mark-yellow.svg' : 'frontend/images/bookmark.svg'}} " alt="bookmark image " class="b1 bookmark-img">
 
                                         </button>
                                     </div>
@@ -507,6 +507,9 @@
         var saveType = $(this).hasClass('active') == true ? 1 : 0;
         var job_id = $(this).data('job');
         var user_id = $(this).data('user');
+        var rowid = $(this).data('rowid');
+        alert(saveType);
+
 
         $.ajax({
             url: "{{route('store-savedjobs')}}",
@@ -518,8 +521,10 @@
                 _token: '{{ csrf_token() }}',
             },
             success: function(response) {
-                if (response) {
-
+                if (response.success == true) {
+                    $("#saveicon" + rowid).attr("src", 'frontend/images/imgs-svg/book-mark-yellow.svg');
+                    $('#saveicon' + rowid).addClass("b1 bookmark-img");
+                    $('#saveclass' + rowid).removeClass("active");
                 }
             }
         });

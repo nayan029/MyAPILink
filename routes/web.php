@@ -116,7 +116,7 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->post('update-email', 'ManagerController@updateEmail')->name('update-email');
         $frontRoute->post('update-notifications-flag', 'ManagerController@updateNotificationsFlag')->name('update-notifications-flag');
         $frontRoute->post('update-delete-flag', 'ManagerController@updateDeleteAccountFlag')->name('update-delete-flag');
-        
+
         $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
         $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');
         $frontRoute->get('view-establishment-account/{id}', 'EstablishmentController@show')->name('view-establishment-account');
@@ -132,7 +132,9 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->get('search-job', 'SearchAdController@index')->name('searchjob');
         $frontRoute->post('store-jobType', 'SearchAdController@store')->name('store-jobType');
         $frontRoute->post('getDocumentName', 'SearchAdController@getDocumentName')->name('getDocumentName');
-        $frontRoute->post('store-savedJobs', 'SearchAdController@insertPosts')->name('store-savedJobs');
+        $frontRoute->post('store-savedjobs', 'SearchAdController@insertPosts')->name('store-savedjobs');
         $frontRoute->get('seeJob', 'SearchAdController@showJob')->name('seeJob');
+        $frontRoute->get('details-job/{id}', 'SearchAdController@showJob')->name('details-job');
+        $frontRoute->get('details-company/{id}', 'SearchAdController@showCompany')->name('details-company');
     });
 });

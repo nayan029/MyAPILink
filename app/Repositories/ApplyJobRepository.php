@@ -55,4 +55,8 @@ class ApplyJobRepository implements ApplyJobRepositoryInterface
     {
         return User::findorfail($id);
     }
+    public function getManagerPosts($id)
+    {
+        return Job::where('deleted_at', NULL)->where('user_id', $id)->get();
+    }
 }

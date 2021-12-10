@@ -64,6 +64,7 @@ class SearchAdController extends Controller
     public function showCompany($id)
     {
         $data['showCompany'] = $this->applyJobRepository->getCompanyData($id);
+        $data['showJobs'] = $this->applyJobRepository->getManagerPosts($id);
         return view('frontend.apply_job.view', $data);
     }
 }

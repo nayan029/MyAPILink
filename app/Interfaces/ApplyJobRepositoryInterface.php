@@ -12,4 +12,5 @@ interface ApplyJobRepositoryInterface
     public function insertPosts(Request $request);
     public function getSingleCandidatedata($id);
     public function getCompanyData($id);
+    public function getManagerPosts($id);
 }

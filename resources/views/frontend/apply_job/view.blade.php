@@ -28,7 +28,7 @@
                 <div class="row mt-5">
                     <div class="col-lg-4 col-md-5">
                         <div class="form-group mb-3">
-                            <img src="images/home.svg" class="drop-icon">
+                            <img src="{{asset('frontend/images/home.svg')}}" class="drop-icon">
                             <div class="applicants-drop bg-dropdown">
                                 <select class="form-control input-drop bg-transparent">
                                     <option value="">{{$showCompany->city}}</option>
@@ -36,9 +36,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-5">
+                    <div class=" col-lg-4 col-md-5">
                         <div class="form-group mb-3">
-                            <img src="images/group100.svg" class="drop-icon">
+                            <img src="{{asset('frontend/images/group100.svg')}}" class="drop-icon">
                             <div class="applicants-drop bg-dropdown">
                                 <select class="form-control input-drop bg-transparent">
                                     <option value="">{{$showCompany->city}}</option>
@@ -180,8 +180,7 @@
                                             <div class="card-body">
                                                 <h5 class="propos">À propos de la structure</h5>
                                                 <p class="propos-text">
-                                                    « Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                                                    in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. »
+                                                    Indisponible
                                                 </p>
                                             </div>
                                         </div>
@@ -191,7 +190,7 @@
                                             <div class="card-body">
                                                 <div class="d-flex">
                                                     <h5 class="propos mb-0">Effectif :</h5>
-                                                    <span class="span-propos">15 personnes</span>
+                                                    <span class="span-propos">Indisponible</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -202,7 +201,7 @@
                                                 <div class="d-flex">
                                                     <h5 class="propos mb-0">Nombre de groupes et tranche d’âges :
                                                     </h5>
-                                                    <span class="span-propos">2 groupes - 0-3 ans; 3-6 ans</span>
+                                                    <span class="span-propos">Indisponible</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -212,7 +211,7 @@
                                             <div class="card-body">
                                                 <div class="d-flex">
                                                     <h5 class="propos mb-0">Pédagogie appréciées :</h5>
-                                                    <span class="span-propos">Maria Montéssori</span>
+                                                    <span class="span-propos">Indisponible</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -222,7 +221,7 @@
                                             <div class="card-body">
                                                 <div class="d-flex">
                                                     <h5 class="propos mb-0">Peut accueillir:</h5>
-                                                    <span class="span-propos"> 35 enfants</span>
+                                                    <span class="span-propos">Indisponible</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -232,7 +231,7 @@
                                             <div class="card-body">
                                                 <div class="d-flex">
                                                     <h5 class="propos mb-0">Superficie de l'établissement</h5>
-                                                    <span class="span-propos">189 m²</span>
+                                                    <span class="span-propos">Indisponible</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -242,7 +241,7 @@
                                             <div class="card-body">
                                                 <div class="d-flex">
                                                     <h5 class="propos mb-0">Autres informations : </h5>
-                                                    <span class="span-propos">Jardin</span>
+                                                    <span class="span-propos">Indisponible</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -252,8 +251,7 @@
                                             <div class="card-body">
                                                 <h5 class="propos">Nos valeurs :</h5>
                                                 <p class="propos-text">
-                                                    « Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                                                    in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. »
+                                                    Indisponible
                                                 </p>
                                             </div>
                                         </div>
@@ -279,7 +277,8 @@
                                         <div class="tab-views">
                                             <ul class="nav nav-pills sr-nav-pills " id="pills-tab" role="tablist">
                                                 <li class="nav-item">
-                                                    <a class="nav-link active nav-custom  ml-3"><img src="images/project/protfolio.svg" class="bulid" alt="bulid">Portfolio</a>
+                                                    <a class="nav-link active nav-custom  ml-3"><img src=" {{asset('frontend/images/project/protfolio.svg')}}" class="bulid" alt="bulid">Portfolio</a>
+
                                                 </li>
                                             </ul>
                                         </div>
@@ -291,53 +290,55 @@
                                     <ul class="applicants-img-ul">
                                         <li>
                                             <div class="img_content_pro">
-                                                <img src="images/imgs-svg/unsplash.svg">
+                                                <img src="{{asset('frontend/images/imgs-svg/unsplash.svg')}}">
                                             </div>
                                         </li>
                                         <li>
                                             <div class="img_content_pro">
-                                                <img src="images/imgs-svg/unsplash5.svg">
+                                                <img src="{{asset('frontend/images/imgs-svg/unsplash5.svg')}}">
+                                            </div>
+
+                                        </li>
+                                        <li>
+                                            <div class="img_content_pro">
+                                                <img src="{{asset('frontend/images/imgs-svg/unsplash7.svg')}}">
+                                            </div>
+
+                                        </li>
+                                        <li>
+                                            <div class="img_content_pro">
+                                                <img src="{{asset('frontend/images/imgs-svg/unsplash6.svg')}}">
                                             </div>
                                         </li>
                                         <li>
                                             <div class="img_content_pro">
-                                                <img src="images/imgs-svg/unsplash7.svg">
+                                                <img src="{{asset('frontend/images/imgs-svg/unsplash11.svg')}}">
                                             </div>
                                         </li>
                                         <li>
                                             <div class="img_content_pro">
-                                                <img src="images/imgs-svg/unsplash6.svg">
+                                                <img src="{{asset('frontend/images/imgs-svg/unsplash3.svg')}}">
                                             </div>
                                         </li>
                                         <li>
                                             <div class="img_content_pro">
-                                                <img src="images/imgs-svg/unsplash11.svg">
+                                                <img src="{{asset('frontend/images/imgs-svg/unsplash.svg')}}">
                                             </div>
                                         </li>
                                         <li>
                                             <div class="img_content_pro">
-                                                <img src="images/imgs-svg/unsplash3.svg">
+                                                <img src="{{asset('frontend/images/imgs-svg/unsplash5.svg')}}">
                                             </div>
                                         </li>
                                         <li>
                                             <div class="img_content_pro">
-                                                <img src="images/imgs-svg/unsplash.svg">
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="img_content_pro">
-                                                <img src="images/imgs-svg/unsplash5.svg">
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="img_content_pro">
-                                                <img src="images/imgs-svg/unsplash7.svg">
+                                                <img src="{{asset('frontend/images/imgs-svg/unsplash7.svg')}}">
                                             </div>
                                         </li>
 
                                     </ul>
                                     <div class="d-flex justify-content-end btn-image-view">
-                                        <a class="btn btn-blue d-flex mr-3"><img src="images/imgs-svg/ionic-md-eye.svg" class="mr-2" alt="eye-icon"> Plus ...</a>
+                                        <a class="btn btn-blue d-flex mr-3"><img src="{{asset('frontend/images/imgs-svg/ionic-md-eye.svg')}}" class="mr-2" alt="eye-icon"> Plus ...</a>
                                     </div>
                                 </div>
                             </div>
@@ -392,13 +393,22 @@
                         <div class="col-md-9">
                             <div class="card sr-card">
                                 <div class="card-body">
+                                    @foreach($showJobs as $data)
+
+                                    @php
+
+                                    $createDate = date('d-m-Y',strtotime($data->created_at));
+                                    $now = date('d-m-Y');
+                                    $diff = strtotime($createDate) - strtotime($now);
+                                    $finalDays = abs(round($diff / 86400));
+                                    @endphp
                                     <div class="job-card">
                                         <div class="job-listing-flex">
-                                            <h5 class="ml-2 mb-0 linkcolor">Auxiliaire Puéricultrice</h5>
+                                            <h5 class="ml-2 mb-0 linkcolor">{{$data->title}}</h5>
 
                                             <button class="btn fav-btn mb-fav-btn" type="button" id="book1">
-                                                <img src="images/bookmark.svg " alt="bookmark image " class="b1 bookmark-img">
-                                                <img src="images/imgs-svg/book-mark-yellow.svg " alt="bookmark image " class="b2 bookmark-img">
+                                                <img src="{{asset('frontend/images/bookmark.svg')}}" alt="bookmark image " class="b1 bookmark-img">
+                                                <img src="{{asset('frontend/images/imgs-svg/book-mark-yellow.svg')}}" alt="bookmark image " class="b2 bookmark-img">
                                             </button>
                                         </div>
 
@@ -411,7 +421,7 @@
                                                             </p>
                                                         </li>
                                                         <li>
-                                                            <p class="mb-0">Experience : Minimum 2 Year</p>
+                                                            <p class="mb-0">Experience : {{$data->minimum_experience}}</p>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -419,312 +429,28 @@
                                             <div class="col-md-8">
                                                 <ul class="job-image-ul">
                                                     <li>
-                                                        <img src="images/map.svg" width="12px">
+                                                        <img src="{{asset('frontend/images/map.svg')}}" width="12px">
                                                         <p class="mb-0">46 rue La Martine 06400 NIce</p>
                                                     </li>
                                                     <li>
-                                                        <img src="images/icon1.svg" width="12px">
-                                                        <p class="mb-0">50,000€ par an</p>
+                                                        <img src="{{asset('frontend/images/icon1.svg')}}" width="12px">
+                                                        <p class="mb-0">{{$data->minimum_gross_salary}} par an</p>
                                                     </li>
                                                     <li>
-                                                        <img src="images/calendar.svg" width="12px">
-                                                        <p class="mb-0">Publié il y a 5 jours</p>
+                                                        <img src="{{asset('frontend/images/calendar.svg')}}" width="12px">
+                                                        <p class="mb-0">Publié il y a {{$finalDays}} jours</p>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div class="col-md-4 d-flex align-items-end">
                                                 <div class="d-flex justify-content-end align-items-center resbtn-flex">
                                                     <a href="listing-details.html" class="btn btn-viewjob listviewjob">Voir l’offre</a>
-                                                    <button class="btn btn-apply listapply" data-toggle="modal" data-target="#establishment">Postuler</button>
+                                                    <button class="btn btn-apply listapply" data-toggle="modal" data-target="#establishment" onclick="openJobModal('{{$data->id}}','{{$data->user_id}}')">Postuler</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="job-card">
-                                        <div class="job-listing-flex">
-                                            <h5 class="ml-2 mb-0 linkcolor">Pédiatre</h5>
-                                            <button class="btn fav-btn mb-fav-btn" type="button" id="book1">
-                                                <img src="images/bookmark.svg " alt="bookmark image " class="b1 bookmark-img">
-                                                <img src="images/imgs-svg/book-mark-yellow.svg " alt="bookmark image " class="b2 bookmark-img">
-                                            </button>
-
-                                        </div>
-
-                                        <div class="row mr-minus9 mb-2">
-                                            <div class="col-md-12">
-                                                <div>
-                                                    <ul class="job-border-ul">
-                                                        <li>
-                                                            <p class="mb-0">Nom du poste : Coordinatrice – Coordinateur de crèche</p>
-                                                        </li>
-                                                        <li>
-                                                            <p class="mb-0">Experience : Minimum 2 Year</p>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <ul class="job-image-ul">
-                                                    <li>
-                                                        <img src="images/map.svg" width="12px">
-                                                        <p class="mb-0">441 East Pearl Ave. Woodstock, GA 30188</p>
-                                                    </li>
-                                                    <li>
-                                                        <img src="images/icon1.svg" width="12px">
-                                                        <p class="mb-0">50,000</p>
-                                                    </li>
-                                                    <li>
-                                                        <img src="images/calendar.svg" width="12px">
-                                                        <p class="mb-0">Publié il y a 5 jours</p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-4 d-flex align-items-end">
-                                                <div class="d-flex justify-content-end align-items-center resbtn-flex">
-                                                    <a href="listing-details.html" class="btn btn-viewjob listviewjob">Voir l’offre</a>
-                                                    <button class="btn btn-apply listapply" data-toggle="modal" data-target="#establishment">Postuler</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="job-card">
-                                        <div class="job-listing-flex">
-                                            <h5 class="ml-2 mb-0 linkcolor">Cuisinier de cantine</h5>
-                                            <button class="btn fav-btn mb-fav-btn" type="button" id="book1">
-                                                <img src="images/bookmark.svg " alt="bookmark image " class="b1 bookmark-img">
-                                                <img src="images/imgs-svg/book-mark-yellow.svg " alt="bookmark image " class="b2 bookmark-img">
-                                            </button>
-
-                                        </div>
-
-                                        <div class="row mr-minus9 mb-2">
-                                            <div class="col-md-12">
-                                                <div>
-                                                    <ul class="job-border-ul">
-                                                        <li>
-                                                            <p class="mb-0">Nom du poste : Auxiliaire de puériculture – Auxiliaire de crèche</p>
-                                                        </li>
-                                                        <li>
-                                                            <p class="mb-0">Experience : Minimum 2 Year</p>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <ul class="job-image-ul">
-                                                    <li>
-                                                        <img src="images/map.svg" width="12px">
-                                                        <p class="mb-0">441 East Pearl Ave. Woodstock, GA 30188</p>
-                                                    </li>
-                                                    <li>
-                                                        <img src="images/icon1.svg" width="12px">
-                                                        <p class="mb-0">$50,000 per year</p>
-                                                    </li>
-                                                    <li>
-                                                        <img src="images/calendar.svg" width="12px">
-                                                        <p class="mb-0">Posted 5days ago</p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-4 d-flex align-items-end">
-                                                <div class="d-flex justify-content-end align-items-center resbtn-flex">
-                                                    <a href="listing-details.html" class="btn btn-viewjob listviewjob">Voir l’offre</a>
-                                                    <button class="btn btn-apply listapply" data-toggle="modal" data-target="#establishment">Postuler</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="job-card">
-                                        <div class="job-listing-flex">
-                                            <h5 class="ml-2 mb-0 linkcolor">Psychologue</h5>
-                                            <button class="btn fav-btn mb-fav-btn" type="button" id="book1">
-                                                <img src="images/bookmark.svg " alt="bookmark image " class="b1 bookmark-img">
-                                                <img src="images/imgs-svg/book-mark-yellow.svg " alt="bookmark image " class="b2 bookmark-img">
-                                            </button>
-
-                                        </div>
-
-                                        <div class="row mr-minus9 mb-2">
-                                            <div class="col-md-12">
-                                                <div>
-                                                    <ul class="job-border-ul">
-                                                        <li>
-                                                            <p class="mb-0">Nom du poste : Éducatrice – Éducateur de jeunes enfants</p>
-                                                        </li>
-                                                        <li>
-                                                            <p class="mb-0">Experience : Minimum 2 Year</p>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <ul class="job-image-ul">
-                                                    <li>
-                                                        <img src="images/map.svg" width="12px">
-                                                        <p class="mb-0">441 East Pearl Ave. Woodstock, GA 30188</p>
-                                                    </li>
-                                                    <li>
-                                                        <img src="images/icon1.svg" width="12px">
-                                                        <p class="mb-0">$50,000 per year</p>
-                                                    </li>
-                                                    <li>
-                                                        <img src="images/calendar.svg" width="12px">
-                                                        <p class="mb-0">Posted 5days ago</p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-4 d-flex align-items-end">
-                                                <div class="d-flex justify-content-end align-items-center resbtn-flex">
-                                                    <a href="listing-details.html" class="btn btn-viewjob listviewjob">Voir l’offre</a>
-                                                    <button class="btn btn-apply listapply" data-toggle="modal" data-target="#establishment">Postuler</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="job-card">
-                                        <div class="job-listing-flex">
-                                            <h5 class="ml-2 mb-0 linkcolor">Lingère en crèche</h5>
-                                            <button class="btn fav-btn mb-fav-btn" type="button" id="book1">
-                                                <img src="images/bookmark.svg " alt="bookmark image " class="b1 bookmark-img">
-                                                <img src="images/imgs-svg/book-mark-yellow.svg " alt="bookmark image " class="b2 bookmark-img">
-                                            </button>
-
-                                        </div>
-
-                                        <div class="row mr-minus9 mb-2">
-                                            <div class="col-md-12">
-                                                <div>
-                                                    <ul class="job-border-ul">
-                                                        <li>
-                                                            <p class="mb-0">Nom du poste : Puéricultrice</p>
-                                                        </li>
-                                                        <li>
-                                                            <p class="mb-0">Experience : Minimum 2 Year</p>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <ul class="job-image-ul">
-                                                    <li>
-                                                        <img src="images/map.svg" width="12px">
-                                                        <p class="mb-0">441 East Pearl Ave. Woodstock, GA 30188</p>
-                                                    </li>
-                                                    <li>
-                                                        <img src="images/icon1.svg" width="12px">
-                                                        <p class="mb-0">$50,000 per year</p>
-                                                    </li>
-                                                    <li>
-                                                        <img src="images/calendar.svg" width="12px">
-                                                        <p class="mb-0">Posted 5days ago</p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-4 d-flex align-items-end">
-                                                <div class="d-flex justify-content-end align-items-center resbtn-flex">
-                                                    <a href="listing-details.html" class="btn btn-viewjob listviewjob">Voir l’offre</a>
-                                                    <button class="btn btn-apply listapply" data-toggle="modal" data-target="#establishment">Postuler</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="job-card">
-                                        <div class="job-listing-flex">
-                                            <h5 class="ml-2 mb-0 linkcolor">Infirmière</h5>
-                                            <button class="btn fav-btn mb-fav-btn" type="button" id="book1">
-                                                <img src="images/bookmark.svg " alt="bookmark image " class="b1 bookmark-img">
-                                                <img src="images/imgs-svg/book-mark-yellow.svg " alt="bookmark image " class="b2 bookmark-img">
-                                            </button>
-
-                                        </div>
-
-                                        <div class="row mr-minus9 mb-2">
-                                            <div class="col-md-12">
-                                                <div>
-                                                    <ul class="job-border-ul">
-                                                        <li>
-                                                            <p class="mb-0">Nom du poste : Infirmière – Infirmier
-                                                            </p>
-                                                        </li>
-                                                        <li>
-                                                            <p class="mb-0">Experience : Minimum 2 Year</p>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <ul class="job-image-ul">
-                                                    <li>
-                                                        <img src="images/map.svg" width="12px">
-                                                        <p class="mb-0">441 East Pearl Ave. Woodstock, GA 30188</p>
-                                                    </li>
-                                                    <li>
-                                                        <img src="images/icon1.svg" width="12px">
-                                                        <p class="mb-0">$50,000 per year</p>
-                                                    </li>
-                                                    <li>
-                                                        <img src="images/calendar.svg" width="12px">
-                                                        <p class="mb-0">Posted 5days ago</p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-4 d-flex align-items-end">
-                                                <div class="d-flex justify-content-end align-items-center resbtn-flex">
-                                                    <a href="listing-details.html" class="btn btn-viewjob listviewjob">Voir l’offre</a>
-                                                    <button class="btn btn-apply listapply" data-toggle="modal" data-target="#establishment">Postuler</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="job-card">
-                                        <div class="job-listing-flex">
-                                            <h5 class="ml-2 mb-0 linkcolor">Infirmière</h5>
-                                            <button class="btn fav-btn mb-fav-btn" type="button" id="book1">
-                                                <img src="images/bookmark.svg " alt="bookmark image " class="b1 bookmark-img">
-                                                <img src="images/imgs-svg/book-mark-yellow.svg " alt="bookmark image " class="b2 bookmark-img">
-                                            </button>
-
-                                        </div>
-
-                                        <div class="row mr-minus9 mb-2">
-                                            <div class="col-md-12">
-                                                <div>
-                                                    <ul class="job-border-ul">
-                                                        <li>
-                                                            <p class="mb-0">Nom du poste : Infirmière – Infirmier
-                                                            </p>
-                                                        </li>
-                                                        <li>
-                                                            <p class="mb-0">Experience : Minimum 2 Year</p>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <ul class="job-image-ul">
-                                                    <li>
-                                                        <img src="images/map.svg" width="12px">
-                                                        <p class="mb-0">441 East Pearl Ave. Woodstock, GA 30188</p>
-                                                    </li>
-                                                    <li>
-                                                        <img src="images/icon1.svg" width="12px">
-                                                        <p class="mb-0">$50,000 per year</p>
-                                                    </li>
-                                                    <li>
-                                                        <img src="images/calendar.svg" width="12px">
-                                                        <p class="mb-0">Posted 5days ago</p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-4 d-flex align-items-end">
-                                                <div class="d-flex justify-content-end align-items-center resbtn-flex">
-                                                    <a href="listing-details.html" class="btn btn-viewjob listviewjob">Voir l’offre</a>
-                                                    <button class="btn btn-apply listapply" data-toggle="modal" data-target="#establishment">Postuler</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                    @endforeach
                                     <div class="custom-pagination pt-5 pb-4">
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination justify-content-center">
@@ -777,34 +503,35 @@
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex">
-                                                            <img src="images/pdf.svg" width="30px" class="mr-3">
+                                                            <img src="{{asset('frontend/images/pdf.svg')}}" width="30px" class="mr-3">
+
                                                             <p class="mb-0">Uploaded projet pédagogique</p>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <a href=""><img src="images/feather-download.svg" class="download-img"></a>
+                                                        <a href=""><img src="{{asset('frontend/images/feather-download.svg')}}" class="download-img"></a>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex">
-                                                            <img src="images/pdf.svg" width="30px" class="mr-3">
+                                                            <img src="{{asset('frontend/images/pdf.svg')}}" width="30px" class="mr-3">
                                                             <p class="mb-0">Uploaded projet pédagogique</p>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <a href=""><img src="images/feather-download.svg" class="download-img"></a>
+                                                        <a href=""><img src="{{asset('frontend/images/feather-download.svg')}}" class="download-img"></a>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex">
-                                                            <img src="images/pdf.svg" width="30px" class="mr-3">
+                                                            <img src="{{asset('frontend/images/pdf.svg')}}" width="30px" class="mr-3">
                                                             <p class="mb-0">Uploaded projet pédagogique</p>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <a href=""><img src="images/feather-download.svg" class="download-img"></a>
+                                                        <a href=""><img src="{{asset('frontend/images/feather-download.svg')}}" class="download-img"></a>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -827,39 +554,45 @@
     <div id="footer"></div>
 
     <!-- See the establishment's file Modal -->
-    <div class="modal fade modal-back-blue" id="establishment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade modal-back-blue" id="establishment" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog center-modal-dialog modal-xl modal-dialog-centered" role="document">
             <div class="modal-content m-32">
                 <div class="modal-header resume_header border-0">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><img src="images/material-close.svg"></span>
+                        <span aria-hidden="true"><img src="{{asset('frontend/images/material-close.svg')}}"></span>
                     </button>
                 </div>
+
+                <input type="hidden" name="jobid" id="jobid">
+                <input type="hidden" name="userid" id="userid">
                 <div class="modal-body resume_modal">
                     <div class="establishment_modal">
                         <h4 class="">Comment souhaitez-vous postuler ?</h4>
 
                         <div class="padding-150px ">
                             <div class="text-center pb-5 mb-5">
-                                <button class="btn btn-modals-blue" type="button" data-target="#bravo" id="bravo-btn">Envoyer mon profil profesionnel<br>au recruteur</button>
+                                <button class="btn btn-modals-blue bravo-btn" type="submit" data-target="#bravo" value="0" id="bravo-btn">Envoyer mon profil profesionnel<br>au recruteur</button>
                             </div>
                             <div class="text-center">
-                                <button class="btn btn-modals-blue cv-radius" id="cv-btn" type="button"><img src="images/project/feather-download.svg" alt="download" class="mr-3">Télécharger et envoyer mon cv</button>
+                                <button class="btn btn-modals-blue cv-radius" id="updateCv" type="submit"><img src="{{asset('frontend/images/project/feather-download.svg')}}" alt="download" class="mr-3">
+
+                                    Télécharger et
+                                    envoyer mon cv</button>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
-
     <!-- bravo modal -->
-    <div class="modal fade modal-back-blue" id="bravo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-centered" role="document">
+    <div class="modal fade modal-back-blue" id="bravo" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header resume_header border-0">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><img src="images/material-close.svg"></span>
+                        <span aria-hidden="true"><img src="{{asset('frontend/images/material-close.svg')}}"></span>
                     </button>
                 </div>
                 <div class="modal-body bravo-body">
@@ -868,7 +601,7 @@
                             <h3>BRAVO !</h3>
                         </div>
                         <div>
-                            <img src="images/project/green-checkmark.svg" alt="checkmark" class="green-checkmarks">
+                            <img src="{{asset('frontend/images/project/green-checkmark.svg')}}" alt="checkmark" class="green-checkmarks">
                             <p class="votres-check">Votre candidature a bien été envoyé</p>
                         </div>
 
@@ -880,12 +613,12 @@
     </div>
 
     <!-- cv modal -->
-    <div class="modal fade modal-back-blue" id="cv-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog center-modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal fade modal-back-blue" id="cv-modal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog center-modal-dialog modal-xl" role="document">
             <div class="modal-content m-32">
                 <div class="modal-header resume_header border-0">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><img src="images/material-close.svg"></span>
+                        <span aria-hidden="true"><img src="{{asset('frontend/images/material-close.svg')}}"></span>
                     </button>
                 </div>
                 <div class="modal-body resume_modal">
@@ -896,21 +629,21 @@
                             <div class="candidate_modal_desc">
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                                 </p>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
-                                    to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-                                    sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
-                                    to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-                                    sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
-                                    to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-                                    sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
+                                    a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+                                    Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
+                                    a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+                                    Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
+                                    a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+                                    Lorem Ipsum passages, and more recently with desktop publishing software
                                 </p>
                             </div>
                             <div class="text-right pt-4 pb-3">
-                                <a href="#" class="btn btn-blue ml-auto skip-btn">
+                                <a href="javasscript:void(0)" class="btn btn-blue ml-auto skip-btn tele-modal-btn">
                                     Passer cette étape</a>
-                                <a href="#" class="btn btn-blue ml-3 ok-btn">
+                                <a href="javasscript:void(0)" class="btn btn-blue ml-3 ok-btn tele-modal-btn">
                                     Ok</a>
                             </div>
                         </div>
@@ -920,7 +653,213 @@
         </div>
     </div>
 
+    <!-- tele modal -->
+
+    <div class="modal" id="tele-modal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header resume_header border-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><img src="{{asset('frontend/images/material-close.svg')}}"></span>
+                    </button>
+                </div>
+                <div class="modal-body bravo-body pb-4">
+                    <div class="text-center">
+                        <div class="veui-detail">
+                            <h5 class="veui-text border-modal">Veuillez choisir un Cv à envoyer au recruteur</h5>
+                        </div>
+                        <div class="overflow-auto px-4">
+                            <table class="download-table w-100">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex">
+                                                <img src="{{asset('frontend/images/pdf.svg')}}" width="30px" class="mr-3">
+                                                <p class="mb-0"> Uploaded CV_10-09-2020.pdf</p>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href=""><img src="{{asset('frontend/images/feather-download.svg')}}" class="download-img"></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex">
+                                                <img src="{{asset('frontend/images/pdf.svg')}}" width="30px" class="mr-3">
+                                                <p class="mb-0"> Uploaded CV_10-09-2020.pdf</p>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href=""><img src="{{asset('frontend/images/feather-download.svg')}}" class="download-img"></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex">
+                                                <img src="{{asset('frontend/images/pdf.svg')}}" width="30px" class="mr-3">
+                                                <p class="mb-0"> Uploaded CV_10-09-2020.pdf</p>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href=""><img src="{{asset('frontend/images/feather-download.svg')}}" class="download-img"></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div>
+                            <h4 class="ou_text border-modal">Ou télécharger un nouveau cv </h4>
+                        </div>
+                        <div class="upload-drop-btns">
+                            <form method="POST" id="mainForm" class="d-content">
+                                @method('POST')
+                                @csrf
+                                <button class="btn btn-modals-blue cv-radius btn-tele position-relative" id="cv-btn" type="button"><img src="{{asset('frontend/images/project/feather-download.svg')}}" alt="download" class="mr-3">
+                                    <input type="file" class="upload-modal-cv" name="document_name" id="document_name">
+                                    Télécharger un cv </button>
+                                <input type="hidden" name="pdf_name" id="pdf_name">
+                                <button href="javascript:void(0)" class="btn btna-oky bravo-btn" id="byResume" value="1">Ok</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 
 
 </section>
 @endsection
+
+@section('script')
+<script type="text/javascript" src="{{asset('frontend/js/bootstrap-multiselect.js')}}"></script>
+<script>
+    $(function() {
+        $(".select-multi").multiselect({
+            includeSelectAllOption: true
+        });
+    });
+    $(document).ready(function() {
+        $(".change-placeholder-select .multiselect").html("Type de poste");
+    });
+</script>
+<script type="text/javascript">
+    function openJobModal(job_id, user_id) {
+        $('#jobid').val(job_id);
+        $('#userid').val(user_id);
+        $('#establishment').modal('show');
+    }
+
+
+
+    $(document).on("change", "#document_name", function() {
+        $.ajax({
+            url: "{{route('getDocumentName')}}",
+            method: "POST",
+            data: new FormData(mainForm),
+            _token: '{{ csrf_token() }}',
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                if (response) {
+                    $("#pdf_name").val(response);
+                }
+            }
+        });
+    });
+
+    $(document).on("click", "#byResume,#bravo-btn", function() {
+        var type = $(this).val();
+        var jobid = $('#jobid').val();
+        var userid = $('#userid').val();
+        var document_name = $('#pdf_name').val();
+
+
+        $.ajax({
+            url: "{{ route('store-jobType') }}",
+            method: "POST",
+            data: {
+                'type': type,
+                'jobid': jobid,
+                'userid': userid,
+                'document_name': document_name,
+                _token: "{{ csrf_token() }}"
+            },
+            success: function(response) {
+                if (response.success == true) {
+                    toastr.success(response.message);
+                    $('#establishment').modal('hide');
+                    $('#bravo').modal('show');
+                    location.reload();
+
+                } else {
+                    toastr.danger(response.message);
+                }
+            }
+        });
+
+    });
+
+
+
+    $(".bravo-btn").on('click', function() {
+        $('#establishment').modal('hide');
+        $('#bravo').modal('show');
+    });
+    $("#updateCv").on('click', function() {
+        $('#establishment').modal('hide');
+        $('#cv-modal').modal('show');
+        setTimeout(function() {
+            $('body').addClass('modal-open');
+        }, 500);
+
+    });
+    $(".tele-modal-btn").on('click', function() {
+        $('#cv-modal').modal('hide');
+        $('#tele-modal').modal('show');
+        setTimeout(function() {
+            $('body').addClass('modal-open');
+        }, 500);
+
+    });
+    $(".bravo-btn").on('click', function() {
+        $('#tele-modal').modal('hide');
+        $('#bravo').modal('show');
+        setTimeout(function() {
+            $('body').addClass('modal-open');
+        }, 500);
+
+    });
+    $('.fav-btn').click(function() {
+        $(this).toggleClass('active');
+    });
+    $(document).on("click", ".save-fav", function() {
+        var saveType = $(this).hasClass('active') == true ? 1 : 0;
+        var job_id = $(this).data('job');
+        var user_id = $(this).data('user');
+
+        $.ajax({
+            url: "{{route('store-savedjobs')}}",
+            method: "POST",
+            data: {
+                'job_id': job_id,
+                'user_id': user_id,
+                'saveType': saveType,
+                _token: '{{ csrf_token() }}',
+            },
+            success: function(response) {
+                if (response) {
+
+                }
+            }
+        });
+    });
+</script>
+@endsection
+
+</body>
+
+</html>

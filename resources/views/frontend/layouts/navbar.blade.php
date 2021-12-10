@@ -64,7 +64,7 @@
                     <li class="nav-item">
                         <!--active-->
                         <!-- <a class="nav-link" href="" data-toggle="modal" data-target="#header-Modallogin1"> -->
-                        <a class="nav-link" href="">
+                        <a class="nav-link" href="{{URL::to('/')}}">
                             <p>Candidats</p> <span class="sr-only">(current)</span>
                         </a>
                     </li>

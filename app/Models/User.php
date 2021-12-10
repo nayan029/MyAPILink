@@ -35,8 +35,8 @@ class User extends Authenticatable
         'address',
         'postal_code',
         'city',
-        'user_type',    
-        
+        'user_type',
+
     ];
 
     /**
@@ -69,8 +69,13 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public static function getData(){
-       $data =  Skill::get();
+    public static function getData()
+    {
+        $data =  Skill::get();
         $skill = SkillPosition::get();
+    }
+    public function saveJob()
+    {
+        return $this->hasMany(SavedJobs::class);
     }
 }

@@ -22,7 +22,7 @@ class Job extends Model
     {
         return $this->hasOne(ApplyJob::class);
     }
-    public function savedJobs()
+    public function savedJob()
     {
         return $this->hasMany(SavedJobs::class);
     }

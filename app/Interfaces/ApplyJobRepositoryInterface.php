@@ -14,5 +14,6 @@ interface ApplyJobRepositoryInterface
     public function getCompanyData($id);
     public function getManagerPosts($id);
     public function getJobsaveDataByUserId();
+    public function getApplyJobDataByUserId();
     
 }

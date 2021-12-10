@@ -61,7 +61,8 @@ class CandidateController extends Controller
         $data['validator'] = JsValidator::make($this->imageValidationRules);
         $data['images'] = $this->establishmentRepository->getCandidateGallery();
         $data['jobSaveData'] = $this->ApplyJobRepository->getJobsaveDataByUserId(); 
-       
+        $data['applyJobData'] =  $this->ApplyJobRepository->getApplyJobDataByUserId();
+
         return view('frontend.candidate.profile', $data);
     }
     public function edit()

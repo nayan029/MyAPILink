@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
+use App\Interfaces\JobRepositoryInterface;
 use App\Models\Job;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use JsValidator;
 
@@ -38,6 +38,14 @@ class JobController extends Controller
         'what_you_are_looking' => 'required',
     ];
 
+    protected $jobRepository="";
+
+    public function __construct(JobRepositoryInterface $jobRepository)
+    {
+        $this->jobRepository = $jobRepository;
+    }
+
+
     public function index(Request $request,$id)
     {
         $this->data['jobvalidator'] = JsValidator::make($this->jobValidationRules);
@@ -47,7 +55,8 @@ class JobController extends Controller
 
     public function showJob($id)
     {
-        $data['showwpost'] = Job::where('id', $id)->get();
+    
+        $data['showwpost'] = $this->jobRepository->showJobData($id);
         return view('frontend.job.show', $data);
     }
 
@@ -55,14 +64,11 @@ class JobController extends Controller
     {
         $this->data['jobvalidator'] = JsValidator::make($this->jobValidationRules);
         $id = request('id');
+        $this->data['id'] = $id;
         $this->data['jobDetails'] = Job::find($id);
         return view('frontend.job.editjob', $this->data);
     }
-    public function admin()
-    {       
-        $count = User::where('user_type',1)->get();
-        return view('frontend.manager.manager-profile', ['count' => $count[0]->total]);
-    }
+   
 
     public function addOrUpdateJob(Request $request,$id)
     {
@@ -78,6 +84,7 @@ class JobController extends Controller
             $contactThrough = implode(',', request('contact_thorugh'));
         }
       
+        $count = User::where('user_type',1)->count();
         $certificationArray = array(
             'user_id' => $id,
             'title' => request('title'),
@@ -100,10 +107,11 @@ class JobController extends Controller
             'job_description' => request('job_description'),
             'employment_mission' => request('employment_mission'),
             'what_you_are_looking' => request('what_you_are_looking'),
+            'total_reg' => $count,
         );
         if (!empty($editId)) {
             $certificationArray['updated_at'] = date('Y-m-d H:i:s');
-            Job::where("id", $editId)->update($certificationArray);
+           $data =  Job::where("id", $editId)->update($certificationArray);
             Session::flash('success', 'Successfully Updated');
             return redirect()->route('profile');
         } else {
@@ -135,6 +143,7 @@ class JobController extends Controller
     public function restoreUser($id)
     {
         Job::withTrashed()->find($id)->restore();
+        Session::flash('success','Successfully Restored');
         return back();
     }
 }

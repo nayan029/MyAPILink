@@ -22,7 +22,7 @@
         </div>
         <div class="card sr-card">
             <div class="card-body">
-                <form action="{{route('addorupdatejob')}}" id="jobupdate" method="POST">
+                <form action="{{route('addorupdatejob',$id)}}" id="jobupdate" method="POST">
                     @csrf
                     <input type="hidden" value="{{$jobDetails->id}}" name="edit_id">
                     <div class="row d-flex justify-content-center ">

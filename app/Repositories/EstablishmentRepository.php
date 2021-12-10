@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use App\Http\Traits\ImageuploadTrait;
 use App\Models\Job;
+use Carbon\Carbon;
 
 class EstablishmentRepository implements EstablishmentRepositoryInterface
 {
@@ -58,6 +59,10 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
     public function getSingleEstablishment($id)
     {
         return Establishment::where('user_id', auth()->guard('web')->user()->id)->where('id', $id)->firstOrFail();
+    }
+
+    public function getJobPostsData($id){
+        return Job::where('user_id',$id)->get();
     }
 
     public function update(Request $request, $id)
@@ -143,7 +148,11 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
     }
 
     public function getPostsData($id){
-        return Job::where('user_id', $id)->paginate(10);
+        $data['jobListing'] = Job::where('user_id', $id)->paginate(10);
+        $data['remaining'] = Job::where('created_at', '>=', Carbon::now())->where('user_id',$id)->get();
+        $data['deleted'] = Job::onlyTrashed()->where('user_id',$id)->get();
+        return $data;
     }
+
     
 }

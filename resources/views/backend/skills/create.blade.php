@@ -124,6 +124,8 @@
         $('.summernote').summernote();
     });
 
+
+
     function validation() {
         var temp = 0;
 
@@ -154,7 +156,24 @@
         }
 
         if (temp == 0) {
-            return true;
+            $(document).on('click', "#addNewRow", function() {
+
+                $('.btn-save').hide();
+                /*var newRowCloned = $('#sectionRows').last().clone();
+                newRowCloned.show();*/
+                var position = $('#position').val();
+                var title = $('#title').val();
+
+                var desc = $("#desc").val();
+
+                var html = "<tr row_id='" + id + "'><td>" + id + "</td><td><input type='hidden' name='position[]' value='" + position + "'/>" + position + "</td><td><input type='hidden' name='title[]' value='" + title + "'/>" + title + "</td><td><input type='hidden' name='descs[]' value='" + desc + "'/>" + desc + "</td><td><a href='javascript:void(0);' row_id='" + id + "' class='edit_row'><i class='fas fa-edit'></i></a><a href='javascript:void(0);' class='btn btn-save' row_id='" + id + "'> <i class='fas fa-save text-success'></i></a><a href='javascript:void(0);' class='btn removeRow'  row_id='" + id + "'> <i class='fas fa-trash-alt text-danger'></i></a></td></tr>";
+                id++;
+                $("#skillbody").append(html);
+
+                $('#position').val('');
+                $('#title').val('');
+                $("#desc").val('');
+            });
         } else {
             return false;
         }
@@ -162,30 +181,9 @@
 
     var id = 1;
 
-    $(document).on('click', "#addNewRow", function() {
 
-        /*var newRowCloned = $('#sectionRows').last().clone();
-        newRowCloned.show();*/
-        var position = $('#position').val();
-        var title = $('#title').val();
-
-        var desc = $("#desc").val();
-
-        var html = "<tr row_id='" + id + "'><td>" + id + "</td><td><input type='hidden' name='position[]' value='" + position + "'/>" + position + "</td><td><input type='hidden' name='title[]' value='" + title + "'/>" + title + "</td><td><input type='hidden' name='descs[]' value='" + desc + "'/>" + desc + "</td><td><a href='javascript:void(0);' row_id='" + id + "' class='edit_row'><i class='fas fa-edit'></i></a><a href='javascript:void(0);' class='btn btn-save' row_id='" + id + "'> Save</a><a href='javascript:void(0);' class='btn removeRow'  row_id='" + id + "'> Delete</a></td></tr>";
-        id++;
-
-
-
-        $("#skillbody").append(html);
-
-        $('#position').val('');
-        $('#title').val('');
-        $("#desc").val('');
-
-
-
-    });
     $(document).on('click', ".edit_row", function() {
+        $('.btn-save').show();
         var tbl_row = $(this).closest('tr');
         var row_id = tbl_row.attr('row_id');
 

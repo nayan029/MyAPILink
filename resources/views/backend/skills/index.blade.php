@@ -19,7 +19,6 @@
                         <tr>
                             <th>{{__("messages.name")}}</th>
                             <th>{{__("messages.image")}}</th>
-                            <th>{{__("messages.description")}}</th>
                         </tr>
                     </thead>
 

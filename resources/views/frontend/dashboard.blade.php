@@ -261,6 +261,7 @@
 <!-- header modal1 -->
 
 <div class="modal fade login_modal" id="Modallogin2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<span class="close">&times;</span>
     <div class="modal-dialog login-modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body login-modal-body">
@@ -359,10 +360,11 @@
 </div>
 @endsection
 @section('script')
-{!! $newslettervalidator->selector('#newsletterform') !!}
 {!! $forgotPasswordValidator->selector('#forgotPasswordForm') !!}
+{!! $newslettervalidator->selector('#newsletterform') !!}
 @include('frontend.layouts.login_script')
 <script>
+    $('body').css('overflow', '');
     $(document).on('click', '.btn-show', function() {
         var id = $(this).attr("data-id");
         var url = "{{route('getAjaxSkill')}}";
@@ -395,6 +397,16 @@
             }
         });
     });
+    $(document).on('click', '.btn-skyblue', function() {
+        $('#Modallogin2').modal('show');
+        $('#Modaljob-desc').modal('hide');
+    
+        $('body').css('overflow','hidden')
+    });
+
+   
+
+
 </script>
 @endsection
 

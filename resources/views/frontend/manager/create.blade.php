@@ -256,7 +256,7 @@
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label class="">Code postal<span class="text-danger">*</span></label>
-                                            <input id="postal_code" type="text" name="postal_code" onkeypress='return isNumber(event)' class="form-control form-add-establish pl-23">
+                                            <input id="postal_code" type="text" name="postal_code" maxlength="6" onkeypress='return isNumber(event)' class="form-control form-add-establish pl-23">
                                             <span class="postal-error text-danger">@error ('postal_code') {{$message}} @enderror</span>
 
                                         </div>

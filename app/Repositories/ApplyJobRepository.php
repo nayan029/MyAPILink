@@ -15,7 +15,7 @@ class ApplyJobRepository implements ApplyJobRepositoryInterface
     use ImageuploadTrait;
     public function getCandidateData()
     {
-        return Job::with('applyJob', 'saveJob')->where('deleted_at', NULL)->get();
+        return Job::with('applyJob', 'savedJob')->where('deleted_at', NULL)->get();
     }
     public function store(Request $request)
     {
@@ -63,7 +63,20 @@ class ApplyJobRepository implements ApplyJobRepositoryInterface
         return User::findorfail($id);
     }
     public function getManagerPosts($id)
-    {
+    { 
         return Job::where('deleted_at', NULL)->where('user_id', $id)->get();
     }
+  
+    public function getJobsaveDataByUserId()
+    {
+        return  SavedJobs::with('job')->where('job_save',1)->where('deleted_at', NULL)->where('user_id',auth()->guard('web')->user()->id)->get();
+    }
+
+    public function getApplyJobDataByUserId()
+    {
+        return  ApplyJob::with('jobApplay')->where('is_apply',1)->where('deleted_at', NULL)->where('user_id',auth()->guard('web')->user()->id)->get();
+    }
+    
+
+    
 }

@@ -12,4 +12,9 @@ class SavedJobs extends Model
     protected $guarded = ['id'];
     protected $dates = ['deleted_at'];
     protected $table = 'job_save';
+
+    public function job()
+    {
+        return  $this->belongsTo(job::class, 'job_id', 'id');
+    }
 }

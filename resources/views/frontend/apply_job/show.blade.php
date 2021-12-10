@@ -51,7 +51,7 @@
                                     </ul>
 
                                     <div class="d-flex justify-content-end">
-                                        <button class="btn btn-light" data-target="#establishment" onclick="openJobModal()">Postuler avec mon profil</button>
+                                        <button class="btn btn-light" data-target="#establishment" onclick="openJobModal('{{$showList->id}}','{{$showList->user_id}}')">Postuler avec mon profil</button>
                                     </div>
 
                                     <div class="d-flex justify-content-between align-items-center mb-4 mt-2 ">
@@ -332,6 +332,7 @@
         var document_name = $('#pdf_name').val();
 
 
+
         $.ajax({
             url: "{{ route('store-jobType') }}",
             method: "POST",
@@ -357,7 +358,9 @@
 
     });
 
-    function openJobModal() {
+    function openJobModal(job_id,user_id) {
+        $('#jobid').val(job_id);
+        $('#userid').val(user_id);
         $('#establishment').modal('show');
     }
 </script>

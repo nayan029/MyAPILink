@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Frontend;
 
 use JsValidator;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use App\Interfaces\ApplyJobRepositoryInterface;
 use App\Interfaces\CandidateRepositoryInterface;
 use App\Interfaces\EstablishmentRepositoryInterface;
 
@@ -47,10 +47,11 @@ class CandidateController extends Controller
 
     ];
     protected $candidateRepository="";
-    public function __construct(CandidateRepositoryInterface $candidateRepository, EstablishmentRepositoryInterface $establishmentRepository)
+    public function __construct(CandidateRepositoryInterface $candidateRepository, EstablishmentRepositoryInterface $establishmentRepository,ApplyJobRepositoryInterface $ApplyJobRepository)
     {
         $this->candidateRepository = $candidateRepository;
         $this->establishmentRepository = $establishmentRepository;
+        $this->ApplyJobRepository=$ApplyJobRepository;
     }
 
     public function index()
@@ -58,6 +59,9 @@ class CandidateController extends Controller
 
         $data['validator'] = JsValidator::make($this->imageValidationRules);
         $data['images'] = $this->establishmentRepository->getCandidateGallery();
+        $data['jobSaveData'] = $this->ApplyJobRepository->getJobsaveDataByUserId(); 
+        $data['applyJobData'] =  $this->ApplyJobRepository->getApplyJobDataByUserId();
+
         return view('frontend.candidate.profile', $data);
     }
     public function edit()

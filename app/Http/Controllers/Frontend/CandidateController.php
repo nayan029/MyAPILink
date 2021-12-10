@@ -46,6 +46,7 @@ class CandidateController extends Controller
         'image' => 'required|mimes:jpeg,png,jpg|max:2048',
 
     ];
+    protected $candidateRepository="";
     public function __construct(CandidateRepositoryInterface $candidateRepository, EstablishmentRepositoryInterface $establishmentRepository)
     {
         $this->candidateRepository = $candidateRepository;

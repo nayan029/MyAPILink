@@ -94,7 +94,7 @@
 
 <!-- header modal1 -->
 
-<div class="modal fade" id="Modallogin2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade login_modal" id="Modallogin2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog login-modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body login-modal-body">
@@ -130,7 +130,7 @@
                         </div>
 
                         <div class="mb-20 text-right">
-                            <a href="" class="forgot-link">J'ai perdu mon mot de passe?</a>
+                        <a href="#" data-toggle="modal" data-target="#forgot_password_modal"  class="forgot-link forgot_password_mdl">J'ai perdu mon mot de passe?</a>
                         </div>
                         <div class="col-md-12 text-center res-dec mb-3 ">
                             <button id="loginbtn" type="submit"  class="btn btn-blue w-100">Connexion</button>
@@ -143,6 +143,52 @@
             </div>
         </div>
     </div>
+</div>
+<div class="modal fade login-modal" id="forgot_password_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-body">
+
+
+
+                <form id="forgotPasswordForm" action="{{route('send-forgot-password-mail')}}" method="post">
+
+                    @csrf
+
+                    <div class="text-center">
+
+                         <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="">
+
+                    </div>
+
+                    <h4 class="forgot-h4 text-center color-black">Mot de passe oublié?</h4>
+
+                    <p class="forgot-p text-center mb-20">Indiquez le nom d’utilisateur ou l’adresse e-mail du compte afin de recevoir un e-mail et réinitialiser votre mot de passe.</p>
+
+                    <div class="mb-20">
+
+                        <input type="email" name="email" class="form-control" placeholder="Email / Nom d'utilisateur*">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <button type="submit" class="btn btn-yellow w-100">Soumettre</button>
+
+                    </div>
+
+                    
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 
 <div class="modal fade" id="header-Modallogin1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -277,6 +323,8 @@
 <script src="{{asset('frontend/js/owl.carousel.js')}} "></script>
 <script src="{{asset('frontend/js/custom.js')}} "></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+{!! $forgotPasswordValidator->selector('#forgotPasswordForm') !!}
 <script>
     $(function() {
 

@@ -3,16 +3,18 @@
 namespace App\Http\Controllers\Frontend;
 
 use JsValidator;
+use App\Models\User;
+use App\Models\Skill;
 use App\Models\Widget;
 use App\Models\Newsletter;
 use Illuminate\Http\Request;
+use App\Models\SkillPosition;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Interfaces\HomeRepositoryInterface;
-use Illuminate\Support\Facades\DB;
-use App\Models\Skill;
-use App\Models\SkillPosition;
 
 class HomeController extends Controller
 {
@@ -25,6 +27,15 @@ class HomeController extends Controller
     [
         'email' => 'required|email',
         'password' => "required",
+    ];
+    protected $forgotPasswordValidator = [
+
+        'email' => 'required|email|exists:users,email',
+
+    ];
+    protected $resetvalidationrules = [
+        'password' => 'required|min:8',
+        'confirm_password' => 'required|same:password',
     ];
 
     public function __construct(HomeRepositoryInterface $homeRepository)
@@ -42,6 +53,7 @@ class HomeController extends Controller
     public function userDashboard()
     {
         $data['newslettervalidator'] = JsValidator::make($this->newsletterValidationRules);
+        $data['forgotPasswordValidator'] = JsValidator::make($this->forgotPasswordValidator);
         $data['widget'] = Widget::get();
         $data['skill'] = Skill::get();
         
@@ -106,4 +118,43 @@ class HomeController extends Controller
         }
         return response()->json(['success' => false, 'errors' => array('invalid' => 'Email et le mot de passe sont erronés')]);
     }
+    public function forgotPassword(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), $this->forgotPasswordValidator);
+
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => $validator->errors()]);
+        }
+      
+        $forgotdata = $this->homeRepository->storePassword($request);
+        if ($forgotdata) {
+            Session::flash('success', 'Votre lien de réinitialisation de mot de passe est envoyé');
+            return redirect()->back();
+        }
+        
+    }
+    public function resetPassword($token)
+    {
+        $data['validator'] = JsValidator::make($this->resetvalidationrules);
+        return view('frontend.forgot.reset-password', ['token' => $token], $data);
+    }
+    
+    public function updatePassword(Request $request)
+    {
+        $validation = Validator::make($request->all(), $this->resetvalidationrules);
+        if ($validation->fails()) {
+            return redirect()->back()->withErrors($validation->errors());
+        }
+        $resetdata = $this->homeRepository->updatePassword($request);
+
+        if ($resetdata == true) {
+            Session::flash('success', 'Le mot de passe a été changé avec succès');
+            return redirect()->route('dashboard');
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    
 }

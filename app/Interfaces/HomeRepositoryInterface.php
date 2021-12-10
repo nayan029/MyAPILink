@@ -9,4 +9,8 @@ interface HomeRepositoryInterface
     public function contactFooter();
 
     public function partnerFooter();
+
+    public function storePassword(Request $request);
+
+    public function updatePassword(Request $request);
 }

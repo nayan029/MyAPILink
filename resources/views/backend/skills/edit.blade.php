@@ -114,7 +114,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary">{{__("messages.update")}}</button>
                 </div>
                 {!! Form::close() !!}
             </div>

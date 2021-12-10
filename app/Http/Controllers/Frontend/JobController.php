@@ -44,7 +44,7 @@ class JobController extends Controller
         return view('frontend.job.index', $this->data);
     }
 
-    public function show($id)
+    public function showJob($id)
     {
         $data['showwpost'] = Job::where('id', $id)->get();
         return view('frontend.job.show', $data);
@@ -71,12 +71,14 @@ class JobController extends Controller
         if (!empty(request('type_of_employment'))) {
             $typeOfEmployment = implode(',', request('type_of_employment'));
         }
+        if (!empty(request('contact_thorugh'))) {
+            $contactThrough = implode(',', request('contact_thorugh'));
+        }
         $id = Auth::guard('web')->user()->id;
         $certificationArray = array(
             'user_id' => $id,
             'title' => request('title'),
             'address' => request('address'),
-            
             'zip_code' => request('zip_code'),
             'city' => request('city'),
             'country' => request('country'),
@@ -89,16 +91,13 @@ class JobController extends Controller
             'minimum_experience' => request('minimum_experience'),
             'deadline_for_receipt_of_applications' => request('deadline_for_receipt_of_applications'),
             'email' => request('email'),
-            'phone' => request('phone'),
-            'email_regarding' => request('email_regarding'),
-            'phone_regarding' => request('phone_regarding'),
-            'apilink_regarding' => request('apilink_regarding'),
+            'phone' => request('phone'),    
+            'contact_thorugh' => $contactThrough,
             'website' => request('website'),
             'job_description' => request('job_description'),
             'employment_mission' => request('employment_mission'),
             'what_you_are_looking' => request('what_you_are_looking'),
         );
-
         if (!empty($editId)) {
             $certificationArray['updated_at'] = date('Y-m-d H:i:s');
             Job::where("id", $editId)->update($certificationArray);
@@ -110,10 +109,8 @@ class JobController extends Controller
             $instert->save();
             $id = $instert->id;
             Session::flash('success', 'Successfully Inserted');
-            return redirect()->route('job.show', $id);
+            return redirect()->route('joblist', $id);
         }
-        // session()->flash('message-type', 'success');
-        // // return redirect()->route('job',$id);
     }
 
     public function destroy($id)

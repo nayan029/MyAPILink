@@ -94,16 +94,16 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
 
     $frontRoute->get('addjob', 'JobController@index')->name('addjob');
     $frontRoute->post('addorupdatejob', 'JobController@addOrUpdateJob')->name('addorupdatejob');
-    $frontRoute->get('job/show/{id}', 'JobController@show')->name('job.show');
+    $frontRoute->get('joblist/{id}', 'JobController@show')->name('joblist');
     $frontRoute->get('users/restore/{id}', 'JobController@restoreUser')->name('users.restore');
 
     $frontRoute->get('editjob/{id}', 'JobController@editJob')->name('editjob');
     $frontRoute->get('destroy/{id}', 'JobController@destroy')->name('destroy');
     $frontRoute->get('see-applicants', 'JobController@viewApplcants')->name('see-applicants');
     $frontRoute->get('edit-applicants', 'JobController@viewApplcants')->name('edit-applicants');
-
-
     $frontRoute->post('getAjaxSkill', 'HomeController@getAjaxSkill')->name('getAjaxSkill');
+
+    $frontRoute->get('establishment-dashborad', 'EstablishmentController@dashborad')->name('establishment-dashborad');
 });
 
 Route::middleware(['auth:web'])->group(function ($route) {
@@ -116,7 +116,7 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->post('update-email', 'ManagerController@updateEmail')->name('update-email');
         $frontRoute->post('update-notifications-flag', 'ManagerController@updateNotificationsFlag')->name('update-notifications-flag');
         $frontRoute->post('update-delete-flag', 'ManagerController@updateDeleteAccountFlag')->name('update-delete-flag');
-
+        
         $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
         $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');
         $frontRoute->get('view-establishment-account/{id}', 'EstablishmentController@show')->name('view-establishment-account');
@@ -129,7 +129,7 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->get('candidate-profile-edit', 'CandidateController@edit')->name('candidate-profile-edit');
 
         $frontRoute->post('user/logout', 'HomeController@logout')->name('user-logout');
-        $frontRoute->get('searchJob', 'SearchAdController@index')->name('applyJob');
+        $frontRoute->get('search-job', 'SearchAdController@index')->name('searchjob');
         $frontRoute->post('store-jobType', 'SearchAdController@store')->name('store-jobType');
         $frontRoute->post('getDocumentName', 'SearchAdController@getDocumentName')->name('getDocumentName');
         $frontRoute->post('store-savedJobs', 'SearchAdController@insertPosts')->name('store-savedJobs');

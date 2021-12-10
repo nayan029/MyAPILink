@@ -15,7 +15,7 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">User Detail</h3>
+          <h3 class="card-title">	{{__("messages.usergroup.show")}}</h3>
 
           
         </div>

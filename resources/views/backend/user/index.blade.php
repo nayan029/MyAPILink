@@ -14,21 +14,21 @@
 						<div class="row">
 							<div class="col-md-4">
 							  <div class="form-group">
-								<label for="name">Name</label>
+								<label for="name">{{__("messages.usergroup.name")}}</label>
 								<input class="form-control" value="" name="name" type="text" placeholder="Name" id="name">
 							 </div>
 							</div>
 						
 							<div class="col-md-4">
 							  <div class="form-group">
-								<label for="name">Email</label>
+								<label for="name">{{__("messages.usergroup.email")}}</label>
 								<input class="form-control" value="" name="email" type="text" placeholder="Email" id="email">
 							 </div>
 							</div>
 						
 							<div class="col-md-4">
 							  <div class="form-group">
-								<label for="name">Mobile</label>
+								<label for="name">{{__("messages.usergroup.phone")}}</label>
 								<input class="form-control" value="" name="mobile" type="text" placeholder="Mobile" id="phone">
 							 </div>
 							</div>
@@ -36,9 +36,9 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12">
-								<button type="button" class="btn btn-primary" id="search_Id" >Filter</button>
+								<button type="button" class="btn btn-primary" id="search_Id" >	{{__("messages.usergroup.filter")}}</button>
 								<!-- <input class="btn btn-warning" type="submit" name="Export" value="Export"> -->
-								<a href="{{url('user')}}"> <button type="button" class="btn btn-default">Reset</button></a>
+								<a href="{{url('user')}}"> <button type="button" class="btn btn-default">{{__("messages.usergroup.reset")}}</button></a>
 							</div>
 						</div>
 					</div>
@@ -56,10 +56,10 @@
                 <table id="User-table" class="table table-bordered table-hover" class="display" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Type</th>
+                            <th>{{__("messages.usergroup.name")}}</th>
+                            <th>{{__("messages.usergroup.email")}}</th>
+                            <th>{{__("messages.usergroup.phone")}}</th>
+                            <th>{{__("messages.usergroup.type")}}</th>
                         </tr>
                     </thead>
 

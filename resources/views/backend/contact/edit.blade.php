@@ -9,7 +9,7 @@
             <!-- general form elements -->
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Update Contact</h3>
+                    <h3 class="card-title">{{__("messages.edit")}}</h3>
                 </div>
 
 
@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary">{{__("messages.update")}}</button>
                 </div>
                 {!! Form::close() !!}
             </div>

@@ -6,17 +6,22 @@
 <section class="hero-index" style="background-image: linear-gradient(180deg, rgb(0 0 0 / 70%), rgb(0 0 0 / 70%)), url('frontend/images/index-bg.png');opacity: 0.8;">
     <div class="index-gradient"></div>
     <div class="container">
+
         <div class="middle_text text-center">
             <h1>VOS COMPÉTENCES AU SERVICE DE LA PETITE ENFANCE</h1>
             <p>CDI - CDD - stage - alternance - indépendant - remplacement</p>
+            @if(Auth::guard('web')->user())
+
+            @else
             <div class="jesuis_btn_text">
                 <button class="btn btn-home-pink " data-toggle="modal" data-target="#Modallogin2">JE SUIS UN
                     CANDIDAT</button>
                 <a href="{{URL::to('/manager')}}" class="btn btn-home-blue ">JE SUIS UN ÉTABLISSEMENT PETITE
                     ENFANCE</a>
             </div>
-
+            @endif
         </div>
+
     </div>
 </section>
 
@@ -188,8 +193,9 @@
             <div class="modal-body resume_modal">
                 <div class="candidate_modal">
 
-                   
-                    <h4 class="mb-3 main_title main-title">-<h3 class="mb-3 position"></h3></h4>
+
+                    <h4 class="mb-3 main_title main-title">-<h3 class="mb-3 position"></h3>
+                    </h4>
                     <div class="candidate_modal_title">
                         <h5 class="candidate_modal_text pb-2 ">Description</h5>
                         <div class="candidate_modal_desc desc">
@@ -309,7 +315,6 @@
 {!! $newslettervalidator->selector('#newsletterform') !!}
 @include('frontend.layouts.login_script')
 <script>
-     
     $(document).on('click', '.btn-show', function() {
         var id = $(this).attr("data-id");
         var url = "{{route('getAjaxSkill')}}";
@@ -342,9 +347,5 @@
             }
         });
     });
- 
-
 </script>
 @endsection
-
-

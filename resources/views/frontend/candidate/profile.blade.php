@@ -153,7 +153,7 @@
                                                 </div>
                                                 <div class="prof-side">
                                                     <h5 class="dark-tit profside-title">Diplômes :</h5>
-                                                    <p class="profside-text">CAP AEPE</p>
+                                                    <p class="profside-text">{{auth()->guard('web')->user()->diplomas}}</p>
                                                 </div>
                                                 <div class="prof-side">
                                                     <h5 class="dark-tit profside-title">Expériences :</h5>
@@ -172,7 +172,7 @@
                                                 </div>
                                                 <div class="prof-side">
                                                     <h5 class="dark-tit profside-title">Mobilité :</h5>
-                                                    <p class="profside-text">Montpellier et 10 km autour</p>
+                                                    <p class="profside-text">{{auth()->guard('web')->user()->mobility}}</p>
                                                 </div>
                                                 <div class="prof-side mb-60">
                                                     <h5 class="dark-tit profside-title">Vérifications :</h5>
@@ -257,17 +257,17 @@
                                             <div class="profile-sidebar-sec">
                                                 <div class="prof-side">
                                                     <h5 class="dark-tit profside-title">Situation actuelle :</h5>
-                                                    <p class="profside-text">En recherche active</p>
+                                                    <p class="profside-text">{{auth()->guard('web')->user()->current_situation}}</p>
                                                 </div>
                                                 <div class="prof-side">
                                                     <h5 class="dark-tit profside-title">Recherche :</h5>
-                                                    <p class="profside-text">CDI, CDD</p>
+                                                    <p class="profside-text">{{auth()->guard('web')->user()->research}}</p>
                                                 </div>
                                                 <div class="prof-side">
                                                     <h5 class="dark-tit profside-title">Disponible :</h5>
                                                     <ul class="prof-view-ul">
-                                                        <li>Dès aujourd’hui</li>
-                                                        <li>À temps plein</li>
+                                                    <li>{{auth()->guard('web')->user()->available_day}}</li>
+                                                        <li>{{auth()->guard('web')->user()->available_time}}</li>
                                                     </ul>
                                                 </div>
                                                 <div class="prof-side">
@@ -828,22 +828,22 @@
                                             <div class="profile-sidebar-sec">
                                                 <div class="prof-side">
                                                     <h5 class="dark-tit profside-title">Situation actuelle :</h5>
-                                                    <p class="profside-text">En recherche active</p>
+                                                    <p class="profside-text">{{auth()->guard('web')->user()->current_situation}}</p>
                                                 </div>
                                                 <div class="prof-side">
                                                     <h5 class="dark-tit profside-title">Recherche :</h5>
-                                                    <p class="profside-text">CDI, CDD</p>
+                                                    <p class="profside-text">{{auth()->guard('web')->user()->research}}</p>
                                                 </div>
                                                 <div class="prof-side">
                                                     <h5 class="dark-tit profside-title">Disponible :</h5>
                                                     <ul class="prof-view-ul">
-                                                        <li>Dès aujourd’hui</li>
-                                                        <li>À temps plein</li>
+                                                    <li>{{auth()->guard('web')->user()->available_day}}</li>
+                                                        <li>{{auth()->guard('web')->user()->available_time}}</li>
                                                     </ul>
                                                 </div>
                                                 <div class="prof-side">
                                                     <h5 class="dark-tit profside-title">Diplômes :</h5>
-                                                    <p class="profside-text">CAP AEPE</p>
+                                                    <p class="profside-text">{{auth()->guard('web')->user()->diplomas}}</p>
                                                 </div>
                                                 <div class="prof-side">
                                                     <h5 class="dark-tit profside-title">Expériences :</h5>
@@ -862,7 +862,7 @@
                                                 </div>
                                                 <div class="prof-side">
                                                     <h5 class="dark-tit profside-title">Mobilité :</h5>
-                                                    <p class="profside-text">Montpellier et 10 km autour</p>
+                                                    <p class="profside-text">{{auth()->guard('web')->user()->mobility}}</p>
                                                 </div>
                                                 <div class="prof-side mb-60">
                                                     <h5 class="dark-tit profside-title">Vérifications :</h5>

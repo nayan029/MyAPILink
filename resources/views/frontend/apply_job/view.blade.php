@@ -103,17 +103,17 @@
                                                         </div>
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                                <input class="form-control view-form" type="text" placeholder="Nom">
+                                                                <input class="form-control view-form" type="text" placeholder="Nom" value="{{$showCompany->first_name}}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                                <input class="form-control view-form" type="text" placeholder="Prénom">
+                                                                <input class="form-control view-form" type="text" placeholder="Prénom" value="{{$showCompany->last_name}}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                                <input class="form-control view-form" type="text" placeholder="Mail">
+                                                                <input class="form-control view-form" type="text" placeholder="Mail" value="{{$showCompany->email}}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -130,7 +130,7 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                                <input class="form-control view-form" type="text" placeholder="Directrice de l'établissement">
+                                                                <input class="form-control view-form" type="text" placeholder="Directrice de l'établissement" value="{{$showCompany->roles}}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -145,10 +145,10 @@
                                             <div class="mt-4">
                                                 <div class="">
                                                     <div class="applicants-veri">
-                                                        <span> <img src="images/imgs-svg/green-check.svg" alt="check"></span>Etablissement
+                                                        <span> <img src="{{asset('frontend/images/imgs-svg/green-check.svg')}}" alt="check"></span>Etablissement
                                                     </div>
                                                     <div class="applicants-veri">
-                                                        <span> <img src="images/imgs-svg/green-check.svg" alt="check"></span> E-mail
+                                                        <span> <img src="{{asset('frontend/images/imgs-svg/green-check.svg')}}" alt="check"></span> E-mail
                                                     </div>
                                                 </div>
                                             </div>
@@ -162,8 +162,9 @@
                                         <div class="tab-views">
                                             <ul class="nav nav-pills sr-nav-pills " id="pills-tab" role="tablist">
                                                 <li class="nav-item">
-                                                    <a class="nav-link active nav-custom"><img src="images/project/bulid.svg" class="bulid" alt="bulid"> Établissement</a>
+                                                    <a class="nav-link active nav-custom"><img src=" {{asset('frontend/images/project/bulid.svg')}}" class="bulid" alt="bulid"> Établissement</a>
                                                 </li>
+
                                             </ul>
                                             <div>
                                                 <p class="mb-0 ouvert-p mr-3">Ouvert depuis le 15 Février 1999</p>

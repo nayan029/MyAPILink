@@ -92,7 +92,7 @@ class SkillsController extends Controller
     {
         $data['validator'] = JsValidator::make($this->updatevalidationrules);
         $data['skill_position'] = SkillPosition::where('skill_id', $id)->where('deleted_at', NULL)->get();
-        
+
         $data['skill'] = $this->SkillRepository->getSingleSkill($id);
         // dd( $data['skill_position']);
         return view('backend.skills.edit', $data);
@@ -138,7 +138,7 @@ class SkillsController extends Controller
     {
         $deletePosition = $this->SkillRepository->destroyPos($request);
         if ($deletePosition) {
-            return response()->json(["success" => true, "skillData" => $deletePosition]);   
+            return response()->json(["success" => true, "skillData" => $deletePosition]);
         }
     }
 

@@ -192,11 +192,11 @@
                     <h4 class="mb-3 main_title main-title">-<h3 class="mb-3 position"></h3></h4>
                     <div class="candidate_modal_title">
                         <h5 class="candidate_modal_text pb-2 ">Description</h5>
-                        <div class="candidate_modal_desc desc">
+                        <div class="candidate_modal_desc desc" id="summernote">
 
                         </div>
                         <div class="text-center pt-4 pb-3">
-                            <button class="btn btn-blue btn-skyblue ml-auto" type="button" id="new-industry">Je crée
+                            <button class="btn btn-blue btn-skyblue ml-auto" type="button" data-target="Modallogin2" id="new-industry">Je crée
                                 mon
                                 profil
                                 professionnel pour ce poste</button>
@@ -331,7 +331,7 @@
             },
             success: function(data) {
                 $('.main-title').text(data.skillData.name);
-                $('.desc').text(data.skillData.description);
+                $('#summernote').text(data.skillData.description);
                 $('.position').text(data.skillData.title);
                 $('#Modaljob-desc').modal('show');
             },

@@ -394,15 +394,14 @@
                         </div>
                     </div>
 
-
+                    
                 </section>
             </div>
-
             <div class="tab-pane fade" id="job-offers" role="tabpanel" aria-labelledby="pills-job-offers">
                 <section class="prof-backsec">
                     <div class="container">
                         <div class="post-right">
-                            <a href="{{route('addjob')}}" class="btn post-an-btn">Publier une offre</a>
+                            <a href="{{route('addjob',$establishment->id)}}" class="btn post-an-btn">Publier une offre</a>
                         </div>
                         <div>
                             <ul class="nav nav-pills tab-inside-pills" id="pills-tab" role="tablist">

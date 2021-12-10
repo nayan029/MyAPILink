@@ -163,26 +163,26 @@
                         <div class="row mt-3">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" name="firstname" placeholder="Prénom" class="form-control login-input inputicon2" id="firstname">
+                                    <input type="text" name="firstname" placeholder="Prénom*" class="form-control login-input inputicon2" id="firstname">
                                     <span class="text-danger error" id="firstname-error"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" name="lastname" placeholder="Nom de famille" class="form-control login-input inputicon2" id="lastname">
+                                    <input type="text" name="lastname" placeholder="Nom de famille*" class="form-control login-input inputicon2" id="lastname">
                                     <span class="text-danger error" id="lastname-error"></span>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="email" name="email" placeholder="Email" class="form-control login-input inputicon2" id="email">
+                                    <input type="email" name="email" placeholder="Email*" class="form-control login-input inputicon2" id="email">
 
                                     <span class="text-danger error" id="email-error"></span>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="text" name="phone" placeholder="Téléphone" class="form-control login-input inputicon2" onkeypress="return isNumber(event)" id="phone" maxlength="10">
+                                    <input type="text" name="phone" placeholder="Téléphone*" class="form-control login-input inputicon2" onkeypress="return isNumber(event)" id="phone" maxlength="10">
                                     <span class="text-danger error" id="phone-error"></span>
                                 </div>
                             </div>

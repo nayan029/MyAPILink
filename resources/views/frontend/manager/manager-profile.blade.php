@@ -211,7 +211,7 @@
             <section class="prof-backsec">
                 <div class="container">
                     <div class="post-right">
-                        <a href="{{route('addjob')}}" class="btn post-an-btn">Publier une offre</a>
+                        <a href="{{route('addjob',auth()->guard('web')->user()->id);}}" class="btn post-an-btn">Publier une offre</a>
                     </div>
                     <div>
                         <ul class="nav nav-pills tab-inside-pills" id="pills-tab" role="tablist">

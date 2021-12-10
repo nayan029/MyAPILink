@@ -13,6 +13,7 @@ use App\Interfaces\HomeRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 use App\Models\Skill;
 use App\Models\SkillPosition;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -42,19 +43,17 @@ class HomeController extends Controller
     public function userDashboard()
     {
         $data['newslettervalidator'] = JsValidator::make($this->newsletterValidationRules);
-        $data['widget'] = Widget::get();
-        $data['skill'] = Skill::get();
-        
+        $userData = $this->homeRepository->UserData();
+        $data['widget'] = $userData['widget'];
+        $data['skill'] = $userData['skill'];
         return view('frontend.dashboard', $data);
     }
 
     public function getAjaxSkill(Request $request)
     {
-        $data = Skill::with('positions')->findOrFail($request->id);
-        return response()->json(["success"=>true,"skillData"=>$data]);
+        $data = $this->homeRepository->getSkillPositionData($request);
+        return response()->json(["success" => true, "skillData" => $data]);
     }
-
-
 
     public function ajaxDataInsert(Request $request)
     {
@@ -71,7 +70,6 @@ class HomeController extends Controller
         );
     }
 
-
     public function addNewsletter(Request $request)
     {
 
@@ -81,17 +79,11 @@ class HomeController extends Controller
 
             return redirect()->back()->withErrors($validation->errors());
         }
-        $instArray = array(
-            'email' => request('email'),
-            'created_at' => date('Y-m-d H:i:s'),
-        );
-        $inasert = new Newsletter($instArray);
-        $inasert->save();
-
-        //   ---------------
-        session()->flash('message-type', 'success');
-        session()->flash('message', 'Add Newsletter successfully');
-        return redirect('/');
+        $instArray = $this->homeRepository->storeNewsLater($request);
+        if ($instArray) {
+            Session::flash('success', 'Successfully Inserted');
+            return redirect('/');
+        }
     }
     public function userLogin(Request $request)
     {
@@ -101,9 +93,9 @@ class HomeController extends Controller
         if ($validator->fails()) {
             return response()->json(['success' => false, 'errors' => $validator->errors()]);
         }
-        $user=Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password, 'deleted_at' => NULL,'verify_email' =>'accept']);
-        if($user) {
-            return response()->json(['success' => true, 'message' => 'Connexion réussie','user'=>Auth::guard('web')->user()->user_type]);
+        $user = $this->homeRepository->usersLogin($request);
+        if ($user) {
+            return response()->json(['success' => true, 'message' => 'Connexion réussie', 'user' => Auth::guard('web')->user()->user_type]);
         }
         return response()->json(['success' => false, 'errors' => array('invalid' => 'Email et le mot de passe sont erronés')]);
     }

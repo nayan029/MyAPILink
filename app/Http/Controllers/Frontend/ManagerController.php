@@ -52,8 +52,8 @@ class ManagerController extends Controller
             'firstname' => 'required',
             'lastname' => 'required',
             'telephone' => 'required|numeric|digits:10',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed|min:6',
+            'email' => 'required|email|unique:users,email,NULL,id,deleted_at,NULL',
+            'password' => 'required|confirmed|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
             'represent' => 'required',
             'organization' => 'required',
             'number_of_establishments' => 'required',
@@ -92,13 +92,11 @@ class ManagerController extends Controller
         $data['remaining'] = Job::where('created_at', '>=', Carbon::now())->where('user_id', $id)->get();
         $data['deleted'] = Job::where('user_id', $id)->onlyTrashed()->get();
         $data['myEstablishmentList'] = Establishment::where('created_by', $id)->get();
-        if($userType==2)
-        {
+        if ($userType == 2) {
             return view('frontend.manager.manager-profile', $data);
-        }else{
+        } else {
             return redirect()->route('mycandidate-profile');
         }
-       
     }
 
     public function updateProfile(Request $request)

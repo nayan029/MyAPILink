@@ -38,9 +38,10 @@ class JobController extends Controller
         'what_you_are_looking' => 'required',
     ];
 
-    public function index(Request $request)
+    public function index(Request $request,$id)
     {
         $this->data['jobvalidator'] = JsValidator::make($this->jobValidationRules);
+        $this->data['id'] =$id;
         return view('frontend.job.index', $this->data);
     }
 
@@ -63,9 +64,8 @@ class JobController extends Controller
         return view('frontend.manager.manager-profile', ['count' => $count[0]->total]);
     }
 
-    public function addOrUpdateJob(Request $request)
+    public function addOrUpdateJob(Request $request,$id)
     {
-
         $validation = Validator::make($request->all(), $this->jobValidationRules);
         if ($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors());
@@ -78,7 +78,6 @@ class JobController extends Controller
             $contactThrough = implode(',', request('contact_thorugh'));
         }
       
-        $id = Auth::guard('web')->user()->id;
         $certificationArray = array(
             'user_id' => $id,
             'title' => request('title'),

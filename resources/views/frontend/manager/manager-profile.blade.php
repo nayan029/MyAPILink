@@ -383,7 +383,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="pills-third" role="tabpanel" aria-labelledby="pills-third-tab">
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="pills-third" role="tabpanel" aria-labelledby="pills-third-tab">
                                     <div class="card sr-card">
                                         <div class="card-body">
                                             <div class="row">
@@ -482,9 +484,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
+                                </div>  
 
 
             </section>

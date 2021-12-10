@@ -9,6 +9,9 @@
         color: red;
         background-color: yellow;
     }
+    .error{
+        color:red;
+    }
 </style>
 @endsection
 @section('content')
@@ -51,14 +54,14 @@
                             <div class="form-group">
                                 {!! Form::label('position', 'Position') !!}
                                 {!! Form::text('',null,['class' => 'form-control', 'placeholder' => 'Enter position','id'=>'position']) !!}
-                                <span class="poserror"></span>
+                                <span class="error poserror"></span>
                             </div>
                         </div>
                         <div class="col-md-5">
                             <div class="form-group">
                                 {!! Form::label('title', 'Title') !!}
                                 {!! Form::text('',null, ['class' => 'form-control', 'placeholder' => 'Enter Title','id'=>'title']) !!}
-                                <span class="titerror"></span>
+                                <span class="error titerror"></span>
                             </div>
                         </div>
                         <div class="col-md-1 mb-5">
@@ -71,7 +74,7 @@
                         <div class="form-group">
                             {!! Form::label('desc', 'Description') !!}
                             {!! Form::textarea('',null, ['class' => 'form-control ', 'placeholder' => 'Enter desc','id'=>'desc']) !!}
-                            <span class="descerror"></span>
+                            <span class="error descerror"></span>
                         </div>
                     </div>
                     <div id="appendNrerow">
@@ -136,6 +139,7 @@
         // getAllData = getAllData.replace(/\]/gi, "");
         // getAllData = getAllData.split(',');
 
+        $('.btn-save').hide();
         var id = '{{count($skill_position)+1}}';
         $(function() {
             $('.summernote').summernote();
@@ -192,7 +196,6 @@
                 return false;
             }
         }
-
         function updateSkillPostionData(position, t, d, id) {
 
             var path = 'skill/' + id;
@@ -215,10 +218,8 @@
                 }
             });
         }
-
-
-
         $(document).on('click', ".edit_row", function() {
+            $('.btn-save').show();
             $(this).closest('tr').css('background-color', '#ddd');
             var tbl_row = $(this).closest('tr');
             var row_id = tbl_row.attr('row_id');
@@ -240,11 +241,11 @@
             var tbl_row = $(this).closest('tr');
             var row_id = tbl_row.attr('row_id');
 
-            var position = $('#position' + row_id).html(p + '<input type="hidden"  class="position" name="position" value="' + p + '">');
+            var position = $('#position' + row_id).html(p + '<input type="hidden"  class="position" name="position[]" value="' + p + '">');
 
-            var title = $('#title' + row_id).html(t + '<input type="hidden"  class="title" name="title" value="' + t + '">');
+            var title = $('#title' + row_id).html(t + '<input type="hidden"  class="title" name="title[]" value="' + t + '">');
 
-            var description = $('#desc' + row_id).html(d + '<input type="hidden"  class="desc" name="descs" value="' + d + '">');
+            var description = $('#desc' + row_id).html(d + '<input type="hidden"  class="desc" name="descs[]" value="' + d + '">');
 
             /*  var position = $('.position').val(p);
             var title = $('.title').val(t);

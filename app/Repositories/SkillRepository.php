@@ -57,7 +57,6 @@ class SkillRepository implements SkillRepositoryInterface
     }
     public function updateSkill(Request $request, $id)
     {
-
         $data = $request->all();
         $skill = $this->getSingleSkill($id);
         $image = "";
@@ -106,8 +105,7 @@ class SkillRepository implements SkillRepositoryInterface
 
         $sortcolumns = array(
             0 => 'skills.name',
-            1 => 'skills.description',
-            2 => 'skills.image',
+            1 => 'skills.image',
         );
 
         $query = Skill::select('*');
@@ -133,7 +131,6 @@ class SkillRepository implements SkillRepositoryInterface
             $json['data'][] = [
                 $nameAction,
                 $Image,
-                $skill->description,
             ];
         }
         return $json;

@@ -76,10 +76,11 @@ class EstablishmentController extends Controller
         $data['imageValidator'] = JsValidator::make($this->imageValidationRules);
         $data['images'] = $this->establishmentRepository->getEstablishmentGallery($id);
         $data['establishment'] = $this->establishmentRepository->getSingleEstablishment($id);
-        $data['jobListing'] = $this->establishmentRepository->getPostsData($id);
-        
 
-       
+        $postsdata = $this->establishmentRepository->getPostsData($id);
+        $data['jobListing'] = $postsdata['jobListing'];
+        $data['remaining'] = $postsdata['remaining'];
+        $data['deleted'] = $postsdata['deleted'];
         return view('frontend.establishment.show',$data);
     }
     public function edit($id)

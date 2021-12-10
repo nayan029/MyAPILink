@@ -50,10 +50,7 @@ class HomeController extends Controller
     public function userDashboard()
     {
         $data['newslettervalidator'] = JsValidator::make($this->newsletterValidationRules);
-        $data['forgotPasswordValidator'] = JsValidator::make($this->forgotPasswordValidator);
-        $data['widget'] = Widget::get();
-        $data['skill'] = Skill::get();
-        
+        $data['forgotPasswordValidator'] = JsValidator::make($this->forgotPasswordValidator); 
         $userData = $this->homeRepository->UserData();
         $data['widget'] = $userData['widget'];
         $data['skill'] = $userData['skill'];

@@ -12,7 +12,7 @@ class UserRepository implements UserRepositoryInterface
 {
     use ImageuploadTrait;
 
-    
+
 
     public function getUserdata(Request $request)
     {
@@ -32,17 +32,17 @@ class UserRepository implements UserRepositoryInterface
         );
 
         $query = User::select('*')->whereNotNull('user_type');
-        if($request->query('name') != ''){
-            $query->whereRaw('first_name LIKE "%'.$request->query('name').'%"');
-            $query->orWhereRaw('last_name LIKE "%'.$request->query('name').'%"');
+        if ($request->query('name') != '') {
+            $query->whereRaw('first_name LIKE "%' . $request->query('name') . '%"');
+            $query->orWhereRaw('last_name LIKE "%' . $request->query('name') . '%"');
         }
 
-        if($request->query('email') != ''){
-            $query->whereRaw('email LIKE "%'.$request->query('email').'%"');
+        if ($request->query('email') != '') {
+            $query->whereRaw('email LIKE "%' . $request->query('email') . '%"');
         }
 
-        if($request->query('phone') != ''){
-            $query->whereRaw('phone LIKE "%'.$request->query('phone').'%"');
+        if ($request->query('phone') != '') {
+            $query->whereRaw('phone LIKE "%' . $request->query('phone') . '%"');
         }
 
         $recordstotal = $query->count();
@@ -62,19 +62,19 @@ class UserRepository implements UserRepositoryInterface
         $Users = $query->orderBy('created_at', 'desc')->get();
         foreach ($Users as $user) {
             $url = route("user.show", $user->id);
-            $userName = ucfirst($user->civility).' '.ucfirst($user->first_name).' '.ucfirst($user->last_name); 
+            $userName = ucfirst($user->civility) . ' ' . ucfirst($user->first_name) . ' ' . ucfirst($user->last_name);
             $nameAction = "<a href='" . $url . "'>" . $userName . "</a>";
 
             $userType = '-';
             $labelClass = '';
-            if($user->user_type == 1){
+            if ($user->user_type == 1) {
                 $userType = 'User';
                 $labelClass = 'btn btn-block btn-success  btn-sm';
-            }else if($user->user_type == 2){
+            } else if ($user->user_type == 2) {
                 $userType = 'Manager';
                 $labelClass = 'btn btn-block btn-primary btn-sm';
             }
-            $type = "<label class='".$labelClass."'>".$userType."</label>";
+            $type = "<label class='" . $labelClass . "'>" . $userType . "</label>";
             $json['data'][] = [
                 $nameAction,
                 $user->email,

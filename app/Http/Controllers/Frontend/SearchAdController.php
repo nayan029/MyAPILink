@@ -43,22 +43,25 @@ class SearchAdController extends Controller
     }
     public function showJob($id)
     {
+
         $data['showList'] = $this->applyJobRepository->getSingleCandidatedata($id);
         return view('frontend.apply_job.show', $data);
     }
     public function insertPosts(Request $request)
     {
-        $insertSavedPosts = $this->applyJobRepository->insertPosts($request);
 
+        $insertSavedPosts = $this->applyJobRepository->insertPosts($request);
         if ($insertSavedPosts) {
             return response()->json([
                 'success' => true,
-                'message' => 'Successfully Inserted'
+                'message' => 'Successfully Inserted',
+                'status' => $insertSavedPosts
             ]);
         }
         return response()->json([
             'success' => false,
-            'message' => 'Sorry, something went wrong. please try again.'
+            'message' => 'Sorry, something went wrong. please try again.',
+            'status' => $insertSavedPosts
         ]);
     }
     public function showCompany($id)

@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Contact;
+use App\Models\Newsletter;
 use App\Models\Partner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -15,6 +16,9 @@ use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use Exception;
 
+use App\Models\Skill;
+use App\Models\Widget;
+use Illuminate\Support\Facades\Auth;
 
 class HomeRepository implements HomeRepositoryInterface
 {
@@ -69,5 +73,35 @@ class HomeRepository implements HomeRepositoryInterface
             Session::flash('error', 'Invalid token');
             return false;
         }
+    }
+    public function UserData()
+    {
+        $data['widget'] =  Widget::get();
+        $data['skill'] =  Skill::get();
+        return $data;
+    }
+
+    public function getSkillPositionData(Request $request)
+    {
+        $data = Skill::with('positions')->findOrFail($request->id);
+        return $data;
+    }
+
+    public function storeNewsLater(Request $request)
+    {
+
+        $instArray = array(
+            'email' => request('email'),
+            'created_at' => date('Y-m-d H:i:s'),
+        );
+        $inasert = new Newsletter($instArray);
+        $inasert->save();
+        return $inasert;
+    }
+
+    public function usersLogin(Request $request)
+    {
+        $user =   Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password, 'deleted_at' => NULL, 'verify_email' => 'accept']);
+        return $user;
     }
 }

@@ -11,6 +11,7 @@ interface EstablishmentRepositoryInterface
     public function uploadEstablishmentImage(Request $request);
     public function getEstablishmentGallery($id);
     public function deleteImage($id);
+    public function getPostsData($id);
 
     
     

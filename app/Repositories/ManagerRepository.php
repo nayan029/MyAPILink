@@ -15,8 +15,6 @@ class ManagerRepository implements ManagerRepositoryInterface
 {
     public function StoreProfile(Request $request)
     {
-
-
         try {
             $storeData = [
                 'civility' => $request->civility,

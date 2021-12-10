@@ -4,9 +4,7 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\ManagerRepositoryInterface;
-use App\Models\Manager;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use JsValidator;
@@ -52,8 +50,8 @@ class ManagerController extends Controller
             'firstname' => 'required',
             'lastname' => 'required',
             'telephone' => 'required|numeric|digits:10',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed|min:6',
+            'email' => 'required|email|unique:users,email,NULL,id,deleted_at,NULL',
+            'password' => 'required|confirmed|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
             'represent' => 'required',
             'organization' => 'required',
             'number_of_establishments' => 'required',
@@ -95,10 +93,9 @@ class ManagerController extends Controller
         if($userType==2)
         {
             return view('frontend.manager.manager-profile', $data);
-        }else{
+        } else {
             return redirect()->route('mycandidate-profile');
         }
-       
     }
 
     public function updateProfile(Request $request)

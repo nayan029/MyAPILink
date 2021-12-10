@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use App\Http\Traits\ImageuploadTrait;
-
+use App\Models\Job;
 
 class EstablishmentRepository implements EstablishmentRepositoryInterface
 {
@@ -141,4 +141,9 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
         $id->delete();
         return $id;
     }
+
+    public function getPostsData($id){
+        return Job::where('user_id', $id)->paginate(10);
+    }
+    
 }

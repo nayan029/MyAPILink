@@ -51,7 +51,9 @@ class SearchAdController extends Controller
     {
 
         $insertSavedPosts = $this->applyJobRepository->insertPosts($request);
+
         if ($insertSavedPosts) {
+
             return response()->json([
                 'success' => true,
                 'message' => 'Successfully Inserted',

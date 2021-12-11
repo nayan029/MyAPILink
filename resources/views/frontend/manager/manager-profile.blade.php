@@ -88,7 +88,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group pb-2">
 
-                                                            {!! Form::text('civility', auth()->guard('web')->user()->civility, ['class' => 'form-control view-form', 'placeholder' => 'Civilité','id'=>'civility']) !!}
+                                                            {!! Form::text('civility', auth()->guard('web')->user()->civility, ['class' => 'form-control view-form', 'placeholder' => 'Civilité*','id'=>'civility']) !!}
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 pb-2">
@@ -96,18 +96,18 @@
 
 
 
-                                                            {!! Form::text('lastname', auth()->guard('web')->user()->last_name, ['class' => 'form-control view-form', 'placeholder' => 'Nom','id'=>'lastname']) !!}
+                                                            {!! Form::text('lastname', auth()->guard('web')->user()->last_name, ['class' => 'form-control view-form', 'placeholder' => 'Nom*','id'=>'lastname']) !!}
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 pb-2">
                                                         <div class="form-group">
-                                                            {!! Form::text('firstname',auth()->guard('web')->user()->first_name, ['class' => 'form-control view-form', 'placeholder' => 'Prénom','id'=>'firstname']) !!}
+                                                            {!! Form::text('firstname',auth()->guard('web')->user()->first_name, ['class' => 'form-control view-form', 'placeholder' => 'Prénom*','id'=>'firstname']) !!}
 
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 pb-2">
                                                         <div class="form-group">
-                                                            {!! Form::text('email',auth()->guard('web')->user()->email, ['class' => 'form-control view-form', 'placeholder' => 'Mail','id'=>'email']) !!}
+                                                            {!! Form::text('email',auth()->guard('web')->user()->email, ['class' => 'form-control view-form', 'placeholder' => 'Mail*','id'=>'email']) !!}
 
                                                         </div>
                                                     </div>
@@ -123,7 +123,7 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                                {!! Form::text('roles',auth()->guard('web')->user()->roles, ['class' => 'form-control view-form', 'placeholder' => "Directrice de l'établissement",'id'=>'roles']) !!}
+                                                                {!! Form::text('roles',auth()->guard('web')->user()->roles, ['class' => 'form-control view-form', 'placeholder' => "Directrice de l'établissement*",'id'=>'roles']) !!}
 
                                                             </div>
                                                         </div>

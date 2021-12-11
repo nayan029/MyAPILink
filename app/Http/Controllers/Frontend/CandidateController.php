@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use JsValidator;
 use Carbon\Carbon;
-use App\Models\SavedJobs;
+use App\Models\ChatMaster;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -19,27 +19,27 @@ class CandidateController extends Controller
     [
         'profile_photo_path' => 'mimes:jpeg,png,jpg|max:2048',
         'about_me' => 'required',
-        'current_situation'=>'required',
-        'research'=>'required',
-        'available_day'=>'required',
-        'available_time'=>"required",
-        'diplomas' =>"required",
-        'seniority'=>"required",
-        'age_range' =>"required",
-        'mobility'=>'required',
-        'permit_vehicle' =>"required",
-        'first_name'=>'required',
-        'last_name'=>"required",
-        'gander'=>'required',
-        'dob'=>'required|date',
-        'phone'=>"required",
-        'city'=>"required",
-        'region'=>"required",
-        'pedagogy'=>"required",
-        'qualities'=>"required",
-        'values'=>"required",
-        'languages_spoken'=>'required',
-        
+        'current_situation' => 'required',
+        'research' => 'required',
+        'available_day' => 'required',
+        'available_time' => "required",
+        'diplomas' => "required",
+        'seniority' => "required",
+        'age_range' => "required",
+        'mobility' => 'required',
+        'permit_vehicle' => "required",
+        'first_name' => 'required',
+        'last_name' => "required",
+        'gander' => 'required',
+        'dob' => 'required|date',
+        'phone' => "required",
+        'city' => "required",
+        'region' => "required",
+        'pedagogy' => "required",
+        'qualities' => "required",
+        'values' => "required",
+        'languages_spoken' => 'required',
+
 
     ];
     protected   $imageValidationRules =
@@ -48,11 +48,11 @@ class CandidateController extends Controller
         'image' => 'required|mimes:jpeg,png,jpg|max:2048',
 
     ];
-    public function __construct(CandidateRepositoryInterface $candidateRepository, EstablishmentRepositoryInterface $establishmentRepository,ApplyJobRepositoryInterface $ApplyJobRepository)
+    public function __construct(CandidateRepositoryInterface $candidateRepository, EstablishmentRepositoryInterface $establishmentRepository, ApplyJobRepositoryInterface $ApplyJobRepository)
     {
         $this->candidateRepository = $candidateRepository;
         $this->establishmentRepository = $establishmentRepository;
-        $this->ApplyJobRepository=$ApplyJobRepository;
+        $this->ApplyJobRepository = $ApplyJobRepository;
     }
 
     public function index()
@@ -60,14 +60,14 @@ class CandidateController extends Controller
 
         $data['validator'] = JsValidator::make($this->imageValidationRules);
         $data['images'] = $this->establishmentRepository->getCandidateGallery();
-        $data['jobSaveData'] = $this->ApplyJobRepository->getJobsaveDataByUserId(); 
+        $data['jobSaveData'] = $this->ApplyJobRepository->getJobsaveDataByUserId();
         $data['applyJobData'] =  $this->ApplyJobRepository->getApplyJobDataByUserId();
 
         return view('frontend.candidate.profile', $data);
     }
     public function edit()
     {
-        $this->validationrules['email'] = "required|email|unique:users,email,".auth()->guard('web')->user()->id . ",id,deleted_at,NULL";
+        $this->validationrules['email'] = "required|email|unique:users,email," . auth()->guard('web')->user()->id . ",id,deleted_at,NULL";
         $data['validator'] = JsValidator::make($this->validationrules);
         return view('frontend.candidate.edit', $data);
     }
@@ -89,5 +89,41 @@ class CandidateController extends Controller
         }
         Session::flash('error', 'Sorry, something went wrong. please try again.');
         return redirect()->back();
+    }
+    public function chatIndex()
+    {
+
+        $data['validator'] = JsValidator::make($this->imageValidationRules);
+
+        return view('frontend.candidate.chat_index', $data);
+    }
+    public function messageListAjax(Request $request)
+    {
+
+        $data['validator'] = JsValidator::make($this->imageValidationRules);
+        $data['messagelist'] =  $this->candidateRepository->getAllMessage($request->id);
+ 
+        return view('frontend.candidate.chatbox', $data);
+    }
+
+    public function sendmessage(Request $request)
+    {
+     
+        $insert =$this->candidateRepository->insertMessage($request);
+        if ($insert) {
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'Data inserted successfully'
+                ]
+            );
+        } else {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Sorry, something went wrong. please try again.'
+                ]
+            );
+        }
     }
 }

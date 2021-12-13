@@ -386,7 +386,7 @@
             },
             success: function(data) {
                 $('.main-title').text(data.skillData.name);
-                $('#summernote').text(data.skillData.description);
+                $('#summernote').html(data.skillData.description);
                 $('.position').text(data.skillData.title);
                 $('#Modaljob-desc').modal('show');
             },

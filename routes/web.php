@@ -134,7 +134,9 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->post('update-candidate-profile', 'CandidateController@update')->name('update-candidate-profile');
         $frontRoute->get('candidate-message', 'CandidateController@chatIndex')->name('candidate-message');
         $frontRoute->get('candidate-message-list-ajax', 'CandidateController@messageListAjax')->name('candidate-message-list-ajax');
+        $frontRoute->get('last-mesage', 'CandidateController@lastMessageCheck')->name('last-mesage');
         
+
         $frontRoute->post('candidate-sendmessage', 'CandidateController@sendmessage')->name('candidate-sendmessage');
         $frontRoute->post('user/logout', 'HomeController@logout')->name('user-logout');
         $frontRoute->get('search-job', 'SearchAdController@index')->name('searchjob');

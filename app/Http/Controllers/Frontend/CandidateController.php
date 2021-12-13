@@ -48,7 +48,7 @@ class CandidateController extends Controller
         'image' => 'required|mimes:jpeg,png,jpg|max:2048',
 
     ];
-    protected $candidateRepository="",$establishmentRepository="",$applyJobRepository="";
+    protected $candidateRepository = "", $establishmentRepository = "", $applyJobRepository = "";
 
     public function __construct(CandidateRepositoryInterface $candidateRepository, EstablishmentRepositoryInterface $establishmentRepository, ApplyJobRepositoryInterface $applyJobRepository)
     {
@@ -101,17 +101,17 @@ class CandidateController extends Controller
     }
     public function messageListAjax(Request $request)
     {
-
+        $data['id'] = $request->id;
         $data['validator'] = JsValidator::make($this->imageValidationRules);
         $data['messagelist'] =  $this->candidateRepository->getAllMessage($request->id);
- 
+
         return view('frontend.candidate.chatbox', $data);
     }
 
     public function sendmessage(Request $request)
     {
-     
-        $insert =$this->candidateRepository->insertMessage($request);
+
+        $insert = $this->candidateRepository->insertMessage($request);
         if ($insert) {
             return response()->json(
                 [
@@ -127,5 +127,10 @@ class CandidateController extends Controller
                 ]
             );
         }
+    }
+
+    public function lastMessageCheck(Request $request)
+    {
+        return $checkMessage = $this->candidateRepository->getLastMessage($request);
     }
 }

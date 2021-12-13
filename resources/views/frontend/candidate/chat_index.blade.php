@@ -150,6 +150,7 @@
 
 
 <script type="text/javascript ">
+
     $('document').ready(function() {
 
         $("#candidate-message a").click(function() {
@@ -159,7 +160,6 @@
     });
 </script>
 <script>
-
     function msgbox(id) {
 
         $.ajax({
@@ -184,16 +184,19 @@
         if (mess.trim() == '') {
             temp++;
             if (bookingfile != '') {
-                
+
                 var Filesize = $("#msgfile")[0].files[0].size;
-                if ($.inArray(FileExtension, ['gif', 'png', 'jpg', 'jpeg', 'bmp', 'jfif', 'pdf']) == -1) {
+                if ($.inArray(FileExtension, ['gif', 'png', 'jpg', 'jpeg', 'bmp', 'jfif', 'pdf','PDF']) == -1) {
                     temp++;
                 }
                 if (Filesize > 10000000) {
                     temp++;
+                    
                 }
-                temp--;
+                
             }
+                temp--;
+            
         }
 
         if (temp == 0) {
@@ -212,7 +215,7 @@
                 cache: false,
                 processData: false,
                 success: function(response) {
-                    alert(response);
+                    
                     if (response.success) {
                         $('#chatmessage').val('');
                         $('#msgfile').val('');
@@ -233,6 +236,8 @@
         }
 
     }
+
+  
 </script>
 
 @endsection

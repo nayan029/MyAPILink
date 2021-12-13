@@ -14,7 +14,7 @@ class AddCompanyIdToChatMasterTable extends Migration
     public function up()
     {
         Schema::table('chat_master', function (Blueprint $table) {
-            $table->integer('company_id');
+            $table->integer('company_id')->after('user_id');
         });
     }
 

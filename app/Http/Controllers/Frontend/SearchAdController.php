@@ -53,17 +53,21 @@ class SearchAdController extends Controller
         $insertSavedPosts = $this->applyJobRepository->insertPosts($request);
 
         if ($insertSavedPosts) {
-
+            if($insertSavedPosts->job_save==1){
+                $msg = 'Job Save Successfully!.';
+            }else{
+                $msg = 'Job Un Save Successfully!.';
+            }
             return response()->json([
                 'success' => true,
-                'message' => 'Successfully Inserted',
-                'status' => $insertSavedPosts
+                'message' => $msg,
+                'data' => $insertSavedPosts
             ]);
         }
         return response()->json([
             'success' => false,
             'message' => 'Sorry, something went wrong. please try again.',
-            'status' => $insertSavedPosts
+            'data' => $insertSavedPosts
         ]);
     }
     public function showCompany($id)

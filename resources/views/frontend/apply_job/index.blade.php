@@ -161,7 +161,7 @@
                                         <span class="public-span">Publié il y a {{$finalDays}} jours</span>
                                         <input type="hidden" name="job_id" id="job_id">
                                         <input type="hidden" name="user_id" id="user_id">
-                                        <button id="saveclass{{$data->id}}" class="btn fav-btn save-fav {{count($data->saveJob)>0?'favpost':''}}" type="button" data-job="{{$data->id}}" data-user="{{$data->user_id}}" data-rowid="{{$data->id}}">
+                                        <button id="saveclass{{$data->id}}" class="btn fav-btn save-fav {{count($data->saveJob) > 0 ? 'favpost' : ''}}" type="button" data-job="{{$data->id}}" data-user="{{$data->user_id}}" data-rowid="{{$data->id}}">
 
                                             <img id="saveicon{{$data->id}}" src="{{count($data->saveJob) > 0 ? 'frontend/images/imgs-svg/book-mark-yellow.svg' : 'frontend/images/bookmark.svg'}}" alt="bookmark image " class="b1 bookmark-img">
 
@@ -513,30 +513,24 @@
 
 
 
+
         $.ajax({
             url: "{{route('store-savedjobs')}}",
             method: "POST",
             data: {
                 'job_id': job_id,
                 'user_id': user_id,
-                'favPost': favPost,
+
                 _token: '{{ csrf_token() }}',
             },
             success: function(response) {
                 if (response.success == true) {
                     $("#saveicon" + rowid).attr("src", 'frontend/images/imgs-svg/book-mark-yellow.svg');
                     $('#saveicon' + rowid).addClass("b1 bookmark-img");
-                    $('#saveclass' + rowid).removeClass("active");
-                    if (response.status == 0) {
-                        $("#saveicon" + rowid).attr("src", 'frontend/images/imgs-svg/bookmark.svg');
+                    if (response.status.job_save == 0) {
+                        alert('yes');
+                        $("#saveicon" + rowid).attr("src", 'frontend/images/bookmark.svg');
                         $('#saveicon' + rowid).addClass("b1 bookmark-img");
-                        $('#saveclass' + rowid).removeClass("active");
-                        $('#saveclass' + rowid).addClass("favpost");
-                    } else {
-                        $("#saveicon" + rowid).attr("src", 'frontend/images/imgs-svg/book-mark-yellow.svg');
-                        $('#saveicon' + rowid).addClass("b1 bookmark-img");
-                        $('#saveclass' + rowid).removeClass("active");
-                        $('#saveclass' + rowid).removeClass("favpost");
                     }
 
                 }

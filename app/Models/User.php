@@ -88,6 +88,6 @@ class User extends Authenticatable
 
     public function userData()
     {
-        return  $this->belongsTo(ChatMaster::class, 'sender_id', 'id');
+        return  $this->belongsTo(ChatMaster::class, 'user_id','id');
     }
 }

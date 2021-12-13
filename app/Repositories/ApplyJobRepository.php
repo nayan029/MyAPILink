@@ -54,10 +54,10 @@ class ApplyJobRepository implements ApplyJobRepositoryInterface
                 $status = 1;
             }
             $update_array['job_save'] = $status;
-            $saveJob = SavedJobs::where('id', $checkType->id)->update($update_array);
+            SavedJobs::where('id', $checkType->id)->update($update_array);
         } else {
             $inputs['job_save'] = 1;
-            $saveJob = SavedJobs::create($inputs);
+            SavedJobs::create($inputs);
         }
         $checkType = SavedJobs::where('job_id', $request->job_id)->where('user_id', $request->user_id)->first();
         return $checkType;

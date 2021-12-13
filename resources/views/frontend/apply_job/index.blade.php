@@ -150,20 +150,21 @@
                                 $now = date('d-m-Y');
                                 $diff = strtotime($createDate) - strtotime($now);
                                 $finalDays = abs(round($diff / 86400));
+                                $saveJob = $data->savedJob ? $data->savedJob[0]->job_save : '';
+                                
                                 @endphp
                                 <div class="d-flex justify-content-between mb-4 ">
                                     <div>
                                         <h5 class="mb-0 job_aux_text">{{$data->title}}</h5>
                                         <p class="mb-0 job_cre_text">{{$data->address}}</p>
                                     </div>
-
                                     <div class="d-flex">
                                         <span class="public-span">Publié il y a {{$finalDays}} jours</span>
                                         <input type="hidden" name="job_id" id="job_id">
                                         <input type="hidden" name="user_id" id="user_id">
-                                        <button id="saveclass{{$data->id}}" class="btn fav-btn save-fav {{$data->saveJob !=null ? 'favpost' : ''}}" type="button" data-job="{{$data->id}}" data-user="{{$data->user_id}}" data-rowid="{{$data->id}}">
+                                        <button id="saveclass{{$data->id}}" class="btn fav-btn save-fav" type="button" data-job="{{$data->id}}" data-user="{{$data->user_id}}" data-rowid="{{$data->id}}">
 
-                                            <img id="saveicon{{$data->id}}" src="{{$data->saveJob !='' ? 'frontend/images/imgs-svg/book-mark-yellow.svg' : 'frontend/images/bookmark.svg'}}" alt="bookmark image " class="b1 bookmark-img">
+                                            <img id="saveicon{{$data->id}}" src="{{$saveJob=='1' ? 'frontend/images/imgs-svg/book-mark-yellow.svg' : 'frontend/images/bookmark.svg'}}" alt="bookmark image " class="b1 bookmark-img">
 
                                         </button>
                                     </div>
@@ -500,20 +501,10 @@
         }, 500);
 
     });
-    // $('.fav-btn').click(function() {
-    //     $(this).toggleClass('active');
-    // });
     $(document).on("click", ".save-fav", function() {
-
-        $(this).toggleClass('favpost');
-        var favPost = $(this).hasClass('favpost') == true ? 1 : 0;
         var job_id = $(this).data('job');
         var user_id = $(this).data('user');
         var rowid = $(this).data('rowid');
-
-
-
-
         $.ajax({
             url: "{{route('store-savedjobs')}}",
             method: "POST",
@@ -525,10 +516,10 @@
             },
             success: function(response) {
                 if (response.success == true) {
+                    toastr.success(response.message);
                     $("#saveicon" + rowid).attr("src", 'frontend/images/imgs-svg/book-mark-yellow.svg');
                     $('#saveicon' + rowid).addClass("b1 bookmark-img");
-                    if (response.status.job_save == 0) {
-                        alert('yes');
+                    if (response.data.job_save == 0) {
                         $("#saveicon" + rowid).attr("src", 'frontend/images/bookmark.svg');
                         $('#saveicon' + rowid).addClass("b1 bookmark-img");
                     }

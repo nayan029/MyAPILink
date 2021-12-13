@@ -15,5 +15,5 @@ interface ApplyJobRepositoryInterface
     public function getManagerPosts($id);
     public function getJobsaveDataByUserId();
     public function getApplyJobDataByUserId();
-    
+    public function chatJobList();
 }

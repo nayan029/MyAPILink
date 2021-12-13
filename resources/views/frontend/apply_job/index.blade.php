@@ -150,7 +150,7 @@
                                 $now = date('d-m-Y');
                                 $diff = strtotime($createDate) - strtotime($now);
                                 $finalDays = abs(round($diff / 86400));
-                                $saveJob = $data->savedJob ? $data->savedJob[0]->job_save : '';
+                                $saveJob = count($data->savedJob)>0 ? $data->savedJob[0]->job_save : '';
                                 
                                 @endphp
                                 <div class="d-flex justify-content-between mb-4 ">

@@ -14,4 +14,9 @@ class ChatMaster extends Model
     protected $dates = ['deleted_at'];
     protected $table = 'chat_master';
     
+
+    public function userData()
+    {
+        return  $this->belongsTo(User::class, 'user_id','id');
+    }
 }

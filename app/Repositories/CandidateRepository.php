@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Repositories;
+
 use App\Models\User;
 use App\Models\ChatMaster;
 use Illuminate\Http\Request;
@@ -66,17 +67,16 @@ class CandidateRepository implements CandidateRepositoryInterface
             $image = $this->uploadImage($request->file('file'), 'chat');;
             $insert_array['image'] = $image;
         }
-        
-    
+
+
         return  ChatMaster::insert($insert_array);
     }
     public function getLastMessage(Request $request)
     {
 
-            $query = ChatMaster::with('userData')
-            ->where("deleted_at", Null)->where("company_id",$request->id)
-            ->where('id','>',$request->lastmessage)->first();
-           return $query;
-           
+        $query = ChatMaster::with('userData')
+            ->where("deleted_at", Null)->where("company_id", $request->id)
+            ->where('id', '>', $request->lastid)->first();
+        return $query;
     }
 }

@@ -86,8 +86,5 @@ class User extends Authenticatable
         return $this->hasMany(SavedJobs::class);
     }
 
-    public function userData()
-    {
-        return  $this->belongsTo(ChatMaster::class, 'user_id','id');
-    }
+    
 }

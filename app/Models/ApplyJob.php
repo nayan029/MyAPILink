@@ -18,5 +18,7 @@ class ApplyJob extends Model
     {
         return  $this->belongsTo(job::class, 'job_id', 'id');
     }
+
+   
 }
 

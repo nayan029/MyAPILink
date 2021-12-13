@@ -96,7 +96,7 @@ class CandidateController extends Controller
     {
 
         $data['validator'] = JsValidator::make($this->imageValidationRules);
-
+        $data['jobList']=$this->applyJobRepository->chatJobList();
         return view('frontend.candidate.chat_index', $data);
     }
     public function messageListAjax(Request $request)

@@ -62,7 +62,7 @@
 
     </div>
     <div>
-        <form id="myForm2" name="myForm2" method="POST" enctype="multipart/form-data" onsubmit="return sendmessage(1);">
+        <form id="myForm2" name="myForm2" method="POST" enctype="multipart/form-data" onsubmit="return sendmessage({{$id}});">
             @csrf
             <div class="bttom chat-bttom">
 
@@ -85,6 +85,7 @@
         </form>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <script>
     $('.mid').scrollTop($('.mid')[0].scrollHeight);
     var lastmsgid = '{{$lastid}}';
@@ -101,22 +102,20 @@
                 if (lastmsgid < messagelist.id) {
                     var chatmsg = "";
                     var chatfile = "";
+                    
                     if (messagelist.type == 'user') {
                         if (messagelist.messag !== null) {
-                        //    chatmsg = "<li class='right'><div class='msg-content chatmsg-content '><span class='time'>'" + messagelist.users.first_name + messagelist.users.last_name + "' ," + moment(messagelist.created_at).format('dd MMM h:mma') + " </span><p>" + messagelist.message + "</p></div><div class='chatprofile'><img src='{{URL::to('/')}}/'" + messagelist.users.profile_photo_path + '" onerror=' ></div></li>";
+                          chatmsg = "<li class='right'><div class='msg-content chatmsg-content'><span class='time'>"+ messagelist.user_data.first_name + messagelist.user_data.last_name + "," + moment(messagelist.created_at).format('dd MMM h:mma') + "</span><p>" + messagelist.message + "</p></div><div class='chatprofile'><img src='{{URL::to('/')}}/'" + messagelist.user_data.profile_photo_path +"'></div></li>";
                         } else {
-                         //   chatfile = "<li class='right'><div class='msg-content chatmsg-content '><span class='time'>'" + messagelist.users.first_name + messagelist.users.last_name + "' ," + moment(messagelist.created_at).format('dd MMM h:mma') + " </span><p><a target='_blank' href='{{URL::to('/')}}/" + messagelist.image + "'>Opne File</a></p></div><div class='chatprofile'><img src='{{URL::to('/')}}/'" + messagelist.users.profile_photo_path + '" onerror=' + this.onerror = null;
-                         //   this.src = +'"{{URL::to("/")}}/frontend/images/profile-change.svg"' + ";></div></li>";
+                           chatfile = "<li class='right'><div class='msg-content chatmsg-content '><span class='time'>"+ messagelist.user_data.first_name + messagelist.user_data.last_name +","+ moment(messagelist.created_at).format('dd MMM h:mma') + "</span><p><a target='_blank' href='{{URL::to('/')}}/" + messagelist.image + "'>Opne File</a></p></div><div class='chatprofile'><img src='{{URL::to('/')}}/" + messagelist.user_data.profile_photo_path +"'></div></li>";
                         }
                         $(".appendmsg").append(chatmsg + chatfile);
                     } else {
-
+                        
                         if (messagelist.messag !== null) {
-                         //   chatmsg = "<li class='left'><div class='msg-content chatmsg-content '><span class='time'>'" + messagelist.users.first_name + messagelist.users.last_name + "' ," + moment(messagelist.created_at).format('dd MMM h:mma') + " </span><p>" + messagelist.message + "</p></div><div class='chatprofile'><img src='{{URL::to('/')}}/'" + messagelist.users.profile_photo_path + '" onerror=' + this.onerror = null;
-                         //   this.src = +'"{{URL::to("/")}}/frontend/images/profile-change.svg"' + ";></div></li>";
+                          chatmsg = "<li class='left'><div class='msg-content chatmsg-content'><span class='time'>"+ messagelist.user_data.first_name + messagelist.user_data.last_name + "," + moment(messagelist.created_at).format('dd MMM h:mma') + "</span><p>" + messagelist.message + "</p></div><div class='chatprofile'><img src='{{URL::to('/')}}/'" + messagelist.user_data.profile_photo_path +"'></div></li>";
                         } else {
-                       //     chatfile = "<li class='left'><div class='msg-content chatmsg-content '><span class='time'>'" + messagelist.users.first_name + messagelist.users.last_name + "' ," + moment(messagelist.created_at).format('dd MMM h:mma') + " </span><p><a target='_blank' href='{{URL::to('/')}}/" + messagelist.image + "'>Opne File</a></p></div><div class='chatprofile'><img src='{{URL::to('/')}}/'" + messagelist.users.profile_photo_path + '" onerror=' + this.onerror = null;
-                        //    this.src = +'"{{URL::to("/")}}/frontend/images/profile-change.svg"' + ";></div></li>";
+                           chatfile = "<li class='left'><div class='msg-content chatmsg-content '><span class='time'>"+ messagelist.user_data.first_name + messagelist.user_data.last_name +","+ moment(messagelist.created_at).format('dd MMM h:mma') + "</span><p><a target='_blank' href='{{URL::to('/')}}/" + messagelist.image + "'>Opne File</a></p></div><div class='chatprofile'><img src='{{URL::to('/')}}/" + messagelist.user_data.profile_photo_path +"'></div></li>";
                         }
 
                         $(".appendmsg").append(chatmsg + chatfile);

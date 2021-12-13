@@ -117,19 +117,20 @@
 
                 </div>
                 <ul class="chat-user-small scrollbar-design profile-chat-design">
+                    @foreach($jobList as $job)
                     <li class="active">
                         <div class="chatprofile">
                             <div class="usershortname">CI</div>
                         </div>
-                        <div onclick="msgbox(1);" class="chatprofile-content">
-                            <h5>User Name</h5>
+                        <div onclick="msgbox({{$job->job_id}});" class="chatprofile-content">
+                            <h5>{{$job['jobApplay']->title}}</h5>
                             <div class="msg-time">
                                 <p>Hi, How are you today?</p>
                                 <span>18:41</span>
                             </div>
                         </div>
                     </li>
-
+                    @endforeach
 
                 </ul>
 
@@ -150,7 +151,6 @@
 
 
 <script type="text/javascript ">
-
     $('document').ready(function() {
 
         $("#candidate-message a").click(function() {
@@ -186,17 +186,17 @@
             if (bookingfile != '') {
 
                 var Filesize = $("#msgfile")[0].files[0].size;
-                if ($.inArray(FileExtension, ['gif', 'png', 'jpg', 'jpeg', 'bmp', 'jfif', 'pdf','PDF']) == -1) {
+                if ($.inArray(FileExtension, ['gif', 'png', 'jpg', 'jpeg', 'bmp', 'jfif', 'pdf', 'PDF']) == -1) {
                     temp++;
                 }
                 if (Filesize > 10000000) {
                     temp++;
-                    
+
                 }
-                
+
             }
-                temp--;
-            
+            temp--;
+
         }
 
         if (temp == 0) {
@@ -215,7 +215,7 @@
                 cache: false,
                 processData: false,
                 success: function(response) {
-                    
+
                     if (response.success) {
                         $('#chatmessage').val('');
                         $('#msgfile').val('');
@@ -236,8 +236,6 @@
         }
 
     }
-
-  
 </script>
 
 @endsection

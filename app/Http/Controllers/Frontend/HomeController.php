@@ -3,16 +3,15 @@
 namespace App\Http\Controllers\Frontend;
 
 use JsValidator;
+use App\Models\Skill;
 use App\Models\Widget;
-use App\Models\Newsletter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Interfaces\HomeRepositoryInterface;
-use Illuminate\Support\Facades\DB;
-use App\Models\Skill;
-use App\Models\SkillPosition;
 
 class HomeController extends Controller
 {
@@ -25,6 +24,15 @@ class HomeController extends Controller
     [
         'email' => 'required|email',
         'password' => "required",
+    ];
+    protected $forgotPasswordValidator = [
+
+        'email' => 'required|email|exists:users,email',
+
+    ];
+    protected $resetvalidationrules = [
+        'password' => 'required|min:8',
+        'confirm_password' => 'required|same:password',
     ];
 
     public function __construct(HomeRepositoryInterface $homeRepository)
@@ -42,19 +50,18 @@ class HomeController extends Controller
     public function userDashboard()
     {
         $data['newslettervalidator'] = JsValidator::make($this->newsletterValidationRules);
-        $data['widget'] = Widget::get();
-        $data['skill'] = Skill::get();
-        
+        $data['forgotPasswordValidator'] = JsValidator::make($this->forgotPasswordValidator); 
+        $userData = $this->homeRepository->UserData();
+        $data['widget'] = $userData['widget'];
+        $data['skill'] = $userData['skill'];
         return view('frontend.dashboard', $data);
     }
 
     public function getAjaxSkill(Request $request)
     {
-        $data = Skill::with('positions')->where('id',$request->id)->get();
-        return response()->json(["success"=>true,"skillData"=>$data]);
+        $data = $this->homeRepository->getSkillPositionData($request);
+        return response()->json(["success" => true, "skillData" => $data]);
     }
-
-
 
     public function ajaxDataInsert(Request $request)
     {
@@ -71,7 +78,6 @@ class HomeController extends Controller
         );
     }
 
-
     public function addNewsletter(Request $request)
     {
 
@@ -81,17 +87,11 @@ class HomeController extends Controller
 
             return redirect()->back()->withErrors($validation->errors());
         }
-        $instArray = array(
-            'email' => request('email'),
-            'created_at' => date('Y-m-d H:i:s'),
-        );
-        $inasert = new Newsletter($instArray);
-        $inasert->save();
-
-        //   ---------------
-        session()->flash('message-type', 'success');
-        session()->flash('message', 'Add Newsletter successfully');
-        return redirect('/');
+        $instArray = $this->homeRepository->storeNewsLater($request);
+        if ($instArray) {
+            Session::flash('success', 'Successfully Inserted');
+            return redirect('/');
+        }
     }
     public function userLogin(Request $request)
     {
@@ -101,10 +101,56 @@ class HomeController extends Controller
         if ($validator->fails()) {
             return response()->json(['success' => false, 'errors' => $validator->errors()]);
         }
-        $user=Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password, 'deleted_at' => NULL,'verify_email' =>'accept']);
-        if($user) {
-            return response()->json(['success' => true, 'message' => 'Connexion réussie','user'=>Auth::guard('web')->user()->user_type]);
+        $user = Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password, 'deleted_at' => NULL]);
+        if ($user) {
+
+
+            if (auth()->guard('web')->user()->verify_email != 'accept') {
+
+                Auth::guard('web')->logout();
+
+                return response()->json(['success' => false, 'errors' => array('invalid' => "Votre compte sous la vérification s'il vous plaît vérifier le courrier.")]);
+            } else {
+                $request->session()->regenerate();
+                return response()->json(['success' => true, 'message' => 'Connexion réussie', 'user' => Auth::guard('web')->user()->user_type]);
+            }
         }
         return response()->json(['success' => false, 'errors' => array('invalid' => 'Email et le mot de passe sont erronés')]);
+    }
+    public function forgotPassword(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), $this->forgotPasswordValidator);
+
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => $validator->errors()]);
+        }
+
+        $forgotdata = $this->homeRepository->storePassword($request);
+        if ($forgotdata) {
+            Session::flash('success', 'Votre lien de réinitialisation de mot de passe est envoyé');
+            return redirect()->back();
+        }
+    }
+    public function resetPassword($token)
+    {
+        $data['validator'] = JsValidator::make($this->resetvalidationrules);
+        return view('frontend.forgot.reset-password', ['token' => $token], $data);
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $validation = Validator::make($request->all(), $this->resetvalidationrules);
+        if ($validation->fails()) {
+            return redirect()->back()->withErrors($validation->errors());
+        }
+        $resetdata = $this->homeRepository->updatePassword($request);
+
+        if ($resetdata == true) {
+            Session::flash('success', 'Le mot de passe a été changé avec succès');
+            return redirect()->route('dashboard');
+        } else {
+            return redirect()->back();
+        }
     }
 }

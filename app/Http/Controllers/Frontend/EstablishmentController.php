@@ -3,12 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use JsValidator;
-use App\Models\Skill;
 use App\Models\Widget;
 use Illuminate\Http\Request;
-use App\Models\Establishment;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Interfaces\EstablishmentRepositoryInterface;
@@ -79,7 +76,11 @@ class EstablishmentController extends Controller
         $data['imageValidator'] = JsValidator::make($this->imageValidationRules);
         $data['images'] = $this->establishmentRepository->getEstablishmentGallery($id);
         $data['establishment'] = $this->establishmentRepository->getSingleEstablishment($id);
-       
+
+        $postsdata = $this->establishmentRepository->getPostsData($id);
+        $data['jobListing'] = $postsdata['jobListing'];
+        $data['remaining'] = $postsdata['remaining'];
+        $data['deleted'] = $postsdata['deleted'];
         return view('frontend.establishment.show',$data);
     }
     public function edit($id)

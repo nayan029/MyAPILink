@@ -74,7 +74,7 @@
                                     <div class="col-md-6 mb-2">
                                         <div class="form-group">
                                             <label class="">Téléphone<span class="text-danger">*</span></label>
-                                            <input id="telephone" type="text" name="telephone" onkeypress='return isNumber(event)' class="form-control form-add-establish pl-23">
+                                            <input id="telephone" type="text" name="telephone" maxlength="10" onkeypress='return isNumber(event)' class="form-control form-add-establish pl-23">
                                             <span class="telephone-error text-danger">@error ('telephone') {{$message}} @enderror</span>
 
                                         </div>
@@ -90,7 +90,7 @@
                                     <div class="col-md-12 mb-2">
                                         <div class="form-group">
                                             <label class="">Mot de passe<span class="text-danger">*</span></label>
-                                            <input id="password" type="password" name="password" class="form-control form-add-establish pl-23">
+                                            <input id="password" type="text" name="password" class="form-control form-add-establish pl-23">
                                             <span class="password-error text-danger">@error ('password') {{$message}} @enderror</span>
 
                                         </div>
@@ -98,7 +98,7 @@
                                     <div class="col-md-12 mb-2">
                                         <div class="form-group">
                                             <label class="">Confirmer le mot de passe<span class="text-danger">*</span></label>
-                                            <input id="password_confirmation" type="password" name="password_confirmation" class="form-control form-add-establish pl-23">
+                                            <input id="password_confirmation" type="text" name="password_confirmation" class="form-control form-add-establish pl-23">
                                             <span class="password_confirmation-error text-danger">@error ('password_confirmation') {{$message}} @enderror</span>
 
                                         </div>
@@ -256,7 +256,7 @@
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label class="">Code postal<span class="text-danger">*</span></label>
-                                            <input id="postal_code" type="text" name="postal_code" onkeypress='return isNumber(event)' class="form-control form-add-establish pl-23">
+                                            <input id="postal_code" type="text" name="postal_code" maxlength="6" onkeypress='return isNumber(event)' class="form-control form-add-establish pl-23">
                                             <span class="postal-error text-danger">@error ('postal_code') {{$message}} @enderror</span>
 
                                         </div>
@@ -386,8 +386,7 @@
     });
 </script>
 <script>
-
-function isNumber(evt) {
+    function isNumber(evt) {
         evt = (evt) ? evt : window.event;
         var charCode = (evt.which) ? evt.which : evt.keyCode;
         if (charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -476,7 +475,7 @@ function isNumber(evt) {
 
     $('.register-yellow').on('click', function(event) {
         event.preventDefault();
-       
+
         var url = '{{ route("manager.store") }}';
 
         $.ajax({
@@ -511,6 +510,7 @@ function isNumber(evt) {
                     $('.address-error').text(response.errors.address);
                     $('.postal-error').text(response.errors.postal_code);
                     $('.city-error').text(response.errors.city);
+                  
                 }
             }
         });

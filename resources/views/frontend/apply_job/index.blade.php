@@ -163,7 +163,7 @@
                                         <input type="hidden" name="user_id" id="user_id">
                                         <button id="saveclass{{$data->id}}" class="btn fav-btn save-fav {{count($data->saveJob) > 0 ? 'favpost' : ''}}" type="button" data-job="{{$data->id}}" data-user="{{$data->user_id}}" data-rowid="{{$data->id}}">
 
-                                            <img id="saveicon{{$data->id}}" src="{{$data->saveJob[0]->job_save == 1 ? 'frontend/images/imgs-svg/book-mark-yellow.svg' : 'frontend/images/bookmark.svg'}}" alt="bookmark image " class="b1 bookmark-img">
+                                            <img id="saveicon{{$data->id}}" src="{{count($data->saveJob) > 0 ? 'frontend/images/imgs-svg/book-mark-yellow.svg' : 'frontend/images/bookmark.svg'}}" alt="bookmark image " class="b1 bookmark-img">
 
                                         </button>
                                     </div>
@@ -506,8 +506,7 @@
     $(document).on("click", ".save-fav", function() {
 
         $(this).toggleClass('favpost');
-
-        //var favPost = $(this).hasClass('favpost') == true ? 1 : 0;
+        var favPost = $(this).hasClass('favpost') == true ? 1 : 0;
         var job_id = $(this).data('job');
         var user_id = $(this).data('user');
         var rowid = $(this).data('rowid');

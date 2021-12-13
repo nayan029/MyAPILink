@@ -57,7 +57,6 @@ class SkillRepository implements SkillRepositoryInterface
     }
     public function updateSkill(Request $request, $id)
     {
-
         $data = $request->all();
         $skill = $this->getSingleSkill($id);
         $image = "";
@@ -72,7 +71,7 @@ class SkillRepository implements SkillRepositoryInterface
         
 
 
-        // $position = $this->getSKillPosition($id);
+        // $position = $this->getSKillPosition($id);    
         $position = SkillPosition::where('skill_id',$id)->delete();
         $n = count($data['position']);
         for ($i = 0; $i < $n; $i++) {
@@ -83,7 +82,6 @@ class SkillRepository implements SkillRepositoryInterface
                 'desc' => $data['descs'][$i],
             ];  
             SkillPosition::create($savedata);
-
         }
         return true;
     }
@@ -107,8 +105,7 @@ class SkillRepository implements SkillRepositoryInterface
 
         $sortcolumns = array(
             0 => 'skills.name',
-            1 => 'skills.description',
-            2 => 'skills.image',
+            1 => 'skills.image',
         );
 
         $query = Skill::select('*');
@@ -134,7 +131,6 @@ class SkillRepository implements SkillRepositoryInterface
             $json['data'][] = [
                 $nameAction,
                 $Image,
-                $skill->description,
             ];
         }
         return $json;

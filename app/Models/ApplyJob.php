@@ -13,4 +13,10 @@ class ApplyJob extends Model
     protected $guarded = ['id'];
     protected $dates = ['deleted_at'];
     protected $table = 'apply_job';
+
+    public function jobApplay()
+    {
+        return  $this->belongsTo(job::class, 'job_id', 'id');
+    }
 }
+

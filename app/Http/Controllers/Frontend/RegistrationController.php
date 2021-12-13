@@ -13,7 +13,11 @@ use Illuminate\Support\Facades\Session;
 class RegistrationController extends Controller
 {
     protected $registrationRepository = "";
-   
+    protected $forgotPasswordValidator = [
+
+        'email' => 'required|email|exists:users,email',
+
+    ];
 
     public function __construct(RegistrationRepositoryInterface $registrationRepository)
     {
@@ -22,8 +26,8 @@ class RegistrationController extends Controller
 
     public function index()
     {
-
-        return view('frontend/registration');
+        $data['forgotPasswordValidator'] = JsValidator::make($this->forgotPasswordValidator);
+        return view('frontend/registration', $data);
     }
 
     public function saveRegistration(Request $request)

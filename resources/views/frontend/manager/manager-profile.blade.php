@@ -88,7 +88,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group pb-2">
 
-                                                            {!! Form::text('civility', auth()->guard('web')->user()->civility, ['class' => 'form-control view-form', 'placeholder' => 'Civilité','id'=>'civility']) !!}
+                                                            {!! Form::text('civility', auth()->guard('web')->user()->civility, ['class' => 'form-control view-form', 'placeholder' => 'Civilité*','id'=>'civility']) !!}
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 pb-2">
@@ -96,18 +96,18 @@
 
 
 
-                                                            {!! Form::text('lastname', auth()->guard('web')->user()->last_name, ['class' => 'form-control view-form', 'placeholder' => 'Nom','id'=>'lastname']) !!}
+                                                            {!! Form::text('lastname', auth()->guard('web')->user()->last_name, ['class' => 'form-control view-form', 'placeholder' => 'Nom*','id'=>'lastname']) !!}
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 pb-2">
                                                         <div class="form-group">
-                                                            {!! Form::text('firstname',auth()->guard('web')->user()->first_name, ['class' => 'form-control view-form', 'placeholder' => 'Prénom','id'=>'firstname']) !!}
+                                                            {!! Form::text('firstname',auth()->guard('web')->user()->first_name, ['class' => 'form-control view-form', 'placeholder' => 'Prénom*','id'=>'firstname']) !!}
 
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 pb-2">
                                                         <div class="form-group">
-                                                            {!! Form::text('email',auth()->guard('web')->user()->email, ['class' => 'form-control view-form', 'placeholder' => 'Mail','id'=>'email']) !!}
+                                                            {!! Form::text('email',auth()->guard('web')->user()->email, ['class' => 'form-control view-form', 'placeholder' => 'Mail*','id'=>'email']) !!}
 
                                                         </div>
                                                     </div>
@@ -123,7 +123,7 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                                {!! Form::text('roles',auth()->guard('web')->user()->roles, ['class' => 'form-control view-form', 'placeholder' => "Directrice de l'établissement",'id'=>'roles']) !!}
+                                                                {!! Form::text('roles',auth()->guard('web')->user()->roles, ['class' => 'form-control view-form', 'placeholder' => "Directrice de l'établissement*",'id'=>'roles']) !!}
 
                                                             </div>
                                                         </div>
@@ -132,8 +132,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-
                                         <div class="d-flex justify-content-end">
                                             <button class="btn btn-yellow d-flex align-items-center pd-btns-edit"><img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" alt="edit" class="mr-3 edit-manager">Editer</button>
                                         </div>
@@ -182,7 +180,7 @@
                                                     <tr>
                                                         <td>
                                                             <div class="d-flex align-items-center">
-                                                                <img src="{{url(''.$value->more_infomation)}}" alt="user" class="manager-pro mr-3">
+                                                                <img src="{{url(''.'/frontend/images/project/mont1.svg')}}" alt="user" class="manager-pro mr-3">
                                                                 <p class="mb-0 managerp">{{$value->type_of_establishment}}</p>
                                                             </div>
                                                         </td>
@@ -213,21 +211,21 @@
             <section class="prof-backsec">
                 <div class="container">
                     <div class="post-right">
-                        <a href="{{route('addjob')}}" class="btn post-an-btn">Publier une offre</a>
+                        <a href="{{route('addjob',auth()->guard('web')->user()->id);}}" class="btn post-an-btn">Publier une offre</a>
                     </div>
                     <div>
                         <ul class="nav nav-pills tab-inside-pills" id="pills-tab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="pills-first-tab" data-toggle="pill" href="#pills-first" role="tab" aria-controls="pills-first" aria-selected="true">Annonces en ligne
-                                    <span>(3)</span></a>
+                                    <span>({{$myJobList ? count($myJobList):'0'}})</span></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="pills-sec-tab" data-toggle="pill" href="#pills-sec" role="tab" aria-controls="pills-sec" aria-selected="false">Annonces expirées
-                                    <span>(0)</span></a>
+                                    <span>({{$remaining ? count($remaining):'0'}})</span></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="pills-third-tab" data-toggle="pill" href="#pills-third" role="tab" aria-controls="pills-third" aria-selected="false">Annonces supprimées
-                                    <span>(1)</span></a>
+                                    <span>({{$deleted ? count($deleted):'0'}})</span></a>
                             </li>
                         </ul>
                     </div>
@@ -276,7 +274,9 @@
                                                                 <div class="text-center date-details">
                                                                     <p class="mb-0">Date</p>
                                                                     <p class="mb-0">{{$value->contract_start_date}}</p>
-                                                                    <p class="mb-0"></p>
+                                                                    <p class="mb-0">51 jours restants
+
+                                                                    </p>
 
                                                                 </div>
                                                                 <div class="mt-images-profile">
@@ -301,13 +301,7 @@
                                                 <p class="text-center">No Job Data Found!..</p>
                                                 @endif
                                             </div>
-                                            <div class="custom-pagination pt-5 pb-3">
-                                                <nav aria-label="Page navigation example">
-                                                    <ul class="pagination justify-content-center">
-                                                        {!! $myJobList->appends(request()->input())->links(); !!}
-                                                    </ul>
-                                                </nav>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -389,7 +383,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="pills-third" role="tabpanel" aria-labelledby="pills-third-tab">
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="pills-third" role="tabpanel" aria-labelledby="pills-third-tab">
                                     <div class="card sr-card">
                                         <div class="card-body">
                                             <div class="row">
@@ -488,9 +484,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
+                                </div>  
 
 
             </section>

@@ -92,9 +92,9 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->post('contact-us', 'ContactUsController@storeContact')->name('contact-us');
 
 
-    $frontRoute->get('addjob', 'JobController@index')->name('addjob');
-    $frontRoute->post('addorupdatejob', 'JobController@addOrUpdateJob')->name('addorupdatejob');
-    $frontRoute->get('joblist/{id}', 'JobController@show')->name('joblist');
+    $frontRoute->get('addjob/{id}', 'JobController@index')->name('addjob');
+    $frontRoute->post('addorupdatejob/{id}', 'JobController@addOrUpdateJob')->name('addorupdatejob');
+    $frontRoute->get('joblist/{id}', 'JobController@showJob')->name('joblist');
     $frontRoute->get('users/restore/{id}', 'JobController@restoreUser')->name('users.restore');
 
     $frontRoute->get('editjob/{id}', 'JobController@editJob')->name('editjob');
@@ -104,6 +104,10 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->post('getAjaxSkill', 'HomeController@getAjaxSkill')->name('getAjaxSkill');
 
     $frontRoute->get('establishment-dashborad', 'EstablishmentController@dashborad')->name('establishment-dashborad');
+    $frontRoute->post('send-forgot-password-mail', 'HomeController@forgotPassword')->name('send-forgot-password-mail');
+    $frontRoute->get('forgotpassword-user/{token}', 'HomeController@resetPassword')->name('forgotpassword-user');
+    $frontRoute->post('user-reset-password', 'HomeController@updatePassword')->name('user-reset-password');
+    
 });
 
 Route::middleware(['auth:web'])->group(function ($route) {
@@ -127,7 +131,11 @@ Route::middleware(['auth:web'])->group(function ($route) {
 
         $frontRoute->get('mycandidate-profile', 'CandidateController@index')->name('mycandidate-profile');
         $frontRoute->get('candidate-profile-edit', 'CandidateController@edit')->name('candidate-profile-edit');
-
+        $frontRoute->post('update-candidate-profile', 'CandidateController@update')->name('update-candidate-profile');
+        $frontRoute->get('candidate-message', 'CandidateController@chatIndex')->name('candidate-message');
+        $frontRoute->get('candidate-message-list-ajax', 'CandidateController@messageListAjax')->name('candidate-message-list-ajax');
+        
+        $frontRoute->post('candidate-sendmessage', 'CandidateController@sendmessage')->name('candidate-sendmessage');
         $frontRoute->post('user/logout', 'HomeController@logout')->name('user-logout');
         $frontRoute->get('search-job', 'SearchAdController@index')->name('searchjob');
         $frontRoute->post('store-jobType', 'SearchAdController@store')->name('store-jobType');

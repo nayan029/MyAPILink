@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use App\Http\Traits\ImageuploadTrait;
-
+use App\Models\Job;
+use Carbon\Carbon;
 
 class EstablishmentRepository implements EstablishmentRepositoryInterface
 {
@@ -36,7 +37,7 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
         $storeData['applied_pedagogy'] = $applied_pedagogy;
         $storeData['document'] = $document;
         //  $storeData['more_infomation'] = $more_infomation;
-        $storeData['created_by'] = auth()->guard('web')->user()->id;
+        $storeData['user_id'] = auth()->guard('web')->user()->id;
 
         $establishment = Establishment::create($storeData);
         $more_infomation = "";
@@ -46,7 +47,7 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
                 $more_infomation  = $this->uploadImage($file, 'Establishment/gallery');;
                 $storeData['image'] = $more_infomation;
                 $storeData['establishment_id'] = $establishment->id;
-                $storeData['created_by'] = auth()->guard('web')->user()->id;
+                $storeData['user_id'] = auth()->guard('web')->user()->id;
 
 
                 EstablishmentGallery::create($storeData);
@@ -57,7 +58,11 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
     }
     public function getSingleEstablishment($id)
     {
-        return Establishment::where('created_by', auth()->guard('web')->user()->id)->where('id', $id)->firstOrFail();
+        return Establishment::where('user_id', auth()->guard('web')->user()->id)->where('id', $id)->firstOrFail();
+    }
+
+    public function getJobPostsData($id){
+        return Job::where('user_id',$id)->get();
     }
 
     public function update(Request $request, $id)
@@ -104,7 +109,7 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
                 $more_infomation  = $this->uploadImage($file, 'Establishment/gallery');;
                 $storeData['image'] = $more_infomation;
                 $storeData['establishment_id'] = $id;
-                $storeData['created_by'] = auth()->guard('web')->user()->id;
+                $storeData['user_id'] = auth()->guard('web')->user()->id;
                 EstablishmentGallery::create($storeData);
             }
         }
@@ -120,7 +125,7 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
 
         $storeData['image'] = $image;
         $storeData['establishment_id'] = $request->establishment_id;
-        $storeData['created_by'] = auth()->guard('web')->user()->id;
+        $storeData['user_id'] = auth()->guard('web')->user()->id;
 
 
         return EstablishmentGallery::create($storeData);
@@ -130,10 +135,24 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
         return EstablishmentGallery::where('establishment_id', $id)->where('deleted_at', NULL)->get();
     }
 
+    public function getCandidateGallery()
+    {
+        $query = EstablishmentGallery::where('deleted_at', NULL)->where('created_by',auth()->guard('web')->user()->id)->get();
+        return  $query;
+    }
     public function deleteImage($id)
     {
         $id = EstablishmentGallery::find($id);
         $id->delete();
         return $id;
     }
+
+    public function getPostsData($id){
+        $data['jobListing'] = Job::where('user_id', $id)->paginate(10);
+        $data['remaining'] = Job::where('created_at', '>=', Carbon::now())->where('user_id',$id)->get();
+        $data['deleted'] = Job::onlyTrashed()->where('user_id',$id)->get();
+        return $data;
+    }
+
+    
 }

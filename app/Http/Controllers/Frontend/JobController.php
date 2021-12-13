@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\Interfaces\JobRepositoryInterface;
+use App\Models\ApplyJob;
 use App\Models\Job;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -132,11 +133,11 @@ class JobController extends Controller
         return redirect()->route('profile');
     }
 
-    public function viewApplcants()
+    public function viewApplcants($id)
     {
-        $data['applicants'] = Job::where('user_id', 1)->paginate(10);
-        $id = Auth::user()->id;
-        $data['user'] = User::where('id', $id)->paginate(10);
+
+        $data['jobDetail'] = Job::where('id', $id)->first();
+        $data['applyJob'] = ApplyJob::where('id',$id)->with('user')->get();
         return view('frontend.job.view-applicants', $data);
     }
 

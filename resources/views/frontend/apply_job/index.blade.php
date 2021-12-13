@@ -529,7 +529,6 @@
                     $("#saveicon" + rowid).attr("src", 'frontend/images/imgs-svg/book-mark-yellow.svg');
                     $('#saveicon' + rowid).addClass("b1 bookmark-img");
                     if (response.status.job_save == 0) {
-                        alert('yes');
                         $("#saveicon" + rowid).attr("src", 'frontend/images/bookmark.svg');
                         $('#saveicon' + rowid).addClass("b1 bookmark-img");
                     }

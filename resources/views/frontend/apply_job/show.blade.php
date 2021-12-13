@@ -23,6 +23,8 @@
                                     $now = date('d-m-Y');
                                     $diff = strtotime($createDate) - strtotime($now);
                                     $finalDays = abs(round($diff / 86400));
+
+                                    $isApplyed = $showList->applyJob!="" ? "disabled":"";
                                     @endphp
                                     <div>
                                         <h5 class="mb-0 job_aux_text">{{$showList->title}}</h5>
@@ -51,7 +53,7 @@
                                     </ul>
 
                                     <div class="d-flex justify-content-end">
-                                        <button class="btn btn-light" data-target="#establishment" onclick="openJobModal()">Postuler avec mon profil</button>
+                                        <button class="btn btn-light" data-target="#establishment" onclick="openJobModal()" {{$isApplyed}}>Postuler avec mon profil</button>
                                     </div>
 
                                     <div class="d-flex justify-content-between align-items-center mb-4 mt-2 ">

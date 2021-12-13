@@ -44,15 +44,23 @@ class ApplyJobRepository implements ApplyJobRepositoryInterface
         $inputs['user_id'] = $request->user_id;
         $inputs['job_save'] = $request->favPost;
 
-        $checkType = SavedJobs::where('job_id', $request->job_id)->first();
+        $checkType = SavedJobs::where('job_id', $request->job_id)->where('user_id', $request->user_id)->first();
+
         $update_array = array('job_save' => $request->favPost);
         if ($checkType) {
+            if ($checkType->job_save == 1) {
+                $status = 0;
+            } else {
+                $status = 1;
+            }
+            $update_array['job_save'] = $status;
             $saveJob = SavedJobs::where('id', $checkType->id)->update($update_array);
-            // $saveJob = SavedJobs::select('job_save')->where('id', $checkType->id)->first();
         } else {
+            $inputs['job_save'] = 1;
             $saveJob = SavedJobs::create($inputs);
         }
-        return $saveJob;
+        $checkType = SavedJobs::where('job_id', $request->job_id)->where('user_id', $request->user_id)->first();
+        return $checkType;
     }
     public function getSingleCandidatedata($id)
     {

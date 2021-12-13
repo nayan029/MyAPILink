@@ -161,7 +161,7 @@
                                         <span class="public-span">Publié il y a {{$finalDays}} jours</span>
                                         <input type="hidden" name="job_id" id="job_id">
                                         <input type="hidden" name="user_id" id="user_id">
-                                        <button id="saveclass{{$data->id}}" class="btn fav-btn save-fav" type="button" data-job="{{$data->id}}" data-user="{{$data->user_id}}" data-rowid="{{$data->id}}">
+                                        <button id="saveclass{{$data->id}}" class="btn fav-btn save-fav {{count($data->saveJob) > 0 ? 'favpost' : ''}}" type="button" data-job="{{$data->id}}" data-user="{{$data->user_id}}" data-rowid="{{$data->id}}">
 
                                             <img id="saveicon{{$data->id}}" src="{{$data->saveJob[0]->job_save == 1 ? 'frontend/images/imgs-svg/book-mark-yellow.svg' : 'frontend/images/bookmark.svg'}}" alt="bookmark image " class="b1 bookmark-img">
 
@@ -506,12 +506,12 @@
     $(document).on("click", ".save-fav", function() {
 
         $(this).toggleClass('favpost');
-        var favPostVal = '{{$data->saveJob[0]->job_save}}';
-        alert(favPostVal);
-        var favPost = $(this).hasClass('favpost') == true ? 1 : 0;
+
+        //var favPost = $(this).hasClass('favpost') == true ? 1 : 0;
         var job_id = $(this).data('job');
         var user_id = $(this).data('user');
         var rowid = $(this).data('rowid');
+
 
 
 
@@ -521,24 +521,17 @@
             data: {
                 'job_id': job_id,
                 'user_id': user_id,
-                'favPost': favPost,
+
                 _token: '{{ csrf_token() }}',
             },
             success: function(response) {
                 if (response.success == true) {
                     $("#saveicon" + rowid).attr("src", 'frontend/images/imgs-svg/book-mark-yellow.svg');
                     $('#saveicon' + rowid).addClass("b1 bookmark-img");
-                    $('#saveclass' + rowid).removeClass("active");
-                    if (response.status == 0) {
-                        $("#saveicon" + rowid).attr("src", 'frontend/images/imgs-svg/bookmark.svg');
+                    if (response.status.job_save == 0) {
+                        alert('yes');
+                        $("#saveicon" + rowid).attr("src", 'frontend/images/bookmark.svg');
                         $('#saveicon' + rowid).addClass("b1 bookmark-img");
-                        $('#saveclass' + rowid).removeClass("active");
-                        $('#saveclass' + rowid).addClass("favpost");
-                    } else {
-                        $("#saveicon" + rowid).attr("src", 'frontend/images/imgs-svg/book-mark-yellow.svg');
-                        $('#saveicon' + rowid).addClass("b1 bookmark-img");
-                        $('#saveclass' + rowid).removeClass("active");
-                        $('#saveclass' + rowid).removeClass("favpost");
                     }
 
                 }

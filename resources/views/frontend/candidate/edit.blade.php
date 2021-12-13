@@ -40,7 +40,7 @@
                         <div class="card-body pb-4">
                             <div>
                                 <div class="mb-4">
-                                    <h5 class="dark-tit">A propos de moi</h5>
+                                    <h5 class="dark-tit">A propos de moi <span class="invalid-error text-danger">*</span></h5>
                                     <div class="">
                                         <textarea name="about_me" class="cand-job-sec mt-4 bg-f6" cols="30" rows="10">{{auth()->guard('web')->user()->about_me}}</textarea>
                                     </div>
@@ -48,7 +48,7 @@
 
                                 <div>
                                     <div class="sr-rel personinfo-form mb-4">
-                                        <h5 class="dark-tit">Situation actuelle :</h5>
+                                        <h5 class="dark-tit">Situation actuelle : <span class="invalid-error text-danger">*</span></h5> 
                                         <select required="" name="current_situation" class="form-control arrow-down profile-drop">
                                             <!-- <option value="" hidden=""></option> -->
                                             <option @if(auth()->guard('web')->user()->current_situation=="en poste") selected  @endif value="en poste">en poste</option>
@@ -59,7 +59,7 @@
                                     </div>
                                     @php $research=explode(",",auth()->guard('web')->user()->research); @endphp
                                     <div class="sr-rel personinfo-form mb-4">
-                                        <h5 class="dark-tit">Recherche :</h5>
+                                        <h5 class="dark-tit">Recherche : <span class="invalid-error text-danger">*</span></h5>
                                         <div class="custom-edit-muti change-text">
                                             <select title="Basic example" name="research[]" multiple="multiple" class="select-multi">
                                                 <option @if(in_array('CDI',$research)) selected @endif value="CDI">CDI</option>
@@ -72,7 +72,7 @@
                                         </div>
                                     </div>
                                     <div class="sr-rel personinfo-form mb-3">
-                                        <h5 class="dark-tit">Disponible :</h5>
+                                        <h5 class="dark-tit">Disponible : <span class="invalid-error text-danger">*</span></h5>
                                         <select required="" name="available_day" class="form-control arrow-down profile-drop">
                                             <!-- <option value="" hidden=""></option> -->
                                             <option @if(auth()->guard('web')->user()->available_day=="Dès aujourd’hui") selected @endif value="Dès aujourd’hui">Dès aujourd’hui</option>
@@ -91,7 +91,7 @@
                                     @php $diplomas=explode(",",auth()->guard('web')->user()->diplomas); @endphp
                                     <div class="mb-4">
                                         <div class="sr-rel personinfo-form mb-3">
-                                            <h5 class="dark-tit">Diplômes :</h5>
+                                            <h5 class="dark-tit">Diplômes : <span class="invalid-error text-danger">*</span></h5>
                                             <div class="custom-edit-muti diplo-text">
                                                 <select title="Basic example" name="diplomas[]" multiple="multiple" class="select-multi">
                                                     <option @if(in_array('Éducateur de jeunes enfants',$diplomas)) selected @endif value="Éducateur de jeunes enfants">Éducateur de jeunes enfants</option>
@@ -113,7 +113,7 @@
 
                                     <div>
                                         <div class="sr-rel personinfo-form mb-3">
-                                            <h5 class="dark-tit">Ancienneté dans le métier :</h5>
+                                            <h5 class="dark-tit">Ancienneté dans le métier : <span class="invalid-error text-danger">*</span></h5>
                                             <select required="" name="seniority" class="form-control arrow-down profile-drop">
                                                 <option  @if(auth()->guard('web')->user()->seniority=="7 ans d’expériences") selected @endif value="7 ans d’expériences">7 ans d’expériences</option>
                                                 <option  @if(auth()->guard('web')->user()->seniority=="Lorem ipsum") selected @endif value="Lorem ipsum">Lorem ipsum</option>
@@ -125,7 +125,7 @@
                                     </div>
 
                                     <div class="sr-rel personinfo-form mb-4">
-                                        <h5 class="dark-tit">Tranche d’âge :</h5>
+                                        <h5 class="dark-tit">Tranche d’âge : <span class="invalid-error text-danger">*</span></h5>
                                         <select required="" name="age_range" class="form-control arrow-down profile-drop">
                                             <!-- <option value="" hidden=""></option> -->
                                             <option @if(auth()->guard('web')->user()->seniority=="0-1 an") selected @endif value="0-1 an">0-1 an</option>
@@ -135,7 +135,7 @@
                                     </div>
 
                                     <div class="form-group  mb-4 personinfo-form sr-rel">
-                                        <h5 class="dark-tit">Mobilité :</h5>
+                                        <h5 class="dark-tit">Mobilité : <span class="invalid-error text-danger">*</span></h5>
                                         <input type="text" name="mobility" value="{{auth()->guard('web')->user()->mobility}}" class=" form-control  sr-rel inputicon-2" placeholder="Montpellier">
                                         <a href=""><img src="images/imgs-svg/edit-icon.svg" alt="" class="arrw-downimg bt-16"></a>
                                     </div>
@@ -187,19 +187,19 @@
                                         <div class="row mx-0 mt-3">
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="form-group">
-                                                    <label>Prénom</label>
+                                                    <label>Prénom <span class="invalid-error text-danger">*</span></label>
                                                     <input type="text" name="first_name" value="{{auth()->guard('web')->user()->first_name}}" class="form-control bg-f6 inputicon2 edit-placeholder">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="form-group">
-                                                    <label>Nom de famille</label>
+                                                    <label>Nom de famille <span class="invalid-error text-danger">*</span></label>
                                                     <input type="text" name="last_name" value="{{auth()->guard('web')->user()->last_name}}" class="form-control bg-f6 inputicon2 edit-placeholder">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="form-group">
-                                                    <label>Genre</label>
+                                                    <label>Genre <span class="invalid-error text-danger">*</span></label>
                                                     <!-- <input type="text" name="gander" value="{{auth()->guard('web')->user()->gander}}" class="form-control bg-f6 inputicon2 edit-placeholder"> -->
                                                     <select required="" name="gander" class="form-control arrow-down profile-drop">
                                                         <option @if(auth()->guard('web')->user()->gander=="Male") selected @endif value="Male">Male</option>
@@ -209,31 +209,31 @@
                                             </div>
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="form-group">
-                                                    <label>Date de naissance</label>
+                                                    <label>Date de naissance <span class="invalid-error text-danger">*</span></label>
                                                     <input type="text" name="dob" value="{{auth()->guard('web')->user()->dob}}" class="form-control bg-f6 inputicon2 edit-placeholder">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="form-group">
-                                                    <label>E-mail</label>
+                                                    <label>E-mail <span class="invalid-error text-danger">*</span></label>
                                                     <input type="text" name="email" value="{{auth()->guard('web')->user()->email}}" class="form-control bg-f6 inputicon2 edit-placeholder">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="form-group">
-                                                    <label>Numéro de téléphone</label>
+                                                    <label>Numéro de téléphone <span class="invalid-error text-danger">*</span></label>
                                                     <input type="text" name="phone" value="{{auth()->guard('web')->user()->phone}}" class="form-control bg-f6 inputicon2 edit-placeholder">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="form-group">
-                                                    <label>Ville</label>
+                                                    <label>Ville <span class="invalid-error text-danger">*</span></label>
                                                     <input type="text" name="city" value="{{auth()->guard('web')->user()->city}}" class="form-control bg-f6 inputicon2 edit-placeholder">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="form-group">
-                                                    <label>Region</label>
+                                                    <label>Region <span class="invalid-error text-danger">*</span></label>
                                                     <input type="text" name="region" value="{{auth()->guard('web')->user()->region}}" class="form-control bg-f6 inputicon2 edit-placeholder">
                                                 </div>
                                             </div>
@@ -241,7 +241,7 @@
                                         </div>
 
                                         <div class="pt-5">
-                                            <h5 class="ml-2 dark-tit">Expériences</h5>
+                                            <h5 class="ml-2 dark-tit">Expériences <span class="invalid-error text-danger">*</span></h5>
                                             <div class="row mx-0 mt-3">
                                                 <div class="custom-col1 col-md-3">
                                                     <div class="sr-rel personinfo-form mb-4">
@@ -301,7 +301,7 @@
                                         </div>
                                         @php $pedagogy=explode(",",auth()->guard('web')->user()->pedagogy); @endphp
                                         <div class="pt-5">
-                                            <h5 class="ml-2 dark-tit">Pédagogie appliquée</h5>
+                                            <h5 class="ml-2 dark-tit">Pédagogie appliquée <span class="invalid-error text-danger">*</span></h5>
                                             <div class="row mx-0 mt-3 editprof-checksec box-edit-profile">
                                                 <div class="col-md-7">
                                                     <div class="custom-control custom-checkbox profile-check">
@@ -362,7 +362,7 @@
 
                                         <div class="pt-5">
                                             <div class="sr-rel personinfo-form mb-4">
-                                                <h5 class="dark-tit">Mes qualités</h5>
+                                                <h5 class="dark-tit">Mes qualités <span class="invalid-error text-danger">*</span></h5>
                                                 <div class="custom-edit-muti bienveillance-text">
                                                     @php $qualities=explode(",",auth()->guard('web')->user()->qualities); @endphp
                                                     <select title="Basic example" multiple="multiple" name="qualities[]" class="select-multi">
@@ -387,7 +387,7 @@
                                                 </div>
                                             </div>
                                             <div class="sr-rel personinfo-form mb-4 pt-3">
-                                                <h5 class="dark-tit">Mes valeurs</h5>
+                                                <h5 class="dark-tit">Mes valeurs <span class="invalid-error text-danger">*</span></h5>
                                                 <select required="" name="values" class="form-control arrow-down profile-drop">
                                                     <!-- <option value="" hidden=""></option> -->
                                                     <option @if(auth()->guard('web')->user()->values=="Paix") selected @endif value="Paix">Paix</option>
@@ -396,7 +396,7 @@
                                                 <img src="{{asset('frontend/images/imgs-svg/down-arrow.svg')}}" alt="" class="arrw-downimg editprof-img">
                                             </div>
                                             <div class="sr-rel personinfo-form mb-4 pt-3">
-                                                <h5 class="dark-tit">Langues parlées couramment</h5>
+                                                <h5 class="dark-tit">Langues parlées couramment <span class="invalid-error text-danger">*</span></h5>
                                                 <select required="" name="languages_spoken" class="form-control arrow-down profile-drop">
                                                     <!-- <option value="" hidden=""></option> -->
                                                     <option @if(auth()->guard('web')->user()->languages_spoken=="Français") selected @endif value="Français">Français</option>
@@ -430,7 +430,7 @@
 
 
 </div>
-</body>
+
 @endsection
 @section('script')
 <script type="text/javascript ">

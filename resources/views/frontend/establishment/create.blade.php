@@ -17,14 +17,14 @@
                                     <div class="col-md-12">
                                         <div class="form-group mt-5">
 
-                                            {!! Form::label('Type d’Établissement', 'Type d’Établissement') !!}<span class="text-danger">*</span>
+                                            {!! Form::label('Type d’Établissement', 'Type d’Établissement') !!}<span class="invalid-error text-danger">*</span>
                                             {!! Form::select('type_of_establishment',['Crèche collective' => 'Crèche collective','Micro-crèche' => 'Micro-crèche','Crèche privée d’entreprise ou inter-entreprises' => 'Crèche privée d’entreprise ou inter-entreprises'] ,null, [ 'id' => 'type_of_establishment', 'class' => 'cus-drop select2 form-add-establish']) !!}
 
                                         </div>
 
 
                                         <div class="form-group">
-                                            {!! Form::label('A propre de notre structure', 'A propre de notre structure') !!}<span class="text-danger">*</span>
+                                            {!! Form::label('A propre de notre structure', 'A propre de notre structure') !!}<span class="invalid-error text-danger">*</span>
                                             {!! Form::text('own_of_our_structure',NULL, ['class' => 'form-control inputicon2 form-add-establish','id'=>'own_of_our_structure']) !!}
                                         </div>
                                     </div>
@@ -32,7 +32,7 @@
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        {!! Form::label('Date d’ouverture', 'Date d’ouverture') !!}<span class="text-danger">*</span>
+                                        {!! Form::label('Date d’ouverture', 'Date d’ouverture') !!}<span class="invalid-error text-danger">*</span>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -49,14 +49,14 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            {!! Form::label('Direction', 'Direction') !!}<span class="text-danger">*</span>
+                                            {!! Form::label('Direction', 'Direction') !!}<span class="invalid-error text-danger">*</span>
                                             {!! Form::text('direction',NULL, ['class' => 'form-control inputicon2','id'=>'direction']) !!}
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
 
-                                            {!! Form::label('Effectif', 'Effectif') !!}<span class="text-danger">*</span>
+                                            {!! Form::label('Effectif', 'Effectif') !!}<span class="invalid-error text-danger">*</span>
                                             {!! Form::select('effective',['1-10 personnes' => '1-10 personnes','11-20 personnes' => '11-20 personnes','21-30 personnes' => '21-30 personnes','31-40 personnes' => '31-40 personnes','41-50 personnes' => '41-50 personnes'],null, [ 'id' => 'effective' ,'class' => 'cus-drop select2 form-add-establish']) !!}
 
 
@@ -64,13 +64,13 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group ">
-                                            {!! Form::label('Nombre de groupes et tranches d’âges', 'Nombre de groupes et tranches d’âges') !!}<span class="text-danger">*</span>
+                                            {!! Form::label('Nombre de groupes et tranches d’âges', 'Nombre de groupes et tranches d’âges') !!}<span class="invalid-error text-danger">*</span>
                                             {!! Form::select('number_of_groups_and_age_groups',['1-10 ans' => '1-10 ans','11-20 ans' => '11-20 ans','21-30 ans' => '21-30 ans','31-40 ans' => '31-40 ans','41-50 ans' => '41-50 ans'],null, [ 'id' => 'number_of_groups_and_age_groups','class' => 'cus-drop select2 form-add-establish']) !!}
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group ">
-                                            {!! Form::label("Capacité d'accueil", "Capacité d'accueil") !!}<span class="text-danger">*</span>
+                                            {!! Form::label("Capacité d'accueil", "Capacité d'accueil") !!}<span class="invalid-error text-danger">*</span>
                                             {!! Form::select('accommodation_capacity',$accommodationCapacity,null, [ 'id' => 'accommodation_capacity','class' => 'cus-drop select2 form-add-establish']) !!}
 
                                         </div>
@@ -78,7 +78,7 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group position-rel value-color">
-                                            {!! Form::label("Superficie de l'établissement", "Superficie de l'établissement") !!}<span class="text-danger">*</span>
+                                            {!! Form::label("Superficie de l'établissement", "Superficie de l'établissement") !!}<span class="invalid-error text-danger">*</span>
                                             {!! Form::text('surface_area_of_the_establishment',NULL, ['class' => ' form-control form-add-establish inputicon2','id'=>'surface_area_of_the_establishment']) !!}
 
                                             <div class="m2-label"> {!! Form::label("m²", "m²") !!}</div>
@@ -86,7 +86,7 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        {!! Form::label('Votre établissement possède t-il un jardin ?', 'Votre établissement possède t-il un jardin ?') !!}<span class="text-danger">*</span>
+                                        {!! Form::label('Votre établissement possède t-il un jardin ?', 'Votre établissement possède t-il un jardin ?') !!}<span class="invalid-error text-danger">*</span>
 
                                         <div>
                                             <div class="radio-custom ">
@@ -110,7 +110,7 @@
 
 
                                 <div class="form-group">
-                                    {!! Form::label('Pédagogie appliquée', 'Pédagogie appliquée') !!}<span class="text-danger">*</span>
+                                    {!! Form::label('Pédagogie appliquée', 'Pédagogie appliquée') !!}<span class="invalid-error text-danger">*</span>
 
                                     <div>
                                         <div class="row check-box-sec check-form mb-4 m-0">
@@ -172,7 +172,7 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    {!! Form::label("Nos valeurs", "Nos valeurs") !!}<span class="text-danger">*</span>
+                                                    {!! Form::label("Nos valeurs", "Nos valeurs") !!}<span class="invalid-error text-danger">*</span>
                                                     {!! Form::textarea('our_values', '', ['size' => '30x4', 'id' => 'our_values', 'name' => 'our_values', 'class' => 'form-control textarea-form inputicon2']) !!}
 
                                                 </div>
@@ -183,7 +183,7 @@
 
                                 <div class="form-group sr-pos">
                                     <div class="upload-file-input">
-                                        {!! Form::label("Notre projet pédagogique", "Notre projet pédagogique") !!}<span class="text-danger">*</span>
+                                        {!! Form::label("Notre projet pédagogique", "Notre projet pédagogique") !!}<span class="invalid-error text-danger">*</span>
 
                                         <input id="uploadFile" value="" class="form-add-establish w-100 inputicon2" disabled>
                                         <div class="fileUpload btn btn-primary attach-file">
@@ -205,7 +205,7 @@
                                                         <div class="form-group mt-3">
                                                             <label class="control-label">Attachez vos
                                                                 documents, relatifs à votre structure pour
-                                                                plus d’informations</label><span class="text-danger">*</span>
+                                                                plus d’informations <span class="invalid-error text-danger">*</span></label>
                                                             <div class="preview-zone hidden">
                                                                 <div class="box box-solid">
                                                                     <div class="box-body"></div>

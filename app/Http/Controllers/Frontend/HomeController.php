@@ -101,9 +101,19 @@ class HomeController extends Controller
         if ($validator->fails()) {
             return response()->json(['success' => false, 'errors' => $validator->errors()]);
         }
-        $user = $this->homeRepository->usersLogin($request);
+        $user = Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password, 'deleted_at' => NULL]);
         if ($user) {
-            return response()->json(['success' => true, 'message' => 'Connexion réussie', 'user' => Auth::guard('web')->user()->user_type]);
+
+
+            if (auth()->guard('web')->user()->verify_email != 'accept') {
+
+                Auth::guard('web')->logout();
+
+                return response()->json(['success' => false, 'errors' => array('invalid' => "Votre compte sous la vérification s'il vous plaît vérifier le courrier.")]);
+            } else {
+                $request->session()->regenerate();
+                return response()->json(['success' => true, 'message' => 'Connexion réussie', 'user' => Auth::guard('web')->user()->user_type]);
+            }
         }
         return response()->json(['success' => false, 'errors' => array('invalid' => 'Email et le mot de passe sont erronés')]);
     }
@@ -115,20 +125,19 @@ class HomeController extends Controller
         if ($validator->fails()) {
             return response()->json(['success' => false, 'errors' => $validator->errors()]);
         }
-      
+
         $forgotdata = $this->homeRepository->storePassword($request);
         if ($forgotdata) {
             Session::flash('success', 'Votre lien de réinitialisation de mot de passe est envoyé');
             return redirect()->back();
         }
-        
     }
     public function resetPassword($token)
     {
         $data['validator'] = JsValidator::make($this->resetvalidationrules);
         return view('frontend.forgot.reset-password', ['token' => $token], $data);
     }
-    
+
     public function updatePassword(Request $request)
     {
         $validation = Validator::make($request->all(), $this->resetvalidationrules);
@@ -144,6 +153,4 @@ class HomeController extends Controller
             return redirect()->back();
         }
     }
-
-    
 }

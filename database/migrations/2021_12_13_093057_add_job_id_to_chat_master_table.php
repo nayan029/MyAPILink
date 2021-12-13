@@ -14,7 +14,7 @@ class AddJobIdToChatMasterTable extends Migration
     public function up()
     {
         Schema::table('chat_master', function (Blueprint $table) {
-            $table->integer('job_id')->after('')
+            $table->integer('job_id')->after('company_id')->nullable();
         });
     }
 

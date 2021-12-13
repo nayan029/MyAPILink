@@ -82,13 +82,9 @@ class JobRepository implements JobRepositoryInterface
         return Job::findorfail($id);
     }
 
-    public function showJobData($id)
-    {
-        $data['showwpost'] = Job::where('id', $id)->get();
-        return $data;
-    }
+  
 
-    public function storeOrUpdateJob(Request $request, $id)
+    public function acceptApplicants(Request $request, $id)
     {
         
     }

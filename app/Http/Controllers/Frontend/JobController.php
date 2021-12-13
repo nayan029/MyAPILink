@@ -57,7 +57,7 @@ class JobController extends Controller
     public function showJob($id)
     {
     
-        $data['showwpost'] = $this->jobRepository->showJobData($id);
+        $data['showwpost'] = $this->jobRepository->getSingleJobData($id);
         return view('frontend.job.show', $data);
     }
 
@@ -127,10 +127,11 @@ class JobController extends Controller
 
     public function destroy($id)
     {
-        $id = Job::findorfail($id);
-        $id->delete();
+        
+        $jobData = Job::findorfail($id);
+        $jobData->delete();
         Session::flash('success', 'Successfully deleted');
-        return redirect()->route('profile');
+        return redirect()->back();
     }
 
     public function viewApplcants($id)
@@ -146,5 +147,16 @@ class JobController extends Controller
         Job::withTrashed()->find($id)->restore();
         Session::flash('success','Successfully Restored');
         return back();
+    }
+
+    public function storeApplicants(Request $request,$id){
+                $request->validate([
+                    'jobCheck' => 'required',
+                ]);
+
+            $store = $this->jobRepository->acceptApplicants($request,$id);
+            if($store){
+
+            }
     }
 }

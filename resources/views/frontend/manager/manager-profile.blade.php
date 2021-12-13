@@ -266,18 +266,26 @@
                                                                 </button>
                                                                 <a href="{{route('editjob',$value->id)}}" class="btn btn btn-met">
                                                                     Modifier</a>
-                                                                <a href="{{route('destroy',$value->id)}}" class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                                <a href="javascript:void(0);" class="btn btn-delete delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                                <form action="{{route('destroy',$value->id)}}" method="POST" class="deleteForm">
+                                                                    @method('DELETE')
+                                                                    @csrf
+                                                                </form>
                                                             </div>
                                                         </div>
+                                                        @php
+
+                                                        $deadLineDate = date('Y-m-d',strtotime($value->deadline_for_receipt_of_applications));
+                                                        $now = date('Y-m-d');
+                                                        $diff = strtotime($deadLineDate) - strtotime($now);
+                                                        $finalDays = abs(round($diff / 86400));
+                                                        @endphp
                                                         <div class="col-md-4 mt-2">
                                                             <div class="space-date">
                                                                 <div class="text-center date-details">
                                                                     <p class="mb-0">Date</p>
                                                                     <p class="mb-0">{{$value->contract_start_date}}</p>
-                                                                    <p class="mb-0">51 jours restants
-
-                                                                    </p>
-
+                                                                    <p class="mb-0">{{$finalDays}} jours restants</p>
                                                                 </div>
                                                                 <div class="mt-images-profile">
                                                                     <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
@@ -288,7 +296,6 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                                             <div class="button-voir">
                                                                 <a href="{{route('see-applicants',$value->id)}}"> <button class="btn btn-blue">Voir les postulants
                                                                     </button></a>
@@ -342,7 +349,11 @@
                                                             <div class="metters-btns">
                                                                 <a href="{{route('editjob',$remain->id)}}" class="btn btn btn-met">
                                                                     Modifier</a>
-                                                                <a href="{{route('destroy',$remain->id)}}" class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                                <!-- <a href="javascript:void(0);" class="btn btn-delete delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                                <form action="{{route('destroy',$remain->id)}}" method="POST" class="deleteForm">
+                                                                    @method('DELETE')
+                                                                    @csrf
+                                                                </form> -->
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4 mr-renew">
@@ -386,105 +397,111 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="pills-third" role="tabpanel" aria-labelledby="pills-third-tab">
-                                    <div class="card sr-card">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="border-job">
-                                                        @if($deleted)
-                                                        @foreach($deleted as $delete)
-                                                        <div class="job-card manager-job-pd">
-                                                            <div class="row mb-3 ">
-                                                                <div class="col-md-3 pr-0">
-                                                                    <ul class="search-image-ul">
-                                                                        <li>
-                                                                            <h5 class="mb-0 job_aux_text fn-19">{{$delete->title}}
-                                                                            </h5>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p class="manage-crep job_cre_text fn-21">{{$delete->job_description}}
-                                                                            </p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p class="mb-0 ">{{$delete->city}}</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p class="mb-0 ">{{$delete->minimum_gross_salary}} € par mois</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p class="mb-0 ">Expérience : {{$delete->minimum_experience}}</p>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
-                                                                    <div class="metters-btns">
-                                                                        <a href="{{route('editjob',$delete->id)}}" class="btn btn btn-met">
-                                                                            Modifier</a>
-                                                                        <a href="{{route('destroy',$delete->id)}}" class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4 mr-renew">
-                                                                    <div>
-                                                                        <div class="renew-top">
-                                                                            <a href="{{route('users.restore',$delete->id)}}" class="btn btn-outline-renew">Renouveler
-                                                                                l'annonce
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-3 mt-2 pl-0">
-                                                                    <div class="space-date justify-content-end">
-                                                                        <div class="mt-images-profile">
-                                                                            <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
-                                                                                <span></span>
-                                                                            </div>
-                                                                            <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                            <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span></span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
+                            <div class="card sr-card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="border-job">
+                                                @if($deleted)
+                                                @foreach($deleted as $delete)
+                                                <div class="job-card manager-job-pd">
+                                                    <div class="row mb-3 ">
+                                                        <div class="col-md-3 pr-0">
+                                                            <ul class="search-image-ul">
+                                                                <li>
+                                                                    <h5 class="mb-0 job_aux_text fn-19">{{$delete->title}}
+                                                                    </h5>
+                                                                </li>
+                                                                <li>
+                                                                    <p class="manage-crep job_cre_text fn-21">{{$delete->job_description}}
+                                                                    </p>
+                                                                </li>
+                                                                <li>
+                                                                    <p class="mb-0 ">{{$delete->city}}</p>
+                                                                </li>
+                                                                <li>
+                                                                    <p class="mb-0 ">{{$delete->minimum_gross_salary}} € par mois</p>
+                                                                </li>
+                                                                <li>
+                                                                    <p class="mb-0 ">Expérience : {{$delete->minimum_experience}}</p>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
+                                                            <div class="metters-btns">
+                                                                <a href="{{route('editjob',$delete->id)}}" class="btn btn btn-met">
+                                                                    Modifier</a>
 
-                                                                    <div class="button-voir text-right-voir">
-                                                                        <a href="applicarion-offer.html" class="btn btn-blue w-95">Voir les
-                                                                            postulants
-                                                                        </a>
-                                                                    </div>
+                                                                <!-- <a href="javascript:void(0);" class="btn btn-delete delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                                <form action="{{route('destroy',$delete->id)}}" method="POST" class="deleteForm">
+                                                                    @method('DELETE')
+                                                                    @csrf
+                                                                </form> -->
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 mr-renew">
+                                                            <div>
+                                                                <div class="renew-top">
+                                                                    <a href="{{route('users.restore',$delete->id)}}" class="btn btn-outline-renew">Renouveler
+                                                                        l'annonce
+                                                                    </a>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        @endforeach
-                                                        @else
-                                                        <p class="text-center">No Job Data Found!..</p>
-                                                        @endif
-                                                    </div>
-                                                    <div class="custom-pagination pt-5 pb-3">
-                                                        <nav aria-label="Page navigation example">
-                                                            <ul class="pagination justify-content-center">
-                                                                <li class="page-item">
-                                                                    <a class="page-link" href="javascript:void(0)" tabindex="-1" id="prev">
-                                                                        &lt; </a>
-                                                                </li>
-                                                                <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a>
-                                                                </li>
-                                                                <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a>
-                                                                </li>
-                                                                <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a>
-                                                                </li>
-                                                                <li class="page-item"><a class="page-link" href="javascript:void(0)">4</a>
-                                                                </li>
-                                                                <li class="page-item"><a class="page-link" href="javascript:void(0)">5</a>
-                                                                </li>
-                                                                <li class="page-item">
-                                                                    <a class="page-link" href="javascript:void(0)" id="next">&gt;</a>
-                                                                </li>
-                                                            </ul>
-                                                        </nav>
+                                                        <div class="col-md-3 mt-2 pl-0">
+                                                            <div class="space-date justify-content-end">
+                                                                <div class="mt-images-profile">
+                                                                    <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
+                                                                        <span></span>
+                                                                    </div>
+                                                                    <!-- <p class="mb-0">31 oct 8:30</p> -->
+                                                                    <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="button-voir text-right-voir">
+                                                                <a href="applicarion-offer.html" class="btn btn-blue w-95">Voir les
+                                                                    postulants
+                                                                </a>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                                @endforeach
+                                                @else
+                                                <p class="text-center">No Job Data Found!..</p>
+                                                @endif
+                                            </div>
+                                            <div class="custom-pagination pt-5 pb-3">
+                                                <nav aria-label="Page navigation example">
+                                                    <ul class="pagination justify-content-center">
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="javascript:void(0)" tabindex="-1" id="prev">
+                                                                &lt; </a>
+                                                        </li>
+                                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a>
+                                                        </li>
+                                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a>
+                                                        </li>
+                                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a>
+                                                        </li>
+                                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">4</a>
+                                                        </li>
+                                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">5</a>
+                                                        </li>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="javascript:void(0)" id="next">&gt;</a>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
                                             </div>
                                         </div>
                                     </div>
-                                </div>  
+                                </div>
+                            </div>
+                        </div>
 
 
             </section>
@@ -554,7 +571,27 @@
             }
         });
     });
+    $(document).on('click','.delete',function(event) {
+        var form = $(".deleteForm").closest("form");
+        event.preventDefault();
+        swal({
+                title: 'Are you sure you want to delete this record?',
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                }
+            });
+    });
 </script>
+
+
+
+
+
 @endsection
 
 </html>

@@ -60,7 +60,7 @@
                                 <img src="images/home.svg" class="drop-icon">
                                 <div class="applicants-drop bg-dropdown">
                                     <select class="form-control input-drop bg-transparent">
-                                        <option value=""></option>       
+                                        <option value=""></option>
                                     </select>
                                 </div>
                             </div>
@@ -85,13 +85,10 @@
                     <div>
                         <ul class="nav nav-pills sr-nav-pills " id="pills-tab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
-                                    aria-controls="pills-homNotre institutione" aria-selected="true">Les postulants</a>
+                                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-homNotre institutione" aria-selected="true">Les postulants</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="pills-editoffer-tab" data-toggle="pill" href="#editoffer"
-                                    role="tab" aria-controls="pills-homNotre institutione"
-                                    aria-selected="true">Editer</a>
+                                <a class="nav-link" id="pills-editoffer-tab" data-toggle="pill" href="#editoffer" role="tab" aria-controls="pills-homNotre institutione" aria-selected="true">Editer</a>
                             </li>
                         </ul>
                     </div>
@@ -106,9 +103,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12 d-flex justify-content-end">
-                                        <a  id="pills-editoffer-tab" data-toggle="pill" href="#editoffer"
-                                    role="tab" aria-controls="pills-homNotre institutione"
-                                    aria-selected="true" class="btn post-an-btn mt-4 mb-5 editer-offer">Editer</a>
+                                        <a id="pills-editoffer-tab" data-toggle="pill" href="#editoffer" role="tab" aria-controls="pills-homNotre institutione" aria-selected="true" class="btn post-an-btn mt-4 mb-5 editer-offer">Editer</a>
                                     </div>
                                 </div>
                                 @if($applyJob)
@@ -131,8 +126,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                @endforeach   
-                                @endif     
+                                @endforeach
+                                @endif
                                 <div class="row ">
                                     <div class="col-md-12 d-flex justify-content-end">
                                         <a href="#">
@@ -143,8 +138,8 @@
                         </div>
                     </div>
                 </section>
-                </div>
-                <div class="tab-pane fade show active" id="editoffer" role="tabpanel" aria-labelledby="pills-editoffer-tab">
+            </div>
+            <div class="tab-pane fade show active" id="editoffer" role="tabpanel" aria-labelledby="pills-editoffer-tab">
                 <section class="prof-backsec">
                     <div class="container">
                         <div class="card sr-card">
@@ -162,192 +157,133 @@
                                         </div> -->
                                     </div>
                                     <div class="job-offer-edit mt-4">
-                                        <div class="job-card ">
-                                            <div class="row mb-2">
-                                                <div class="col-md-7">
-                                                    <div class="offer2-text d-flex">
-                                                        <div class="custom-edit-radio">
-                                                            <div class="custom-control custom-radio">
-                                                                <input type="radio" checked id="customRadio1"
-                                                                    name="customRadio"  class="custom-control-input">
-                                                                <div class="div-edit-radio"></div>
-                                                                <label class="check-labels">
-                                                                    <img src="{{asset('frontend/images/project/dark-white-check.svg')}}">
-                                                                </label>
-                                                            </div>
+                                        <form action="{{route('acceptJobDetails')}}" method="post">
+                                            @csrf
+                                            @if($applyJob)
+                                            @foreach($applyJob as $job)
+                                            <div class="job-card ">
+                                                <div class="row mb-2">
+                                                    <div class="col-md-7">
+                                                        <div class="offer2-text d-flex">
+                                                            <div class="custom-edit-radio">
+                                                                <div class="custom-control custom-radio">
+                                                                    <input type="hidden" name="job_id" data-id="{{$job->job_id}}" id="job_id">
+                                                                    <input type="hidden" name="user_id" value="{{$job->user_id}}" id="user_id">
+                                                                    <input type="radio" name="jobCheck" checked id="customRadio1" name="customRadio" class="custom-control-input">
 
-                                                        </div>
-                                                        <div class="ml-offer-edit">
-                                                            <p class="mb-0 offer-app-one">Jean Claude Payet</p>
-                                                            <p class="mb-0 offer-app-sec">Educateur Jeunes enfants</p>
-                                                            <p class="mb-0 offer-app-sec">3 ans d'expériences</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-5 mt-2">
-                                                    <div class="float-right">
-                                                        <a href="" class="btn btn-light-accept">
-                                                            Accepter
-                                                        </a>
-                                                        <a href="" class="btn btn-blue-refuse">
-                                                            Refuser
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="job-card ">
-                                            <div class="row mb-2">
-                                                <div class="col-md-7">
-                                                    <div class="offer2-text d-flex">
-                                                        <div class="custom-edit-radio">
-                                                            <div class="custom-control custom-radio">
-                                                                <input type="radio" id="customRadio1" name="customRadio"
-                                                                    class="custom-control-input">
-                                                                <div class="div-edit-radio"></div>
-                                                                <label class="check-labels">
-                                                                    <img src="images/project/dark-white-check.svg">
-                                                                </label>
-                                                            </div>
+                                                                    <div class="div-edit-radio"></div>
+                                                                    <label class="check-labels">
+                                                                        <img src="{{asset('frontend/images/project/dark-white-check.svg')}}">
+                                                                    </label>
+                                                                </div>
 
-                                                        </div>
-                                                        <div class="ml-offer-edit">
-                                                            <p class="mb-0 offer-app-one">Jean Claude Payet</p>
-                                                            <p class="mb-0 offer-app-sec">Educateur Jeunes enfants</p>
-                                                            <p class="mb-0 offer-app-sec">3 ans d'expériences</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-5 mt-2">
-                                                    <div class="float-right">
-                                                        <a href="" class="btn btn-light-accept">
-                                                            Accepter
-                                                        </a>
-                                                        <a href="" class="btn btn-blue-refuse">
-                                                            Refuser
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="job-card ">
-                                            <div class="row mb-2">
-                                                <div class="col-md-7">
-                                                    <div class="offer2-text d-flex">
-                                                        <div class="custom-edit-radio">
-                                                            <div class="custom-control custom-radio">
-                                                                <input type="radio" id="customRadio1" name="customRadio"
-                                                                    class="custom-control-input">
-                                                                <div class="div-edit-radio"></div>
-                                                                <label class="check-labels">
-                                                                    <img src="images/project/dark-white-check.svg">
-                                                                </label>
                                                             </div>
-
-                                                        </div>
-                                                        <div class="ml-offer-edit">
-                                                            <p class="mb-0 offer-app-one">Jean Claude Payet</p>
-                                                            <p class="mb-0 offer-app-sec">Educateur Jeunes enfants</p>
-                                                            <p class="mb-0 offer-app-sec">3 ans d'expériences</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-5">
-                                                    <div class="float-right mt-2">
-                                                        <a href="" class="btn btn-light-accept">
-                                                            Accepter
-                                                        </a>
-                                                        <a href="" class="btn btn-blue-refuse">
-                                                            Refuser
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="job-card ">
-                                            <div class="row mb-2">
-                                                <div class="col-md-7">
-                                                    <div class="offer2-text d-flex">
-                                                        <div class="custom-edit-radio">
-                                                            <div class="custom-control custom-radio">
-                                                                <input type="radio" id="customRadio1" name="customRadio"
-                                                                    class="custom-control-input">
-                                                                <div class="div-edit-radio"></div>
-                                                                <label class="check-labels">
-                                                                    <img src="images/project/dark-white-check.svg">
-                                                                </label>
+                                                            <div class="ml-offer-edit">
+                                                                <p class="mb-0 offer-app-one">{{$job->user->first_name}}{{$job->user->last_name}}</p>
+                                                                <p class="mb-0 offer-app-sec">Educateur Jeunes enfants</p>
+                                                                <p class="mb-0 offer-app-sec">{{$jobDetail->minimum_experience}}</p>
                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-5 mt-2">
+                                                        <div class="float-right">
+                                                            <a href="" job-id="{{$job->job_id}}" user-id="{{$job->user_id}}" class="btn btn-light-accept" data-toggle="modal" data-target="#message-modal">
+                                                                Accepter
+                                                            </a>
+                                                            <a href="" class="btn btn-blue-refuse">
+                                                                Refuser
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </form>
 
-                                                        </div>
-                                                        <div class="ml-offer-edit">
-                                                            <p class="mb-0 offer-app-one">Jean Claude Payet</p>
-                                                            <p class="mb-0 offer-app-sec">Educateur Jeunes enfants</p>
-                                                            <p class="mb-0 offer-app-sec">3 ans d'expériences</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-5">
-                                                    <div class="float-right mt-2">
-                                                        <a href="" class="btn btn-light-accept">
-                                                            Accepter
-                                                        </a>
-                                                        <a href="" class="btn btn-blue-refuse">
-                                                            Refuser
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="job-card ">
-                                            <div class="row mb-2">
-                                                <div class="col-md-7">
-                                                    <div class="offer2-text d-flex">
-                                                        <div class="custom-edit-radio">
-                                                            <div class="custom-control custom-radio">
-                                                                <input type="radio" id="customRadio1" name="customRadio"
-                                                                    class="custom-control-input">
-                                                                <div class="div-edit-radio"></div>
-                                                                <label class="check-labels">
-                                                                    <img src="images/project/dark-white-check.svg">
-                                                                </label>
-                                                            </div>
+                                    </div>
+                                    @endforeach
+                                    @endif
 
-                                                        </div>
-                                                        <div class="ml-offer-edit">
-                                                            <p class="mb-0 offer-app-one">Jean Claude Payet</p>
-                                                            <p class="mb-0 offer-app-sec">Educateur Jeunes enfants</p>
-                                                            <p class="mb-0 offer-app-sec">3 ans d'expériences</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-5">
-                                                    <div class="float-right mt-2">
-                                                        <a href="" class="btn btn-light-accept">
-                                                            Accepter
-                                                        </a>
-                                                        <a href="" class="btn btn-blue-refuse">
-                                                            Refuser
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
+
+                                    <div class="row ">
+                                        <div class="col-md-12 d-flex justify-content-end">
+                                            <a href="#">
+                                                <i class="fa fa-angle-right btn-arrow"></i></a>
                                         </div>
+
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                </section>
 
-                                <div class="row ">
-                                    <div class="col-md-12 d-flex justify-content-end">
-                                        <a href="#">
-                                            <i class="fa fa-angle-right btn-arrow"></i></a>
+                <!-- modal-message start -->
+
+                <div class="modal fade modal-back-blue" id="message-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header resume_header border-0">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true"><img src="{{asset('frontend/images/material-close.svg')}}"></span>
+                                </button>
+                            </div>
+                            <div class="modal-body bravo-body padding-taper">
+                                <div class="text-center">
+                                    <div class="taper-text">
+                                        <p>Taper votre message pour accepter le(s) candidat(s)</p>
+                                        <span class="pink-border-span"></span>
+                                    </div>
+                                    <div class="form-messages">
+                                        <div class="form-group">
+                                            <textarea class="form-control modal-textarea">Bonjour , 
+                                        Nous avons retenu votre 
+                                        candidature.
+                                        nous vous contacterons dans les 
+                                        plus brefs délais  </textarea>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button type="submit" class="tosend-btn btn"> Envoyer </button>
                                     </div>
 
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
-          
-          
+
+                </div>
+
+                <!-- modal message-second start -->
+
+                <div class="modal fade modal-back-blue" id="refusal-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header resume_header border-0">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true"><img src="{{asset('frontend/images/material-close.svg')}}"></span>
+                                </button>
+                            </div>
+                            <div class="modal-body bravo-body padding-taper">
+                                <div class="text-center">
+                                    <div class="taper-text">
+                                        <p>Taper votre message de refus au(x) candidat(s)</p>
+                                        <span class="pink-border-span"></span>
+                                    </div>
+                                    <div class="form-messages">
+                                        <div class="form-group">
+                                            <textarea class="form-control modal-textarea">Bonjour ,
+
+                                                                Nous sommes dans le regret 
+                                                                de refuser votre candidature  ! </textarea>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button class="tosend-btn btn"> Envoyer </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
 </body>
 
 <script src="{{asset('frontend/js/jquery.min.js')}}"></script>
@@ -395,6 +331,42 @@
     });
     $(document).ready(function() {
         $(".change-placeholder-select .multiselect").html("Type de poste");
+    });
+
+
+    $(document).on("click", ".btn-light-accept,.btn-blue-refuse", function() {
+        // var type = $(this).val();
+        var dataId = $('#job_id').attr("data-id");
+        var dataId = $('#job_id').attr("data-id");
+        var dataId = $('#job_id').attr("data-id");
+        alert(dataId);
+        var userid = $('#userid').val();
+        var document_name = $('#pdf_name').val();
+
+
+        $.ajax({
+            url: "{{ route('store-jobType') }}",
+            method: "POST",
+            data: {
+                'type': type,
+                'jobid': jobid,
+                'userid': userid,
+                'document_name': document_name,
+                _token: "{{ csrf_token() }}"
+            },
+            success: function(response) {
+                if (response.success == true) {
+                    toastr.success(response.message);
+                    $('#establishment').modal('hide');
+                    $('#bravo').modal('show');
+                    location.reload();
+
+                } else {
+                    toastr.danger(response.message);
+                }
+            }
+        });
+
     });
 </script>
 

@@ -7,7 +7,7 @@
                     <div class="d-flex justify-content-between res-btn-column">
                         <img src="{{asset('frontend/images/footer/apilink_logo_dark.svg')}}" width="150px">
                         @if(!Auth::guard('web')->user())
-                        
+
                         <div class="btn-footer-left">
                             <button class="btn footer-btn-white">INSCRIVEZ-VOUS</button>
                             <button class="btn footer-btn2" data-toggle="modal" data-target="#Modallogin2">SE CONNECTER</button>
@@ -104,17 +104,15 @@
                                     <h5 class="footer-headings">Nos partenaires</h5>
                                 </div>
                                 <ul class="partner-ul">
-
-                                    @foreach($partners as $partner)
-
-                                    <li>
-                                        <a href="{{$partner->link}}" target="_blank">
-                                            <img src="{{$partner->image}}" alt="">
-                                        </a>
-
-                                    </li>
-
-                                    @endforeach
+                                    @if($partners)
+                                      @foreach($partners as $partner)
+                                        <li>
+                                            <a href="{{$partner->link}}" target="_blank">
+                                                <img src="{{asset($partner->image)}}" alt="sas">
+                                            </a>
+                                        </li>
+                                        @endforeach`
+                                    @endif
 
                                 </ul>
                             </div>
@@ -252,4 +250,5 @@
 </script>
 @yield('script')
 </body>
+
 </html>

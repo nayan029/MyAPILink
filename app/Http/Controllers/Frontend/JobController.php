@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\Interfaces\JobRepositoryInterface;
+use App\Models\ApplyJob;
 use App\Models\Job;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -56,7 +57,7 @@ class JobController extends Controller
     public function showJob($id)
     {
     
-        $data['showwpost'] = $this->jobRepository->showJobData($id);
+        $data['showwpost'] = $this->jobRepository->getSingleJobData($id);
         return view('frontend.job.show', $data);
     }
 
@@ -126,17 +127,18 @@ class JobController extends Controller
 
     public function destroy($id)
     {
-        $id = Job::findorfail($id);
-        $id->delete();
+        
+        $jobData = Job::findorfail($id);
+        $jobData->delete();
         Session::flash('success', 'Successfully deleted');
-        return redirect()->route('profile');
+        return redirect()->back();
     }
 
-    public function viewApplcants()
+    public function viewApplcants($id)
     {
-        $data['applicants'] = Job::where('user_id', 1)->paginate(10);
-        $id = Auth::user()->id;
-        $data['user'] = User::where('id', $id)->paginate(10);
+
+        $data['jobDetail'] = Job::where('id', $id)->first();
+        $data['applyJob'] = ApplyJob::where('id',$id)->with('user')->get();
         return view('frontend.job.view-applicants', $data);
     }
 
@@ -145,5 +147,16 @@ class JobController extends Controller
         Job::withTrashed()->find($id)->restore();
         Session::flash('success','Successfully Restored');
         return back();
+    }
+
+    public function storeApplicants(Request $request,$id){
+                $request->validate([
+                    'jobCheck' => 'required',
+                ]);
+
+            $store = $this->jobRepository->acceptApplicants($request,$id);
+            if($store){
+
+            }
     }
 }

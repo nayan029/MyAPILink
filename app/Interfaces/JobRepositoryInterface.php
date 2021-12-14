@@ -10,7 +10,6 @@ interface JobRepositoryInterface
     
     public function getSingleJobData($id);
 
-    public function showJobData($id);
 
-    public function storeOrUpdateJob(Request $request,$id);
+    public function acceptApplicants(Request $request,$id);
 }

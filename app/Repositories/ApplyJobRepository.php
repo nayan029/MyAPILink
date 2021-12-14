@@ -8,6 +8,7 @@ use App\Models\ApplyJob;
 use App\Models\SavedJobs;
 use Illuminate\Http\Request;
 use App\Http\Traits\ImageuploadTrait;
+use App\Models\ChatMaster;
 use App\Models\User;
 use PHPUnit\Framework\MockObject\ClassIsFinalException;
 
@@ -91,7 +92,9 @@ class ApplyJobRepository implements ApplyJobRepositoryInterface
     {
         return  ApplyJob::with('jobApplay')->where('is_apply',1)->where('deleted_at', NULL)->where('user_id',auth()->guard('web')->user()->id)->get();
     }
-    
+    public function chatUserList(){
+        return ChatMaster::where('id',auth()->user()->id)->groupBy('')->where('deleted_at', NULL)->get();
+    }
 
     
 }

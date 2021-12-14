@@ -24,4 +24,10 @@ trait TimeAgoTrait
              return $diff . " " . $strTime[$i] . "s ago ";
         }
     }   
+    public static function convertDMTime($date)
+	{
+		if ($date == "")  return '';
+
+		return date('d M g:ia', strtotime($date));
+	}
 }

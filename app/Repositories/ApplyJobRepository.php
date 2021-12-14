@@ -8,19 +8,22 @@ use App\Models\ApplyJob;
 use App\Models\SavedJobs;
 use Illuminate\Http\Request;
 use App\Http\Traits\ImageuploadTrait;
+use App\Models\ChatMaster;
 use App\Models\User;
+use PHPUnit\Framework\MockObject\ClassIsFinalException;
 
 class ApplyJobRepository implements ApplyJobRepositoryInterface
 {
     use ImageuploadTrait;
     public function getCandidateData()
     {
-        return Job::with('applyJob', 'savedJob')->where('deleted_at', NULL)->get();
+        return Job::with('applyJob')->with('savedJob')->where('deleted_at', NULL)->get();
     }
     public function store(Request $request)
     {
         $input['job_id'] = $request->jobid;
-        $input['user_id'] = $request->userid;
+        $input['user_id'] = auth()->user()->id;
+        $input['company_id'] =$request->userid;
         $input['apply_type'] = $request->type;
         $input['is_apply'] = 1;
         $input['document_name'] = $request->document_name;
@@ -41,7 +44,7 @@ class ApplyJobRepository implements ApplyJobRepositoryInterface
     {
 
         $inputs['job_id'] = $request->job_id;
-        $inputs['user_id'] = $request->user_id;
+        $inputs['user_id'] = $request->auth()->user()->id;
         $inputs['job_save'] = $request->favPost;
 
         $checkType = SavedJobs::where('job_id', $request->job_id)->where('user_id', $request->user_id)->first();
@@ -84,7 +87,14 @@ class ApplyJobRepository implements ApplyJobRepositoryInterface
     {
         return  ApplyJob::with('jobApplay')->where('is_apply',1)->where('deleted_at', NULL)->where('user_id',auth()->guard('web')->user()->id)->get();
     }
-    
+
+    public function chatJobList()
+    {
+        return  ApplyJob::with('jobApplay')->where('is_apply',1)->where('deleted_at', NULL)->where('user_id',auth()->guard('web')->user()->id)->get();
+    }
+    public function chatUserList(){
+        return ChatMaster::where('id',auth()->user()->id)->groupBy('')->where('deleted_at', NULL)->get();
+    }
 
     
 }

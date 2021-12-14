@@ -85,4 +85,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(SavedJobs::class);
     }
+    public function establishmentData()
+    {
+        return $this->hasMany(Establishment::class);
+    }
+
+    public function getJobList()
+    {
+        return $this->hasMany(Job::class);
+    }
+    
 }

@@ -18,6 +18,10 @@ class ApplyJob extends Model
     {
         return  $this->belongsTo(job::class, 'job_id', 'id');
     }
+    public function userData()
+    {
+        return  $this->belongsTo(User::class, 'user_id', 'id');
+    }
 
    
 }

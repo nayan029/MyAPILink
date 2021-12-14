@@ -120,7 +120,8 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->post('update-email', 'ManagerController@updateEmail')->name('update-email');
         $frontRoute->post('update-notifications-flag', 'ManagerController@updateNotificationsFlag')->name('update-notifications-flag');
         $frontRoute->post('update-delete-flag', 'ManagerController@updateDeleteAccountFlag')->name('update-delete-flag');
-
+        $frontRoute->get('manager-message', 'ManagerController@chatIndex')->name('manager-message');
+        
         $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
         $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');
         $frontRoute->get('view-establishment-account/{id}', 'EstablishmentController@show')->name('view-establishment-account');
@@ -135,8 +136,7 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->get('candidate-message', 'CandidateController@chatIndex')->name('candidate-message');
         $frontRoute->get('candidate-message-list-ajax', 'CandidateController@messageListAjax')->name('candidate-message-list-ajax');
         $frontRoute->get('last-mesage', 'CandidateController@lastMessageCheck')->name('last-mesage');
-        
-
+    
         $frontRoute->post('candidate-sendmessage', 'CandidateController@sendmessage')->name('candidate-sendmessage');
         $frontRoute->post('user/logout', 'HomeController@logout')->name('user-logout');
         $frontRoute->get('search-job', 'SearchAdController@index')->name('searchjob');

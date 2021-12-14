@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\frontend;
 
-use App\Http\Controllers\Controller;
-use App\Interfaces\ManagerRepositoryInterface;
+use JsValidator;
+use Carbon\Carbon;
+use App\Models\Job;
 use Illuminate\Http\Request;
+use App\Models\Establishment;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use JsValidator;
-use App\Models\Job;
-use App\Models\Establishment;
-use Carbon\Carbon;
+use App\Interfaces\ManagerRepositoryInterface;
+use App\Interfaces\ApplyJobRepositoryInterface;
 
 class ManagerController extends Controller
 {
@@ -23,17 +24,24 @@ class ManagerController extends Controller
         'roles' => "required",
 
     ];
+    protected   $imageValidationRules =
+    [
+
+        'image' => 'required|mimes:jpeg,png,jpg|max:2048',
+
+    ];
     protected   $passwordValidationRules =
     [
         'password' => 'required|min:8',
         'confirm_password' => "required|same:password",
 
     ];
+    protected $applyJobRepository = "";
 
-
-    public function __construct(ManagerRepositoryInterface $managerRepository)
+    public function __construct(ManagerRepositoryInterface $managerRepository, ApplyJobRepositoryInterface $applyJobRepository)
     {
         $this->managerRepository = $managerRepository;
+        $this->applyJobRepository =$applyJobRepository;
     }
 
 
@@ -177,4 +185,15 @@ class ManagerController extends Controller
         }
         return response()->json(['success' => false, 'message' => 'Sorry, something went wrong. please try again.']);
     }
+    public function chatIndex()
+    {
+
+        $data['validator'] = JsValidator::make($this->imageValidationRules);
+        $data['userList']=$this->applyJobRepository->chatUserList();
+        
+        dd($data['userList']);
+
+        return view('frontend.manager.chat_index', $data);
+    }
+    
 }

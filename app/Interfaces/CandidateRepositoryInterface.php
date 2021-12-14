@@ -11,4 +11,6 @@ interface CandidateRepositoryInterface
     public function getAllMessage($id);
 
     public function insertMessage(Request $request);
+
+    public function getLastMessage(Request $request);
 }

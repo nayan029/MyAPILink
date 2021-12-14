@@ -20,7 +20,7 @@ class Job extends Model
 
     public function applyJob()
     {
-        return $this->hasOne(ApplyJob::class);
+        return $this->hasOne(ApplyJob::class)->where('user_id',auth()->user()->id);
     }
     public function savedJob()
     {

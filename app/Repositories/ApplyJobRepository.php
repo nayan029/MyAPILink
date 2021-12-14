@@ -90,10 +90,10 @@ class ApplyJobRepository implements ApplyJobRepositoryInterface
 
     public function chatJobList()
     {
-        return  ApplyJob::with('jobApplay')->where('is_apply',1)->where('deleted_at', NULL)->where('user_id',auth()->guard('web')->user()->id)->get();
+        return  ApplyJob::with('jobApplay','getEstablishmentList')->where('is_apply',1)->where('deleted_at', NULL)->where('user_id',auth()->guard('web')->user()->id)->get();
     }
     public function chatUserList(){
-        return ChatMaster::where('id',auth()->user()->id)->groupBy('')->where('deleted_at', NULL)->get();
+        return ChatMaster::groupBy('sender_id')->where('deleted_at', NULL)->get();
     }
 
     

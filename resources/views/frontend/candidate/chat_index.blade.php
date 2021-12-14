@@ -121,8 +121,8 @@
                     <li class="active">
                         <div class="chatprofile">
                             <div class="usershortname">CI</div>
-                        </div>
-                        <div onclick="msgbox({{$job->job_id}});" class="chatprofile-content">
+                        </div>@php $revicerId=$job['getEstablishmentList']->user_id @endphp
+                        <div onclick="msgbox({{$job->job_id}},{{$revicerId}});" class="chatprofile-content">
                             <h5>{{$job['jobApplay']->title}}</h5>
                             <div class="msg-time">
                                 <p>Hi, How are you today?</p>
@@ -160,10 +160,10 @@
     });
 </script>
 <script>
-    function msgbox(id) {
+    function msgbox(id,$reciverId) {
 
         $.ajax({
-            url: '{{URL::to("/")}}/candidate-message-list-ajax?id=' + id,
+            url: '{{URL::to("/")}}/candidate-message-list-ajax?id=' + id+'&reciverid='+$reciverId,
             method: "GET",
             success: function(data) {
                 $('#messagelist').html(data);
@@ -175,7 +175,8 @@
     }
 </script>
 <script>
-    function sendmessage(id) {
+    function sendmessage(id,reciverId) {
+      
         var temp = 0;
         var mess = $("#chatmessage").val();
         var bookingfile = $("#msgfile").val();
@@ -203,7 +204,7 @@
 
             $('#sendbutton').prop('disabled', true);
 
-            var url = '{{URL::to("/")}}/candidate-sendmessage?id=' + id;
+            var url = '{{URL::to("/")}}/candidate-sendmessage?id=' + id +'&reciverid='+reciverId;
             event.preventDefault();
             $.ajax({
                 url: url,
@@ -219,7 +220,7 @@
                     if (response.success) {
                         $('#chatmessage').val('');
                         $('#msgfile').val('');
-                        msgbox(id);
+                        msgbox(id,reciverId);
                         $('#sendbutton').prop('disabled', false);
                     } else {
 

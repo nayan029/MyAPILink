@@ -23,6 +23,11 @@ class ApplyJob extends Model
         return  $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    public function getEstablishmentList()
+    {
+        return  $this->belongsTo(Establishment::class, 'company_id', 'id');
+    }
+
    
 }
 

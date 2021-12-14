@@ -87,7 +87,7 @@ class User extends Authenticatable
     }
     public function establishmentData()
     {
-        return $this->hasMany(Establishment::class);
+        return $this->hasMany(Establishment::class)->where('user_id',auth()->user()->id);
     }
 
     public function getJobList()
@@ -95,4 +95,6 @@ class User extends Authenticatable
         return $this->hasMany(Job::class);
     }
     
+   
+
 }

@@ -15,5 +15,9 @@ class Establishment extends Model
     protected $dates = ['deleted_at'];
     protected $table = 'establishment';
 
+    public function getUserList()
+    {
+        return  $this->belongsTo(User::class, 'user_id', 'id');
+    }
     
 }

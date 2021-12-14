@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Http\Traits\ImageuploadTrait;
 use App\Interfaces\JobRepositoryInterface;
+use App\Models\ChatMaster;
 use App\Models\Job;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
@@ -84,8 +85,14 @@ class JobRepository implements JobRepositoryInterface
 
   
 
-    public function acceptApplicants(Request $request, $id)
+    public function acceptApplicants(Request $request)
     {
-        
+        $userJobData = ChatMaster::create([
+            'job_id' => $request->jobid,
+            'sender_id' => $request->userid,
+            'message' => $request->message,
+            'type' => 'manager',
+        ]);
+        return $userJobData;
     }
 }

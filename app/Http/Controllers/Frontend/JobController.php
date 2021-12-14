@@ -149,14 +149,20 @@ class JobController extends Controller
         return back();
     }
 
-    public function storeApplicants(Request $request,$id){
+    public function storeApplicants(Request $request){
                 $request->validate([
-                    'jobCheck' => 'required',
+                    // 'jobCheck' => 'required',
                 ]);
-
-            $store = $this->jobRepository->acceptApplicants($request,$id);
+            $store = $this->jobRepository->acceptApplicants($request);
             if($store){
-
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Successfully Inserted'
+                ]);
             }
+    }
+
+    public function candidatePortfolio(Request $request){
+        return view('frontend.job.esatablishment-portfolio');
     }
 }

@@ -13,5 +13,4 @@ class ChatMaster extends Model
     protected $guarded = ['id'];
     protected $dates = ['deleted_at'];
     protected $table = 'chat_master';
-    
 }

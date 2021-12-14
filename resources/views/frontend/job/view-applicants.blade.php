@@ -46,18 +46,18 @@
                 <div class="col-md-9">
                     <div class="full-divmain">
                         <div class="mb-3 mt-5 profile">
-                            <h4 class="profile-name"></h4>
+                            <h4 class="profile-name">{{$jobDetail->title}}</h4>
                             <p class="mb-0">Type de structure : garderie</p>
                             <p class="">Municipalisé</p>
                         </div>
                         <div>
-                            <a href="search-for-ad.html" class="btn-recruit btn">RECRUTER</a>
+                            <a href="{{route('searchjob')}}" class="btn-recruit btn">RECRUTER</a>
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-lg-4 col-md-5">
                             <div class="form-group mb-3">
-                                <img src="images/home.svg" class="drop-icon">
+                                <img src="{{asset('frontend/images/home.svg')}}" class="drop-icon">
                                 <div class="applicants-drop bg-dropdown">
                                     <select class="form-control input-drop bg-transparent">
                                         <option value=""></option>
@@ -67,7 +67,7 @@
                         </div>
                         <div class="col-lg-4 col-md-5">
                             <div class="form-group mb-3">
-                                <img src="images/group100.svg" class="drop-icon">
+                                <img src="{{asset('frontend/images/group100.svg')}}" class="drop-icon">
                                 <div class="applicants-drop bg-dropdown">
                                     <select class="form-control input-drop bg-transparent">
                                         <option value=""></option>
@@ -119,7 +119,7 @@
                                         </div>
                                         <div class="col-md-5">
                                             <div class="d-flex justify-content-end">
-                                                <a href="establishment-portfolio-of-candidate.html" class="mr-3 btn btn-viewjob offer-application ">Voir le profil
+                                                <a href="{{route('candidatePortfolio')}}" class="mr-3 btn btn-viewjob offer-application ">Voir le profil
                                                     Apilink</a>
                                                 <button class="btn btn-apply offer-application">Voir le CV</button>
                                             </div>
@@ -168,7 +168,7 @@
                                                             <div class="custom-edit-radio">
                                                                 <div class="custom-control custom-radio">
                                                                     <input type="hidden" name="job_id" data-id="{{$job->job_id}}" id="job_id">
-                                                                    <input type="hidden" name="user_id" value="{{$job->user_id}}" id="user_id">
+                                                                    <input type="hidden" name="user_id" user_id="{{$job->user_id}}" id="user_id">
                                                                     <input type="radio" name="jobCheck" checked id="customRadio1" name="customRadio" class="custom-control-input">
 
                                                                     <div class="div-edit-radio"></div>
@@ -187,10 +187,10 @@
                                                     </div>
                                                     <div class="col-md-5 mt-2">
                                                         <div class="float-right">
-                                                            <a href="" job-id="{{$job->job_id}}" user-id="{{$job->user_id}}" class="btn btn-light-accept" data-toggle="modal" data-target="#message-modal">
+                                                            <a href="javacript:void(0);" job-id="{{$job->job_id}}" user-id="{{$job->user_id}}" class="btn btn-light-accept" data-toggle="modal" data-target="#message-modal">
                                                                 Accepter
                                                             </a>
-                                                            <a href="" class="btn btn-blue-refuse">
+                                                            <a href="javacript:void(0);" job-id="{{$job->job_id}}" user-id="{{$job->user_id}}" class="btn btn-blue-refuse" data-toggle="modal" data-target="#refusal-modal">
                                                                 Refuser
                                                             </a>
                                                         </div>
@@ -233,7 +233,7 @@
                                     </div>
                                     <div class="form-messages">
                                         <div class="form-group">
-                                            <textarea class="form-control modal-textarea">Bonjour , 
+                                            <textarea class="form-control modal-textarea" id="message">Bonjour , 
                                         Nous avons retenu votre 
                                         candidature.
                                         nous vous contacterons dans les 
@@ -241,7 +241,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <button type="submit" class="tosend-btn btn"> Envoyer </button>
+                                    <a data-dismiss="modal" data-toggle="modal" href="#message-modal"><button class="tosend-btn btn accept"> Envoyer</button></a>  
                                     </div>
 
                                 </div>
@@ -270,15 +270,13 @@
                                     <div class="form-messages">
                                         <div class="form-group">
                                             <textarea class="form-control modal-textarea">Bonjour ,
-
-                                                                Nous sommes dans le regret 
-                                                                de refuser votre candidature  ! </textarea>
+                                             Nous sommes dans le regret 
+                                              de refuser votre candidature  ! </textarea>
                                         </div>
                                     </div>
                                     <div>
-                                        <button class="tosend-btn btn"> Envoyer </button>
+                                    <a data-dismiss="modal" data-toggle="modal" href="#refusal-modal">   <button class="tosend-btn btn"> Envoyer </button></a>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -334,35 +332,25 @@
     });
 
 
-    $(document).on("click", ".btn-light-accept,.btn-blue-refuse", function() {
-        // var type = $(this).val();
-        var dataId = $('#job_id').attr("data-id");
-        var dataId = $('#job_id').attr("data-id");
-        var dataId = $('#job_id').attr("data-id");
-        alert(dataId);
-        var userid = $('#userid').val();
-        var document_name = $('#pdf_name').val();
-
+    $(document).on("click", ".tosend-btn", function() {
+        var job_id = $('#job_id').attr("data-id");
+        var user_id = $('#user_id').attr("user_id");
+        var message = $('#message').val();
 
         $.ajax({
-            url: "{{ route('store-jobType') }}",
+            url: "{{ route('acceptJobDetails') }}",
             method: "POST",
             data: {
-                'type': type,
-                'jobid': jobid,
-                'userid': userid,
-                'document_name': document_name,
+                'jobid': job_id,
+                'userid': user_id,
+                'message': message,
                 _token: "{{ csrf_token() }}"
             },
             success: function(response) {
                 if (response.success == true) {
                     toastr.success(response.message);
-                    $('#establishment').modal('hide');
-                    $('#bravo').modal('show');
-                    location.reload();
-
-                } else {
-                    toastr.danger(response.message);
+                    $('#message-modal').modal('hide');
+                    $('#refusal-modal').modal('hide');
                 }
             }
         });

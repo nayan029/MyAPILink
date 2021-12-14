@@ -511,7 +511,6 @@
             data: {
                 'job_id': job_id,
                 'user_id': user_id,
-
                 _token: '{{ csrf_token() }}',
             },
             success: function(response) {

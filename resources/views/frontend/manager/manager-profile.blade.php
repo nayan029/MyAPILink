@@ -350,10 +350,10 @@
                                                                 <a href="{{route('editjob',$remain->id)}}" class="btn btn btn-met">
                                                                     Modifier</a>
                                                                 <a href="javascript:void(0);" class="btn btn-delete delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                                <form action="{{route('destroy',$remain->id)}}" method="POST" class="deleteForm">
+                                                                <!-- <form action="{{route('destroy',$remain->id)}}" method="POST" class="deleteForm">
                                                                     @method('DELETE')
                                                                     @csrf
-                                                                </form>
+                                                                </form> -->
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4 mr-renew">
@@ -378,6 +378,7 @@
                                                             </div>
 
                                                             <div class="button-voir text-right-voir">
+                                                                
                                                                 <a href="{{route('see-applicants',$remain->id)}}" class="btn btn-blue w-95">Voir les
                                                                     postulants
                                                                 </a>
@@ -428,15 +429,14 @@
                                                         </div>
                                                         <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
                                                             <div class="metters-btns">
-                                                                <a href="{{route('editjob',$delete->id)}}" class="btn btn btn-met">
+                                                                <a href="{{route('editjob',$delete->id)}}" class="btn btn btn-met"> 
                                                                     Modifier</a>
-
                                                                 <a href="javascript:void(0);" class="btn btn-delete delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                                <form action="{{route('destroy',$delete->id)}}" method="POST" class="deleteForm">
+                                                                <!-- <form action="{{route('destroy',$delete->id)}}" method="POST" class="deleteForm">
                                                                     @method('DELETE')
                                                                     @csrf
-                                                                </form>
-
+                                                                </form> -->
+                                                                
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4 mr-renew">
@@ -461,7 +461,7 @@
                                                             </div>
 
                                                             <div class="button-voir text-right-voir">
-                                                                <a href="{{route('see-applicants',$delete->id)}}" class="btn btn-blue w-95">Voir les
+                                                                <a href="#" class="btn btn-blue w-95">Voir les
                                                                     postulants
                                                                 </a>
                                                             </div>

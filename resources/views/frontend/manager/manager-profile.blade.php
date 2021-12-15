@@ -461,7 +461,7 @@
                                                             </div>
 
                                                             <div class="button-voir text-right-voir">
-                                                                <a href="#" class="btn btn-blue w-95">Voir les
+                                                                <a href="{{route('see-applicants',$delete->id)}}" class="btn btn-blue w-95">Voir les
                                                                     postulants
                                                                 </a>
                                                             </div>
@@ -532,6 +532,7 @@
         $('#establishment').modal('hide');
         $('#cv-modal').modal('show');
     });
+    
 </script>
 <script>
     // -------------------
@@ -586,9 +587,6 @@
             });
     });
 </script>
-
-
-
 
 
 @endsection

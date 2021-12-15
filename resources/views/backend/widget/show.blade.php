@@ -34,9 +34,9 @@
               <div class="row">
               
                 <div class="col-12 col-sm-6">
-                  <ul class="list-group list-group-unbordered mb-3">
-                    <li class="list-group-item">
-                      <b>Title</b> <span class="widget-section">{{$widget->title !="" ? $widget->title : '---'}}</span>
+                  <ul class="list-group list-group-unbordered">
+                    <li class="list-group-item" >
+                      <b>Title</b> <span class="widget-section">{{$widget->title !="" ? $widget->title : 'N/A'}}</span>
                     </li>
                     <li class="list-group-item">
                     <b>Image</b> <img src="{{url($widget->image)}}" class="img-fluid" width="50px"><br/>

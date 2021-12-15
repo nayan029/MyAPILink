@@ -41,7 +41,7 @@ class ManagerController extends Controller
     public function __construct(ManagerRepositoryInterface $managerRepository, ApplyJobRepositoryInterface $applyJobRepository)
     {
         $this->managerRepository = $managerRepository;
-        $this->applyJobRepository =$applyJobRepository;
+        $this->applyJobRepository = $applyJobRepository;
     }
 
 
@@ -98,8 +98,7 @@ class ManagerController extends Controller
         $data['remaining'] = Job::where('created_at', '>=', Carbon::now())->get();
         $data['deleted'] = Job::onlyTrashed()->get();
         $data['myEstablishmentList'] = Establishment::where('user_id', $id)->get();
-        if($userType==2)
-        {
+        if ($userType == 2) {
             return view('frontend.manager.manager-profile', $data);
         } else {
             return redirect()->route('mycandidate-profile');
@@ -189,11 +188,10 @@ class ManagerController extends Controller
     {
 
         $data['validator'] = JsValidator::make($this->imageValidationRules);
-        $data['userList']=$this->applyJobRepository->chatUserList();
-        
+        $data['userList'] = $this->applyJobRepository->chatUserList();
+
         dd($data['userList']);
 
         return view('frontend.manager.chat_index', $data);
     }
-    
 }

@@ -45,7 +45,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            Dashboard
+                        {{__("messages.dashboard")}}
                         </p>
                     </a>
                 </li>
@@ -54,21 +54,19 @@
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         @switch($locale)
                         @case('en')
-                        <img height="20px" width="30px" src="{{asset('admin\dist\img\EN.png')}}"> English
+                        <img height="20px" width="30px" src="{{asset('admin\dist\img\EN.png')}}">English
                         @break
-
                         @case('fr')
-                        <img height="20px" width="30px" src="{{asset('admin\dist\img\fr.png')}}"> French
+                        <img height="20px" width="30px" src="{{asset('admin\dist\img\fr.png')}}">French
                         @break
                         @default
-                        <img height="20px" width="30px" src="{{asset('admin\dist\img\fr.png')}}"> French
+                        <img height="20px" width="30px" src="{{asset('admin\dist\img\fr.png')}}"> <p>French</p>
                         @endswitch
                         <span class="caret"></span>
                     </a>
                     <div class="dropdown-menu lang  dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{url('languagee/en')}}">&nbsp;&nbsp;<img height="20px" width="30px" src="{{asset('admin\dist\img\EN.png')}}">&nbsp; English</a>
-                        <br><br> <a class="dropdown-item" href="{{url('languagee/fr')}}">&nbsp;&nbsp;<img height="20px" width="30px" src="{{asset('admin\dist\img\fr.png')}}">&nbsp; French</a>
-
+                        <a class="dropdown-item" href="{{url('languagee/en')}}"><img height="20px" width="30px" src="{{asset('admin\dist\img\EN.png')}}">English</a>
+                        <a class="dropdown-item" href="{{url('languagee/fr')}}"><img height="20px" width="30px" src="{{asset('admin\dist\img\fr.png')}}">French</a>
                     </div>
                 </li>
                 <li class="nav-item">

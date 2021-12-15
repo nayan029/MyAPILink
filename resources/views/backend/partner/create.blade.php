@@ -1,6 +1,10 @@
 @extends('backend.master')
 @section('css')
-
+<style>
+    #partner-add input {
+        width: 100%;
+    }
+</style>
 @endsection
 @section('content')
 <div class="row">
@@ -19,14 +23,14 @@
 
                         <div class="col-md-6">
                             <div class="container">
-                                {!! Form::label('image', 'Image') !!}
+                                {!! Form::label('image', 'Image') !!}<span class="text-danger">*</span>
                                 {!! Form::file('image', old('image'), ['class' => 'form-control','id'=>'image']) !!}
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                {!! Form::label('link', 'Link') !!}
+                                {!! Form::label('link', 'Link') !!}<span class="text-danger">*</span>
                                 {!! Form::text('link', old('link'), ['class' => 'form-control', 'placeholder' => 'Enter Link','id'=>'link']) !!}
                             </div>
                         </div>

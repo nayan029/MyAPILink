@@ -60,7 +60,7 @@ class RegistrationRepository implements RegistrationRepositoryInterface
                     "accept: application/json",
                     "api-key: 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",
                     "content-type: application/json"
-                    
+
                 ),
             ));
             $response = curl_exec($curl);

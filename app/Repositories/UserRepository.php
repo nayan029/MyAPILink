@@ -34,6 +34,7 @@ class UserRepository implements UserRepositoryInterface
         $query = User::select('*')->whereNotNull('user_type');
         if ($request->query('name') != '') {
             $query->whereRaw('first_name LIKE "%' . $request->query('name') . '%"');
+            $query->orWhereRaw('civility LIKE "%' . $request->query('name') . '%"');
             $query->orWhereRaw('last_name LIKE "%' . $request->query('name') . '%"');
         }
 

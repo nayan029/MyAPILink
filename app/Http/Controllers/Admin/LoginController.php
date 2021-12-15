@@ -13,7 +13,7 @@ class LoginController extends Controller
 {
     protected $validationRules = [
         'email' => 'required|email',
-        'password' => 'required|min:6'
+        'password' => 'required|min:6',
     ];
 
     public function index()
@@ -38,14 +38,14 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (auth()->guard('admin')->attempt($credentials)) {
-            Session::flash('success', 'Administrator login successfuly!!...');
+            Session::flash('success', 'Successfully Logged In');
             return redirect()->route('admin.dashboard');
         } else {
             Session::flash('error', 'Invalid Email or Password');
             return redirect()->back();
         }
         if (auth()->guard('web')->attempt($credentials)) {
-            Session::flash('success', 'Login successfuly!!...');
+            Session::flash('success', 'Successfully Logged In');
             return redirect()->route('/home');
         }
     }

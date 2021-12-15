@@ -20,7 +20,7 @@
 							<div class="col-md-3">
 							  <div class="form-group">
 								<label for="name">{{__("messages.title")}}</label>
-								<input class="form-control"  name="title" type="text" placeholder="Job Title" id="title">
+								<input class="form-control"  name="title" type="text" placeholder="Title" id="title">
 							 </div>
 							</div>
 						
@@ -41,7 +41,7 @@
                             <div class="col-md-3">
 							  <div class="form-group">
 								<label for="name">{{__("messages.jobsgroup.min_experience")}}</label>
-								<input class="form-control"  name="minimum_experience" type="text" placeholder="Min Experience" id="minimum_experience">
+								<input class="form-control"  name="minimum_experience" type="text" placeholder="Minimum Experience" id="minimum_experience">
 							 </div>
 							</div>
 

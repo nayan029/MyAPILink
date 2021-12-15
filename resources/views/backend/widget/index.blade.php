@@ -18,7 +18,7 @@
                     <thead>
                         <tr>
                             <th>{{__("messages.widgetgroup.title")}}</th>
-                            <th>{{__("messages.widgetgroup.slug")}}</th>
+                            <th>{{__("messages.widgetgroup.widget")}}</th>
                             <th>{{__("messages.widgetgroup.image")}}</th>
                             <th>{{__("messages.widgetgroup.description")}}</th>
                         </tr>
@@ -48,7 +48,7 @@
 
     function loadData() {
         $('#widget-table').DataTable({
-            "processing": true,
+            "processing": false,
             "serverSide": true,
             "searching": false,
             "ajax": {

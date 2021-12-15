@@ -1,5 +1,6 @@
 <?php
 return [
+    'dashboard' => 'Dashboard',
     'widget' => 'Widget',
     'logout' => 'Logout',
     'skills' => 'Professionals',
@@ -22,16 +23,17 @@ return [
     'skillgroup' => [
         "list" => "Professional List",
         "btnadd" => "Add Professional",
-        "create" => "Create Professional",
-        "show" =>"Detail",
+        "create" => "Add Professional",
+        "show" =>"Professionals Detail",
         "btnedit" => "Edit",
         "btndelete" => "Delete",
         "edit" => "Edit Professional"
     ],
     'widgetgroup' => [
+        "widget" => "Widget",
         "list" => "Widget List",
         "btnadd" => "Add Widget",
-        "create" => "Create Widget",
+        "create" => "Add Widget",
         "show" => "Widget Detail",
         "btnedit" => "Edit",
         "btndelete" => "Delete",
@@ -44,11 +46,11 @@ return [
     "partnergroup" => [
         "list" => "Partner List",
         "btnadd" => "Add Partner",
-        "create" => "Create Partner",
+        "create" => "Add Partner",
         "show" => "Partner Detail",
         "edit" => "Edit Partner",
         "image" => "Image",
-        "link" => "List",
+        "link" => "Link",
         "actions" => "Actions",
     ],
     "usergroup" => [

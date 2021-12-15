@@ -1,5 +1,6 @@
 <?php
 return [
+    'dashboard' => 'Tableau de bord',
     'widget' => 'Widget',
     'logout' => 'Se déconnecter',
     'skills' => 'profeessionnels',
@@ -22,16 +23,17 @@ return [
     'skillgroup' => [
         "list" => "profeessionnels lister",
         "btnadd" => "ajouter profeessionnels",
-        "create" => "Créer profeessionnels",
+        "create" => "ajouter profeessionnels",
         "show" => "profeessionnels Détail",
         "btnedit" => "Éditer",
         "btndelete" => "effacer",
         "edit" => "Éditer profeessionnels"
     ],
     'widgetgroup' => [
+        "widget" => "Widget",
         "list" => "Widget lister",
         "btnadd" => "ajouter Widget",
-        "create" => "Créer Widget",
+        "create" => "ajouter Widget",
         "show" => "Widget Détail",
         "btnedit" => "Éditer",
         "btndelete" => "effacer",
@@ -45,7 +47,7 @@ return [
     "partnergroup" => [
         "list" => "Partenaire lister",
         "btnadd" => "ajouter Partenaire",
-        "create" => "Créer Partenaire",
+        "create" => "ajouter Partenaire",
         "show" => "Partenaire Détail",
         "edit" => "Éditer Partenaire",
         "image" => "Image",

@@ -22,24 +22,27 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                {!! Form::label('slug','Select Widget') !!}
-                                {!! Form::select('slug',$widgets,old('slug')?old('slug'):$widget->slug, ['class' => 'form-control', 'multiple' => false,'placeholder' => 'Please select widget','id'=>'slug']) !!}
+                                {!! Form::label('slug','Widget') !!}<span class="text-danger">*</span>
+                                {!! Form::select('widget',$widgets,old('widget')?old('widget'):$widget->slug, ['class' => 'form-control custom-select', 'multiple' => false,'placeholder' => 'Please select Widget','id'=>'slug']) !!}
                             </div>
                         </div>
                         <div class="col-md-4 slug">
-                            <div class="form-group ">
-                                {!! Form::label('title', 'Title') !!}
+                            <div class="form-group hideshow">
+                                {!! Form::label('title', 'Title') !!}<span class="text-danger">*</span>
                                 {!! Form::text('title', old('title'), ['class' => 'form-control', 'placeholder' => 'Enter Title','id'=>'title']) !!}
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                {!! Form::label('image', 'Image') !!}
+                                {!! Form::label('image', 'Image') !!}<span class="text-danger">*</span>
                                 {!! Form::file('image', old('image'), ['class' => 'form-control','id'=>'image']) !!}
+                                &nbsp;&nbsp; <img src="{{ asset($widget->image) }}" height="50px" width="50px" />
                             </div>
+
+
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="">
                         <div class="form-group">
                             {!! Form::label('description', 'Description') !!}
                             {!! Form::textarea('description', old('description'), ['class' => 'form-control', 'placeholder' => 'Enter Description','id'=>'summernote']) !!}
@@ -62,13 +65,14 @@
     <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
     {!! $validator->selector('#widget-update') !!}
     <script>
-        $('#slug').on('change', function() {
-            var slug = $('#slug').val();
-            if (slug == 'how_it_works') {
-                $('.slug').hide();
-            } else {
-                $('.slug').show();
+      $('#slug').on('change',function(){
+            var slug = $(this).val();
+            alert(slug);
+            if(slug == 'how_it_works'){
+                $('.hideshow').hide();
+            }else{
+                $('.hideshow').show();
             }
-        });
-    </script>
+      });
+  </script>
     @endsection

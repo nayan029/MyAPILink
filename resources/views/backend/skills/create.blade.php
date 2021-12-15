@@ -74,7 +74,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             {!! Form::label('desc', 'Description') !!}
-                            {!! Form::textarea('',null, ['class' => 'form-control ', 'placeholder' => 'Enter desc','id'=>'desc']) !!}
+                            {!! Form::textarea('',null, ['class' => 'form-control ', 'placeholder' => 'Enter description','id'=>'desc']) !!}
                             <div class="error"><span class="descerror"></span></div>
                         </div>
                     </div>
@@ -131,24 +131,32 @@
 
         var position = $('#position').val();
         if (position == "") {
-            $('.poserror').html("*please enter your position");
+            $('.poserror').html("*please enter your Position");
             temp++
         } else {
             $('.poserror').html("");
 
         }
 
-        var position = $('#title').val();
-        if (position == "") {
-            $('.titerror').html("*please enter your position");
+        var title = $('#title').val();
+        if (title == "") {
+            $('.titerror').html("*please enter your Title");
             temp++
         } else {
             $('.titerror').html("");
         }
 
-        var position = $('#desc').val();
-        if (position == "") {
-            $('.descerror').html("*please enter your position");
+        var title1 = $('#title').val();
+        if (title1 >= 25) {
+            $('.titerror').html("*The title must not be greater than 25 characters.");
+            temp++
+        } else {
+            $('.titerror').html("");
+        }
+
+        var desc = $('#desc').val();
+        if (desc == "") {
+            $('.descerror').html("*please enter your Description");
             temp++
         } else {
             $('.descerror').html("");

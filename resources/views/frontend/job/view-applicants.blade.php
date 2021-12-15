@@ -122,7 +122,7 @@
                     </div>
                 </div>
                 <div class="col-md-9">
-                    <div class="full-divmain" >
+                    <div class="full-divmain">
                         <div class="mb-3 mt-5 profile">
                             <h4 class="profile-name">{{$jobDetail->title}}</h4>
                             <p class="mb-0">Type de structure : garderie</p>
@@ -198,10 +198,10 @@
                                         <div class="col-md-5">
                                             <div class="d-flex justify-content-end">
                                                 <a href="{{route('candidatePortfolio')}}" class="mr-3 btn btn-viewjob offer-application ">Voir le profil
-                                                    Apilink</a> 
-                                                
+                                                    Apilink</a>
+
                                                 <button id="trigger" class="btn btn-apply offer-application" {{$job->document_name == "" ? 'disabled' : ''}}>Voir le CV</button>
-                                           
+
                                                 <div style="display:none">
                                                     <iframe id="dialog" src="{{asset($job->document_name)}}"></iframe>
                                                 </div>
@@ -418,6 +418,22 @@
         myIframe.print();
         return false;
     });
+
+    $('#pills-home-tab').click(function() {
+        $('#pills-tabContent').show();
+    });
+    $('#pills-editoffer-tab').click(function() {
+        $('#editoffer').show();
+    });
+
+
+    $('.editer-offer').click(function() {
+
+        $('#pills-home-tab').removeClass('active');
+        $('#pills-editoffer-tab').addClass('active');
+        $('#pills-tabContent').hide();
+        $('#editoffer').show();
+    });
     var togglePassword = document.getElementById("toggle-password ");
 
     if (togglePassword) {
@@ -432,7 +448,7 @@
     }
 
     // -------------------
- 
+
 
     $(function() {
         $(".select-multi").multiselect({

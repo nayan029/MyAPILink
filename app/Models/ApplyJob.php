@@ -18,5 +18,16 @@ class ApplyJob extends Model
     {
         return  $this->belongsTo(job::class, 'job_id', 'id');
     }
+
+    public function user()
+    {
+        return $this->hasOne(User::class,'id','user_id')->select('first_name','last_name','id');
+    }
+    public function userData()
+    {
+        return  $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+   
 }
 

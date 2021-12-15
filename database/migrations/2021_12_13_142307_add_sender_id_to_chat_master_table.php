@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddPhoneToUsers extends Migration
+class AddSenderIdToChatMasterTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddPhoneToUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('phone', 15)->nullable();
+        Schema::table('chat_master', function (Blueprint $table) {
+            //$table->integer('company_id')->after('user_id');
         });
     }
 
@@ -25,8 +25,8 @@ class AddPhoneToUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('phone');
+        Schema::table('chat_master', function (Blueprint $table) {
+        
         });
     }
 }

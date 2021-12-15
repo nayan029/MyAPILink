@@ -6,13 +6,13 @@
     <title>MyApi Link</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="images/favicon.ico" type="image/png" sizes="16x16">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/magnific-popup.css">
-    <link rel="stylesheet" href="css/owl.carousel.css">
-    <link rel="stylesheet" href="css/select2.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="{{asset('frontend/images/favicon.ico')}}" type="image/png" sizes="16x16">
+    <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="css/magnific-popup.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/owl.carousel.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .navbar-collapse {
@@ -316,7 +316,7 @@
                                                                     name="customRadio" class="custom-control-input">
                                                                 <div class="div-edit-radio"></div>
                                                                 <label class="check-labels">
-                                                                    <img src="images/project/dark-white-check.svg">
+                                                                    <img src="{{asset('frontend/images/project/dark-white-check.svg')}}">
                                                                 </label>
                                                             </div>
 
@@ -499,15 +499,15 @@
     </section>
 </body>
 
-<script src="js/jquery.min.js "></script>
-<script src="js/jquery-ui.min.js"></script>
-<script src="js/popper.min.js "></script>
+<script src="{{asser('frontend/js/jquery.min.js')}} "></script>
+<script src="{{asser('frontend/js/jquery-ui.min.js')}}"></script>
+<script src="{{asser('frontend/js/popper.min.js')}} "></script>
 <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
-<script src="js/bootstrap.min.js "></script>
-<script src="js/select2.min.js "></script>
-<script src="js/jquery.magnific-popup.min.js "></script>
-<script src="js/owl.carousel.js "></script>
-<script src="js/custom.js "></script>
+<script src="{{asser('frontend/js/bootstrap.min.js')}} "></script>
+<script src="{{asser('frontend/js/select2.min.js')}} "></script>
+<script src="{{asser('frontend/js/jquery.magnific-popup.min.js')}} "></script>
+<script src="{{asser('frontend/js/owl.carousel.js')}} "></script>
+<script src="{{asser('frontend/js/custom.js "></script>
 <script type="text/javascript ">
     $(".select2 ").select2();
 </script>

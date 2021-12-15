@@ -96,14 +96,20 @@
                                         </div>
 
                                         <div class="row">
+
+                                            @php
+                                           $arraynew = explode(",", $jobDetails->type_of_employment);
+                                            @endphp
+
                                             <div class="col-md-6 pb-2">
                                                 <h5 class="publish-labeldark">Type d'emploi<span class="text-danger">*</span></h5>
                                                 <div class="custom-control custom-checkbox profile-check ">
-                                                    <input type="checkbox" name="type_of_employment[]" class="custom-control-input" id="Temps plein" value="Full-time" {{  ($jobDetails->type_of_employment == 'Full-time' ? ' checked' : '') }} >
+
+                                                    <input type="checkbox" name="type_of_employment[]" class="custom-control-input" id="Temps plein" value="Full-time" {{ ($jobDetails->type_of_employment = in_array('Full-time',$arraynew)  ? ' checked' : '') }}>
                                                     <label class="custom-control-label pro-check publish-check" for="Temps plein">Temps plein</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox profile-check">
-                                                    <input type="checkbox" name="type_of_employment[]" class="custom-control-input" value="Part-time" {{  ($jobDetails->type_of_employment == 'Part-time' ? ' checked' : '') }} id="Temps partiel">
+                                                    <input type="checkbox" name="type_of_employment[]" class="custom-control-input" id="Temps partiel" value="Part-time" {{($jobDetails->type_of_employment = in_array('Part-time',$arraynew)  ? ' checked' : '') }}>
                                                     <label class="custom-control-label pro-check publish-check" for="Temps partiel">Temps partiel</label>
                                                 </div>
 
@@ -169,17 +175,20 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="custom-control custom-checkbox profile-check ">
-                                                    <input name="contact_thorugh[]" type="checkbox" class="custom-control-input" value="email_regarding" id="check1"{{  ($jobDetails->contact_thorugh == 'email_regarding'? ' checked' : '') }} >
+                                                @php
+                                           $contract = explode(",", $jobDetails->contact_thorugh);
+                                            @endphp
+                                                    <input name="contact_thorugh[]" type="checkbox" class="custom-control-input" value="email_regarding" id="check1" {{ ($jobDetails->contact_thorugh = in_array('email_regarding',$contract)  ? ' checked' : '') }}>
                                                     <label class="custom-control-label pro-check publish-check" for="check1">J'autorise les candidats à me contacter par
                                                         mail au sujet de leur candidature<span class="text-danger">*</span></label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox profile-check ">
-                                                    <input name="contact_thorugh[]" type="checkbox" class="custom-control-input " value="phone_regarding" id="check2" {{  ($jobDetails->contact_thorugh == 'phone_regarding'? ' checked' : '') }}>
+                                                    <input name="contact_thorugh[]" type="checkbox" class="custom-control-input " value="phone_regarding" id="check2" {{ ($jobDetails->contact_thorugh = in_array('phone_regarding',$contract)  ? ' checked' : '') }}>
                                                     <label class="custom-control-label pro-check publish-check" for="check2">J'autorise les candidats à me contacter par
                                                         téléphone au sujet de leur candidature</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox profile-check ">
-                                                    <input name="contact_thorugh[]" type="checkbox" class="custom-control-input" value="apilink_regarding" id="check3" {{  ($jobDetails->contact_thorugh == 'apilink_regarding'? ' checked' : '') }}>
+                                                    <input name="contact_thorugh[]" type="checkbox" class="custom-control-input" value="apilink_regarding" id="check3" {{ ($jobDetails->contact_thorugh = in_array('apilink_regarding',$contract)  ? ' checked' : '') }}>
                                                     <label class="custom-control-label pro-check publish-check" for="check3">Je souhaite recevoir les candidatures
                                                         uniquement via Apilink</label>
                                                 </div>

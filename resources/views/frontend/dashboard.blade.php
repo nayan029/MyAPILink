@@ -16,7 +16,7 @@
             <div class="jesuis_btn_text">
                 <button class="btn btn-home-pink " data-toggle="modal" data-target="#Modallogin2">JE SUIS UN
                     CANDIDAT</button>
-                <a href="{{URL::to('/manager')}}" class="btn btn-home-blue ">JE SUIS UN ÉTABLISSEMENT PETITE
+                <a href="{{route('establishment-dashborad')}}" class="btn btn-home-blue ">JE SUIS UN ÉTABLISSEMENT PETITE
                     ENFANCE</a>
             </div>
             @endif

@@ -48,29 +48,28 @@
                                                 src="{{asset('frontend/images/bookmark.svg')}}" alt="bookmark image "
                                                 class="ml-3 bookmark-img"></span>
                                     </div>
-                                    @foreach($showwpost as $show)
                                     <div class="job-information">
                                         <h4 class="job-info-text">Informations sur le poste</h4>
                                         <ul class="search-image-ul">
 
                                             <li>
-                                                <p class="mb-0 ">{{$show->minimum_gross_salary}} per month</p>
+                                                <p class="mb-0 ">{{$showwpost->minimum_gross_salary}} per month</p>
                                             </li>
                                             <li>
-                                                <p class="mb-0 ">Expérience : {{$show->minimum_experience}}</p>
+                                                <p class="mb-0 ">Expérience : {{$showwpost->minimum_experience}}</p>
                                             </li>
                                             <li>
-                                                <p class="mb-0 ">Durée du contrat : {{$show->contract_length}}</p>
+                                                <p class="mb-0 ">Durée du contrat : {{$showwpost->contract_length}}</p>
                                             </li>
                                             <li>
-                                                <p class="mb-0 "> Type d 'emploi : {{$show->type_of_employment}}</p>
+                                                <p class="mb-0 "> Type d 'emploi : {{$showwpost->type_of_employment}}</p>
                                             </li>
                                         </ul>
 
                                         <div class="d-flex justify-content-between align-items-center mb-4 pt-5">
                                             <div>
                                                 <h5 class="mb-0 ul_check_color ">Site internet</h5>
-                                                <p class="mb-0 www-text mb-2 ">{{$show->website}}</p>
+                                                <p class="mb-0 www-text mb-2 ">{{$showwpost->website}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -79,12 +78,12 @@
                                 <div class="pb-4 listing-side-pd ">
                                     <div class="job-infosdetail mb-4 ">
                                         <h5 class="job-infos-title ">Description</h5>
-                                        <p>{{$show->job_description}}
+                                        <p>{{$showwpost->job_description}}
                                         </p>
                                     </div>
                                     <div class="job-infosdetail mb-4 ">
                                         <h5 class="job-infos-title ">Mission</h5>
-                                        <p>{{$show->employment_mission}}
+                                        <p>{{$showwpost->employment_mission}}
                                         </p>
                                         <!-- <ul class="job-infos-li ">
                                             <li>Lorem Ipsum is simply dummy text</li>
@@ -95,7 +94,7 @@
                                     </div>
                                     <div class="job-infosdetail mb-4 ">
                                         <h5 class="job-infos-title ">Que recherchons-nous ?</h5>
-                                        <p>{{$show->what_you_are_looking}}
+                                        <p>{{$showwpost->what_you_are_looking}}
                                         </p>
                                         <!-- <ul class="job-infos-li ">
                                             <li>Lorem Ipsum is simply dummy text</li>
@@ -110,7 +109,6 @@
                                         </p> -->
                                     </div>
                                 </div>
-                                @endforeach
                                 <div class="d-flex justify-content-between listing-side-pd mb-4 ">
                                     <div class="pb-5 ">
                                         <h5 class="mb-0 job-location fn-19 ">Lieu du poste</h5>
@@ -120,7 +118,7 @@
                                 </div>
 
                                 <div class="d-flex justify-content-end listing-side-pd pb-4 offer-prs ">
-                                    <a href="{{route('editjob',$show->id)}}" class="btn btn-yellow ">Modifier mon offre</a>
+                                    <a href="{{route('editjob',$showwpost->id)}}" class="btn btn-yellow ">Modifier mon offre</a>
                                 </div>
                             </div>
                         </div>

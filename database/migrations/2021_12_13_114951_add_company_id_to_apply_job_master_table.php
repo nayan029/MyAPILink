@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCompanyIdToChatMasterTable extends Migration
+class AddCompanyIdToApplyJobMasterTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddCompanyIdToChatMasterTable extends Migration
      */
     public function up()
     {
-        Schema::table('chat_master', function (Blueprint $table) {
+        Schema::table('apply_job', function (Blueprint $table) {
             $table->integer('company_id')->after('user_id');
         });
     }
@@ -25,7 +25,7 @@ class AddCompanyIdToChatMasterTable extends Migration
      */
     public function down()
     {
-        Schema::table('chat_master', function (Blueprint $table) {
+        Schema::table('apply_job_master', function (Blueprint $table) {
             //
         });
     }

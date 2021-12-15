@@ -14,7 +14,7 @@
                     <div class="col-md-7">
                         <div class="c-profile-sec">
                             <div class="d-flex align-items-center">
-                                <img src="{{URL::to('/')}}/{{auth()->user()->profile_photo_path}}" alt="candidate-profile" class="c-profimage">
+                                <img src="{{URL::to('/')}}/{{auth()->user()->profile_photo_path}}" onerror='this.onerror=null;this.src="{{URL::to("/")}}/frontend/images/profile-change.svg";' alt="candidate-profile" class="c-profimage">
                                 <div class="pl-3">
                                     <h5 class="dark-tit">{{auth()->guard('web')->user()->first_name}} {{auth()->guard('web')->user()->last_name}} </h5>
                                     <div class="c-prof-headertext">

@@ -17,7 +17,7 @@ class CreateChatMasterTable extends Migration
             $table->id();
             $table->string('message')->nullable();
             $table->string('image')->nullable();
-            $table->integer('sender_id');
+            $table->integer('user_id');
             $table->enum('type', ['user','manager'])->default('user');
             $table->timestamps();
             $table->softDeletes();

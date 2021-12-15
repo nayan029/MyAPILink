@@ -25,13 +25,16 @@
                                     $finalDays = abs(round($diff / 86400));
 
                                     $isApplyed = $showList->applyJob!="" ? "disabled":"";
+                                    $saveJob = $showList->savedJob ? $showList->savedJob[0]->job_save : '';
+                                    $isSaved = $showList->savedJob[0]->job_save=='0' ? "disabled":"";
                                     @endphp
                                     <div>
                                         <h5 class="mb-0 job_aux_text">{{$showList->title}}</h5>
                                         <p class="mb-0 job_cre_text">{{$showList->address}}</p>
                                     </div>
 
-                                    <span class="public-span mr-4">Publié il y a {{$finalDays}} jours<img src="{{asset('frontend/images/bookmark.svg')}}" alt="bookmark image " class="ml-3 bookmark-img"></span>
+                                    <span class="public-span mr-4 save-fav" data-job="{{$showList->id}}" data-user="{{$showList->user_id}}" data-rowid="{{$showList->id}}">Publié il y a {{$finalDays}} jours<img id="saveicon{{$showList->id}}" src="{{$saveJob=='1' ? asset('frontend/images/imgs-svg/book-mark-yellow.svg') : asset('frontend/images/bookmark.svg')}}" alt="bookmark image " class="ml-3 bookmark-img"></span>
+
                                 </div>
 
                                 <div class="job-information">
@@ -53,11 +56,7 @@
                                     </ul>
 
                                     <div class="d-flex justify-content-end">
-<<<<<<< HEAD
                                         <button class="btn btn-light" data-target="#establishment" onclick="openJobModal()" {{$isApplyed}}>Postuler avec mon profil</button>
-=======
-                                        <button class="btn btn-light" data-target="#establishment" onclick="openJobModal('{{$showList->id}}','{{$showList->user_id}}')">Postuler avec mon profil</button>
->>>>>>> 6fdd2f009ccbba9f71f241de5d51b25c3222bc1a
                                     </div>
 
                                     <div class="d-flex justify-content-between align-items-center mb-4 mt-2 ">
@@ -331,6 +330,44 @@
         });
     }
 
+    var favSave = "{{$showList->savedJob[0]->job_save}}";
+
+    if (favSave == '1') {
+        $('.public-span').removeClass('save-fav');
+    }
+
+    $(document).on("click", '.save-fav', function() {
+        var job_id = $(this).data('job');
+        var user_id = $(this).data('user');
+        var rowid = $(this).data('rowid');
+
+        $.ajax({
+            url: "{{route('store-savedjobs')}}",
+            method: "POST",
+            data: {
+                'job_id': job_id,
+                'user_id': user_id,
+
+                _token: '{{ csrf_token() }}',
+            },
+            success: function(response) {
+                if (response.success == true) {
+                    toastr.success(response.message);
+                    $("#saveicon" + rowid).attr("src", 'frontend/images/imgs-svg/book-mark-yellow.svg');
+                    $('#saveicon' + rowid).addClass("b1 bookmark-img");
+                    if (response.data.job_save == 0) {
+                        $("#saveicon" + rowid).attr("src", 'frontend/images/bookmark.svg');
+                        $('#saveicon' + rowid).addClass("b1 bookmark-img");
+                    }
+
+                }
+
+            }
+        });
+
+
+    });
+
     $(document).on("click", "#bravo-btn", function() {
         var type = $(this).val();
         var jobid = $('#jobid').val();
@@ -364,7 +401,7 @@
 
     });
 
-    function openJobModal(job_id,user_id) {
+    function openJobModal(job_id, user_id) {
         $('#jobid').val(job_id);
         $('#userid').val(user_id);
         $('#establishment').modal('show');

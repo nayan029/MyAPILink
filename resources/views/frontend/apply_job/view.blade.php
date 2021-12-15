@@ -454,18 +454,7 @@
                                     <div class="custom-pagination pt-5 pb-4">
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination justify-content-center">
-                                                <li class="page-item disabled">
-                                                    <a class="page-link" href="#" tabindex="-1">
-                                                        &lt; </a>
-                                                </li>
-                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#">&gt;</a>
-                                                </li>
+                                                {{ $showJobs->appends(request()->except('page'))->links("pagination::bootstrap-4") }}
                                             </ul>
                                         </nav>
                                     </div>

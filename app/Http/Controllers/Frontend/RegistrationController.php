@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use JsValidator;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
-
+use PDF;
 
 class RegistrationController extends Controller
 {
@@ -39,8 +39,8 @@ class RegistrationController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|min:6',
             'phone' => 'required|digits:10',
-            'customCheck1' => 'required',
-            'customCheck2' => 'required',
+            'accept_condition' => 'required',
+            'accept_sensitive_data' => 'required',
         ])->validate();
 
         $data = $this->registrationRepository->createRegistration($request);
@@ -55,8 +55,11 @@ class RegistrationController extends Controller
     public function getEmailVerify($email){
         $update =  $this->registrationRepository->verifyEmail($email);
         if($update){
+            $data['updateUser'] = $update;
             Session::flash('success','Your Email has been verified');
-            return redirect()->route('registration');
+            return view('frontend.candidate.candidate-profile-step',$data);
+            // Session::flash('success','Your Email has been verified');
+            // return redirect()->route('registration');
         }else{
             Session::flash('error','Your e-mail is already verified. You can now login.');
             return redirect()->route('registration');
@@ -67,6 +70,35 @@ class RegistrationController extends Controller
     {
 
         return view('frontend.email-template.accountcreate');
+    }
+
+    public function candidateProfileStep(Request $request,$id)
+    {
+        $data = $this->registrationRepository->updateCandidateProfileStep($request,$id);
+        if ($data) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Update'
+            ]);
+        }   
+    }
+
+    public function candidateDownloadResume($userId)
+    {
+        // $data = [
+        //     'title' => 'Welcome to ItSolutionStuff.com',
+        //     'date' => date('m/d/Y')
+        // ];
+        // $pdf = PDF::loadView('frontend.candidate.resume-download', $data);
+    
+        // return $pdf->download('itsolutionstuff.pdf');
+         $data = $this->registrationRepository->downalodStepResume($userId);
+        if ($data) {
+            return response()->json([
+                'success' => true,
+                'message' => 'CV download successfully'
+            ]);
+        }  
     }
    
 }

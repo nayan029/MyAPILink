@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 
 class RegistrationRepository implements RegistrationRepositoryInterface
@@ -53,8 +54,8 @@ class RegistrationRepository implements RegistrationRepositoryInterface
 
     public function verifyEmail($email)
     {
-        //$verifyUser = User::where('email', $email)->where('verify_email', 'pending')->first();
-        $verifyUser = User::where('email', $email)->first();
+        $verifyUser = User::where('email', $email)->where('verify_email', 'pending')->first();
+       // $verifyUser = User::where('email', $email)->first();
         if ($verifyUser) {
             $verifyUser->verify_email = 'accept';
             $verifyUser->update();
@@ -95,9 +96,22 @@ class RegistrationRepository implements RegistrationRepositoryInterface
 
     public function downalodStepResume($userid)
     {
+        
         $userData =  User::findorfail($userid);
         view()->share('userData',$userData);
         $pdf = PDF::loadView('frontend.candidate.resume-download',$userData);
-        return $pdf->download('test.pdf');
+        $fileName = 'Resume_'.$userData->first_name.'_'.$userData->last_name.'.pdf';
+        return $pdf->download($fileName);
+    }
+
+    public function directCandidateLogin($userid)
+    {
+        $user = User::where('id',$userid)->where('verify_email','accept')->where('deleted_at',null)->first();
+        if($user){
+            Auth::loginUsingId($user->id);
+            return true;
+        }else{
+            return false;
+        }
     }
 }

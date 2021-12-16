@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\RegistrationRepositoryInterface;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use JsValidator;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
@@ -92,13 +94,32 @@ class RegistrationController extends Controller
         // $pdf = PDF::loadView('frontend.candidate.resume-download', $data);
     
         // return $pdf->download('itsolutionstuff.pdf');
-         $data = $this->registrationRepository->downalodStepResume($userId);
-        if ($data) {
-            return response()->json([
-                'success' => true,
-                'message' => 'CV download successfully'
-            ]);
-        }  
+        return $this->registrationRepository->downalodStepResume($userId);
+        // if ($data) {
+        //     return response()->json([
+        //         'success' => true,
+        //         'message' => 'CV download successfully'
+        //     ]);
+        // }  
+    }
+
+    public function getWelcomePage($id)
+    {
+        return view('frontend.candidate.candidate-welcome-step',["id"=>$id]);
+    }
+
+    public function candidateProfileLogin($userid)
+    {
+        $user = $this->registrationRepository->directCandidateLogin($userid);
+        if($user)
+        {
+            Session::flash('success','Login Successfully');
+            return redirect()->route('mycandidate-profile');
+        }else{
+            Session::flash('success','Somthing went wrong');
+            return redirect()->back();
+        }
+        
     }
    
 }

@@ -13,4 +13,6 @@ interface RegistrationRepositoryInterface
     public function updateCandidateProfileStep(Request $request,$id);
 
     public function downalodStepResume($id);
+
+    public function directCandidateLogin($userid);
 }

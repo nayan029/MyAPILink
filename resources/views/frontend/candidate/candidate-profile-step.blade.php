@@ -168,11 +168,11 @@
 
                                 <div class="col-md-12 ">
                                     <div class="custom-control custom-checkbox step4-check">
-                                        <input type="checkbox" name="available_time[]" value="fulltime" class="custom-control-input available_time">
+                                        <input type="checkbox" name="available_time[]" value="fulltime" class="custom-control-input" id="available_time" >
                                         <label class="custom-control-label login-cus-check">à temps plein</label>
                                     </div>
                                     <div class="custom-control custom-checkbox step4-check">
-                                        <input type="checkbox" name="available_time[]" class="custom-control-input available_time" value="part time">
+                                        <input type="checkbox" name="available_time[]" class="custom-control-input" value="part time" id="available_time">
                                         <label class="custom-control-label login-cus-check">à temps partiel</label>
                                     </div>
                                     <span style="color: red;" class="error" id="available_dayerror"></span>
@@ -356,13 +356,13 @@
                                 <div class="mb-4">
                                     <div class="min-max-km">
                                         <div class="min-div">
-                                            <input type="hidden" name="kmmin" class="min"/>km
+                                            <input type="hidden" name="kmmin" class="min" />km
                                             <!-- <span id="kmmin"></span>km -->
                                         </div>
                                         <div id="slider"></div>
 
                                         <div class="min-div">
-                                            <input type="hidden" name="kmmax" class="max"/>km
+                                            <input type="hidden" name="kmmax" class="max" />km
                                             <!-- <span id="kmmax"></span>km -->
                                             <!-- <span name="kmmax"></span>km -->
                                         </div>
@@ -408,7 +408,7 @@
                 </div>
             </div>
             <div class="text-right">
-                <a href="javascript:void(0);" type="button" class="btn eng-btn mb-20 mr-3 w-200px" id="step5-btn">Etape
+                <a href="{{route('candidate.welcome',$updateUser->id)}}" class="btn eng-btn mb-20 mr-3 w-200px" id="step5-btn">Etape
                     suivante</a>
             </div>
         </div>
@@ -642,7 +642,7 @@
         var current_situation = $("#current_situation").val();
         var research = $("#research").val();
         var available_day = $("#available_day").val();
-        var available_time = $(".available_time").prop('checked');
+        var available_time = $("#available_time").prop('checked');
 
         if (current_situation == '') {
             $("#current_situationerror").html("Please select situation");
@@ -832,17 +832,29 @@
         })
     }
 
-    $(document).on("click",".download-btn",function(){
+    function downloadFile(response) {
+        var blob = new Blob([response], {
+            type: 'application/pdf'
+        })
+        var url = URL.createObjectURL(blob);
+       return location.assign(url);
+    }
+    $(document).on("click", ".download-btn", function() {
         $.ajax({
             url: '{{route("candidate.resume",$updateUser->id)}}',
             method: 'get',
             dataType: 'json',
             success: function(response) {
-                if (response.success == true) {
-                    toastr.success(response.message);
-                }
+                downloadFile(response);
+                // var blob = new Blob([response], {
+                //     type: 'application/pdf'
+                // })
+                // var url = URL.createObjectURL(blob);
+                // console.log(location.assign(url));
+                // location.assign(url);
+                toastr.success("CV download successfully");
             }
-        })
+        });
     });
 </script>
 

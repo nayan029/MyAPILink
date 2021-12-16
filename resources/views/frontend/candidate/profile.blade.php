@@ -355,9 +355,16 @@
                                             <div class="card-body pos-card">
                                                 <div class="card-pd">
 
-
+                                                    @if(count($applyJobData) > 0)
                                                     @foreach($applyJobData as $applyJob)
-                                                    <div class="job-card ">
+                                                    @if($applyJob['jobApplay'])
+                                                    @php
+                                                    $createDate = date('d-m-Y',strtotime($applyJob->created_at));
+                                                    $now = date('d-m-Y');
+                                                    $diff = strtotime($createDate) - strtotime($now);
+                                                    $finalDays = abs(round($diff / 86400));
+                                                    @endphp
+                                                    <div class="job-card">
                                                         <div class="d-flex justify-content-between mb-4 ">
                                                             <div>
                                                                 <h5 class="mb-0 c-prof-jobtext">{{$applyJob['jobApplay']->title}}
@@ -365,7 +372,7 @@
                                                                 <p class="mb-0 job_cre_text">{{$applyJob['jobApplay']->type_of_contract}}</p>
                                                             </div>
 
-                                                            <span class="c-prof-public-text mr-5">Publié il y a 5
+                                                            <span class="c-prof-public-text mr-5">Publié il y a {{$finalDays}}
                                                                 jours</span>
                                                         </div>
                                                         <div class="row mb-3 ">
@@ -389,172 +396,187 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    @endif
                                                     @endforeach
+                                                    @else
+                                                    <div class="job-card">
+                                                        <p class="text-center">No Data Available.</p>
+                                                    </div>
+                                                    @endif
                                                 </div>
                                             </div>
-
                                         </div>
+
                                     </div>
-                                    <div class="tab-pane fade " id="save-file" role="tabpanel" aria-labelledby="save-file-tab">
-                                        <div class="sr-card tab-minus">
-                                            <div class="card-body pos2-card">
-                                                <div class="card-pd">
-                                                    <div class="card-pd">
+                                </div>
+                                <div class="tab-pane fade " id="save-file" role="tabpanel" aria-labelledby="save-file-tab">
+                                    <div class="sr-card tab-minus">
+                                        <div class="card-body pos2-card">
+                                            <div class="card-pd">
+                                                @if(count($jobSaveData)>0)
+                                                @foreach($jobSaveData as $jobSave)
+                                                @if($jobSave['job'])
+                                                @php
+                                                $isApplyed = $jobSave->applyJob!=null ? "disabled":"";
+                                                $createDate = date('d-m-Y',strtotime($jobSave->created_at));
+                                                $now = date('d-m-Y');
+                                                $diff = strtotime($createDate) - strtotime($now);
+                                                $finalDays = abs(round($diff / 86400));
+                                                @endphp
+                                                <div class="job-card ">
+                                                    <div class="d-flex justify-content-between mb-4 ">
+                                                        <div>
+                                                            <h5 class="mb-0 c-prof-jobtext">{{$jobSave['job']->title}}
+                                                            </h5>
+                                                            <p class="mb-0 job_cre_text">{{$jobSave['job']->type_of_contract}}
+                                                            </p>
+                                                        </div>
 
-                                                        @foreach($jobSaveData as $jobSave)
-                                                        <div class="job-card ">
-                                                            <div class="d-flex justify-content-between mb-4 ">
-                                                                <div>
-                                                                    <h5 class="mb-0 c-prof-jobtext">{{$jobSave['job']->title}}
-                                                                    </h5>
-                                                                    <p class="mb-0 job_cre_text">{{$jobSave['job']->type_of_contract}}
+                                                        <span class="c-prof-public-text">Publié il y a {{$finalDays}}
+                                                            jours<img src="{{asset('frontend/images/imgs-svg/book-mark-yellow.svg')}}" alt="bookmark image " class="ml-3 book-yellow-img"></span>
+                                                    </div>
+                                                    <div class="row mb-3 ">
+                                                        <div class="col-md-8 ">
+                                                            <ul class="search-image-ul">
+                                                                <li>
+                                                                    <!-- <p class="mb-0 ">Montpellier (34)</p> -->
+                                                                </li>
+                                                                <li>
+                                                                    <p class="mb-0 ">{{$jobSave['job']->maximum_gross_salary}} € par mois</p>
+                                                                </li>
+                                                                <li>
+                                                                    <p class="mb-0 ">Expérience :{{$jobSave['job']->minimum_experience}}
                                                                     </p>
-                                                                </div>
-
-                                                                <span class="c-prof-public-text">Publié il y a 5
-                                                                    jours<img src="{{asset('frontend/images/imgs-svg/book-mark-yellow.svg')}}" alt="bookmark image " class="ml-3 book-yellow-img"></span>
-                                                            </div>
-                                                            <div class="row mb-3 ">
-                                                                <div class="col-md-8 ">
-                                                                    <ul class="search-image-ul">
-                                                                        <li>
-                                                                            <!-- <p class="mb-0 ">Montpellier (34)</p> -->
-                                                                        </li>
-                                                                        <li>
-                                                                            <p class="mb-0 ">{{$jobSave['job']->maximum_gross_salary}} € par mois</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p class="mb-0 ">Expérience :{{$jobSave['job']->minimum_experience}}
-                                                                            </p>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="col-md-4 mt-2 align-items-end d-flex justify-content-end">
-                                                                    <div class="d-flex">
-                                                                        <a href="{{URL::to('details-job'.'/'.$jobSave['job']->id)}}" class="btn btn-viewjob mr-4">Voir
-                                                                            l’offre</a>
-                                                                        <button class="btn btn-apply " data-toggle="modal" data-target="#establishment">Postuler</button>
-                                                                    </div>
-                                                                </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-md-4 mt-2 align-items-end d-flex justify-content-end">
+                                                            <div class="d-flex">
+                                                                <a href="{{URL::to('details-job'.'/'.$jobSave['job']->id)}}" class="btn btn-viewjob mr-4">Voir
+                                                                    l’offre</a>
+                                                                <button class="btn btn-apply" @if($jobSave->applyJob != null) @else onclick="openJobModal('{{$jobSave->id}}','{{$jobSave->user_id}}')" @endif {{$isApplyed}}>Postuler</button>
                                                             </div>
                                                         </div>
-                                                        @endforeach
-
-
                                                     </div>
-
                                                 </div>
+                                                @endif
+                                                @endforeach
+                                                @else
+                                                <div class="job-card ">
+                                                    <p class="text-center">No Data Available.</p>
+                                                </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-
-
-
                             </div>
+
+
+
+
                         </div>
                     </div>
-                    <div class="tab-pane fade " id="Portfolio1" role="tabpanel" aria-labelledby="portfolio1-tab">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="card sr-card">
-                                    <div class="card-body">
-                                        <div class="profile-sidebar-sec">
-                                            <div class="prof-side">
-                                                <h5 class="dark-tit profside-title">Situation actuelle :</h5>
-                                                <p class="profside-text">{{auth()->guard('web')->user()->current_situation}}</p>
+                </div>
+                <div class="tab-pane fade " id="Portfolio1" role="tabpanel" aria-labelledby="portfolio1-tab">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card sr-card">
+                                <div class="card-body">
+                                    <div class="profile-sidebar-sec">
+                                        <div class="prof-side">
+                                            <h5 class="dark-tit profside-title">Situation actuelle :</h5>
+                                            <p class="profside-text">{{auth()->guard('web')->user()->current_situation}}</p>
+                                        </div>
+                                        <div class="prof-side">
+                                            <h5 class="dark-tit profside-title">Recherche :</h5>
+                                            <p class="profside-text">{{auth()->guard('web')->user()->research}}</p>
+                                        </div>
+                                        <div class="prof-side">
+                                            <h5 class="dark-tit profside-title">Disponible :</h5>
+                                            <ul class="prof-view-ul">
+                                                <li>{{auth()->guard('web')->user()->available_day}}</li>
+                                                <li>{{auth()->guard('web')->user()->available_time}}</li>
+                                            </ul>
+                                        </div>
+                                        <div class="prof-side">
+                                            <h5 class="dark-tit profside-title">Diplômes :</h5>
+                                            <p class="profside-text">{{auth()->guard('web')->user()->diplomas}}</p>
+                                        </div>
+                                        <div class="prof-side">
+                                            <h5 class="dark-tit profside-title">Expériences :</h5>
+                                            <p class="profside-text">7 ans d’expériences</p>
+                                        </div>
+                                        <div class="prof-side">
+                                            <h5 class="dark-tit profside-title">Tranche d’âge :</h5>
+                                            <ul class="prof-viewcheck-ul">
+                                                <li> <span><img src="{{asset('frontend/images/imgs-svg/blue-md-checkmark.svg')}}" alt=""></span> 0-1 an
+                                                </li>
+                                                <li> <span><img src="{{asset('frontend/images/imgs-svg/blue-md-checkmark.svg')}}" alt=""></span> 2-3 an
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="prof-side">
+                                            <h5 class="dark-tit profside-title">Mobilité :</h5>
+                                            <p class="profside-text">{{auth()->guard('web')->user()->mobility}}</p>
+                                        </div>
+                                        <div class="prof-side mb-60">
+                                            <h5 class="dark-tit profside-title">Vérifications :</h5>
+                                            <div class="verification-view">
+                                                <span> <img src="{{asset('frontend/images/imgs-svg/green-check.svg')}}" alt=""></span> Charte d’engagement Apilink
                                             </div>
-                                            <div class="prof-side">
-                                                <h5 class="dark-tit profside-title">Recherche :</h5>
-                                                <p class="profside-text">{{auth()->guard('web')->user()->research}}</p>
-                                            </div>
-                                            <div class="prof-side">
-                                                <h5 class="dark-tit profside-title">Disponible :</h5>
-                                                <ul class="prof-view-ul">
-                                                    <li>{{auth()->guard('web')->user()->available_day}}</li>
-                                                    <li>{{auth()->guard('web')->user()->available_time}}</li>
-                                                </ul>
-                                            </div>
-                                            <div class="prof-side">
-                                                <h5 class="dark-tit profside-title">Diplômes :</h5>
-                                                <p class="profside-text">{{auth()->guard('web')->user()->diplomas}}</p>
-                                            </div>
-                                            <div class="prof-side">
-                                                <h5 class="dark-tit profside-title">Expériences :</h5>
-                                                <p class="profside-text">7 ans d’expériences</p>
-                                            </div>
-                                            <div class="prof-side">
-                                                <h5 class="dark-tit profside-title">Tranche d’âge :</h5>
-                                                <ul class="prof-viewcheck-ul">
-                                                    <li> <span><img src="{{asset('frontend/images/imgs-svg/blue-md-checkmark.svg')}}" alt=""></span> 0-1 an
-                                                    </li>
-                                                    <li> <span><img src="{{asset('frontend/images/imgs-svg/blue-md-checkmark.svg')}}" alt=""></span> 2-3 an
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="prof-side">
-                                                <h5 class="dark-tit profside-title">Mobilité :</h5>
-                                                <p class="profside-text">{{auth()->guard('web')->user()->mobility}}</p>
-                                            </div>
-                                            <div class="prof-side mb-60">
-                                                <h5 class="dark-tit profside-title">Vérifications :</h5>
-                                                <div class="verification-view">
-                                                    <span> <img src="{{asset('frontend/images/imgs-svg/green-check.svg')}}" alt=""></span> Charte d’engagement Apilink
-                                                </div>
-                                                <div class="verification-view">
-                                                    <span> <img src="{{asset('frontend/images/imgs-svg/green-check.svg')}}" alt=""></span> E-mail
-                                                </div>
+                                            <div class="verification-view">
+                                                <span> <img src="{{asset('frontend/images/imgs-svg/green-check.svg')}}" alt=""></span> E-mail
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-8">
-                                <div class="card sr-card tab-hgt">
-                                    <div class="card-body">
-                                        <div class="dossier_sec personal_detail_edit pb-0">
-                                            <ul class="img-ul" id="appendid">
-                                                @foreach($images as $image)
-                                                <li id="image{{$image->id}}">
-                                                    <div class="img_section">
-                                                        <div class="img_content">
-                                                            <img src='{{asset("$image->image")}}' />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card sr-card tab-hgt">
+                                <div class="card-body">
+                                    <div class="dossier_sec personal_detail_edit pb-0">
+                                        <ul class="img-ul" id="appendid">
+                                            @foreach($images as $image)
+                                            <li id="image{{$image->id}}">
+                                                <div class="img_section">
+                                                    <div class="img_content">
+                                                        <img src='{{asset("$image->image")}}' />
 
-                                                        </div>
-                                                        <img onclick="removeImage({{$image->id}})" src="{{asset('frontend/images/close.svg')}}" width="12px" class="c-prof-closeimg">
-                                                        <div class="text-imgs">
-                                                            <p class="mb-0">Project Name 1</p>
-                                                            <p class="work-from">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                                            <button class="btn btn-small" data-toggle="modal" data-target="#cv-modal1">view more</button>
+                                                    </div>
+                                                    <img onclick="removeImage({{$image->id}})" src="{{asset('frontend/images/close.svg')}}" width="12px" class="c-prof-closeimg">
+                                                    <div class="text-imgs">
+                                                        <p class="mb-0">Project Name 1</p>
+                                                        <p class="work-from">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                                        <button class="btn btn-small" data-toggle="modal" data-target="#cv-modal1">view more</button>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            @endforeach
+                                            <li>
+
+                                                <form method="post" enctype="multipart/form-data" name="myForm" id="myForm">
+                                                    @csrf
+                                                    <div class="img_section">
+                                                        <div class="profimage-upload">
+                                                            <div class="upload-div">
+                                                                <div><img src="{{asset('frontend/images/upload-icon.svg')}}" alt="upload-profile" class="upload-img1">
+                                                                </div>
+                                                                <p class="mb-0">Télécharger <br>une image</p>
+                                                            </div>
+                                                            <input type="file" id="imageUpload" name="image" accept=".png, .jpg, .jpeg" onchange="imageUploadGallery();" class="upload-input1">
                                                         </div>
                                                     </div>
-                                                </li>
-                                                @endforeach
-                                                <li>
-
-                                                    <form method="post" enctype="multipart/form-data" name="myForm" id="myForm">
-                                                        @csrf
-                                                        <div class="img_section">
-                                                            <div class="profimage-upload">
-                                                                <div class="upload-div">
-                                                                    <div><img src="{{asset('frontend/images/upload-icon.svg')}}" alt="upload-profile" class="upload-img1">
-                                                                    </div>
-                                                                    <p class="mb-0">Télécharger <br>une image</p>
-                                                                </div>
-                                                                <input type="file" id="imageUpload" name="image" accept=".png, .jpg, .jpeg" onchange="imageUploadGallery();" class="upload-input1">
-                                                            </div>
-                                                        </div>
-                                                        <span class="image-upload-error text-danger">@error ('image') {{$message}} @enderror</span>
-                                                    </form>
-                                                </li>
-                                            </ul>
-                                            <div class="d-flex justify-content-end btn-image-view mt-4">
-                                                <a class="btn btn-blue d-flex"><img src="{{asset('frontend/images/imgs-svg/ionic-md-eye.svg')}}" class="mr-4" alt="eye-icon">Plus ...</a>
-                                            </div>
+                                                    <span class="image-upload-error text-danger">@error ('image') {{$message}} @enderror</span>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                        <div class="d-flex justify-content-end btn-image-view mt-4">
+                                            <a class="btn btn-blue d-flex"><img src="{{asset('frontend/images/imgs-svg/ionic-md-eye.svg')}}" class="mr-4" alt="eye-icon">Plus ...</a>
                                         </div>
-
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -562,115 +584,52 @@
                 </div>
             </div>
         </div>
+    </div>
 
 
     </div>
 </section>
 
-<!--first modal  -->
-<div class="modal fade modal-back-blue" id="cv-modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog center-modal-dialog modal-xl" role="document">
-        <div class="modal-content m-32">
-            <div class="modal-header resume_header border-0">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><img src="{{asset('frontend/images/material-close.svg')}}"></span>
-                </button>
-            </div>
-            <div class="modal-body resume_modal">
-                <div class="candidate_modal">
-                    <h4 class="mb-3">Lettre de motivation</h4>
-                    <div class="candidate_modal_title">
-                        <h5 class="candidate_modal_text pb-2">Description</h5>
-                        <div class="candidate_modal_desc">
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                            </p>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                containing Lorem Ipsum passages, and more recently with desktop publishing software
-                            </p>
-                        </div>
-                        <div class="text-right pt-4 pb-3">
-                            <a href="#" class="btn btn-blue ml-auto skip-btn" id="passer1-btn">
-                                Passer cette étape</a>
-                            <a href="#" class="btn btn-blue ml-3 ok-btn" id="lettrebtn1">
-                                Ok</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--end first modal  -->
-
-<!-- bravo modal -->
-<div class="modal fade modal-back-blue" id="bravo1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header resume_header border-0">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><img src="{{asset('frontend/images/material-close.svg')}}"></span>
-                </button>
-            </div>
-            <div class="modal-body bravo-body">
-                <div class="text-center">
-                    <div class="bravo-text">
-                        <h3>BRAVO !</h3>
-                    </div>
-                    <div>
-                        <img src="{{asset('frontend/images/project/green-checkmark.svg')}}" alt="checkmark" class="green-checkmarks">
-                        <p class="votres-check">Votre candidature a bien été envoyé</p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-</div>
-
 <!-- See the establishment's file Modal -->
-<div class="modal fade modal-back-blue" id="establishment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog center-modal-dialog modal-xl" role="document">
+<div class="modal fade modal-back-blue" id="establishment" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog center-modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content m-32">
             <div class="modal-header resume_header border-0">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><img src="{{asset('frontend/images/material-close.svg')}}"></span>
+                    <span aria-hidden="true"><img src="frontend/images/material-close.svg"></span>
                 </button>
             </div>
+
+            <input type="hidden" name="jobid" id="jobid">
+            <input type="hidden" name="userid" id="userid">
             <div class="modal-body resume_modal">
                 <div class="establishment_modal">
                     <h4 class="">Comment souhaitez-vous postuler ?</h4>
 
                     <div class="padding-150px ">
                         <div class="text-center pb-5 mb-5">
-                            <button class="btn btn-modals-blue" type="button" data-target="#bravo" id="bravo-btn">Envoyer mon profil profesionnel<br>au recruteur</button>
+                            <button class="btn btn-modals-blue bravo-btn" type="submit" data-target="#bravo" value="0" id="bravo-btn">Envoyer mon profil profesionnel<br>au recruteur</button>
                         </div>
                         <div class="text-center">
-                            <button class="btn btn-modals-blue cv-radius" id="cv-btn" type="button"><img src="{{asset('frontend/images/project/feather-download.svg')}}" alt="download" class="mr-3">Télécharger et envoyer mon cv</button>
+                            <button class="btn btn-modals-blue cv-radius" id="updateCv" type="submit"><img src="frontend/images/project/feather-download.svg" alt="download" class="mr-3">
+
+                                Télécharger et
+                                envoyer mon cv</button>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
-
 <!-- bravo modal -->
-<div class="modal fade" id="bravo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade modal-back-blue" id="bravo" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header resume_header border-0">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><img src="{{asset('frontend/images/material-close.svg')}}"></span>
+                    <span aria-hidden="true"><img src="frontend/images/material-close.svg"></span>
                 </button>
             </div>
             <div class="modal-body bravo-body">
@@ -679,7 +638,7 @@
                         <h3>BRAVO !</h3>
                     </div>
                     <div>
-                        <img src="images/project/green-checkmark.svg" alt="checkmark" class="green-checkmarks">
+                        <img src="frontend/images/project/green-checkmark.svg" alt="checkmark" class="green-checkmarks">
                         <p class="votres-check">Votre candidature a bien été envoyé</p>
                     </div>
 
@@ -691,12 +650,12 @@
 </div>
 
 <!-- cv modal -->
-<div class="modal fade modal-back-blue" id="cv-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade modal-back-blue" id="cv-modal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog center-modal-dialog modal-xl" role="document">
         <div class="modal-content m-32">
             <div class="modal-header resume_header border-0">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><img src="{{asset('frontend/images/material-close.svg')}}"></span>
+                    <span aria-hidden="true"><img src="frontend/images/material-close.svg"></span>
                 </button>
             </div>
             <div class="modal-body resume_modal">
@@ -707,21 +666,21 @@
                         <div class="candidate_modal_desc">
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                             </p>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                containing Lorem Ipsum passages, and more recently with desktop publishing software
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
+                                a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+                                Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
+                                a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+                                Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
+                                a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+                                Lorem Ipsum passages, and more recently with desktop publishing software
                             </p>
                         </div>
                         <div class="text-right pt-4 pb-3">
-                            <a href="#" class="btn btn-blue ml-auto skip-btn">
+                            <a href="javasscript:void(0)" class="btn btn-blue ml-auto skip-btn tele-modal-btn">
                                 Passer cette étape</a>
-                            <a href="#" class="btn btn-blue ml-3 ok-btn">
+                            <a href="javasscript:void(0)" class="btn btn-blue ml-3 ok-btn tele-modal-btn">
                                 Ok</a>
                         </div>
                     </div>
@@ -730,37 +689,110 @@
         </div>
     </div>
 </div>
+
+<!-- tele modal -->
+
+<div class="modal" id="tele-modal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header resume_header border-0">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><img src="frontend/images/material-close.svg"></span>
+                </button>
+            </div>
+            <div class="modal-body bravo-body pb-4">
+                <div class="text-center">
+                    <div class="veui-detail">
+                        <h5 class="veui-text border-modal">Veuillez choisir un Cv à envoyer au recruteur</h5>
+                    </div>
+                    <div class="overflow-auto px-4">
+                        <table class="download-table w-100">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex">
+                                            <img src="frontend/images/pdf.svg" width="30px" class="mr-3">
+                                            <p class="mb-0"> Uploaded CV_10-09-2020.pdf</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href=""><img src="frontend/images/feather-download.svg" class="download-img"></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex">
+                                            <img src="frontend/images/pdf.svg" width="30px" class="mr-3">
+                                            <p class="mb-0"> Uploaded CV_10-09-2020.pdf</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href=""><img src="frontend/images/feather-download.svg" class="download-img"></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex">
+                                            <img src="frontend/images/pdf.svg" width="30px" class="mr-3">
+                                            <p class="mb-0"> Uploaded CV_10-09-2020.pdf</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href=""><img src="frontend/images/feather-download.svg" class="download-img"></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div>
+                        <h4 class="ou_text border-modal">Ou télécharger un nouveau cv </h4>
+                    </div>
+                    <div class="upload-drop-btns">
+                        <form method="POST" id="mainForm" class="d-content">
+                            @method('POST')
+                            @csrf
+                            <button class="btn btn-modals-blue cv-radius btn-tele position-relative" id="cv-btn" type="button"><img src="frontend/images/project/feather-download.svg" alt="download" class="mr-3">
+                                <input type="file" class="upload-modal-cv" name="document_name" id="document_name">
+                                Télécharger un cv </button>
+                            <input type="hidden" name="pdf_name" id="pdf_name">
+                            <button href="javascript:void(0)" class="btn btna-oky bravo-btn" id="byResume" value="1">Ok</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
 <!-- </body> -->
 @endsection
 @section('script')
 <script type="text/javascript">
-    $(document).ready(function() {
-        $("#lettrebtn1").on('click', function() {
-            $('#cv-modal1').modal('hide');
-            $('#bravo1').modal('show');
-            setTimeout(function() {
-                $('body').addClass('modal-open');
-            }, 500);
-        });
-
-        $("#passer1-btn").on('click', function() {
-            $('#cv-modal1').modal('hide');
-            $('#bravo1').modal('show');
-            setTimeout(function() {
-                $('body').addClass('modal-open');
-            }, 500);
-        });
-
-    });
-
-    //------------------
-    $("#bravo-btn").on('click', function() {
+    $(".bravo-btn").on('click', function() {
         $('#establishment').modal('hide');
         $('#bravo').modal('show');
     });
-    $("#cv-btn").on('click', function() {
+    $("#updateCv").on('click', function() {
         $('#establishment').modal('hide');
         $('#cv-modal').modal('show');
+        setTimeout(function() {
+            $('body').addClass('modal-open');
+        }, 500);
+
+    });
+    $(".tele-modal-btn").on('click', function() {
+        $('#cv-modal').modal('hide');
+        $('#tele-modal').modal('show');
+        setTimeout(function() {
+            $('body').addClass('modal-open');
+        }, 500);
+
+    });
+    $(".bravo-btn").on('click', function() {
+        $('#tele-modal').modal('hide');
+        $('#bravo').modal('show');
         setTimeout(function() {
             $('body').addClass('modal-open');
         }, 500);
@@ -813,6 +845,60 @@
             }
         });
     }
+
+    function openJobModal(job_id, user_id) {
+        $('#jobid').val(job_id);
+        $('#userid').val(user_id);
+        $('#establishment').modal('show');
+    }
+
+    $(document).on("change", "#document_name", function() {
+        $.ajax({
+            url: "{{route('getDocumentName')}}",
+            method: "POST",
+            data: new FormData(mainForm),
+            _token: '{{ csrf_token() }}',
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                if (response) {
+                    $("#pdf_name").val(response);
+                }
+            }
+        });
+    });
+
+    $(document).on("click", "#byResume,#bravo-btn", function() {
+        var type = $(this).val();
+        var jobid = $('#jobid').val();
+        var userid = $('#userid').val();
+        var document_name = $('#pdf_name').val();
+
+
+        $.ajax({
+            url: "{{ route('store-jobType') }}",
+            method: "POST",
+            data: {
+                'type': type,
+                'jobid': jobid,
+                'userid': userid,
+                'document_name': document_name,
+                _token: "{{ csrf_token() }}"
+            },
+            success: function(response) {
+                if (response.success == true) {
+                    toastr.success(response.message);
+                    $('#establishment').modal('hide');
+                    $('#bravo').modal('show');
+                    location.reload();
+
+                } else {
+                    toastr.danger(response.message);
+                }
+            }
+        });
+
+    });
 </script>
 
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>

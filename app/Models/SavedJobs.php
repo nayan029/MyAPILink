@@ -17,4 +17,8 @@ class SavedJobs extends Model
     {
         return  $this->belongsTo(job::class, 'job_id', 'id');
     }
+    public function applyJob()
+    {
+        return $this->hasOne(ApplyJob::class, 'job_id', 'id')->where('user_id', auth()->user()->id);
+    }
 }

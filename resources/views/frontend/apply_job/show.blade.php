@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-md-9">
                     <div class="mb-3 ml-3">
-                        <a href="" class="back link_a">
+                        <a href="{{URL::to('/search-job')}}" class="back link_a">
                             <span><i class="fa fa-angle-left mr-2"></i></span>Retour à mes offres d'emploi
                         </a>
                     </div>
@@ -25,8 +25,8 @@
                                     $finalDays = abs(round($diff / 86400));
 
                                     $isApplyed = $showList->applyJob!="" ? "disabled":"";
-                                    $saveJob = $showList->savedJob ? $showList->savedJob[0]->job_save : '';
-                                    $isSaved = $showList->savedJob[0]->job_save=='0' ? "disabled":"";
+                                    $saveJob = count($showList->savedJob)>0 ? $showList->savedJob[0]->job_save : '';
+
                                     @endphp
                                     <div>
                                         <h5 class="mb-0 job_aux_text">{{$showList->title}}</h5>
@@ -56,13 +56,13 @@
                                     </ul>
 
                                     <div class="d-flex justify-content-end">
-                                        <button class="btn btn-light" data-target="#establishment" onclick="openJobModal()" {{$isApplyed}}>Postuler avec mon profil</button>
+                                        <button class="btn btn-light" data-target="#establishment" onclick="openJobModal('{{$showList->id}}','{{$showList->user_id}}')" {{$isApplyed}}>Postuler avec mon profil</button>
                                     </div>
 
-                                    <div class="d-flex justify-content-between align-items-center mb-4 mt-2 ">
+                                    <div class=" d-flex justify-content-between align-items-center mb-4 mt-2 ">
                                         <div>
-                                            <h5 class="mb-0 ul_check_color ">Site internet</h5>
-                                            <p class="mb-0 www-text mb-2">www. crechedubonheur.fr</p>
+                                            <h5 class=" mb-0 ul_check_color ">Site internet</h5>
+                                            <p class=" mb-0 www-text mb-2">{{$showList->website}}</p>
                                         </div>
 
                                         <a class="btn establishment-btn" href="{{route('details-company',$showList->user_id)}}">Voir la fiche de
@@ -142,7 +142,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true"><img src="{{asset('frontend/images/material-close.svg')}}"></span>
                 </button>
-                {{asset('frontend/images/material-close.svg')}}
+
             </div>
             <div class="modal-body bravo-body">
                 <div class="text-center">
@@ -150,7 +150,7 @@
                         <h3>BRAVO !</h3>
                     </div>
                     <div>
-                        {{asset('frontend/images/project/green-checkmark.svg')}}
+
                         <img src="{{asset('frontend/images/project/green-checkmark.svg')}}" alt="checkmark" class="green-checkmarks">
                         <p class="votres-check">Votre candidature a bien été envoyé</p>
                     </div>
@@ -273,8 +273,9 @@
 
                                 <input type="file" class="upload-modal-cv" name="document_name" id="document_name">
                                 Télécharger un cv </button>
+                            <span class="text-danger error" id="document_name-error"></span>
                             <input type="hidden" name="pdf_name" id="pdf_name">
-                            <button href="javascript:void(0)" class="btn btna-oky bravo-btn" id="byResume" value="1">Ok</button>
+                            <button type="button" class="btn btna-oky mt-5 bravo-btn" id="byResume" value="1">Ok</button>
                         </form>
                     </div>
                 </div>
@@ -287,10 +288,10 @@
 
 @section('script')
 <script type="text/javascript">
-    $("#bravo-btn").on('click', function() {
+    /*  $("#bravo-btn").on('click', function() {
         $('#establishment').modal('hide');
         $('#bravo').modal('show');
-    });
+    }); */
     $("#updateCv").on('click', function() {
         $('#establishment').modal('hide');
         $('#cv-modal').modal('show');
@@ -307,14 +308,14 @@
         }, 500);
 
     });
-    $(".bravo-btn").on('click', function() {
-        $('#tele-modal').modal('hide');
-        $('#bravo').modal('show');
-        setTimeout(function() {
-            $('body').addClass('modal-open');
-        }, 500);
+    /*  $(".bravo-btn").on('click', function() {
+         $('#tele-modal').modal('hide');
+         $('#bravo').modal('show');
+         setTimeout(function() {
+             $('body').addClass('modal-open');
+         }, 500);
 
-    });
+     }); */
 </script>
 <script>
     var togglePassword = document.getElementById("toggle-password ");
@@ -330,7 +331,7 @@
         });
     }
 
-    var favSave = "{{$showList->savedJob[0]->job_save}}";
+    var favSave = "{{count($showList->savedJob) > 0 ? $showList->savedJob[0]->job_save:''}}";
 
     if (favSave == '1') {
         $('.public-span').removeClass('save-fav');
@@ -368,7 +369,30 @@
 
     });
 
-    $(document).on("click", "#bravo-btn", function() {
+    function openJobModal(job_id, user_id) {
+        $('#jobid').val(job_id);
+        $('#userid').val(user_id);
+        $('#establishment').modal('show');
+    }
+
+    $(document).on("change", "#document_name", function() {
+        $.ajax({
+            url: "{{route('getDocumentName')}}",
+            method: "POST",
+            data: new FormData(mainForm),
+            _token: '{{ csrf_token() }}',
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                if (response) {
+                    $("#pdf_name").val(response);
+                }
+            }
+        });
+    });
+
+
+    $(document).on("click", "#bravo-btn,#byResume", function() {
         var type = $(this).val();
         var jobid = $('#jobid').val();
         var userid = $('#userid').val();
@@ -392,20 +416,13 @@
                     $('#establishment').modal('hide');
                     $('#bravo').modal('show');
                     location.reload();
-
                 } else {
-                    toastr.danger(response.message);
+                    $('#document_name-error').text(response.errors);
                 }
             }
         });
 
     });
-
-    function openJobModal(job_id, user_id) {
-        $('#jobid').val(job_id);
-        $('#userid').val(user_id);
-        $('#establishment').modal('show');
-    }
 </script>
 @endsection
 </body>

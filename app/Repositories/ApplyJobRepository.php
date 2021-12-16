@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use App\Http\Traits\ImageuploadTrait;
 use App\Models\ChatMaster;
 use App\Models\User;
-use PHPUnit\Framework\MockObject\ClassIsFinalException;
 
 class ApplyJobRepository implements ApplyJobRepositoryInterface
 {
@@ -21,6 +20,7 @@ class ApplyJobRepository implements ApplyJobRepositoryInterface
     }
     public function store(Request $request)
     {
+
         $input['job_id'] = $request->jobid;
         $input['user_id'] = auth()->user()->id;
         $input['company_id'] = $request->userid;
@@ -42,14 +42,14 @@ class ApplyJobRepository implements ApplyJobRepositoryInterface
     }
     public function insertPosts(Request $request)
     {
-
+        //dd($request->all());
         $inputs['job_id'] = $request->job_id;
-        $inputs['user_id'] = $request->auth()->user()->id;
-        $inputs['job_save'] = $request->favPost;
+        $inputs['user_id'] = auth()->user()->id;
+        //$inputs['job_save'] = $request->favPost;
 
-        $checkType = SavedJobs::where('job_id', $request->job_id)->where('user_id', $request->user_id)->first();
+        $checkType = SavedJobs::where('job_id', $request->job_id)->where('user_id', auth()->user()->id)->first();
 
-        $update_array = array('job_save' => $request->favPost);
+        // $update_array = array('job_save' => $request->favPost);
         if ($checkType) {
             if ($checkType->job_save == 1) {
                 $status = 0;
@@ -62,12 +62,12 @@ class ApplyJobRepository implements ApplyJobRepositoryInterface
             $inputs['job_save'] = 1;
             SavedJobs::create($inputs);
         }
-        $checkType = SavedJobs::where('job_id', $request->job_id)->where('user_id', $request->user_id)->first();
+        $checkType = SavedJobs::where('job_id', $request->job_id)->where('user_id', auth()->user()->id)->first();
         return $checkType;
     }
     public function getSingleCandidatedata($id)
     {
-        return Job::with('applyJob')->where('deleted_at', NULL)->where('id', $id)->first();
+        return Job::with('applyJob')->with('savedJob')->where('deleted_at', NULL)->where('id', $id)->first();
     }
     public function getCompanyData($id)
     {
@@ -75,12 +75,12 @@ class ApplyJobRepository implements ApplyJobRepositoryInterface
     }
     public function getManagerPosts($id)
     {
-        return Job::where('deleted_at', NULL)->where('user_id', $id)->paginate(2);
+        return Job::with('applyJob')->where('deleted_at', NULL)->where('user_id', $id)->paginate(2);
     }
 
     public function getJobsaveDataByUserId()
     {
-        return  SavedJobs::with('job')->where('job_save', 1)->where('deleted_at', NULL)->where('user_id', auth()->guard('web')->user()->id)->get();
+        return  SavedJobs::with('applyJob')->with('job')->where('job_save', 1)->where('deleted_at', NULL)->where('user_id', auth()->guard('web')->user()->id)->get();
     }
 
     public function getApplyJobDataByUserId()

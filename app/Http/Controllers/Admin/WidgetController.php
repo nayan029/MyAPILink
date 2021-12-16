@@ -14,7 +14,7 @@ class WidgetController extends Controller
 {
 
     protected $storevalidationrules = [
-        'title' => 'required|max:25',
+        'title' => 'required|max:25|regex:/^[a-zA-Z\s]*$/',
         'image' => 'required|mimes:jpeg,png,jpg,gif,svg',
         'description' => 'required',
         'widget' => 'required',
@@ -22,7 +22,7 @@ class WidgetController extends Controller
 
 
     protected $updatevalidationrules = [
-        'title' => 'required|max:25',
+        'title' => 'required|max:25|regex:/^[a-zA-Z\s]*$/',
         'description' => 'required',
         'widget' => 'required',
     ];

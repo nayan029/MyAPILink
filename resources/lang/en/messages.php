@@ -10,6 +10,7 @@ return [
     'filter' => 'Filter',
     'reset' => 'Reset',
     'contact us' => 'Contact Us',
+    'list' => 'Contact Us List',    
     "actions" => "Actions",
     'edit' => 'Edit Contact',
     'name' => 'Name',
@@ -20,6 +21,9 @@ return [
     'id' => 'Id',
     'save' => 'Save',
     'update' => 'Update',
+    'users' => "User's List",
+    'email' => 'Email',
+    'search' => 'Search',
     'skillgroup' => [
         "list" => "Professional List",
         "btnadd" => "Add Professional",
@@ -31,10 +35,10 @@ return [
     ],
     'widgetgroup' => [
         "widget" => "Widget",
-        "list" => "Widget List",
+        "list" => "Widget's List",
         "btnadd" => "Add Widget",
         "create" => "Add Widget",
-        "show" => "Widget Detail",
+        "show" => "Widget's Detail",
         "btnedit" => "Edit",
         "btndelete" => "Delete",
         "edit" => "Edit Widget",
@@ -47,7 +51,7 @@ return [
         "list" => "Partner List",
         "btnadd" => "Add Partner",
         "create" => "Add Partner",
-        "show" => "Partner Detail",
+        "show" => "Partner's Detail",
         "edit" => "Edit Partner",
         "image" => "Image",
         "link" => "Link",
@@ -60,13 +64,14 @@ return [
         'type' => 'Type',
         'filter' => 'Filter',
         'reset' => 'Reset',
-        "show" => "User Detail",
+        "show" => "User's Detail",
     ],
     "jobsgroup" => [
         'type_of_contract' => 'Type of Contract',
         'startdate' => 'Start Date',
         'min_experience' => 'Minimum Experience',
-        'show' => 'Job Detail',
+        'show' => "Job's Detail",
+        'list' => "Job's List"
     ],
   
 ];

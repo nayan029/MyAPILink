@@ -45,7 +45,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                        {{__("messages.dashboard")}}
+                            {{__("messages.dashboard")}}
                         </p>
                     </a>
                 </li>
@@ -54,13 +54,23 @@
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         @switch($locale)
                         @case('en')
-                        <img height="20px" width="30px" src="{{asset('admin\dist\img\EN.png')}}">English
+                        <img height="20px" width="20px" src="{{asset('admin\dist\img\EN.png')}}" style="
+    margin-right: 10px;
+    margin-left: 3px;
+">English
                         @break
                         @case('fr')
-                        <img height="20px" width="30px" src="{{asset('admin\dist\img\fr.png')}}">French
+                        <img height="20px" width="20px" src="{{asset('admin\dist\img\fr.png')}}" style="
+    margin-right: 10px;
+    margin-left: 3px;
+">French
                         @break
                         @default
-                        <img height="20px" width="30px" src="{{asset('admin\dist\img\fr.png')}}"> <p>French</p>
+                        <img height="20px" width="20px" src="{{asset('admin\dist\img\fr.png')}}" style="
+    margin-right: 10px;
+    margin-left: 3px;
+">
+                        <p>French</p>
                         @endswitch
                         <span class="caret"></span>
                     </a>
@@ -112,7 +122,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('skill.index')}}" class="nav-link {{ request()->is('skill*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-cogs"></i>
+                        <i class="nav-icon fas fa-cogs"></i>&nbsp;&nbsp;
                         <p>
                             {{__("messages.skills")}}
                         </p>
@@ -120,8 +130,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('contact.index')}}" class="nav-link {{ request()->is('contact-us') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-cogs"></i>
-                        <p>
+                        <i class="fas fa-phone-square-alt"></i>&nbsp;&nbsp; <p>
                             {{__("messages.contact us")}}
                         </p>
                     </a>

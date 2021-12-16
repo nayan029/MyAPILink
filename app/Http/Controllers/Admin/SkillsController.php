@@ -13,12 +13,12 @@ use JsValidator;
 class SkillsController extends Controller
 {
     protected $storevalidationrules = [
-        'name' => 'required|max:25',
+        'name' => 'required|max:50|regex:/^[a-zA-Z\s]*$/',
         'description' => 'required',
         'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ];
     protected $updatevalidationrules = [
-        'name' => 'required',
+        'name' => 'required|max:50|regex:/^[a-zA-Z\s]*$/',
         'description' => 'required',
     ];
 

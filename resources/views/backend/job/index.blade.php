@@ -62,7 +62,9 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-            
+        <div class="card-header">
+                <h3 class="card-title float-left">{{__("messages.jobsgroup.list")}}</h3>
+            </div>
             <!-- /.card-header -->
             <div class="card-body">
                 <table id="job-table" class="table table-bordered table-hover" class="display" style="width:100%">
@@ -115,7 +117,7 @@
     function loadData() {
         var formData = $('.job_form').serialize();
         $('#job-table').DataTable({
-            "processing": true,
+            "processing": false,
             "serverSide": true,
             "searching": false,
             "ajax": {

@@ -60,6 +60,11 @@ class WidgetRepository implements WidgetRepositoryInterface
     public function getWidgetdata(Request $request)
     {
 
+        $searchTitle = $request->query('search_title');
+        $searchSlug = $request->query('search_slug');
+        $searchImage = $request->query('search_image');
+        $searchDesc = $request->query('search_description');
+
         $draw = $request->query('draw', 0);
         $start = $request->query('start', 0);
         $length = $request->query('length', 25);
@@ -75,6 +80,18 @@ class WidgetRepository implements WidgetRepositoryInterface
         );
 
         $query = Widget::select('*');
+        if (!empty($searchTitle)) {
+            $query->where('title', 'like', '%' . $searchTitle . '%');
+        }
+        if (!empty($searchSlug)) {
+            $query->where('slug', $searchSlug);
+        }
+        if (!empty($searchImage)) {
+            $query->where('image', 'like', '%' . $searchImage . '%');
+        }
+        if (!empty($searchDesc)) {
+            $query->where('description', 'like', '%' . $searchDesc . '%');
+        }
         $recordstotal = $query->count();
         $sortColumnName = $sortcolumns[$order[0]['column']];
 

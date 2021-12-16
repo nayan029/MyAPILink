@@ -37,38 +37,38 @@ class ManagerRepository implements ManagerRepositoryInterface
             //dd($storeData);
             $manager = User::create($storeData);
             // $findUser = Manager::where('id', $manager->id)->first();
-            $emailtemplateid = EmailTemplate::where('id', 2)->first();
+                $emailtemplateid = EmailTemplate::where('id', 2)->first();
 
-            $mail = $manager->email;
-            $address = $manager->address;
-            $telephone = $manager->telephone;
-            $firstname = $manager->first_name;
-            $organization = $manager->organization;
-            $civility = $manager->civility;
-            $html = $emailtemplateid->email;
+                $mail = $manager->email;
+                $address = $manager->address;
+                $telephone = $manager->telephone;
+                $firstname = $manager->first_name;
+                $organization = $manager->organization;
+                $civility = $manager->civility;
+                $html = $emailtemplateid->email;
 
-            $html = str_replace('{{FIRSTNAME}}', $firstname, $html);
-            $html = str_replace('{{TELEPHONE}}', $telephone, $html);
-            $html = str_replace('{{EMAIL}}', $mail, $html);
-            $html = str_replace('{{ORGANIZATION}}', $organization, $html);
-            $html = str_replace('{{ADDRESS}}', $address, $html);
-            $html = str_replace('{{CIVILITY}}', $civility, $html);
+                $html = str_replace('{{FIRSTNAME}}', $firstname, $html);
+                $html = str_replace('{{TELEPHONE}}', $telephone, $html);
+                $html = str_replace('{{EMAIL}}', $mail, $html);
+                $html = str_replace('{{ORGANIZATION}}', $organization, $html);
+                $html = str_replace('{{ADDRESS}}', $address, $html);
+                $html = str_replace('{{CIVILITY}}', $civility, $html);
 
-            Mail::send(
-                'frontend.email-template.manager-mail',
-                [
-                    'emailtemplate' => $html,
-                ],
-                function ($message) use ($request) {
-                    $message->to($request->email);
-                    $message->subject('Telephone appointment');
-                }
-            );
-            return true;
-        } catch (Exception $e) {
-            return back()->withError($e->getMessage());
+                Mail::send(
+                    'frontend.email-template.manager-mail',
+                    [
+                        'emailtemplate' => $html,
+                    ],
+                    function ($message) use ($request) {
+                        $message->to($request->email);
+                        $message->subject('Telephone appointment');
+                    }
+                );
+                return true;
+            } catch (Exception $e) {
+                return back()->withError($e->getMessage());
+            }
         }
-    }
     public function updateProfile(Request $request)
     {
         $updateData = [

@@ -20,7 +20,7 @@ class ContactController extends Controller
         $this->contactRepository = $contactRepository;
     }
     protected $validationRules = [
-        'email' => 'required|email|unique:contact',
+        'email' => 'required|email',
         'mobile' => 'required|digits:10',
         'address' => 'required|max:255',
     ];

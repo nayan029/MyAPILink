@@ -50,7 +50,9 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-            
+        <div class="card-header">
+                <h3 class="card-title float-left">{{__("messages.users")}}</h3>
+            </div>
             <!-- /.card-header -->
             <div class="card-body">
                 <table id="User-table" class="table table-bordered table-hover" class="display" style="width:100%">
@@ -92,7 +94,7 @@
     function loadData() {
         var formData = $('.user_form').serialize();
         $('#User-table').DataTable({
-            "processing": true,
+            "processing": false,
             "serverSide": true,
             "searching": false,
             "ajax": {

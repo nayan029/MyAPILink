@@ -25,7 +25,7 @@
             <div class="col-6 col-sm-6">
               <ul class="list-group list-group-unbordered mb-3">
                 <li class="list-group-item">
-                  <b>Name</b><span class="widget-section">{{ucfirst($user->civility)}} {{ucfirst($user->first_name)}} {{ucfirst($user->last_name)}}</span>
+                  <b>Name</b><span class="widget-section">{{ucfirst($user->civility)}}{{ucfirst($user->first_name)}}{{ucfirst($user->last_name)}}</span>
                 </li>
                 <li class="list-group-item">
                   <b>Email</b><span class="widget-section">{{$user->email != "" ? $user->email : '---'}}</span>
@@ -33,7 +33,6 @@
                 <li class="list-group-item">
                   <b>Phone</b><span class="widget-section">{{$user->phone !="" ? $user->phone : '---'}}</span>
                 </li>
-
               </ul>
             </div>
             <div class="col-6 col-sm-6">

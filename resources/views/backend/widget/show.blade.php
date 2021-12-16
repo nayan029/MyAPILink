@@ -19,8 +19,8 @@
 
           <div class="card-tools">
             <div class="text-center mt-0 mb-3">
-              <a href="{{route('widget.edit',$widget->id)}}" class="btn btn-sm btn-primary">{{__("messages.widgetgroup.btnedit")}}</a>
-              <a id="delete" href="javascript:void(0);" class="btn btn-sm btn-danger">{{__("messages.widgetgroup.btndelete")}}</a>
+              <a href="{{route('widget.edit',$widget->id)}}" class="btn btn-sm btn-primary" title="Edit">{{__("messages.widgetgroup.btnedit")}}</a>
+              <a id="delete" href="javascript:void(0);" class="btn btn-sm btn-danger" title="Delete">{{__("messages.widgetgroup.btndelete")}}</a>
               <form action="{{ route('widget.destroy', $widget->id)}}" method="POST" id="deleteForm">
                   @csrf
                   <input name="_method" type="hidden" value="DELETE">           

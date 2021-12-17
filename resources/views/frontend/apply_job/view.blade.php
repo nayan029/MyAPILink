@@ -62,6 +62,7 @@
                         <li class="nav-item">
                             <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Photos</a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link" id="pills-job-offers" data-toggle="pill" href="#job-offers" role="tab" aria-controls="job-offers" aria-selected="false">Nos offres d’emploi</a>
                         </li>
@@ -393,22 +394,23 @@
                         <div class="col-md-9">
                             <div class="card sr-card">
                                 <div class="card-body">
+
                                     @foreach($showJobs as $data)
 
                                     @php
-
+                                    $isApplyed = $data->applyJob!="" ? "disabled":"";
                                     $createDate = date('d-m-Y',strtotime($data->created_at));
                                     $now = date('d-m-Y');
                                     $diff = strtotime($createDate) - strtotime($now);
                                     $finalDays = abs(round($diff / 86400));
+                                    $saveJob = $data->savedJob!=null && count($data->savedJob)>0 ? $data->savedJob[0]->job_save : '';
                                     @endphp
                                     <div class="job-card">
                                         <div class="job-listing-flex">
                                             <h5 class="ml-2 mb-0 linkcolor">{{$data->title}}</h5>
 
-                                            <button class="btn fav-btn mb-fav-btn" type="button" id="book1">
-                                                <img src="{{asset('frontend/images/bookmark.svg')}}" alt="bookmark image " class="b1 bookmark-img">
-                                                <img src="{{asset('frontend/images/imgs-svg/book-mark-yellow.svg')}}" alt="bookmark image " class="b2 bookmark-img">
+                                            <button class="btn fav-btn mb-fav-btn save-fav" type="button" data-job="{{$data->id}}" data-user="{{$data->user_id}}" data-rowid="{{$data->id}}">
+                                                <img id="saveicon{{$data->id}}" src="{{$saveJob=='1' ? asset('frontend/images/imgs-svg/book-mark-yellow.svg') : asset('frontend/images/bookmark.svg')}}" alt="bookmark image " class="b1 bookmark-img">
                                             </button>
                                         </div>
 
@@ -445,7 +447,7 @@
                                             <div class="col-md-4 d-flex align-items-end">
                                                 <div class="d-flex justify-content-end align-items-center resbtn-flex">
                                                     <a href="listing-details.html" class="btn btn-viewjob listviewjob">Voir l’offre</a>
-                                                    <button class="btn btn-apply listapply" data-toggle="modal" data-target="#establishment" onclick="openJobModal('{{$data->id}}','{{$data->user_id}}')">Postuler</button>
+                                                    <button class="btn btn-apply listapply" data-toggle="modal" data-target="#establishment" onclick="openJobModal('{{$data->id}}','{{$data->user_id}}')" {{$isApplyed}}>Postuler</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -454,18 +456,7 @@
                                     <div class="custom-pagination pt-5 pb-4">
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination justify-content-center">
-                                                <li class="page-item disabled">
-                                                    <a class="page-link" href="#" tabindex="-1">
-                                                        &lt; </a>
-                                                </li>
-                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#">&gt;</a>
-                                                </li>
+                                                {{ $showJobs->appends(request()->except('page'))->links("pagination::bootstrap-4") }}
                                             </ul>
                                         </nav>
                                     </div>
@@ -641,9 +632,9 @@
                                 </p>
                             </div>
                             <div class="text-right pt-4 pb-3">
-                                <a href="javasscript:void(0)" class="btn btn-blue ml-auto skip-btn tele-modal-btn">
+                                <a href="javascript:void(0)" class="btn btn-blue ml-auto skip-btn tele-modal-btn">
                                     Passer cette étape</a>
-                                <a href="javasscript:void(0)" class="btn btn-blue ml-3 ok-btn tele-modal-btn">
+                                <a href="javascript:void(0)" class="btn btn-blue ml-3 ok-btn tele-modal-btn">
                                     Ok</a>
                             </div>
                         </div>
@@ -718,8 +709,9 @@
                                 <button class="btn btn-modals-blue cv-radius btn-tele position-relative" id="cv-btn" type="button"><img src="{{asset('frontend/images/project/feather-download.svg')}}" alt="download" class="mr-3">
                                     <input type="file" class="upload-modal-cv" name="document_name" id="document_name">
                                     Télécharger un cv </button>
+                                <span class="text-danger error" id="document_name-error"></span>
                                 <input type="hidden" name="pdf_name" id="pdf_name">
-                                <button href="javascript:void(0)" class="btn btna-oky bravo-btn" id="byResume" value="1">Ok</button>
+                                <button type="button" class="btn btna-oky mt-5 bravo-btn" id="byResume" value="1">Ok</button>
                             </form>
                         </div>
                     </div>
@@ -745,6 +737,20 @@
     $(document).ready(function() {
         $(".change-placeholder-select .multiselect").html("Type de poste");
     });
+
+    var page_no = '{{$pages}}';
+
+    if (page_no != "") {
+
+        $("#pills-home-tab").removeClass("active");
+        $("#pills-home").removeClass("show");
+        $("#pills-home").removeClass("active");
+
+        $("#pills-job-offers").addClass("active");
+        $("#job-offers").addClass("show");
+        $("#job-offers").addClass("active");
+
+    }
 </script>
 <script type="text/javascript">
     function openJobModal(job_id, user_id) {
@@ -794,9 +800,8 @@
                     $('#establishment').modal('hide');
                     $('#bravo').modal('show');
                     location.reload();
-
                 } else {
-                    toastr.danger(response.message);
+                    $('#document_name-error').text(response.errors);
                 }
             }
         });
@@ -805,10 +810,10 @@
 
 
 
-    $(".bravo-btn").on('click', function() {
-        $('#establishment').modal('hide');
-        $('#bravo').modal('show');
-    });
+    /*   $(".bravo-btn").on('click', function() {
+          $('#establishment').modal('hide');
+          $('#bravo').modal('show');
+      }); */
     $("#updateCv").on('click', function() {
         $('#establishment').modal('hide');
         $('#cv-modal').modal('show');
@@ -825,35 +830,44 @@
         }, 500);
 
     });
-    $(".bravo-btn").on('click', function() {
+    /* $(".bravo-btn").on('click', function() {
         $('#tele-modal').modal('hide');
         $('#bravo').modal('show');
         setTimeout(function() {
             $('body').addClass('modal-open');
         }, 500);
 
-    });
-    $('.fav-btn').click(function() {
-        $(this).toggleClass('active');
-    });
+    }); */
+    var favSave = "{{count($data->savedJob) > 0 ? $data->savedJob[0]->job_save:''}}";
+
+    if (favSave == '1') {
+        $('.fav-btn').removeClass('save-fav');
+    }
     $(document).on("click", ".save-fav", function() {
-        var saveType = $(this).hasClass('active') == true ? 1 : 0;
         var job_id = $(this).data('job');
         var user_id = $(this).data('user');
-
+        var rowid = $(this).data('rowid');
         $.ajax({
             url: "{{route('store-savedjobs')}}",
             method: "POST",
             data: {
                 'job_id': job_id,
                 'user_id': user_id,
-                'saveType': saveType,
+
                 _token: '{{ csrf_token() }}',
             },
             success: function(response) {
-                if (response) {
+                if (response.success == true) {
+                    toastr.success(response.message);
+                    $("#saveicon" + rowid).attr("src", "{{asset('frontend/images/imgs-svg/book-mark-yellow.svg')}}");
+                    $('#saveicon' + rowid).addClass("b1 bookmark-img");
+                    if (response.data.job_save == 0) {
+                        $("#saveicon" + rowid).attr("src", "{{asset('frontend/images/bookmark.svg')}}");
+                        $('#saveicon' + rowid).addClass("b1 bookmark-img");
+                    }
 
                 }
+
             }
         });
     });

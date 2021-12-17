@@ -6,6 +6,8 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Interfaces\ApplyJobRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 
 class SearchAdController extends Controller
 {
@@ -20,23 +22,39 @@ class SearchAdController extends Controller
     public function index()
     {
         $data['list'] = $this->applyJobRepository->getCandidateData();
-        
+
         return view('frontend.apply_job.index', $data);
     }
     public function store(Request $request)
     {
-        $storeJobType = $this->applyJobRepository->store($request);
+        if ($request->type == '1') {
+            $rules = array('document_name' => 'required');
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false,
+                    'errors' => "Please choose file"
+                ], 200); // 400 being the HTTP code for an invalid request.
+            } else {
+                $storeJobType = $this->applyJobRepository->store($request);
 
-        if ($storeJobType) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Successfully Inserted'
-            ]);
+                if ($storeJobType) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Successfully Inserted'
+                    ]);
+                }
+            }
+        } else {
+            $storeJobType = $this->applyJobRepository->store($request);
+
+            if ($storeJobType) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Successfully Inserted'
+                ]);
+            }
         }
-        return response()->json([
-            'success' => false,
-            'message' => 'Sorry, something went wrong. please try again.'
-        ]);
     }
     public function getDocumentName(Request $request)
     {
@@ -54,9 +72,9 @@ class SearchAdController extends Controller
         $insertSavedPosts = $this->applyJobRepository->insertPosts($request);
 
         if ($insertSavedPosts) {
-            if($insertSavedPosts->job_save==1){
+            if ($insertSavedPosts->job_save == 1) {
                 $msg = 'Job Save Successfully!.';
-            }else{
+            } else {
                 $msg = 'Job Un Save Successfully!.';
             }
             return response()->json([
@@ -71,10 +89,12 @@ class SearchAdController extends Controller
             'data' => $insertSavedPosts
         ]);
     }
-    public function showCompany($id)
+    public function showCompany($id, Request $request)
     {
+        $data['pages'] = $request->page;
         $data['showCompany'] = $this->applyJobRepository->getCompanyData($id);
         $data['showJobs'] = $this->applyJobRepository->getManagerPosts($id);
+
         return view('frontend.apply_job.view', $data);
     }
 }

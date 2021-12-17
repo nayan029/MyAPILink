@@ -81,6 +81,12 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('registration', 'RegistrationController@index')->name('registration');
     $frontRoute->post('registration', 'RegistrationController@saveRegistration')->name('registration.save');
     $frontRoute->get('email-verify/{email}', 'RegistrationController@getEmailVerify')->name('email.verify');
+    //start profile route step
+    $frontRoute->get('candidate-profile/{userid}', 'RegistrationController@candidateProfileStep')->name('candidate.profile');
+    $frontRoute->get('candidate/resumedownaload/{userid}', 'RegistrationController@candidateDownloadResume')->name('candidate.resume');
+    $frontRoute->get('candidate/welcome/{userid}', 'RegistrationController@getWelcomePage')->name('candidate.welcome');
+    $frontRoute->get('candidate/success/{userid}', 'RegistrationController@candidateProfileLogin')->name('candidate.login');
+    //end profile route step
     $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
     $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');
 
@@ -107,7 +113,6 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->post('send-forgot-password-mail', 'HomeController@forgotPassword')->name('send-forgot-password-mail');
     $frontRoute->get('forgotpassword-user/{token}', 'HomeController@resetPassword')->name('forgotpassword-user');
     $frontRoute->post('user-reset-password', 'HomeController@updatePassword')->name('user-reset-password');
-    
 });
 
 Route::middleware(['auth:web'])->group(function ($route) {
@@ -121,7 +126,7 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->post('update-notifications-flag', 'ManagerController@updateNotificationsFlag')->name('update-notifications-flag');
         $frontRoute->post('update-delete-flag', 'ManagerController@updateDeleteAccountFlag')->name('update-delete-flag');
         $frontRoute->get('manager-message', 'ManagerController@chatIndex')->name('manager-message');
-        
+
         $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
         $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');
         $frontRoute->get('view-establishment-account/{id}', 'EstablishmentController@show')->name('view-establishment-account');
@@ -136,7 +141,7 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->get('candidate-message', 'CandidateController@chatIndex')->name('candidate-message');
         $frontRoute->get('candidate-message-list-ajax', 'CandidateController@messageListAjax')->name('candidate-message-list-ajax');
         $frontRoute->get('last-mesage', 'CandidateController@lastMessageCheck')->name('last-mesage');
-    
+
         $frontRoute->post('candidate-sendmessage', 'CandidateController@sendmessage')->name('candidate-sendmessage');
         $frontRoute->post('user/logout', 'HomeController@logout')->name('user-logout');
         $frontRoute->get('search-job', 'SearchAdController@index')->name('searchjob');

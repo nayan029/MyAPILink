@@ -202,6 +202,9 @@ class ManagerController extends Controller
         {
             Session::flash('success','Email has been verified successfully..');
             return redirect()->route('profile');
+        }else{
+            Session::flash('error','Email has been already verified so now you can login');
+            return redirect()->route('registration');
         }
     }
 }

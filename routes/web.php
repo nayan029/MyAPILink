@@ -81,6 +81,9 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('registration', 'RegistrationController@index')->name('registration');
     $frontRoute->post('registration', 'RegistrationController@saveRegistration')->name('registration.save');
     $frontRoute->get('email-verify/{email}', 'RegistrationController@getEmailVerify')->name('email.verify');
+
+    $frontRoute->get('manager/email-verify/{email}', 'ManagerController@getEmailVerify')->name('manager.email.verify');
+
     //start profile route step
     $frontRoute->get('candidate-profile/{userid}', 'RegistrationController@candidateProfileStep')->name('candidate.profile');
     $frontRoute->get('candidate/resumedownaload/{userid}', 'RegistrationController@candidateDownloadResume')->name('candidate.resume');

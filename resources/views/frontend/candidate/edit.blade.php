@@ -42,14 +42,14 @@
                                 <div class="mb-4">
                                     <h5 class="dark-tit">A propos de moi <span class="invalid-error text-danger">*</span></h5>
                                     <div class="">
-                                        <textarea name="about_me" class="cand-job-sec mt-4 bg-f6" cols="30" rows="10">{{auth()->guard('web')->user()->about_me}}</textarea>
+                                        <textarea name="about_me" class="mb-0 bg-f6 edit-textarea" cols="30" rows="5">{{auth()->guard('web')->user()->about_me}}</textarea>
                                     </div>
                                 </div>
 
                                 <div>
                                     <div class="sr-rel personinfo-form mb-4">
                                         <h5 class="dark-tit">Situation actuelle : <span class="invalid-error text-danger">*</span></h5> 
-                                        <select required="" name="current_situation" class="form-control arrow-down profile-drop">
+                                        <select required="" name="current_situation" class="edit-select form-control arrow-down profile-drop select2 arrow-change">
                                             <!-- <option value="" hidden=""></option> -->
                                             <option @if(auth()->guard('web')->user()->current_situation=="en poste") selected  @endif value="en poste">en poste</option>
                                             <option @if(auth()->guard('web')->user()->current_situation=="En recherche active") selected  @endif value="En recherche active">En recherche active</option>
@@ -73,21 +73,47 @@
                                     </div>
                                     <div class="sr-rel personinfo-form mb-3">
                                         <h5 class="dark-tit">Disponible : <span class="invalid-error text-danger">*</span></h5>
-                                        <select required="" name="available_day" class="form-control arrow-down profile-drop">
+                                        <select required="" name="available_day" class="edit-select form-control arrow-down profile-drop select2 arrow-change">
                                             <!-- <option value="" hidden=""></option> -->
-                                            <option @if(auth()->guard('web')->user()->available_day=="Dès aujourd’hui") selected @endif value="Dès aujourd’hui">Dès aujourd’hui</option>
-                                            <option @if(auth()->guard('web')->user()->available_day=="Lorem ipsum") selected @endif value="Lorem ipsum">Lorem ipsum</option>
+                                            <option @if(auth()->guard('web')->user()->available_day=="Dès aujourd’hui") selected @endif value="Dès aujourd’hui">dès le …</option>
+                                            <option @if(auth()->guard('web')->user()->available_day=="Lorem ipsum") selected @endif value="Lorem ipsum">préavis de ..</option>
                                         </select>
                                         <img src="{{asset('frontend/images/imgs-svg/down-arrow.svg')}}" alt="" class="arrw-downimg editprof-img">
                                     </div>
+
+                                    <div class="box-edit">
+                                            <div class="form-group">
+                                                <input type="text" class="datepicker1 form-control bg-f6 inputicon2 edit-placeholder pd-date" placeholder="dès le"></div>
+                                        </div>
                                     <div class="sr-rel personinfo-form mb-4">
                                         <select required="" name="available_time" class="form-control arrow-down profile-drop">
                                             <!-- <option value="" hidden=""></option> -->
-                                            <option @if(auth()->guard('web')->user()->available_time=="À temps plein") selected @endif value="À temps plein">À temps plein</option>
-                                            <option  @if(auth()->guard('web')->user()->available_time=="Lorem ipsum") selected @endif value="Lorem ipsum">Lorem ipsum</option>
+                                            <option @if(auth()->guard('web')->user()->available_time=="1 mois") selected @endif value="1 mois">1 mois</option>
+                                            <option  @if(auth()->guard('web')->user()->available_time=="2 mois") selected @endif value="2 mois">2 mois</option>
+                                            <option  @if(auth()->guard('web')->user()->available_time=="3 mois") selected @endif value="3 mois">3 mois</option>
                                         </select>
                                         <img src="{{asset('frontend/images/imgs-svg/down-arrow.svg')}}" alt="" class="arrw-downimg editprof-img">
                                     </div>
+                                    <div class="box-edit">
+                                            <div class="form-group">
+                                                <input class="form-control bg-f6 inputicon2 edit-placeholder" placeholder="Autre">
+                                            </div>
+                                        </div>
+                                        <div class="sr-rel  mb-4">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="editprof3">
+                                                <label class="custom-control-label login-cus-check edprof-checklabel" for="editprof3">à temps plein</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="editprof4">
+                                                <label class="custom-control-label login-cus-check edprof-checklabel" for="editprof4">à temps partiel</label>
+                                            </div>
+                                            <!-- <select required="" class="form-control arrow-down profile-drop">
+                                                <option value="">À temps plein</option>
+                                                <option value="">Lorem ipsum</option>
+                                            </select>
+                                            <img src="images/imgs-svg/down-arrow.svg" alt="" class="arrw-downimg editprof-img"> -->
+                                        </div>
                                     @php $diplomas=explode(",",auth()->guard('web')->user()->diplomas); @endphp
                                     <div class="mb-4">
                                         <div class="sr-rel personinfo-form mb-3">
@@ -121,7 +147,6 @@
                                             <img src="{{asset('frontend/images/imgs-svg/down-arrow.svg')}}" alt="" class="arrw-downimg editprof-img">
                                         </div>
                                         <a href="javascript:void(0)" class="btn plus  "><img src="{{asset('frontend/images/imgs-svg/plus.svg')}}" alt="" class="pls-img" style="background:#75BFD3;"></a>
-
                                     </div>
 
                                     <div class="sr-rel personinfo-form mb-4">
@@ -185,6 +210,16 @@
                                     <div class="personal_detail_edit detail-person">
                                         <h5 class="ml-2 dark-tit">Détails personnels</h5>
                                         <div class="row mx-0 mt-3">
+                                        <div class="custom-col2 col-md-6">
+                                                    <div class="form-group box-shanone mb-4">
+                                                        <label>Civilité</label>
+                                                        <select name="civility" class="form-control arrow-change arrow-down profile-drop select2">
+                                                            <option value="Mme">Mme</option>
+                                                            <option value="Mr">Mr</option>
+                                                        </select>
+                                                        <img src="images/imgs-svg/down-arrow.svg" alt="" class="arrw-downimg civi-img">
+                                                    </div>
+                                                </div>
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="form-group">
                                                     <label>Prénom <span class="invalid-error text-danger">*</span></label>
@@ -243,26 +278,16 @@
                                         <div class="pt-5">
                                             <h5 class="ml-2 dark-tit">Expériences <span class="invalid-error text-danger">*</span></h5>
                                             <div class="row mx-0 mt-3">
-                                                <div class="custom-col1 col-md-3">
-                                                    <div class="sr-rel personinfo-form mb-4">
-                                                        <select required="" class="form-control arrow-down profile-drop">
-                                                            <!-- <option value="" hidden=""></option> -->
-                                                            <option value="de">De</option>
-                                                            <option value="Lorem ipsum">Lorem ipsum</option>
-                                                        </select>
-                                                        <img src="{{asset('frontend/images/imgs-svg/down-arrow.svg')}}" alt="" class="arrw-downimg editprof-img">
+                                                    <div class="custom-col1 col-md-3">
+                                                        <div class="sr-rel personinfo-form mb-4">
+                                                            <input type="text" name="start_date" class="datepicker1 form-control  form-add-establish fn-family pd-date" placeholder="De">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="custom-col1 col-md-3">
-                                                    <div class="sr-rel personinfo-form mb-4">
-                                                        <select required="" class="form-control arrow-down profile-drop">
-                                                            <!-- <option value="" hidden=""></option> -->
-                                                            <option value="">À</option>
-                                                            <option value="">Lorem ipsum</option>
-                                                        </select>
-                                                        <img src="{{asset('frontend/images/imgs-svg/down-arrow.svg')}}" alt="" class="arrw-downimg editprof-img">
+                                                    <div class="custom-col1 col-md-3">
+                                                        <div class="sr-rel personinfo-form mb-4">
+                                                            <input type="text"  name="end_date" class="datepicker1 form-control  form-add-establish fn-family pd-date" placeholder="À">
+                                                        </div>
                                                     </div>
-                                                </div>
                                                 <div class="custom-col2 col-md-6">
                                                     <div class="form-group  mb-4 personinfo-form sr-rel">
 
@@ -272,93 +297,56 @@
                                                 </div>
                                             </div>
                                             <div class="row mx-0">
-                                                <div class="custom-col3 col-md-6">
-                                                    <div class="">
-                                                        <div class="sr-rel personinfo-form mb-3">
-                                                            <select required="" class="form-control arrow-down profile-drop">
-                                                                <option value="">Fonction</option>
-                                                                <option value="">Lorem ipsum</option>
+                                                    <div class="custom-col3 col-md-6">
+                                                        <div class="">
+                                                            <div class="sr-rel personinfo-form mb-3">
+                                                                <input type="text" name="" class="form-control  form-add-establish fn-family pd-date" value="poste occupé">
+                                                            </div>
+                                                            <a href="javascript:void(0)" class="btn plus  "><img src="{{asset('frontend/images/imgs-svg/plus.svg')}}" alt="" class="pls-img" style="background:#75BFD3;"></a>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="custom-col2 col-md-6">
+                                                        <div class="sr-rel personinfo-form mb-4">
+                                                            <select required="" class="form-control arrow-change arrow-down profile-drop select2">
+                                                                <!-- <option value="" hidden=""></option> -->
+                                                                <option value="">CDI</option>
+                                                                <option value="">CDD</option>
+                                                                <option value="">Stage</option>
+                                                                <option value="">Alternance</option>
+                                                                <option value="">Freelance / Indépendant</option>
+                                                                <option value="">Remplaçements</option>
                                                             </select>
                                                             <img src="{{asset('frontend/images/imgs-svg/down-arrow.svg')}}" alt="" class="arrw-downimg editprof-img">
                                                         </div>
-                                                        <a href="javascript:void(0)" class="btn plus  "><img src="{{asset('frontend/images/imgs-svg/plus.svg')}}" alt="" class="pls-img" style="background:#75BFD3;"></a>
                                                     </div>
 
                                                 </div>
-
-                                                <div class="custom-col2 col-md-6">
-                                                    <div class="sr-rel personinfo-form mb-4">
-                                                        <select required="" class="form-control arrow-down profile-drop">
-                                                            <!-- <option value="" hidden=""></option> -->
-                                                            <option value="">Type de poste (CDi, CDD…</option>
-                                                            <option value="">Lorem ipsum</option>
-                                                        </select>
-                                                        <img src="{{asset('frontend/images/imgs-svg/down-arrow.svg')}}" alt="" class="arrw-downimg editprof-img">
-                                                    </div>
-                                                </div>
-
-                                            </div>
                                         </div>
-                                        @php $pedagogy=explode(",",auth()->guard('web')->user()->pedagogy); @endphp
-                                        <div class="pt-5">
-                                            <h5 class="ml-2 dark-tit">Pédagogie appliquée <span class="invalid-error text-danger">*</span></h5>
-                                            <div class="row mx-0 mt-3 editprof-checksec box-edit-profile">
-                                                <div class="col-md-7">
-                                                    <div class="custom-control custom-checkbox profile-check">
-                                                        <input type="checkbox" name="pedagogy[]" value="Maria" @if(in_array('Maria Montessori',$pedagogy)) checked @endif class="custom-control-input" id="Maria Montessori">
-                                                        <label class="custom-control-label pro-check" for="Maria Montessori">Maria
-                                                        </label>
-                                                    </div>
-                                                    <div class="custom-control custom-checkbox profile-check">
-                                                        <input type="checkbox" name="pedagogy[]" value="Pédagogie" @if(in_array("Pédagogie",$pedagogy)) checked @endif class="custom-control-input" id="Pédagogie">
-                                                        <label class="custom-control-label pro-check" for="Pédagogie">Pédagogie
-                                                            Faber et</label>
-                                                    </div>
-                                                    <div class="custom-control custom-checkbox profile-check">
-                                                        <input type="checkbox" name="pedagogy[]" value="Pédagogie" @if(in_array("Pédagogie Reggio",$pedagogy)) checked @endif class="custom-control-input" id="Pédagogie Reggio">
-                                                        <label class="custom-control-label pro-check" for="Pédagogie Reggio">Pédagogie Reggio</label>
-                                                    </div>
-                                                    <div class="custom-control custom-checkbox profile-check">
-                                                        <input type="checkbox" name="pedagogy[]" value="Parler Bambin" @if(in_array("Parler Bambin",$pedagogy)) checked @endif class="custom-control-input" id="Parler Bambin">
-                                                        <label class="custom-control-label pro-check" for="Parler Bambin">Parler
-                                                            Bambin</label>
-                                                    </div>
-                                                    <div class="custom-control custom-checkbox profile-check">
-                                                        <input type="checkbox" name="pedagogy[]" value="Autres" @if(in_array("Autres",$pedagogy)) checked @endif class="custom-control-input" id="Autres">
-                                                        <label class="custom-control-label pro-check" for="Autres">Autres</label>
+                                        @php $pedagogy=explode(",",auth()->guard('web')->user()->pedagogy);    @endphp
+                                        <div class="pt-5  personinfo-form">  
+                                                <h5 class="ml-2 dark-tit">Pédagogie appliquée<span class="invalid-error text-danger">*</span></h5>
+                                                <div class="custom-edit-muti maria-text">
+                                                    <select  name="pedagogy[]"  title="Basic example" multiple="multiple" class="select-multi">
+                                                            <option value="Maria Montessori"@if(in_array('Maria Montessori',$pedagogy)) selected @endif>Maria Montessori</option>
+                                                            <option value="Pédagogie Interactive" @if(in_array("Pédagogie Interactive",$pedagogy)) selected @endif>Pédagogie Interactive</option>
+                                                            <option value="Pédagogie Faber et Mazlish" @if(in_array("Pédagogie Faber et Mazlish",$pedagogy)) selected @endif>Pédagogie Faber et Mazlish</option>
+                                                            <option value="Pickler Loczy" @if(in_array("Pickler Loczy",$pedagogy)) selected @endif >Pickler Loczy</option>
+                                                            <option value="Pédagogie Reggio" @if(in_array("Pédagogie Reggio",$pedagogy)) selected @endif>Pédagogie Reggio</option>
+                                                            <option value="Snoezelen" @if(in_array("Snoezelen",$pedagogy)) selected @endif >Snoezelen</option>
+                                                            <option value="Parler Bambin" @if(in_array("Parler Bambin",$pedagogy)) selected @endif>Parler Bambin</option>
+                                                            <option value="Steiner-Waldorf" @if(in_array("Steiner-Waldorf",$pedagogy)) selected @endif>Pédagogie Steiner-Waldorf</option>
+                                                            <option value="Autres" @if(in_array("Autres",$pedagogy)) selected @endif>Autres</option>
+                                                            <option value="Aucune en particulier" @if(in_array("Aucune en particulier",$pedagogy)) selected @endif>Aucune en particulier</option>
+                                                       </select>
 
 
-
-                                                    </div>
                                                 </div>
-                                                <div class="col-md-5">
-                                                    <div class="custom-control custom-checkbox profile-check">
-                                                        <input type="checkbox" name="pedagogy[]" value="Pédagogie" @if(in_array("Pédagogie Interactive",$pedagogy)) checked @endif class="custom-control-input" id="Pédagogie Interactive">
-                                                        <label class="custom-control-label pro-check" for="Pédagogie Interactive">Pédagogie
-                                                            Interactive</label>
-                                                    </div>
-                                                    <div class="custom-control custom-checkbox profile-check">
-                                                        <input type="checkbox" name="pedagogy[]" value="Pickler" @if(in_array("Pickler Loczy",$pedagogy)) checked @endif class="custom-control-input" id="Pickler Loczy">
-                                                        <label class="custom-control-label pro-check" for="Pickler Loczy">Pickler
-                                                            Loczy</label>
-                                                    </div>
-                                                    <div class="custom-control custom-checkbox profile-check">
-                                                        <input type="checkbox" name="pedagogy[]" value="Snoezelen" @if(in_array("Snoezelen",$pedagogy)) checked @endif class="custom-control-input" id="Snoezelen">
-                                                        <label class="custom-control-label pro-check" for="Snoezelen">Snoezelen</label>
-                                                    </div>
-                                                    <div class="custom-control custom-checkbox profile-check">
-                                                        <input type="checkbox" name="pedagogy[]" value="Pédagogie Steiner" @if(in_array("Pédagogie Steiner",$pedagogy)) checked @endif class="custom-control-input" id="Pédagogie Steiner">
-                                                        <label class="custom-control-label pro-check" for="Pédagogie Steiner">Pédagogie
-                                                            Steiner-</label>
-                                                    </div>
-                                                    <div class="custom-control custom-checkbox profile-check">
-                                                        <input type="checkbox" name="pedagogy[]" value="Aucune en particulier" @if(in_array("Aucune en particulier",$pedagogy)) checked @endif class="custom-control-input" id="Aucune en particulier">
-                                                        <label class="custom-control-label pro-check" for="Aucune en particulier">Aucune en
-                                                            particulier</label>
-                                                    </div>
+                                                <div class="form-group">
+                                                    <input type="text" name="autres" class="form-control bg-f6 inputicon2 edit-placeholder mt-3" placeholder="Autres">
                                                 </div>
                                             </div>
-                                        </div>
 
                                         <div class="pt-5">
                                             <div class="sr-rel personinfo-form mb-4">
@@ -386,24 +374,55 @@
                                                     </select>
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                        <input type="text" name="autres1" class="form-control bg-f6 inputicon2 edit-placeholder mt-3" placeholder="Autres">
+                                                    </div>
                                             <div class="sr-rel personinfo-form mb-4 pt-3">
                                                 <h5 class="dark-tit">Mes valeurs <span class="invalid-error text-danger">*</span></h5>
-                                                <select required="" name="values" class="form-control arrow-down profile-drop">
+                                                <select required="" name="values" class="form-control arrow-change arrow-down profile-drop select2" >
                                                     <!-- <option value="" hidden=""></option> -->
-                                                    <option @if(auth()->guard('web')->user()->values=="Paix") selected @endif value="Paix">Paix</option>
-                                                    <option value="Lorem ipsum" @if(auth()->guard('web')->user()->values=="Lorem ipsum") selected @endif>Lorem ipsum</option>
+                                                    <option value="Authenticité" @if(auth()->guard('web')->user()->values=="Authenticité") selected @endif>Authenticité</option>
+                                                    <option value="Autonomie" @if(auth()->guard('web')->user()->values=="Autonomie") selected @endif>Autonomie</option>
+                                                    <option value="Réussite" @if(auth()->guard('web')->user()->values=="Réussite") selected @endif>Réussite</option>
+                                                    <option value="Créativité" @if(auth()->guard('web')->user()->values=="Créativité") selected @endif>Créativité</option>
+                                                    <option value="Curiosité" @if(auth()->guard('web')->user()->values=="Curiosité") selected @endif>Curiosité</option>
+                                                    <option value="Détermination" @if(auth()->guard('web')->user()->values=="Détermination") selected @endif>Détermination</option>
+                                                    <option value="Justice" @if(auth()->guard('web')->user()->values=="Justice") selected @endif>Justice</option>
+                                                    <option value="Honnêteté" @if(auth()->guard('web')->user()->values=="Honnêteté") selected @endif>Honnêteté</option>
+                                                    <option value="Amour" @if(auth()->guard('web')->user()->values=="Amour") selected @endif>Amour</option>
+                                                    <option value="Paix" @if(auth()->guard('web')->user()->values=="Paix") selected @endif>Paix</option>
+                                                    <option value="Responsabilité" @if(auth()->guard('web')->user()->values=="Responsabilité") selected @endif>Responsabilité</option>
+                                                    <option value="Sécurité" @if(auth()->guard('web')->user()->values=="Sécurité") selected @endif>Sécurité</option>
+                                                    <option value="Respect" @if(auth()->guard('web')->user()->values=="Respect") selected @endif>Respect</option>
+                                                    <option value="Sagesse" @if(auth()->guard('web')->user()->values=="Sagesse") selected @endif>Sagesse</option>
+                                                    <option value="Fiabilité" @if(auth()->guard('web')->user()->values=="Fiabilité") selected @endif>Fiabilité</option>
+                                                    <option value="Autres" @if(auth()->guard('web')->user()->values=="Autres") selected @endif>Autres</option>
+                                                    
                                                 </select>
                                                 <img src="{{asset('frontend/images/imgs-svg/down-arrow.svg')}}" alt="" class="arrw-downimg editprof-img">
                                             </div>
                                             <div class="sr-rel personinfo-form mb-4 pt-3">
                                                 <h5 class="dark-tit">Langues parlées couramment <span class="invalid-error text-danger">*</span></h5>
-                                                <select required="" name="languages_spoken" class="form-control arrow-down profile-drop">
+                                                <select required="" name="languages_spoken" class="edit-select form-control arrow-down profile-drop select2 arrow-change">
                                                     <!-- <option value="" hidden=""></option> -->
-                                                    <option @if(auth()->guard('web')->user()->languages_spoken=="Français") selected @endif value="Français">Français</option>
-                                                    <option @if(auth()->guard('web')->user()->languages_spoken=="Lorem ipsum") selected @endif value="Lorem ipsum">Lorem ipsum</option>
+                                                    <option value="Français" @if(auth()->guard('web')->user()->languages_spoken=="Français") selected @endif >Français</option>
+                                                    <option value="Anglais" @if(auth()->guard('web')->user()->languages_spoken=="Anglais") selected @endif >Anglais</option>
+                                                    <option value="Espagnol" @if(auth()->guard('web')->user()->languages_spoken=="Espagnol") selected @endif >Espagnol</option>
+                                                    <option value="Allemand" @if(auth()->guard('web')->user()->languages_spoken=="Allemand") selected @endif >Allemand</option>
+                                                    <option value="Italien" @if(auth()->guard('web')->user()->languages_spoken=="Italien") selected @endif >Italien</option>
+                                                    <option value="Portugais" @if(auth()->guard('web')->user()->languages_spoken=="Portugais") selected @endif >Portugais</option>
+                                                    <option value="Russe" @if(auth()->guard('web')->user()->languages_spoken=="Russe") selected @endif >Russe</option>
+                                                    <option value="Arabe" @if(auth()->guard('web')->user()->languages_spoken=="Arabe") selected @endif >Arabe</option>
+                                                    <option value="Chinois" @if(auth()->guard('web')->user()->languages_spoken=="Chinois") selected @endif >Chinois</option>
+                                                    <option value="Néerlandais" @if(auth()->guard('web')->user()->languages_spoken=="Néerlandais") selected @endif >Néerlandais</option>
+                                                    <option value="Autres" @if(auth()->guard('web')->user()->languages_spoken=="Autres") selected @endif >Autres</option>
+                                                    
                                                 </select>
                                                 <img src="{{asset('frontend/images/imgs-svg/down-arrow.svg')}}" alt="" class="arrw-downimg editprof-img">
                                             </div>
+                                            <div class="form-group">
+                                                        <input type="text" name="Autres3" class="form-control bg-f6 inputicon2 edit-placeholder mt-0" placeholder="Autres">
+                                                    </div>
 
 
                                         </div>
@@ -468,9 +487,20 @@
         $(".bienveillance-text .multiselect").html("Bienveillance");
 
     });
+    $(document).ready(function() {
+        $(".datepicker1").datepicker({
+            format: 'dd/mm/yyyy'
+        });
+        $('.time1').timepicker({
+            defaultTime: null,
+            timeFormat: "HH:mm",
+            showMeridian: false,
+        });
+    });
 </script>
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 {!! $validator->selector('#update-profile') !!}
+
 @endsection
 
 </body>

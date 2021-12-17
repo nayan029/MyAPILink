@@ -33,23 +33,16 @@ class WidgetRepository implements WidgetRepositoryInterface
     public function updateWidget(Request $request, $id)
     {
         $data = $request->all();
-
-        $image1 = 'required|image|mimes:jpeg,png,jpg,gif,svg';
-
         $image = "";
         $widget = $this->getSingleWidget($id);
         if ($request->hasFile('image')) {
             $image = $this->uploadImage($request->file('image'), 'widgets');
-        } elseif ($request->hasFile('image')){
+        } else {
             $image = $widget->image;
-        }elseif(!$image1){
-                return false;
-        }else {
-            $data['image'] = $image;
-            $data['slug'] = $request->widget;
-            $widget->update($data);
         }
-      
+        $data['image'] = $image;
+        $data['slug'] = $request->widget;
+        $widget->update($data);
         return $widget;
     }
 

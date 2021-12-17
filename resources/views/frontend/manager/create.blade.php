@@ -21,6 +21,10 @@
     .error {
         color: Red;
     }
+    form i {
+    margin-left: -30px;
+    cursor: pointer;
+}
 </style>
 
 <body>
@@ -51,7 +55,7 @@
                                     <div class="col-md-2 mb-2">
                                         <div class="form-group">
                                             <label class="">Civilité<span class="text-danger">*</span></label>
-                                            <input id="civility" type="text" name="civility" class="form-control form-add-establish pl-23">
+                                            <input id="civility" type="text" maxlength="5" name="civility" class="form-control form-add-establish pl-23">
                                             <span class="civility-error text-danger">@error ('civility') {{$message}} @enderror</span>
                                         </div>
                                     </div>
@@ -74,8 +78,8 @@
                                     <div class="col-md-6 mb-2">
                                         <div class="form-group">
                                             <label class="">Téléphone<span class="text-danger">*</span></label>
-                                            <input id="telephone" type="text" name="telephone" maxlength="10" onkeypress='return isNumber(event)' class="form-control form-add-establish pl-23">
-                                            <span class="telephone-error text-danger">@error ('telephone') {{$message}} @enderror</span>
+                                            <input id="phone" type="text" name="phone" maxlength="10" onkeypress='return isNumber(event)' class="form-control form-add-establish pl-23">
+                                            <span class="phone-error text-danger">@error ('phone') {{$message}} @enderror</span>
 
                                         </div>
                                     </div>
@@ -91,8 +95,9 @@
                                         <div class="form-group">
                                             <label class="">Mot de passe<span class="text-danger">*</span></label>
                                             <input id="password" type="text" name="password" class="form-control form-add-establish pl-23">
+                                            <i class="bi bi-eye-slash" style="background-color: black;" id="togglePassword"></i>
                                             <span class="password-error text-danger">@error ('password') {{$message}} @enderror</span>
-
+                                            
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-2">
@@ -321,7 +326,7 @@
             <div class="row">
                 <div class="col-md-2">
                     <div class="back-apilink">
-                        <a href="javascript:void(0)">Retour sur le site Apilink</a>
+                        <a href="https://appworkdemo.com/apilink/public/">Retour sur le site Apilink</a>
                     </div>
                 </div>
                 <div class="col-md-5 text-right">
@@ -424,15 +429,7 @@
         inViewport();
         inViewport1();
     });
-
-
-
-
     $("#fix-number-ul-id li:nth-child(1)").addClass('scale');
-
-
-
-
     function inViewport() {
 
         $('.ustep2').each(function() {
@@ -471,8 +468,6 @@
             }
         });
     }
-
-
     $('.register-yellow').on('click', function(event) {
         event.preventDefault();
 
@@ -500,9 +495,10 @@
                     $('.civility-error').text(response.errors.civility);
                     $('.firstname-error').text(response.errors.firstname);
                     $('.lastname-error').text(response.errors.lastname);
-                    $('.telephone-error').text(response.errors.telephone);
+                    $('.phone-error').text(response.errors.phone);
                     $('.email-error').text(response.errors.email);
                     $('.password-error').text(response.errors.password);
+                    $('.password_confirmation-error').text(response.errors.password_confirmation);
                     $('.radio-error').text(response.errors.radio);
                     $('.represent-error').text(response.errors.represent);
                     $('.organization-error').text(response.errors.organization);

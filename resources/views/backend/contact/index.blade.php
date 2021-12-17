@@ -57,9 +57,6 @@
                 <table id="contact-us-table" class="table table-bordered table-hover" class="display" style="width:100%">
                     <thead>
                         <tr>
-                            <th>
-                                {{__("messages.id")}}
-                            </th>
                             <th>{{__("messages.firstname")}}</th>
                             <th>{{__("messages.lastname")}}</th>
                             <th>{{__("messages.email")}}</th>

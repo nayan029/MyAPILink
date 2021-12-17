@@ -87,7 +87,7 @@ return [
     'mimes' => 'File must :attribute!! Like: :values.',
     'mimetypes' => 'The :attribute must be a file of type: :values.',
     'min' => [
-        'numeric' => 'The :attribute must be at least :min.',
+        'numeric' => 'The :Attribute must be at least :min.',
         'file' => 'The :attribute must be at least :min kilobytes.',
         'string' => ':Attribute atleast :min characters allowed.',
         'array' => 'The :attribute must have at least :min items.',
@@ -95,7 +95,7 @@ return [
     'multiple_of' => 'The :attribute must be a multiple of :value.',
     'not_in' => 'The selected :attribute is invalid.',
     'not_regex' => 'The :attribute format is invalid.',
-    'numeric' => 'The :attribute must be a number.',
+    'numeric' => 'The :Attribute must be a number.',
     'password' => 'The password is incorrect.',
     'present' => 'The :attribute field must be present.',
     'regex' => 'The :Attribute format is invalid.',

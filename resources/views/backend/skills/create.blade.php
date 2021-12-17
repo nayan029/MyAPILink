@@ -64,7 +64,7 @@
                                     <div class="error"><span class="titerror"></span></div>
                                 </div>
                             </div>
-                            <div class="col-md-1 mb-5">
+                            <div style="margin-bottom :50px;">
                                 <a href="javascript:void(0);" class="btn btn-success btn-xs mt-4" onclick="return validation();" id="addNewRow"><i class="fa fa-plus"></i></a>
                             </div>
                         </div>
@@ -103,6 +103,7 @@
             </div>  
 
         </div>
+    
 
         {!! Form::close() !!}
     </div>
@@ -139,15 +140,7 @@
         }
 
         var title = $('#title').val();
-        if (title == "") {
-            $('.titerror').html("Please enter your Title");
-            temp++
-        } else {
-            $('.titerror').html("");
-        }
-
-        var title1 = $('#title').val();
-        if (title1 >= 25) {
+        if ((title == "") || (title > 25)) {
             $('.titerror').html("The title must not be greater than 25 characters.");
             temp++
         } else {
@@ -163,6 +156,7 @@
 
         }
 
+        
         if (temp == 0) {
             $(document).on('click', "#addNewRow", function() {
 
@@ -221,8 +215,9 @@
 
 
     $(document).on('click', ".removeRow", function() {
-        var self = $(this);
-        self.parents("#skillbody").remove();
+        var tbl_row = $(this).closest('tr');
+            var row_id = tbl_row.attr('row_id');
+            $("*[row_id=" + row_id + "]").remove();
     });
 </script>
 

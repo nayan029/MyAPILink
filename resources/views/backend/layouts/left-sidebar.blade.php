@@ -61,7 +61,7 @@
                         @break
                         @case('fr')
                         <img height="20px" width="20px" src="{{asset('admin\dist\img\fr.png')}}" style="
-    margin-right: 10px;
+    margin-right: 11px;
     margin-left: 3px;
 ">French
                         @break
@@ -82,14 +82,14 @@
                 <li class="nav-item">
                     <a href="{{route('widget.index')}}" class="nav-link {{ request()->is('widget*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-th"></i>
-                        <p>
+                        <p >
                             {{__("messages.widget")}}
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('partner.index')}}" class="nav-link {{ request()->is('partner*') ? 'active' : '' }}">
-                        <i class="far fa-handshake"></i>&nbsp;&nbsp;
+                        <i class="nav-icon far fa-handshake"></i>
                         <p>
                             {{__("messages.partner")}}
                         </p>
@@ -97,7 +97,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('user.index')}}" class="nav-link {{ request()->is('user*') ? 'active' : '' }}">
-                        <i class="far fa-user"></i>&nbsp;&nbsp;
+                        <i class="nav-icon far fa-user"></i>
                         <p>
                             Users
                         </p>
@@ -105,7 +105,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('job.index')}}" class="nav-link {{ request()->is('job*') ? 'active' : '' }}">
-                        <i class="far fa-user"></i>&nbsp;&nbsp;
+                    <i class="nav-icon fas fa-briefcase"></i>
                         <p>
                             Jobs
                         </p>
@@ -114,7 +114,7 @@
                 @php $i=1; @endphp
                 <li class="nav-item">
                     <a href="{{route('contact.edit',$i)}}" class="nav-link {{ request()->is('contact') ? 'active' : '' }}">
-                        <i class="far fa-address-book"></i>&nbsp;&nbsp;
+                        <i class="nav-icon  far fa-address-book"></i>
                         <p>
                             {{__("messages.contact")}}
                         </p>
@@ -122,7 +122,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('skill.index')}}" class="nav-link {{ request()->is('skill*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-cogs"></i>&nbsp;&nbsp;
+                    <i class="nav-icon fas fa-user-tie"></i> 
                         <p>
                             {{__("messages.skills")}}
                         </p>
@@ -130,7 +130,8 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('contact.index')}}" class="nav-link {{ request()->is('contact-us') ? 'active' : '' }}">
-                        <i class="fas fa-phone-square-alt"></i>&nbsp;&nbsp; <p>
+                        <i class="nav-icon fas fa-phone-square-alt"></i>
+                        <p>
                             {{__("messages.contact us")}}
                         </p>
                     </a>

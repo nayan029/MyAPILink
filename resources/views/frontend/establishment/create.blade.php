@@ -103,12 +103,7 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
-
-
-
-
                                 <div class="form-group">
                                     {!! Form::label('Pédagogie appliquée', 'Pédagogie appliquée') !!}<span class="invalid-error text-danger">*</span>
 

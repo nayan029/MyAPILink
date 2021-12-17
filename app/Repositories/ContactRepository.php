@@ -73,7 +73,6 @@ class ContactRepository implements ContactRepositoryInterface
         foreach ($contactus as $contact) {
         $action  = "<a href='' data-delete='" . $contact->id . "' class='delete_contact' title='Delete'><i class='fa fa-trash text-danger'></i></a>";
             $json['data'][] = [
-                $contact->id,
                 $contact->firstname,
                 $contact->lastname,
                 $contact->email,

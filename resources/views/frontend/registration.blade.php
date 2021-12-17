@@ -100,40 +100,40 @@
             <div class="modal-body login-modal-body">
                 <form id="manager-login" method="post">
                     @csrf
-                <div class="">
-                    <div class="lmodal-logo mb-20">
-                        <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="">
-                    </div>
-                    <button class="btn social-btn facebook mb-20">
-                        <img src="{{asset('frontend/images/imgs-svg/facebook-f.svg')}}"> Connexion avec
-                        Facebook
-                    </button>
-                    <button class="btn social-btn google mb-20">
-                        <img src="{{asset('frontend/images/imgs-svg/google.svg')}}"> Connexion avec
-                        Google
-                    </button>
-                    <div class="ordiv mb-20"><span>OU</span></div>
-                    <div class="mb-20">
-                        <div class="form-group">
-                            <input type="text" name="email" placeholder="Email / Nom d'utilisateur*" class="form-control email-place login-input inputicon2">
-                            <span class="email-error text-danger">@error ('email') {{$message}} @enderror</span>
+                    <div class="">
+                        <div class="lmodal-logo mb-20">
+                            <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="">
                         </div>
-                    </div>
-                    <div class="mb-20">
-                        <div class="form-group sr-rel">
-                            <input type="password" name="password" placeholder="Mot de passe*" class="form-control  email-place login-input inputicon2 sr-rel" id="password">
-                            <img src="{{asset('frontend/images/about/eye.svg')}}" alt="" class="sr-eye" id="toggle-password">
-                            <span class="password-error text-danger">@error ('password') {{$message}} @enderror</span>
+                        <button class="btn social-btn facebook mb-20">
+                            <img src="{{asset('frontend/images/imgs-svg/facebook-f.svg')}}"> Connexion avec
+                            Facebook
+                        </button>
+                        <button class="btn social-btn google mb-20">
+                            <img src="{{asset('frontend/images/imgs-svg/google.svg')}}"> Connexion avec
+                            Google
+                        </button>
+                        <div class="ordiv mb-20"><span>OU</span></div>
+                        <div class="mb-20">
+                            <div class="form-group">
+                                <input type="text" name="email" placeholder="Email / Nom d'utilisateur*" class="form-control email-place login-input inputicon2">
+                                <span class="email-error text-danger">@error ('email') {{$message}} @enderror</span>
+                            </div>
+                        </div>
+                        <div class="mb-20">
+                            <div class="form-group sr-rel">
+                                <input type="password" name="password" placeholder="Mot de passe*" class="form-control  email-place login-input inputicon2 sr-rel" id="password">
+                                <img src="{{asset('frontend/images/about/eye.svg')}}" alt="" class="sr-eye" id="toggle-password">
+                                <span class="password-error text-danger">@error ('password') {{$message}} @enderror</span>
                                 <span class="invalid-error text-danger">@error ('invalid') {{$message}} @enderror</span>
 
                             </div>
                         </div>
 
                         <div class="mb-20 text-right">
-                        <a href="#" data-toggle="modal" data-target="#forgot_password_modal"  class="forgot-link forgot_password_mdl">J'ai perdu mon mot de passe?</a>
+                            <a href="#" data-toggle="modal" data-target="#forgot_password_modal" class="forgot-link forgot_password_mdl">J'ai perdu mon mot de passe?</a>
                         </div>
                         <div class="col-md-12 text-center res-dec mb-3 ">
-                            <button id="loginbtn" type="submit"  class="btn btn-blue w-100">Connexion</button>
+                            <button id="loginbtn" type="submit" class="btn btn-blue w-100">Connexion</button>
                         </div>
                         <div class=" meconnecter">
                             <p class="proxima-nove">Pas encore membre?<a href="javascript:void(0);" class="openRegister"> Inscrivez-vous</a></p>
@@ -160,7 +160,7 @@
 
                     <div class="text-center">
 
-                         <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="">
+                        <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="">
 
                     </div>
 
@@ -180,7 +180,7 @@
 
                     </div>
 
-                    
+
                 </form>
 
             </div>
@@ -241,23 +241,25 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="accept_condition" name="accept_condition">
-
-                                    <label class="custom-control-label login-cus-check" for="accept_condition">J'accepte
+                                    <input type="checkbox" class="custom-control-input" id="terms" name="terms[]">
+                                    <label class="custom-control-label login-cus-check" for="terms">J'accepte
                                         les
                                         conditions générales d'utilisation d'APILINK - J'accepte que mon profil soit
                                         visible
-                                        par l'ensemble des établissements employeurs, partenaires d'APILINK.</label>
-                                    <span class="text-danger error" id="accept_condition-error"></span>
+                                        par l'ensemble des établissements employeurs, partenaires d'APILINK.
+                                        <br><span class="text-danger error" id="terms-error"></span>
+                                    </label>
                                 </div>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="accept_sensitive_data" name="accept_sensitive_data">
+                                    <input type="checkbox" class="custom-control-input" id="terms" name="terms">
 
-                                    <label class="custom-control-label login-cus-check" for="accept_sensitive_data">J'accepte
+                                    <label class="custom-control-label login-cus-check" for="terms">J'accepte
                                         que mes
                                         données sensibles soient traitées par APILINK pour me fournir le
-                                        service.</label>
-                                    <span class="text-danger error" id="accept_sensitive_data-error"></span>
+                                        service.
+                                        <br> <span class="text-danger error" id="accept_sensitive_data-error"></span>
+
+                                    </label>
                                 </div>
 
                             </div>
@@ -326,7 +328,7 @@
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 {!! $forgotPasswordValidator->selector('#forgotPasswordForm') !!}
 <script>
-     function isNumber(evt) {
+    function isNumber(evt) {
         evt = (evt) ? evt : window.event;
         var charCode = (evt.which) ? evt.which : evt.keyCode;
         if (charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -354,11 +356,11 @@
     });
 </script>
 <script>
-    $(document).on('click','.openLogin',function(){
+    $(document).on('click', '.openLogin', function() {
         $("#header-Modallogin1").modal('hide');
         $("#Modallogin2").modal('show');
     });
-    $(document).on('click','.openRegister',function(){
+    $(document).on('click', '.openRegister', function() {
         $("#header-Modallogin1").modal('show');
         $("#Modallogin2").modal('hide');
     });
@@ -386,8 +388,8 @@
                 $('#email-error').text(response.responseJSON.errors.email);
                 $('#phone-error').text(response.responseJSON.errors.phone);
                 $('#password-error').text(response.responseJSON.errors.password);
-                $('#accept_condition-error').text(response.responseJSON.errors.accept_condition);
-                $('#accept_sensitive_data-error').text(response.responseJSON.errors.accept_sensitive_data);
+                $('#terms-error').text(response.responseJSON.errors.terms);
+                $('#accept_sensitive_data-error').text(response.responseJSON.errors.terms);
             }
         });
 
@@ -396,4 +398,5 @@
 @include('frontend.layouts.login_script')
 
 </body>
+
 </html>

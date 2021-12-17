@@ -18,7 +18,7 @@ class ManagerController extends Controller
     protected $managerRepository = "";
     protected   $updatevalidationrules =
     [
-        'civility' => 'required',
+        'civility' => 'required|max:5',
         'firstname' => "required|max:25",
         'lastname' => "required|max:25",
         'roles' => "required",
@@ -44,7 +44,6 @@ class ManagerController extends Controller
         $this->applyJobRepository = $applyJobRepository;
     }
 
-
     public function index()
     {
         return view('frontend.manager.create');
@@ -52,19 +51,18 @@ class ManagerController extends Controller
 
     public function storeData(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
-            'civility' => 'required',
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'telephone' => 'required|numeric|digits:10',
+            'civility' => 'required|regex:/^([^0-9]*)$/',
+            'firstname' => 'required|max:25|regex:/^([^0-9]*)$/',
+            'lastname' => 'required|max:25|regex:/^([^0-9]*)$/',
+            'phone' => 'required|numeric|digits:10',
             'email' => 'required|email|unique:users,email,NULL,id,deleted_at,NULL',
             'password' => 'required|confirmed|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
             'represent' => 'required',
-            'organization' => 'required',
-            'number_of_establishments' => 'required',
+            'organization' => 'required|max:75',
+            'number_of_establishments' => 'required|numeric|digits:5',
             'address' => 'required',
-            'postal_code' => 'required|digits:6',
+            'postal_code' => 'required|digits:5',
             'city' => 'required',
         ]);
 

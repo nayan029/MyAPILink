@@ -27,9 +27,6 @@ class EstablishmentController extends Controller
         'garden' => 'required',
         'applied_pedagogy' => 'required',
         'our_values' => 'required',
-        
-
-
     ];
     protected   $imageValidationRules =
     [

@@ -16,8 +16,8 @@ class ContactUsController extends Controller
     public function storeContact(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'firstname' => 'required',
-            'lastname' => 'required',
+            'firstname' => 'required|max:25|regex:/^([^0-9]*)$/',
+            'lastname' => 'required|max:25|regex:/^([^0-9]*)$/,',
             'email' => 'required|unique:contact_us|email    ',
             'description' => 'required',
         ]);
@@ -27,7 +27,7 @@ class ContactUsController extends Controller
         } else {
             $data = ContactUs::contactUsData($request);
             if ($data) {
-                return response()->json(['status' => true, 'message' => 'Thank you for contact us!']);
+                return response()->json(['status' => true, 'message' => 'Thank you for Contact us']);
             }
         }
     }

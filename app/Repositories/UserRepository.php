@@ -42,8 +42,8 @@ class UserRepository implements UserRepositoryInterface
             $query->whereRaw('email LIKE "%' . $request->query('email') . '%"');
         }
 
-        if ($request->query('phone') != '') {
-            $query->whereRaw('phone LIKE "%' . $request->query('phone') . '%"');
+        if ($request->query('mobile') != '') {
+            $query->whereRaw('phone LIKE "%' . $request->query('mobile') . '%"');
         }
 
         $recordstotal = $query->count();

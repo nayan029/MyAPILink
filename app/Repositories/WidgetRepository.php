@@ -14,30 +14,42 @@ class WidgetRepository implements WidgetRepositoryInterface
 
     public function storeWidget(Request $request)
     {
-        $image = "";
-        if ($request->hasFile('image')) {
-            $image = $this->uploadImage($request->file('image'), 'widgets');
+        $checkExits = Widget::where('title','LIKE',$request->title)->first();
+        if($checkExits){
+              return false;
+        }else{
+            $image = "";
+            if ($request->hasFile('image')) {
+                $image = $this->uploadImage($request->file('image'), 'widgets');
+            }
+            $data = $request->all();
+            $data['slug'] = $request->widget;
+            $data['image'] = $image;
+            return Widget::create($data);
         }
-        $data = $request->all();
-        $data['slug'] = $request->widget;
-        $data['image'] = $image;
-        return Widget::create($data);
+      
     }
 
     public function updateWidget(Request $request, $id)
     {
         $data = $request->all();
 
+        $image1 = 'required|image|mimes:jpeg,png,jpg,gif,svg';
+
         $image = "";
         $widget = $this->getSingleWidget($id);
         if ($request->hasFile('image')) {
             $image = $this->uploadImage($request->file('image'), 'widgets');
-        } else {
+        } elseif ($request->hasFile('image')){
             $image = $widget->image;
+        }elseif(!$image1){
+                return false;
+        }else {
+            $data['image'] = $image;
+            $data['slug'] = $request->widget;
+            $widget->update($data);
         }
-        $data['image'] = $image;
-        $data['slug'] = $request->widget;
-        $widget->update($data);
+      
         return $widget;
     }
 
@@ -75,7 +87,6 @@ class WidgetRepository implements WidgetRepositoryInterface
             0 => 'widgets.title',
             1 => 'widgets.slug',
             2 => 'widgets.image',
-            3 => 'widgets.description',
 
         );
 
@@ -88,9 +99,6 @@ class WidgetRepository implements WidgetRepositoryInterface
         }
         if (!empty($searchImage)) {
             $query->where('image', 'like', '%' . $searchImage . '%');
-        }
-        if (!empty($searchDesc)) {
-            $query->where('description', 'like', '%' . $searchDesc . '%');
         }
         $recordstotal = $query->count();
         $sortColumnName = $sortcolumns[$order[0]['column']];
@@ -117,7 +125,6 @@ class WidgetRepository implements WidgetRepositoryInterface
                 $nameAction,
                 $slug,
                 $Image,
-                $widget->description,
             ];
         }
         return $json;

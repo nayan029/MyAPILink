@@ -87,20 +87,7 @@ class RegistrationController extends Controller
 
     public function candidateDownloadResume($userId)
     {
-        // $data = [
-        //     'title' => 'Welcome to ItSolutionStuff.com',
-        //     'date' => date('m/d/Y')
-        // ];
-        // $pdf = PDF::loadView('frontend.candidate.resume-download', $data);
-    
-        // return $pdf->download('itsolutionstuff.pdf');
         return $this->registrationRepository->downalodStepResume($userId);
-        // if ($data) {
-        //     return response()->json([
-        //         'success' => true,
-        //         'message' => 'CV download successfully'
-        //     ]);
-        // }  
     }
 
     public function getWelcomePage($id)

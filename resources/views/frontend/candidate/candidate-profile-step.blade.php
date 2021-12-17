@@ -402,7 +402,7 @@
                 <div class="wel-hgt d-flex justify-content-center align-items-center">
                     <div class="row d-flex justify-content-center">
                         <div>
-                            <a href="javascript:void(0);" class="btn btn-blue download-btn"><img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" alt="" class="mr-2" download>Télécharger mon cv</a>
+                            <a href='{{route("candidate.resume",$updateUser->id)}}' class="btn btn-blue download-btn"><img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" alt="" class="mr-2" download>Télécharger mon cv</a>
                         </div>
                     </div>
                 </div>
@@ -831,31 +831,6 @@
             }
         })
     }
-
-    function downloadFile(response) {
-        var blob = new Blob([response], {
-            type: 'application/pdf'
-        })
-        var url = URL.createObjectURL(blob);
-       return location.assign(url);
-    }
-    $(document).on("click", ".download-btn", function() {
-        $.ajax({
-            url: '{{route("candidate.resume",$updateUser->id)}}',
-            method: 'get',
-            dataType: 'json',
-            success: function(response) {
-                downloadFile(response);
-                // var blob = new Blob([response], {
-                //     type: 'application/pdf'
-                // })
-                // var url = URL.createObjectURL(blob);
-                // console.log(location.assign(url));
-                // location.assign(url);
-                toastr.success("CV download successfully");
-            }
-        });
-    });
 </script>
 
 </html>

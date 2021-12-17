@@ -6,7 +6,7 @@
     <table width="100%">
         <thead>
             <tr>
-                <td style="font-size: 25px;display: block;text-align: center;color: #EC91BC;border-bottom: 2px solid #000;background: #192842;" colspan='2'>Apilink Resume</td>
+                <td style="font-size: 25px;text-align: center;color: #EC91BC;border-bottom: 2px solid #000;background: #192842;">Apilink Resume</td>
             </tr>
         </thead>
     </table>
@@ -14,7 +14,7 @@
         <table width="100%" style="border:2px solid #000;border-bottom:0;border-top: 0;">
             <thead>
                 <tr>
-                    <td style="font-size: 25px;display: block;text-align: center;color: #75bfd3;border-bottom: 2px solid #000;background: #000000db;" colspan='2'>Infos Personnelles</td>
+                    <td style="font-size: 25px;text-align: center;color: #75bfd3;border-bottom: 2px solid #000;background: #000000db;">Infos Personnelles</td>
                 </tr>
             </thead>
             <tbody>
@@ -47,7 +47,7 @@
         <table width="100%" style="border:2px solid #000;border-bottom:0">
             <thead>
                 <tr>
-                    <td style="font-size: 25px;display: block;text-align: center;color: #75bfd3;border-bottom: 2px solid #000;background: #000000db;" colspan='2'>Situation actuelle</td>
+                    <td style="font-size: 25px;text-align: center;color: #75bfd3;border-bottom: 2px solid #000;background: #000000db;">Situation actuelle</td>
                 </tr>
             </thead>
             <tbody>
@@ -69,7 +69,7 @@
         <table width="100%" style="border:2px solid #000;border-bottom:0">
             <thead>
                 <tr>
-                    <td style="font-size: 25px;display: block;text-align: center;color: #75bfd3;border-bottom: 2px solid #000;background: #000000db;" colspan='2'>Mon parcours</td>
+                    <td style="font-size: 25px;text-align: center;color: #75bfd3;border-bottom: 2px solid #000;background: #000000db;">Mon parcours</td>
                 </tr>
             </thead>
             <tbody>
@@ -95,7 +95,7 @@
         <table width="100%" style="border:2px solid #000;border-bottom:0">
             <thead>
                 <tr>
-                    <td style="font-size: 25px;display: block;text-align: center;color: #75bfd3;border-bottom: 2px solid #000;background: #000000db;" colspan='2'>A propos de moi</td>
+                    <td style="font-size: 25px;text-align: center;color: #75bfd3;border-bottom: 2px solid #000;background: #000000db;">A propos de moi</td>
                 </tr>
             </thead>
             <tbody>

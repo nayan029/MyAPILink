@@ -14,27 +14,27 @@ class WidgetController extends Controller
 {
 
     protected $storevalidationrules = [
-        'title' => 'required|max:255',
+        'title' => 'required|max:25|regex:/^[a-zA-Z\s]*$/',
         'image' => 'required|mimes:jpeg,png,jpg,gif,svg',
         'description' => 'required',
-        'slug' => 'required',
+        'widget' => 'required',
     ];
 
 
     protected $updatevalidationrules = [
-        'title' => 'required|max:255',
+        'title' => 'required|max:25|regex:/^[a-zA-Z\s]*$/',
         'description' => 'required',
-        'slug' => 'required',
+        'widget' => 'required',
     ];
 
     protected $slugvalidationrules = [
        'image' => 'required|mimes:jpeg,png,jpg,gif,svg',
         'description' => 'required',
-        'slug' => 'required',
+        'widget' => 'required',
     ];
 
     protected $slugupdaterules = [
-        'slug' => 'required',
+        'widget' => 'required',
         'description' => 'required',
     ];
 
@@ -79,7 +79,7 @@ class WidgetController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->slug=="how_it_works")
+        if($request->widget=="how_it_works")
         {
             $validation = Validator::make($request->all(), $this->slugvalidationrules);
         }else{
@@ -92,7 +92,7 @@ class WidgetController extends Controller
 
         $storewidget = $this->widgetRepository->storeWidget($request);
         if ($storewidget) {
-            Session::flash('success', 'Successfully inserted');
+            Session::flash('success', 'Successfully Inserted');
             return redirect()->route('widget.index');
         }
     }
@@ -132,7 +132,7 @@ class WidgetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if($request->slug=="how_it_works")
+        if($request->widget=="how_it_works")
         {
             $validation = Validator::make($request->all(), $this->slugupdaterules);
         }else{
@@ -146,7 +146,7 @@ class WidgetController extends Controller
         $updateWidget = $this->widgetRepository->updateWidget($request, $id);
 
         if ($updateWidget) {
-            Session::flash('success', 'Successfully updated');
+            Session::flash('success', 'Successfully Updated');
             return redirect()->route('widget.index');
     }
     }
@@ -161,7 +161,7 @@ class WidgetController extends Controller
     {
         $deletewidget = $this->widgetRepository->deleteWidget($id);
         if ($deletewidget) {
-            Session::flash('success', 'Successfully deleted');
+            Session::flash('success', 'Successfully Deleted');
             return redirect()->route('widget.index');
         }
     }

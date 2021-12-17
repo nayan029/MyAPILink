@@ -19,6 +19,7 @@ class WidgetRepository implements WidgetRepositoryInterface
             $image = $this->uploadImage($request->file('image'), 'widgets');
         }
         $data = $request->all();
+        $data['slug'] = $request->widget;
         $data['image'] = $image;
         return Widget::create($data);
     }
@@ -35,6 +36,7 @@ class WidgetRepository implements WidgetRepositoryInterface
             $image = $widget->image;
         }
         $data['image'] = $image;
+        $data['slug'] = $request->widget;
         $widget->update($data);
         return $widget;
     }
@@ -58,6 +60,11 @@ class WidgetRepository implements WidgetRepositoryInterface
     public function getWidgetdata(Request $request)
     {
 
+        $searchTitle = $request->query('search_title');
+        $searchSlug = $request->query('search_slug');
+        $searchImage = $request->query('search_image');
+        $searchDesc = $request->query('search_description');
+
         $draw = $request->query('draw', 0);
         $start = $request->query('start', 0);
         $length = $request->query('length', 25);
@@ -73,6 +80,18 @@ class WidgetRepository implements WidgetRepositoryInterface
         );
 
         $query = Widget::select('*');
+        if (!empty($searchTitle)) {
+            $query->where('title', 'like', '%' . $searchTitle . '%');
+        }
+        if (!empty($searchSlug)) {
+            $query->where('slug', $searchSlug);
+        }
+        if (!empty($searchImage)) {
+            $query->where('image', 'like', '%' . $searchImage . '%');
+        }
+        if (!empty($searchDesc)) {
+            $query->where('description', 'like', '%' . $searchDesc . '%');
+        }
         $recordstotal = $query->count();
         $sortColumnName = $sortcolumns[$order[0]['column']];
 
@@ -90,7 +109,7 @@ class WidgetRepository implements WidgetRepositoryInterface
         $widgets = $query->orderBy('created_at', 'desc')->get();
         foreach ($widgets as $widget) {
             $url = route("widget.show", $widget->id);
-            $nameAction = "<a href='" . $url . "'>" . $widget->title . "</a>";
+            $nameAction = $widget->title!="" ? "<a href='" . $url . "'>" . $widget->title . "</a>" :'N/A';
             $slugCon = str_replace('_', ' ', ucwords($widget->slug, '_'));
             $slug = "<a href='" . $url . "'>" . $slugCon . "</a>";
             $Image = "<img src='" . url($widget->image) . "' height='50px' width='50px'>";

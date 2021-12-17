@@ -6,6 +6,34 @@
 @section('content')
 <!-- Main content -->
 <div class="row">
+<div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form action="#" method="post" id="skill_search_form">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                {!! Form::label('search_name', 'Name') !!}
+                                    {!! Form::text('search_name', '', ['class' => 'form-control', 'placeholder' =>  'Search Name','id'=>'search_name']) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                {!! Form::label('search_image', 'Image') !!}
+                                    {!! Form::text('search_image', '', ['class' => 'form-control', 'placeholder' =>  'Search Image','id'=>'search_image']) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group mt-4">
+                                <button type="button" id="searchData" class="btn btn-success">{{__("messages.search")}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="col-12">
         <div class="card">
             <div class="card-header">
@@ -43,14 +71,19 @@
     $(document).ready(function() {
         loadData();
     });
+    $(document).on('click','#searchData',function(){
+                $('#skill-table').DataTable().destroy();
+                 loadData();
+        });
 
     function loadData() {
+        var formData = $('#skill_search_form').serialize();     
         $('#skill-table').DataTable({
-            "processing": true,
+            "processing": false,
             "serverSide": true,
             "searching": false,
             "ajax": {   
-                url: "{{ route('skill.data') }}",
+                url: "{{ route('skill.data') }}?"+formData,
                 method: "get"
             }
         });

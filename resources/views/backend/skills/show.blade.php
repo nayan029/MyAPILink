@@ -19,8 +19,8 @@
 
           <div class="card-tools">
             <div class="text-center mt-0 mb-3">
-              <a href="{{route('skill.edit',$skill->id)}}" class="btn btn-sm btn-primary">{{__("messages.skillgroup.btnedit")}}</a>
-              <a id="delete" href="javascript:void(0);" class="btn btn-sm btn-danger">{{__("messages.skillgroup.btndelete")}}</a>
+              <a href="{{route('skill.edit',$skill->id)}}" class="btn btn-sm btn-primary" title="Edit">{{__("messages.skillgroup.btnedit")}}</a>
+              <a id="delete" href="javascript:void(0);" class="btn btn-sm btn-danger" title="Delete">{{__("messages.skillgroup.btndelete")}}</a>
               <form action="{{ route('skill.destroy', $skill->id)}}" method="POST" id="deleteForm">
                   @csrf
                   <input name="_method" type="hidden" value="DELETE">           
@@ -39,12 +39,11 @@
                       <b>Name</b> <span class="widget-section">{{$skill->name}}</span>
                     </li>
                     <li class="list-group-item">
-                      <b>Description</b> <span class="widget-section">{!! $skill->description !!}</span>
+                    <b>Image</b> <span class="widget-section"><img src="{{url($skill->image)}}" class="img-fluid" width="50px"></span><br/>
                     </li>
                     <li class="list-group-item">
-                    <b>Image</b> <img src="{{url($skill->image)}}" class="img-fluid" width="50px"><br/>
-                    </li>
-                
+                      <b>Description</b> <span class="widget-section">{!! $skill->description !!}</span>
+                    </li>  
             </div>
           </div>
         </div>

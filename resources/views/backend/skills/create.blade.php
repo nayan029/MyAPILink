@@ -26,13 +26,13 @@
                     <div class="row">
                         <div class="col-md-6 hideshow">
                             <div class="form-group">
-                                {!! Form::label('name', 'Name') !!}
+                                {!! Form::label('name', 'Name') !!} <span class="text-danger">*</span>
                                 {!! Form::text('name', old('name'), ['class' => 'form-control', 'placeholder' => 'Enter Name','id'=>'name']) !!}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                {!! Form::label('image', 'Image') !!}
+                                {!! Form::label('image', 'Image') !!} <span class="text-danger">*</span>
                                 {!! Form::file('image', old('image'), ['class' => 'form-control','id'=>'image']) !!}
                             </div>
                         </div>
@@ -48,37 +48,37 @@
                     </div>
                     <hr>
                     <br>
-                    <div class="container">
                         <label>Add Position:</label>
                         <div class="row" id="sectionRows">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {!! Form::label('position', 'Position') !!}
+                                    {!! Form::label('position', 'Position') !!} <span class="text-danger">*</span>
                                     {!! Form::text('',null,['class' => 'form-control', 'placeholder' => 'Enter position','id'=>'position']) !!}
                                     <div class="error"><span class="poserror"></span></div>
                                 </div>
                             </div>
                             <div class="col-md-5">
                                 <div class="form-group">
-                                    {!! Form::label('title', 'Title') !!}
+                                    {!! Form::label('title', 'Title') !!} <span class="text-danger">*</span>
                                     {!! Form::text('',null, ['class' => 'form-control', 'placeholder' => 'Enter Title','id'=>'title']) !!}
                                     <div class="error"><span class="titerror"></span></div>
                                 </div>
                             </div>
                             <div class="col-md-1 mb-5">
-                                <a href="javascript:void(0);" class="btn btn-success btn-xs" onclick="return validation();" id="addNewRow"><i class="fa fa-plus"></i></a>
+                                <a href="javascript:void(0);" class="btn btn-success btn-xs mt-4" onclick="return validation();" id="addNewRow"><i class="fa fa-plus"></i></a>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md-12">
                         <div class="form-group">
-                            {!! Form::label('desc', 'Description') !!}
-                            {!! Form::textarea('',null, ['class' => 'form-control ', 'placeholder' => 'Enter desc','id'=>'desc']) !!}
+                            {!! Form::label('desc', 'Description') !!} <span class="text-danger">*</span>
+                            {!! Form::textarea('',null, ['class' => 'form-control ', 'placeholder' => 'Enter description','id'=>'desc']) !!}
                             <div class="error"><span class="descerror"></span></div>
                         </div>
                     </div>
 
+                    <div class="container">
                     <div id="appendNrerow">
                         <table class="table table-bordered">
                             <thead>
@@ -100,7 +100,7 @@
                     </div>
                 </div>
             </div>
-
+            </div>  
 
         </div>
 
@@ -131,24 +131,32 @@
 
         var position = $('#position').val();
         if (position == "") {
-            $('.poserror').html("*please enter your position");
+            $('.poserror').html("Please enter your Position");
             temp++
         } else {
             $('.poserror').html("");
 
         }
 
-        var position = $('#title').val();
-        if (position == "") {
-            $('.titerror').html("*please enter your position");
+        var title = $('#title').val();
+        if (title == "") {
+            $('.titerror').html("Please enter your Title");
             temp++
         } else {
             $('.titerror').html("");
         }
 
-        var position = $('#desc').val();
-        if (position == "") {
-            $('.descerror').html("*please enter your position");
+        var title1 = $('#title').val();
+        if (title1 >= 25) {
+            $('.titerror').html("The title must not be greater than 25 characters.");
+            temp++
+        } else {
+            $('.titerror').html("");
+        }
+
+        var desc = $('#desc').val();
+        if (desc == "") {
+            $('.descerror').html("Please enter your Description");
             temp++
         } else {
             $('.descerror').html("");
@@ -166,7 +174,7 @@
 
                 var desc = $("#desc").val();
 
-                var html = "<tr row_id='" + id + "'><td>" + id + "</td><td><input type='hidden' name='position[]' value='" + position + "'/>" + position + "</td><td><input type='hidden' name='title[]' value='" + title + "'/>" + title + "</td><td><input type='hidden' name='descs[]' value='" + desc + "'/>" + desc + "</td><td><a href='javascript:void(0);' row_id='" + id + "' class='edit_row'><i class='fas fa-edit'></i></a><a href='javascript:void(0);' class='btn btn-save' row_id='" + id + "'> <i class='fas fa-save text-success'></i></a><a href='javascript:void(0);' class='btn removeRow'  row_id='" + id + "'> <i class='fas fa-trash-alt text-danger'></i></a></td></tr>";
+                var html = "<tr row_id='" + id + "'><td>" + id + "</td><td><input type='hidden' name='position[]' value='" + position + "'/>" + position + "</td><td><input type='hidden' name='title[]' value='" + title + "'/>" + title + "</td><td><input type='hidden' name='descs[]' value='" + desc + "'/>" + desc + "</td><td><a href='javascript:void(0);' row_id='" + id + "' class='btn edit_row'><i class='fas fa-edit'></i></a><a href='javascript:void(0);' class='btn btn-save' row_id='" + id + "'> <i class='fas fa-save text-success'></i></a><a href='javascript:void(0);' class='btn removeRow'  row_id='" + id + "'> <i class='fas fa-trash-alt text-danger'></i></a></td></tr>";
                 id++;
                 $("#skillbody").append(html);
 

@@ -33,7 +33,7 @@
                   <b>Address</b> <span class="widget-section">{{$job->address != "" ? $job->address : '---'}}</span>
                 </li>
                 <li class="list-group-item">
-                  <b>ZipCode</b> <span class="widget-section">{{$job->zip_code !="" ? $job->zip_code : '---'}}</span>
+                  <b>Postal Code</b> <span class="widget-section">{{$job->zip_code !="" ? $job->zip_code : '---'}}</span>
                 </li>
                 <li class="list-group-item">
                   <b>City</b> <span class="widget-section">{{$job->city !="" ? $job->city : '---'}}</span>
@@ -49,7 +49,7 @@
                   <b>Contract Length</b> <span class="widget-section">{{$job->contract_length != "" ? $job->contract_length : '---'}}</span>
                 </li>
                 <li class="list-group-item">
-                  <b>Type of employment</b> <span class="widget-section">{{$job->type_of_employment != "" ? $job->type_of_employment : '---'}}</span>
+                  <b>Type of Employment</b> <span class="widget-section">{{$job->type_of_employment != "" ? $job->type_of_employment : '---'}}</span>
                 </li>
                 <li class="list-group-item">
                   <b>Start Date</b> <span class="widget-section">{{$job->contract_start_date != "" ? date("m/d/Y",strtotime($job->contract_start_date)) : '---'}}</span>

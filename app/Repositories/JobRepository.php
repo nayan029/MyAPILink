@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Http\Traits\ImageuploadTrait;
 use App\Interfaces\JobRepositoryInterface;
+use App\Models\ChatMaster;
 use App\Models\Job;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
@@ -39,11 +40,8 @@ class JobRepository implements JobRepositoryInterface
         if($request->query('type_of_contract') != ''){
             $query->where('type_of_contract LIKE "%'.$request->query('type_of_contract').'%"');
         }
-        /*
-        if($request->query('contract_start_date') != ''){
-            $query->where('contract_start_date',date('Y-m-d',strtotime($request->query('contract_start_date'))));
-        }
-        */
+      
+    
         if($request->query('minimum_experience') != ''){
             $query->where('minimum_experience LIKE "%'.$request->query('minimum_experience').'%"');
         }
@@ -84,8 +82,14 @@ class JobRepository implements JobRepositoryInterface
 
   
 
-    public function acceptApplicants(Request $request, $id)
+    public function acceptApplicants(Request $request)
     {
-        
+        $userJobData = ChatMaster::create([
+            'job_id' => $request->jobid,
+            'sender_id' => $request->userid,
+            'message' => $request->message,
+            'type' => 'manager',
+        ]);
+        return $userJobData;
     }
 }

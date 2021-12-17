@@ -1,6 +1,10 @@
 @extends('backend.master')
 @section('css')
-
+<style>
+    #partner-update input {
+        width: 100%;
+    }
+</style>
 @endsection
 @section('content')
 <div class="row">
@@ -21,13 +25,12 @@
 
                         <div class="col-md-6">
                             <div class="container">
-                                {!! Form::label('image', 'Image') !!}
+                                {!! Form::label('image', 'Image') !!}<span class="text-danger">*</span>
 
                                 {!! Form::file('image', ['id' => 'image', 'name' => 'image', 'class' => 'file']) !!}
-
                                 &nbsp;&nbsp;
                                 <div>
-                                    <img src="{{ asset($partner->image) }}" height="100px" width="100px" />
+                                    <img src="{{ asset($partner->image) }}" height="50px" width="50px"/>
                                 </div>
 
                             </div>
@@ -35,7 +38,7 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                {!! Form::label('link', 'Link') !!}
+                                {!! Form::label('link', 'Link') !!}<span class="text-danger">*</span>
                                 {!! Form::text('link', old('link'), ['class' => 'form-control', 'placeholder' => 'Enter Link','id'=>'link']) !!}
                             </div>
                         </div>
@@ -59,7 +62,7 @@
 @endsection
 @section('script')
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-{!! $validator->selector('#partner-edit') !!}
-{!! $image->selector('#partner-edit') !!}
+{!! $validator->selector('#partner-update') !!}
+{!! $image->selector('#partner-update') !!}
 
 @endsection

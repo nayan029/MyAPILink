@@ -15,17 +15,24 @@ class ChatMaster extends Model
     protected $table = 'chat_master';
     
 
-    public function userData()
+    public function getUserReciverData()
     {
-        return  $this->belongsTo(User::class, 'user_id','id');
+        return  $this->belongsTo(User::class,'reciver_id','id');
     }
+
     
-    public function establishmentData()
+    public function getUserSenderData()
     {
-        return  $this->belongsTo(Establishment::class, 'company_id', 'id')->where('user_id',auth()->user()->id);
+        return  $this->belongsTo(User::class, 'sender_id','id');
     }
+ 
     public function applyJob()
     {
         return $this->hasMany(ApplyJob::class,'company_id','job_id');
+    }
+
+    public function getapplyJob()
+    {
+        return $this->belongsTo(ApplyJob::class,'job_id','id');
     }
 }

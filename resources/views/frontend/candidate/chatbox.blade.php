@@ -43,7 +43,7 @@
                     <div class="usershortname chat-username">UN</div>
                 </div>
                 <div class="msg-content chatmsg-content">
-                    <span class="time">User, {{Commontimeago::convertDMTime($message->created_at) }} </span>
+                    <span class="time">{{$message['getUserReciverData']->first_name}} {{$message['getUserReciverData']->last_name}}, {{Commontimeago::convertDMTime($message->created_at) }} </span>
                     @if($message->message != "")
                     <p>{{$message->message}}
                     </p>
@@ -62,7 +62,7 @@
 
     </div>
     <div>
-        <form id="myForm2" name="myForm2" method="POST" enctype="multipart/form-data" onsubmit="return sendmessage({{$id}});">
+        <form id="myForm2" name="myForm2" method="POST" enctype="multipart/form-data" onsubmit="return sendmessage({{$id}},{{$reciverid}});">
             @csrf
             <div class="bttom chat-bttom">
 
@@ -93,7 +93,7 @@
     function getNemessage() {
        
         $.ajax({
-            url: '{{URL::to("/")}}/last-mesage?id={{$id}}&lastid=' + lastmsgid,            
+            url: '{{URL::to("/")}}/last-mesage?id={{$id}}&reciverid={{$reciverid}}&lastid=' + lastmsgid,            
             method: "GET",
             success: function(messagelist) {
                 var html = '';
@@ -105,19 +105,19 @@
                     
                     if (messagelist.type == 'user') {
                         if (messagelist.messag !== null) {
-                          chatmsg = "<li class='right'><div class='msg-content chatmsg-content'><span class='time'>"+ messagelist.user_data.first_name + messagelist.user_data.last_name + "," + moment(messagelist.created_at).format('dd MMM h:mma') + "</span><p>" + messagelist.message + "</p></div><div class='chatprofile'><img src='{{URL::to('/')}}/'" + messagelist.user_data.profile_photo_path +"'></div></li>";
+                          chatmsg = "<li class='right'><div class='msg-content chatmsg-content'><span class='time'>"+ messagelist.get_user_sender_data.first_name + messagelist.get_user_sender_data.last_name + "," + moment(messagelist.created_at).format('dd MMM h:mma') + "</span><p>" + messagelist.message + "</p></div><div class='chatprofile'><img src='{{URL::to('/')}}/'" + messagelist.get_user_sender_data.profile_photo_path +"'></div></li>";
                         } else {
-                           chatfile = "<li class='right'><div class='msg-content chatmsg-content '><span class='time'>"+ messagelist.user_data.first_name + messagelist.user_data.last_name +","+ moment(messagelist.created_at).format('dd MMM h:mma') + "</span><p><a target='_blank' href='{{URL::to('/')}}/" + messagelist.image + "'>Opne File</a></p></div><div class='chatprofile'><img src='{{URL::to('/')}}/" + messagelist.user_data.profile_photo_path +"'></div></li>";
+                           chatfile = "<li class='right'><div class='msg-content chatmsg-content '><span class='time'>"+ messagelist.get_user_sender_data.first_name + messagelist.get_user_sender_data.last_name +","+ moment(messagelist.created_at).format('dd MMM h:mma') + "</span><p><a target='_blank' href='{{URL::to('/')}}/" + messagelist.image + "'>Opne File</a></p></div><div class='chatprofile'><img src='{{URL::to('/')}}/" + messagelist.get_user_sender_data.profile_photo_path +"'></div></li>";
                         }
                         $(".appendmsg").append(chatmsg + chatfile);
                     } else {
                         
                         if (messagelist.messag !== null) {
-                          chatmsg = "<li class='left'><div class='msg-content chatmsg-content'><span class='time'>"+ messagelist.user_data.first_name + messagelist.user_data.last_name + "," + moment(messagelist.created_at).format('dd MMM h:mma') + "</span><p>" + messagelist.message + "</p></div><div class='chatprofile'><img src='{{URL::to('/')}}/'" + messagelist.user_data.profile_photo_path +"'></div></li>";
+                          chatmsg = "<li class='left'><div class='chatprofile'><img src='{{URL::to('/')}}/'" + messagelist.get_user_reciver_data.profile_photo_path +"'></div><div class='msg-content chatmsg-content'><span class='time'>"+ messagelist.get_user_reciver_data.first_name + messagelist.get_user_reciver_data.last_name + "," + moment(messagelist.created_at).format('dd MMM h:mma') + "</span><p>" + messagelist.message + "</p></div></li>";
                         } else {
-                           chatfile = "<li class='left'><div class='msg-content chatmsg-content '><span class='time'>"+ messagelist.user_data.first_name + messagelist.user_data.last_name +","+ moment(messagelist.created_at).format('dd MMM h:mma') + "</span><p><a target='_blank' href='{{URL::to('/')}}/" + messagelist.image + "'>Opne File</a></p></div><div class='chatprofile'><img src='{{URL::to('/')}}/" + messagelist.user_data.profile_photo_path +"'></div></li>";
+                           chatfile = "<li class='left'><div class='chatprofile'><img src='{{URL::to('/')}}/" + messagelist.get_user_reciver_data.profile_photo_path +"'></div><div class='msg-content chatmsg-content '><span class='time'>"+ messagelist.get_user_reciver_data.first_name + messagelist.get_user_reciver_data.last_name +","+ moment(messagelist.created_at).format('dd MMM h:mma') + "</span><p><a target='_blank' href='{{URL::to('/')}}/" + messagelist.image + "'>Opne File</a></p></div></li>";
                         }
-
+              
                         $(".appendmsg").append(chatmsg + chatfile);
                     }
                     $('.mid').scrollTop($('.mid')[0].scrollHeight);

@@ -8,7 +8,7 @@ interface CandidateRepositoryInterface
    
     public function updateProfile(Request $request);
 
-    public function getAllMessage($id);
+    public function getAllMessage($id,$reciverId);
 
     public function insertMessage(Request $request);
 

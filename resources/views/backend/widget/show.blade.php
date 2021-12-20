@@ -19,8 +19,8 @@
 
           <div class="card-tools">
             <div class="text-center mt-0 mb-3">
-              <a href="{{route('widget.edit',$widget->id)}}" class="btn btn-sm btn-primary">{{__("messages.widgetgroup.btnedit")}}</a>
-              <a id="delete" href="javascript:void(0);" class="btn btn-sm btn-danger">{{__("messages.widgetgroup.btndelete")}}</a>
+              <a href="{{route('widget.edit',$widget->id)}}" class="btn btn-sm btn-primary" title="Edit">{{__("messages.widgetgroup.btnedit")}}</a>
+              <a id="delete" href="javascript:void(0);" class="btn btn-sm btn-danger" title="Delete">{{__("messages.widgetgroup.btndelete")}}</a>
               <form action="{{ route('widget.destroy', $widget->id)}}" method="POST" id="deleteForm">
                   @csrf
                   <input name="_method" type="hidden" value="DELETE">           
@@ -34,9 +34,9 @@
               <div class="row">
               
                 <div class="col-12 col-sm-6">
-                  <ul class="list-group list-group-unbordered mb-3">
-                    <li class="list-group-item">
-                      <b>Title</b> <span class="widget-section">{{$widget->title !="" ? $widget->title : '---'}}</span>
+                  <ul class="list-group list-group-unbordered">
+                    <li class="list-group-item" >
+                      <b>Title</b> <span class="widget-section">{{$widget->title !="" ? $widget->title : 'N/A'}}</span>
                     </li>
                     <li class="list-group-item">
                     <b>Image</b> <img src="{{url($widget->image)}}" class="img-fluid" width="50px"><br/>

@@ -98,6 +98,10 @@ class SkillRepository implements SkillRepositoryInterface
 
     public function getSkillData(Request $request)
     {
+
+        $searchName = $request->query('search_name');
+        $searchImage = $request->query('search_image');
+
         $draw = $request->query('draw', 0);
         $start = $request->query('start', 0);
         $length = $request->query('length', 25);
@@ -109,6 +113,12 @@ class SkillRepository implements SkillRepositoryInterface
         );
 
         $query = Skill::select('*');
+        if (!empty($searchName)) {
+            $query->where('name', 'like', '%' . $searchName . '%');
+        }
+        if (!empty($searchImage)) {
+            $query->where('image', 'like', '%' .$searchImage.'%');
+        }
         $recordstotal = $query->count();
         $sortColumnName = $sortcolumns[$order[0]['column']];
 

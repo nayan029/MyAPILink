@@ -349,8 +349,8 @@
                                                             <div class="metters-btns">
                                                                 <a href="{{route('editjob',$remain->id)}}" class="btn btn btn-met">
                                                                     Modifier</a>
-                                                                <!-- <a href="javascript:void(0);" class="btn btn-delete delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                                <form action="{{route('destroy',$remain->id)}}" method="POST" class="deleteForm">
+                                                                <a href="javascript:void(0);" class="btn btn-delete delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                                <!-- <form action="{{route('destroy',$remain->id)}}" method="POST" class="deleteForm">
                                                                     @method('DELETE')
                                                                     @csrf
                                                                 </form> -->
@@ -373,13 +373,13 @@
                                                                     </div>
                                                                     <!-- <p class="mb-0">31 oct 8:30</p> -->
                                                                     <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>{{$remain->total_reg}}</span>
-
                                                                     </div>
                                                                 </div>
                                                             </div>
 
                                                             <div class="button-voir text-right-voir">
-                                                                <a href="applicarion-offer.html" class="btn btn-blue w-95">Voir les
+                                                                
+                                                                <a href="{{route('see-applicants',$remain->id)}}" class="btn btn-blue w-95">Voir les
                                                                     postulants
                                                                 </a>
                                                             </div>
@@ -429,15 +429,14 @@
                                                         </div>
                                                         <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
                                                             <div class="metters-btns">
-                                                                <a href="{{route('editjob',$delete->id)}}" class="btn btn btn-met">
+                                                                <a href="{{route('editjob',$delete->id)}}" class="btn btn btn-met"> 
                                                                     Modifier</a>
-
-                                                                <!-- <a href="javascript:void(0);" class="btn btn-delete delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                                <form action="{{route('destroy',$delete->id)}}" method="POST" class="deleteForm">
+                                                                <a href="javascript:void(0);" class="btn btn-delete delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                                <!-- <form action="{{route('destroy',$delete->id)}}" method="POST" class="deleteForm">
                                                                     @method('DELETE')
                                                                     @csrf
                                                                 </form> -->
-
+                                                                
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4 mr-renew">
@@ -462,7 +461,7 @@
                                                             </div>
 
                                                             <div class="button-voir text-right-voir">
-                                                                <a href="applicarion-offer.html" class="btn btn-blue w-95">Voir les
+                                                                <a href="{{route('see-applicants',$delete->id)}}" class="btn btn-blue w-95">Voir les
                                                                     postulants
                                                                 </a>
                                                             </div>
@@ -533,6 +532,7 @@
         $('#establishment').modal('hide');
         $('#cv-modal').modal('show');
     });
+    
 </script>
 <script>
     // -------------------
@@ -571,7 +571,7 @@
             }
         });
     });
-    $(document).on('click','.delete',function(event) {
+    $(document).on('click', '.delete', function(event) {
         var form = $(".deleteForm").closest("form");
         event.preventDefault();
         swal({
@@ -587,9 +587,6 @@
             });
     });
 </script>
-
-
-
 
 
 @endsection

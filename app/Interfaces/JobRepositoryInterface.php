@@ -11,5 +11,5 @@ interface JobRepositoryInterface
     public function getSingleJobData($id);
 
 
-    public function acceptApplicants(Request $request,$id);
+    public function acceptApplicants(Request $request);
 }

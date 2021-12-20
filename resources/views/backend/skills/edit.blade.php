@@ -9,8 +9,9 @@
         color: red;
         background-color: yellow;
     }
-    .error{
-        color:red;
+
+    .error {
+        color: red;
     }
 </style>
 @endsection
@@ -25,7 +26,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                {!! Form::model($skill,['method' => 'PUT', 'route' => ['skill.update',$skill->id], 'files' => true,'id'=>'skill-update']) !!}
+                {!! Form::model($skill,['method' => 'PUT', 'name'=>'form','route' => ['skill.update',$skill->id], 'files' => true,'id'=>'skill-update']) !!}
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4 slug">
@@ -37,7 +38,8 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 {!! Form::label('image', 'Image') !!}
-                                {!! Form::file('image', old('image'), ['class' => 'form-control','id'=>'image']) !!}
+                                {!! Form::file('image', old('image'), ['class' => 'form-control','id'=>'image','onchange'=>'checkextension()']) !!}
+                                &nbsp;&nbsp; <img src="{{ asset($skill->image) }}" height="50px" width="50px" />
                             </div>
                         </div>
                     </div>
@@ -53,7 +55,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {!! Form::label('position', 'Position') !!}
-                                {!! Form::text('',null,['class' => 'form-control', 'placeholder' => 'Enter position','id'=>'position']) !!}
+                                {!! Form::text('',null,['class' => 'form-control', 'placeholder' => 'Enter Position','id'=>'position']) !!}
                                 <span class="error poserror"></span>
                             </div>
                         </div>
@@ -70,10 +72,10 @@
 
                     </div>
 
-                    <div class="col-md-12">
+                    <div class="">
                         <div class="form-group">
                             {!! Form::label('desc', 'Description') !!}
-                            {!! Form::textarea('',null, ['class' => 'form-control ', 'placeholder' => 'Enter desc','id'=>'desc']) !!}
+                            {!! Form::textarea('',null, ['class' => 'form-control ', 'placeholder' => 'Enter Description','id'=>'desc']) !!}
                             <span class="error descerror"></span>
                         </div>
                     </div>
@@ -88,9 +90,6 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-
-
-
                             <tbody id="skillbody">
                                 @if($skill_position)
                                 @foreach($skill_position as $key=>$sk)
@@ -99,9 +98,9 @@
                                     <td id="position{{$key+1}}">{{$sk->position}}<input type="hidden" class="position" name="position[]" value="{{$sk->position}}"></td>
                                     <td id="title{{$key+1}}">{{$sk->title}}<input type="hidden" class="title" name="title[]" value="{{$sk->title}}"></td>
                                     <td id="desc{{$key+1}}">{{$sk->desc}}<input type="hidden" class="desc" name="descs[]" value="{{$sk->desc}}"></td>
-                                    <td><a href='javascript:void(0);' class="edit_row" row_id="{{$key+1}}"><i class='fas fa-edit'></i></a>
-                                        <a href='javascript:void(0);' class="btn btn-save" data-id="{{$sk->id}}" row_id="{{$key+1}}"><i class="fas fa-save text-success"></i></i></a>
-                                        <a href='javascript:void(0);' class="btn btn-cancel btn delete" remove-id="{{$sk->id}}" row_id="{{$key+1}}"><i class="fas fa-trash-alt text-danger"></i></a>
+                                    <td><a href='javascript:void(0);' class="btn edit_row" row_id="{{$key+1}}"><i class='fas fa-edit' title="Edit"></i></a>
+                                        <a href='javascript:void(0);' class="btn btn-save" title="Save" data-id="{{$sk->id}}" row_id="{{$key+1}}"><i class="fas fa-save text-success mb-1"></i></a>
+                                        <a href='javascript:void(0);' class="btn btn delete" title="Delete" remove-id="{{$sk->id}}" row_id="{{$key+1}}"><i class="fas fa-trash-alt text-danger"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -109,24 +108,18 @@
                                 <tr>No Data Found</tr>
                                 @endif
                             </tbody>
-
                         </table>
-
                     </div>
                 </div>
                 <!-- /.card-body -->
-
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">{{__("messages.update")}}</button>
+                    <button type="submit" onClick="return validate();" class="btn btn-primary">{{__("messages.update")}}</button>
                 </div>
                 {!! Form::close() !!}
             </div>
-
-
             <!-- /.card -->
         </div>
     </div>
-
     @endsection
     @section('script')
     @section('script')
@@ -150,52 +143,52 @@
 
             var position = $('#position').val();
             if (position == "") {
-                $('.poserror').html("*please enter your position");
+                $('.poserror').html("Please enter your Position");
                 temp++
             } else {
                 $('.poserror').html("");
 
             }
 
-            var position = $('#title').val();
-            if (position == "") {
-                $('.titerror').html("*please enter your position");
+            var title = $('#title').val();
+            if (title == "") {
+                $('.titerror').html("Please enter your Title");
                 temp++
             } else {
                 $('.titerror').html("");
             }
 
-            var position = $('#desc').val();
-            if (position == "") {
-                $('.descerror').html("*please enter your position");
+            var desc = $('#desc').val();
+            if (desc == "") {
+                $('.descerror').html("Please enter your Description");
                 temp++
             } else {
                 $('.descerror').html("");
 
             }
-
             if (temp == 0) {
-               
-        $(document).on('click', "#addNewRow", function() {
-            var position = $('#position').val();
-            var title = $('#title').val();
-            var desc = $("#desc").val();
-            loadPosition(id, position, title, desc);
-        });
 
-        function loadPosition(id, position, title, desc) {
-            var html = "<tr row_id='" + id + "'><td>" + id + "</td><td><input type='hidden' name='position[]' value='" + position + "'/>" + position + "</td><td><input type='hidden' name='title[]' value='" + title + "'/>" + title + "</td><td><input type='hidden' name='descs[]' value='" + desc + "'/>" + desc + "</td><td><a href='javascript:void(0);' row_id='" + id + "' class='edit_row'><i class='fas fa-edit'></i></a><a href='javascript:void(0);' class='btn btn-save' row_id='" + id + "'> <i class='fas fa-save text-success'></i></a><a href='javascript:void(0);' class='btn removeRow'  row_id='" + id + "'> <i class='fas fa-trash-alt text-danger'></i></a></td></tr>";
-            id++;
+                $(document).on('click', "#addNewRow", function() {
+                    var position = $('#position').val();
+                    var title = $('#title').val();
+                    var desc = $("#desc").val();
+                    loadPosition(id, position, title, desc);
+                });
 
-            $("#skillbody").append(html);
-            $('#position').val('');
-            $('#title').val('');
-            $("#desc").val('');
-        }
+                function loadPosition(id, position, title, desc) {
+                    var html = "<tr row_id='" + id + "'><td>" + id + "</td><td><input type='hidden' name='position[]' value='" + position + "'/>" + position + "</td><td><input type='hidden' name='title[]' value='" + title + "'/>" + title + "</td><td><input type='hidden' name='descs[]' value='" + desc + "'/>" + desc + "</td><td><a href='javascript:void(0);' row_id='" + id + "' class='btn edit_row' title='Edit'><i class='fas fa-edit'></i></a><a href='javascript:void(0);' class='btn btn-save' row_id='" + id + "' title='Save'><i class='fas fa-save text-success'></i></a><a href='javascript:void(0);' class='btn removeRow' title='Delete' row_id='" + id + "'><i class='fas fa-trash-alt text-danger'></i></a></td></tr>";
+                    id++;
+
+                    $("#skillbody").append(html);
+                    $('#position').val('');
+                    $('#title').val('');
+                    $("#desc").val('');
+                }
             } else {
                 return false;
             }
         }
+
         function updateSkillPostionData(position, t, d, id) {
 
             var path = 'skill/' + id;
@@ -220,7 +213,7 @@
         }
         $(document).on('click', ".edit_row", function() {
             $('.btn-save').show();
-            $(this).closest('tr').css('background-color', '#ddd');
+            $(this).closest('tr').attr('row_id').css('background-color', '#ddd');
             var tbl_row = $(this).closest('tr');
             var row_id = tbl_row.attr('row_id');
 
@@ -286,6 +279,15 @@
                     }
                 }
             });
+        }
+    </script>
+    <script>
+          function checkextension() {
+            var file = document.querySelector("#image");
+            alert(file);
+            if (/\.(jpe?g|png|gif)$/i.test(file.files[0].name) === false) {
+                alert("not an image!");
+            }
         }
     </script>
 

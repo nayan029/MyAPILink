@@ -367,9 +367,9 @@
                                                     <div class="job-card">
                                                         <div class="d-flex justify-content-between mb-4 ">
                                                             <div>
-                                                                <h5 class="mb-0 c-prof-jobtext">{{$applyJob['jobApplay']->title}}
+                                                                <h5 class="mb-0 c-prof-jobtext">{{$applyJob->title}}
                                                                 </h5>
-                                                                <p class="mb-0 job_cre_text">{{$applyJob['jobApplay']->type_of_contract}}</p>
+                                                                <p class="mb-0 job_cre_text">{{$applyJob->type_of_contract}}</p>
                                                             </div>
 
                                                             <span class="c-prof-public-text mr-5">Publié il y a {{$finalDays}}
@@ -382,10 +382,10 @@
                                                                         <p class="mb-0 ">Montpellier (34)</p>
                                                                     </li>
                                                                     <li>
-                                                                        <p class="mb-0 ">{{$applyJob['jobApplay']->maximum_gross_salary}} € par mois</p>
+                                                                        <p class="mb-0 ">{{$applyJob->maximum_gross_salary}} € par mois</p>
                                                                     </li>
                                                                     <li>
-                                                                        <p class="mb-0 ">Expérience :{{$applyJob['jobApplay']->minimum_experience}}
+                                                                        <p class="mb-0 ">Expérience :{{$applyJob->minimum_experience}}
                                                                         </p>
                                                                     </li>
                                                                 </ul>

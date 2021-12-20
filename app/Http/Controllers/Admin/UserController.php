@@ -16,7 +16,8 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
+    
+    protected $SkillRepository = "";
     public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;

@@ -66,7 +66,7 @@ class JobController extends Controller
         $this->data['jobvalidator'] = JsValidator::make($this->jobValidationRules);
         $id = request('id');
         $this->data['id'] = $id;
-        $this->data['jobDetails'] = Job::find($id);
+        $this->data['jobDetails'] = Job::findOrFail($id);
         return view('frontend.job.editjob', $this->data);
     }
    
@@ -144,19 +144,26 @@ class JobController extends Controller
 
     public function restoreUser($id)
     {
-        Job::withTrashed()->find($id)->restore();
+        Job::withTrashed()->findOrFail
+        ($id)->restore();
         Session::flash('success','Successfully Restored');
         return back();
     }
 
-    public function storeApplicants(Request $request,$id){
+    public function storeApplicants(Request $request){
                 $request->validate([
-                    'jobCheck' => 'required',
+                    // 'jobCheck' => 'required',
                 ]);
-
-            $store = $this->jobRepository->acceptApplicants($request,$id);
+            $store = $this->jobRepository->acceptApplicants($request);
             if($store){
-
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Successfully Inserted'
+                ]);
             }
+    }
+  
+    public function candidatePortfolio(Request $request){
+        return view('frontend.job.esatablishment-portfolio');
     }
 }

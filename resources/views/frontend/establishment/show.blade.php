@@ -480,7 +480,7 @@
                                                             </div>
 
                                                             <div class="button-voir">
-                                                                <a href="{{route('see-applicants')}}"> <button class="btn btn-blue">Voir les postulants
+                                                                <a href="{{route('see-applicants',$value->id)}}"> <button class="btn btn-blue">Voir les postulants
                                                                     </button></a>
                                                             </div>
                                                         </div>

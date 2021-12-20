@@ -150,7 +150,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group  mb-4">
-                                                    <input type="text" value="{{$jobDetails->deadline_for_receipt_of_applications}}" name="deadline_for_receipt_of_applications" class="datepicker1 form-control inputicon2 form-publish">
+                                                    <input type="date" value="{{$jobDetails->deadline_for_receipt_of_applications}}" name="deadline_for_receipt_of_applications" class="datepicker1 form-control inputicon2 form-publish">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">

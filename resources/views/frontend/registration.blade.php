@@ -204,7 +204,7 @@
                     <div class="lmodal-logo">
                         <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="">
                     </div>
-                    <form action="#" method="post" id="nozel_search_form">
+                    <form action="#" method="post" id="register_form_data">
                         @csrf
                         <div class="row mt-3">
                             <div class="col-md-6">
@@ -241,23 +241,23 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck1" name="customCheck1">
+                                    <input type="checkbox" class="custom-control-input" id="accept_condition" name="accept_condition">
 
-                                    <label class="custom-control-label login-cus-check" for="customCheck1">J'accepte
+                                    <label class="custom-control-label login-cus-check" for="accept_condition">J'accepte
                                         les
                                         conditions générales d'utilisation d'APILINK - J'accepte que mon profil soit
                                         visible
                                         par l'ensemble des établissements employeurs, partenaires d'APILINK.</label>
-                                    <span class="text-danger error" id="customCheck1-error"></span>
+                                    <span class="text-danger error" id="accept_condition-error"></span>
                                 </div>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck2" name="customCheck2">
+                                    <input type="checkbox" class="custom-control-input" id="accept_sensitive_data" name="accept_sensitive_data">
 
-                                    <label class="custom-control-label login-cus-check" for="customCheck2">J'accepte
+                                    <label class="custom-control-label login-cus-check" for="accept_sensitive_data">J'accepte
                                         que mes
                                         données sensibles soient traitées par APILINK pour me fournir le
                                         service.</label>
-                                    <span class="text-danger error" id="customCheck2-error"></span>
+                                    <span class="text-danger error" id="accept_sensitive_data-error"></span>
                                 </div>
 
                             </div>
@@ -365,7 +365,7 @@
     $(document).on('click', '#registerUser', function() {
 
         var token = $("meta[name='csrf-token']").attr("content");
-        var formData = $('#nozel_search_form').serialize();
+        var formData = $('#register_form_data').serialize();
         $.ajax({
 
             url: "{{ route('registration.save') }}",
@@ -376,7 +376,7 @@
                     setTimeout(function() {
                         $('#header-Modallogin1').modal('hide');
                         $('.invisible').trigger('click');
-                        $("#nozel_search_form")[0].reset();
+                        $("#register_form_data")[0].reset();
                     });
                 }
             },
@@ -386,8 +386,8 @@
                 $('#email-error').text(response.responseJSON.errors.email);
                 $('#phone-error').text(response.responseJSON.errors.phone);
                 $('#password-error').text(response.responseJSON.errors.password);
-                $('#customCheck1-error').text(response.responseJSON.errors.customCheck1);
-                $('#customCheck2-error').text(response.responseJSON.errors.customCheck2);
+                $('#accept_condition-error').text(response.responseJSON.errors.accept_condition);
+                $('#accept_sensitive_data-error').text(response.responseJSON.errors.accept_sensitive_data);
             }
         });
 

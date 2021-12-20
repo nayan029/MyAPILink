@@ -22,6 +22,12 @@ class ContactRepository implements ContactRepositoryInterface
     
     public function getAjaxData(Request $request)
     {
+
+        $searchFirstName = $request->query('search_firstname');
+        $searchLastName = $request->query('search_lastname');
+        $searchEmail = $request->query('search_email');
+        $searchDesc = $request->query('search_description');
+
         $draw = $request->query('draw', 0);
         $start = $request->query('start', 0);
         $length = $request->query('length', 25);
@@ -32,11 +38,24 @@ class ContactRepository implements ContactRepositoryInterface
             0 => 'contact_us.id',
             1 => 'contact_us.firstname',
             2 => 'contact_us.lastname',
+            2 => 'contact_us.email',
             3 => 'contact_us.description',
 
         );
 
         $query = ContactUs::select('*');
+        if (!empty($searchFirstName)) {
+            $query->where('firstname', 'like', '%' . $searchFirstName . '%');
+        }
+        if (!empty($searchLastName)) {
+            $query->where('lastname','like', '%'. $searchLastName. '%');
+        }
+        if (!empty($searchEmail)) {
+            $query->where('email', 'like', '%' . $searchEmail . '%');
+        }
+        if (!empty($searchDesc)) {
+            $query->where('description', 'like', '%' . $searchDesc . '%');
+        }
         $recordstotal = $query->count();
         $sortColumnName = $sortcolumns[$order[0]['column']];
         $query->orderBy($sortColumnName, $order[0]['dir'])
@@ -52,11 +71,12 @@ class ContactRepository implements ContactRepositoryInterface
 
         $contactus = $query->orderBy('created_at', 'desc')->get();
         foreach ($contactus as $contact) {
-        $action  = "<a href='' data-delete='" . $contact->id . "' class='delete_contact'><i class='fa fa-trash text-danger'></i></a>";
+        $action  = "<a href='' data-delete='" . $contact->id . "' class='delete_contact' title='Delete'><i class='fa fa-trash text-danger'></i></a>";
             $json['data'][] = [
                 $contact->id,
                 $contact->firstname,
                 $contact->lastname,
+                $contact->email,
                 $contact->description,
                 $action,
             ];

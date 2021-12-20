@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <link rel="icon" href="images/favicon.ico" type="image/png" sizes="16x16">
+    <link rel="icon" href="{{asset('frontend/images/favicon.ico')}}" type="image/png" sizes="16x16">
     <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="{{asset('text/css" href="css/magnific-popup.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/owl.carousel.css')}}">

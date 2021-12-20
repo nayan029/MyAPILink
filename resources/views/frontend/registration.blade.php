@@ -209,13 +209,13 @@
                         <div class="row mt-3">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" name="firstname" placeholder="Prénom*" class="form-control login-input inputicon2" id="firstname">
+                                    <input type="text" name="first_name" placeholder="Prénom*" class="form-control login-input inputicon2" id="firstname">
                                     <span class="text-danger error" id="firstname-error"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" name="lastname" placeholder="Nom de famille*" class="form-control login-input inputicon2" id="lastname">
+                                    <input type="text" name="last_name" placeholder="Nom de famille*" class="form-control login-input inputicon2" id="lastname">
                                     <span class="text-danger error" id="lastname-error"></span>
                                 </div>
                             </div>
@@ -383,8 +383,8 @@
                 }
             },
             error: function(response) {
-                $('#firstname-error').text(response.responseJSON.errors.firstname);
-                $('#lastname-error').text(response.responseJSON.errors.lastname);
+                $('#firstname-error').text(response.responseJSON.errors.first_name);
+                $('#lastname-error').text(response.responseJSON.errors.last_name);
                 $('#email-error').text(response.responseJSON.errors.email);
                 $('#phone-error').text(response.responseJSON.errors.phone);
                 $('#password-error').text(response.responseJSON.errors.password);

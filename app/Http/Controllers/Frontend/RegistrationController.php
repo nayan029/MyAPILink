@@ -36,8 +36,8 @@ class RegistrationController extends Controller
     {
 
         Validator::make($request->all(), [
-            'firstname' => 'required|string|max:25|regex:/^([^0-9]*)$/',
-            'lastname' => 'required|string|max:25|regex:/^([^0-9]*)$/',
+            'first_name' => 'required|string|max:25|regex:/^([^0-9]*)$/',
+            'last_name' => 'required|string|max:25|regex:/^([^0-9]*)$/',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|min:6',
             'phone' => 'required|digits:10',

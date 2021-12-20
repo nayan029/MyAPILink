@@ -105,10 +105,6 @@
                                     </div>
 
                                 </div>
-
-
-
-
                                 <div class="form-group">
                                     {!! Form::label('Pédagogie appliquée', 'Pédagogie appliquée') !!}<span class="invalid-error text-danger">*</span>
                                     @php $applied_pedagogy=explode(",",$establishment->applied_pedagogy); @endphp
@@ -233,7 +229,7 @@
 
                                     <div class="col-md-12 d-flex justify-content-end mt-5">
                                         <button class="btn btn-outline-cancel annuler-btns">Annuler</button>
-                                        <button  class="btn btn-yellow">Sauvegarder</button>
+                                        <button  class="btn btn-yellow">Mettre à jour</button>
                                         <!-- href="view-establishment-account-3.html" -->
                                     </div>
 

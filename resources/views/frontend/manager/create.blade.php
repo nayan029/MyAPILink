@@ -21,10 +21,11 @@
     .error {
         color: Red;
     }
+
     form i {
-    margin-left: -30px;
-    cursor: pointer;
-}
+        margin-left: -30px;
+        cursor: pointer;
+    }
 </style>
 
 <body>
@@ -55,14 +56,17 @@
                                     <div class="col-md-2 mb-2">
                                         <div class="form-group">
                                             <label class="">Civilité<span class="text-danger">*</span></label>
-                                            <input id="civility" type="text" maxlength="5" name="civility" class="form-control form-add-establish pl-23">
+                                            <select class="cus-drop pl-23 select2 form-add-establish" name="represent" style="width: 100%;">
+                                                <option value="Monsieur">Monsieur</option>
+                                                <option value="Mme">Mme</option>
+                                            </select>
                                             <span class="civility-error text-danger">@error ('civility') {{$message}} @enderror</span>
                                         </div>
                                     </div>
                                     <div class="col-md-5 mb-2">
                                         <div class="form-group">
                                             <label class="">Prénom<span class="text-danger">*</span></label>
-                                            <input id="firstname" type="text" name="firstname" class="form-control form-add-establish pl-23">
+                                            <input id="firstname" type="text" name="first_name" class="form-control form-add-establish pl-23" placeholder="Prénom">
                                             <span class="firstname-error text-danger">@error ('firstname') {{$message}} @enderror</span>
 
                                         </div>
@@ -70,7 +74,7 @@
                                     <div class="col-md-5 mb-2">
                                         <div class="form-group">
                                             <label class="">Nom de famille<span class="text-danger">*</span></label>
-                                            <input id="lastname" type="text" name="lastname" class="form-control form-add-establish pl-23">
+                                            <input id="lastname" type="text" name="last_name" class="form-control form-add-establish pl-23" placeholder="Nom de famille">
                                             <span class="lastname-error text-danger">@error ('lastname') {{$message}} @enderror</span>
 
                                         </div>
@@ -78,7 +82,7 @@
                                     <div class="col-md-6 mb-2">
                                         <div class="form-group">
                                             <label class="">Téléphone<span class="text-danger">*</span></label>
-                                            <input id="phone" type="text" name="phone" maxlength="10" onkeypress='return isNumber(event)' class="form-control form-add-establish pl-23">
+                                            <input id="phone" type="text" name="phone" maxlength="10" onkeypress='return isNumber(event)' class="form-control form-add-establish pl-23" placeholder="Téléphone">
                                             <span class="phone-error text-danger">@error ('phone') {{$message}} @enderror</span>
 
                                         </div>
@@ -86,7 +90,7 @@
                                     <div class="col-md-6 mb-2">
                                         <div class="form-group">
                                             <label class="">Adresse e-mail<span class="text-danger">*</span></label>
-                                            <input id="email" type="text" name="email" class="form-control form-add-establish pl-23">
+                                            <input id="email" type="text" name="email_address" class="form-control form-add-establish pl-23" placeholder="Adresse e-mail">
                                             <span class="email-error text-danger">@error ('email') {{$message}} @enderror</span>
 
                                         </div>
@@ -94,16 +98,15 @@
                                     <div class="col-md-12 mb-2">
                                         <div class="form-group">
                                             <label class="">Mot de passe<span class="text-danger">*</span></label>
-                                            <input id="password" type="text" name="password" class="form-control form-add-establish pl-23">
-                                            <i class="bi bi-eye-slash" style="background-color: black;" id="togglePassword"></i>
+                                            <input id="password" type="password" name="password" class="form-control form-add-establish pl-23" placeholder="Mot de passe">
                                             <span class="password-error text-danger">@error ('password') {{$message}} @enderror</span>
-                                            
+
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-2">
                                         <div class="form-group">
                                             <label class="">Confirmer le mot de passe<span class="text-danger">*</span></label>
-                                            <input id="password_confirmation" type="text" name="password_confirmation" class="form-control form-add-establish pl-23">
+                                            <input id="password_confirmation" type="password" name="password_confirmation" class="form-control form-add-establish pl-23" placeholder="Confirmer le mot de passe">
                                             <span class="password_confirmation-error text-danger">@error ('password_confirmation') {{$message}} @enderror</span>
 
                                         </div>
@@ -237,7 +240,7 @@
                                     <div class="col-md-12 mb-2">
                                         <div class="form-group">
                                             <label class="">Nom de notre organisation<span class="text-danger">*</span></label>
-                                            <input id="organization" type="text" name="organization" class="form-control form-add-establish pl-23">
+                                            <input id="organization" type="text" name="name_of_our_organization" class="form-control form-add-establish pl-23" placeholder="Nom de notre organisation">
                                             <span class="organization-error text-danger">@error ('organization') {{$message}} @enderror</span>
 
                                         </div>
@@ -245,7 +248,7 @@
                                     <div class="col-md-12 mb-2">
                                         <div class="form-group">
                                             <label class="">Nombre d'établissements dans l'organisation<span class="text-danger">*</span></label>
-                                            <input id="number_of_establishments" type="text" name="number_of_establishments" class="form-control form-add-establish pl-23">
+                                            <input id="number_of_establishments" type="text" name="number_of_establishments" class="form-control form-add-establish pl-23" placeholder="Nombre d'établissements dans l'organisation">
                                             <span class="establish-error text-danger">@error ('number_of_establishments') {{$message}} @enderror</span>
 
                                         </div>
@@ -253,7 +256,7 @@
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <label class="">Adresse de l'organisation<span class="text-danger">*</span></label>
-                                            <input id="address" type="text" name="address" class="form-control form-add-establish pl-23">
+                                            <input id="address" type="text" name="organization_address" class="form-control form-add-establish pl-23" placeholder="Adresse de l'organisation">
                                             <span class="address-error text-danger">@error ('address') {{$message}} @enderror</span>
 
                                         </div>
@@ -261,7 +264,7 @@
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label class="">Code postal<span class="text-danger">*</span></label>
-                                            <input id="postal_code" type="text" name="postal_code" maxlength="6" onkeypress='return isNumber(event)' class="form-control form-add-establish pl-23">
+                                            <input id="postal_code" type="text" name="postal_code" maxlength="6" onkeypress='return isNumber(event)' class="form-control form-add-establish pl-23" placeholder="Code postal">
                                             <span class="postal-error text-danger">@error ('postal_code') {{$message}} @enderror</span>
 
                                         </div>
@@ -269,7 +272,7 @@
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <label class="">Ville<span class="text-danger">*</span></label>
-                                            <input id="city" type="text" name="city" class="form-control form-add-establish pl-23">
+                                            <input id="city" type="text" name="city" class="form-control form-add-establish pl-23" placeholder="Ville">
                                             <span class="city-error text-danger">@error ('city') {{$message}} @enderror</span>
 
                                         </div>
@@ -430,6 +433,7 @@
         inViewport1();
     });
     $("#fix-number-ul-id li:nth-child(1)").addClass('scale');
+
     function inViewport() {
 
         $('.ustep2').each(function() {
@@ -493,20 +497,20 @@
 
                 } else {
                     $('.civility-error').text(response.errors.civility);
-                    $('.firstname-error').text(response.errors.firstname);
-                    $('.lastname-error').text(response.errors.lastname);
+                    $('.firstname-error').text(response.errors.first_name);
+                    $('.lastname-error').text(response.errors.last_name);
                     $('.phone-error').text(response.errors.phone);
-                    $('.email-error').text(response.errors.email);
+                    $('.email-error').text(response.errors.email_address);
                     $('.password-error').text(response.errors.password);
                     $('.password_confirmation-error').text(response.errors.password_confirmation);
                     $('.radio-error').text(response.errors.radio);
                     $('.represent-error').text(response.errors.represent);
-                    $('.organization-error').text(response.errors.organization);
+                    $('.organization-error').text(response.errors.name_of_our_organization);
                     $('.establish-error').text(response.errors.number_of_establishments);
-                    $('.address-error').text(response.errors.address);
+                    $('.address-error').text(response.errors.organization_address);
                     $('.postal-error').text(response.errors.postal_code);
                     $('.city-error').text(response.errors.city);
-                  
+
                 }
             }
         });

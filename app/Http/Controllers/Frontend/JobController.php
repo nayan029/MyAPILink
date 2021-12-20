@@ -18,25 +18,26 @@ class JobController extends Controller
 {
 
     protected $jobValidationRules = [
-        'title' => 'required',
+        'title' => 'required|max:25|regex:/^([^0-9]*)$/',
         'address' => 'required',
-        'zip_code' => 'required|digits:6',
+        'postal_code' => 'required|digits:6',
         'city' => 'required',
         'country' => 'required',
         'type_of_contract' => 'required',
-        'contract_length' => 'required',
-        'type_of_employment' => 'required',
-        'contract_start_date' => 'required',
-        'minimum_gross_salary' => 'required',
-        'maximum_gross_salary' => 'required',
-        'minimum_experience' => 'required',
+        'duration_of_the_contract' => 'required',
+        'job_type' => 'required',
+        'contract_start_date' => 'required|after:tomorrow',
+        'minimum_gross_salary' => 'required|min:4|numeric',
+        'maximum_gross_salary' => 'required|max:10|numeric',
+        'minimum_experience' => 'required|min:3',
         'deadline_for_receipt_of_applications' => 'required',
-        'email' => 'required|email',
+        'email_address' => 'required|email',
         'phone' => 'required|digits:10',
-        'website' => 'required',
+        'contact_thorugh'=>'required',
+        'website' => 'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
         'job_description' => 'required',
-        'employment_mission' => 'required',
-        'what_you_are_looking' => 'required',
+        'job_mission' => 'required',
+        'what_you_are_looking_for' => 'required',
     ];
 
     protected $jobRepository="";
@@ -78,8 +79,8 @@ class JobController extends Controller
             return redirect()->back()->withErrors($validation->errors());
         }
         $editId = request('edit_id');
-        if (!empty(request('type_of_employment'))) {
-            $typeOfEmployment = implode(',', request('type_of_employment'));
+        if (!empty(request('job_type'))) {
+            $typeOfEmployment = implode(',', request('job_type'));
         }
         if (!empty(request('contact_thorugh'))) {
             $contactThrough = implode(',', request('contact_thorugh'));
@@ -90,24 +91,24 @@ class JobController extends Controller
             'user_id' => $id,
             'title' => request('title'),
             'address' => request('address'),
-            'zip_code' => request('zip_code'),
+            'zip_code' => request('postal_code'),
             'city' => request('city'),
             'country' => request('country'),
             'type_of_contract' => request('type_of_contract'),
-            'contract_length' => request('contract_length'),
+            'contract_length' => request('duration_of_the_contract'),
             'type_of_employment' => $typeOfEmployment,
             'contract_start_date' => request('contract_start_date'),
             'minimum_gross_salary' => request('minimum_gross_salary'),
             'maximum_gross_salary' => request('maximum_gross_salary'),
             'minimum_experience' => request('minimum_experience'),
             'deadline_for_receipt_of_applications' => request('deadline_for_receipt_of_applications'),
-            'email' => request('email'),
+            'email' => request('email_address'),
             'phone' => request('phone'),
             'contact_thorugh' => $contactThrough,
             'website' => request('website'),
             'job_description' => request('job_description'),
-            'employment_mission' => request('employment_mission'),
-            'what_you_are_looking' => request('what_you_are_looking'),
+            'employment_mission' => request('job_mission'),
+            'what_you_are_looking' => request('what_you_are_looking_for'),
             'total_reg' => $count,
         );
         if (!empty($editId)) {

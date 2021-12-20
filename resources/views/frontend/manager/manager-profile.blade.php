@@ -93,17 +93,17 @@
                                                     </div>
                                                     <div class="col-md-12 pb-2">
                                                         <div class="form-group">
-                                                            {!! Form::text('firstname',auth()->guard('web')->user()->first_name, ['class' => 'form-control view-form', 'placeholder' => 'Prénom*','id'=>'firstname']) !!}
+                                                            {!! Form::text('first_name',auth()->guard('web')->user()->first_name, ['class' => 'form-control view-form', 'placeholder' => 'Prénom*','id'=>'firstname']) !!}
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 pb-2">
                                                         <div class="form-group">
-                                                            {!! Form::text('lastname', auth()->guard('web')->user()->last_name, ['class' => 'form-control view-form', 'placeholder' => 'Nom*','id'=>'lastname']) !!}
+                                                            {!! Form::text('last_name', auth()->guard('web')->user()->last_name, ['class' => 'form-control view-form', 'placeholder' => 'Nom*','id'=>'lastname']) !!}
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 pb-2">
                                                         <div class="form-group">
-                                                            {!! Form::text('email',auth()->guard('web')->user()->email, ['class' => 'form-control view-form', 'placeholder' => 'Email*','id'=>'email']) !!}
+                                                            {!! Form::text('email_address',auth()->guard('web')->user()->email, ['class' => 'form-control view-form', 'placeholder' => 'Email*','id'=>'email']) !!}
 
                                                         </div>
                                                     </div>
@@ -119,7 +119,7 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                                {!! Form::text('roles',auth()->guard('web')->user()->roles, ['class' => 'form-control view-form', 'placeholder' => "Directrice de l'établissement*",'id'=>'roles']) !!}
+                                                                {!! Form::text('roles',auth()->guard('web')->user()->roles, ['class' => 'form-control view-form', 'placeholder' => "Directrice de l'établissement*",'id'=>'roles',('disabled')]) !!}
 
                                                             </div>
                                                         </div>
@@ -129,7 +129,7 @@
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-end">
-                                            <button class="btn btn-yellow d-flex align-items-center pd-btns-edit"><img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" alt="edit" class="mr-3 edit-manager">Editer</button>
+                                            <button class="btn btn-yellow d-flex align-items-center pd-btns-edit"><img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" alt="edit" class="mr-3 edit-manager">Mettre à jour</button>
                                         </div>
                                     </div>
                                     {!! Form::close() !!}

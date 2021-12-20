@@ -16,21 +16,21 @@ class EstablishmentController extends Controller
     protected   $validationrules =
     [
         'type_of_establishment' => 'required',
-        'own_of_our_structure' => 'required',
+        'own_of_our_structure' => 'required|regex:/^([^0-9]*)$/',
         'opening_date' => 'required',
         'year' => 'required',
-        'direction' => 'required',
+        'direction' => 'required|regex:/^([^0-9]*)$/',
         'effective' => 'required',
         'number_of_groups_and_age_groups' => 'required',
         'accommodation_capacity' => 'required',
-        'surface_area_of_the_establishment' => 'required',
+        'surface_area_of_the_establishment' => 'required|numeric',
         'garden' => 'required',
         'applied_pedagogy' => 'required',
         'our_values' => 'required',
+        'more_infomation'=>'required|mimes:jpeg,png,jpg',
     ];
     protected   $imageValidationRules =
-    [
-        
+    [   
         'image' => 'required|mimes:jpeg,png,jpg|max:2048',
 
     ];
@@ -50,8 +50,7 @@ class EstablishmentController extends Controller
     }
     public function store(Request $request)
     {
-        $validationrules['document']='required|mimes:pdf';
-        $validationrules['more_infomation'] = 'required|mimes:jpeg,png,jpg|max:2048';
+        
         $validator = Validator::make($request->all(), $this->validationrules);
         if ($validator->fails()) {
            print_r($validator->errors());

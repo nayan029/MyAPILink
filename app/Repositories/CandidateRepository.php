@@ -51,7 +51,7 @@ class CandidateRepository implements CandidateRepositoryInterface
 
     public function getAllMessage($id)
     {
-        return ChatMaster::where("deleted_at", Null)->where("company_id", $id)->orderBy('created_at', 'asc')->get();;
+        return ChatMaster::where("deleted_at", Null)->where("company_id", $id)->orderBy('created_at', 'asc')->get();
     }
 
     public function insertMessage(Request $request)

@@ -646,7 +646,7 @@
 
     <!-- tele modal -->
 
-    <div class="modal" id="tele-modal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade modal-back-blue" id="tele-modal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header resume_header border-0">
@@ -706,7 +706,8 @@
                             <form method="POST" id="mainForm" class="d-content">
                                 @method('POST')
                                 @csrf
-                                <button class="btn btn-modals-blue cv-radius btn-tele position-relative" id="cv-btn" type="button"><img src="{{asset('frontend/images/project/feather-download.svg')}}" alt="download" class="mr-3">
+
+                                <button class="btn btn-modals-blue mb-0 cv-radius btn-tele position-relative" id="cv-btn" type="button"><img src="{{asset('frontend/images/project/feather-download.svg')}}" alt="download" class="mr-3">
                                     <input type="file" class="upload-modal-cv" name="document_name" id="document_name">
                                     Télécharger un cv </button>
                                 <span class="text-danger error" id="document_name-error"></span>

@@ -36,8 +36,8 @@ class ManagerRepository implements ManagerRepositoryInterface
             ];
             //dd($storeData);
             $manager = User::create($storeData);
-
-            $URL = route('email.verify', $manager->email);
+           
+            $URL = route('manager.email.verify', $manager->email);
             $html = "Verify profile <br> <a href='" . $URL . "' target='_blank'>Click Here</a>";
             $subject = "Please complete your profile on ApiLink";
             // -------Mail------
@@ -50,7 +50,7 @@ class ManagerRepository implements ManagerRepositoryInterface
                 CURLOPT_TIMEOUT => 30,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => "{\"sender\":{\"name\":\"ApiLink\",\"email\":\"no-reply@apilink.fr\"},\"to\":[{\"name\":\"ApiLink\",\"email\":\"" . $request->email . "\"}],\"subject\":\"" . $subject . "\",\"templateId\":1,\"params\":{\"EMAIL\":\"" . $request->email . "\",\"RESET_LINK\":\"" . $URL . "\",\"LINK\":\"" . $URL . "\"}}",
+                CURLOPT_POSTFIELDS => "{\"sender\":{\"name\":\"apilink\",\"email\":\"no-reply@apilink.fr\"},\"to\":[{\"name\":\"ApiLink\",\"email\":\"" . $request->email . "\"}],\"subject\":\"" . $subject . "\",\"templateId\":1,\"params\":{\"EMAIL\":\"" . $request->email . "\",\"RESET_LINK\":\"" . $URL . "\",\"LINK\":\"" . $URL . "\"}}",
                 CURLOPT_HTTPHEADER => array(
                     "accept: application/json",
                     "api-key: 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",
@@ -149,7 +149,19 @@ class ManagerRepository implements ManagerRepositoryInterface
 
         return User::where('id', auth()->guard('web')->user()->id)->update($updateData);
     }
-
+    
+    public function getManagerEmailVerify($email)
+    {
+        $verifyUser = User::where('email', $email)->where('verify_email', 'pending')->first();
+        if ($verifyUser) {
+            $verifyUser->verify_email = 'accept';
+            $verifyUser->update();
+            Auth::loginUsingId($verifyUser->id);
+            return true;
+        } else {
+            return false;
+        }
+    }
     
     
 }

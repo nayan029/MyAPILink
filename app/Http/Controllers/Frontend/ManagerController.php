@@ -192,4 +192,17 @@ class ManagerController extends Controller
 
         return view('frontend.manager.chat_index', $data);
     }
+
+    public function getEmailVerify($email)
+    {
+        $managerlogin = $this->managerRepository->getManagerEmailVerify($email);
+        if($managerlogin)
+        {
+            Session::flash('success','Email has been verified successfully..');
+            return redirect()->route('profile');
+        }else{
+            Session::flash('error','Email has been already verified so now you can login');
+            return redirect()->route('registration');
+        }
+    }
 }

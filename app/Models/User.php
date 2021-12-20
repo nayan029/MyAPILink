@@ -94,7 +94,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Job::class);
     }
-    
+    public function establishmentUserData()
+    {
+        return $this->belongsTo(Establishment::class,'user_id','id')->where('user_id',auth()->user()->id);
+    }
    
 
 }

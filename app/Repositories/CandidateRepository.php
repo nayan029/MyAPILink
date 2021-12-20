@@ -49,10 +49,14 @@ class CandidateRepository implements CandidateRepositoryInterface
         return User::where('id', auth()->guard('web')->user()->id)->update($updateData);
     }
 
-    public function getAllMessage($id,$reciverId)
+    public function getAllMessage($id, $reciverId)
     {
-        return ChatMaster::with('getUserReciverData')->with('getUserSenderData')->where("deleted_at", Null)->where("job_id", $id)->where('reciver_id',$reciverId)->orderBy('created_at', 'asc')->get();;
-    }  
+        return ChatMaster::with('getUserReciverData')->with('getUserSenderData')->where("deleted_at", Null)->where("job_id", $id)
+            ->where(function ($query ) use($reciverId) {
+                $query->where('reciver_id', $reciverId)
+                    ->orWhere('sender_id', $reciverId);
+            })->orderBy('created_at', 'asc')->get();
+    }
 
     public function insertMessage(Request $request)
     {
@@ -76,7 +80,7 @@ class CandidateRepository implements CandidateRepositoryInterface
     {
 
         $query = ChatMaster::with('getUserReciverData')->with('getUserSenderData')
-            ->where("deleted_at",Null)->where('reciver_id',$request->reciverid)->where("job_id", $request->id)
+            ->where("deleted_at", Null)->where('sender_id', $request->reciverid)->where("job_id", $request->id)
             ->where('id', '>', $request->lastid)->first();
         return $query;
     }

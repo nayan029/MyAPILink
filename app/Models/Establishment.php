@@ -19,5 +19,10 @@ class Establishment extends Model
     {
         return  $this->belongsTo(User::class, 'user_id', 'id');
     }
+    public function getFindEstablishmentData()
+    {
+        return $this->belongsTo(job::class,'user_id','id');
+    }
+ 
     
 }

@@ -31,8 +31,8 @@ class ChatMaster extends Model
         return $this->hasMany(ApplyJob::class,'company_id','job_id');
     }
 
-    public function getapplyJob()
+    public function getJob()
     {
-        return $this->belongsTo(ApplyJob::class,'job_id','id');
+        return $this->belongsTo(Job::class,'job_id','id');
     }
 }

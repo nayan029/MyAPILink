@@ -121,7 +121,8 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->post('update-notifications-flag', 'ManagerController@updateNotificationsFlag')->name('update-notifications-flag');
         $frontRoute->post('update-delete-flag', 'ManagerController@updateDeleteAccountFlag')->name('update-delete-flag');
         $frontRoute->get('manager-message', 'ManagerController@chatIndex')->name('manager-message');
-        
+        $frontRoute->get('manager-message-list-ajax', 'ManagerController@messageListAjax')->name('manager-message-list-ajax');
+
         $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
         $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');
         $frontRoute->get('view-establishment-account/{id}', 'EstablishmentController@show')->name('view-establishment-account');

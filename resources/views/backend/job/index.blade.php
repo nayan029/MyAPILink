@@ -12,7 +12,7 @@
 <div class="row">
 		
 			<div class="col-md-12">
-                <form action="#" class="job_form">
+                <form action="javacript:void(0);" id="job_form">
 				<div class="card">
 					<div class="card-body">
 						<div class="row">
@@ -100,12 +100,6 @@
 -->
 <script>
     $(document).ready(function() {
-        /*
-        $("#job_date").datepicker({
-				dateFormat: "mm/dd/yyyy",
-				defaultDate: new Date(),
-		}).datepicker("setDate", '0');
-        */
         loadData();
     });
 
@@ -115,7 +109,7 @@
     });
 
     function loadData() {
-        var formData = $('.job_form').serialize();
+        var formData = $('#job_form').serialize();
         $('#job-table').DataTable({
             "processing": false,
             "serverSide": true,

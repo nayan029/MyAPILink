@@ -141,22 +141,46 @@
         function validation() {
             var temp = 0;
 
-            var position = $('#position').val();
-            if (position == "") {
-                $('.poserror').html("Please enter your Position");
+            var number = /([0-9])/;
+        var position = $('#position').val();
+        $('.poserror').html('');
+       
+        if (position.match(number)) {
+            $('.poserror').html("Numbers not allowed.");
+            temp++
+        } else {
+            if(position.length > 25){
+                $('.poserror').html("Position must not be grater than 25 characters.");
                 temp++
-            } else {
-                $('.poserror').html("");
-
+            }else{
+                if(position == ""){
+            $('.poserror').html("Please enter your Position");
+            temp++
             }
+        }
+    }
 
-            var title = $('#title').val();
-            if (title == "") {
-                $('.titerror').html("Please enter your Title");
+        var number = /([0-9])/;
+        var title = $('#title').val();
+        $('.titerror').html('');
+
+       
+        if (title.match(number)) {
+            $('.titerror').html("Numbers not allowed.");
+            temp++
+        } else {
+            if(title.length > 25){
+                $('.titerror').html("Title must not be grater than 25 characters.");
                 temp++
-            } else {
-                $('.titerror').html("");
+            }else{
+                if(title == ""){
+            $('.titerror').html("Please enter your Title");
+            temp++
+                }
             }
+        }
+    
+
 
             var desc = $('#desc').val();
             if (desc == "") {

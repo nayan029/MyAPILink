@@ -93,21 +93,17 @@
                                                     </div>
                                                     <div class="col-md-12 pb-2">
                                                         <div class="form-group">
-
-
-
-                                                            {!! Form::text('lastname', auth()->guard('web')->user()->last_name, ['class' => 'form-control view-form', 'placeholder' => 'Nom*','id'=>'lastname']) !!}
+                                                            {!! Form::text('first_name',auth()->guard('web')->user()->first_name, ['class' => 'form-control view-form', 'placeholder' => 'Prénom*','id'=>'firstname']) !!}
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 pb-2">
                                                         <div class="form-group">
-                                                            {!! Form::text('firstname',auth()->guard('web')->user()->first_name, ['class' => 'form-control view-form', 'placeholder' => 'Prénom*','id'=>'firstname']) !!}
-
+                                                            {!! Form::text('last_name', auth()->guard('web')->user()->last_name, ['class' => 'form-control view-form', 'placeholder' => 'Nom*','id'=>'lastname']) !!}
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 pb-2">
                                                         <div class="form-group">
-                                                            {!! Form::text('email',auth()->guard('web')->user()->email, ['class' => 'form-control view-form', 'placeholder' => 'Mail*','id'=>'email']) !!}
+                                                            {!! Form::text('email_address',auth()->guard('web')->user()->email, ['class' => 'form-control view-form', 'placeholder' => 'Email*','id'=>'email']) !!}
 
                                                         </div>
                                                     </div>
@@ -123,7 +119,7 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                                {!! Form::text('roles',auth()->guard('web')->user()->roles, ['class' => 'form-control view-form', 'placeholder' => "Directrice de l'établissement*",'id'=>'roles']) !!}
+                                                                {!! Form::text('roles',auth()->guard('web')->user()->roles, ['class' => 'form-control view-form', 'placeholder' => "Directrice de l'établissement*",'id'=>'roles',('disabled')]) !!}
 
                                                             </div>
                                                         </div>
@@ -133,7 +129,7 @@
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-end">
-                                            <button class="btn btn-yellow d-flex align-items-center pd-btns-edit"><img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" alt="edit" class="mr-3 edit-manager">Editer</button>
+                                            <button class="btn btn-yellow d-flex align-items-center pd-btns-edit"><img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" alt="edit" class="mr-3 edit-manager">Mettre à jour</button>
                                         </div>
                                     </div>
                                     {!! Form::close() !!}
@@ -261,7 +257,7 @@
                                                         </div>
                                                         <div class="col-md-4 d-flex align-items-end mb-3">
                                                             <div class="metters-btns">
-                                                                <button class="btn btn-met">
+                                                                <button class="btn btn-met pause" data-hold = "{{$value->is_hold }}"  data-id="{{$value->id}}">
                                                                     Mettre en pause
                                                                 </button>
                                                                 <a href="{{route('editjob',$value->id)}}" class="btn btn btn-met">
@@ -586,6 +582,33 @@
                 }
             });
     });
+    $(document).on('click', '.pause', function(event) {
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        var url = "{{route('holdJobData')}}"
+        var id = $(this).attr("data-id");
+        var hold = $(this).attr("data-hold") == 0 ? 1 : 0;
+    
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: {id:id,hold:hold,
+                _token: CSRF_TOKEN,
+            },
+            success: function(response) {
+                if (response.success == true) {   //Message come from controller
+                    toastr.success(response.message);
+                    if(response.hold == '1'){
+                        $('.pause'+id).addClass("btn-primary");
+                        $('.pause'+id).removeClass("btn-met");
+                    }else{
+                        $('.pause'+id).removeClass("btn-primary");
+                        $('.pause'+id).addClass("btn-met");
+                    }
+                }
+            },
+    });
+    });
+
 </script>
 
 

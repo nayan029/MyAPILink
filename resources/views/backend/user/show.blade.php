@@ -25,13 +25,13 @@
             <div class="col-6 col-sm-6">
               <ul class="list-group list-group-unbordered mb-3">
                 <li class="list-group-item">
-                  <b>Name</b><span class="widget-section">{{ucfirst($user->civility)}}{{ucfirst($user->first_name)}}{{ucfirst($user->last_name)}}</span>
+                  <b>Name</b><span class="widget-section ml-1">{{ucfirst($user->civility)}}{{ucfirst($user->first_name)}}{{ucfirst($user->last_name)}}</span>
                 </li>
                 <li class="list-group-item">
-                  <b>Email</b><span class="widget-section">{{$user->email != "" ? $user->email : '---'}}</span>
+                  <b>Email</b><span class="widget-section" style="margin-left: 7px;">{{$user->email != "" ? $user->email : '---'}}</span>
                 </li>
                 <li class="list-group-item">
-                  <b>Phone</b><span class="widget-section">{{$user->phone !="" ? $user->phone : '---'}}</span>
+                  <b>Phone</b><span class="widget-section mr-5">{{$user->phone !="" ? $user->phone : '---'}}</span>
                 </li>
               </ul>
             </div>
@@ -39,7 +39,7 @@
               <ul class="list-group list-group-unbordered mb-3">
                 @if($user->user_type == 2)
                 <li class="list-group-item">
-                  <b>Address</b> <span class="widget-section">{{$user->address != "" ? $user->address : '---'}}</span>
+                  <b>Address</b><span class="widget-section">{{$user->address != "" ? $user->address : '---'}}</span>
                 </li>
                 <li class="list-group-item">
                   <b>PostalCode</b> <span class="widget-section">{{$user->postal_code != "" ? $user->postal_code : '---'}}</span>

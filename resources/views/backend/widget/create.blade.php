@@ -45,7 +45,7 @@
                                 {!! Form::textarea('description', old('description'), ['class' => 'form-control', 'placeholder' => 'Enter Description','id'=>'summernote']) !!}
                             </div>
                         </div>
-                        </div>
+                    </div>
                         <div class="card-footer">
                 <button type="submit" class="btn btn-primary">{{__("messages.save")}}</button>
             </div>

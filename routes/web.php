@@ -104,6 +104,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('addjob/{id}', 'JobController@index')->name('addjob');
     $frontRoute->post('addorupdatejob/{id}', 'JobController@addOrUpdateJob')->name('addorupdatejob');
     $frontRoute->get('joblist/{id}', 'JobController@showJob')->name('joblist');
+    $frontRoute->post('holdJobData','JobController@holdJobData')->name('holdJobData');
     $frontRoute->get('users/restore/{id}', 'JobController@restoreUser')->name('users.restore');
 
     $frontRoute->get('editjob/{id}', 'JobController@editJob')->name('editjob');

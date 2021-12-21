@@ -15,8 +15,8 @@ class RegistrationRepository implements RegistrationRepositoryInterface
         try {
 
             $data = [
-                'first_name' => $request->firstname,
-                'last_name' => $request->lastname,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
                 'email' => $request['email'],
                 'password' => Hash::make($request->password),
                 'phone' => $request->phone,

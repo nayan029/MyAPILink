@@ -14,7 +14,7 @@ class WidgetController extends Controller
 {
 
     protected $storevalidationrules = [
-        'title' => 'required|max:25|regex:/^[a-zA-Z\s]*$/',
+        'title' => 'required|max:25|regex:/^([^0-9]*)$/',
         'image' => 'required|mimes:jpeg,png,jpg,gif,svg',
         'description' => 'required',
         'widget' => 'required',
@@ -22,7 +22,7 @@ class WidgetController extends Controller
 
 
     protected $updatevalidationrules = [
-        'title' => 'required|max:25|regex:/^[a-zA-Z\s]*$/',
+        'title' => 'required|max:50|regex:/^([^0-9]*)$/',
         'description' => 'required',
         'widget' => 'required',
     ];
@@ -94,6 +94,9 @@ class WidgetController extends Controller
         if ($storewidget) {
             Session::flash('success', 'Successfully Inserted');
             return redirect()->route('widget.index');
+        }else{
+            Session::flash('error', 'Title already exits');
+            return redirect()->back;
         }
     }
 
@@ -117,7 +120,7 @@ class WidgetController extends Controller
      */
     public function edit($id)
     {
-        $data['validator'] = JsValidator::make([]);
+        $data['validator'] = JsValidator::make($this->updatevalidationrules);
         $data['widget'] = $this->widgetRepository->getSingleWidget($id);
         $data['widgets'] = ['our_advantages' => 'OUR ADVANTAGES', 'our_added_value' => 'OUR ADDED VALUE', 'how_it_works' => 'HOW IT WORKS'];
         return view('backend.widget.edit', $data);

@@ -60,7 +60,6 @@
                             <th>{{__("messages.widgetgroup.title")}}</th>
                             <th>{{__("messages.widgetgroup.widget")}}</th>
                             <th>{{__("messages.widgetgroup.image")}}</th>
-                            <th>{{__("messages.widgetgroup.description")}}</th>
                         </tr>
                     </thead>
 

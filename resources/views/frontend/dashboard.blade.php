@@ -140,7 +140,6 @@
                 </div>
             </div>
             <div class="row les-professional-sec">
-
                 @foreach($skill as $sk)
                 <div class="col-md-4">
                     <div class="card sr-card">
@@ -158,7 +157,6 @@
                                 @endif
                             </a>
                         </div>
-
                     </div>
                 </div>
                 @endforeach
@@ -282,13 +280,13 @@
                         <div class="ordiv mb-20"><span>OU</span></div>
                         <div class="mb-20">
                             <div class="form-group">
-                                <input type="text" name="email" placeholder="Email / Nom d'utilisateur*" class="form-control email-place login-input inputicon2">
+                                <input type="text" name="email" placeholder="Email / Nom d'utilisateur *" class="form-control email-place login-input inputicon2">
                                 <span class="email-error text-danger">@error ('email') {{$message}} @enderror</span>
                             </div>
                         </div>
                         <div class="mb-20">
                             <div class="form-group sr-rel">
-                                <input type="password" name="password" placeholder="Mot de passe*" class="form-control  email-place login-input inputicon2 sr-rel" id="password">
+                                <input type="password" name="password" placeholder="Mot de passe *" class="form-control  email-place login-input inputicon2 sr-rel" id="password">
                                 <img src="{{asset('frontend/images/about/eye.svg')}}" alt="" class="sr-eye" id="toggle-password">
                                 <span class="password-error text-danger">@error ('password') {{$message}} @enderror</span>
                                 <span class="invalid-error text-danger">@error ('invalid') {{$message}} @enderror</span>

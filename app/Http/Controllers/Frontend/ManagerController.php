@@ -18,9 +18,9 @@ class ManagerController extends Controller
     protected $managerRepository = "";
     protected   $updatevalidationrules =
     [
-        'civility' => 'required',
-        'firstname' => "required|max:25",
-        'lastname' => "required|max:25",
+        'civility' => 'required|max:5|regex:/^([^0-9]*)$/',
+        'first_name' => "required|max:25|regex:/^([^0-9]*)$/",
+        'last_name' => "required|max:25|regex:/^([^0-9]*)$/",
         'roles' => "required",
 
     ];
@@ -44,7 +44,6 @@ class ManagerController extends Controller
         $this->applyJobRepository = $applyJobRepository;
     }
 
-
     public function index()
     {
         return view('frontend.manager.create');
@@ -52,19 +51,19 @@ class ManagerController extends Controller
 
     public function storeData(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
-            'civility' => 'required',
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'telephone' => 'required|numeric|digits:10',
-            'email' => 'required|email|unique:users,email,NULL,id,deleted_at,NULL',
-            'password' => 'required|confirmed|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+            'civility' => 'required|regex:/^([^0-9]*)$/',
+            'first_name' => 'required|max:25|regex:/^([^0-9]*)$/',
+            'last_name' => 'required|max:25|regex:/^([^0-9]*)$/',
+            'phone' => 'required|numeric|digits:10',
+            'email_address' => 'required|email|unique:users,email,NULL,id,deleted_at,NULL',
+            'password' => 'required|min:6',
+            'confirm_password' => 'required|same:password',
             'represent' => 'required',
-            'organization' => 'required',
-            'number_of_establishments' => 'required',
-            'address' => 'required',
-            'postal_code' => 'required|digits:6',
+            'name_of_our_organization' => 'required|max:75',
+            'number_of_establishments_in_the_organization' => 'required|numeric|digits:5',
+            'organization_address' => 'required',
+            'postal_code' => 'required|digits:5',
             'city' => 'required',
         ]);
 
@@ -89,7 +88,7 @@ class ManagerController extends Controller
 
     public function profile()
     {
-        $this->updatevalidationrules['email'] = "required|email|unique:users,email," . auth()->guard('web')->user()->id . ",id,deleted_at,NULL";
+        $this->updatevalidationrules['email_address'] = "required|email|unique:users,email," . auth()->guard('web')->user()->id . ",id,deleted_at,NULL";
 
         $id = auth()->guard('web')->user()->id;
         $userType = auth()->guard('web')->user()->user_type;
@@ -108,7 +107,7 @@ class ManagerController extends Controller
     public function updateProfile(Request $request)
     {
 
-        $this->updatevalidationrules['email'] = "required|email|unique:users,email," . auth()->guard('web')->user()->id . ",id,deleted_at,NULL";
+        $this->updatevalidationrules['email_address'] = "required|email|unique:users,email," . auth()->guard('web')->user()->id . ",id,deleted_at,NULL";
 
         $validation = Validator::make($request->all(), $this->updatevalidationrules);
         if ($validation->fails()) {

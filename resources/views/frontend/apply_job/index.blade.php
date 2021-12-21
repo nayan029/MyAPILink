@@ -338,7 +338,8 @@
                     <div class="overflow-auto px-4">
                         <table class="download-table w-100">
                             <tbody>
-                                <tr>
+                                @php
+                                for ($i = 0; $i < 3; $i++) { @endphp <tr>
                                     <td>
                                         <div class="d-flex">
                                             <img src="frontend/images/pdf.svg" width="30px" class="mr-3">
@@ -346,31 +347,10 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <a href=""><img src="frontend/images/feather-download.svg" class="download-img"></a>
+                                        <a href="uploads/document/Disclaimer.pdf" download="Document.pdf"><img src="frontend/images/feather-download.svg" class="download-img"></a>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex">
-                                            <img src="frontend/images/pdf.svg" width="30px" class="mr-3">
-                                            <p class="mb-0"> Uploaded CV_10-09-2020.pdf</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href=""><img src="frontend/images/feather-download.svg" class="download-img"></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex">
-                                            <img src="frontend/images/pdf.svg" width="30px" class="mr-3">
-                                            <p class="mb-0"> Uploaded CV_10-09-2020.pdf</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href=""><img src="frontend/images/feather-download.svg" class="download-img"></a>
-                                    </td>
-                                </tr>
+                                    </tr>
+                                    @php } @endphp
                             </tbody>
                         </table>
                     </div>
@@ -379,14 +359,14 @@
                         <h4 class="ou_text border-modal">Ou télécharger un nouveau cv </h4>
                     </div>
                     <div class="upload-drop-btns">
-                        <form method="POST" id="mainForm" class="d-content">
+                        <form method="POST" id="mainForm" class="d-content" enctype="multipart/form-data">
                             @method('POST')
                             @csrf
 
                             <button class="btn btn-modals-blue mb-0 cv-radius btn-tele position-relative" id="cv-btn" type="button"><img src="frontend/images/project/feather-download.svg" alt="download" class="mr-3">
                                 <input type="file" class="upload-modal-cv" name="document_name" id="document_name">
                                 Télécharger un cv </button>
-                            <span class="text-danger error" id="document_name-error"></span>
+                            <span class="text-danger" id="document_name-error"></span>
                             <input type="hidden" name="pdf_name" id="pdf_name">
                             <button type="button" class="btn btna-oky mt-5 bravo-btn" id="byResume" value="1">Ok</button>
                         </form>
@@ -434,35 +414,53 @@
         });
     });
 
+
+
     $(document).on("click", "#byResume,#bravo-btn", function() {
         var type = $(this).val();
         var jobid = $('#jobid').val();
         var userid = $('#userid').val();
         var document_name = $('#pdf_name').val();
 
-
-        $.ajax({
-            url: "{{ route('store-jobType') }}",
-            method: "POST",
-            data: {
-                'type': type,
-                'jobid': jobid,
-                'userid': userid,
-                'document_name': document_name,
-                _token: "{{ csrf_token() }}"
-            },
-            success: function(response) {
-
-                if (response.success == true) {
-                    toastr.success(response.message);
-                    $('#establishment').modal('hide');
-                    $('#bravo').modal('show');
-                    location.reload();
-                } else {
-                    $('#document_name-error').text(response.errors);
-                }
+        var temp = 0;
+        regex = new RegExp("(.*?)\.(pdf|docs|docx)$");
+        if (document_name != "") {
+            if (!(regex.test(document_name))) {
+                $('#document_name-error').html("Only PDF, DOCS and DOCX docs are allowed");
+                temp = 1;
             }
-        });
+        } else {
+            $('#document_name-error').html("");
+            temp = 0;
+        }
+
+
+        if (temp == 0) {
+            $('#document_name-error').html("");
+            $.ajax({
+                url: "{{ route('store-jobType') }}",
+                method: "POST",
+                data: {
+                    'type': type,
+                    'jobid': jobid,
+                    'userid': userid,
+                    'document_name': document_name,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function(response) {
+
+                    if (response.success == true) {
+                        toastr.success(response.message);
+                        $('#establishment').modal('hide');
+                        $('#tele-modal').modal('hide');
+                        $('#bravo').modal('show');
+                        location.reload();
+                    } else {
+                        $('#document_name-error').html(response.errors.document_name);
+                    }
+                }
+            });
+        }
 
     });
 
@@ -524,6 +522,9 @@
         });
     });
 </script>
+
+
+
 @endsection
 </body>
 

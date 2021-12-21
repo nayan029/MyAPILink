@@ -154,7 +154,8 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->get('seeJob', 'SearchAdController@showJob')->name('seeJob');
         $frontRoute->get('details-job/{id}', 'SearchAdController@showJob')->name('details-job');
         $frontRoute->get('details-company/{id}', 'SearchAdController@showCompany')->name('details-company');
-        $frontRoute->post('accept-applicants','JobController@storeApplicants')->name('acceptJobDetails');
-        $frontRoute->get('establishment-portfolio-candidate','JobController@candidatePortfolio')->name('candidatePortfolio');
+        $frontRoute->post('accept-applicants', 'JobController@storeApplicants')->name('acceptJobDetails');
+        $frontRoute->get('establishment-portfolio-candidate', 'JobController@candidatePortfolio')->name('candidatePortfolio');
+        $frontRoute->get('get_ajax_data/{id}', 'SearchAdController@get_ajax_data')->name('get_ajax_data');
     });
 });

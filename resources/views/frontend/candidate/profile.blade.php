@@ -75,7 +75,7 @@
                                 <circle cx="23.5" cy="23.5" r="23" fill="none" />
                             </g>
                             <path id="Icon_feather-bookmark" class="svg-stroke" data-name="Icon feather-bookmark" d="M23.969,25.674l-8.234-5.882L7.5,25.674V6.853A2.353,2.353,0,0,1,9.853,4.5H21.616a2.353,2.353,0,0,1,2.353,2.353Z" transform="translate(7.365 8.413)" fill="none" stroke="#7d7d7d" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
-                        </svg>Mes candidatures</a>
+                        </svg>Mes candidatures </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="portfolio1-tab" data-toggle="tab" href="#Portfolio1" role="tab" aria-controls="home" aria-selected="true"><svg xmlns="http://www.w3.org/2000/svg" width="31.788" height="31.79" viewBox="0 0 31.788 31.79">
@@ -357,7 +357,7 @@
 
                                                     @if(count($applyJobData) > 0)
                                                     @foreach($applyJobData as $applyJob)
-                                                    @if($applyJob['jobApplay'])
+                                                    @if($applyJob['jobApplay']!=null)
                                                     @php
                                                     $createDate = date('d-m-Y',strtotime($applyJob->created_at));
                                                     $now = date('d-m-Y');
@@ -365,9 +365,9 @@
                                                     $finalDays = abs(round($diff / 86400));
                                                     @endphp
                                                     <div class="job-card">
-                                                        <div class="d-flex justify-content-between mb-4 ">
+                                                        <div class="d-flex justify-content-between mb-4">
                                                             <div>
-                                                                <h5 class="mb-0 c-prof-jobtext">{{$applyJob->title}}
+                                                                <h5 class="mb-0 c-prof-jobtext">{{$applyJob['jobApplay']->title}}
                                                                 </h5>
                                                                 <p class="mb-0 job_cre_text">{{$applyJob->type_of_contract}}</p>
                                                             </div>
@@ -375,7 +375,7 @@
                                                             <span class="c-prof-public-text mr-5">Publié il y a {{$finalDays}}
                                                                 jours</span>
                                                         </div>
-                                                        <div class="row mb-3 ">
+                                                        <div class="row mb-3">
                                                             <div class="col-md-6 ">
                                                                 <ul class="search-image-ul">
                                                                     <li>
@@ -408,186 +408,186 @@
                                         </div>
 
                                     </div>
-                                </div>
-                                <div class="tab-pane fade " id="save-file" role="tabpanel" aria-labelledby="save-file-tab">
-                                    <div class="sr-card tab-minus">
-                                        <div class="card-body pos2-card">
-                                            <div class="card-pd">
-                                                @if(count($jobSaveData)>0)
-                                                @foreach($jobSaveData as $jobSave)
-                                                @if($jobSave['job'])
-                                                @php
-                                                $isApplyed = $jobSave->applyJob!=null ? "disabled":"";
-                                                $createDate = date('d-m-Y',strtotime($jobSave->created_at));
-                                                $now = date('d-m-Y');
-                                                $diff = strtotime($createDate) - strtotime($now);
-                                                $finalDays = abs(round($diff / 86400));
-                                                @endphp
-                                                <div class="job-card ">
-                                                    <div class="d-flex justify-content-between mb-4 ">
-                                                        <div>
-                                                            <h5 class="mb-0 c-prof-jobtext">{{$jobSave['job']->title}}
-                                                            </h5>
-                                                            <p class="mb-0 job_cre_text">{{$jobSave['job']->type_of_contract}}
-                                                            </p>
-                                                        </div>
 
-                                                        <span class="c-prof-public-text">Publié il y a {{$finalDays}}
-                                                            jours<img src="{{asset('frontend/images/imgs-svg/book-mark-yellow.svg')}}" alt="bookmark image " class="ml-3 book-yellow-img"></span>
-                                                    </div>
-                                                    <div class="row mb-3 ">
-                                                        <div class="col-md-8 ">
-                                                            <ul class="search-image-ul">
-                                                                <li>
-                                                                    <!-- <p class="mb-0 ">Montpellier (34)</p> -->
-                                                                </li>
-                                                                <li>
-                                                                    <p class="mb-0 ">{{$jobSave['job']->maximum_gross_salary}} € par mois</p>
-                                                                </li>
-                                                                <li>
-                                                                    <p class="mb-0 ">Expérience :{{$jobSave['job']->minimum_experience}}
-                                                                    </p>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-md-4 mt-2 align-items-end d-flex justify-content-end">
-                                                            <div class="d-flex">
-                                                                <a href="{{URL::to('details-job'.'/'.$jobSave['job']->id)}}" class="btn btn-viewjob mr-4">Voir
-                                                                    l’offre</a>
-                                                                <button class="btn btn-apply" @if($jobSave->applyJob != null) @else onclick="openJobModal('{{$jobSave->id}}','{{$jobSave->user_id}}')" @endif {{$isApplyed}}>Postuler</button>
+                                    <div class="tab-pane fade " id="save-file" role="tabpanel" aria-labelledby="save-file-tab">
+                                        <div class="sr-card tab-minus">
+                                            <div class="card-body pos2-card">
+                                                <div class="card-pd">
+                                                    @if(count($jobSaveData)>0)
+                                                    @foreach($jobSaveData as $jobSave)
+                                                    @if($jobSave['job'])
+                                                    @php
+                                                    $isApplyed = $jobSave->applyJob!=null ? "disabled":"";
+                                                    $createDate = date('d-m-Y',strtotime($jobSave->created_at));
+                                                    $now = date('d-m-Y');
+                                                    $diff = strtotime($createDate) - strtotime($now);
+                                                    $finalDays = abs(round($diff / 86400));
+                                                    @endphp
+                                                    <div class="job-card ">
+                                                        <div class="d-flex justify-content-between mb-4 ">
+                                                            <div>
+                                                                <h5 class="mb-0 c-prof-jobtext">{{$jobSave['job']->title}}
+                                                                </h5>
+                                                                <p class="mb-0 job_cre_text">{{$jobSave['job']->type_of_contract}}
+                                                                </p>
                                                             </div>
+
+                                                            <span class="c-prof-public-text">Publié il y a {{$finalDays}}
+                                                                jours<img src="{{asset('frontend/images/imgs-svg/book-mark-yellow.svg')}}" alt="bookmark image " class="ml-3 book-yellow-img"></span>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                @endif
-                                                @endforeach
-                                                @else
-                                                <div class="job-card ">
-                                                    <p class="text-center">No Data Available.</p>
-                                                </div>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade " id="Portfolio1" role="tabpanel" aria-labelledby="portfolio1-tab">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card sr-card">
-                                <div class="card-body">
-                                    <div class="profile-sidebar-sec">
-                                        <div class="prof-side">
-                                            <h5 class="dark-tit profside-title">Situation actuelle :</h5>
-                                            <p class="profside-text">{{auth()->guard('web')->user()->current_situation}}</p>
-                                        </div>
-                                        <div class="prof-side">
-                                            <h5 class="dark-tit profside-title">Recherche :</h5>
-                                            <p class="profside-text">{{auth()->guard('web')->user()->research}}</p>
-                                        </div>
-                                        <div class="prof-side">
-                                            <h5 class="dark-tit profside-title">Disponible :</h5>
-                                            <ul class="prof-view-ul">
-                                                <li>{{auth()->guard('web')->user()->available_day}}</li>
-                                                <li>{{auth()->guard('web')->user()->available_time}}</li>
-                                            </ul>
-                                        </div>
-                                        <div class="prof-side">
-                                            <h5 class="dark-tit profside-title">Diplômes :</h5>
-                                            <p class="profside-text">{{auth()->guard('web')->user()->diplomas}}</p>
-                                        </div>
-                                        <div class="prof-side">
-                                            <h5 class="dark-tit profside-title">Expériences :</h5>
-                                            <p class="profside-text">7 ans d’expériences</p>
-                                        </div>
-                                        <div class="prof-side">
-                                            <h5 class="dark-tit profside-title">Tranche d’âge :</h5>
-                                            <ul class="prof-viewcheck-ul">
-                                                <li> <span><img src="{{asset('frontend/images/imgs-svg/blue-md-checkmark.svg')}}" alt=""></span> 0-1 an
-                                                </li>
-                                                <li> <span><img src="{{asset('frontend/images/imgs-svg/blue-md-checkmark.svg')}}" alt=""></span> 2-3 an
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="prof-side">
-                                            <h5 class="dark-tit profside-title">Mobilité :</h5>
-                                            <p class="profside-text">{{auth()->guard('web')->user()->mobility}}</p>
-                                        </div>
-                                        <div class="prof-side mb-60">
-                                            <h5 class="dark-tit profside-title">Vérifications :</h5>
-                                            <div class="verification-view">
-                                                <span> <img src="{{asset('frontend/images/imgs-svg/green-check.svg')}}" alt=""></span> Charte d’engagement Apilink
-                                            </div>
-                                            <div class="verification-view">
-                                                <span> <img src="{{asset('frontend/images/imgs-svg/green-check.svg')}}" alt=""></span> E-mail
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card sr-card tab-hgt">
-                                <div class="card-body">
-                                    <div class="dossier_sec personal_detail_edit pb-0">
-                                        <ul class="img-ul" id="appendid">
-                                            @foreach($images as $image)
-                                            <li id="image{{$image->id}}">
-                                                <div class="img_section">
-                                                    <div class="img_content">
-                                                        <img src='{{asset("$image->image")}}' />
-
-                                                    </div>
-                                                    <img onclick="removeImage({{$image->id}})" src="{{asset('frontend/images/close.svg')}}" width="12px" class="c-prof-closeimg">
-                                                    <div class="text-imgs">
-                                                        <p class="mb-0">Project Name 1</p>
-                                                        <p class="work-from">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                                        <button class="btn btn-small" data-toggle="modal" data-target="#cv-modal1">view more</button>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            @endforeach
-                                            <li>
-
-                                                <form method="post" enctype="multipart/form-data" name="myForm" id="myForm">
-                                                    @csrf
-                                                    <div class="img_section">
-                                                        <div class="profimage-upload">
-                                                            <div class="upload-div">
-                                                                <div><img src="{{asset('frontend/images/upload-icon.svg')}}" alt="upload-profile" class="upload-img1">
+                                                        <div class="row mb-3 ">
+                                                            <div class="col-md-8 ">
+                                                                <ul class="search-image-ul">
+                                                                    <li>
+                                                                        <!-- <p class="mb-0 ">Montpellier (34)</p> -->
+                                                                    </li>
+                                                                    <li>
+                                                                        <p class="mb-0 ">{{$jobSave['job']->maximum_gross_salary}} € par mois</p>
+                                                                    </li>
+                                                                    <li>
+                                                                        <p class="mb-0 ">Expérience :{{$jobSave['job']->minimum_experience}}
+                                                                        </p>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="col-md-4 mt-2 align-items-end d-flex justify-content-end">
+                                                                <div class="d-flex">
+                                                                    <a href="{{URL::to('details-job'.'/'.$jobSave['job']->id)}}" class="btn btn-viewjob mr-4">Voir
+                                                                        l’offre</a>
+                                                                    <button class="btn btn-apply" @if($jobSave->applyJob != null) @else onclick="openJobModal('{{$jobSave->id}}','{{$jobSave->user_id}}')" @endif {{$isApplyed}}>Postuler</button>
                                                                 </div>
-                                                                <p class="mb-0">Télécharger <br>une image</p>
                                                             </div>
-                                                            <input type="file" id="imageUpload" name="image" accept=".png, .jpg, .jpeg" onchange="imageUploadGallery();" class="upload-input1">
                                                         </div>
                                                     </div>
-                                                    <span class="image-upload-error text-danger">@error ('image') {{$message}} @enderror</span>
-                                                </form>
-                                            </li>
-                                        </ul>
-                                        <div class="d-flex justify-content-end btn-image-view mt-4">
-                                            <a class="btn btn-blue d-flex"><img src="{{asset('frontend/images/imgs-svg/ionic-md-eye.svg')}}" class="mr-4" alt="eye-icon">Plus ...</a>
+                                                    @endif
+                                                    @endforeach
+                                                    @else
+                                                    <div class="job-card ">
+                                                        <p class="text-center">No Data Available.</p>
+                                                    </div>
+                                                    @endif
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+                                </div>
 
+
+
+
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade " id="Portfolio1" role="tabpanel" aria-labelledby="portfolio1-tab">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card sr-card">
+                                        <div class="card-body">
+                                            <div class="profile-sidebar-sec">
+                                                <div class="prof-side">
+                                                    <h5 class="dark-tit profside-title">Situation actuelle :</h5>
+                                                    <p class="profside-text">{{auth()->guard('web')->user()->current_situation}}</p>
+                                                </div>
+                                                <div class="prof-side">
+                                                    <h5 class="dark-tit profside-title">Recherche :</h5>
+                                                    <p class="profside-text">{{auth()->guard('web')->user()->research}}</p>
+                                                </div>
+                                                <div class="prof-side">
+                                                    <h5 class="dark-tit profside-title">Disponible :</h5>
+                                                    <ul class="prof-view-ul">
+                                                        <li>{{auth()->guard('web')->user()->available_day}}</li>
+                                                        <li>{{auth()->guard('web')->user()->available_time}}</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="prof-side">
+                                                    <h5 class="dark-tit profside-title">Diplômes :</h5>
+                                                    <p class="profside-text">{{auth()->guard('web')->user()->diplomas}}</p>
+                                                </div>
+                                                <div class="prof-side">
+                                                    <h5 class="dark-tit profside-title">Expériences :</h5>
+                                                    <p class="profside-text">7 ans d’expériences</p>
+                                                </div>
+                                                <div class="prof-side">
+                                                    <h5 class="dark-tit profside-title">Tranche d’âge :</h5>
+                                                    <ul class="prof-viewcheck-ul">
+                                                        <li> <span><img src="{{asset('frontend/images/imgs-svg/blue-md-checkmark.svg')}}" alt=""></span> 0-1 an
+                                                        </li>
+                                                        <li> <span><img src="{{asset('frontend/images/imgs-svg/blue-md-checkmark.svg')}}" alt=""></span> 2-3 an
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="prof-side">
+                                                    <h5 class="dark-tit profside-title">Mobilité :</h5>
+                                                    <p class="profside-text">{{auth()->guard('web')->user()->mobility}}</p>
+                                                </div>
+                                                <div class="prof-side mb-60">
+                                                    <h5 class="dark-tit profside-title">Vérifications :</h5>
+                                                    <div class="verification-view">
+                                                        <span> <img src="{{asset('frontend/images/imgs-svg/green-check.svg')}}" alt=""></span> Charte d’engagement Apilink
+                                                    </div>
+                                                    <div class="verification-view">
+                                                        <span> <img src="{{asset('frontend/images/imgs-svg/green-check.svg')}}" alt=""></span> E-mail
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card sr-card tab-hgt">
+                                        <div class="card-body">
+                                            <div class="dossier_sec personal_detail_edit pb-0">
+                                                <ul class="img-ul" id="appendid">
+                                                    @foreach($images as $image)
+                                                    <li id="image{{$image->id}}">
+                                                        <div class="img_section">
+                                                            <div class="img_content">
+                                                                <img src='{{asset("$image->image")}}' />
+
+                                                            </div>
+                                                            <img onclick="removeImage({{$image->id}})" src="{{asset('frontend/images/close.svg')}}" width="12px" class="c-prof-closeimg">
+                                                            <div class="text-imgs">
+                                                                <p class="mb-0">Project Name 1</p>
+                                                                <p class="work-from">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                                                <button class="btn btn-small" data-toggle="modal" data-target="#cv-modal1">view more</button>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    @endforeach
+                                                    <li>
+
+                                                        <form method="post" enctype="multipart/form-data" name="myForm" id="myForm">
+                                                            @csrf
+                                                            <div class="img_section">
+                                                                <div class="profimage-upload">
+                                                                    <div class="upload-div">
+                                                                        <div><img src="{{asset('frontend/images/upload-icon.svg')}}" alt="upload-profile" class="upload-img1">
+                                                                        </div>
+                                                                        <p class="mb-0">Télécharger <br>une image</p>
+                                                                    </div>
+                                                                    <input type="file" id="imageUpload" name="image" accept=".png, .jpg, .jpeg" onchange="imageUploadGallery();" class="upload-input1">
+                                                                </div>
+                                                            </div>
+                                                            <span class="image-upload-error text-danger">@error ('image') {{$message}} @enderror</span>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                                <div class="d-flex justify-content-end btn-image-view mt-4">
+                                                    <a class="btn btn-blue d-flex"><img src="{{asset('frontend/images/imgs-svg/ionic-md-eye.svg')}}" class="mr-4" alt="eye-icon">Plus ...</a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+
         </div>
-    </div>
-
-
-    </div>
 </section>
 
 <!-- See the establishment's file Modal -->

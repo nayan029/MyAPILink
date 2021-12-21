@@ -64,6 +64,8 @@ class CandidateController extends Controller
         $data['images'] = $this->establishmentRepository->getCandidateGallery();
         $data['jobSaveData'] = $this->applyJobRepository->getJobsaveDataByUserId();
         $data['applyJobData'] =  $this->applyJobRepository->getApplyJobDataByUserId();
+
+
         return view('frontend.candidate.profile', $data);
     }
     public function edit()
@@ -95,16 +97,16 @@ class CandidateController extends Controller
     {
 
         $data['validator'] = JsValidator::make($this->imageValidationRules);
-        $data['jobList']=$this->applyJobRepository->chatJobList();
-      
+        $data['jobList'] = $this->applyJobRepository->chatJobList();
+
         return view('frontend.candidate.chat_index', $data);
     }
     public function messageListAjax(Request $request)
     {
         $data['id'] = $request->id;
-        $data['reciverid'] =$request->reciverid;
+        $data['reciverid'] = $request->reciverid;
         $data['validator'] = JsValidator::make($this->imageValidationRules);
-        $data['messagelist'] =  $this->candidateRepository->getAllMessage($request->id,$request->reciverid);
+        $data['messagelist'] =  $this->candidateRepository->getAllMessage($request->id, $request->reciverid);
 
         return view('frontend.candidate.chatbox', $data);
     }

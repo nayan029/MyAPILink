@@ -129,23 +129,41 @@
 
     function validation() {
         var temp = 0;
-
+        var number = /([0-9])/;
         var position = $('#position').val();
-        if (position == "") {
+        $('.poserror').html('');
+        if(position){   
+        }
+        if (position.match(number)) {
+            $('.poserror').html("Numbers not allowed.");
+            temp++
+        } else {
+            if(position.length > 25){
+                $('.poserror').html("Position must not be grater than 25 characters.");
+                temp++
+            }else{
+                if(position == ""){
             $('.poserror').html("Please enter your Position");
             temp++
-        } else {
-            $('.poserror').html("");
-
+            }
         }
+    }
 
+        var number = /([0-9])/;
         var title = $('#title').val();
-        if ((title == "") || (title > 25)) {
-            $('.titerror').html("The title must not be greater than 25 characters.");
+        $('.titerror').html('');
+
+        if(title){
+        if (title.match(number)) {
+            $('.titerror').html("Numbers not allowed.");
             temp++
         } else {
-            $('.titerror').html("");
+            if(title.length > 25){
+                $('.titerror').html("Title must not be grater than 25 characters.");
+                temp++
+            }
         }
+    }
 
         var desc = $('#desc').val();
         if (desc == "") {

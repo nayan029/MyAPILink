@@ -257,7 +257,7 @@
                                                         </div>
                                                         <div class="col-md-4 d-flex align-items-end mb-3">
                                                             <div class="metters-btns">
-                                                                <button class="btn btn-met">
+                                                                <button class="btn btn-met pause" data-hold = "{{$value->is_hold }}"  data-id="{{$value->id}}">
                                                                     Mettre en pause
                                                                 </button>
                                                                 <a href="{{route('editjob',$value->id)}}" class="btn btn btn-met">
@@ -582,6 +582,33 @@
                 }
             });
     });
+    $(document).on('click', '.pause', function(event) {
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        var url = "{{route('holdJobData')}}"
+        var id = $(this).attr("data-id");
+        var hold = $(this).attr("data-hold") == 0 ? 1 : 0;
+    
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: {id:id,hold:hold,
+                _token: CSRF_TOKEN,
+            },
+            success: function(response) {
+                if (response.success == true) {   //Message come from controller
+                    toastr.success(response.message);
+                    if(response.hold == '1'){
+                        $('.pause'+id).addClass("btn-primary");
+                        $('.pause'+id).removeClass("btn-met");
+                    }else{
+                        $('.pause'+id).removeClass("btn-primary");
+                        $('.pause'+id).addClass("btn-met");
+                    }
+                }
+            },
+    });
+    });
+
 </script>
 
 

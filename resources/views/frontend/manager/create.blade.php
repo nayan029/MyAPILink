@@ -56,15 +56,15 @@
                                     <div class="col-md-2 mb-2">
                                         <div class="form-group">
                                             <label class="">Civilité<span class="text-danger">*</span></label>
-                                            <select class="cus-drop pl-23 select2 form-add-establish" name="represent" style="width: 100%;">
-                                                <option value="Monsieur">Monsieur</option>
-                                                <option value="Mme">Mme</option>
+                                            <select class="cus-drop pl-23 select2 form-add-establish" name="civility" style="width: 100%;">
+                                                <option value="Mr">M.</option>
+                                                <option value="Mrs">Madame.</option>
                                             </select>
                                             <span class="civility-error text-danger">@error ('civility') {{$message}} @enderror</span>
                                         </div>
                                     </div>
                                     <div class="col-md-5 mb-2">
-                                        <div class="form-group">
+                                              <div class="form-group">
                                             <label class="">Prénom<span class="text-danger">*</span></label>
                                             <input id="firstname" type="text" name="first_name" class="form-control form-add-establish pl-23" placeholder="Prénom">
                                             <span class="firstname-error text-danger">@error ('firstname') {{$message}} @enderror</span>
@@ -106,7 +106,7 @@
                                     <div class="col-md-12 mb-2">
                                         <div class="form-group">
                                             <label class="">Confirmer le mot de passe<span class="text-danger">*</span></label>
-                                            <input id="password_confirmation" type="password" name="password_confirmation" class="form-control form-add-establish pl-23" placeholder="Confirmer le mot de passe">
+                                            <input id="confirm_password" type="password" name="confirm_password" class="form-control form-add-establish pl-23" placeholder="Confirmer le mot de passe">
                                             <span class="password_confirmation-error text-danger">@error ('password_confirmation') {{$message}} @enderror</span>
 
                                         </div>
@@ -248,7 +248,7 @@
                                     <div class="col-md-12 mb-2">
                                         <div class="form-group">
                                             <label class="">Nombre d'établissements dans l'organisation<span class="text-danger">*</span></label>
-                                            <input id="number_of_establishments" type="text" name="number_of_establishments" class="form-control form-add-establish pl-23" placeholder="Nombre d'établissements dans l'organisation">
+                                            <input id="number_of_establishments_in_the_organization" type="text" name="number_of_establishments_in_the_organization" class="form-control form-add-establish pl-23" placeholder="Nombre d'établissements dans l'organisation">
                                             <span class="establish-error text-danger">@error ('number_of_establishments') {{$message}} @enderror</span>
 
                                         </div>
@@ -502,11 +502,11 @@
                     $('.phone-error').text(response.errors.phone);
                     $('.email-error').text(response.errors.email_address);
                     $('.password-error').text(response.errors.password);
-                    $('.password_confirmation-error').text(response.errors.password_confirmation);
+                    $('.password_confirmation-error').text(response.errors.confirm_password);
                     $('.radio-error').text(response.errors.radio);
                     $('.represent-error').text(response.errors.represent);
                     $('.organization-error').text(response.errors.name_of_our_organization);
-                    $('.establish-error').text(response.errors.number_of_establishments);
+                    $('.establish-error').text(response.errors.number_of_establishments_in_the_organization);
                     $('.address-error').text(response.errors.organization_address);
                     $('.postal-error').text(response.errors.postal_code);
                     $('.city-error').text(response.errors.city);

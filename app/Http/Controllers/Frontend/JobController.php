@@ -135,6 +135,18 @@ class JobController extends Controller
         return redirect()->back();
     }
 
+    public function holdJobData(Request $request){
+      
+     $data = Job::where('id',$request->id)->update(['is_hold' =>$request->hold]);
+     if($data){
+        return response()->json([
+            'success' => true,
+            'message' => 'Successfully Updated',
+            'hold'=>$request->hold
+        ]);
+    }
+    }
+
     public function viewApplcants($id)
     {
 
@@ -167,4 +179,6 @@ class JobController extends Controller
     public function candidatePortfolio(Request $request){
         return view('frontend.job.esatablishment-portfolio');
     }
+
+
 }

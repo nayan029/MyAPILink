@@ -16,9 +16,9 @@ class ContactUsController extends Controller
     public function storeContact(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'firstname' => 'required|max:25|regex:/^([^0-9]*)$/',
-            'lastname' => 'required|max:25|regex:/^([^0-9]*)$/,',
-            'email' => 'required|unique:contact_us|email    ',
+            'first_name' => 'required|max:25|regex:/^([^0-9]*)$/',
+            'last_name' => 'required|max:25|regex:/^([^0-9]*)$/',
+            'email' => 'required|unique:contact_us|email',
             'description' => 'required',
         ]);
 

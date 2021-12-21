@@ -140,7 +140,6 @@
                 </div>
             </div>
             <div class="row les-professional-sec">
-
                 @foreach($skill as $sk)
                 <div class="col-md-4">
                     <div class="card sr-card">
@@ -158,7 +157,6 @@
                                 @endif
                             </a>
                         </div>
-
                     </div>
                 </div>
                 @endforeach

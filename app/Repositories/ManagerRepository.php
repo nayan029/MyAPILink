@@ -27,7 +27,7 @@ class ManagerRepository implements ManagerRepositoryInterface
                 'establishment_management' => $request->management,
                 'represent' => $request->represent,
                 'organization' => $request->name_of_our_organization,
-                'number_of_establishments' => $request->number_of_establishments,
+                'number_of_establishments' => $request->number_of_establishments_in_the_organization,
                 'address' => $request->organization_address,
                 'postal_code' => $request->postal_code,
                 'city' => $request->city,

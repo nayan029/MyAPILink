@@ -54,16 +54,17 @@ class RegistrationController extends Controller
         }
     }
 
-    public function getEmailVerify($email){
+    public function getEmailVerify($email)
+    {
         $update =  $this->registrationRepository->verifyEmail($email);
-        if($update){
+        if ($update) {
             $data['updateUser'] = $update;
-            Session::flash('success','Your Email has been verified');
-            return view('frontend.candidate.candidate-profile-step',$data);
+            Session::flash('success', 'Your Email has been verified');
+            return view('frontend.candidate.candidate-profile-step', $data);
             // Session::flash('success','Your Email has been verified');
             // return redirect()->route('registration');
-        }else{
-            Session::flash('error','Your e-mail is already verified. You can now login.');
+        } else {
+            Session::flash('error', 'Your e-mail is already verified. You can now login.');
             return redirect()->route('registration');
         }
     }
@@ -74,15 +75,15 @@ class RegistrationController extends Controller
         return view('frontend.email-template.accountcreate');
     }
 
-    public function candidateProfileStep(Request $request,$id)
+    public function candidateProfileStep(Request $request, $id)
     {
-        $data = $this->registrationRepository->updateCandidateProfileStep($request,$id);
+        $data = $this->registrationRepository->updateCandidateProfileStep($request, $id);
         if ($data) {
             return response()->json([
                 'success' => true,
                 'message' => 'Update'
             ]);
-        }   
+        }
     }
 
     public function candidateDownloadResume($userId)
@@ -92,21 +93,18 @@ class RegistrationController extends Controller
 
     public function getWelcomePage($id)
     {
-        return view('frontend.candidate.candidate-welcome-step',["id"=>$id]);
+        return view('frontend.candidate.candidate-welcome-step', ["id" => $id]);
     }
 
     public function candidateProfileLogin($userid)
     {
         $user = $this->registrationRepository->directCandidateLogin($userid);
-        if($user)
-        {
-            Session::flash('success','Login Successfully');
+        if ($user) {
+            Session::flash('success', 'Login Successfully');
             return redirect()->route('mycandidate-profile');
-        }else{
-            Session::flash('success','Somthing went wrong');
+        } else {
+            Session::flash('success', 'Somthing went wrong');
             return redirect()->back();
         }
-        
     }
-   
 }

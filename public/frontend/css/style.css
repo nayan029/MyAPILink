@@ -8881,3 +8881,9 @@ ul.multiselect-container.dropdown-menu.show {
 .d-content {
   display: contents;
 }
+.modal.modal-static .modal-dialog {
+  transform: scale(1) !important;
+}
+.modal.modal-static {
+  overflow: auto !important;
+}

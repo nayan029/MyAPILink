@@ -37,24 +37,26 @@ class EstablishmentController extends Controller
     protected $newsletterValidationRules = [
         'email' => 'required|email|unique:newsletter,email,NULL,id,deleted_at,NULL'
     ];
-   
+
     public function __construct(EstablishmentRepositoryInterface $establishmentRepository)
     {
         $this->establishmentRepository = $establishmentRepository;
     }
     public function index()
     {
-        $data['accommodationCapacity'] = array (1=>1 );
+        $data['accommodationCapacity'] = array(1 => 1);
         $data['validator'] = JsValidator::make($this->validationrules);
-        return view('frontend.establishment.create',$data);
+        return view('frontend.establishment.create', $data);
     }
     public function store(Request $request)
     {
+        $validationrules['document'] = 'required|mimes:pdf';
+        $validationrules['more_infomation'] = 'required|mimes:jpeg,png,jpg|max:2048';
         
         $validator = Validator::make($request->all(), $this->validationrules);
         if ($validator->fails()) {
-           print_r($validator->errors());
-           die;
+            print_r($validator->errors());
+            die;
             return redirect()->back()->withErrors($validator->errors());
         }
 
@@ -62,12 +64,12 @@ class EstablishmentController extends Controller
 
         if ($storeProfile) {
             Session::flash('success', 'Successfully Inserted');
-            return redirect('/view-establishment-account/'.$storeProfile->id);
+            return redirect('/view-establishment-account/' . $storeProfile->id);
         }
         Session::flash('error', 'Sorry, something went wrong. please try again.');
         return redirect()->back();
     }
-    public function show(Request $request,$id)
+    public function show(Request $request, $id)
     {
         $data['imageValidator'] = JsValidator::make($this->imageValidationRules);
         $data['images'] = $this->establishmentRepository->getEstablishmentGallery($id);
@@ -77,16 +79,16 @@ class EstablishmentController extends Controller
         $data['jobListing'] = $postsdata['jobListing'];
         $data['remaining'] = $postsdata['remaining'];
         $data['deleted'] = $postsdata['deleted'];
-        return view('frontend.establishment.show',$data);
+        return view('frontend.establishment.show', $data);
     }
     public function edit($id)
     {
-        
+
         $data['validator'] = JsValidator::make($this->validationrules);
         $data['establishment'] = $this->establishmentRepository->getSingleEstablishment($id);
-        return view('frontend.establishment.edit',$data);
+        return view('frontend.establishment.edit', $data);
     }
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
 
 
@@ -95,11 +97,11 @@ class EstablishmentController extends Controller
             return redirect()->back()->withErrors($validator->errors());
         }
 
-        $update = $this->establishmentRepository->update($request,$id);
+        $update = $this->establishmentRepository->update($request, $id);
 
         if ($update) {
             Session::flash('success', 'Successfully Updated');
-            return redirect('/view-establishment-account/'.$id);
+            return redirect('/view-establishment-account/' . $id);
         }
         Session::flash('error', 'Sorry, something went wrong. please try again.');
         return redirect()->back();
@@ -117,29 +119,26 @@ class EstablishmentController extends Controller
         $store = $this->establishmentRepository->uploadEstablishmentImage($request);
 
         if ($store) {
-            return response()->json(['success' => true, 'message' => 'Successfully Inserted','data' => $store]);
+            return response()->json(['success' => true, 'message' => 'Successfully Inserted', 'data' => $store]);
         }
         return response()->json(['success' => false, 'message' => 'Sorry, something went wrong. please try again.']);
     }
     public function removeImage(Request $request)
     {
         $delete = $this->establishmentRepository->deleteImage($request->id);
-      
+
         if ($delete) {
-            return response()->json(['success' => true, 'message' => 'Successfully Deleted','data' => $delete]);
+            return response()->json(['success' => true, 'message' => 'Successfully Deleted', 'data' => $delete]);
         }
         return response()->json(['success' => false, 'message' => 'Sorry, something went wrong. please try again.']);
     }
 
-    
+
     public function dashborad()
     {
         $data['newslettervalidator'] = JsValidator::make($this->newsletterValidationRules);
         $data['widget'] = Widget::get();
 
-        return view('frontend.establishment.dashborad',$data);
+        return view('frontend.establishment.dashborad', $data);
     }
-    
-    
-    
 }

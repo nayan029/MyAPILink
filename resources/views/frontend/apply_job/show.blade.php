@@ -222,7 +222,8 @@
                     <div class="overflow-auto px-4">
                         <table class="download-table w-100">
                             <tbody>
-                                <tr>
+                                @php
+                                for ($i = 0; $i < 3; $i++) { @endphp <tr>
                                     <td>
                                         <div class="d-flex">
                                             <img src="{{asset('frontend/images/pdf.svg')}}" width="30px" class="mr-3">
@@ -231,33 +232,11 @@
 
                                     </td>
                                     <td>
-                                        <a href=""><img src=" {{asset('frontend/images/feather-download.svg')}}" class="download-img"></a>
+                                        <a href="{{asset('uploads/document/Disclaimer.pdf')}}" download="Document.pdf"><img src="{{asset('frontend/images/feather-download.svg')}}" class="download-img"></a>
 
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex">
-                                            <img src="{{asset('frontend/images/pdf.svg')}}" width="30px" class="mr-3">
-                                            <p class="mb-0"> Uploaded CV_10-09-2020.pdf</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href=""><img src=" {{asset('frontend/images/feather-download.svg')}}" class="download-img"></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex">
-                                            <img src=" {{asset('frontend/images/pdf.svg')}}" width="30px" class="mr-3">
-                                            <p class="mb-0"> Uploaded CV_10-09-2020.pdf</p>
-                                        </div>
-                                    </td>
-                                    <td>
-
-                                        <a href=""><img src="{{asset('frontend/images/feather-download.svg')}}" class="download-img"></a>
-                                    </td>
-                                </tr>
+                                    </tr>
+                                    @php } @endphp
                             </tbody>
                         </table>
                     </div>
@@ -269,7 +248,7 @@
                         <form method="POST" id="mainForm" class="d-content">
                             @method('POST')
                             @csrf
-                            <button class="btn btn-modals-blue cv-radius btn-tele position-relative" id="cv-btn" type="button"><img src="{{asset('frontend/images/project/feather-download.svg')}}" alt="download" class="mr-3">
+                            <button class="btn btn-modals-blue cv-radius btn-tele position-relative mb-0" id="cv-btn" type="button"><img src="{{asset('frontend/images/project/feather-download.svg')}}" alt="download" class="mr-3">
 
                                 <input type="file" class="upload-modal-cv" name="document_name" id="document_name">
                                 Télécharger un cv </button>
@@ -354,10 +333,10 @@
             success: function(response) {
                 if (response.success == true) {
                     toastr.success(response.message);
-                    $("#saveicon" + rowid).attr("src", 'frontend/images/imgs-svg/book-mark-yellow.svg');
+                    $("#saveicon" + rowid).attr("src", "{{asset('frontend/images/imgs-svg/book-mark-yellow.svg')}}");
                     $('#saveicon' + rowid).addClass("b1 bookmark-img");
                     if (response.data.job_save == 0) {
-                        $("#saveicon" + rowid).attr("src", 'frontend/images/bookmark.svg');
+                        $("#saveicon" + rowid).attr("src", "{{asset('frontend/images/bookmark.svg')}}");
                         $('#saveicon' + rowid).addClass("b1 bookmark-img");
                     }
 
@@ -398,29 +377,43 @@
         var userid = $('#userid').val();
         var document_name = $('#pdf_name').val();
 
-
-
-        $.ajax({
-            url: "{{ route('store-jobType') }}",
-            method: "POST",
-            data: {
-                'type': type,
-                'jobid': jobid,
-                'userid': userid,
-                'document_name': document_name,
-                _token: "{{ csrf_token() }}"
-            },
-            success: function(response) {
-                if (response.success == true) {
-                    toastr.success(response.message);
-                    $('#establishment').modal('hide');
-                    $('#bravo').modal('show');
-                    location.reload();
-                } else {
-                    $('#document_name-error').text(response.errors);
-                }
+        var temp = 0;
+        regex = new RegExp("(.*?)\.(pdf|docs|docx)$");
+        if (document_name != "") {
+            if (!(regex.test(document_name))) {
+                $('#document_name-error').html("Only PDF, DOCS and DOCX docs are allowed");
+                temp = 1;
             }
-        });
+        } else {
+            $('#document_name-error').html("");
+            temp = 0;
+        }
+
+        if (temp == 0) {
+
+            $.ajax({
+                url: "{{ route('store-jobType') }}",
+                method: "POST",
+                data: {
+                    'type': type,
+                    'jobid': jobid,
+                    'userid': userid,
+                    'document_name': document_name,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function(response) {
+                    if (response.success == true) {
+                        toastr.success(response.message);
+                        $('#establishment').modal('hide');
+                        $('#bravo').modal('show');
+                        location.reload();
+                    } else {
+                        $('#document_name-error').html(response.errors.document_name);
+                    }
+
+                }
+            });
+        }
 
     });
 </script>

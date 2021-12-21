@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
-
+use JsValidator;
 use App\Http\Controllers\Controller;
 use App\Interfaces\ApplyJobRepositoryInterface;
 use Illuminate\Http\Request;
@@ -14,6 +14,8 @@ class SearchAdController extends Controller
 
 
     protected $applyJobRepository = "";
+
+
 
     public function __construct(ApplyJobRepositoryInterface $applyJobRepository)
     {
@@ -28,13 +30,11 @@ class SearchAdController extends Controller
     public function store(Request $request)
     {
         if ($request->type == '1') {
-            $rules = array('document_name' => 'required');
-            $validator = Validator::make($request->all(), $rules);
+
+            $validationrules['document_name'] = 'required';
+            $validator = Validator::make($request->all(), $validationrules);
             if ($validator->fails()) {
-                return response()->json([
-                    'success' => false,
-                    'errors' => "Please choose file"
-                ], 200); // 400 being the HTTP code for an invalid request.
+                return response()->json(['success' => false, 'errors' => $validator->errors()]);
             } else {
                 $storeJobType = $this->applyJobRepository->store($request);
 
@@ -94,6 +94,9 @@ class SearchAdController extends Controller
         $data['pages'] = $request->page;
         $data['showCompany'] = $this->applyJobRepository->getCompanyData($id);
         $data['showJobs'] = $this->applyJobRepository->getManagerPosts($id);
+        if ($request->ajax()) {
+            return view('frontend.apply_job.get_ajax', $data)->render();
+        }
 
         return view('frontend.apply_job.view', $data);
     }

@@ -393,73 +393,8 @@
                         </div>
                         <div class="col-md-9">
                             <div class="card sr-card">
-                                <div class="card-body">
+                                <div class="card-body" id="table_data">
 
-                                    @foreach($showJobs as $data)
-
-                                    @php
-                                    $isApplyed = $data->applyJob!="" ? "disabled":"";
-                                    $createDate = date('d-m-Y',strtotime($data->created_at));
-                                    $now = date('d-m-Y');
-                                    $diff = strtotime($createDate) - strtotime($now);
-                                    $finalDays = abs(round($diff / 86400));
-                                    $saveJob = $data->savedJob!=null && count($data->savedJob)>0 ? $data->savedJob[0]->job_save : '';
-                                    @endphp
-                                    <div class="job-card">
-                                        <div class="job-listing-flex">
-                                            <h5 class="ml-2 mb-0 linkcolor">{{$data->title}}</h5>
-
-                                            <button class="btn fav-btn mb-fav-btn save-fav" type="button" data-job="{{$data->id}}" data-user="{{$data->user_id}}" data-rowid="{{$data->id}}">
-                                                <img id="saveicon{{$data->id}}" src="{{$saveJob=='1' ? asset('frontend/images/imgs-svg/book-mark-yellow.svg') : asset('frontend/images/bookmark.svg')}}" alt="bookmark image " class="b1 bookmark-img">
-                                            </button>
-                                        </div>
-
-                                        <div class="row mr-minus9 mb-2">
-                                            <div class="col-md-12">
-                                                <div>
-                                                    <ul class="job-border-ul">
-                                                        <li>
-                                                            <p class="mb-0">Nom du poste : Directrice – Directeur de crèche
-                                                            </p>
-                                                        </li>
-                                                        <li>
-                                                            <p class="mb-0">Experience : {{$data->minimum_experience}}</p>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <ul class="job-image-ul">
-                                                    <li>
-                                                        <img src="{{asset('frontend/images/map.svg')}}" width="12px">
-                                                        <p class="mb-0">46 rue La Martine 06400 NIce</p>
-                                                    </li>
-                                                    <li>
-                                                        <img src="{{asset('frontend/images/icon1.svg')}}" width="12px">
-                                                        <p class="mb-0">{{$data->minimum_gross_salary}} par an</p>
-                                                    </li>
-                                                    <li>
-                                                        <img src="{{asset('frontend/images/calendar.svg')}}" width="12px">
-                                                        <p class="mb-0">Publié il y a {{$finalDays}} jours</p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-4 d-flex align-items-end">
-                                                <div class="d-flex justify-content-end align-items-center resbtn-flex">
-                                                    <a href="listing-details.html" class="btn btn-viewjob listviewjob">Voir l’offre</a>
-                                                    <button class="btn btn-apply listapply" data-toggle="modal" data-target="#establishment" onclick="openJobModal('{{$data->id}}','{{$data->user_id}}')" {{$isApplyed}}>Postuler</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @endforeach
-                                    <div class="custom-pagination pt-5 pb-4">
-                                        <nav aria-label="Page navigation example">
-                                            <ul class="pagination justify-content-center">
-                                                {{ $showJobs->appends(request()->except('page'))->links("pagination::bootstrap-4") }}
-                                            </ul>
-                                        </nav>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -646,7 +581,7 @@
 
     <!-- tele modal -->
 
-    <div class="modal" id="tele-modal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade modal-back-blue" id="tele-modal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header resume_header border-0">
@@ -706,7 +641,8 @@
                             <form method="POST" id="mainForm" class="d-content">
                                 @method('POST')
                                 @csrf
-                                <button class="btn btn-modals-blue cv-radius btn-tele position-relative" id="cv-btn" type="button"><img src="{{asset('frontend/images/project/feather-download.svg')}}" alt="download" class="mr-3">
+
+                                <button class="btn btn-modals-blue mb-0 cv-radius btn-tele position-relative" id="cv-btn" type="button"><img src="{{asset('frontend/images/project/feather-download.svg')}}" alt="download" class="mr-3">
                                     <input type="file" class="upload-modal-cv" name="document_name" id="document_name">
                                     Télécharger un cv </button>
                                 <span class="text-danger error" id="document_name-error"></span>
@@ -722,7 +658,6 @@
     </div>
 
 
-
 </section>
 @endsection
 
@@ -730,13 +665,30 @@
 <script type="text/javascript" src="{{asset('frontend/js/bootstrap-multiselect.js')}}"></script>
 <script>
     $(function() {
+
         $(".select-multi").multiselect({
             includeSelectAllOption: true
         });
     });
     $(document).ready(function() {
         $(".change-placeholder-select .multiselect").html("Type de poste");
+        fetch_data(1);
     });
+
+    $(document).on('click', '.pagination a', function(event) {
+        event.preventDefault();
+        var page = $(this).attr('href').split('page=')[1];
+        fetch_data(page);
+    });
+
+    function fetch_data(page) {
+        $.ajax({
+            url: "{{route('details-company',$showCompany->id)}}?page=" + page,
+            success: function(data) {
+                $('#table_data').html(data);
+            }
+        });
+    }
 
     var page_no = '{{$pages}}';
 
@@ -783,28 +735,45 @@
         var userid = $('#userid').val();
         var document_name = $('#pdf_name').val();
 
-
-        $.ajax({
-            url: "{{ route('store-jobType') }}",
-            method: "POST",
-            data: {
-                'type': type,
-                'jobid': jobid,
-                'userid': userid,
-                'document_name': document_name,
-                _token: "{{ csrf_token() }}"
-            },
-            success: function(response) {
-                if (response.success == true) {
-                    toastr.success(response.message);
-                    $('#establishment').modal('hide');
-                    $('#bravo').modal('show');
-                    location.reload();
-                } else {
-                    $('#document_name-error').text(response.errors);
-                }
+        var temp = 0;
+        regex = new RegExp("(.*?)\.(pdf|docs|docx)$");
+        if (document_name != "") {
+            if (!(regex.test(document_name))) {
+                $('#document_name-error').html("Only PDF, DOCS and DOCX docs are allowed");
+                temp = 1;
             }
-        });
+        } else {
+            $('#document_name-error').html("");
+            temp = 0;
+        }
+
+
+        if (temp == 0) {
+            $('#document_name-error').html("");
+            $.ajax({
+                url: "{{ route('store-jobType') }}",
+                method: "POST",
+                data: {
+                    'type': type,
+                    'jobid': jobid,
+                    'userid': userid,
+                    'document_name': document_name,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function(response) {
+
+                    if (response.success == true) {
+                        toastr.success(response.message);
+                        $('#establishment').modal('hide');
+                        $('#tele-modal').modal('hide');
+                        $('#bravo').modal('show');
+                        location.reload();
+                    } else {
+                        $('#document_name-error').html(response.errors.document_name);
+                    }
+                }
+            });
+        }
 
     });
 
@@ -838,11 +807,8 @@
         }, 500);
 
     }); */
-    var favSave = "{{count($data->savedJob) > 0 ? $data->savedJob[0]->job_save:''}}";
 
-    if (favSave == '1') {
-        $('.fav-btn').removeClass('save-fav');
-    }
+
     $(document).on("click", ".save-fav", function() {
         var job_id = $(this).data('job');
         var user_id = $(this).data('user');

@@ -107,6 +107,9 @@
                             <div class="form-group">
                                 {!! Form::label('Pédagogie appliquée', 'Pédagogie appliquée') !!}<span class="invalid-error text-danger"> *</span>
 
+                            <div class="form-group">
+                                {!! Form::label('Pédagogie appliquée', 'Pédagogie appliquée') !!}<span class="invalid-error text-danger">*</span>
+
                                 <div>
                                     <div class="row check-box-sec check-form mb-4 m-0">
                                         <div class="col-md-6">
@@ -212,7 +215,12 @@
                                                                 <p>Drag and drop here or<span style="color:#192842;font-family: 'Quicksand-Bold'">
                                                                         Browse</span> </p>
                                                             </div>
+<<<<<<< HEAD
                                                             {!! Form::file('more_infomation[]', ['id' => 'more_infomation', 'name' => 'more_infomation', 'class' => 'dropzone']) !!}
+=======
+                                                            {!! Form::file('more_infomation', ['id' => 'more_infomation', 'name' => 'more_infomation', 'class' => 'dropzone']) !!}
+
+>>>>>>> d962b7ef175196482001fa2c78883de9cff43f73
                                                         </div>
                                                     </div>
                                                 </div>

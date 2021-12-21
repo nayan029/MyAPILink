@@ -414,8 +414,6 @@
         });
     });
 
-
-
     $(document).on("click", "#byResume,#bravo-btn", function() {
         var type = $(this).val();
         var jobid = $('#jobid').val();

@@ -21,21 +21,22 @@
         .error {
             font-size: 12px;
         }
-           .intl-tel-input.allow-dropdown.separate-dial-code .selected-dial-code {
-        padding-left: 15px !important;
-    }
 
-    .intl-tel-input.allow-dropdown.separate-dial-code.iti-sdc-3 .selected-flag {
-        padding-left: 0;
-    }
+        .intl-tel-input.allow-dropdown.separate-dial-code .selected-dial-code {
+            padding-left: 15px !important;
+        }
 
-    .intl-tel-input.allow-dropdown.separate-dial-code .selected-dial-code {
-        padding-left: 20px !important;
-    }
+        .intl-tel-input.allow-dropdown.separate-dial-code.iti-sdc-3 .selected-flag {
+            padding-left: 0;
+        }
 
-    #country_code+.intl-tel-input {
-        width: 100%;
-    }
+        .intl-tel-input.allow-dropdown.separate-dial-code .selected-dial-code {
+            padding-left: 20px !important;
+        }
+
+        #country_code+.intl-tel-input {
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -245,12 +246,12 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                               
-                                <input type="hidden" class="form-control" id="country_code" name="country_code" />
+
+                                    <input type="hidden" class="form-control" id="country_code" name="country_code" />
                                     <input type="text" name="phone" placeholder="Téléphone*" class="form-control login-input inputicon2" onkeypress="return isNumber(event)" id="phone" maxlength="10">
                                     <i class="clear-input">
-                                    <ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon>
-                                </i>
+                                        <ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon>
+                                    </i>
                                     <span class="text-danger error" id="phone-error"></span>
                                     <span class="text-danger error" id="mobile-error"></span>
                                 </div>
@@ -351,8 +352,8 @@
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.7/js/intlTelInput.js"></script>
-   
-    <script src="location/to/intl-tel-input/js/intlTelInput.js"></script>
+
+<script src="location/to/intl-tel-input/js/intlTelInput.js"></script>
 {!! $forgotPasswordValidator->selector('#forgotPasswordForm') !!}
 <script>
     function isNumber(evt) {
@@ -392,7 +393,6 @@
         $("#Modallogin2").modal('hide');
     });
     $(document).on('click', '#registerUser', function() {
-
         var token = $("meta[name='csrf-token']").attr("content");
         var formData = $('#register_form_data').serialize();
         $.ajax({
@@ -423,42 +423,42 @@
     });
 </script>
 <script>
-      var telInput = $("#phone"),
-            errorMsg = $("#phone-error").html(''),
-            validMsg = $("#valid-msg");
-        errorMsg.addClass("hide");
-        telInput.intlTelInput({
-            preferredCountries: ['gb'],
-            separateDialCode: true,
-            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.4/js/utils.js"
-        });
-        var reset = function() {
+    //   var telInput = $("#phone"),
+    //         errorMsg = $("#phone-error").html(''),
+    //         validMsg = $("#valid-msg");
+    //     errorMsg.addClass("hide");
+    //     telInput.intlTelInput({
+    //         preferredCountries: ['gb'],
+    //         separateDialCode: true,
+    //         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.4/js/utils.js"
+    //     });
+    //     var reset = function() {
 
-            telInput.removeClass("error");
-            errorMsg.addClass("hide");
-            validMsg.addClass("hide");
-        };
+    //         telInput.removeClass("error");
+    //         errorMsg.addClass("hide");
+    //         validMsg.addClass("hide");
+    //     };
 
-        // on blur: validate
-        telInput.blur(function() {
-            reset();
-            if ($.trim(telInput.val())) {
-                if (telInput.intlTelInput("isValidNumber")) {
-                    console.log("if");
-                    validMsg.removeClass("hide");
-                    var getCode = telInput.intlTelInput('getSelectedCountryData').dialCode;
-                    $('#country_code').val(getCode);
-                    $("#phone-error").html("");
-                    $("#mobile-error").html("");
-                } else {
-                    console.log("else");
-                    telInput.addClass("error");
-                    errorMsg.removeClass("hide");
-                    $("#phone-error").html('Invalid Mobile Number');
-                    $("#mobile-error").html('');
-                }
-            }
-        });
+    //     // on blur: validate
+    //     telInput.blur(function() {
+    //         reset();
+    //         if ($.trim(telInput.val())) {
+    //             if (telInput.intlTelInput("isValidNumber")) {
+    //                 console.log("if");
+    //                 validMsg.removeClass("hide");
+    //                 var getCode = telInput.intlTelInput('getSelectedCountryData').dialCode;
+    //                 $('#country_code').val(getCode);
+    //                 $("#phone-error").html("");
+    //                 $("#mobile-error").html("");
+    //             } else {
+    //                 console.log("else");
+    //                 telInput.addClass("error");
+    //                 errorMsg.removeClass("hide");
+    //                 $("#phone-error").html('Invalid Mobile Number');
+    //                 $("#mobile-error").html('');
+    //             }
+    //         }
+    //     });
 </script>
 @include('frontend.layouts.login_script')
 

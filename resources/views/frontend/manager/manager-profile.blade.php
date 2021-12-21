@@ -239,7 +239,7 @@
                                                         <div class="col-md-4">
                                                             <ul class="search-image-ul">
                                                                 <li>
-                                                                    <h5 class="mb-0 job_aux_text fn-19">{{$value->title}}</h5>
+                                                                       <h5 class="mb-0 job_aux_text fn-19">{{$value->title}}</h5>
                                                                 </li>
                                                                 <li>
                                                                     <p class="manage-crep job_cre_text fn-21">{{$value->job_description}}</p>

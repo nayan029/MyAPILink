@@ -40,8 +40,8 @@
                                 <div class="listing-side-pd">
                                     <div class="d-flex justify-content-between mb-4 ">
                                         <div>
-                                            <h5 class="mb-0 job_aux_text">Auxiliaire Puéricultrice</h5>
-                                            <p class="mb-0 job_cre_text">Crèche du bonheur</p>
+                                            <h5 class="mb-0 job_aux_text">{{$showwpost->title}}</h5>
+                                            <p class="mb-0 job_cre_text">{{$showwpost->address}}</p>
                                         </div>
 
                                         <span class="public-span mr-4">Publié il y a 5 jours<img

@@ -183,7 +183,7 @@
                                     <div class="col-md-12 d-flex justify-content-end">
                                         <a href="#editoffer" class="btn post-an-btn mt-4 mb-5 editer-offer">Editer</a>
                                     </div>
-                                </div>  
+                                </div>
                                 @if($applyJob)
                                 @foreach($applyJob as $job)
                                 <div class="job-card ">
@@ -195,7 +195,7 @@
                                                 <p class="mb-0 offer-app-sec">{{$jobDetail->minimum_experience}}</p>
                                             </div>
                                         </div>
-                                       
+
                                         <div class="col-md-5">
                                             <div class="d-flex justify-content-end">
                                                 <a href="{{route('candidatePortfolio',$job->user->id)}}" class="mr-3 btn btn-viewjob offer-application ">Voir le profil
@@ -212,10 +212,10 @@
                                 </div>
                                 @endforeach
                                 @else
-             
-                            <p class="text-center">No Job Data Found!..</p>
-                            @endif
-                            </div>   
+
+                                <p class="text-center">No Job Data Found!..</p>
+                                @endif
+                            </div>
                             <div class="row ">
                                 <div class="col-md-12 d-flex justify-content-end">
                                     <a href="#">
@@ -261,7 +261,7 @@
                                                             <div class="div-edit-radio"></div>
                                                             <label class="check-labels">
                                                                 <img src="{{asset('frontend/images/project/dark-white-check.svg')}}">
-                                                            </label>             
+                                                            </label>
                                                         </div>
                                                     </div>
                                                     <div class="ml-offer-edit">
@@ -269,7 +269,7 @@
                                                         <p class="mb-0 offer-app-sec">Educateur Jeunes enfants</p>
                                                         <p class="mb-0 offer-app-sec">{{$jobDetail->minimum_experience}}</p>
                                                     </div>
-                                                   
+
                                                 </div>
                                                 <span class="jobcheck_error text-danger"></span>
                                             </div>
@@ -361,7 +361,7 @@
                                 </div>
                             </div>
                             <div>
-                                <a data-dismiss="modal" data-toggle="modal" href="#refusal-modal"> <button class="tosend-btn btn"> Envoyer </button></a>
+                                <a data-dismiss="modal" data-toggle="modal" href="#refusal-modal"> <button class="tosend-btn btn">Envoyer</button></a>
                             </div>
                         </div>
                     </div>
@@ -430,7 +430,7 @@
 
     $('#pills-editoffer-tab').hide();
     $('#pills-home-tab').click(function() {
-         $('#editoffer').hide();
+        $('#editoffer').hide();
     });
     $('#editoffer').hide();
     $('.editer-offer').click(function() {
@@ -493,12 +493,12 @@
 
     });
 
-    function validation(){
+    function validation() {
         var job_id = $('#job_id').attr("data-id");
         if ($('input[name="jobCheck"]:checked').length == 0) {
             $('.jobcheck_error').html("please select atleast one user");
             return false
-        }else{
+        } else {
             $('.jobcheck_error').html('');
         }
     }

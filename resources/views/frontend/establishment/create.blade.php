@@ -138,7 +138,7 @@
                                                                 <div class="box-body"></div>
                                                             </div>
                                                         </div>
-                                                        <div id="dropzone" class="drop-zonecontent">
+                                                        <!-- <div id="dropzone" class="drop-zonecontent">
                                                             <div class="dz-message needsclick">
                                                                 <span class="text">
                                                                     <img src="{{asset('frontend/images/profile-feather-upload.svg')}}" width="30px" class="mb-1">
@@ -147,11 +147,21 @@
                                                                 <div>
                                                                     <p>Drag and drop here or<span style="color:#192842;font-family: 'Quicksand-Bold'">
                                                                             Browse</span>
-                                                                {!! Form::file('more_infomation[]', ['id' => 'more_infomation', 'name' => 'more_infomation', 'class' => 'dropzone']) !!} </p>
+                                                                        {!! Form::file('more_infomation[]', ['id' => 'more_infomation', 'name' => 'more_infomation', 'class' => 'dropzone']) !!} </p>
                                                                 </div>
                                                             </div>
                                                             {!! Form::file('more_infomation', ['id' => 'more_infomation', 'name' => 'more_infomation', 'class' => 'dropzone']) !!}
-                                                        </div>
+                                                        </div> -->
+
+                                                        <div class="upload__box">
+  <div class="upload__btn-box">
+    <label class="upload__btn">
+      <p>Upload images</p>
+      <input type="file" multiple="" data-max_length="20" class="upload__inputfile">
+    </label>
+  </div>
+  <div class="upload__img-wrap"></div>
+</div>
 
                                                     </div>
                                                 </div>
@@ -175,6 +185,9 @@
         </div>
     </div>
     {!! Form::close() !!}
+
+
+    
 </section>
 @endsection
 @section('script')
@@ -230,6 +243,67 @@
             showMeridian: false,
         });
     });
+
+    jQuery(document).ready(function () {
+  ImgUpload();
+});
+
+function ImgUpload() {
+  var imgWrap = "";
+  var imgArray = [];
+
+  $('.upload__inputfile').each(function () {
+    $(this).on('change', function (e) {
+      imgWrap = $(this).closest('.upload__box').find('.upload__img-wrap');
+      var maxLength = $(this).attr('data-max_length');
+
+      var files = e.target.files;
+      var filesArr = Array.prototype.slice.call(files);
+      var iterator = 0;
+      filesArr.forEach(function (f, index) {
+
+        if (!f.type.match('image.*')) {
+          return;
+        }
+
+        if (imgArray.length > maxLength) {
+          return false
+        } else {
+          var len = 0;
+          for (var i = 0; i < imgArray.length; i++) {
+            if (imgArray[i] !== undefined) {
+              len++;
+            }
+          }
+          if (len > maxLength) {
+            return false;
+          } else {
+            imgArray.push(f);
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              var html = "<div class='upload__img-box'><div style='background-image: url(" + e.target.result + ")' data-number='" + $(".upload__img-close").length + "' data-file='" + f.name + "' class='img-bg'><div class='upload__img-close'></div></div></div>";
+              imgWrap.append(html);
+              iterator++;
+            }
+            reader.readAsDataURL(f);
+          }
+        }
+      });
+    });
+  });
+
+  $('body').on('click', ".upload__img-close", function (e) {
+    var file = $(this).parent().data("file");
+    for (var i = 0; i < imgArray.length; i++) {
+      if (imgArray[i].name === file) {
+        imgArray.splice(i, 1);
+        break;
+      }
+    }
+    $(this).parent().parent().remove();
+  });
+}
 </script>
 
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>

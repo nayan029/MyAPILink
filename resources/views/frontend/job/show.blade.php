@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,17 +39,11 @@
                                 <div class="listing-side-pd">
                                     <div class="d-flex justify-content-between mb-4 ">
                                         <div>
-<<<<<<< HEAD
                                             <h5 class="mb-0 job_aux_text">{{$showwpost->title}}</h5>
-=======
-                                        <h5 class="mb-0 job_aux_text">{{$showwpost->title}}</h5>
->>>>>>> 77eecea41dcac3e710d93001dfc4474553017aff
                                             <p class="mb-0 job_cre_text">{{$showwpost->address}}</p>
                                         </div>
 
-                                        <span class="public-span mr-4">Publié il y a 5 jours<img
-                                                src="{{asset('frontend/images/bookmark.svg')}}" alt="bookmark image "
-                                                class="ml-3 bookmark-img"></span>
+                                        <span class="public-span mr-4">Publié il y a 5 jours<img src="{{asset('frontend/images/bookmark.svg')}}" alt="bookmark image " class="ml-3 bookmark-img"></span>
                                     </div>
                                     <div class="job-information">
                                         <h4 class="job-info-text">Informations sur le poste</h4>
@@ -136,8 +129,7 @@
 
 
     <!-- See the establishment's file Modal -->
-    <div class="modal fade modal-back-blue " id="establishment " tabindex="-1 " role="dialog "
-        aria-labelledby="exampleModalLabel " aria-hidden="true ">
+    <div class="modal fade modal-back-blue " id="establishment " tabindex="-1 " role="dialog " aria-labelledby="exampleModalLabel " aria-hidden="true ">
         <div class="modal-dialog center-modal-dialog modal-xl " role="document ">
             <div class="modal-content m-32 ">
                 <div class="modal-header resume_header border-0 ">
@@ -151,14 +143,10 @@
 
                         <div class="padding-150px ">
                             <div class="text-center pb-5 mb-5 ">
-                                <button class="btn btn-modals-blue " type="button " data-target="#bravo "
-                                    id="bravo-btn ">Envoyer mon profil profesionnel<br>au recruteur</button>
+                                <button class="btn btn-modals-blue " type="button " data-target="#bravo " id="bravo-btn ">Envoyer mon profil profesionnel<br>au recruteur</button>
                             </div>
                             <div class="text-center ">
-                                <button class="btn btn-modals-blue cv-radius " data-toggle="modal "
-                                    data-target="#cv-modal " id="cv-btn " type="button "><img
-                                        src="images/project/feather-download.svg " alt="download "
-                                        class="mr-3 ">Télécharger et envoyer mon cv</button>
+                                <button class="btn btn-modals-blue cv-radius " data-toggle="modal " data-target="#cv-modal " id="cv-btn " type="button "><img src="images/project/feather-download.svg " alt="download " class="mr-3 ">Télécharger et envoyer mon cv</button>
                             </div>
                         </div>
                     </div>
@@ -168,8 +156,7 @@
     </div>
 
     <!-- bravo modal -->
-    <div class="modal fade " id="bravo " tabindex="-1 " role="dialog " aria-labelledby="exampleModalLabel "
-        aria-hidden="true ">
+    <div class="modal fade " id="bravo " tabindex="-1 " role="dialog " aria-labelledby="exampleModalLabel " aria-hidden="true ">
         <div class="modal-dialog modal-dialog-centered " role="document ">
             <div class="modal-content ">
                 <div class="modal-header resume_header border-0 ">
@@ -195,8 +182,7 @@
     </div>
 
     <!-- cv modal -->
-    <div class="modal fade modal-back-blue " id="cv-modal " tabindex="-1 " role="dialog "
-        aria-labelledby="exampleModalLabel " aria-hidden="true ">
+    <div class="modal fade modal-back-blue " id="cv-modal " tabindex="-1 " role="dialog " aria-labelledby="exampleModalLabel " aria-hidden="true ">
         <div class="modal-dialog center-modal-dialog modal-xl " role="document ">
             <div class="modal-content m-32 ">
                 <div class="modal-header resume_header border-0 ">
@@ -276,7 +262,7 @@
     var togglePassword = document.getElementById("toggle-password ");
 
     if (togglePassword) {
-        togglePassword.addEventListener('click ', function () {
+        togglePassword.addEventListener('click ', function() {
             var x = document.getElementById("password ");
             if (x.type === "password ") {
                 x.type = "text ";

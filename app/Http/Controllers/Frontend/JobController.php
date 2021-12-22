@@ -113,7 +113,7 @@ class JobController extends Controller
         );
         if (!empty($editId)) {
             $certificationArray['updated_at'] = date('Y-m-d H:i:s');
-            $data =  Job::where("user_id", $editId)->update($certificationArray);
+            $data =  Job::where("id", $editId)->update($certificationArray);
             Session::flash('success', 'Successfully Updated');
             return redirect()->route('profile');
         } else {

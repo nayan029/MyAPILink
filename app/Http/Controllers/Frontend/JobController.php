@@ -45,6 +45,7 @@ class JobController extends Controller
     public function __construct(JobRepositoryInterface $jobRepository)
     {
         $this->jobRepository = $jobRepository;
+        
     }
 
 
@@ -179,6 +180,13 @@ class JobController extends Controller
     public function candidatePortfolio(Request $request){
         return view('frontend.job.esatablishment-portfolio');
     }
+
+    public function showAllCandidate(Request $request){
+        $data['candidateList'] = $this->jobRepository->allCandidates();
+        return view('frontend.candidate.list',$data);
+    }
+
+    
 
 
 }

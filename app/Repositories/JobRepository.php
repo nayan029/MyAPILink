@@ -6,6 +6,7 @@ use App\Http\Traits\ImageuploadTrait;
 use App\Interfaces\JobRepositoryInterface;
 use App\Models\ChatMaster;
 use App\Models\Job;
+use App\Models\User;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 
@@ -88,5 +89,9 @@ class JobRepository implements JobRepositoryInterface
             'type' => 'manager',
         ]);
         return $userJobData;
+    }
+    public function allCandidates()
+    {
+        return User::where('user_type',1)->get();
     }
 }

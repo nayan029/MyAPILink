@@ -113,6 +113,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->delete('destroy/{id}', 'JobController@destroy')->name('destroy');
     $frontRoute->get('see-applicants/{id}', 'JobController@viewApplcants')->name('see-applicants');
     $frontRoute->get('edit-applicants/{id}', 'JobController@viewApplcants')->name('edit-applicants');
+    $frontRoute->get('showallcandidate', 'JobController@showAllCandidate')->name('showallcandidate');
+
     $frontRoute->post('getAjaxSkill', 'HomeController@getAjaxSkill')->name('getAjaxSkill');
 
     $frontRoute->get('establishment-dashborad', 'EstablishmentController@dashborad')->name('establishment-dashborad');

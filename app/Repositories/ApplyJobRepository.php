@@ -101,4 +101,5 @@ class ApplyJobRepository implements ApplyJobRepositoryInterface
     {
         return ChatMaster::groupBy('sender_id')->where('deleted_at', NULL)->get();
     }
+   
 }

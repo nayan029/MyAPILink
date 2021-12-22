@@ -129,7 +129,7 @@
                             <p class="">Municipalisé</p>
                         </div>
                         <div>
-                            <a href="{{route('searchjob')}}" class="btn-recruit btn">RECRUTER</a>
+                            <a href="{{route('showallcandidate')}}" class="btn-recruit btn">RECRUTER</a>
                         </div>
                     </div>
                     <div class="row mt-5">

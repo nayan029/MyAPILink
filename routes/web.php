@@ -107,6 +107,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->post('holdJobData','JobController@holdJobData')->name('holdJobData');
     $frontRoute->get('users/restore/{id}', 'JobController@restoreUser')->name('users.restore');
 
+
+
     $frontRoute->get('editjob/{id}', 'JobController@editJob')->name('editjob');
     $frontRoute->delete('destroy/{id}', 'JobController@destroy')->name('destroy');
     $frontRoute->get('see-applicants/{id}', 'JobController@viewApplcants')->name('see-applicants');
@@ -158,5 +160,7 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->post('accept-applicants', 'JobController@storeApplicants')->name('acceptJobDetails');
         $frontRoute->get('establishment-portfolio-candidate', 'JobController@candidatePortfolio')->name('candidatePortfolio');
         $frontRoute->get('get_ajax_data/{id}', 'SearchAdController@get_ajax_data')->name('get_ajax_data');
+        $frontRoute->get('job-details/{id}', 'SearchAdController@jobDetails')->name('job-details');
+
     });
 });

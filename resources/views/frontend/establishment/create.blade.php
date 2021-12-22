@@ -2,6 +2,9 @@
 @section('title')
 <title>ApiLink |</title>
 @endsection
+@section('css')
+<link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css" />
+@endsection
 
 @section('content')
 
@@ -53,6 +56,8 @@
                                         {!! Form::text('direction',NULL, ['class' => 'form-control inputicon2','id'=>'direction']) !!}
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
 
@@ -61,8 +66,6 @@
 
 
                                     </div>
-                                </div>
-                                <div class="col-md-12">
                                     <div class="form-group ">
                                         {!! Form::label('Nombre de groupes et tranches d’âges', 'Nombre de groupes et tranches d’âges') !!}<span class="invalid-error text-danger"> *</span>
                                         {!! Form::select('number_of_groups_and_age_groups',['1-10 ans' => '1-10 ans','11-20 ans' => '11-20 ans','21-30 ans' => '21-30 ans','31-40 ans' => '31-40 ans','41-50 ans' => '41-50 ans'],null, [ 'id' => 'number_of_groups_and_age_groups','class' => 'cus-drop select2 form-add-establish']) !!}
@@ -103,150 +106,160 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                {!! Form::label('Pédagogie appliquée', 'Pédagogie appliquée') !!}<span class="invalid-error text-danger"> *</span>
-
-                            <div class="form-group">
-                                {!! Form::label('Pédagogie appliquée', 'Pédagogie appliquée') !!}<span class="invalid-error text-danger">*</span>
-
-                                <div>
-                                    <div class="row check-box-sec check-form mb-4 m-0">
-                                        <div class="col-md-6">
-                                            <div class="custom-control custom-checkbox profile-check">
-                                                {!! Form::checkbox('applied_pedagogy[]','Maria Montessori',false,['class' => 'custom-control-input','id' =>'applied_pedagogy']) !!}
-                                                {!! Form::label('applied_pedagogy', 'Maria Montessori', ['class' => 'custom-control-label pro-check']) !!}
-
-                                            </div>
-                                            <div class="custom-control custom-checkbox profile-check">
-                                                {!! Form::checkbox('applied_pedagogy[]','Pédagogie',false,['class' => 'custom-control-input','id' =>'Pédagogie']) !!}
-                                                {!! Form::label('Pédagogie', 'Pédagogie Faber et Mazlish', ['class' => 'custom-control-label pro-check']) !!}
-
-                                            </div>
-                                            <div class="custom-control custom-checkbox profile-check">
-                                                {!! Form::checkbox('applied_pedagogy[]','Pédagogie Reggio',false,['class' => 'custom-control-input','id' =>'Reggio']) !!}
-                                                {!! Form::label('Reggio', 'Pédagogie Reggio', ['class' => 'custom-control-label pro-check']) !!}
-
-                                            </div>
-                                            <div class="custom-control custom-checkbox profile-check">
-                                                {!! Form::checkbox('applied_pedagogy[]','Parler Bambin',false,['class' => 'custom-control-input','id' =>'Parler']) !!}
-                                                {!! Form::label('Parler', 'Parler Bambin', ['class' => 'custom-control-label pro-check']) !!}
-
-                                            </div>
-                                            <div class="custom-control custom-checkbox profile-check">
-                                                {!! Form::checkbox('applied_pedagogy[]','Autres',false,['class' => 'custom-control-input','id' =>'Autres']) !!}
-                                                {!! Form::label('Autres', 'Autres', ['class' => 'custom-control-label pro-check']) !!}
-
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="custom-control custom-checkbox profile-check">
-
-                                                {!! Form::checkbox('applied_pedagogy[]','Pédagogie Interactive',false,['class' => 'custom-control-input','id' =>'Interactive']) !!}
-                                                {!! Form::label('Interactive', 'Pédagogie Interactive', ['class' => 'custom-control-label pro-check']) !!}
-                                            </div>
-                                            <div class="custom-control custom-checkbox profile-check">
-                                                {!! Form::checkbox('applied_pedagogy[]','Pickler Loczy',false,['class' => 'custom-control-input','id' =>'Pickler']) !!}
-                                                {!! Form::label('Pickler', 'Pickler Loczy', ['class' => 'custom-control-label pro-check']) !!}
-
-                                            </div>
-                                            <div class="custom-control custom-checkbox profile-check">
-
-                                                {!! Form::checkbox('applied_pedagogy[]','Snoezelen',false,['class' => 'custom-control-input','id' =>'Snoezelen']) !!}
-                                                {!! Form::label('Snoezelen', 'Snoezelen', ['class' => 'custom-control-label pro-check']) !!}
-                                            </div>
-                                            <div class="custom-control custom-checkbox profile-check">
-
-                                                {!! Form::checkbox('applied_pedagogy[]','Pédagogie Steiner',false,['class' => 'custom-control-input','id' =>'Steiner']) !!}
-                                                {!! Form::label('Steiner', 'Pédagogie Steiner', ['class' => 'custom-control-label pro-check']) !!}
-                                            </div>
-                                            <div class="custom-control custom-checkbox profile-check">
-
-                                                {!! Form::checkbox('applied_pedagogy[]','Aucune en particulier',false,['class' => 'custom-control-input','id' =>'particulier']) !!}
-                                                {!! Form::label('particulier', 'Aucune en particulier', ['class' => 'custom-control-label pro-check']) !!}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                {!! Form::label("Nos valeurs", "Nos valeurs") !!}<span class="invalid-error text-danger"> *</span>
-                                                {!! Form::textarea('our_values', '', ['size' => '30x4', 'id' => 'our_values', 'name' => 'our_values', 'class' => 'form-control textarea-form inputicon2']) !!}
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group sr-pos">
-                                <div class="upload-file-input">
-                                    {!! Form::label("Notre projet pédagogique", "Notre projet pédagogique") !!}<span class="invalid-error text-danger"> *</span>
-
-                                    <input id="uploadFile" value="" class="form-add-establish w-100 inputicon2" disabled>
-                                    <div class="fileUpload btn btn-primary attach-file">
-                                        <span><i class="fa fa-paperclip mr-2"></i>Attacher un
-                                            document</span>
-                                        {!! Form::file('document[]', ['id' => 'document', 'name' => 'document[]', 'class' => 'upload', 'multiple' => true ],[]) !!}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
                                 <div class="col-md-12">
-                                    <section>
+                                    <div class="form-group">
+                                        {!! Form::label('Pédagogie appliquée', 'Pédagogie appliquée') !!}<span class="invalid-error text-danger"> *</span>
 
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group mt-3">
-                                                        <label class="control-label">Attachez vos
-                                                            documents, relatifs à votre structure pour
-                                                            plus d’informations <span class="invalid-error text-danger"> *</span></label>
-                                                        <div class="preview-zone hidden">
-                                                            <div class="box box-solid">
-                                                                <div class="box-body"></div>
-                                                            </div>
+                                        <div class="form-group">
+                                            {!! Form::label('Pédagogie appliquée', 'Pédagogie appliquée') !!}<span class="invalid-error text-danger">*</span>
+
+                                            <div>
+                                                <div class="row check-box-sec check-form mb-4 m-0">
+                                                    <div class="col-md-6">
+                                                        <div class="custom-control custom-checkbox profile-check">
+                                                            {!! Form::checkbox('applied_pedagogy[]','Maria Montessori',false,['class' => 'custom-control-input','id' =>'applied_pedagogy']) !!}
+                                                            {!! Form::label('applied_pedagogy', 'Maria Montessori', ['class' => 'custom-control-label pro-check']) !!}
+
                                                         </div>
-                                                        <div class="dropzone-wrapper">
-                                                            <div class="dropzone-desc">
-                                                                <img src="{{asset('frontend/images/profile-feather-upload.svg')}}" width="30px" class="mb-1">
-                                                                <!-- <i class="glyphicon glyphicon-download-alt"></i> -->
-                                                                <p>Drag and drop here or<span style="color:#192842;font-family: 'Quicksand-Bold'">
-                                                                        Browse</span> </p>
-                                                            </div>
-<<<<<<< HEAD
-                                                            {!! Form::file('more_infomation[]', ['id' => 'more_infomation', 'name' => 'more_infomation', 'class' => 'dropzone']) !!}
-=======
-                                                            {!! Form::file('more_infomation', ['id' => 'more_infomation', 'name' => 'more_infomation', 'class' => 'dropzone']) !!}
+                                                        <div class="custom-control custom-checkbox profile-check">
+                                                            {!! Form::checkbox('applied_pedagogy[]','Pédagogie',false,['class' => 'custom-control-input','id' =>'Pédagogie']) !!}
+                                                            {!! Form::label('Pédagogie', 'Pédagogie Faber et Mazlish', ['class' => 'custom-control-label pro-check']) !!}
 
->>>>>>> d962b7ef175196482001fa2c78883de9cff43f73
+                                                        </div>
+                                                        <div class="custom-control custom-checkbox profile-check">
+                                                            {!! Form::checkbox('applied_pedagogy[]','Pédagogie Reggio',false,['class' => 'custom-control-input','id' =>'Reggio']) !!}
+                                                            {!! Form::label('Reggio', 'Pédagogie Reggio', ['class' => 'custom-control-label pro-check']) !!}
+
+                                                        </div>
+                                                        <div class="custom-control custom-checkbox profile-check">
+                                                            {!! Form::checkbox('applied_pedagogy[]','Parler Bambin',false,['class' => 'custom-control-input','id' =>'Parler']) !!}
+                                                            {!! Form::label('Parler', 'Parler Bambin', ['class' => 'custom-control-label pro-check']) !!}
+
+                                                        </div>
+                                                        <div class="custom-control custom-checkbox profile-check">
+                                                            {!! Form::checkbox('applied_pedagogy[]','Autres',false,['class' => 'custom-control-input','id' =>'Autres']) !!}
+                                                            {!! Form::label('Autres', 'Autres', ['class' => 'custom-control-label pro-check']) !!}
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="custom-control custom-checkbox profile-check">
+
+                                                            {!! Form::checkbox('applied_pedagogy[]','Pédagogie Interactive',false,['class' => 'custom-control-input','id' =>'Interactive']) !!}
+                                                            {!! Form::label('Interactive', 'Pédagogie Interactive', ['class' => 'custom-control-label pro-check']) !!}
+                                                        </div>
+                                                        <div class="custom-control custom-checkbox profile-check">
+                                                            {!! Form::checkbox('applied_pedagogy[]','Pickler Loczy',false,['class' => 'custom-control-input','id' =>'Pickler']) !!}
+                                                            {!! Form::label('Pickler', 'Pickler Loczy', ['class' => 'custom-control-label pro-check']) !!}
+
+                                                        </div>
+                                                        <div class="custom-control custom-checkbox profile-check">
+
+                                                            {!! Form::checkbox('applied_pedagogy[]','Snoezelen',false,['class' => 'custom-control-input','id' =>'Snoezelen']) !!}
+                                                            {!! Form::label('Snoezelen', 'Snoezelen', ['class' => 'custom-control-label pro-check']) !!}
+                                                        </div>
+                                                        <div class="custom-control custom-checkbox profile-check">
+
+                                                            {!! Form::checkbox('applied_pedagogy[]','Pédagogie Steiner',false,['class' => 'custom-control-input','id' =>'Steiner']) !!}
+                                                            {!! Form::label('Steiner', 'Pédagogie Steiner', ['class' => 'custom-control-label pro-check']) !!}
+                                                        </div>
+                                                        <div class="custom-control custom-checkbox profile-check">
+
+                                                            {!! Form::checkbox('applied_pedagogy[]','Aucune en particulier',false,['class' => 'custom-control-input','id' =>'particulier']) !!}
+                                                            {!! Form::label('particulier', 'Aucune en particulier', ['class' => 'custom-control-label pro-check']) !!}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                {!! Form::label("Nos valeurs", "Nos valeurs") !!}<span class="invalid-error text-danger"> *</span>
+                                                                {!! Form::textarea('our_values', '', ['size' => '30x4', 'id' => 'our_values', 'name' => 'our_values', 'class' => 'form-control textarea-form inputicon2']) !!}
+
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
+                                            <div class="form-group sr-pos">
+                                                <div class="upload-file-input">
+                                                    {!! Form::label("Notre projet pédagogique", "Notre projet pédagogique") !!}<span class="invalid-error text-danger"> *</span>
+
+                                                    <input id="uploadFile" value="" class="form-add-establish w-100 inputicon2" disabled>
+                                                    <div class="fileUpload btn btn-primary attach-file">
+                                                        <span><i class="fa fa-paperclip mr-2"></i>Attacher un
+                                                            document</span>
+                                                        {!! Form::file('document[]', ['id' => 'document', 'name' => 'document[]', 'class' => 'upload', 'multiple' => true ],[]) !!}
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
 
-                                    </section>
+                                        {!! Form::file('more_infomation', ['id' => 'more_infomation', 'name' => 'more_infomation', 'class' => 'dropzone']) !!}
+
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <section>
+
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group mt-3">
+                                                                    <label class="control-label">Attachez vos
+                                                                        documents, relatifs à votre structure pour
+                                                                        plus d’informations <span class="invalid-error text-danger"> *</span></label>
+                                                                    <div class="preview-zone hidden">
+                                                                        <div class="box box-solid">
+                                                                            <div class="box-body"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="dropzone-wrapper">
+                                                                        <div class="dropzone-desc">
+                                                                            <img src="{{asset('frontend/images/profile-feather-upload.svg')}}" width="30px" class="mb-1">
+                                                                            <!-- <i class="glyphicon glyphicon-download-alt"></i> -->
+                                                                            <p>Drag and drop here or<span style="color:#192842;font-family: 'Quicksand-Bold'">
+                                                                                    Browse</span> </p>
+                                                                        </div>
+                                                                        {!! Form::file('more_infomation[]', ['id' => 'more_infomation', 'name' => 'more_infomation', 'class' => 'dropzone']) !!}
+
+                                                                    </div>
+                                                                    {!! Form::file('more_infomation', ['id' => 'more_infomation', 'name' => 'more_infomation', 'class' => 'dropzone']) !!}
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </section>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-
-
-                                <div class="col-md-12 d-flex justify-content-end mt-5">
-                                    <button class="btn btn-outline-cancel annuler-btns">Annuler</button>
-                                    <button class="btn btn-yellow">Sauvegarder</button>
-                                    <!-- href="view-establishment-account-3.html" -->
-                                </div>
-
-
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    {!! Form::close() !!}
+
+</section>
+</div>
+
+
+<div class="col-md-12 d-flex justify-content-end mt-5">
+    <button class="btn btn-outline-cancel annuler-btns">Annuler</button>
+    <button class="btn btn-yellow">Sauvegarder</button>
+    <!-- href="view-establishment-account-3.html" -->
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{!! Form::close() !!}
 </section>
 @endsection
 @section('script')

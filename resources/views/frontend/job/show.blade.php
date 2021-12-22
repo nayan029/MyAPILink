@@ -40,7 +40,11 @@
                                 <div class="listing-side-pd">
                                     <div class="d-flex justify-content-between mb-4 ">
                                         <div>
+<<<<<<< HEAD
                                             <h5 class="mb-0 job_aux_text">{{$showwpost->title}}</h5>
+=======
+                                        <h5 class="mb-0 job_aux_text">{{$showwpost->title}}</h5>
+>>>>>>> 77eecea41dcac3e710d93001dfc4474553017aff
                                             <p class="mb-0 job_cre_text">{{$showwpost->address}}</p>
                                         </div>
 

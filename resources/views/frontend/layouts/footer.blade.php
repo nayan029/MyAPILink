@@ -9,14 +9,157 @@
                         @if(!Auth::guard('web')->user())
 
                         <div class="btn-footer-left">
-                            <button class="btn footer-btn-white">INSCRIVEZ-VOUS</button>
+                            <button class="btn footer-btn-white" data-toggle="modal" data-target="#header-Modallogin1">INSCRIVEZ-VOUS</button>
                             <button class="btn footer-btn2" data-toggle="modal" data-target="#Modallogin2">SE CONNECTER</button>
                         </div>
                         @endif
                     </div>
                 </div>
             </div>
-            @if($contact)
+            <div class="modal fade" id="header-Modallogin1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog login-modal-dialog" role="document">
+                    <div class="modal-content">
+                        <!-- <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><img src="images/material-close.svg"></span>
+                </button>
+            </div> -->
+                        <div class="modal-body login-modal-body">
+                            <div class="">
+                                <div class="lmodal-logo">
+                                    <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="">
+                                </div>
+                                <form action="#" method="post" id="register_form_data">
+                                    @csrf
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" name="first_name" placeholder="Prénom*" class="form-control login-input inputicon2" id="firstname">
+                                                <span class="text-danger error" id="firstname-error"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" name="last_name" placeholder="Nom de famille*" class="form-control login-input inputicon2" id="lastname">
+                                                <span class="text-danger error" id="lastname-error"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input type="email" name="email" placeholder="Email*" class="form-control login-input inputicon2" id="email">
+
+                                                <span class="text-danger error" id="email-error"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">       
+                                                <input type="text" name="phone" placeholder="Téléphone*" class="form-control login-input inputicon2" onkeypress="return isNumber(event)" id="phone" maxlength="10">
+                                                <span class="text-danger error" id="phone-error"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input type="password" name="password" placeholder="Mot de passe*" class="form-control  login-input inputicon2" id="password">
+                                                <span class="text-danger error" id="password-error"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="terms" name="terms[]">
+                                                <label class="custom-control-label login-cus-check" for="terms">J'accepte
+                                                    les
+                                                    conditions générales d'utilisation d'APILINK - J'accepte que mon profil soit
+                                                    visible
+                                                    par l'ensemble des établissements employeurs, partenaires d'APILINK.
+                                                    <br><span class="text-danger error" id="terms-error"></span>
+                                                </label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="terms" name="terms">
+
+                                                <label class="custom-control-label login-cus-check" for="terms">J'accepte
+                                                    que mes
+                                                    données sensibles soient traitées par APILINK pour me fournir le
+                                                    service.
+                                                    <br> <span class="text-danger error" id="accept_sensitive_data-error"></span>
+
+                                                </label>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-12 text-center res-dec mt-3 mb-3 ">
+                                            <!-- <a href="engagement-step1.html" class="btn btn-blue w-100">S'inscrire</a> -->
+                                            <!-- <a class="btn btn-blue w-100" id="bravo-btn">S'inscrire</a> -->
+
+                                            <button type="button" class="btn btn-blue w-100 registerUser" id="registerUser">S'inscrire</button>
+                                        </div>
+
+                                        <div class="col-md-12 text-center res-dec mt-3">
+                                            <div class=" meconnecter Connectez-vous">
+                                                <p class="">Déjà membre?<a href="javascript:void(0);" data-toggle="modal" data-target="#Modallogin2" class="openLogin">Connectez-vous</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+<div class="modal fade login_modal" id="Modallogin2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog login-modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body login-modal-body">
+                <form id="manager-login" method="post">
+                    @csrf
+                    <div class="">
+                        <div class="lmodal-logo mb-20">
+                            <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="">
+                        </div>
+                        <button class="btn social-btn facebook mb-20">
+                            <img src="{{asset('frontend/images/imgs-svg/facebook-f.svg')}}"> Connexion avec
+                            Facebook
+                        </button>
+                        <button class="btn social-btn google mb-20">
+                            <img src="{{asset('frontend/images/imgs-svg/google.svg')}}"> Connexion avec
+                            Google
+                        </button>
+                        <div class="ordiv mb-20"><span>OU</span></div>
+                        <div class="mb-20">
+                            <div class="form-group">
+                                <input type="text" name="email" placeholder="Email / Nom d'utilisateur*" class="form-control email-place login-input inputicon2">
+                                <span class="email-error text-danger">@error ('email') {{$message}} @enderror</span>
+                            </div>
+                        </div>
+                        <div class="mb-20">
+                            <div class="form-group sr-rel">
+                                <input type="password" name="password" placeholder="Mot de passe*" class="form-control  email-place login-input inputicon2 sr-rel" id="password">
+                                <img src="{{asset('frontend/images/about/eye.svg')}}" alt="" class="sr-eye" id="toggle-password">
+                                <span class="password-error text-danger">@error ('password') {{$message}} @enderror</span>
+                                <span class="invalid-error text-danger">@error ('invalid') {{$message}} @enderror</span>
+
+                            </div>
+                        </div>
+
+                        <div class="mb-20 text-right">
+                            <a href="#" data-toggle="modal" data-target="#forgot_password_modal" class="forgot-link forgot_password_mdl">J'ai perdu mon mot de passe?</a>
+                        </div>
+                        <div class="col-md-12 text-center res-dec mb-3 ">
+                            <button id="loginbtn" type="submit" class="btn btn-blue w-100">Connexion</button>
+                        </div>
+                        <div class=" meconnecter">
+                            <p class="proxima-nove">Pas encore membre?<a href="#header-Modallogin1" data-toggle="modal" data-target="#header-Modallogin1" class="openRegister"> Inscrivez-vous</a></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+         @if($contact)
             <div class="footer-inner">
                 <div class="container">
                     <div class="footer-body">
@@ -105,13 +248,13 @@
                                 </div>
                                 <ul class="partner-ul">
                                     @if($partners)
-                                      @foreach($partners as $partner)
-                                        <li>
-                                            <a href="{{$partner->link}}" target="_blank">
-                                                <img src="{{asset($partner->image)}}" alt="sas">
-                                            </a>
-                                        </li>
-                                        @endforeach`
+                                    @foreach($partners as $partner)
+                                    <li>
+                                        <a href="{{$partner->link}}" target="_blank">
+                                            <img src="{{asset($partner->image)}}" alt="sas">
+                                        </a>
+                                    </li>
+                                    @endforeach`
                                     @endif
 
                                 </ul>
@@ -136,19 +279,13 @@
                                 Cookies
                             </p>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-
     </footer>
-
 </div>
 </div>
-
-
-
 <script src="{{asset('frontend/js/jquery.min.js')}} "></script>
 <script src="{{asset('frontend/js/popper.min.js')}} "></script>
 <script src="{{asset('frontend/js/bootstrap.min.js ')}}"></script>
@@ -217,6 +354,14 @@
 </script>
 
 <script>
+       $(document).on('click', '.openLogin', function() {
+        $("#header-Modallogin1").modal('hide');
+        $("#Modallogin2").modal('show');
+    });
+    $(document).on('click', '.openRegister', function() {
+        $("#header-Modallogin1").modal('show');
+        $("#Modallogin2").modal('hide');
+    });
     $(document).ready(function() {
 
         $("#contact-us").on('submit', function(e) {
@@ -246,6 +391,35 @@
                 }
             });
         });
+    });
+    $(document).on('click', '#registerUser', function() {
+        var token = $("meta[name='csrf-token']").attr("content");
+        var formData = $('#register_form_data').serialize();
+        $.ajax({
+
+            url: "{{ route('registration.save') }}",
+            method: 'post',
+            data: formData,
+            success: function(response) {
+                if (response.status == true) {
+                    setTimeout(function() {
+                        $('#header-Modallogin1').modal('hide');
+                        $('.invisible').trigger('click');
+                        $("#register_form_data")[0].reset();
+                    });
+                }
+            },
+            error: function(response) {
+                $('#firstname-error').text(response.responseJSON.errors.first_name);
+                $('#lastname-error').text(response.responseJSON.errors.last_name);
+                $('#email-error').text(response.responseJSON.errors.email);
+                $('#phone-error').text(response.responseJSON.errors.phone);
+                $('#password-error').text(response.responseJSON.errors.password);
+                $('#terms-error').text(response.responseJSON.errors.terms);
+                $('#accept_sensitive_data-error').text(response.responseJSON.errors.terms);
+            }
+        });
+
     });
 </script>
 @yield('script')

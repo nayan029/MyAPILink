@@ -100,4 +100,10 @@ class SearchAdController extends Controller
 
         return view('frontend.apply_job.view', $data);
     }
+
+    public function jobDetails($id, Request $request)
+    {
+        $data['showList'] = $this->applyJobRepository->getSingleCandidatedata($id);
+        return view('frontend.apply_job.job_details', $data);
+    }
 }

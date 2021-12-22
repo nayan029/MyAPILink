@@ -47,7 +47,7 @@
                                             <div class="col-md-2">
                                                 <div class="form-group  mb-4">
                                                     <label class="publish-smalllabel">Code postale<span class="text-danger">*</span></label>
-                                                    <input type="text" value="{{$jobDetails->zip_code}}" name="zip_code" class="form-control inputicon2 form-publish" placeholder="04300">
+                                                    <input type="text" value="{{$jobDetails->zip_code}}" name="postal_code" class="form-control inputicon2 form-publish" placeholder="04300">
                                                 </div>
                                             </div>
                                         </div>
@@ -90,7 +90,7 @@
                                             <div class="col-md-6 mb-2">
                                                 <div class="form-group  mb-4 mt-4">
                                                     <label class="publish-smalllabel">Durée du contrat<span class="text-danger">*</span><span class="text-danger">*</span></label>
-                                                    <input type="text" value="{{$jobDetails->contract_length}}" name="contract_length" class="form-control inputicon2 form-publish">
+                                                    <input type="text" value="{{$jobDetails->contract_length}}" name="duration_of_the_contract" class="form-control inputicon2 form-publish">
                                                 </div>
                                             </div>
                                         </div>
@@ -105,11 +105,11 @@
                                                 <h5 class="publish-labeldark">Type d'emploi<span class="text-danger">*</span></h5>
                                                 <div class="custom-control custom-checkbox profile-check ">
 
-                                                    <input type="checkbox" name="type_of_employment[]" class="custom-control-input" id="Temps plein" value="Full-time" {{ ($jobDetails->type_of_employment = in_array('Full-time',$arraynew)  ? ' checked' : '') }}>
+                                                    <input type="checkbox" name="job_type[]" class="custom-control-input" id="Temps plein" value="Full-time" {{ ($jobDetails->type_of_employment = in_array('Full-time',$arraynew)  ? ' checked' : '') }}>
                                                     <label class="custom-control-label pro-check publish-check" for="Temps plein">Temps plein</label>
                                                 </div>
                                                 <div class="custom-control custom-checkbox profile-check">
-                                                    <input type="checkbox" name="type_of_employment[]" class="custom-control-input" id="Temps partiel" value="Part-time" {{($jobDetails->type_of_employment = in_array('Part-time',$arraynew)  ? ' checked' : '') }}>
+                                                    <input type="checkbox" name="job_type[]" class="custom-control-input" id="Temps partiel" value="Part-time" {{($jobDetails->type_of_employment = in_array('Part-time',$arraynew)  ? ' checked' : '') }}>
                                                     <label class="custom-control-label pro-check publish-check" for="Temps partiel">Temps partiel</label>
                                                 </div>
 
@@ -164,7 +164,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group  mb-4">
                                                     <label class="publish-smalllabel">Adresse e-mail<span class="text-danger">*</span></label>
-                                                    <input type="text" value="{{$jobDetails->email}}" name="email" class="datepicker1 form-control inputicon2 form-publish">
+                                                    <input type="text" value="{{$jobDetails->email}}" name="email_address" class="datepicker1 form-control inputicon2 form-publish">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -210,13 +210,13 @@
                                             <div class="col-md-12">
                                                 <div class="form-group  mb-4">
                                                     <label class="publish-smalllabel">Mission de l’emploi<span class="text-danger">*</span></label>
-                                                    <textarea name="employment_mission" id="" cols="30" rows="6" class="form-control textarea-form inputicon2">{{$jobDetails->employment_mission}}</textarea>
+                                                    <textarea name="job_mission" id="" cols="30" rows="6" class="form-control textarea-form inputicon2">{{$jobDetails->employment_mission}}</textarea>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group  mb-4">
                                                     <label class="publish-smalllabel">Ce que vous recherchez<span class="text-danger">*</span></label>
-                                                    <textarea name="what_you_are_looking" id="" cols="30" rows="6" class="form-control textarea-form inputicon2">{{$jobDetails->what_you_are_looking}}</textarea>
+                                                    <textarea name="what_you_are_looking_for" id="" cols="30" rows="6" class="form-control textarea-form inputicon2">{{$jobDetails->what_you_are_looking}}</textarea>
                                                 </div>
                                             </div>
 

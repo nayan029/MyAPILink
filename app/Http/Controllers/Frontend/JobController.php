@@ -28,7 +28,7 @@ class JobController extends Controller
         'job_type' => 'required',
         'contract_start_date' => 'required|after:tomorrow',
         'minimum_gross_salary' => 'required|min:4|numeric',
-        'maximum_gross_salary' => 'required|max:10|numeric',
+        'maximum_gross_salary' => 'required|numeric',
         'minimum_experience' => 'required|min:3',
         'deadline_for_receipt_of_applications' => 'required',
         'email_address' => 'required|email',

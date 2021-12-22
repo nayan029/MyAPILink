@@ -16,6 +16,9 @@
                     </div>
                 </div>
             </div>
+
+            <!-- header model -->
+
             <div class="modal fade" id="header-Modallogin1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog login-modal-dialog" role="document">
                     <div class="modal-content">
@@ -52,9 +55,15 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <div class="form-group">       
+                                            <div class="form-group">
+
+                                                <input type="hidden" class="form-control" id="country_code" name="country_code" />
                                                 <input type="text" name="phone" placeholder="Téléphone*" class="form-control login-input inputicon2" onkeypress="return isNumber(event)" id="phone" maxlength="10">
+                                                <i class="clear-input">
+                                                    <ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon>
+                                                </i>
                                                 <span class="text-danger error" id="phone-error"></span>
+                                                <span class="text-danger error" id="mobile-error"></span>
                                             </div>
                                         </div>
 
@@ -98,68 +107,71 @@
 
                                         <div class="col-md-12 text-center res-dec mt-3">
                                             <div class=" meconnecter Connectez-vous">
-                                                <p class="">Déjà membre?<a href="javascript:void(0);" data-toggle="modal" data-target="#Modallogin2" class="openLogin">Connectez-vous</a></p>
+                                                <p class="">Déjà membre?<a href="javascript:void(0);" class="openLogin"> Connectez-vous</a></p>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-<div class="modal fade login_modal" id="Modallogin2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog login-modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body login-modal-body">
-                <form id="manager-login" method="post">
-                    @csrf
-                    <div class="">
-                        <div class="lmodal-logo mb-20">
-                            <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="">
-                        </div>
-                        <button class="btn social-btn facebook mb-20">
-                            <img src="{{asset('frontend/images/imgs-svg/facebook-f.svg')}}"> Connexion avec
-                            Facebook
-                        </button>
-                        <button class="btn social-btn google mb-20">
-                            <img src="{{asset('frontend/images/imgs-svg/google.svg')}}"> Connexion avec
-                            Google
-                        </button>
-                        <div class="ordiv mb-20"><span>OU</span></div>
-                        <div class="mb-20">
-                            <div class="form-group">
-                                <input type="text" name="email" placeholder="Email / Nom d'utilisateur*" class="form-control email-place login-input inputicon2">
-                                <span class="email-error text-danger">@error ('email') {{$message}} @enderror</span>
-                            </div>
-                        </div>
-                        <div class="mb-20">
-                            <div class="form-group sr-rel">
-                                <input type="password" name="password" placeholder="Mot de passe*" class="form-control  email-place login-input inputicon2 sr-rel" id="password">
-                                <img src="{{asset('frontend/images/about/eye.svg')}}" alt="" class="sr-eye" id="toggle-password">
-                                <span class="password-error text-danger">@error ('password') {{$message}} @enderror</span>
-                                <span class="invalid-error text-danger">@error ('invalid') {{$message}} @enderror</span>
+            <!-- end header model -->
+            <!-- header modal1 -->
 
-                            </div>
-                        </div>
+            <div class="modal fade login_modal" id="Modallogin2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog login-modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body login-modal-body">
+                            <form id="manager-login" method="post">
+                                @csrf
+                                <div class="">
+                                    <div class="lmodal-logo mb-20">
+                                        <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="">
+                                    </div>
+                                    <button class="btn social-btn facebook mb-20">
+                                        <img src="{{asset('frontend/images/imgs-svg/facebook-f.svg')}}"> Connexion avec
+                                        Facebook
+                                    </button>
+                                    <button class="btn social-btn google mb-20">
+                                        <img src="{{asset('frontend/images/imgs-svg/google.svg')}}"> Connexion avec
+                                        Google
+                                    </button>
+                                    <div class="ordiv mb-20"><span>OU</span></div>
+                                    <div class="mb-20">
+                                        <div class="form-group">
+                                            <input type="text" name="email" placeholder="Email / Nom d'utilisateur*" class="form-control email-place login-input inputicon2">
+                                            <span class="email-error text-danger">@error ('email') {{$message}} @enderror</span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-20">
+                                        <div class="form-group sr-rel">
+                                            <input type="password" name="password" placeholder="Mot de passe*" class="form-control  email-place login-input inputicon2 sr-rel" id="password">
+                                            <img src="{{asset('frontend/images/about/eye.svg')}}" alt="" class="sr-eye" id="toggle-password">
+                                            <span class="password-error text-danger">@error ('password') {{$message}} @enderror</span>
+                                            <span class="invalid-error text-danger">@error ('invalid') {{$message}} @enderror</span>
 
-                        <div class="mb-20 text-right">
-                            <a href="#" data-toggle="modal" data-target="#forgot_password_modal" class="forgot-link forgot_password_mdl">J'ai perdu mon mot de passe?</a>
-                        </div>
-                        <div class="col-md-12 text-center res-dec mb-3 ">
-                            <button id="loginbtn" type="submit" class="btn btn-blue w-100">Connexion</button>
-                        </div>
-                        <div class=" meconnecter">
-                            <p class="proxima-nove">Pas encore membre?<a href="#header-Modallogin1" data-toggle="modal" data-target="#header-Modallogin1" class="openRegister"> Inscrivez-vous</a></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-20 text-right">
+                                        <a href="javascript:void(0);" data-toggle="modal" data-target="#forgot_password_modal" class="forgot-link forgot_password_mdl">J'ai perdu mon mot de passe?</a>
+                                    </div>
+                                    <div class="col-md-12 text-center res-dec mb-3 ">
+                                        <button id="loginbtn" type="submit" class="btn btn-blue w-100">Connexion</button>
+                                    </div>
+                                    <div class=" meconnecter">
+                                        <p class="proxima-nove">Pas encore membre?<a href="javasript:void(0);" data-toggle="modal" data-target="#header-Modallogin1" class="openRegister"> Inscrivez-vous</a></p>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
-         @if($contact)
+            @if($contact)
             <div class="footer-inner">
                 <div class="container">
                     <div class="footer-body">
@@ -354,7 +366,7 @@
 </script>
 
 <script>
-       $(document).on('click', '.openLogin', function() {
+    $(document).on('click', '.openLogin', function() {
         $("#header-Modallogin1").modal('hide');
         $("#Modallogin2").modal('show');
     });

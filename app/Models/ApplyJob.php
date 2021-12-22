@@ -21,7 +21,7 @@ class ApplyJob extends Model
 
     public function user()
     {
-        return $this->hasOne(User::class,'id','user_id')->select('first_name','last_name','id');
+        return $this->hasOne(User::class,'id','user_id');
     }
     public function userData()
     {

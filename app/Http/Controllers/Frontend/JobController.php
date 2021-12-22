@@ -152,7 +152,7 @@ class JobController extends Controller
     {
 
         $data['jobDetail'] = Job::where('id', $id)->first();
-        $data['applyJob'] = ApplyJob::where('id', $id)->with('user')->get();
+        $data['applyJob'] = ApplyJob::where('job_id', $id)->with('user')->get();
         return view('frontend.job.view-applicants', $data);
     }
 
@@ -177,8 +177,9 @@ class JobController extends Controller
         }
     }
 
-    public function candidatePortfolio(Request $request)
+    public function candidatePortfolio($id)
     {
-        return view('frontend.job.esatablishment-portfolio');
+        $data['userData'] = ApplyJob::where('user_id',$id)->first();
+        return view('frontend.job.esatablishment-portfolio',$data);
     }
 }

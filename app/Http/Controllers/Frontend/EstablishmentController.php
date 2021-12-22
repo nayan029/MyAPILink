@@ -18,7 +18,6 @@ class EstablishmentController extends Controller
         'type_of_establishment' => 'required',
         'own_of_our_structure' => 'required|regex:/^([^0-9]*)$/',
         'opening_date' => 'required',
-        'year' => 'required',
         'direction' => 'required|regex:/^([^0-9]*)$/',
         'effective' => 'required',
         'number_of_groups_and_age_groups' => 'required',
@@ -26,7 +25,6 @@ class EstablishmentController extends Controller
         'surface_area_of_the_establishment' => 'required|numeric',
         'garden' => 'required',
         'applied_pedagogy' => 'required',
-        'our_values' => 'required',
         'more_infomation'=>'required|mimes:jpeg,png,jpg',
     ];
     protected   $imageValidationRules =

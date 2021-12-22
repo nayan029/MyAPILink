@@ -14,7 +14,7 @@
 
             @else
             <div class="jesuis_btn_text">
-                <button class="btn btn-home-pink " data-toggle="modal" data-target="#Modallogin2">JE SUIS UN
+                <button class="btn btn-home-pink " data-toggle="modal" data-target="#header-Modallogin1">JE SUIS UN
                     CANDIDAT</button>
                 <a href="{{route('establishment-dashborad')}}" class="btn btn-home-blue ">JE SUIS UN ÉTABLISSEMENT PETITE
                     ENFANCE</a>
@@ -256,6 +256,108 @@
     </div>
 </section>
 
+
+<div class="modal fade" id="header-Modallogin1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog login-modal-dialog" role="document">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><img src="images/material-close.svg"></span>
+                </button>
+            </div> -->
+            <div class="modal-body login-modal-body">
+                <div class="">
+                    <div class="lmodal-logo">
+                        <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="">
+                    </div>
+                    <form action="#" method="post" id="register_form_data">
+                        @csrf
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" name="first_name" placeholder="Prénom*" class="form-control login-input inputicon2" id="firstname">
+                                    <span class="text-danger error" id="firstname-error"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" name="last_name" placeholder="Nom de famille*" class="form-control login-input inputicon2" id="lastname">
+                                    <span class="text-danger error" id="lastname-error"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="email" name="email" placeholder="Email*" class="form-control login-input inputicon2" id="email">
+
+                                    <span class="text-danger error" id="email-error"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+
+                                    <input type="hidden" class="form-control" id="country_code" name="country_code" />
+                                    <input type="text" name="phone" placeholder="Téléphone*" class="form-control login-input inputicon2" onkeypress="return isNumber(event)" id="phone" maxlength="10">
+                                    <i class="clear-input">
+                                        <ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon>
+                                    </i>
+                                    <span class="text-danger error" id="phone-error"></span>
+                                    <span class="text-danger error" id="mobile-error"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="password" name="password" placeholder="Mot de passe*" class="form-control  login-input inputicon2" id="password">
+                                    <span class="text-danger error" id="password-error"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="terms" name="terms[]">
+                                    <label class="custom-control-label login-cus-check" for="terms">J'accepte
+                                        les
+                                        conditions générales d'utilisation d'APILINK - J'accepte que mon profil soit
+                                        visible
+                                        par l'ensemble des établissements employeurs, partenaires d'APILINK.
+                                        <br><span class="text-danger error" id="terms-error"></span>
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="terms" name="terms">
+
+                                    <label class="custom-control-label login-cus-check" for="terms">J'accepte
+                                        que mes
+                                        données sensibles soient traitées par APILINK pour me fournir le
+                                        service.
+                                        <br> <span class="text-danger error" id="accept_sensitive_data-error"></span>
+
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-12 text-center res-dec mt-3 mb-3 ">
+                                <!-- <a href="engagement-step1.html" class="btn btn-blue w-100">S'inscrire</a> -->
+                                <!-- <a class="btn btn-blue w-100" id="bravo-btn">S'inscrire</a> -->
+
+                                <button type="button" class="btn btn-blue w-100 registerUser" id="registerUser">S'inscrire</button>
+                            </div>
+
+                            <div class="col-md-12 text-center res-dec mt-3">
+                                <div class=" meconnecter Connectez-vous">
+                                    <p class="">Déjà membre?<a href="javascript:void(0);" class="openLogin"> Connectez-vous</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- header modal1 -->
 
 <div class="modal fade login_modal" id="Modallogin2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -301,7 +403,7 @@
                             <button id="loginbtn" type="submit" class="btn btn-blue w-100">Connexion</button>
                         </div>
                         <div class=" meconnecter">
-                            <p class="proxima-nove">Pas encore membre?<a href="#" class=""> Inscrivez-vous</a></p>
+                            <p class="proxima-nove">Pas encore membre?<a href="#" data-toggle="modal" data-target="#header-Modallogin1" class="openRegister"> Inscrivez-vous</a></p>
                         </div>
                     </div>
                 </form>
@@ -398,6 +500,10 @@
     $(document).on('click', '.btn-skyblue', function() {
         $('#Modallogin2').modal('show');
         $('#Modaljob-desc').modal('hide');  
+    });
+    $(document).on('click', '.openRegister', function() {
+        $("#header-Modallogin1").modal('show');
+        $("#Modallogin2").modal('hide');
     });
 </script>
 @endsection

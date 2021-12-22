@@ -183,7 +183,7 @@
                                     <div class="col-md-12 d-flex justify-content-end">
                                         <a href="#editoffer" class="btn post-an-btn mt-4 mb-5 editer-offer">Editer</a>
                                     </div>
-                                </div>
+                                </div>  
                                 @if($applyJob)
                                 @foreach($applyJob as $job)
                                 <div class="job-card ">
@@ -195,9 +195,10 @@
                                                 <p class="mb-0 offer-app-sec">{{$jobDetail->minimum_experience}}</p>
                                             </div>
                                         </div>
+                                       
                                         <div class="col-md-5">
                                             <div class="d-flex justify-content-end">
-                                                <a href="{{route('candidatePortfolio')}}" class="mr-3 btn btn-viewjob offer-application ">Voir le profil
+                                                <a href="{{route('candidatePortfolio',$job->user->id)}}" class="mr-3 btn btn-viewjob offer-application ">Voir le profil
                                                     Apilink</a>
 
                                                 <button id="trigger" class="btn btn-apply offer-application" {{$job->document_name == "" ? 'disabled' : ''}}>Voir le CV</button>
@@ -209,11 +210,12 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            @endforeach
-                            @else
+                                @endforeach
+                                @else
+             
                             <p class="text-center">No Job Data Found!..</p>
                             @endif
+                            </div>   
                             <div class="row ">
                                 <div class="col-md-12 d-flex justify-content-end">
                                     <a href="#">
@@ -255,25 +257,25 @@
                                                         <div class="custom-control custom-radio">
                                                             <input type="hidden" name="job_id" data-id="{{$job->job_id}}" id="job_id">
                                                             <input type="hidden" name="user_id" user_id="{{$job->user_id}}" id="user_id">
-                                                            <input type="radio" name="jobCheck" checked id="customRadio1" name="customRadio" class="custom-control-input">
-
+                                                            <input type="radio" name="jobCheck" id="customRadio1" class="custom-control-input" value="jobcheck">
                                                             <div class="div-edit-radio"></div>
                                                             <label class="check-labels">
                                                                 <img src="{{asset('frontend/images/project/dark-white-check.svg')}}">
-                                                            </label>
+                                                            </label>             
                                                         </div>
-
                                                     </div>
                                                     <div class="ml-offer-edit">
                                                         <p class="mb-0 offer-app-one">{{$job->user->first_name}}{{$job->user->last_name}}</p>
                                                         <p class="mb-0 offer-app-sec">Educateur Jeunes enfants</p>
                                                         <p class="mb-0 offer-app-sec">{{$jobDetail->minimum_experience}}</p>
                                                     </div>
+                                                   
                                                 </div>
+                                                <span class="jobcheck_error text-danger"></span>
                                             </div>
                                             <div class="col-md-5 mt-2">
                                                 <div class="float-right">
-                                                    <a href="javacript:void(0);" job-id="{{$job->job_id}}" user-id="{{$job->user_id}}" class="btn btn-light-accept" data-toggle="modal" data-target="#message-modal">
+                                                    <a href="javacript:void(0);" job-id="{{$job->job_id}}" user-id="{{$job->user_id}}" onclick="return validation();" class="btn btn-light-accept" data-toggle="modal" data-target="#message-modal">
                                                         Accepter
                                                     </a>
                                                     <a href="javacript:void(0);" job-id="{{$job->job_id}}" user-id="{{$job->user_id}}" class="btn btn-blue-refuse" data-toggle="modal" data-target="#refusal-modal">
@@ -426,11 +428,15 @@
         $('#editoffer').show();
     });
 
-
+    $('#pills-editoffer-tab').hide();
+    $('#pills-home-tab').click(function() {
+         $('#editoffer').hide();
+    });
+    $('#editoffer').hide();
     $('.editer-offer').click(function() {
-
         $('#pills-home-tab').removeClass('active');
         $('#pills-editoffer-tab').addClass('active');
+        $('#pills-editoffer-tab').show();
         $('#pills-tabContent').hide();
         $('#editoffer').show();
     });
@@ -486,6 +492,16 @@
         });
 
     });
+
+    function validation(){
+        var job_id = $('#job_id').attr("data-id");
+        if ($('input[name="jobCheck"]:checked').length == 0) {
+            $('.jobcheck_error').html("please select atleast one user");
+            return false
+        }else{
+            $('.jobcheck_error').html('');
+        }
+    }
 </script>
 
 </html>

@@ -13,10 +13,7 @@
     <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
 </head>
-
 <body>
     <div id="header-candidate"></div>
     <section class="back-f6 pt-2 pb-5">
@@ -36,11 +33,11 @@
                                         <div class="d-flex align-items-center">
                                             <img src="{{asset('frontend/images/imgs-svg/view-profile.svg')}}" alt="candidate-profile" class="c-profimage">
                                             <div class="pl-3">
-                                                <h5 class="dark-tit">Monsieur Paul Bertrand</h5>
+                                                <h5 class="dark-tit">{{$userData->user->first_name}} {{$userData->user->last_name}}</h5>
                                                 <div class="c-prof-headertext">
                                                     <p class="mb-0">Auxiliaire de crèche</p>
                                                     <p class="mb-0">
-                                                        <span><img src="{{asset('frontend/images/map.svg')}}" width="12px"></span> Montpellier, France
+                                                        <span><img src="{{asset('frontend/images/map.svg')}}" width="12px"></span> {{$userData->user->city}}
                                                     </p>
                                                 </div>
                                             </div>
@@ -75,8 +72,6 @@
                         </div>
                     </div>
                 </div>
-
-
                 <div class="col-md-12 mt-5">
                     <div class="row">
                         <div class="col-md-4">
@@ -89,27 +84,27 @@
                                         </div>
                                         <div class="prof-side">
                                             <h5 class="dark-tit profside-title">Recherche :</h5>
-                                            <p class="profside-text">CDI, CDD</p>
+                                            <p class="profside-text">{{$userData->user->research}}</p>
                                         </div>
                                         <div class="prof-side">
                                             <h5 class="dark-tit profside-title">Disponible :</h5>
                                             <ul class="prof-view-ul">
-                                                <li>Dès aujourd’hui</li>
-                                                <li>À temps plein</li>
+                                                <li>{{$userData->user->available_day}}</li>
+                                                <li>{{$userData->user->available_time}}</li>
                                             </ul>
                                         </div>
                                         <div class="prof-side">
                                             <h5 class="dark-tit profside-title">Diplômes :</h5>
-                                            <p class="profside-text">CAP AEPE</p>
+                                            <p class="profside-text">{{$userData->user->diplomas}}</p>
                                         </div>
                                         <div class="prof-side">
                                             <h5 class="dark-tit profside-title">Expériences :</h5>
-                                            <p class="profside-text">7 ans d’expériences</p>
+                                            <p class="profside-text">{{$userData->user->experiences_of}}</p>
                                         </div>
                                         <div class="prof-side">
                                             <h5 class="dark-tit profside-title">Tranche d’âge :</h5>
                                             <ul class="prof-viewcheck-ul">
-                                                <li> <span><img src="{{asset('frontend/images/imgs-svg/blue-md-checkmark.svg')}}" alt=""></span> 0-1 an
+                                                <li> <span><img src="{{asset('frontend/images/imgs-svg/blue-md-checkmark.svg')}}" alt=""></span> {{$userData->user->age_range}}
                                                 </li>
                                                 <li> <span><img src="{{asset('frontend/images/imgs-svg/blue-md-checkmark.svg')}}" alt=""></span> 2-3 an
                                                 </li>
@@ -117,7 +112,7 @@
                                         </div>
                                         <div class="prof-side">
                                             <h5 class="dark-tit profside-title">Mobilité :</h5>
-                                            <p class="profside-text">Montpellier et 10 km autour</p>
+                                            <p class="profside-text">{{$userData->user->mobility}}</p>
                                         </div>
                                         <div class="prof-side mb-60">
                                             <h5 class="dark-tit profside-title">Vérifications :</h5>
@@ -188,40 +183,31 @@
 
                                             <div class="prof-side mb-4">
                                                 <h5 class="dark-tit profside-title">Pédagogies appréciées</h5>
-                                                <p class="profside-text">Maria Montessori</p>
+                                                <p class="profside-text">{{$userData->user->pedagogy}}</p>
                                             </div>
                                             <div class="prof-side mb-4">
                                                 <h5 class="dark-tit profside-title">Mes qualités</h5>
                                                 <ul class="prof-view-ul Mes-ul">
-                                                    <li>Bienveillant</li>
-                                                    <li>Doux</li>
-                                                    <li>Patient</li>
+                                                    <li>{{$userData->user->qualities}}</li>
                                                 </ul>
                                             </div>
                                             <div class="prof-side ">
                                                 <h5 class="dark-tit profside-title">Mes valeurs</h5>
                                                 <ul class="prof-view-ul Mes-ul">
-                                                    <li>Créativité</li>
-                                                    <li>Paix</li>
-                                                    <li>Amour</li>
+                                                    <li>{{$userData->user->values}}</li>
                                                 </ul>
                                             </div>
                                             <div class="prof-side ">
                                                 <h5 class="dark-tit profside-title">Langue parlées couramment</h5>
                                                 <ul class="prof-view-ul Mes-ul">
-                                                    <li>Français</li>
-                                                    <li>Anglais</li>
+                                                    <li>{{$userData->user->languages_spoken}}</li>
                                                 </ul>
                                             </div>
 
                                             <!-- <div class="text-right edit-btns">
                                                 <a href="editcandidate-profile.html" class="btn btn-yellow"><img src="{{asset('frontend/images/imgs-svg/feather-edit.svg')}}" class="edit-profile mr-4" alt="edit" height="16" width="16">Edit Profile</a>
                                             </div> -->
-
-
                                         </div>
-
-
                                     </div>
                                     <div class="tab-pane fade " id="Portfolio3" role="tabpanel" aria-labelledby="Portfolio3-tab">
                                         <div class="dossier_sec personal_detail_edit">

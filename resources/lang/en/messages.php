@@ -73,5 +73,4 @@ return [
         'show' => "Job's Detail",
         'list' => "Job's List"
     ],
-  
 ];

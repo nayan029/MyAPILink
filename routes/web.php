@@ -165,3 +165,4 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->get('job-details/{id}', 'SearchAdController@jobDetails')->name('job-details');
     });
 });
+    

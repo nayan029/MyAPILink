@@ -20,7 +20,7 @@ class JobController extends Controller
     protected $jobValidationRules = [
         'title' => 'required|max:25|regex:/^([^0-9]*)$/',
         'address' => 'required',
-        'postal_code' => 'required|digits:6',
+        'postal_code' => 'required|digits:5',
         'city' => 'required',
         'country' => 'required',
         'type_of_contract' => 'required',
@@ -112,7 +112,6 @@ class JobController extends Controller
             'what_you_are_looking' => request('what_you_are_looking_for'),
             'total_reg' => $count,
         );
-        dd($certificationArray);
         if (!empty($editId)) {
             $certificationArray['updated_at'] = date('Y-m-d H:i:s');
             $data =  Job::where("id", $editId)->update($certificationArray);

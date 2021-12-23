@@ -189,7 +189,7 @@ class ManagerController extends Controller
         $data['validator'] = JsValidator::make($this->imageValidationRules);
         $data['userList'] = $this->applyJobRepository->chatUserList();
 
-        dd($data['userList']);
+       // dd($data['userList']);
 
         return view('frontend.manager.chat_index', $data);
     }

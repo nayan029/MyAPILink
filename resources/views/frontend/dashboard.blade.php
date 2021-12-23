@@ -148,12 +148,15 @@
                         <div class="card-body sheight">
                             <a href="javascript:void(0);" class="btn-show" data-id="{{$sk->id}}">
                                 <h6 class="card-title color1m main_title">{{$sk->name}}</h6>
-                                @if($sk->positions)
-                                @foreach($sk->positions as $position)
+                                @if(count($sk->positions)>0)
                                 <ul class="les-professional-ul">
+                                    @foreach($sk->positions as $position)
                                     <li>- {{$position->position}} - {{$position->title}}</li>
+                                    @endforeach
                                 </ul>
-                                @endforeach
+                                @endif
+                                @else
+                                <p class="text-center">No Record Found</p>
                                 @endif
                             </a>
                         </div>

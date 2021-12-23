@@ -178,13 +178,13 @@
                 <section class="prof-backsec">
                     <div class="container">
                         <div class="card sr-card">
-                            <div class="card-body">
+                            <div class="card-body">      
+                                @if(count($applyJob)>0)
                                 <div class="row">
                                     <div class="col-md-12 d-flex justify-content-end">
                                         <a href="#editoffer" class="btn post-an-btn mt-4 mb-5 editer-offer">Editer</a>
                                     </div>
                                 </div>
-                                @if($applyJob)
                                 @foreach($applyJob as $job)
                                 <div class="job-card ">
                                     <div class="row mb-2">
@@ -211,14 +211,14 @@
                                 </div>
                                 @endforeach
                             </div>
-                            @else
-                                <p class="text-center">No Job Data Found!..</p>
-                                @endif
-                            <div class="row ">
+                            <div class="row">
                                 <div class="col-md-12 d-flex justify-content-end">
                                     <a href="#">
                                         <i class="fa fa-angle-right btn-arrow"></i></a>
                                 </div>
+                                @else
+                            <p class="text-center">No Data Found</p>
+                            @endif
                             </div>
                         </div>
                     </div>
@@ -245,7 +245,7 @@
                             <div class="job-offer-edit mt-4">
                                 <form action="{{route('acceptJobDetails')}}" method="post">
                                     @csrf
-                                    @if($applyJob)
+                                    @if(count($applyJob)>0)
                                     @foreach($applyJob as $job)
                                     <div class="job-card ">
                                         <div class="row mb-2">
@@ -253,9 +253,13 @@
                                                 <div class="offer2-text d-flex">
                                                     <div class="custom-edit-radio">
                                                         <div class="custom-control custom-radio">
+                                                            <tr>
+                                                                <td>
                                                             <input type="hidden" name="job_id" data-id="{{$job->job_id}}" id="job_id">
                                                             <input type="hidden" name="user_id" user_id="{{$job->user_id}}" id="user_id">
                                                             <input type="radio" name="jobCheck" id="customRadio1" class="custom-control-input" value="jobcheck">
+                                                            </tr>
+                                                            </td>
                                                             <div class="div-edit-radio"></div>
                                                             <label class="check-labels">
                                                                 <img src="{{asset('frontend/images/project/dark-white-check.svg')}}">
@@ -273,7 +277,7 @@
                                             </div>
                                             <div class="col-md-5 mt-2">
                                                 <div class="float-right">
-                                                    <a href="javacript:void(0);" job-id="{{$job->job_id}}" user-id="{{$job->user_id}}" onclick="return validation();" class="btn btn-light-accept" data-toggle="modal" data-target="#message-modal">
+                                                    <a href="javacript:void(0);" job-id="{{$job->job_id}}" user-id="{{$job->user_id}}" class="btn btn-light-accept" data-toggle="modal" data-target="#message-modal">
                                                         Accepter
                                                     </a>
                                                     <a href="javacript:void(0);" job-id="{{$job->job_id}}" user-id="{{$job->user_id}}" class="btn btn-blue-refuse" data-toggle="modal" data-target="#refusal-modal">
@@ -283,20 +287,17 @@
                                             </div>
                                         </div>
                                 </form>
-
+                                @endforeach
                             </div>
-                            @endforeach
-                            @else
-                            <p class="text-center">No Job Data Found!..</p>
-                            @endif
-
-
+                           
                             <div class="row ">
                                 <div class="col-md-12 d-flex justify-content-end">
                                     <a href="#">
                                         <i class="fa fa-angle-right btn-arrow"></i></a>
                                 </div>
-
+                                @else
+                            <p class="text-center">No Job Data Found!..</p>
+                            @endif
                             </div>
                         </div>
                     </div>
@@ -491,15 +492,15 @@
 
     });
 
-    function validation() {
-        var job_id = $('#job_id').attr("data-id");
+    $(document).on("click", ".tosend-btn", function() {
+        $('.jobcheck_error').html('');
         if ($('input[name="jobCheck"]:checked').length == 0) {
             $('.jobcheck_error').html("please select atleast one user");
-            return false
-        } else {
-            $('.jobcheck_error').html('');
+            $('#message-modal').modal('hide');
+        }else{
+            $('#message-modal').modal('show');
         }
-    }
+    });
 </script>
 
 </html>

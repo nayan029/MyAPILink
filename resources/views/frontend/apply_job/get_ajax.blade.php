@@ -50,7 +50,7 @@ $saveJob = $data->savedJob!=null && count($data->savedJob)>0 ? $data->savedJob[0
         </div>
         <div class="col-md-4 d-flex align-items-end">
             <div class="d-flex justify-content-end align-items-center resbtn-flex">
-                <a href="listing-details.html" class="btn btn-viewjob listviewjob">Voir l’offre</a>
+                <a href="{{route('job-details',$data->id)}}" class="btn btn-viewjob listviewjob">Voir l’offre</a>
                 <button class="btn btn-apply listapply" data-toggle="modal" data-target="#establishment" onclick="openJobModal('{{$data->id}}','{{$data->user_id}}')" {{$isApplyed}}>Postuler</button>
             </div>
         </div>

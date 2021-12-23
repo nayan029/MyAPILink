@@ -477,107 +477,107 @@
 
                             </div>
                         </div>
+                    </div>
 
-                        <div class="tab-pane fade " id="Portfolio1" role="tabpanel" aria-labelledby="portfolio1-tab">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="card sr-card">
-                                        <div class="card-body">
-                                            <div class="profile-sidebar-sec">
-                                                <div class="prof-side">
-                                                    <h5 class="dark-tit profside-title">Situation actuelle :</h5>
-                                                    <p class="profside-text">{{auth()->guard('web')->user()->current_situation}}</p>
+                    <div class="tab-pane fade " id="Portfolio1" role="tabpanel" aria-labelledby="portfolio1-tab">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card sr-card">
+                                    <div class="card-body">
+                                        <div class="profile-sidebar-sec">
+                                            <div class="prof-side">
+                                                <h5 class="dark-tit profside-title">Situation actuelle :</h5>
+                                                <p class="profside-text">{{auth()->guard('web')->user()->current_situation}}</p>
+                                            </div>
+                                            <div class="prof-side">
+                                                <h5 class="dark-tit profside-title">Recherche :</h5>
+                                                <p class="profside-text">{{auth()->guard('web')->user()->research}}</p>
+                                            </div>
+                                            <div class="prof-side">
+                                                <h5 class="dark-tit profside-title">Disponible :</h5>
+                                                <ul class="prof-view-ul">
+                                                    <li>{{auth()->guard('web')->user()->available_day}}</li>
+                                                    <li>{{auth()->guard('web')->user()->available_time}}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="prof-side">
+                                                <h5 class="dark-tit profside-title">Diplômes :</h5>
+                                                <p class="profside-text">{{auth()->guard('web')->user()->diplomas}}</p>
+                                            </div>
+                                            <div class="prof-side">
+                                                <h5 class="dark-tit profside-title">Expériences :</h5>
+                                                <p class="profside-text">7 ans d’expériences</p>
+                                            </div>
+                                            <div class="prof-side">
+                                                <h5 class="dark-tit profside-title">Tranche d’âge :</h5>
+                                                <ul class="prof-viewcheck-ul">
+                                                    <li> <span><img src="{{asset('frontend/images/imgs-svg/blue-md-checkmark.svg')}}" alt=""></span> 0-1 an
+                                                    </li>
+                                                    <li> <span><img src="{{asset('frontend/images/imgs-svg/blue-md-checkmark.svg')}}" alt=""></span> 2-3 an
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="prof-side">
+                                                <h5 class="dark-tit profside-title">Mobilité :</h5>
+                                                <p class="profside-text">{{auth()->guard('web')->user()->mobility}}</p>
+                                            </div>
+                                            <div class="prof-side mb-60">
+                                                <h5 class="dark-tit profside-title">Vérifications :</h5>
+                                                <div class="verification-view">
+                                                    <span> <img src="{{asset('frontend/images/imgs-svg/green-check.svg')}}" alt=""></span> Charte d’engagement Apilink
                                                 </div>
-                                                <div class="prof-side">
-                                                    <h5 class="dark-tit profside-title">Recherche :</h5>
-                                                    <p class="profside-text">{{auth()->guard('web')->user()->research}}</p>
-                                                </div>
-                                                <div class="prof-side">
-                                                    <h5 class="dark-tit profside-title">Disponible :</h5>
-                                                    <ul class="prof-view-ul">
-                                                        <li>{{auth()->guard('web')->user()->available_day}}</li>
-                                                        <li>{{auth()->guard('web')->user()->available_time}}</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="prof-side">
-                                                    <h5 class="dark-tit profside-title">Diplômes :</h5>
-                                                    <p class="profside-text">{{auth()->guard('web')->user()->diplomas}}</p>
-                                                </div>
-                                                <div class="prof-side">
-                                                    <h5 class="dark-tit profside-title">Expériences :</h5>
-                                                    <p class="profside-text">7 ans d’expériences</p>
-                                                </div>
-                                                <div class="prof-side">
-                                                    <h5 class="dark-tit profside-title">Tranche d’âge :</h5>
-                                                    <ul class="prof-viewcheck-ul">
-                                                        <li> <span><img src="{{asset('frontend/images/imgs-svg/blue-md-checkmark.svg')}}" alt=""></span> 0-1 an
-                                                        </li>
-                                                        <li> <span><img src="{{asset('frontend/images/imgs-svg/blue-md-checkmark.svg')}}" alt=""></span> 2-3 an
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="prof-side">
-                                                    <h5 class="dark-tit profside-title">Mobilité :</h5>
-                                                    <p class="profside-text">{{auth()->guard('web')->user()->mobility}}</p>
-                                                </div>
-                                                <div class="prof-side mb-60">
-                                                    <h5 class="dark-tit profside-title">Vérifications :</h5>
-                                                    <div class="verification-view">
-                                                        <span> <img src="{{asset('frontend/images/imgs-svg/green-check.svg')}}" alt=""></span> Charte d’engagement Apilink
-                                                    </div>
-                                                    <div class="verification-view">
-                                                        <span> <img src="{{asset('frontend/images/imgs-svg/green-check.svg')}}" alt=""></span> E-mail
-                                                    </div>
+                                                <div class="verification-view">
+                                                    <span> <img src="{{asset('frontend/images/imgs-svg/green-check.svg')}}" alt=""></span> E-mail
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-8">
-                                    <div class="card sr-card tab-hgt">
-                                        <div class="card-body">
-                                            <div class="dossier_sec personal_detail_edit pb-0">
-                                                <ul class="img-ul" id="appendid">
-                                                    @foreach($images as $image)
-                                                    <li id="image{{$image->id}}">
-                                                        <div class="img_section">
-                                                            <div class="img_content">
-                                                                <img src='{{asset("$image->image")}}' />
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card sr-card tab-hgt">
+                                    <div class="card-body">
+                                        <div class="dossier_sec personal_detail_edit pb-0">
+                                            <ul class="img-ul" id="appendid">
+                                                @foreach($images as $image)
+                                                <li id="image{{$image->id}}">
+                                                    <div class="img_section">
+                                                        <div class="img_content">
+                                                            <img src='{{asset("$image->image")}}' />
 
-                                                            </div>
-                                                            <img onclick="removeImage({{$image->id}})" src="{{asset('frontend/images/close.svg')}}" width="12px" class="c-prof-closeimg">
-                                                            <div class="text-imgs">
-                                                                <p class="mb-0">Project Name 1</p>
-                                                                <p class="work-from">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                                                <button class="btn btn-small" data-toggle="modal" data-target="#cv-modal1">view more</button>
+                                                        </div>
+                                                        <img onclick="removeImage({{$image->id}})" src="{{asset('frontend/images/close.svg')}}" width="12px" class="c-prof-closeimg">
+                                                        <div class="text-imgs">
+                                                            <p class="mb-0">Project Name 1</p>
+                                                            <p class="work-from">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                                            <button class="btn btn-small" data-toggle="modal" data-target="#cv-modal1">view more</button>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                @endforeach
+                                                <li>
+
+                                                    <form method="post" enctype="multipart/form-data" name="myForm" id="myForm">
+                                                        @csrf
+                                                        <div class="img_section">
+                                                            <div class="profimage-upload">
+                                                                <div class="upload-div">
+                                                                    <div><img src="{{asset('frontend/images/upload-icon.svg')}}" alt="upload-profile" class="upload-img1">
+                                                                    </div>
+                                                                    <p class="mb-0">Télécharger <br>une image</p>
+                                                                </div>
+                                                                <input type="file" id="imageUpload" name="image" accept=".png, .jpg, .jpeg" onchange="imageUploadGallery();" class="upload-input1">
                                                             </div>
                                                         </div>
-                                                    </li>
-                                                    @endforeach
-                                                    <li>
-
-                                                        <form method="post" enctype="multipart/form-data" name="myForm" id="myForm">
-                                                            @csrf
-                                                            <div class="img_section">
-                                                                <div class="profimage-upload">
-                                                                    <div class="upload-div">
-                                                                        <div><img src="{{asset('frontend/images/upload-icon.svg')}}" alt="upload-profile" class="upload-img1">
-                                                                        </div>
-                                                                        <p class="mb-0">Télécharger <br>une image</p>
-                                                                    </div>
-                                                                    <input type="file" id="imageUpload" name="image" accept=".png, .jpg, .jpeg" onchange="imageUploadGallery();" class="upload-input1">
-                                                                </div>
-                                                            </div>
-                                                            <span class="image-upload-error text-danger">@error ('image') {{$message}} @enderror</span>
-                                                        </form>
-                                                    </li>
-                                                </ul>
-                                                <div class="d-flex justify-content-end btn-image-view mt-4">
-                                                    <a class="btn btn-blue d-flex"><img src="{{asset('frontend/images/imgs-svg/ionic-md-eye.svg')}}" class="mr-4" alt="eye-icon">Plus ...</a>
-                                                </div>
+                                                        <span class="image-upload-error text-danger">@error ('image') {{$message}} @enderror</span>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                            <div class="d-flex justify-content-end btn-image-view mt-4">
+                                                <a class="btn btn-blue d-flex"><img src="{{asset('frontend/images/imgs-svg/ionic-md-eye.svg')}}" class="mr-4" alt="eye-icon">Plus ...</a>
                                             </div>
-
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -585,9 +585,10 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
+
+
+    </div>
 </section>
 
 <!-- See the establishment's file Modal -->

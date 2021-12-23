@@ -388,14 +388,17 @@
         });
     });
 
+    var count = 0;
 
     function openJobModal(job_id, user_id) {
+
         $('#jobid').val(job_id);
         $('#userid').val(user_id);
         $('#establishment').modal('show');
+        count++;
     }
 
-
+    var view = 0;
 
     $(document).on("change", "#document_name", function() {
         $.ajax({

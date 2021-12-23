@@ -10,7 +10,7 @@ return [
     'filter' => 'Filter',
     'reset' => 'Reset',
     'contact us' => 'Contact Us',
-    'list' => 'Contact Us List',    
+    'list' => 'Contact Us List',
     "actions" => "Actions",
     'edit' => 'Edit Contact',
     'name' => 'Name',
@@ -24,11 +24,12 @@ return [
     'users' => "User's List",
     'email' => 'Email',
     'search' => 'Search',
+    'gallery' => 'Gallery',
     'skillgroup' => [
         "list" => "Professional List",
         "btnadd" => "Add Professional",
         "create" => "Add Professional",
-        "show" =>"Professionals Detail",
+        "show" => "Professionals Detail",
         "btnedit" => "Edit",
         "btndelete" => "Delete",
         "edit" => "Edit Professional"
@@ -73,4 +74,11 @@ return [
         'show' => "Job's Detail",
         'list' => "Job's List"
     ],
+    "gallerygroup" => [
+        'list' => "Gallery List",
+        "image" => "Image",
+        "action" => "Action",
+        "status" => "Status",
+    ],
+
 ];

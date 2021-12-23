@@ -7,6 +7,7 @@ use App\Models\ChatMaster;
 use Illuminate\Http\Request;
 use App\Http\Traits\ImageuploadTrait;
 use App\Interfaces\CandidateRepositoryInterface;
+use App\Models\EstablishmentGallery;
 
 class CandidateRepository implements CandidateRepositoryInterface
 {
@@ -83,5 +84,13 @@ class CandidateRepository implements CandidateRepositoryInterface
             ->where("deleted_at", Null)->where('sender_id', $request->reciverid)->where("job_id", $request->id)
             ->where('id', '>', $request->lastid)->first();
         return $query;
+    }
+    public function getCandidateDetails($id)
+    {
+        return User::where('user_type', 1)->where('id', $id)->first();
+    }
+    public function getCandidateApprovedImages($id)
+    {
+        return EstablishmentGallery::where('establishment_id', $id)->where('status', 'accept')->get();
     }
 }

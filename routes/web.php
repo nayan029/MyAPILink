@@ -62,6 +62,11 @@ Route::middleware(['auth:admin'])->group(function ($route) {
         //Job module route
         $adminRoute->resource('job', 'JobController');
         $adminRoute->get('/getdata', 'JobController@getAjaxData')->name('job.data');
+
+        //Gallery Module Route
+        $adminRoute->resource('gallery', 'GalleryController');
+        $adminRoute->get('/getdata', 'GalleryController@getAjaxData')->name('gallery.data');
+        $adminRoute->get('/getstatus', 'GalleryController@getUpdateStatus')->name('gallery.update-status');
     });
 });
 
@@ -104,7 +109,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('addjob/{id}', 'JobController@index')->name('addjob');
     $frontRoute->post('addorupdatejob/{id}', 'JobController@addOrUpdateJob')->name('addorupdatejob');
     $frontRoute->get('joblist/{id}', 'JobController@showJob')->name('joblist');
-    $frontRoute->post('holdJobData','JobController@holdJobData')->name('holdJobData');
+    $frontRoute->post('holdJobData', 'JobController@holdJobData')->name('holdJobData');
     $frontRoute->get('users/restore/{id}', 'JobController@restoreUser')->name('users.restore');
 
 
@@ -150,6 +155,7 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->get('candidate-message', 'CandidateController@chatIndex')->name('candidate-message');
         $frontRoute->get('candidate-message-list-ajax', 'CandidateController@messageListAjax')->name('candidate-message-list-ajax');
         $frontRoute->get('last-mesage', 'CandidateController@lastMessageCheck')->name('last-mesage');
+        $frontRoute->get('candidate-details/{id}', 'CandidateController@showCandidateDetails')->name('candidate-details');
 
         $frontRoute->post('candidate-sendmessage', 'CandidateController@sendmessage')->name('candidate-sendmessage');
         $frontRoute->post('user/logout', 'HomeController@logout')->name('user-logout');

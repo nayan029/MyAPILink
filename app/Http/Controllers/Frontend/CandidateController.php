@@ -137,4 +137,10 @@ class CandidateController extends Controller
     {
         return $checkMessage = $this->candidateRepository->getLastMessage($request);
     }
+    public function showCandidateDetails($id)
+    {
+        $data['details'] =  $this->candidateRepository->getCandidateDetails($id);
+        $data['images'] = $this->candidateRepository->getCandidateApprovedImages($id);
+        return view('frontend.candidate.candidate-details', $data);
+    }
 }

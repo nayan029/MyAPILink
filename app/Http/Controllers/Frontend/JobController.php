@@ -75,6 +75,7 @@ class JobController extends Controller
 
     public function addOrUpdateJob(Request $request, $id)
     {
+
         $validation = Validator::make($request->all(), $this->jobValidationRules);
         if ($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors());
@@ -86,7 +87,6 @@ class JobController extends Controller
         if (!empty(request('contact_thorugh'))) {
             $contactThrough = implode(',', request('contact_thorugh'));
         }
-
         $count = User::where('user_type', 1)->count();
         $certificationArray = array(
             'user_id' => $id,
@@ -112,6 +112,7 @@ class JobController extends Controller
             'what_you_are_looking' => request('what_you_are_looking_for'),
             'total_reg' => $count,
         );
+        dd($certificationArray);
         if (!empty($editId)) {
             $certificationArray['updated_at'] = date('Y-m-d H:i:s');
             $data =  Job::where("id", $editId)->update($certificationArray);
@@ -180,8 +181,8 @@ class JobController extends Controller
 
     public function candidatePortfolio($id)
     {
-        $data['userData'] = ApplyJob::where('user_id',$id)->first();
-        return view('frontend.job.esatablishment-portfolio',$data);
+        $data['userData'] = ApplyJob::where('user_id', $id)->first();
+        return view('frontend.job.esatablishment-portfolio', $data);
     }
     public function showAllCandidate(Request $request){
         $data['candidateList'] = $this->jobRepository->allCandidates();

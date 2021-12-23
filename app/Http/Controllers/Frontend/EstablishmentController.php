@@ -25,7 +25,6 @@ class EstablishmentController extends Controller
         'surface_area_of_the_establishment' => 'required|numeric',
         'garden' => 'required',
         'applied_pedagogy' => 'required',
-        'more_infomation'=>'required|mimes:jpeg,png,jpg',
     ];
     protected   $imageValidationRules =
     [   
@@ -49,12 +48,10 @@ class EstablishmentController extends Controller
     public function store(Request $request)
     {
         $validationrules['document'] = 'required|mimes:pdf';
-        $validationrules['more_infomation'] = 'required|mimes:jpeg,png,jpg|max:2048';
+        $validationrules['more_infomation'] = 'required|mimes:jpeg,png,jpg';
         
         $validator = Validator::make($request->all(), $this->validationrules);
         if ($validator->fails()) {
-            print_r($validator->errors());
-            die;
             return redirect()->back()->withErrors($validator->errors());
         }
 

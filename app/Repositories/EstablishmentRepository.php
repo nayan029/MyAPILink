@@ -25,8 +25,6 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
                 $documents[] = $this->uploadImage($file, 'Establishment/document');
             }
         }
-
-
         $applied_pedagogy = implode(",", $request->applied_pedagogy);
         $document = implode(",", $documents);
         $storeData = $request->all();
@@ -44,9 +42,7 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
                 $storeData['image'] = $more_infomation;
                 $storeData['establishment_id'] = $establishment->id;
                 $storeData['user_id'] = auth()->guard('web')->user()->id;
-
-
-                EstablishmentGallery::create($storeData);
+     EstablishmentGallery::create($storeData);
             }
         }
 

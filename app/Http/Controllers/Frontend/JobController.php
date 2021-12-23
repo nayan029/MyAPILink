@@ -112,7 +112,6 @@ class JobController extends Controller
             'what_you_are_looking' => request('what_you_are_looking_for'),
             'total_reg' => $count,
         );
-        dd($certificationArray);
         if (!empty($editId)) {
             $certificationArray['updated_at'] = date('Y-m-d H:i:s');
             $data =  Job::where("id", $editId)->update($certificationArray);

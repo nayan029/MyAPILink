@@ -58,7 +58,7 @@
 
                                     <div class="d-flex justify-content-end message-btn-profile ">
                                         <div class="sr-pos mr-2 res-sr-pos">
-                                            <a href="{{establish-message.html}}" class="btn btn-profile">
+                                            <a href="{{route('candidate-message')}}" class="btn btn-profile">
                                                 <img src="{{asset('frontend/images/message-square.svg')}}" class="msquareicon">Contacter par message
                                             </a>
                                         </div>
@@ -382,11 +382,6 @@
                     </div>
                 </div>
             </div>
-
-
-
-
-
         </div>
     </section>
 
@@ -459,13 +454,6 @@
         </div>
 
     </div>
-
-
-
-
-
-
-
     </div>
 </body>
 

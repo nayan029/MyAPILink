@@ -212,7 +212,6 @@
                             <ul class="pagination justify-content-center">
                                 {{ $list->appends(request()->except('page'))->links("pagination::bootstrap-4") }}
                             </ul>
-
                         </nav>
                     </div>
                 </div>

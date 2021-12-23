@@ -9,7 +9,10 @@ use App\Models\SavedJobs;
 use Illuminate\Http\Request;
 use App\Http\Traits\ImageuploadTrait;
 use App\Models\ChatMaster;
+use App\Models\Establishment;
 use App\Models\User;
+use PHPUnit\Framework\MockObject\ClassIsFinalException;
+use PHPUnit\TextUI\XmlConfiguration\Group;
 
 class ApplyJobRepository implements ApplyJobRepositoryInterface
 {
@@ -90,16 +93,15 @@ class ApplyJobRepository implements ApplyJobRepositoryInterface
 
     public function chatJobList()
     {
-        return  ApplyJob::with('jobApplay')->where('is_apply', 1)->where('deleted_at', NULL)->where('user_id', auth()->guard('web')->user()->id)->get();
+        return  ApplyJob::with('jobApplay','getEstablishmentList')->where('is_apply', 1)->where('deleted_at', NULL)->where('user_id', auth()->guard('web')->user()->id)->get();
     }
-    // public function chatUserList()
-    // {
-    //     return ChatMaster::where('id', auth()->user()->id)->groupBy('')->where('deleted_at', NULL)->get();
-    //     return  ApplyJob::with('jobApplay','getEstablishmentList')->where('is_apply',1)->where('deleted_at', NULL)->where('user_id',auth()->guard('web')->user()->id)->get();
-    // }
-    public function chatUserList()
-    {
-        return ChatMaster::groupBy('sender_id')->where('deleted_at', NULL)->get();
+    public function chatUserList(){
+        return ChatMaster::where(function ($query) {
+            $query->where('reciver_id',auth()->guard('web')->user()->id)
+                  ->orWhere('sender_id',auth()->guard('web')->user()->id);
+                })->GroupBy('sender_id','reciver_id')->where('deleted_at', NULL)
+                ->with('getUserReciverData','getUserSenderData')
+                ->get();
     }
    
 }

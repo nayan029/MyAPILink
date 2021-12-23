@@ -153,15 +153,15 @@
                                                             {!! Form::file('more_infomation', ['id' => 'more_infomation', 'name' => 'more_infomation', 'class' => 'dropzone']) !!}
                                                         </div> -->
 
-                                                        <div class="upload__box">
-  <div class="upload__btn-box">
+                                                        <!-- <div class="upload__box"> -->
+  <!-- <div class="upload__btn-box">
     <label class="upload__btn">
       <p>Upload images</p>
       <input type="file" multiple="" data-max_length="20" class="upload__inputfile">
     </label>
   </div>
   <div class="upload__img-wrap"></div>
-</div>
+</div> -->
 
                                                     </div>
                                                 </div>

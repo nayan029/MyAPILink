@@ -200,7 +200,6 @@
                                             <div class="d-flex justify-content-end">
                                                 <a href="{{route('candidatePortfolio',$job->user->id)}}" class="mr-3 btn btn-viewjob offer-application ">Voir le profil
                                                     Apilink</a>
-
                                                 <button id="trigger" class="btn btn-apply offer-application" {{$job->document_name == "" ? 'disabled' : ''}}>Voir le CV</button>
 
                                                 <div style="display:none">
@@ -211,11 +210,10 @@
                                     </div>
                                 </div>
                                 @endforeach
-                                @else
-
+                            </div>
+                            @else
                                 <p class="text-center">No Job Data Found!..</p>
                                 @endif
-                            </div>
                             <div class="row ">
                                 <div class="col-md-12 d-flex justify-content-end">
                                     <a href="#">

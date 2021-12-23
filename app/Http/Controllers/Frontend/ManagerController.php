@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Interfaces\ManagerRepositoryInterface;
 use App\Interfaces\ApplyJobRepositoryInterface;
+use App\Interfaces\CandidateRepositoryInterface;
 
 class ManagerController extends Controller
 {
@@ -37,11 +38,13 @@ class ManagerController extends Controller
 
     ];
     protected $applyJobRepository = "";
+    protected $candidateRepository ="";
 
-    public function __construct(ManagerRepositoryInterface $managerRepository, ApplyJobRepositoryInterface $applyJobRepository)
+    public function __construct(ManagerRepositoryInterface $managerRepository, ApplyJobRepositoryInterface $applyJobRepository,CandidateRepositoryInterface $candidateRepository)
     {
         $this->managerRepository = $managerRepository;
-        $this->applyJobRepository = $applyJobRepository;
+        $this->applyJobRepository =$applyJobRepository;
+        $this->candidateRepository=$candidateRepository;
     }
 
     public function index()
@@ -205,5 +208,19 @@ class ManagerController extends Controller
             Session::flash('error','Email has been already verified so now you can login');
             return redirect()->route('registration');
         }
+        $userList=$this->applyJobRepository->chatUserList();
+        
+      
+
+        return view('frontend.manager.chat_index', $data);
+    }
+    public function messageListAjax(Request $request)
+    {
+        $data['id'] = $request->id;
+        $data['reciverid'] =$request->reciverid;
+        $data['validator'] = JsValidator::make($this->imageValidationRules);
+        $data['messagelist'] =  $this->candidateRepository->getAllMessage($request->id,$request->reciverid);
+
+        return view('frontend.manager.chatbox', $data);
     }
 }

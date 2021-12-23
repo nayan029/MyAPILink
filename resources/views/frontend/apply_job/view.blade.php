@@ -7,7 +7,7 @@
     <div class="atext-pos  pt-90px">
         <img src="{{asset('frontend/images/profile-background.png')}}" alt="profile page background image" class="w-100 prof-resimg">
 
-        <a href="" class="back link_a pos-img-link">
+        <a href="{{URL::to('/details-job/'.$showCompany->id)}}" class="back link_a pos-img-link">
             <span><i class="fa fa-angle-left mr-2"></i></span>breadcrumb
         </a>
     </div>

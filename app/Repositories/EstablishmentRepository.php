@@ -120,9 +120,8 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
         }
 
         $storeData['image'] = $image;
-        $storeData['establishment_id'] = $request->establishment_id;
-        $storeData['user_id'] = auth()->guard('web')->user()->id;
-
+        $storeData['establishment_id'] = auth()->guard('web')->user()->id;
+        
 
         return EstablishmentGallery::create($storeData);
     }

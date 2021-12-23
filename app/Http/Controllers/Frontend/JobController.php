@@ -45,6 +45,7 @@ class JobController extends Controller
     public function __construct(JobRepositoryInterface $jobRepository)
     {
         $this->jobRepository = $jobRepository;
+        
     }
 
 
@@ -182,4 +183,12 @@ class JobController extends Controller
         $data['userData'] = ApplyJob::where('user_id',$id)->first();
         return view('frontend.job.esatablishment-portfolio',$data);
     }
+    public function showAllCandidate(Request $request){
+        $data['candidateList'] = $this->jobRepository->allCandidates();
+        return view('frontend.candidate.list',$data);
+    }
+
+    
+
+
 }

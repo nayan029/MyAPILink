@@ -65,7 +65,7 @@ class ManagerController extends Controller
             'confirm_password' => 'required|same:password',
             'represent' => 'required',
             'name_of_our_organization' => 'required|max:75',
-            'number_of_establishments_in_the_organization' => 'required|numeric|digits:5',
+            // 'number_of_establishments_in_the_organization' => 'required|numeric|digits:5',
             'organization_address' => 'required',
             'postal_code' => 'required|digits:5',
             'city' => 'required',
@@ -104,8 +104,15 @@ class ManagerController extends Controller
         $data['count']= ApplyJob::where('job_id',$id)->count();
         // dd($data['count']);
         if ($userType == 2) {
-            return view('frontend.manager.manager-profile', $data);
-        } else {
+            if (auth()->guard('web')->user()->establishment_management=="single") {
+                $EstablishmentDetails=Establishment::where('user_id', $id)->orderBy('id','DESC')->first();
+                return redirect('view-establishment-account/'.$EstablishmentDetails->id);
+            }else{
+                return view('frontend.manager.manager-profile', $data);
+            }
+            
+        }elseif($userType == 1) {
+           
             return redirect()->route('mycandidate-profile');
         }
     }

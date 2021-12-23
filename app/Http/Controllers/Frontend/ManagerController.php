@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Interfaces\ManagerRepositoryInterface;
 use App\Interfaces\ApplyJobRepositoryInterface;
 use App\Interfaces\CandidateRepositoryInterface;
+use App\Models\ApplyJob;
 
 class ManagerController extends Controller
 {
@@ -96,10 +97,12 @@ class ManagerController extends Controller
         $id = auth()->guard('web')->user()->id;
         $userType = auth()->guard('web')->user()->user_type;
         $data['validator'] = JsValidator::make($this->updatevalidationrules);
-        $data['myJobList'] = Job::where('user_id', $id)->paginate(10);
+        $data['myJobList'] = Job::where('user_id', $id)->paginate(4);
         $data['remaining'] = Job::where('created_at', '>=', Carbon::now())->get();
         $data['deleted'] = Job::onlyTrashed()->get();
         $data['myEstablishmentList'] = Establishment::where('user_id', $id)->get();
+        $data['count']= ApplyJob::where('job_id',$id)->count();
+        // dd($data['count']);
         if ($userType == 2) {
             return view('frontend.manager.manager-profile', $data);
         } else {

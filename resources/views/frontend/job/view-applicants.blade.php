@@ -178,7 +178,7 @@
                 <section class="prof-backsec">
                     <div class="container">
                         <div class="card sr-card">
-                            <div class="card-body">      
+                            <div class="card-body">
                                 @if(count($applyJob)>0)
                                 <div class="row">
                                     <div class="col-md-12 d-flex justify-content-end">
@@ -217,8 +217,8 @@
                                         <i class="fa fa-angle-right btn-arrow"></i></a>
                                 </div>
                                 @else
-                            <p class="text-center">No Data Found</p>
-                            @endif
+                                <p class="text-center">No Data Found</p>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -255,9 +255,9 @@
                                                         <div class="custom-control custom-radio">
                                                             <tr>
                                                                 <td>
-                                                            <input type="hidden" name="job_id" data-id="{{$job->job_id}}" id="job_id">
-                                                            <input type="hidden" name="user_id" user_id="{{$job->user_id}}" id="user_id">
-                                                            <input type="radio" name="jobCheck" id="customRadio1" class="custom-control-input" value="jobcheck">
+                                                                    <input type="hidden" name="job_id" data-id="{{$job->job_id}}" id="job_id">
+                                                                    <input type="hidden" name="user_id" user_id="{{$job->user_id}}" id="user_id">
+                                                                    <input type="radio" name="jobCheck" id="customRadio1" class="custom-control-input" value="jobcheck">
                                                             </tr>
                                                             </td>
                                                             <div class="div-edit-radio"></div>
@@ -289,15 +289,15 @@
                                 </form>
                                 @endforeach
                             </div>
-                           
+
                             <div class="row ">
                                 <div class="col-md-12 d-flex justify-content-end">
                                     <a href="#">
                                         <i class="fa fa-angle-right btn-arrow"></i></a>
                                 </div>
                                 @else
-                            <p class="text-center">No Job Data Found!..</p>
-                            @endif
+                                <p class="text-center">No Job Data Found!..</p>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -424,6 +424,7 @@
         $('#pills-tabContent').show();
     });
     $('#pills-editoffer-tab').click(function() {
+        $('#pills-home-tab').hide();
         $('#editoffer').show();
     });
 
@@ -497,7 +498,7 @@
         if ($('input[name="jobCheck"]:checked').length == 0) {
             $('.jobcheck_error').html("please select atleast one user");
             $('#message-modal').modal('hide');
-        }else{
+        } else {
             $('#message-modal').modal('show');
         }
     });

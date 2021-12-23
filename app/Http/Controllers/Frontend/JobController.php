@@ -87,7 +87,8 @@ class JobController extends Controller
         if (!empty(request('contact_thorugh'))) {
             $contactThrough = implode(',', request('contact_thorugh'));
         }
-        $count = User::where('user_type', 1)->count();
+       
+       
         $certificationArray = array(
             'user_id' => $id,
             'title' => request('title'),
@@ -110,7 +111,8 @@ class JobController extends Controller
             'job_description' => request('job_description'),
             'employment_mission' => request('job_mission'),
             'what_you_are_looking' => request('what_you_are_looking_for'),
-            'total_reg' => $count,
+           
+          
         );
         if (!empty($editId)) {
             $certificationArray['updated_at'] = date('Y-m-d H:i:s');
@@ -129,7 +131,6 @@ class JobController extends Controller
 
     public function destroy($id)
     {
-
         $jobData = Job::findorfail($id);
         $jobData->delete();
         Session::flash('success', 'Successfully deleted');

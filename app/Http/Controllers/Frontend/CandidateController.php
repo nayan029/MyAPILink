@@ -70,19 +70,19 @@ class CandidateController extends Controller
     }
     public function edit()
     {
-        $this->validationrules['email'] = "required|email|unique:users,email," . auth()->guard('web')->user()->id . ",id,deleted_at,NULL";
+        $this->validationrules['email'] = "required|email";
         $data['validator'] = JsValidator::make($this->validationrules);
         return view('frontend.candidate.edit', $data);
     }
     public function update(Request $request)
     {
 
-        $this->validationrules['email'] = "required|email|unique:users,email," . auth()->guard('web')->user()->id . ",id,deleted_at,NULL";
+        // $this->validationrules['email'] = "required|email|unique:users,email," . auth()->guard('web')->user()->id . ",id,deleted_at,NULL";
 
-        $validator = Validator::make($request->all(), $this->validationrules);
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator->errors());
-        }
+        // $validator = Validator::make($request->all(), $this->validationrules);
+        // if ($validator->fails()) {
+        //     return redirect()->back()->withErrors($validator->errors());
+        // }
 
         $update = $this->candidateRepository->updateProfile($request);
 

@@ -3,6 +3,13 @@
 <title>ApiLink | SearchJob</title>
 @endsection
 @section('content')
+<style>
+    .modal-textareas{
+        width: 100%;
+    resize: none;
+    padding: 20px 25px;
+    }
+</style>
 <section class="search-bg" style="background-image: url(frontend/images/project/profile-background.png)">
     <div class="container">
         <div class="row justify-content-center">
@@ -293,18 +300,7 @@
                     <div class="candidate_modal_title">
                         <h5 class="candidate_modal_text pb-2">Description</h5>
                         <div class="candidate_modal_desc">
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                            </p>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-                                a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-                                Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-                                a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-                                Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-                                a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-                                Lorem Ipsum passages, and more recently with desktop publishing software
-                            </p>
+                           <textarea  id="jobdesc" class="modal-textareas" rows="8"></textarea>
                         </div>
                         <div class="text-right pt-4 pb-3">
                             <a href="javascript:void(0)" class="btn btn-blue ml-auto skip-btn tele-modal-btn">
@@ -361,7 +357,7 @@
                         <form method="POST" id="mainForm" class="d-content" enctype="multipart/form-data">
                             @method('POST')
                             @csrf
-
+                         
                             <button class="btn btn-modals-blue mb-0 cv-radius btn-tele position-relative" id="cv-btn" type="button"><img src="frontend/images/project/feather-download.svg" alt="download" class="mr-3">
                                 <input type="file" class="upload-modal-cv" name="document_name" id="document_name">
                                 Télécharger un cv </button>
@@ -421,6 +417,7 @@
         var jobid = $('#jobid').val();
         var userid = $('#userid').val();
         var document_name = $('#pdf_name').val();
+        var jobdesc  = $('textarea#jobdesc').val();
 
         var temp = 0;
         regex = new RegExp("(.*?)\.(pdf|docs|docx)$");
@@ -445,6 +442,7 @@
                     'jobid': jobid,
                     'userid': userid,
                     'document_name': document_name,
+                    'desc': jobdesc,
                     _token: "{{ csrf_token() }}"
                 },
                 success: function(response) {
@@ -521,6 +519,7 @@
             }
         });
     });
+
 </script>
 
 

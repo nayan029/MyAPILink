@@ -29,6 +29,7 @@ class ApplyJobRepository implements ApplyJobRepositoryInterface
         $input['company_id'] = $request->userid;
         $input['apply_type'] = $request->type;
         $input['is_apply'] = 1;
+        $input['desc'] =  $request->desc;
         $input['document_name'] = $request->document_name;
         $input['created_at'] = date('Y-m-d H:i:s');
 

@@ -94,6 +94,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('candidate/resumedownaload/{userid}', 'RegistrationController@candidateDownloadResume')->name('candidate.resume');
     $frontRoute->get('candidate/welcome/{userid}', 'RegistrationController@getWelcomePage')->name('candidate.welcome');
     $frontRoute->get('candidate/success/{userid}', 'RegistrationController@candidateProfileLogin')->name('candidate.login');
+    $frontRoute->post('uploadcv', 'RegistrationController@uploadCv')->name('uploadcv');
+    
     //end profile route step
     $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
     $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');

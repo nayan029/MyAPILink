@@ -35,11 +35,22 @@ class CandidateRepository implements CandidateRepositoryInterface
             'languages_spoken' => $request->languages_spoken,
 
         ];
-        $updateData['research'] = implode(",", $request->research);
+if (!empty($request->research)) {
+    $updateData['research'] = implode(",", $request->research);
+}
+        
+if (!empty($request->diplomas)) {
         $updateData['diplomas'] = implode(",", $request->diplomas);
+}
+if (!empty($request->permit_vehicle)) {
         $updateData['permit_vehicle'] = implode(",", $request->permit_vehicle);
+}
+if (!empty($request->pedagogy)) {
         $updateData['pedagogy'] = implode(",", $request->pedagogy);
+}
+if (!empty($request->qualities)) {
         $updateData['qualities'] = implode(",", $request->qualities);
+}
 
 
         if ($request->hasfile('profile_photo_path')) {

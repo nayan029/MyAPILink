@@ -274,19 +274,18 @@
                                         <div class="overflow-auto can-download-btn">
                                             <table class="download-table w-100">
                                                 <tbody>
-                                                    <tr>
+                                                   <tr>
                                                         <td>
                                                             <img src="{{asset('frontend/images/pdf.svg')}}" width="30px">
                                                         </td>
                                                         <td>
-                                                            <p class="mb-0">Uploaded CV_10-09-2020.pdf</p>
+                                                          <a href="{{route('candidate.resume',auth()->guard('web')->user()->id)}}" target="_blank"><p class="mb-0">Api link cv.pdf</p></a>
                                                         </td>
                                                         <td>
-                                                            <div class="input-dupload">
+                                                            <!-- <div class="input-dupload">
                                                                 <input type="file" class="dupload-file">
                                                                 <img src="{{asset('frontend/images/feather-download.svg')}}" class="download-img">
-                                                            </div>
-
+                                                            </div> -->
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -294,27 +293,13 @@
                                                             <img src="{{asset('frontend/images/pdf.svg')}}" width="30px">
                                                         </td>
                                                         <td>
-                                                            <p class="mb-0">Uploaded CV_10-09-2020.pdf</p>
+                                                          <a href="{{url(''.auth()->guard('web')->user()->cv)}}" target="_blank"><p class="mb-0">Uploded cv.pdf</p></a>
                                                         </td>
                                                         <td>
-                                                            <div class="input-dupload">
+                                                            <!-- <div class="input-dupload">
                                                                 <input type="file" class="dupload-file">
                                                                 <img src="{{asset('frontend/images/feather-download.svg')}}" class="download-img">
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <img src="{{asset('frontend/images/pdf.svg')}}" width="30px">
-                                                        </td>
-                                                        <td>
-                                                            <p class="mb-0">Uploaded CV_10-09-2020.pdf</p>
-                                                        </td>
-                                                        <td>
-                                                            <div class="input-dupload">
-                                                                <input type="file" class="dupload-file">
-                                                                <img src="{{asset('frontend/images/feather-download.svg')}}" class="download-img">
-                                                            </div>
+                                                            </div> -->
                                                         </td>
                                                     </tr>
                                                 </tbody>

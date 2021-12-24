@@ -85,21 +85,20 @@
                                             <div class="form-group">
                                                 <input type="text" class="datepicker1 form-control bg-f6 inputicon2 edit-placeholder pd-date" placeholder="dès le"></div>
                                         </div>
-                                    <div class="sr-rel personinfo-form mb-4">
+                                    <!-- <div class="sr-rel personinfo-form mb-4">
                                         <select required="" name="available_time" class="form-control arrow-down profile-drop">
-                                            <!-- <option value="" hidden=""></option> -->
                                             <option @if(auth()->guard('web')->user()->available_time=="1 mois") selected @endif value="1 mois">1 mois</option>
                                             <option  @if(auth()->guard('web')->user()->available_time=="2 mois") selected @endif value="2 mois">2 mois</option>
                                             <option  @if(auth()->guard('web')->user()->available_time=="3 mois") selected @endif value="3 mois">3 mois</option>
                                         </select>
                                         <img src="{{asset('frontend/images/imgs-svg/down-arrow.svg')}}" alt="" class="arrw-downimg editprof-img">
-                                    </div>
-                                    <div class="box-edit">
+                                    </div> -->
+                                    <!-- <div class="box-edit">
                                             <div class="form-group">
                                                 <input class="form-control bg-f6 inputicon2 edit-placeholder" placeholder="Autre">
                                             </div>
-                                        </div>
-                                        <div class="sr-rel  mb-4">
+                                        </div> -->
+                                        <!-- <div class="sr-rel  mb-4">
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input" id="editprof3">
                                                 <label class="custom-control-label login-cus-check edprof-checklabel" for="editprof3">à temps plein</label>
@@ -108,12 +107,12 @@
                                                 <input type="checkbox" class="custom-control-input" id="editprof4">
                                                 <label class="custom-control-label login-cus-check edprof-checklabel" for="editprof4">à temps partiel</label>
                                             </div>
-                                            <!-- <select required="" class="form-control arrow-down profile-drop">
+                                        <select required="" class="form-control arrow-down profile-drop">
                                                 <option value="">À temps plein</option>
                                                 <option value="">Lorem ipsum</option>
                                             </select>
-                                            <img src="images/imgs-svg/down-arrow.svg" alt="" class="arrw-downimg editprof-img"> -->
-                                        </div>
+                                            <img src="images/imgs-svg/down-arrow.svg" alt="" class="arrw-downimg editprof-img">
+                                        </div> -->
                                     @php $diplomas=explode(",",auth()->guard('web')->user()->diplomas); @endphp
                                     <div class="mb-4">
                                         <div class="sr-rel personinfo-form mb-3">
@@ -210,7 +209,7 @@
                                     <div class="personal_detail_edit detail-person">
                                         <h5 class="ml-2 dark-tit">Détails personnels</h5>
                                         <div class="row mx-0 mt-3">
-                                        <div class="custom-col2 col-md-6">
+                                        <!-- <div class="custom-col2 col-md-6">
                                                     <div class="form-group box-shanone mb-4">
                                                         <label>Civilité</label>
                                                         <select name="civility" class="form-control arrow-change arrow-down profile-drop select2">
@@ -219,7 +218,7 @@
                                                         </select>
                                                         <img src="images/imgs-svg/down-arrow.svg" alt="" class="arrw-downimg civi-img">
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="form-group">
                                                     <label>Prénom <span class="invalid-error text-danger">*</span></label>
@@ -428,8 +427,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 text-right mt-4">
-                                        <button class="btn btn-outline-cancel">Annuler</button>
-                                        <button class="btn btn-save btn-Sauvegarder">Sauvegarder</button>
+                                        <button type="button" class="btn btn-outline-cancel">Annuler</button>
+                                        <button type="submit" class="btn btn-save btn-Sauvegarder">Sauvegarder</button>
                                     </div>
 
 

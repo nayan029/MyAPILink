@@ -117,14 +117,14 @@
 
                 </div>
                 <ul class="chat-user-small scrollbar-design profile-chat-design">
-                    @foreach($userList as $user)
+                    @foreach($chatList as $user)
                    
                     <li class="active">
                         <div class="chatprofile">
-                            <div class="usershortname">CI</div>
+                            <div class="usershortname"><img src="{{URL::to('/')}}/{{ ($user->sender_id != auth()->user()->id) ? $user['getUserSenderData']->profile_photo_path : $user['getUserReciverData']->profile_photo_path}}" onerror='this.onerror=null;this.src="{{URL::to("/")}}/frontend/images/profile-change.svg";'></div>
                         </div>
-                        <div onclick="msgbox({{$user->job_id}},{{($user->sender_id != auth()->user()->id) ? $user->sender_id : $user->reciver_id}});" class="chatprofile-content">
-                            <h5>{{($user->sender_id != auth()->user()->id) ? isset($user['getUserSenderData']->first_name)? $user['getUserSenderData']->first_name:"".' '.isset($user['getUserSenderData']->last_name)?$user['getUserSenderData']->last_name :"" : isset($user['getUserReciverData']->first_name)?$user['getUserReciverData']->first_name :"" .' '. isset($user['getUserReciverData']->last_name)?$user['getUserReciverData']->last_name:""}}</h5>
+                        <div onclick="msgbox({{$user->job_id}},{{ ($user->sender_id != auth()->user()->id) ? $user->sender_id : $user->reciver_id}});" class="chatprofile-content">
+                        <h5>{{($user->sender_id != auth()->user()->id) ? $user['getUserSenderData']->first_name.' '.$user['getUserSenderData']->last_name : $user['getUserReciverData']->first_name .' '.$user['getUserReciverData']->last_name}}</h5>
                             <div class="msg-time">
                                 <p>Hi, How are you today?</p>
                                 <span>18:41</span>

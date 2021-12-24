@@ -18,4 +18,6 @@ interface CandidateRepositoryInterface
     public function getCandidateDetails($id);
 
     public function getCandidateApprovedImages($id);
+
+    public function getReciverData($id);
 }

@@ -107,6 +107,7 @@ class CandidateController extends Controller
     {
         $data['id'] = $request->id;
         $data['reciverid'] = $request->reciverid;
+        $data['reciverData'] = $this->candidateRepository->getReciverData($request->reciverid);  
         $data['validator'] = JsValidator::make($this->imageValidationRules);
         $data['messagelist'] =  $this->candidateRepository->getAllMessage($request->id, $request->reciverid);
 

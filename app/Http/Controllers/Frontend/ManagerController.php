@@ -14,6 +14,7 @@ use App\Interfaces\ManagerRepositoryInterface;
 use App\Interfaces\ApplyJobRepositoryInterface;
 use App\Interfaces\CandidateRepositoryInterface;
 use App\Models\ApplyJob;
+use App\Models\ChatMaster;
 
 class ManagerController extends Controller
 {
@@ -198,11 +199,29 @@ class ManagerController extends Controller
     }
     public function chatIndex()
     {
-
+        $searchVal = request('search_val');
+        $loginUserId = auth()->user()->id;
         $data['validator'] = JsValidator::make($this->imageValidationRules);
-        $data['userList'] = $this->applyJobRepository->chatUserList();
-
-       // dd($data['userList']);
+        $data['userList'] =$userList= $this->applyJobRepository->chatUserList();
+        $receiverarray = array();
+        $senderarray = array();
+        $checkChatData = array();
+        $opponent = array();
+        foreach ($userList as $kkey) {
+            $receiverarray[] = $kkey->receiver_id;
+            if (!in_array($kkey->receiver_id, $opponent) && $loginUserId != $kkey->receiver_id) {
+                $opponent[] = $kkey->receiver_id;
+            }
+            $senderarray[] = $kkey->sender_id;
+            if (!in_array($kkey->sender_id, $opponent) && $loginUserId != $kkey->sender_id) {
+                $opponent[] = $kkey->sender_id;
+            }
+        }
+        foreach ($opponent as $kkkey) {
+            $detailsData = $this->managerRepository->managerChatList($kkkey,$loginUserId);
+            $checkChatData[] = $detailsData;
+        }
+        $data['chatList'] = $checkChatData;
 
         return view('frontend.manager.chat_index', $data);
     }
@@ -228,6 +247,7 @@ class ManagerController extends Controller
     {
         $data['id'] = $request->id;
         $data['reciverid'] =$request->reciverid;
+        $data['reciverData'] = $this->candidateRepository->getReciverData($request->reciverid);  
         $data['validator'] = JsValidator::make($this->imageValidationRules);
         $data['messagelist'] =  $this->candidateRepository->getAllMessage($request->id,$request->reciverid);
 

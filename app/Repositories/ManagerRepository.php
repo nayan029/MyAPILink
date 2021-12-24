@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use Exception;
 use App\Models\User;
+use App\Models\ChatMaster;
 use App\Models\Establishment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -142,6 +143,10 @@ class ManagerRepository implements ManagerRepositoryInterface
         } else {
             return false;
         }
+    }
+    public function managerChatList($opponent,$loginUserId){
+        return ChatMaster::where('deleted_at',NULL)->whereIn('sender_id', [$opponent, $loginUserId])
+        ->whereIn('reciver_id', [$opponent, $loginUserId])->with('getUserReciverData','getUserSenderData')->first();
     }
     
     

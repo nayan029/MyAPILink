@@ -176,7 +176,7 @@
 </script>
 <script>
     function sendmessage(id,reciverId) {
-      
+    
         var temp = 0;
         var mess = $("#chatmessage").val();
         var bookingfile = $("#msgfile").val();

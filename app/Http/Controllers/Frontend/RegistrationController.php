@@ -48,8 +48,8 @@ class RegistrationController extends Controller
         $data = $this->registrationRepository->createRegistration($request);
         if ($data) {
             return response()->json([
-                'status' => true,
-                'msg' => 'Successfully Created'
+                'success' => true,
+                'message' => 'Registered Sucessfully'
             ]);
         }
     }

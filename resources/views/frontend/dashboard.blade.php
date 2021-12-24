@@ -21,11 +21,10 @@
             </div>
             @endif
         </div>
-
     </div>
 </section>
 
-<section class="index_section_bg" style="background-image: url('frontend/images/register-bg2.png');">
+<section class="index_section_bg" style="{{asset('frontend/images/register-bg2.png')}}">
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
@@ -84,21 +83,21 @@
             @endif
             @endforeach
             @endif
-
         </ul>
     </div>
 </section>
 
-<img src="{{asset('frontend/images/skyblue-background.png')}}" alt="back-blue" class="skyblue-img minus-img">
-<section class="light-blue mb-minus-sec">
-    <div class="container">
+
+<!-- <section class="skyblue-img" style="background-image:{{ url('/') }}/frontend/images/index/light-blue-bg.png"> -->
+<section class="skyblue-img" style="background-image: url('{{asset('frontend/images/index/light-blue-bg.png')}}');">
+    <div class="container pt-200px">
         <div class="row">
             <div class="col-md-12 text-center">
                 <h3 class=" comment-sec comment-title">Comment ça marche ?</h3>
             </div>
         </div>
         <div class="text-center pt-5">
-            @if($widget)
+            @if(count($widget)>0)
             <ul class="comment-ul d-inline-flex">
                 @foreach($widget as $wt)
                 @if($wt->slug == 'how_it_works')
@@ -116,19 +115,18 @@
                 </li>
                 @endif
                 @endforeach
-
             </ul>
             @endif
         </div>
     </div>
 </section>
+<!-- <img src="{{asset('frontend/images/darkblue-back2.png')}}" alt="" class="darkblue-img"> -->
 
-<img src="{{asset('frontend/images/darkblue-back2.png')}}" alt="" class="darkblue-img">
-<section class="nos_bg">
-    <div class="nos-hgt">
+<section class="nos_bg" style="background-image: url({{asset('frontend/images/index/down-blue-bg.png')}});">
+    <!-- <div class="nos-hgt">
         <img src="{{asset('frontend/images/nos-bg.png')}}" class="w-100 nos-imgs-res" />
-    </div>
-    <div class="mt-nos-minus">
+    </div> -->
+    <div class="paddingtop-nos">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center ">
@@ -143,18 +141,20 @@
                 @foreach($skill as $sk)
                 <div class="col-md-4">
                     <div class="card sr-card">
-
                         <img class="card-img-top nos_card_image" src="{{asset($sk->image)}}" alt="man-writing">
                         <div class="card-body sheight">
-                            <a href="javascript:void(0);" class="btn-show" data-id="{{$sk->id}}">
-                                <h6 class="card-title color1m main_title">{{$sk->name}}</h6>
-                                @if($sk->positions)
+                            <h6 class="card-title color1m main_title">{{$sk->name}}</h6>
+                            @if(count($sk->positions)>0)
+                            <ul class="les-professional-ul">
                                 @foreach($sk->positions as $position)
-                                <ul class="les-professional-ul">
-                                    <li>- {{$position->position}} - {{$position->title}}</li>
-                                </ul>
+                                <a href="javascript:void(0);" class="btn-show" data-id="{{$position->id}}">
+                                    <li>- {{$position->position}}-{{$position->title}}</li>
+                                </a>
                                 @endforeach
-                                @endif
+                            </ul>
+                            @else
+                            <p>No Record Found</p>
+                            @endif
                             </a>
                         </div>
                     </div>
@@ -164,9 +164,8 @@
         </div>
     </div>
 </section>
-<section class="mt-minus-200">
-
-    <img src="{{asset('frontend/images/darkblue3.png')}}" alt="" class="w-100">
+<section class="mt-minus-124">
+    <img src="{{asset('frontend/images/darkblue3.png')}}" alt="" class="w-100 back-dark-600">
     <div class="container">
         <div>
             <div class="row mt-minus1 vous-cher">
@@ -177,9 +176,8 @@
 
         </div>
     </div>
-
 </section>
-
+<!-- modal  -->
 <div class="modal fade modal-back-blue" id="Modaljob-desc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog center-modal-dialog modal-xl" role="document">
         <div class="modal-content m-32">
@@ -196,11 +194,10 @@
                     </h4>
                     <div class="candidate_modal_title">
                         <h5 class="candidate_modal_text pb-2 ">Description</h5>
-                        <div class="candidate_modal_desc desc" id="summernote">
-
-                        </div>
+                        <textarea class="candidate-modal-textarea desc" id="summernote">
+                        </textarea>
                         <div class="text-center pt-4 pb-3">
-                            <button class="btn btn-blue btn-skyblue ml-auto" type="button" data-target="Modallogin2" id="new-industry">Je crée
+                            <button class="btn btn-blue btn-skyblue ml-auto" type="button" data-toggle="modal" data-target="#header-Modallogin1" id="new-industry">Je crée
                                 mon
                                 profil
                                 professionnel pour ce poste</button>
@@ -361,7 +358,7 @@
 <!-- header modal1 -->
 
 <div class="modal fade login_modal" id="Modallogin2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<span class="close">&times;</span>
+    <span class="close">&times;</span>
     <div class="modal-dialog login-modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body login-modal-body">
@@ -397,7 +394,7 @@
                         </div>
 
                         <div class="mb-20 text-right">
-                            <a href="#" data-toggle="modal" data-target="#forgot_password_modal"  class="forgot-link forgot_password_mdl">J'ai perdu mon mot de passe?</a>
+                            <a href="#" data-toggle="modal" data-target="#forgot_password_modal" class="forgot-link forgot_password_mdl">J'ai perdu mon mot de passe?</a>
                         </div>
                         <div class="col-md-12 text-center res-dec mb-3 ">
                             <button id="loginbtn" type="submit" class="btn btn-blue w-100">Connexion</button>
@@ -428,7 +425,7 @@
 
                     <div class="text-center">
 
-                         <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="">
+                        <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="">
 
                     </div>
 
@@ -448,7 +445,7 @@
 
                     </div>
 
-                    
+
                 </form>
 
             </div>
@@ -485,8 +482,8 @@
                 pos: pos,
             },
             success: function(data) {
-                $('.main-title').text(data.skillData.name);
-                $('#summernote').html(data.skillData.description);
+                $('.main-title').text(data.skillData.position);
+                $('#summernote').html(data.skillData.desc);
                 $('.position').text(data.skillData.title);
                 $('#Modaljob-desc').modal('show');
             },
@@ -498,8 +495,8 @@
         });
     });
     $(document).on('click', '.btn-skyblue', function() {
-        $('#Modallogin2').modal('show');
-        $('#Modaljob-desc').modal('hide');  
+        $('#header-Modallogin1').modal('show');
+        $('#Modaljob-desc').modal('hide');
     });
     $(document).on('click', '.openRegister', function() {
         $("#header-Modallogin1").modal('show');
@@ -507,6 +504,3 @@
     });
 </script>
 @endsection
-
-
-    

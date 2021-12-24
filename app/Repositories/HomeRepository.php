@@ -17,6 +17,7 @@ use App\Models\User;
 use Exception;
 
 use App\Models\Skill;
+use App\Models\SkillPosition;
 use App\Models\Widget;
 use Illuminate\Support\Facades\Auth;
 
@@ -83,7 +84,7 @@ class HomeRepository implements HomeRepositoryInterface
 
     public function getSkillPositionData(Request $request)
     {
-        $data = Skill::with('positions')->findOrFail($request->id);
+        $data = SkillPosition::findOrFail($request->id);
         return $data;
     }
 

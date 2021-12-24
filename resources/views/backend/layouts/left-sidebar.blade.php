@@ -82,7 +82,7 @@
                 <li class="nav-item">
                     <a href="{{route('widget.index')}}" class="nav-link {{ request()->is('widget*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-th"></i>
-                        <p >
+                        <p>
                             {{__("messages.widget")}}
                         </p>
                     </a>
@@ -105,7 +105,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('job.index')}}" class="nav-link {{ request()->is('job*') ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-briefcase"></i>
+                        <i class="nav-icon fas fa-briefcase"></i>
                         <p>
                             Jobs
                         </p>
@@ -122,7 +122,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('skill.index')}}" class="nav-link {{ request()->is('skill*') ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-user-tie"></i> 
+                        <i class="nav-icon fas fa-user-tie"></i>
                         <p>
                             {{__("messages.skills")}}
                         </p>
@@ -133,6 +133,14 @@
                         <i class="nav-icon fas fa-phone-square-alt"></i>
                         <p>
                             {{__("messages.contact us")}}
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('gallery.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-file-image"></i>
+                        <p>
+                            {{__("messages.gallery")}}
                         </p>
                     </a>
                 </li>

@@ -98,6 +98,7 @@ class CandidateController extends Controller
 
         $data['validator'] = JsValidator::make($this->imageValidationRules);
         $data['jobList'] = $this->applyJobRepository->chatJobList();
+       
 
         return view('frontend.candidate.chat_index', $data);
     }
@@ -135,5 +136,11 @@ class CandidateController extends Controller
     public function lastMessageCheck(Request $request)
     {
         return $checkMessage = $this->candidateRepository->getLastMessage($request);
+    }
+    public function showCandidateDetails($id)
+    {
+        $data['details'] =  $this->candidateRepository->getCandidateDetails($id);
+        $data['images'] = $this->candidateRepository->getCandidateApprovedImages($id);
+        return view('frontend.candidate.candidate-details', $data);
     }
 }

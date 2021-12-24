@@ -117,13 +117,14 @@
 
                 </div>
                 <ul class="chat-user-small scrollbar-design profile-chat-design">
-                    @foreach($jobList as $job)
+                    @foreach($userList as $user)
+                   
                     <li class="active">
                         <div class="chatprofile">
                             <div class="usershortname">CI</div>
                         </div>
-                        <div onclick="msgbox({{$job->job_id}});" class="chatprofile-content">
-                            <h5>{{$job['jobApplay']->title}}</h5>
+                        <div onclick="msgbox({{$user->job_id}},{{($user->sender_id != auth()->user()->id) ? $user->sender_id : $user->reciver_id}});" class="chatprofile-content">
+                            <h5>{{($user->sender_id != auth()->user()->id) ? isset($user['getUserSenderData']->first_name)? $user['getUserSenderData']->first_name:"".' '.isset($user['getUserSenderData']->last_name)?$user['getUserSenderData']->last_name :"" : isset($user['getUserReciverData']->first_name)?$user['getUserReciverData']->first_name :"" .' '. isset($user['getUserReciverData']->last_name)?$user['getUserReciverData']->last_name:""}}</h5>
                             <div class="msg-time">
                                 <p>Hi, How are you today?</p>
                                 <span>18:41</span>
@@ -160,10 +161,10 @@
     });
 </script>
 <script>
-    function msgbox(id) {
+    function msgbox(id, $reciverId) {
 
         $.ajax({
-            url: '{{URL::to("/")}}/candidate-message-list-ajax?id=' + id,
+            url: '{{URL::to("/")}}/manager-message-list-ajax?id=' + id + '&reciverid=' + $reciverId,
             method: "GET",
             success: function(data) {
                 $('#messagelist').html(data);
@@ -175,67 +176,68 @@
     }
 </script>
 <script>
-    function sendmessage(id) {
-        var temp = 0;
-        var mess = $("#chatmessage").val();
-        var bookingfile = $("#msgfile").val();
-        var FileExtension = bookingfile.replace(/^.*\./, '');
+    function sendmessage(id,reciverId) {
+      
+      var temp = 0;
+      var mess = $("#chatmessage").val();
+      var bookingfile = $("#msgfile").val();
+      var FileExtension = bookingfile.replace(/^.*\./, '');
 
-        if (mess.trim() == '') {
-            temp++;
-            if (bookingfile != '') {
+      if (mess.trim() == '') {
+          temp++;
+          if (bookingfile != '') {
 
-                var Filesize = $("#msgfile")[0].files[0].size;
-                if ($.inArray(FileExtension, ['gif', 'png', 'jpg', 'jpeg', 'bmp', 'jfif', 'pdf', 'PDF']) == -1) {
-                    temp++;
-                }
-                if (Filesize > 10000000) {
-                    temp++;
+              var Filesize = $("#msgfile")[0].files[0].size;
+              if ($.inArray(FileExtension, ['gif', 'png', 'jpg', 'jpeg', 'bmp', 'jfif', 'pdf', 'PDF']) == -1) {
+                  temp++;
+              }
+              if (Filesize > 10000000) {
+                  temp++;
 
-                }
+              }
 
-            }
-            temp--;
+          }
+          temp--;
 
-        }
+      }
 
-        if (temp == 0) {
+      if (temp == 0) {
 
-            $('#sendbutton').prop('disabled', true);
+          $('#sendbutton').prop('disabled', true);
 
-            var url = '{{URL::to("/")}}/candidate-sendmessage?id=' + id;
-            event.preventDefault();
-            $.ajax({
-                url: url,
-                method: "POST",
-                data: new FormData(myForm2),
-                _token: '{{ csrf_token() }}',
-                dataType: 'JSON',
-                contentType: false,
-                cache: false,
-                processData: false,
-                success: function(response) {
+          var url = '{{URL::to("/")}}/candidate-sendmessage?id=' + id +'&reciverid='+reciverId;
+          event.preventDefault();
+          $.ajax({
+              url: url,
+              method: "POST",
+              data: new FormData(myForm2),
+              _token: '{{ csrf_token() }}',
+              dataType: 'JSON',
+              contentType: false,
+              cache: false,
+              processData: false,
+              success: function(response) {
 
-                    if (response.success) {
-                        $('#chatmessage').val('');
-                        $('#msgfile').val('');
-                        msgbox(id);
-                        $('#sendbutton').prop('disabled', false);
-                    } else {
+                  if (response.success) {
+                      $('#chatmessage').val('');
+                      $('#msgfile').val('');
+                      msgbox(id,reciverId);
+                      $('#sendbutton').prop('disabled', false);
+                  } else {
 
-                        $('#sendbutton').prop('disabled', false);
-                    }
+                      $('#sendbutton').prop('disabled', false);
+                  }
 
-                }
+              }
 
-            });
+          });
 
-        } else {
+      } else {
 
-            return false;
-        }
+          return false;
+      }
 
-    }
+  }
 </script>
 
 @endsection

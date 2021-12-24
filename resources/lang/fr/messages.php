@@ -24,6 +24,7 @@ return [
     'users' => 'Liste des utilisateurs',
     'email' => 'E-mail',
     'search' => 'Chercher',
+    'gallery' => 'Galerie',
     'skillgroup' => [
         "list" => "Profeessionnels lister",
         "btnadd" => "ajouter Profeessionnels",
@@ -73,5 +74,11 @@ return [
         'min_experience' => 'Expérience minimale',
         'show' => 'Travail Détail',
         'list' => 'Liste des tâches'
+    ],
+    "gallerygroup" => [
+        'list' => "Liste des galeries",
+        "image" => "Image",
+        "action" => "Action",
+        "status" => "statut",
     ],
 ];

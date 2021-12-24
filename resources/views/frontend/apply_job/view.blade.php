@@ -294,49 +294,6 @@
                                                 <img src="{{asset('frontend/images/imgs-svg/unsplash.svg')}}">
                                             </div>
                                         </li>
-                                        <li>
-                                            <div class="img_content_pro">
-                                                <img src="{{asset('frontend/images/imgs-svg/unsplash5.svg')}}">
-                                            </div>
-
-                                        </li>
-                                        <li>
-                                            <div class="img_content_pro">
-                                                <img src="{{asset('frontend/images/imgs-svg/unsplash7.svg')}}">
-                                            </div>
-
-                                        </li>
-                                        <li>
-                                            <div class="img_content_pro">
-                                                <img src="{{asset('frontend/images/imgs-svg/unsplash6.svg')}}">
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="img_content_pro">
-                                                <img src="{{asset('frontend/images/imgs-svg/unsplash11.svg')}}">
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="img_content_pro">
-                                                <img src="{{asset('frontend/images/imgs-svg/unsplash3.svg')}}">
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="img_content_pro">
-                                                <img src="{{asset('frontend/images/imgs-svg/unsplash.svg')}}">
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="img_content_pro">
-                                                <img src="{{asset('frontend/images/imgs-svg/unsplash5.svg')}}">
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="img_content_pro">
-                                                <img src="{{asset('frontend/images/imgs-svg/unsplash7.svg')}}">
-                                            </div>
-                                        </li>
-
                                     </ul>
                                     <div class="d-flex justify-content-end btn-image-view">
                                         <a class="btn btn-blue d-flex mr-3"><img src="{{asset('frontend/images/imgs-svg/ionic-md-eye.svg')}}" class="mr-2" alt="eye-icon"> Plus ...</a>

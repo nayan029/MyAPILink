@@ -113,61 +113,61 @@
                         </div>
                         <div class="type-width">
                             <button class="btn btn-yellow filters-btns">Appliquer les filtres</button>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div>
-            <div class="container">
-                <div class="row application_card pt-2 pb-4 mx-0 candidate-card">
-                    @foreach($candidateList as $value)
+    <div>
+        <div class="container">
+            <div class="row application_card pt-2 pb-4 mx-0 candidate-card">
+                @foreach($candidateList as $value)
 
-                    <div class="col-xl-3 col-lg-4 col-md-4 mb-60">
-                            <div class="card sr-card">
-                                <div class="card-body candidate-card-body">
-                                    <div class="disponsible">
-                                        <div class="disponsibleinner">
-                                            <span><img src="{{url('frontend/images/imgs-svg/disponsible-dot.svg')}}" alt="" class="mr-2"></span> Disponible
-                                        </div>
+                <div class="col-xl-3 col-lg-4 col-md-4 mb-60">
+                    <div class="card sr-card">
+                        <div class="card-body candidate-card-body">
+                            <div class="disponsible">
+                                <div class="disponsibleinner">
+                                    <span><img src="{{url('frontend/images/imgs-svg/disponsible-dot.svg')}}" alt="" class="mr-2"></span> Disponible
+                                </div>
 
+                            </div>
+                            <div class="text-center">
+                                <div class="application-profile">
+                                    <img src="{{url('frontend/images/imgs-svg/image-line-svg.svg')}}" alt="application-line" class="view-profile-line">
+                                    @if(!empty($value->profile_photo_path))
+                                    <img src="{{url(''.$value->profile_photo_path)}}" alt="application-profile" class="view-application-pic">
+                                    @else
+                                    <img src="{{url('frontend/images/imgs-svg/app1.svg')}}" alt="application-profile" class="view-application-pic">
+                                    @endif
+                                </div>
+                                <div class="candidate-card_content mt-2">
+                                    <h5 class="bluefelix-text">{{$value->first_name}} {{$value->last_name}}</h5>
+                                    <p class=" candidate-loc"><img src="{{url('frontend/images/map-gray.svg')}}" class="map_job mr-2" alt="map">{{$value->city}}</p>
+                                    <!--job_location-->
+                                    <p class="auxiliaire-text">Auxiliaire de Puériculture</p>
+
+                                    <div class="candidate-exp ">
+                                        <p>Expérience. : <span>{{$value->experiences_of}}</span></p>
+                                        <p>Groupe avec exp. :<span>{{$value->experiences_at}}</span></p>
                                     </div>
-                                    <div class="text-center">
-                                        <div class="application-profile">
-                                            <img src="{{url('frontend/images/imgs-svg/image-line-svg.svg')}}" alt="application-line" class="view-profile-line">
-                                            @if(!empty($value->profile_photo_path))
-                                            <img src="{{url(''.$value->profile_photo_path)}}" alt="application-profile" class="view-application-pic">
-                                            @else
-                                            <img src="{{url('frontend/images/imgs-svg/app1.svg')}}" alt="application-profile" class="view-application-pic">
-                                            @endif
-                                        </div>
-                                        <div class="candidate-card_content mt-2">
-                                            <h5 class="bluefelix-text">{{$value->first_name}} {{$value->last_name}}</h5>
-                                            <p class=" candidate-loc"><img src="{{url('frontend/images/map-gray.svg')}}" class="map_job mr-2" alt="map">{{$value->city}}</p>
-                                            <!--job_location-->
-                                            <p class="auxiliaire-text">Auxiliaire de Puériculture</p>
-
-                                            <div class="candidate-exp ">
-                                                <p>Expérience. : <span>{{$value->experiences_of}}</span></p>
-                                                <p>Groupe avec exp. :<span>{{$value->experiences_at}}</span></p>
-                                            </div>
-                                        </div>
-                                        <div class="application_btn ">
-                                            <a href="establishment-portfolio-of-candidate.html" class="btn btn-blue find-canbtn">Voir le
-                                            profil</a>
-                                        </div>
-                                    </div>
+                                </div>
+                                <div class="application_btn ">
+                                    <a href="{{route('candidate-details',$value->id)}}" class="btn btn-blue find-canbtn">Voir le
+                                        profil</a>
                                 </div>
                             </div>
                         </div>
-                    
-                    @endforeach
                     </div>
-            </div>
+                </div>
 
+                @endforeach
+            </div>
         </div>
+
+    </div>
 
 </section>
 

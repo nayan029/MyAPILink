@@ -6,6 +6,7 @@ use JsValidator;
 use App\Http\Controllers\Controller;
 use App\Interfaces\ApplyJobRepositoryInterface;
 use Illuminate\Http\Request;
+use App\Models\Job;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 
@@ -38,6 +39,9 @@ class SearchAdController extends Controller
             } else {
                 $storeJobType = $this->applyJobRepository->store($request);
 
+                $jobView = Job::where('id', $storeJobType->job_id)->select('total_reg')->first();
+                $views = $jobView->total_reg + 1;
+                $update = Job::where('id', $storeJobType->job_id)->update(['total_reg' => $views]);
                 if ($storeJobType) {
                     return response()->json([
                         'success' => true,
@@ -48,10 +52,14 @@ class SearchAdController extends Controller
         } else {
             $storeJobType = $this->applyJobRepository->store($request);
 
+            $jobView = Job::where('id', $storeJobType->job_id)->select('total_reg')->first();
+            $views = $jobView->total_reg + 1;
+            $update = Job::where('id', $storeJobType->job_id)->update(['total_reg' => $views]);
             if ($storeJobType) {
                 return response()->json([
                     'success' => true,
-                    'message' => 'Successfully Inserted'
+                    'message' => 'Successfully Inserted',
+                    'data' => $storeJobType
                 ]);
             }
         }
@@ -62,6 +70,10 @@ class SearchAdController extends Controller
     }
     public function showJob($id)
     {
+        $jobView = Job::where('id', $id)->select('total_view')->first();
+        $views = $jobView->total_view + 1;
+        $update = Job::where('id', $id)->update(['total_view' => $views]);
+
         $data['showList'] = $this->applyJobRepository->getSingleCandidatedata($id);
         return view('frontend.apply_job.show', $data);
     }
@@ -82,6 +94,8 @@ class SearchAdController extends Controller
                 'data' => $insertSavedPosts
             ]);
         }
+
+
         return response()->json([
             'success' => false,
             'message' => 'Sorry, something went wrong. please try again.',
@@ -93,6 +107,7 @@ class SearchAdController extends Controller
         $data['pages'] = $request->page;
         $data['showCompany'] = $this->applyJobRepository->getCompanyData($id);
         $data['showJobs'] = $this->applyJobRepository->getManagerPosts($id);
+
         if ($request->ajax()) {
             return view('frontend.apply_job.get_ajax', $data)->render();
         }

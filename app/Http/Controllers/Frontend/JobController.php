@@ -20,7 +20,7 @@ class JobController extends Controller
     protected $jobValidationRules = [
         'title' => 'required|max:25|regex:/^([^0-9]*)$/',
         'address' => 'required',
-        'postal_code' => 'required|digits:6',
+        'postal_code' => 'required|digits:5',
         'city' => 'required',
         'country' => 'required',
         'type_of_contract' => 'required',
@@ -45,7 +45,6 @@ class JobController extends Controller
     public function __construct(JobRepositoryInterface $jobRepository)
     {
         $this->jobRepository = $jobRepository;
-        
     }
 
 
@@ -87,7 +86,8 @@ class JobController extends Controller
         if (!empty(request('contact_thorugh'))) {
             $contactThrough = implode(',', request('contact_thorugh'));
         }
-        $count = User::where('user_type', 1)->count();
+       
+       
         $certificationArray = array(
             'user_id' => $id,
             'title' => request('title'),
@@ -110,9 +110,10 @@ class JobController extends Controller
             'job_description' => request('job_description'),
             'employment_mission' => request('job_mission'),
             'what_you_are_looking' => request('what_you_are_looking_for'),
-            'total_reg' => $count,
+           
+          
         );
-        dd($certificationArray);
+
         if (!empty($editId)) {
             $certificationArray['updated_at'] = date('Y-m-d H:i:s');
             $data =  Job::where("id", $editId)->update($certificationArray);
@@ -130,7 +131,6 @@ class JobController extends Controller
 
     public function destroy($id)
     {
-
         $jobData = Job::findorfail($id);
         $jobData->delete();
         Session::flash('success', 'Successfully deleted');
@@ -184,12 +184,9 @@ class JobController extends Controller
         $data['userData'] = ApplyJob::where('user_id', $id)->first();
         return view('frontend.job.esatablishment-portfolio', $data);
     }
-    public function showAllCandidate(Request $request){
+    public function showAllCandidate(Request $request)
+    {
         $data['candidateList'] = $this->jobRepository->allCandidates();
-        return view('frontend.candidate.list',$data);
+        return view('frontend.candidate.list', $data);
     }
-
-    
-
-
 }

@@ -93,4 +93,8 @@ class CandidateRepository implements CandidateRepositoryInterface
     {
         return EstablishmentGallery::where('establishment_id', $id)->where('status', 'accept')->get();
     }
+
+    public function getReciverData($id){
+        return User::where('id', $id)->first();
+    }
 }

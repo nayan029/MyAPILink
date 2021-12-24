@@ -21,6 +21,7 @@ interface ManagerRepositoryInterface
 
     public function getManagerEmailVerify($email);
 
+    public function managerChatList($opponent,$loginUserId);
     
     
 

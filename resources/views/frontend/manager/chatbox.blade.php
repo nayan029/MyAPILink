@@ -1,10 +1,10 @@
 <div class="chat-container">
     <div class="head chat-head">
         <div class="chatprofile">
-            <div class="usershortname">UN</div>
+            <div class="usershortname"> <img src="{{URL::to('/')}}/{{$reciverData->profile_photo_path}}" onerror='this.onerror=null;this.src="{{URL::to("/")}}/frontend/images/profile-change.svg";'></div>
         </div>
         <div class="headun chat-headun">
-            <h6 class="username-title">Paul Bertrand</h6>
+            <h6 class="username-title">{{$reciverData->first_name}} {{$reciverData->last_name}}</h6>
             <ul class="username-menus chatuser-menu">
                 <li><a href="javascript:void(0)">Active</a></li>
                 <li><a href="javascript:void(0)">Gallery</a></li>
@@ -40,7 +40,7 @@
             @else
             <li class="left">
                 <div class="chatprofile">
-                    <div class="usershortname chat-username">UN</div>
+                    <div class="usershortname chat-username"><img src="{{URL::to('/')}}/{{$message['getUserSenderData']->profile_photo_path}}" onerror='this.onerror=null;this.src="{{URL::to("/")}}/frontend/images/profile-change.svg";'></div>
                 </div>
                 <div class="msg-content chatmsg-content">
                     <span class="time">{{$message['getUserSenderData']->first_name}} {{$message['getUserSenderData']->last_name}}, {{Commontimeago::convertDMTime($message->created_at) }} </span>

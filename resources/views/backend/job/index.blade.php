@@ -12,7 +12,7 @@
 <div class="row">
 		
 			<div class="col-md-12">
-                <form action="#" class="job_form">
+                <form action="javacript:void(0);" id="job_form">
 				<div class="card">
 					<div class="card-body">
 						<div class="row">
@@ -20,7 +20,7 @@
 							<div class="col-md-3">
 							  <div class="form-group">
 								<label for="name">{{__("messages.title")}}</label>
-								<input class="form-control"  name="title" type="text" placeholder="Job Title" id="title">
+								<input class="form-control"  name="title" type="text" placeholder="Title" id="title">
 							 </div>
 							</div>
 						
@@ -41,7 +41,7 @@
                             <div class="col-md-3">
 							  <div class="form-group">
 								<label for="name">{{__("messages.jobsgroup.min_experience")}}</label>
-								<input class="form-control"  name="minimum_experience" type="text" placeholder="Min Experience" id="minimum_experience">
+								<input class="form-control"  name="minimum_experience" type="text" placeholder="Minimum Experience" id="minimum_experience">
 							 </div>
 							</div>
 
@@ -62,7 +62,9 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-            
+        <div class="card-header">
+                <h3 class="card-title float-left">{{__("messages.jobsgroup.list")}}</h3>
+            </div>
             <!-- /.card-header -->
             <div class="card-body">
                 <table id="job-table" class="table table-bordered table-hover" class="display" style="width:100%">
@@ -98,12 +100,6 @@
 -->
 <script>
     $(document).ready(function() {
-        /*
-        $("#job_date").datepicker({
-				dateFormat: "mm/dd/yyyy",
-				defaultDate: new Date(),
-		}).datepicker("setDate", '0');
-        */
         loadData();
     });
 
@@ -113,9 +109,9 @@
     });
 
     function loadData() {
-        var formData = $('.job_form').serialize();
+        var formData = $('#job_form').serialize();
         $('#job-table').DataTable({
-            "processing": true,
+            "processing": false,
             "serverSide": true,
             "searching": false,
             "ajax": {

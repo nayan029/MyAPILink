@@ -21,6 +21,11 @@
     .error {
         color: Red;
     }
+
+    form i {
+        margin-left: -30px;
+        cursor: pointer;
+    }
 </style>
 
 <body>
@@ -51,14 +56,17 @@
                                     <div class="col-md-2 mb-2">
                                         <div class="form-group">
                                             <label class="">Civilité<span class="text-danger">*</span></label>
-                                            <input id="civility" type="text" name="civility" class="form-control form-add-establish pl-23">
+                                            <select class="cus-drop pl-23 select2 form-add-establish" name="civility" style="width: 100%;">
+                                                <option value="Mr">M.</option>
+                                                <option value="Mrs">Madame.</option>
+                                            </select>
                                             <span class="civility-error text-danger">@error ('civility') {{$message}} @enderror</span>
                                         </div>
                                     </div>
                                     <div class="col-md-5 mb-2">
-                                        <div class="form-group">
+                                              <div class="form-group">
                                             <label class="">Prénom<span class="text-danger">*</span></label>
-                                            <input id="firstname" type="text" name="firstname" class="form-control form-add-establish pl-23">
+                                            <input id="firstname" type="text" name="first_name" class="form-control form-add-establish pl-23" placeholder="Prénom">
                                             <span class="firstname-error text-danger">@error ('firstname') {{$message}} @enderror</span>
 
                                         </div>
@@ -66,7 +74,7 @@
                                     <div class="col-md-5 mb-2">
                                         <div class="form-group">
                                             <label class="">Nom de famille<span class="text-danger">*</span></label>
-                                            <input id="lastname" type="text" name="lastname" class="form-control form-add-establish pl-23">
+                                            <input id="lastname" type="text" name="last_name" class="form-control form-add-establish pl-23" placeholder="Nom de famille">
                                             <span class="lastname-error text-danger">@error ('lastname') {{$message}} @enderror</span>
 
                                         </div>
@@ -74,15 +82,15 @@
                                     <div class="col-md-6 mb-2">
                                         <div class="form-group">
                                             <label class="">Téléphone<span class="text-danger">*</span></label>
-                                            <input id="telephone" type="text" name="telephone" maxlength="10" onkeypress='return isNumber(event)' class="form-control form-add-establish pl-23">
-                                            <span class="telephone-error text-danger">@error ('telephone') {{$message}} @enderror</span>
+                                            <input id="phone" type="text" name="phone" maxlength="10" onkeypress='return isNumber(event)' class="form-control form-add-establish pl-23" placeholder="Téléphone">
+                                            <span class="phone-error text-danger">@error ('phone') {{$message}} @enderror</span>
 
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-2">
                                         <div class="form-group">
                                             <label class="">Adresse e-mail<span class="text-danger">*</span></label>
-                                            <input id="email" type="text" name="email" class="form-control form-add-establish pl-23">
+                                            <input id="email" type="text" name="email_address" class="form-control form-add-establish pl-23" placeholder="Adresse e-mail">
                                             <span class="email-error text-danger">@error ('email') {{$message}} @enderror</span>
 
                                         </div>
@@ -90,7 +98,7 @@
                                     <div class="col-md-12 mb-2">
                                         <div class="form-group">
                                             <label class="">Mot de passe<span class="text-danger">*</span></label>
-                                            <input id="password" type="text" name="password" class="form-control form-add-establish pl-23">
+                                            <input id="password" type="password" name="password" class="form-control form-add-establish pl-23" placeholder="Mot de passe">
                                             <span class="password-error text-danger">@error ('password') {{$message}} @enderror</span>
 
                                         </div>
@@ -98,7 +106,7 @@
                                     <div class="col-md-12 mb-2">
                                         <div class="form-group">
                                             <label class="">Confirmer le mot de passe<span class="text-danger">*</span></label>
-                                            <input id="password_confirmation" type="text" name="password_confirmation" class="form-control form-add-establish pl-23">
+                                            <input id="confirm_password" type="password" name="confirm_password" class="form-control form-add-establish pl-23" placeholder="Confirmer le mot de passe">
                                             <span class="password_confirmation-error text-danger">@error ('password_confirmation') {{$message}} @enderror</span>
 
                                         </div>
@@ -168,7 +176,7 @@
                             <div class="col-md-7 profile-label">
                                 <div class="management-radios">
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" name="management" class="custom-control-input" value="manage_several" checked>
+                                        <input type="radio" onchange="hideShowStepThree()" name="management" class="custom-control-input" value="multiple" checked>
                                         <div class="custom-management-text">
                                             <p class="manage-textp">Je vais gérer
                                                 plusieurs établissements </p>
@@ -178,7 +186,7 @@
                                 </div>
                                 <div class="management-radios">
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" name="management" class="custom-control-input" value="manage_single">
+                                        <input type="radio" onchange="hideShowStepThree()" name="management" class="custom-control-input" value="single">
                                         <div class="custom-management-text">
                                             <p class="manage-textp">Je vais gérer un seul
                                                 établissement </p>
@@ -215,7 +223,7 @@
 
                         <div class="row justify-content-start">
                             <div class="col-md-11 profile-label">
-                                <div class="row">
+                                <div id="multiplediv" class="row">
                                     <div class="col-md-12 mb-2">
                                         <div class="form-group">
                                             <label class="">Je représente <span class="text-danger">*</span></label>
@@ -232,7 +240,7 @@
                                     <div class="col-md-12 mb-2">
                                         <div class="form-group">
                                             <label class="">Nom de notre organisation<span class="text-danger">*</span></label>
-                                            <input id="organization" type="text" name="organization" class="form-control form-add-establish pl-23">
+                                            <input id="organization" type="text" name="name_of_our_organization" class="form-control form-add-establish pl-23" placeholder="Nom de notre organisation">
                                             <span class="organization-error text-danger">@error ('organization') {{$message}} @enderror</span>
 
                                         </div>
@@ -240,15 +248,16 @@
                                     <div class="col-md-12 mb-2">
                                         <div class="form-group">
                                             <label class="">Nombre d'établissements dans l'organisation<span class="text-danger">*</span></label>
-                                            <input id="number_of_establishments" type="text" name="number_of_establishments" class="form-control form-add-establish pl-23">
+                                            <input id="number_of_establishments_in_the_organization" type="text" name="number_of_establishments_in_the_organization" class="form-control form-add-establish pl-23" placeholder="Nombre d'établissements dans l'organisation">
                                             <span class="establish-error text-danger">@error ('number_of_establishments') {{$message}} @enderror</span>
 
                                         </div>
                                     </div>
+                                    
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <label class="">Adresse de l'organisation<span class="text-danger">*</span></label>
-                                            <input id="address" type="text" name="address" class="form-control form-add-establish pl-23">
+                                            <input id="address" type="text" name="organization_address" class="form-control form-add-establish pl-23" placeholder="Adresse de l'organisation">
                                             <span class="address-error text-danger">@error ('address') {{$message}} @enderror</span>
 
                                         </div>
@@ -256,7 +265,7 @@
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label class="">Code postal<span class="text-danger">*</span></label>
-                                            <input id="postal_code" type="text" name="postal_code" maxlength="6" onkeypress='return isNumber(event)' class="form-control form-add-establish pl-23">
+                                            <input id="postal_code" type="text" name="postal_code" maxlength="6" onkeypress='return isNumber(event)' class="form-control form-add-establish pl-23" placeholder="Code postal">
                                             <span class="postal-error text-danger">@error ('postal_code') {{$message}} @enderror</span>
 
                                         </div>
@@ -264,7 +273,60 @@
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <label class="">Ville<span class="text-danger">*</span></label>
-                                            <input id="city" type="text" name="city" class="form-control form-add-establish pl-23">
+                                            <input id="city" type="text" name="city" class="form-control form-add-establish pl-23" placeholder="Ville">
+                                            <span class="city-error text-danger">@error ('city') {{$message}} @enderror</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="singlediv" class="row">
+                                    <div class="col-md-12 mb-2">
+                                        <div class="form-group">
+                                            <label class="">Type d'établissement<span class="text-danger">*</span></label>
+                                            <select class="cus-drop pl-23 select2 form-add-establish" name="represent" style="width: 100%;">
+                                                <option value="creche collective">Créche collective</option>
+                                                <option value="private_structure">Créche multi-accueil </option>
+                                                <option value="Créche multi-accueil">Halte garderie</option>
+                                                <option value="Créche municipale">Créche municipale</option>
+                                                <option value="Jardin d'enfants">Jardin d'enfants</option>
+                                                <option value="Micro creche (Prive)">Micro creche (Prive)</option>
+                                                <option value="Créche parentable">Créche parentable</option>
+                                                <option value="Créche prive d'entreprise ou inter-enterpice">Créche prive d'entreprise ou inter-enterpice</option>
+                                                <option value="Créche associative">Créche associative</option>
+                                                <option value="other">Autre </option>
+                                            </select>
+                                            <span class="represent-error text-danger">@error ('represent') {{$message}} @enderror</span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb-2">
+                                        <div class="form-group">
+                                            <label class="">Nom de l'etablissement<span class="text-danger">*</span></label>
+                                            <input id="organization" type="text" name="name_of_our_organization" class="form-control form-add-establish pl-23" placeholder="Nom de notre organisation">
+                                            <span class="organization-error text-danger">@error ('organization') {{$message}} @enderror</span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label class="">Adresse de l'organisation<span class="text-danger">*</span></label>
+                                            <input id="address" type="text" name="organization_address" class="form-control form-add-establish pl-23" placeholder="Adresse de l'organisation">
+                                            <span class="address-error text-danger">@error ('address') {{$message}} @enderror</span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="">Code postal<span class="text-danger">*</span></label>
+                                            <input id="postal_code" type="text" name="postal_code" maxlength="6" onkeypress='return isNumber(event)' class="form-control form-add-establish pl-23" placeholder="Code postal">
+                                            <span class="postal-error text-danger">@error ('postal_code') {{$message}} @enderror</span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label class="">Ville<span class="text-danger">*</span></label>
+                                            <input id="city" type="text" name="city" class="form-control form-add-establish pl-23" placeholder="Ville">
                                             <span class="city-error text-danger">@error ('city') {{$message}} @enderror</span>
 
                                         </div>
@@ -321,7 +383,7 @@
             <div class="row">
                 <div class="col-md-2">
                     <div class="back-apilink">
-                        <a href="javascript:void(0)">Retour sur le site Apilink</a>
+                        <a href="https://appworkdemo.com/apilink/public/">Retour sur le site Apilink</a>
                     </div>
                 </div>
                 <div class="col-md-5 text-right">
@@ -424,14 +486,7 @@
         inViewport();
         inViewport1();
     });
-
-
-
-
     $("#fix-number-ul-id li:nth-child(1)").addClass('scale');
-
-
-
 
     function inViewport() {
 
@@ -471,8 +526,6 @@
             }
         });
     }
-
-
     $('.register-yellow').on('click', function(event) {
         event.preventDefault();
 
@@ -498,23 +551,36 @@
 
                 } else {
                     $('.civility-error').text(response.errors.civility);
-                    $('.firstname-error').text(response.errors.firstname);
-                    $('.lastname-error').text(response.errors.lastname);
-                    $('.telephone-error').text(response.errors.telephone);
-                    $('.email-error').text(response.errors.email);
+                    $('.firstname-error').text(response.errors.first_name);
+                    $('.lastname-error').text(response.errors.last_name);
+                    $('.phone-error').text(response.errors.phone);
+                    $('.email-error').text(response.errors.email_address);
                     $('.password-error').text(response.errors.password);
+                    $('.password_confirmation-error').text(response.errors.confirm_password);
                     $('.radio-error').text(response.errors.radio);
                     $('.represent-error').text(response.errors.represent);
-                    $('.organization-error').text(response.errors.organization);
-                    $('.establish-error').text(response.errors.number_of_establishments);
-                    $('.address-error').text(response.errors.address);
+                    $('.organization-error').text(response.errors.name_of_our_organization);
+                    $('.establish-error').text(response.errors.number_of_establishments_in_the_organization);
+                    $('.address-error').text(response.errors.organization_address);
                     $('.postal-error').text(response.errors.postal_code);
                     $('.city-error').text(response.errors.city);
-                  
+
                 }
             }
         });
     });
 </script>
+<script>
+    function hideShowStepThree() {
+        var radioValue = $("input[name='management']:checked").val();
+            if(radioValue=="single"){
+                $('#singlediv').show();
+                $('#multiplediv').hide();
+            }else{
+                $('#multiplediv').show();
+                $('#singlediv').hide();
 
+            }
+    }
+</script>
 </html>

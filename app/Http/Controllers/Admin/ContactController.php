@@ -22,7 +22,7 @@ class ContactController extends Controller
     protected $validationRules = [
         'email' => 'required|email',
         'mobile' => 'required|digits:10',
-        'address' => 'required',
+        'address' => 'required|max:255',
     ];
 
     public function index(){

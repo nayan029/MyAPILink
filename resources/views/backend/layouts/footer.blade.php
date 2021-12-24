@@ -4,7 +4,7 @@
     <div class="container">
 
     </div>
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+    <strong>Copyright &copy; 2014-2021 <a href="https://appworkdemo.com/apilink/public">ApiLink.io</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
         <b>Version</b> 3.1.0
@@ -35,6 +35,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="{{asset('admin/plugins/summernote/summernote-bs4.min.js')}}"></script>
 <script src="{{asset('admin/plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}"></script>
+<script src="{{asset('admin/plugins/sweetalert2/sweetalert2.all.js')}}"></script>
+<script src="{{asset('admin/plugins/sweetalert2/sweetalert2.all.min.js')}}"></script>
+<script src="{{asset('admin/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
+
 
 
 <script>

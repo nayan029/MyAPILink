@@ -19,6 +19,8 @@ interface ManagerRepositoryInterface
 
     public function changeDeleteAccountFlag(Request $request);
 
+    public function getManagerEmailVerify($email);
+
     
     
 

@@ -3,9 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Skill;
-use App\Models\Widget;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use JsValidator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +13,7 @@ class LoginController extends Controller
 {
     protected $validationRules = [
         'email' => 'required|email',
-        'password' => 'required|min:6'
+        'password' => 'required|min:6',
     ];
 
     public function index()
@@ -41,14 +38,14 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (auth()->guard('admin')->attempt($credentials)) {
-            Session::flash('success', 'Administrator login successfuly!!...');
+            Session::flash('success', 'Successfully Logged In');
             return redirect()->route('admin.dashboard');
         } else {
-            Session::flash('error', 'Email or password invalid');
+            Session::flash('error', 'Invalid Email or Password');
             return redirect()->back();
         }
         if (auth()->guard('web')->attempt($credentials)) {
-            Session::flash('success', 'Login successfuly!!...');
+            Session::flash('success', 'Successfully Logged In');
             return redirect()->route('/home');
         }
     }
@@ -58,17 +55,6 @@ class LoginController extends Controller
             return view('backend.dashboard.index');
         } {
             return view('backend.login');
-        }
-    }
-
-    public function userDashboard()
-    {
-        $data['widget'] = Widget::get();
-        $data['skill'] = Skill::get();
-        if (Auth::check()) {
-            return view('frontend.dashboard', $data);
-        } {
-            return view('/login');
         }
     }
 

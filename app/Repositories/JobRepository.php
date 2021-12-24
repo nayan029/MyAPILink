@@ -4,7 +4,9 @@ namespace App\Repositories;
 
 use App\Http\Traits\ImageuploadTrait;
 use App\Interfaces\JobRepositoryInterface;
+use App\Models\ChatMaster;
 use App\Models\Job;
+use App\Models\User;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 
@@ -33,21 +35,16 @@ class JobRepository implements JobRepositoryInterface
 
         $query = Job::select('*');
         if($request->query('title') != ''){
-            $query->where('title LIKE "%'.$request->query('title').'%"');
+            $query->whereRaw('title LIKE "%'.$request->query('title').'%"');
         }
 
         if($request->query('type_of_contract') != ''){
-            $query->where('type_of_contract LIKE "%'.$request->query('type_of_contract').'%"');
-        }
-        /*
-        if($request->query('contract_start_date') != ''){
-            $query->where('contract_start_date',date('Y-m-d',strtotime($request->query('contract_start_date'))));
-        }
-        */
+            $query->whereRaw('type_of_contract LIKE "%'.$request->query('type_of_contract').'%"');
+        }  
         if($request->query('minimum_experience') != ''){
-            $query->where('minimum_experience LIKE "%'.$request->query('minimum_experience').'%"');
+            $query->whereRaw('minimum_experience LIKE "%'.$request->query('minimum_experience').'%"');
         }
-
+       
         $recordstotal = $query->count();
         $sortColumnName = $sortcolumns[$order[0]['column']];
 
@@ -65,8 +62,7 @@ class JobRepository implements JobRepositoryInterface
         $jobs = $query->orderBy('created_at', 'desc')->get();
         foreach ($jobs as $job) {
             $url = route("job.show", $job->id);
-            $titleAction = "<a href='" . $url . "'>" . $job->title . "</a>";
-            
+            $titleAction = "<a href='" . $url . "'>" . $job->title . "</a>";      
             $json['data'][] = [
                 $titleAction,
                 $job->type_of_contract,
@@ -82,14 +78,20 @@ class JobRepository implements JobRepositoryInterface
         return Job::findorfail($id);
     }
 
-    public function showJobData($id)
-    {
-        $data['showwpost'] = Job::where('id', $id)->get();
-        return $data;
-    }
+  
 
-    public function storeOrUpdateJob(Request $request, $id)
+    public function acceptApplicants(Request $request)
     {
-        
+        $userJobData = ChatMaster::create([
+            'job_id' => $request->jobid,
+            'sender_id' => $request->userid,
+            'message' => $request->message,
+            'type' => 'manager',
+        ]);
+        return $userJobData;
+    }
+    public function allCandidates()
+    {
+        return User::where('user_type',1)->get();
     }
 }

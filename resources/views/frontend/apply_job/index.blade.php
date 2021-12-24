@@ -140,19 +140,21 @@
                 <div class="col-md-10 padding-search">
                     <div class="">
                         <div class="card-pd">
+
+                            @if(count($list)>0)
+                            @foreach($list as $data)
+                            @php
+                            $isApplyed = $data->applyJob!="" ? "disabled":"";
+                            $createDate = date('d-m-Y',strtotime($data->created_at));
+                            $now = date('d-m-Y');
+                            $diff = strtotime($createDate) - strtotime($now);
+                            $finalDays = abs(round($diff / 86400));
+                            $saveJob = $data->savedJob!=null && count($data->savedJob)>0 ? $data->savedJob[0]->job_save : '';
+
+                            @endphp
                             <div class="job-card">
 
-                                @if($list)
-                                @foreach($list as $data)
-                                @php
-                                $isApplyed = $data->applyJob!="" ? "disabled":"";
-                                $createDate = date('d-m-Y',strtotime($data->created_at));
-                                $now = date('d-m-Y');
-                                $diff = strtotime($createDate) - strtotime($now);
-                                $finalDays = abs(round($diff / 86400));
-                                $saveJob = count($data->savedJob)>0 ? $data->savedJob[0]->job_save : '';
-                                
-                                @endphp
+
                                 <div class="d-flex justify-content-between mb-4 ">
                                     <div>
                                         <h5 class="mb-0 job_aux_text">{{$data->title}}</h5>
@@ -193,13 +195,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                @endforeach
-                                @endif
+
                             </div>
-
-
-
-
+                            @endforeach
+                            @else
+                            <div class="job-card">
+                                <p class="text-center">No Data Available.</p>
+                            </div>
+                            @endif
 
                         </div>
                     </div>
@@ -207,18 +210,7 @@
                     <div class="custom-pagination pt-5 pb-4">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">
-                                <!-- <li class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1">
-                                            <i class="fa fa-angle-left pagination-right"></i></a>
-                                    </li> -->
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#"><i class="fa fa-angle-right pagination-right"></i></a>
-                                </li>
+                                {{ $list->appends(request()->except('page'))->links("pagination::bootstrap-4") }}
                             </ul>
                         </nav>
                     </div>
@@ -233,7 +225,7 @@
         <div class="modal-content m-32">
             <div class="modal-header resume_header border-0">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><img src="frontend/images/material-close.svg"></span>
+                    <span aria-hidden="true"><img src="{{asset('frontend/images/material-close.svg')}}"></span>
                 </button>
             </div>
 
@@ -248,7 +240,7 @@
                             <button class="btn btn-modals-blue bravo-btn" type="submit" data-target="#bravo" value="0" id="bravo-btn">Envoyer mon profil profesionnel<br>au recruteur</button>
                         </div>
                         <div class="text-center">
-                            <button class="btn btn-modals-blue cv-radius" id="updateCv" type="submit"><img src="frontend/images/project/feather-download.svg" alt="download" class="mr-3">
+                            <button class="btn btn-modals-blue cv-radius" id="updateCv" type="submit"><img src="{{asset('frontend/images/project/feather-download.svg')}}" alt="download" class="mr-3">
 
                                 Télécharger et
                                 envoyer mon cv</button>
@@ -266,7 +258,7 @@
         <div class="modal-content">
             <div class="modal-header resume_header border-0">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><img src="frontend/images/material-close.svg"></span>
+                    <span aria-hidden="true"><img src="{{asset('frontend/images/material-close.svg')}}"></span>
                 </button>
             </div>
             <div class="modal-body bravo-body">
@@ -275,7 +267,7 @@
                         <h3>BRAVO !</h3>
                     </div>
                     <div>
-                        <img src="frontend/images/project/green-checkmark.svg" alt="checkmark" class="green-checkmarks">
+                        <img src="{{asset('frontend/images/project/green-checkmark.svg')}}" alt="checkmark" class="green-checkmarks">
                         <p class="votres-check">Votre candidature a bien été envoyé</p>
                     </div>
 
@@ -315,9 +307,9 @@
                             </p>
                         </div>
                         <div class="text-right pt-4 pb-3">
-                            <a href="javasscript:void(0)" class="btn btn-blue ml-auto skip-btn tele-modal-btn">
+                            <a href="javascript:void(0)" class="btn btn-blue ml-auto skip-btn tele-modal-btn">
                                 Passer cette étape</a>
-                            <a href="javasscript:void(0)" class="btn btn-blue ml-3 ok-btn tele-modal-btn">
+                            <a href="javascript:void(0)" class="btn btn-blue ml-3 ok-btn tele-modal-btn">
                                 Ok</a>
                         </div>
                     </div>
@@ -345,7 +337,8 @@
                     <div class="overflow-auto px-4">
                         <table class="download-table w-100">
                             <tbody>
-                                <tr>
+                                @php
+                                for ($i = 0; $i < 3; $i++) { @endphp <tr>
                                     <td>
                                         <div class="d-flex">
                                             <img src="frontend/images/pdf.svg" width="30px" class="mr-3">
@@ -353,31 +346,10 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <a href=""><img src="frontend/images/feather-download.svg" class="download-img"></a>
+                                        <a href="uploads/document/Disclaimer.pdf" download="Document.pdf"><img src="frontend/images/feather-download.svg" class="download-img"></a>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex">
-                                            <img src="frontend/images/pdf.svg" width="30px" class="mr-3">
-                                            <p class="mb-0"> Uploaded CV_10-09-2020.pdf</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href=""><img src="frontend/images/feather-download.svg" class="download-img"></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex">
-                                            <img src="frontend/images/pdf.svg" width="30px" class="mr-3">
-                                            <p class="mb-0"> Uploaded CV_10-09-2020.pdf</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href=""><img src="frontend/images/feather-download.svg" class="download-img"></a>
-                                    </td>
-                                </tr>
+                                    </tr>
+                                    @php } @endphp
                             </tbody>
                         </table>
                     </div>
@@ -386,14 +358,16 @@
                         <h4 class="ou_text border-modal">Ou télécharger un nouveau cv </h4>
                     </div>
                     <div class="upload-drop-btns">
-                        <form method="POST" id="mainForm" class="d-content">
+                        <form method="POST" id="mainForm" class="d-content" enctype="multipart/form-data">
                             @method('POST')
                             @csrf
-                            <button class="btn btn-modals-blue cv-radius btn-tele position-relative" id="cv-btn" type="button"><img src="frontend/images/project/feather-download.svg" alt="download" class="mr-3">
+
+                            <button class="btn btn-modals-blue mb-0 cv-radius btn-tele position-relative" id="cv-btn" type="button"><img src="frontend/images/project/feather-download.svg" alt="download" class="mr-3">
                                 <input type="file" class="upload-modal-cv" name="document_name" id="document_name">
                                 Télécharger un cv </button>
+                            <span class="text-danger" id="document_name-error"></span>
                             <input type="hidden" name="pdf_name" id="pdf_name">
-                            <button href="javascript:void(0)" class="btn btna-oky bravo-btn" id="byResume" value="1">Ok</button>
+                            <button type="button" class="btn btna-oky mt-5 bravo-btn" id="byResume" value="1">Ok</button>
                         </form>
                     </div>
                 </div>
@@ -414,14 +388,17 @@
         });
     });
 
+    var count = 0;
 
     function openJobModal(job_id, user_id) {
+
         $('#jobid').val(job_id);
         $('#userid').val(user_id);
         $('#establishment').modal('show');
+        count++;
     }
 
-
+    var view = 0;
 
     $(document).on("change", "#document_name", function() {
         $.ajax({
@@ -445,38 +422,54 @@
         var userid = $('#userid').val();
         var document_name = $('#pdf_name').val();
 
-
-        $.ajax({
-            url: "{{ route('store-jobType') }}",
-            method: "POST",
-            data: {
-                'type': type,
-                'jobid': jobid,
-                'userid': userid,
-                'document_name': document_name,
-                _token: "{{ csrf_token() }}"
-            },
-            success: function(response) {
-                if (response.success == true) {
-                    toastr.success(response.message);
-                    $('#establishment').modal('hide');
-                    $('#bravo').modal('show');
-                    location.reload();
-
-                } else {
-                    toastr.danger(response.message);
-                }
+        var temp = 0;
+        regex = new RegExp("(.*?)\.(pdf|docs|docx)$");
+        if (document_name != "") {
+            if (!(regex.test(document_name))) {
+                $('#document_name-error').html("Only PDF, DOCS and DOCX docs are allowed");
+                temp = 1;
             }
-        });
+        } else {
+            $('#document_name-error').html("");
+            temp = 0;
+        }
+
+
+        if (temp == 0) {
+            $('#document_name-error').html("");
+            $.ajax({
+                url: "{{ route('store-jobType') }}",
+                method: "POST",
+                data: {
+                    'type': type,
+                    'jobid': jobid,
+                    'userid': userid,
+                    'document_name': document_name,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function(response) {
+
+                    if (response.success == true) {
+                        toastr.success(response.message);
+                        $('#establishment').modal('hide');
+                        $('#tele-modal').modal('hide');
+                        $('#bravo').modal('show');
+                        location.reload();
+                    } else {
+                        $('#document_name-error').html(response.errors.document_name);
+                    }
+                }
+            });
+        }
 
     });
 
 
 
-    $(".bravo-btn").on('click', function() {
-        $('#establishment').modal('hide');
-        $('#bravo').modal('show');
-    });
+    // $(".bravo-btn").on('click', function() {
+    //     $('#establishment').modal('hide');
+    //     $('#bravo').modal('show');
+    // });
     $("#updateCv").on('click', function() {
         $('#establishment').modal('hide');
         $('#cv-modal').modal('show');
@@ -493,14 +486,14 @@
         }, 500);
 
     });
-    $(".bravo-btn").on('click', function() {
-        $('#tele-modal').modal('hide');
-        $('#bravo').modal('show');
-        setTimeout(function() {
-            $('body').addClass('modal-open');
-        }, 500);
+    // $(".bravo-btn").on('click', function() {
+    //     $('#tele-modal').modal('hide');
+    //     $('#bravo').modal('show');
+    //     setTimeout(function() {
+    //         $('body').addClass('modal-open');
+    //     }, 500);
 
-    });
+    // });
     $(document).on("click", ".save-fav", function() {
         var job_id = $(this).data('job');
         var user_id = $(this).data('user');
@@ -511,7 +504,6 @@
             data: {
                 'job_id': job_id,
                 'user_id': user_id,
-
                 _token: '{{ csrf_token() }}',
             },
             success: function(response) {
@@ -530,6 +522,9 @@
         });
     });
 </script>
+
+
+
 @endsection
 </body>
 

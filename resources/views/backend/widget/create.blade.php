@@ -22,30 +22,30 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                {!! Form::label('slug','Select Widget') !!}
-                                {!! Form::select('slug',$widget, old('slug'), ['class' => 'form-control', 'multiple' => false,'placeholder' => 'Please select widget','id'=>'slug']) !!}
+                                {!! Form::label('slug','Widget') !!} <span class="text-danger">*</span>
+                                {!! Form::select('widget',$widget, old('widget'), ['class' => 'form-control custom-select', 'multiple' => false,'placeholder' => 'Please select widget','id'=>'slug']) !!}
                             </div>
                         </div>
                         <div class="col-md-4 hideshow">
                             <div class="form-group">
-                                {!! Form::label('title', 'Title') !!}
+                                {!! Form::label('title', 'Title') !!}<span class="text-danger">*</span>
                                 {!! Form::text('title', old('title'), ['class' => 'form-control', 'placeholder' => 'Enter Title','id'=>'title']) !!}
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                {!! Form::label('image', 'Image') !!}
+                                {!! Form::label('image', 'Image') !!}<span class="text-danger">*</span>
                                 {!! Form::file('image', old('image'), ['class' => 'form-control','id'=>'image']) !!}
                             </div>
                         </div>
                     </div>
-                        <div class="col-md-12">
+                        <div class="mr-9" >
                             <div class="form-group">
                                 {!! Form::label('description', 'Description') !!}
                                 {!! Form::textarea('description', old('description'), ['class' => 'form-control', 'placeholder' => 'Enter Description','id'=>'summernote']) !!}
                             </div>
                         </div>
-                        </div>
+                    </div>
                         <div class="card-footer">
                 <button type="submit" class="btn btn-primary">{{__("messages.save")}}</button>
             </div>

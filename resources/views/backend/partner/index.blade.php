@@ -6,6 +6,33 @@
 @section('content')
 <!-- Main content -->
 <div class="row">
+<div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form action="#" method="post" id="partner_search_form">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                {!! Form::label('search_image', 'Image') !!}
+                                    {!! Form::text('search_image', '', ['class' => 'form-control', 'placeholder' =>  'Search Image','id'=>'search_image']) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                {!! Form::label('search_link', 'Link') !!}
+                                    {!! Form::text('search_link', '', ['class' => 'form-control', 'placeholder' =>  'Search Link','id'=>'search_link']) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group mt-4">
+                                <button type="button" id="searchData" class="btn btn-success">{{__("messages.search")}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="col-12">
         <div class="card">
             <div class="card-header">
@@ -77,18 +104,22 @@
     $(document).ready(function() {
         loadData();
     });
-
+    $(document).on('click','#searchData',function(){
+                $('#partner-table').DataTable().destroy();
+                 loadData();
+        });
     function loadData() {
+        var formData = $('#partner_search_form').serialize();            
         $('#partner-table').DataTable({
-            "processing": true,
+            "processing": false,
             "serverSide": true,
             "searching": false,
             "ajax": {
-                url: "{{ route('partner.data') }}",
+                url: "{{ route('partner.data') }}?"+formData,
                 columns: [{
                     data: 'image',
                     name: 'link',
-                    action: 'action'
+                    action: 'action',
                 }],
                 method: "get"
             }

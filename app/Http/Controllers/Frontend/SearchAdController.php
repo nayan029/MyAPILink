@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers\Frontend;
 
-
+use JsValidator;
 use App\Http\Controllers\Controller;
 use App\Interfaces\ApplyJobRepositoryInterface;
 use Illuminate\Http\Request;
+use App\Models\Job;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 
 class SearchAdController extends Controller
 {
 
 
     protected $applyJobRepository = "";
+
+
 
     public function __construct(ApplyJobRepositoryInterface $applyJobRepository)
     {
@@ -20,23 +25,44 @@ class SearchAdController extends Controller
     public function index()
     {
         $data['list'] = $this->applyJobRepository->getCandidateData();
-        
+
         return view('frontend.apply_job.index', $data);
     }
     public function store(Request $request)
     {
-        $storeJobType = $this->applyJobRepository->store($request);
+        if ($request->type == '1') {
 
-        if ($storeJobType) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Successfully Inserted'
-            ]);
+            $validationrules['document_name'] = 'required';
+            $validator = Validator::make($request->all(), $validationrules);
+            if ($validator->fails()) {
+                return response()->json(['success' => false, 'errors' => $validator->errors()]);
+            } else {
+                $storeJobType = $this->applyJobRepository->store($request);
+
+                $jobView = Job::where('id', $storeJobType->job_id)->select('total_reg')->first();
+                $views = $jobView->total_reg + 1;
+                $update = Job::where('id', $storeJobType->job_id)->update(['total_reg' => $views]);
+                if ($storeJobType) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Successfully Inserted'
+                    ]);
+                }
+            }
+        } else {
+            $storeJobType = $this->applyJobRepository->store($request);
+
+            $jobView = Job::where('id', $storeJobType->job_id)->select('total_reg')->first();
+            $views = $jobView->total_reg + 1;
+            $update = Job::where('id', $storeJobType->job_id)->update(['total_reg' => $views]);
+            if ($storeJobType) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Successfully Inserted',
+                    'data' => $storeJobType
+                ]);
+            }
         }
-        return response()->json([
-            'success' => false,
-            'message' => 'Sorry, something went wrong. please try again.'
-        ]);
     }
     public function getDocumentName(Request $request)
     {
@@ -44,6 +70,9 @@ class SearchAdController extends Controller
     }
     public function showJob($id)
     {
+        $jobView = Job::where('id', $id)->select('total_view')->first();
+        $views = $jobView->total_view + 1;
+        $update = Job::where('id', $id)->update(['total_view' => $views]);
 
         $data['showList'] = $this->applyJobRepository->getSingleCandidatedata($id);
         return view('frontend.apply_job.show', $data);
@@ -54,9 +83,9 @@ class SearchAdController extends Controller
         $insertSavedPosts = $this->applyJobRepository->insertPosts($request);
 
         if ($insertSavedPosts) {
-            if($insertSavedPosts->job_save==1){
+            if ($insertSavedPosts->job_save == 1) {
                 $msg = 'Job Save Successfully!.';
-            }else{
+            } else {
                 $msg = 'Job Un Save Successfully!.';
             }
             return response()->json([
@@ -65,16 +94,29 @@ class SearchAdController extends Controller
                 'data' => $insertSavedPosts
             ]);
         }
+
+
         return response()->json([
             'success' => false,
             'message' => 'Sorry, something went wrong. please try again.',
             'data' => $insertSavedPosts
         ]);
     }
-    public function showCompany($id)
+    public function showCompany($id, Request $request)
     {
+        $data['pages'] = $request->page;
         $data['showCompany'] = $this->applyJobRepository->getCompanyData($id);
         $data['showJobs'] = $this->applyJobRepository->getManagerPosts($id);
+
+        if ($request->ajax()) {
+            return view('frontend.apply_job.get_ajax', $data)->render();
+        }
+
         return view('frontend.apply_job.view', $data);
+    }
+    public function jobDetails($id, Request $request)
+    {
+        $data['showList'] = $this->applyJobRepository->getSingleCandidatedata($id);
+        return view('frontend.apply_job.job_details', $data);
     }
 }

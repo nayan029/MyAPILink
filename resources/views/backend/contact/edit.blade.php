@@ -21,7 +21,7 @@
                         <div class="col-md-6">
 
                             <div class="form-group">
-                                {!! Form::label('email', 'Email *') !!}
+                                {!! Form::label('email', 'Email ') !!} <span class="text-danger">*</span>
                                 {!! Form::text('email', old('email'), ['class' => 'form-control', 'placeholder' => 'Enter Email','id'=>'email']) !!}
                             </div>
 
@@ -34,13 +34,13 @@
                                 {!! Form::text('twitter_link', old('twitter_link'), ['class' => 'form-control', 'placeholder' => 'Enter Twitter Link','id'=>'twitter_link']) !!}
                             </div>
                             <div class="form-group">
-                                {!! Form::label('address', 'Address *') !!}
+                                {!! Form::label('address', 'Address') !!}<span class="text-danger">*</span>
                                 {!! Form::textarea('address', old('address'), ['class' => 'form-control', 'placeholder' => 'Enter Address','id'=>'address']) !!}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                {!! Form::label('mobile', 'Mobile *') !!}
+                                {!! Form::label('mobile', 'Mobile ') !!}<span class="text-danger">*</span>
                                 {!! Form::text('mobile', old('mobile'), ['class' => 'form-control', 'placeholder' => 'Enter Mobile','id'=>'mobile']) !!}
                             </div>
                             <div class="form-group">

@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use Exception;
 use App\Models\User;
+use App\Models\Establishment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -15,20 +16,21 @@ class ManagerRepository implements ManagerRepositoryInterface
 {
     public function StoreProfile(Request $request)
     {
+      
         try {
             $storeData = [
                 'civility' => $request->civility,
-                'first_name' => $request->firstname,
-                'last_name' => $request->lastname,
-                'phone' => $request->telephone,
-                'email' => $request->email,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'phone' => $request->phone,
+                'email' => $request->email_address,
                 'password' => Hash::make($request->password),
                 'roles' => $request->radio,
                 'establishment_management' => $request->management,
                 'represent' => $request->represent,
-                'organization' => $request->organization,
-                'number_of_establishments' => $request->number_of_establishments,
-                'address' => $request->address,
+                'organization' => $request->name_of_our_organization,
+                'number_of_establishments' => $request->number_of_establishments_in_the_organization,
+                'address' => $request->organization_address,
                 'postal_code' => $request->postal_code,
                 'city' => $request->city,
                 'user_type' => 2,
@@ -36,46 +38,49 @@ class ManagerRepository implements ManagerRepositoryInterface
             ];
             //dd($storeData);
             $manager = User::create($storeData);
-            // $findUser = Manager::where('id', $manager->id)->first();
-            $emailtemplateid = EmailTemplate::where('id', 2)->first();
 
-            $mail = $manager->email;
-            $address = $manager->address;
-            $telephone = $manager->telephone;
-            $firstname = $manager->first_name;
-            $organization = $manager->organization;
-            $civility = $manager->civility;
-            $html = $emailtemplateid->email;
-
-            $html = str_replace('{{FIRSTNAME}}', $firstname, $html);
-            $html = str_replace('{{TELEPHONE}}', $telephone, $html);
-            $html = str_replace('{{EMAIL}}', $mail, $html);
-            $html = str_replace('{{ORGANIZATION}}', $organization, $html);
-            $html = str_replace('{{ADDRESS}}', $address, $html);
-            $html = str_replace('{{CIVILITY}}', $civility, $html);
-
-            Mail::send(
-                'frontend.email-template.manager-mail',
-                [
-                    'emailtemplate' => $html,
-                ],
-                function ($message) use ($request) {
-                    $message->to($request->email);
-                    $message->subject('Telephone appointment');
-                }
-            );
-            return true;
-        } catch (Exception $e) {
-            return back()->withError($e->getMessage());
+            $storeDataEstablishment=array('user_id'=>$manager->id,
+                                            'type' =>"Default",
+                                            'type_of_establishment' => $request->represent,
+                                            'own_of_our_structure' => $request->name_of_our_organization,
+                                        );
+            Establishment::create($storeDataEstablishment);
+           
+            $URL = route('manager.email.verify', $manager->email);
+            $html = "Verify profile <br> <a href='" . $URL . "' target='_blank'>Click Here</a>";
+            $subject = "Please complete your profile on ApiLink";
+            // -------Mail------
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://api.sendinblue.com/v3/smtp/email",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING  => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => "{\"sender\":{\"name\":\"apilink\",\"email\":\"no-reply@apilink.fr\"},\"to\":[{\"name\":\"ApiLink\",\"email\":\"" . $request->email . "\"}],\"subject\":\"" . $subject . "\",\"templateId\":1,\"params\":{\"EMAIL\":\"" . $request->email . "\",\"RESET_LINK\":\"" . $URL . "\",\"LINK\":\"" . $URL . "\"}}",
+                CURLOPT_HTTPHEADER => array(
+                    "accept: application/json",
+                    "api-key: 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",
+                    "content-type: application/json"
+                ),
+            ));
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+            curl_close($curl);
+                return true;
+            } catch (Exception $e) {
+                return back()->withError($e->getMessage());
+            }
         }
-    }
     public function updateProfile(Request $request)
     {
         $updateData = [
             'civility' => $request->civility,
-            'first_name' => $request->firstname,
-            'last_name' => $request->lastname,
-            'email' => $request->email,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email_address,
             'roles' => $request->roles,
 
         ];
@@ -125,7 +130,19 @@ class ManagerRepository implements ManagerRepositoryInterface
 
         return User::where('id', auth()->guard('web')->user()->id)->update($updateData);
     }
-
+    
+    public function getManagerEmailVerify($email)
+    {
+        $verifyUser = User::where('email', $email)->where('verify_email', 'pending')->first();
+        if ($verifyUser) {
+            $verifyUser->verify_email = 'accept';
+            $verifyUser->update();
+            Auth::loginUsingId($verifyUser->id);
+            return true;
+        } else {
+            return false;
+        }
+    }
     
     
 }

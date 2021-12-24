@@ -11,14 +11,16 @@ use Illuminate\Support\Facades\Session;
 
 class PartnerController extends Controller
 {
+
+
     protected $storevalidationrules = [
-        'link' => 'required',
+        'link' => 'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
         'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ];
 
     protected $updatevalidationrules =
     [
-        'link' => 'required',
+        'link' => 'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
     ];
     protected $imagevalidationrules =
     [
@@ -52,7 +54,7 @@ class PartnerController extends Controller
         }
         $storepartner = $this->partnerRepository->storePartner($request);
         if ($storepartner) {
-            Session::flash('success', 'Successfully inserted');
+            Session::flash('success', 'Successfully Inserted');
             return redirect()->route('partner.index');
         }
     }

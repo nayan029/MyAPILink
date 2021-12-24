@@ -120,28 +120,28 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {!! Form::text('firstname', old('firstname'), ['class' => 'form-control view-form', 'placeholder' => 'Prénom*','id'=>'firstname']) !!}
-                                    <span class="text-danger error-text firstname_error"></span>
+                                    {!! Form::text('first_name', old('first_name'), ['class' => 'form-control contact-input inputicon2', 'placeholder' => 'Prénom*','id'=>'first_name']) !!}
+                                    <span class="text-danger error-text first_name_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {!! Form::text('lastname', old('lastname'), ['class' => 'form-control view-form', 'placeholder' => 'Nom de famille*','id'=>'lastname']) !!}
-                                    <span class="text-danger error-text lastname_error"></span>
+                                    {!! Form::text('last_name', old('last_name'), ['class' => 'form-control contact-input inputicon2', 'placeholder' => 'Nom de famille*','id'=>'last_name']) !!}
+                                    <span class="text-danger error-text last_name_error"></span>
 
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
 
-                                    {!! Form::text('email', old('email'), ['class' => 'form-control view-form', 'placeholder' => 'Email*','id'=>'email']) !!}
+                                    {!! Form::text('email', old('email'), ['class' => 'form-control contact-input inputicon2', 'placeholder' => 'Email*','id'=>'email']) !!}
                                     <span class="text-danger error-text email_error"></span>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
 
-                                    {!! Form::textarea('description', old('description'), ['class' => 'form-control view-form', 'placeholder' => 'Votre texte ici…*','id'=>'description']) !!}
+                                    {!! Form::textarea('description', old('description'), ['class' => 'form-control contact-input inputicon2', 'placeholder' => 'Votre texte ici…*','id'=>'description']) !!}
                                     <span class="text-danger error-text description_error"></span>
                                 </div>
                             </div>

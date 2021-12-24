@@ -34,6 +34,7 @@ class UserRepository implements UserRepositoryInterface
         $query = User::select('*')->whereNotNull('user_type');
         if ($request->query('name') != '') {
             $query->whereRaw('first_name LIKE "%' . $request->query('name') . '%"');
+            $query->orWhereRaw('civility LIKE "%' . $request->query('name') . '%"');
             $query->orWhereRaw('last_name LIKE "%' . $request->query('name') . '%"');
         }
 
@@ -41,8 +42,8 @@ class UserRepository implements UserRepositoryInterface
             $query->whereRaw('email LIKE "%' . $request->query('email') . '%"');
         }
 
-        if ($request->query('phone') != '') {
-            $query->whereRaw('phone LIKE "%' . $request->query('phone') . '%"');
+        if ($request->query('mobile') != '') {
+            $query->whereRaw('phone LIKE "%' . $request->query('mobile') . '%"');
         }
 
         $recordstotal = $query->count();

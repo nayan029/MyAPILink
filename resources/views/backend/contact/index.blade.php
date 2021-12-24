@@ -6,21 +6,60 @@
 @section('content')
 <!-- Main content -->
 <div class="row">
+<div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form action="#" method="post" id="contact-us_search_form">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                {!! Form::label('search_firstname', 'FirstName') !!}
+                                    {!! Form::text('search_firstname', '', ['class' => 'form-control', 'placeholder' =>  'Search FirstName','id'=>'search_firstname']) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                {!! Form::label('search_lastname', 'LastName') !!}
+                                    {!! Form::text('search_lastname', '', ['class' => 'form-control', 'placeholder' =>  'Search Widget','id'=>'search_lastname']) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                            {!! Form::label('search_email', 'Email') !!}
+                                    {!! Form::text('search_email', '', ['class' => 'form-control', 'placeholder' =>  'Search Email','id'=>'search_email']) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                            {!! Form::label('search_description','Description') !!}
+                            {!! Form::text('search_description','', ['class' => 'form-control', 'multiple' => false,'placeholder' => 'Search Description']) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group mt-2">
+                                <button type="button" id="searchData" class="btn btn-success">{{__("messages.search")}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-
+            <h3 class="card-title float-left">{{__("messages.list")}}</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
                 <table id="contact-us-table" class="table table-bordered table-hover" class="display" style="width:100%">
                     <thead>
                         <tr>
-                            <th>
-                                {{__("messages.id")}}
-                            </th>
                             <th>{{__("messages.firstname")}}</th>
                             <th>{{__("messages.lastname")}}</th>
+                            <th>{{__("messages.email")}}</th>
                             <th>{{__("messages.description")}}</th>
                             <th>{{__("messages.actions")}}</th>
                         </tr>
@@ -78,14 +117,19 @@
     $(document).ready(function() {
         loadData();
     });
+    $(document).on('click','#searchData',function(){
+                $('#contact-us-table').DataTable().destroy();
+                 loadData();
+        });
 
     function loadData() {
+        var formData = $('#contact-us_search_form').serialize();            
         $('#contact-us-table').DataTable({
-            "processing": true,
+            "processing": false,
             "serverSide": true,
             "searching": false,
             "ajax": {
-                url: "{{ route('contact.data') }}",
+                url: "{{ route('contact.data')}}?"+formData,
                 method: "get"
             }
         });

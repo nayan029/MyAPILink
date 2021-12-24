@@ -18,23 +18,25 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
-<style>
-  .card-primary.card-outline {
-    border-top: 3px solid #74bfd4;
-}
-.btn-primary {
-    color: #fff;
-    background-color: #19c3f3;
-    border-color: #19c3f3;
-    box-shadow: none;
-}
-.btn-warning {
-    color: #1f2d3d;
-    background-color: #e9a523;
-    border-color: #e9a523;
-    box-shadow: none;
-}
-</style>
+  <style>
+    .card-primary.card-outline {
+      border-top: 3px solid #74bfd4;
+    }
+
+    .btn-primary {
+      color: #fff;
+      background-color: #19c3f3;
+      border-color: #19c3f3;
+      box-shadow: none;
+    }
+
+    .btn-warning {
+      color: #1f2d3d;
+      background-color: #e9a523;
+      border-color: #e9a523;
+      box-shadow: none;
+    }
+  </style>
 </head>
 
 <body class="hold-transition login-page">
@@ -49,7 +51,7 @@
 
         <form action="{{route('admin.auth')}}" method="post" id="logindata">
           @csrf
-          <div class="input-group mb-3">
+          <div class="input-group mb-2">
             <input type="email" name="email" class="form-control" placeholder="Email">
             <div class="input-group-append">
               <div class="input-group-text">
@@ -57,12 +59,14 @@
               </div>
             </div>
           </div>
-          <div class="input-group mb-3">
-            <input type="password" name="password" class="form-control" placeholder="Password">
+          <div class="input-group mb-2">
+            <input type="password" name="password"  id="password" class="form-control" placeholder="Password">
+            <span class="input-group-btn" id="eyeSlash">
+              <button class="btn btn-default reveal" onclick="visibility3()" type="button"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+            </span> <span class="input-group-btn" id="eyeShow" style="display: none;">
+              <button class="btn btn-default reveal" onclick="visibility3()" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
+            </span>
             <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-lock"></span>
-              </div>
             </div>
           </div>
           <!-- /.col -->
@@ -112,7 +116,29 @@
       @endif
     });
   </script>
-
+<script>
+  
+function visibility3() {
+  var x = document.getElementById('password');
+  if (x.type === 'password') {
+    x.type = "text";
+    $('#eyeShow').show();
+    $('#eyeSlash').hide();
+  }else {
+    x.type = "password";
+    $('#eyeShow').hide();
+    $('#eyeSlash').show();
+  }
+}
+function myFunction() {
+  var x = document.getElementById("*passwordbox-id*");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
 
 </body>
 

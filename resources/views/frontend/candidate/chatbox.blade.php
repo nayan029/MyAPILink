@@ -16,9 +16,7 @@
         <div class="fixed-msg-label">
             <label>Aujourd’hui</label>
         </div>
-
         <ul class="mid-top appendmsg">
-
             @php $lastid =0; @endphp @foreach ($messagelist as $message)
             @php $lastid = $message->id; @endphp
             @if($message->type == "user")
@@ -128,8 +126,6 @@
                     lastmsgid = messagelist.id;
                 }
                 console.log(lastmsgid);
-          
-
             }
         });
       

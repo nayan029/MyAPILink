@@ -7,10 +7,6 @@ use App\Models\EstablishmentGallery;
 use App\Models\Establishment;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Session;
 use App\Http\Traits\ImageuploadTrait;
 use App\Models\Job;
 use Carbon\Carbon;
@@ -29,8 +25,6 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
                 $documents[] = $this->uploadImage($file, 'Establishment/document');
             }
         }
-
-
         $applied_pedagogy = implode(",", $request->applied_pedagogy);
         $document = implode(",", $documents);
         $storeData = $request->all();
@@ -48,9 +42,7 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
                 $storeData['image'] = $more_infomation;
                 $storeData['establishment_id'] = $establishment->id;
                 $storeData['user_id'] = auth()->guard('web')->user()->id;
-
-
-                EstablishmentGallery::create($storeData);
+     EstablishmentGallery::create($storeData);
             }
         }
 
@@ -124,9 +116,8 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
         }
 
         $storeData['image'] = $image;
-        $storeData['establishment_id'] = $request->establishment_id;
-        $storeData['user_id'] = auth()->guard('web')->user()->id;
-
+        $storeData['establishment_id'] = auth()->guard('web')->user()->id;
+        
 
         return EstablishmentGallery::create($storeData);
     }

@@ -1,5 +1,6 @@
 <?php
 return [
+    'dashboard' => 'Dashboard',
     'widget' => 'Widget',
     'logout' => 'Logout',
     'skills' => 'Professionals',
@@ -9,6 +10,7 @@ return [
     'filter' => 'Filter',
     'reset' => 'Reset',
     'contact us' => 'Contact Us',
+    'list' => 'Contact Us List',
     "actions" => "Actions",
     'edit' => 'Edit Contact',
     'name' => 'Name',
@@ -19,20 +21,25 @@ return [
     'id' => 'Id',
     'save' => 'Save',
     'update' => 'Update',
+    'users' => "User's List",
+    'email' => 'Email',
+    'search' => 'Search',
+    'gallery' => 'Gallery',
     'skillgroup' => [
         "list" => "Professional List",
         "btnadd" => "Add Professional",
-        "create" => "Create Professional",
-        "show" =>"Detail",
+        "create" => "Add Professional",
+        "show" => "Professionals Detail",
         "btnedit" => "Edit",
         "btndelete" => "Delete",
         "edit" => "Edit Professional"
     ],
     'widgetgroup' => [
-        "list" => "Widget List",
+        "widget" => "Widget",
+        "list" => "Widget's List",
         "btnadd" => "Add Widget",
-        "create" => "Create Widget",
-        "show" => "Widget Detail",
+        "create" => "Add Widget",
+        "show" => "Widget's Detail",
         "btnedit" => "Edit",
         "btndelete" => "Delete",
         "edit" => "Edit Widget",
@@ -44,11 +51,11 @@ return [
     "partnergroup" => [
         "list" => "Partner List",
         "btnadd" => "Add Partner",
-        "create" => "Create Partner",
-        "show" => "Partner Detail",
+        "create" => "Add Partner",
+        "show" => "Partner's Detail",
         "edit" => "Edit Partner",
         "image" => "Image",
-        "link" => "List",
+        "link" => "Link",
         "actions" => "Actions",
     ],
     "usergroup" => [
@@ -58,13 +65,20 @@ return [
         'type' => 'Type',
         'filter' => 'Filter',
         'reset' => 'Reset',
-        "show" => "User Detail",
+        "show" => "User's Detail",
     ],
     "jobsgroup" => [
         'type_of_contract' => 'Type of Contract',
         'startdate' => 'Start Date',
         'min_experience' => 'Minimum Experience',
-        'show' => 'Job Detail',
+        'show' => "Job's Detail",
+        'list' => "Job's List"
     ],
-  
+    "gallerygroup" => [
+        'list' => "Gallery List",
+        "image" => "Image",
+        "action" => "Action",
+        "status" => "Status",
+    ],
+
 ];

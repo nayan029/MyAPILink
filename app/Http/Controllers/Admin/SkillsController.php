@@ -13,12 +13,12 @@ use JsValidator;
 class SkillsController extends Controller
 {
     protected $storevalidationrules = [
-        'name' => 'required',
+        'name' => 'required|max:50|regex:/^[a-zA-Z\s]*$/',
         'description' => 'required',
-        'image' => 'required',
+        'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ];
     protected $updatevalidationrules = [
-        'name' => 'required',
+        'name' => 'required|max:50|regex:/^[a-zA-Z\s]*$/',
         'description' => 'required',
     ];
 
@@ -65,7 +65,7 @@ class SkillsController extends Controller
         }
         $storeskill = $this->SkillRepository->storeSkill($request);
         if ($storeskill) {
-            Session::flash('success', 'Successfully inseted');
+            Session::flash('success', 'Successfully Inseted');
             return redirect()->route('skill.index');
         }
     }
@@ -114,7 +114,7 @@ class SkillsController extends Controller
 
         $updateskill = $this->SkillRepository->updateSkill($request, $id);
         if ($updateskill) {
-            Session::flash('success', 'Sucessfully updated');
+            Session::flash('success', 'Sucessfully Updated');
             return redirect()->route('skill.index');
         }
     }
@@ -129,7 +129,7 @@ class SkillsController extends Controller
     {
         $deleteskill = $this->SkillRepository->destroySkill($id);
         if ($deleteskill) {
-            Session::flash('success', 'Successfully deleted');
+            Session::flash('success', 'Successfully Deleted');
             return redirect()->route('skill.index');
         }
     }

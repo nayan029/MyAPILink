@@ -15,9 +15,27 @@
     <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.6/css/intlTelInput.css">
+    <link rel="stylesheet" href="location/to/intl-tel-input/css/intlTelInput.css">
     <style>
         .error {
             font-size: 12px;
+        }
+
+        .intl-tel-input.allow-dropdown.separate-dial-code .selected-dial-code {
+            padding-left: 15px !important;
+        }
+
+        .intl-tel-input.allow-dropdown.separate-dial-code.iti-sdc-3 .selected-flag {
+            padding-left: 0;
+        }
+
+        .intl-tel-input.allow-dropdown.separate-dial-code .selected-dial-code {
+            padding-left: 20px !important;
+        }
+
+        #country_code+.intl-tel-input {
+            width: 100%;
         }
     </style>
 </head>
@@ -100,40 +118,40 @@
             <div class="modal-body login-modal-body">
                 <form id="manager-login" method="post">
                     @csrf
-                <div class="">
-                    <div class="lmodal-logo mb-20">
-                        <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="">
-                    </div>
-                    <button class="btn social-btn facebook mb-20">
-                        <img src="{{asset('frontend/images/imgs-svg/facebook-f.svg')}}"> Connexion avec
-                        Facebook
-                    </button>
-                    <button class="btn social-btn google mb-20">
-                        <img src="{{asset('frontend/images/imgs-svg/google.svg')}}"> Connexion avec
-                        Google
-                    </button>
-                    <div class="ordiv mb-20"><span>OU</span></div>
-                    <div class="mb-20">
-                        <div class="form-group">
-                            <input type="text" name="email" placeholder="Email / Nom d'utilisateur*" class="form-control email-place login-input inputicon2">
-                            <span class="email-error text-danger">@error ('email') {{$message}} @enderror</span>
+                    <div class="">
+                        <div class="lmodal-logo mb-20">
+                            <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="">
                         </div>
-                    </div>
-                    <div class="mb-20">
-                        <div class="form-group sr-rel">
-                            <input type="password" name="password" placeholder="Mot de passe*" class="form-control  email-place login-input inputicon2 sr-rel" id="password">
-                            <img src="{{asset('frontend/images/about/eye.svg')}}" alt="" class="sr-eye" id="toggle-password">
-                            <span class="password-error text-danger">@error ('password') {{$message}} @enderror</span>
+                        <button class="btn social-btn facebook mb-20">
+                            <img src="{{asset('frontend/images/imgs-svg/facebook-f.svg')}}"> Connexion avec
+                            Facebook
+                        </button>
+                        <button class="btn social-btn google mb-20">
+                            <img src="{{asset('frontend/images/imgs-svg/google.svg')}}"> Connexion avec
+                            Google
+                        </button>
+                        <div class="ordiv mb-20"><span>OU</span></div>
+                        <div class="mb-20">
+                            <div class="form-group">
+                                <input type="text" name="email" placeholder="Email / Nom d'utilisateur*" class="form-control email-place login-input inputicon2">
+                                <span class="email-error text-danger">@error ('email') {{$message}} @enderror</span>
+                            </div>
+                        </div>
+                        <div class="mb-20">
+                            <div class="form-group sr-rel">
+                                <input type="password" name="password" placeholder="Mot de passe*" class="form-control  email-place login-input inputicon2 sr-rel" id="password">
+                                <img src="{{asset('frontend/images/about/eye.svg')}}" alt="" class="sr-eye" id="toggle-password">
+                                <span class="password-error text-danger">@error ('password') {{$message}} @enderror</span>
                                 <span class="invalid-error text-danger">@error ('invalid') {{$message}} @enderror</span>
 
                             </div>
                         </div>
 
                         <div class="mb-20 text-right">
-                        <a href="#" data-toggle="modal" data-target="#forgot_password_modal"  class="forgot-link forgot_password_mdl">J'ai perdu mon mot de passe?</a>
+                            <a href="#" data-toggle="modal" data-target="#forgot_password_modal" class="forgot-link forgot_password_mdl">J'ai perdu mon mot de passe?</a>
                         </div>
                         <div class="col-md-12 text-center res-dec mb-3 ">
-                            <button id="loginbtn" type="submit"  class="btn btn-blue w-100">Connexion</button>
+                            <button id="loginbtn" type="submit" class="btn btn-blue w-100">Connexion</button>
                         </div>
                         <div class=" meconnecter">
                             <p class="proxima-nove">Pas encore membre?<a href="javascript:void(0);" class="openRegister"> Inscrivez-vous</a></p>
@@ -160,7 +178,7 @@
 
                     <div class="text-center">
 
-                         <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="">
+                        <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="">
 
                     </div>
 
@@ -180,7 +198,7 @@
 
                     </div>
 
-                    
+
                 </form>
 
             </div>
@@ -204,18 +222,18 @@
                     <div class="lmodal-logo">
                         <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="">
                     </div>
-                    <form action="#" method="post" id="nozel_search_form">
+                    <form action="#" method="post" id="register_form_data">
                         @csrf
                         <div class="row mt-3">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" name="firstname" placeholder="Prénom*" class="form-control login-input inputicon2" id="firstname">
+                                    <input type="text" name="first_name" placeholder="Prénom*" class="form-control login-input inputicon2" id="firstname">
                                     <span class="text-danger error" id="firstname-error"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" name="lastname" placeholder="Nom de famille*" class="form-control login-input inputicon2" id="lastname">
+                                    <input type="text" name="last_name" placeholder="Nom de famille*" class="form-control login-input inputicon2" id="lastname">
                                     <span class="text-danger error" id="lastname-error"></span>
                                 </div>
                             </div>
@@ -228,8 +246,14 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
+
+                                    <input type="hidden" class="form-control" id="country_code" name="country_code" />
                                     <input type="text" name="phone" placeholder="Téléphone*" class="form-control login-input inputicon2" onkeypress="return isNumber(event)" id="phone" maxlength="10">
+                                    <i class="clear-input">
+                                        <ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon>
+                                    </i>
                                     <span class="text-danger error" id="phone-error"></span>
+                                    <span class="text-danger error" id="mobile-error"></span>
                                 </div>
                             </div>
 
@@ -241,23 +265,25 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck1" name="customCheck1">
-
-                                    <label class="custom-control-label login-cus-check" for="customCheck1">J'accepte
+                                    <input type="checkbox" class="custom-control-input" id="terms" name="terms[]">
+                                    <label class="custom-control-label login-cus-check" for="terms">J'accepte
                                         les
                                         conditions générales d'utilisation d'APILINK - J'accepte que mon profil soit
                                         visible
-                                        par l'ensemble des établissements employeurs, partenaires d'APILINK.</label>
-                                    <span class="text-danger error" id="customCheck1-error"></span>
+                                        par l'ensemble des établissements employeurs, partenaires d'APILINK.
+                                        <br><span class="text-danger error" id="terms-error"></span>
+                                    </label>
                                 </div>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck2" name="customCheck2">
+                                    <input type="checkbox" class="custom-control-input" id="terms" name="terms">
 
-                                    <label class="custom-control-label login-cus-check" for="customCheck2">J'accepte
+                                    <label class="custom-control-label login-cus-check" for="terms">J'accepte
                                         que mes
                                         données sensibles soient traitées par APILINK pour me fournir le
-                                        service.</label>
-                                    <span class="text-danger error" id="customCheck2-error"></span>
+                                        service.
+                                        <br> <span class="text-danger error" id="accept_sensitive_data-error"></span>
+
+                                    </label>
                                 </div>
 
                             </div>
@@ -324,9 +350,13 @@
 <script src="{{asset('frontend/js/custom.js')}} "></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.7/js/intlTelInput.js"></script>
+
+<script src="location/to/intl-tel-input/js/intlTelInput.js"></script>
 {!! $forgotPasswordValidator->selector('#forgotPasswordForm') !!}
 <script>
-     function isNumber(evt) {
+    function isNumber(evt) {
         evt = (evt) ? evt : window.event;
         var charCode = (evt.which) ? evt.which : evt.keyCode;
         if (charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -354,46 +384,85 @@
     });
 </script>
 <script>
-    $(document).on('click','.openLogin',function(){
+    $(document).on('click', '.openLogin', function() {
         $("#header-Modallogin1").modal('hide');
         $("#Modallogin2").modal('show');
     });
-    $(document).on('click','.openRegister',function(){
+    $(document).on('click', '.openRegister', function() {
         $("#header-Modallogin1").modal('show');
         $("#Modallogin2").modal('hide');
     });
     $(document).on('click', '#registerUser', function() {
-
         var token = $("meta[name='csrf-token']").attr("content");
-        var formData = $('#nozel_search_form').serialize();
+        var formData = $('#register_form_data').serialize();
         $.ajax({
 
             url: "{{ route('registration.save') }}",
             method: 'post',
             data: formData,
             success: function(response) {
-                if (response.status == true) {
+                if (response.success == true) {
+                    toastr.success(response.message);
                     setTimeout(function() {
                         $('#header-Modallogin1').modal('hide');
                         $('.invisible').trigger('click');
-                        $("#nozel_search_form")[0].reset();
-                    });
+                        $("#register_form_data")[0].reset();
+                    }, 2000);
                 }
             },
             error: function(response) {
-                $('#firstname-error').text(response.responseJSON.errors.firstname);
-                $('#lastname-error').text(response.responseJSON.errors.lastname);
+                $('#firstname-error').text(response.responseJSON.errors.first_name);
+                $('#lastname-error').text(response.responseJSON.errors.last_name);
                 $('#email-error').text(response.responseJSON.errors.email);
                 $('#phone-error').text(response.responseJSON.errors.phone);
                 $('#password-error').text(response.responseJSON.errors.password);
-                $('#customCheck1-error').text(response.responseJSON.errors.customCheck1);
-                $('#customCheck2-error').text(response.responseJSON.errors.customCheck2);
+                $('#terms-error').text(response.responseJSON.errors.terms);
+                $('#accept_sensitive_data-error').text(response.responseJSON.errors.terms);
             }
         });
 
     });
 </script>
+<script>
+    //   var telInput = $("#phone"),
+    //         errorMsg = $("#phone-error").html(''),
+    //         validMsg = $("#valid-msg");
+    //     errorMsg.addClass("hide");
+    //     telInput.intlTelInput({
+    //         preferredCountries: ['gb'],
+    //         separateDialCode: true,
+    //         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.4/js/utils.js"
+    //     });
+    //     var reset = function() {
+
+    //         telInput.removeClass("error");
+    //         errorMsg.addClass("hide");
+    //         validMsg.addClass("hide");
+    //     };
+
+    //     // on blur: validate
+    //     telInput.blur(function() {
+    //         reset();
+    //         if ($.trim(telInput.val())) {
+    //             if (telInput.intlTelInput("isValidNumber")) {
+    //                 console.log("if");
+    //                 validMsg.removeClass("hide");
+    //                 var getCode = telInput.intlTelInput('getSelectedCountryData').dialCode;
+    //                 $('#country_code').val(getCode);
+    //                 $("#phone-error").html("");
+    //                 $("#mobile-error").html("");
+    //             } else {
+    //                 console.log("else");
+    //                 telInput.addClass("error");
+    //                 errorMsg.removeClass("hide");
+    //                 $("#phone-error").html('Invalid Mobile Number');
+    //                 $("#mobile-error").html('');
+    //             }
+    //         }
+    //     });
+</script>
 @include('frontend.layouts.login_script')
 
 </body>
+
 </html>

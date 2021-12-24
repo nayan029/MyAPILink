@@ -93,21 +93,17 @@
                                                     </div>
                                                     <div class="col-md-12 pb-2">
                                                         <div class="form-group">
-
-
-
-                                                            {!! Form::text('lastname', auth()->guard('web')->user()->last_name, ['class' => 'form-control view-form', 'placeholder' => 'Nom*','id'=>'lastname']) !!}
+                                                            {!! Form::text('first_name',auth()->guard('web')->user()->first_name, ['class' => 'form-control view-form', 'placeholder' => 'Prénom*','id'=>'firstname']) !!}
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 pb-2">
                                                         <div class="form-group">
-                                                            {!! Form::text('firstname',auth()->guard('web')->user()->first_name, ['class' => 'form-control view-form', 'placeholder' => 'Prénom*','id'=>'firstname']) !!}
-
+                                                            {!! Form::text('last_name', auth()->guard('web')->user()->last_name, ['class' => 'form-control view-form', 'placeholder' => 'Nom*','id'=>'lastname']) !!}
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 pb-2">
                                                         <div class="form-group">
-                                                            {!! Form::text('email',auth()->guard('web')->user()->email, ['class' => 'form-control view-form', 'placeholder' => 'Mail*','id'=>'email']) !!}
+                                                            {!! Form::text('email_address',auth()->guard('web')->user()->email, ['class' => 'form-control view-form', 'placeholder' => 'Email*','id'=>'email']) !!}
 
                                                         </div>
                                                     </div>
@@ -123,7 +119,7 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                                {!! Form::text('roles',auth()->guard('web')->user()->roles, ['class' => 'form-control view-form', 'placeholder' => "Directrice de l'établissement*",'id'=>'roles']) !!}
+                                                                {!! Form::text('roles',auth()->guard('web')->user()->roles, ['class' => 'form-control view-form', 'placeholder' => "Directrice de l'établissement*",'id'=>'roles',('disabled')]) !!}
 
                                                             </div>
                                                         </div>
@@ -133,7 +129,7 @@
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-end">
-                                            <button class="btn btn-yellow d-flex align-items-center pd-btns-edit"><img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" alt="edit" class="mr-3 edit-manager">Editer</button>
+                                            <button class="btn btn-yellow d-flex align-items-center pd-btns-edit"><img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" alt="edit" class="mr-3 edit-manager">Mettre à jour</button>
                                         </div>
                                     </div>
                                     {!! Form::close() !!}
@@ -261,36 +257,43 @@
                                                         </div>
                                                         <div class="col-md-4 d-flex align-items-end mb-3">
                                                             <div class="metters-btns">
-                                                                <button class="btn btn-met">
+                                                                <button class="btn btn-met pause" data-hold="{{$value->is_hold }}" data-id="{{$value->id}}">
                                                                     Mettre en pause
                                                                 </button>
                                                                 <a href="{{route('editjob',$value->id)}}" class="btn btn btn-met">
                                                                     Modifier</a>
-                                                                <a href="{{route('destroy',$value->id)}}" class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                                <a href="javascript:void(0);" class="btn btn-delete delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                                <form action="{{route('destroy',$value->id)}}" method="POST" class="deleteForm">
+                                                                    @method('DELETE')
+                                                                    @csrf
+                                                                </form>
                                                             </div>
                                                         </div>
+                                                        @php
+
+                                                        $deadLineDate = date('Y-m-d',strtotime($value->deadline_for_receipt_of_applications));
+                                                        $now = date('Y-m-d');
+                                                        $diff = strtotime($deadLineDate) - strtotime($now);
+                                                        $finalDays = abs(round($diff / 86400));
+                                                        @endphp
                                                         <div class="col-md-4 mt-2">
                                                             <div class="space-date">
                                                                 <div class="text-center date-details">
                                                                     <p class="mb-0">Date</p>
                                                                     <p class="mb-0">{{$value->contract_start_date}}</p>
-                                                                    <p class="mb-0">51 jours restants
-
-                                                                    </p>
-
+                                                                    <p class="mb-0">{{$finalDays}} jours restants</p>
                                                                 </div>
                                                                 <div class="mt-images-profile">
                                                                     <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
-                                                                        <span>{{$value->total_view}}</span>
+                                                                        <span>{{$value->total_vi}}</span>
                                                                     </div>
                                                                     <!-- <p class="mb-0">31 oct 8:30</p> -->
                                                                     <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>{{$value->total_reg}}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                                             <div class="button-voir">
-                                                                <a href="{{route('see-applicants')}}"> <button class="btn btn-blue">Voir les postulants
+                                                                <a href="{{route('see-applicants',$value->id)}}"> <button class="btn btn-blue">Voir les postulants
                                                                     </button></a>
                                                             </div>
                                                         </div>
@@ -301,7 +304,13 @@
                                                 <p class="text-center">No Job Data Found!..</p>
                                                 @endif
                                             </div>
-
+                                            <div class="custom-pagination pt-5 pb-3">
+                                                <nav aria-label="Page navigation example">
+                                                    <ul class="pagination justify-content-center">
+                                                        {{ $myJobList->appends(request()->except('page'))->links("pagination::bootstrap-4") }}
+                                                    </ul>
+                                                </nav>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -313,7 +322,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="border-job">
-                                                @if($remaining)
+                                                @if(count($remaining)>0)
                                                 @foreach($remaining as $remain)
                                                 <div class="job-card manager-job-pd">
                                                     <div class="row mb-3 ">
@@ -342,7 +351,11 @@
                                                             <div class="metters-btns">
                                                                 <a href="{{route('editjob',$remain->id)}}" class="btn btn btn-met">
                                                                     Modifier</a>
-                                                                <a href="{{route('destroy',$remain->id)}}" class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                                <a href="javascript:void(0);" class="btn btn-delete delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                                <!-- <form action="{{route('destroy',$remain->id)}}" method="POST" class="deleteForm">
+                                                                    @method('DELETE')
+                                                                    @csrf
+                                                                </form> -->
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4 mr-renew">
@@ -362,13 +375,13 @@
                                                                     </div>
                                                                     <!-- <p class="mb-0">31 oct 8:30</p> -->
                                                                     <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span>{{$remain->total_reg}}</span>
-
                                                                     </div>
                                                                 </div>
                                                             </div>
 
                                                             <div class="button-voir text-right-voir">
-                                                                <a href="applicarion-offer.html" class="btn btn-blue w-95">Voir les
+
+                                                                <a href="{{route('see-applicants',$remain->id)}}" class="btn btn-blue w-95">Voir les
                                                                     postulants
                                                                 </a>
                                                             </div>
@@ -376,115 +389,114 @@
                                                     </div>
                                                 </div>
                                                 @endforeach
-                                                @else
-                                                <p class="text-center">No Job Data Found!..</p>
-                                                @endif
+
                                             </div>
+                                            <div class="custom-pagination pt-5 pb-3">
+                                                <nav aria-label="Page navigation example">
+                                                    <ul class="pagination justify-content-center">
+                                                        {{ $remaining->appends(request()->except('page'))->links("pagination::bootstrap-4") }}
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                            @else
+                                            <p class="text-center">No Job Data Found!..</p>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="pills-third" role="tabpanel" aria-labelledby="pills-third-tab">
-                                    <div class="card sr-card">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="border-job">
-                                                        @if($deleted)
-                                                        @foreach($deleted as $delete)
-                                                        <div class="job-card manager-job-pd">
-                                                            <div class="row mb-3 ">
-                                                                <div class="col-md-3 pr-0">
-                                                                    <ul class="search-image-ul">
-                                                                        <li>
-                                                                            <h5 class="mb-0 job_aux_text fn-19">{{$delete->title}}
-                                                                            </h5>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p class="manage-crep job_cre_text fn-21">{{$delete->job_description}}
-                                                                            </p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p class="mb-0 ">{{$delete->city}}</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p class="mb-0 ">{{$delete->minimum_gross_salary}} € par mois</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p class="mb-0 ">Expérience : {{$delete->minimum_experience}}</p>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
-                                                                    <div class="metters-btns">
-                                                                        <a href="{{route('editjob',$delete->id)}}" class="btn btn btn-met">
-                                                                            Modifier</a>
-                                                                        <a href="{{route('destroy',$delete->id)}}" class="btn btn-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4 mr-renew">
-                                                                    <div>
-                                                                        <div class="renew-top">
-                                                                            <a href="{{route('users.restore',$delete->id)}}" class="btn btn-outline-renew">Renouveler
-                                                                                l'annonce
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-3 mt-2 pl-0">
-                                                                    <div class="space-date justify-content-end">
-                                                                        <div class="mt-images-profile">
-                                                                            <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
-                                                                                <span></span>
-                                                                            </div>
-                                                                            <!-- <p class="mb-0">31 oct 8:30</p> -->
-                                                                            <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span></span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
+                    </div>
+                    <div class="tab-pane" id="pills-third" role="tabpanel" aria-labelledby="pills-third-tab">
+                        <div class="card sr-card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="border-job">
+                                            @if(count($deleted)>0)
+                                            @foreach($deleted as $delete)
+                                            <div class="job-card manager-job-pd">
+                                                <div class="row mb-3 ">
+                                                    <div class="col-md-3 pr-0">
+                                                        <ul class="search-image-ul">
+                                                            <li>
+                                                                <h5 class="mb-0 job_aux_text fn-19">{{$delete->title}}
+                                                                </h5>
+                                                            </li>
+                                                            <li>
+                                                                <p class="manage-crep job_cre_text fn-21">{{$delete->job_description}}
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <p class="mb-0 ">{{$delete->city}}</p>
+                                                            </li>
+                                                            <li>
+                                                                <p class="mb-0 ">{{$delete->minimum_gross_salary}} € par mois</p>
+                                                            </li>
+                                                            <li>
+                                                                <p class="mb-0 ">Expérience : {{$delete->minimum_experience}}</p>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-2 d-flex align-items-end btn-modifi mb-3">
+                                                        <div class="metters-btns">
+                                                            <a href="{{route('editjob',$delete->id)}}" class="btn btn btn-met">
+                                                                Modifier</a>
+                                                            <a href="javascript:void(0);" class="btn btn-delete delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                            <!-- <form action="{{route('destroy',$delete->id)}}" method="POST" class="deleteForm">
+                                                                    @method('DELETE')
+                                                                    @csrf
+                                                                </form> -->
 
-                                                                    <div class="button-voir text-right-voir">
-                                                                        <a href="applicarion-offer.html" class="btn btn-blue w-95">Voir les
-                                                                            postulants
-                                                                        </a>
-                                                                    </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 mr-renew">
+                                                        <div>
+                                                            <div class="renew-top">
+                                                                <a href="{{route('users.restore',$delete->id)}}" class="btn btn-outline-renew">Renouveler
+                                                                    l'annonce
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 mt-2 pl-0">
+                                                        <div class="space-date justify-content-end">
+                                                            <div class="mt-images-profile">
+                                                                <div> <img src="{{asset('frontend/images/project/eyes.svg')}}" class="image-date">
+                                                                    <span></span>
+                                                                </div>
+                                                                <!-- <p class="mb-0">31 oct 8:30</p> -->
+                                                                <div><img src="{{asset('frontend/images/project/users.svg')}}" class="image-date"><span></span>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        @endforeach
-                                                        @else
-                                                        <p class="text-center">No Job Data Found!..</p>
-                                                        @endif
-                                                    </div>
-                                                    <div class="custom-pagination pt-5 pb-3">
-                                                        <nav aria-label="Page navigation example">
-                                                            <ul class="pagination justify-content-center">
-                                                                <li class="page-item">
-                                                                    <a class="page-link" href="javascript:void(0)" tabindex="-1" id="prev">
-                                                                        &lt; </a>
-                                                                </li>
-                                                                <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a>
-                                                                </li>
-                                                                <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a>
-                                                                </li>
-                                                                <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a>
-                                                                </li>
-                                                                <li class="page-item"><a class="page-link" href="javascript:void(0)">4</a>
-                                                                </li>
-                                                                <li class="page-item"><a class="page-link" href="javascript:void(0)">5</a>
-                                                                </li>
-                                                                <li class="page-item">
-                                                                    <a class="page-link" href="javascript:void(0)" id="next">&gt;</a>
-                                                                </li>
-                                                            </ul>
-                                                        </nav>
+
+                                                        <div class="button-voir text-right-voir">
+                                                            <a href="{{route('see-applicants',$delete->id)}}" class="btn btn-blue w-95">Voir les
+                                                                postulants
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            @endforeach                                        
                                         </div>
+                                        <div class="custom-pagination pt-5 pb-3">
+                                            <nav aria-label="Page navigation example">
+                                                <ul class="pagination justify-content-center">
+                                                    {{$deleted}}
+                                                    {{$deleted->appends(request()->except('page'))->links("pagination::bootstrap-4")}}
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                        @else
+                                            <p class="text-center">No Job Data Found!..</p>
+                                            @endif
                                     </div>
-                                </div>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
             </section>
@@ -554,7 +566,52 @@
             }
         });
     });
+    $(document).on('click', '.delete', function(event) {
+        var form = $(".deleteForm").closest("form");
+        event.preventDefault();
+        swal({
+                title: 'Are you sure you want to delete this record?',
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                }
+            });
+    });
+    $(document).on('click', '.pause', function(event) {
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        var url = "{{route('holdJobData')}}"
+        var id = $(this).attr("data-id");
+        var hold = $(this).attr("data-hold") == 0 ? 1 : 0;
+
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: {
+                id: id,
+                hold: hold,
+                _token: CSRF_TOKEN,
+            },
+            success: function(response) {
+                if (response.success == true) { //Message come from controller
+                    toastr.success(response.message);
+                    if (response.hold == '1') {
+                        $('.pause' + id).addClass("btn-primary");
+                        $('.pause' + id).removeClass("btn-met");
+                    } else {
+                        $('.pause' + id).removeClass("btn-primary");
+                        $('.pause' + id).addClass("btn-met");
+                    }
+                }
+            },
+        });
+    });
 </script>
+
+
 @endsection
 
 </html>

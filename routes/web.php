@@ -62,6 +62,11 @@ Route::middleware(['auth:admin'])->group(function ($route) {
         //Job module route
         $adminRoute->resource('job', 'JobController');
         $adminRoute->get('/getdata', 'JobController@getAjaxData')->name('job.data');
+
+        //Gallery Module Route
+        $adminRoute->resource('gallery', 'GalleryController');
+        $adminRoute->get('/getdata', 'GalleryController@getAjaxData')->name('gallery.data');
+        $adminRoute->get('/getstatus', 'GalleryController@getUpdateStatus')->name('gallery.update-status');
     });
 });
 
@@ -81,6 +86,15 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('registration', 'RegistrationController@index')->name('registration');
     $frontRoute->post('registration', 'RegistrationController@saveRegistration')->name('registration.save');
     $frontRoute->get('email-verify/{email}', 'RegistrationController@getEmailVerify')->name('email.verify');
+
+    $frontRoute->get('manager/email-verify/{email}', 'ManagerController@getEmailVerify')->name('manager.email.verify');
+
+    //start profile route step
+    $frontRoute->get('candidate-profile/{userid}', 'RegistrationController@candidateProfileStep')->name('candidate.profile');
+    $frontRoute->get('candidate/resumedownaload/{userid}', 'RegistrationController@candidateDownloadResume')->name('candidate.resume');
+    $frontRoute->get('candidate/welcome/{userid}', 'RegistrationController@getWelcomePage')->name('candidate.welcome');
+    $frontRoute->get('candidate/success/{userid}', 'RegistrationController@candidateProfileLogin')->name('candidate.login');
+    //end profile route step
     $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
     $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');
 
@@ -95,19 +109,23 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('addjob/{id}', 'JobController@index')->name('addjob');
     $frontRoute->post('addorupdatejob/{id}', 'JobController@addOrUpdateJob')->name('addorupdatejob');
     $frontRoute->get('joblist/{id}', 'JobController@showJob')->name('joblist');
+    $frontRoute->post('holdJobData', 'JobController@holdJobData')->name('holdJobData');
     $frontRoute->get('users/restore/{id}', 'JobController@restoreUser')->name('users.restore');
 
+
+
     $frontRoute->get('editjob/{id}', 'JobController@editJob')->name('editjob');
-    $frontRoute->get('destroy/{id}', 'JobController@destroy')->name('destroy');
-    $frontRoute->get('see-applicants', 'JobController@viewApplcants')->name('see-applicants');
-    $frontRoute->get('edit-applicants', 'JobController@viewApplcants')->name('edit-applicants');
+    $frontRoute->delete('destroy/{id}', 'JobController@destroy')->name('destroy');
+    $frontRoute->get('see-applicants/{id}', 'JobController@viewApplcants')->name('see-applicants');
+    $frontRoute->get('edit-applicants/{id}', 'JobController@viewApplcants')->name('edit-applicants');
+    $frontRoute->get('showallcandidate', 'JobController@showAllCandidate')->name('showallcandidate');
+
     $frontRoute->post('getAjaxSkill', 'HomeController@getAjaxSkill')->name('getAjaxSkill');
 
     $frontRoute->get('establishment-dashborad', 'EstablishmentController@dashborad')->name('establishment-dashborad');
     $frontRoute->post('send-forgot-password-mail', 'HomeController@forgotPassword')->name('send-forgot-password-mail');
     $frontRoute->get('forgotpassword-user/{token}', 'HomeController@resetPassword')->name('forgotpassword-user');
     $frontRoute->post('user-reset-password', 'HomeController@updatePassword')->name('user-reset-password');
-    
 });
 
 Route::middleware(['auth:web'])->group(function ($route) {
@@ -137,7 +155,8 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->get('candidate-message', 'CandidateController@chatIndex')->name('candidate-message');
         $frontRoute->get('candidate-message-list-ajax', 'CandidateController@messageListAjax')->name('candidate-message-list-ajax');
         $frontRoute->get('last-mesage', 'CandidateController@lastMessageCheck')->name('last-mesage');
-    
+        $frontRoute->get('candidate-details/{id}', 'CandidateController@showCandidateDetails')->name('candidate-details');
+
         $frontRoute->post('candidate-sendmessage', 'CandidateController@sendmessage')->name('candidate-sendmessage');
         $frontRoute->post('user/logout', 'HomeController@logout')->name('user-logout');
         $frontRoute->get('search-job', 'SearchAdController@index')->name('searchjob');
@@ -147,5 +166,9 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->get('seeJob', 'SearchAdController@showJob')->name('seeJob');
         $frontRoute->get('details-job/{id}', 'SearchAdController@showJob')->name('details-job');
         $frontRoute->get('details-company/{id}', 'SearchAdController@showCompany')->name('details-company');
+        $frontRoute->post('accept-applicants', 'JobController@storeApplicants')->name('acceptJobDetails');
+        $frontRoute->get('establishment-portfolio-candidate/{id}', 'JobController@candidatePortfolio')->name('candidatePortfolio');
+        $frontRoute->get('get_ajax_data/{id}', 'SearchAdController@get_ajax_data')->name('get_ajax_data');
+        $frontRoute->get('job-details/{id}', 'SearchAdController@jobDetails')->name('job-details');
     });
 });

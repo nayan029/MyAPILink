@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,37 +39,34 @@
                                 <div class="listing-side-pd">
                                     <div class="d-flex justify-content-between mb-4 ">
                                         <div>
-                                            <h5 class="mb-0 job_aux_text">Auxiliaire Puéricultrice</h5>
-                                            <p class="mb-0 job_cre_text">Crèche du bonheur</p>
+                                            <h5 class="mb-0 job_aux_text">{{$showwpost->title}}</h5>
+                                            <p class="mb-0 job_cre_text">{{$showwpost->address}}</p>
                                         </div>
 
-                                        <span class="public-span mr-4">Publié il y a 5 jours<img
-                                                src="{{asset('frontend/images/bookmark.svg')}}" alt="bookmark image "
-                                                class="ml-3 bookmark-img"></span>
+                                        <span class="public-span mr-4">Publié il y a 5 jours<img src="{{asset('frontend/images/bookmark.svg')}}" alt="bookmark image " class="ml-3 bookmark-img"></span>
                                     </div>
-                                    @foreach($showwpost as $show)
                                     <div class="job-information">
                                         <h4 class="job-info-text">Informations sur le poste</h4>
                                         <ul class="search-image-ul">
 
                                             <li>
-                                                <p class="mb-0 ">{{$show->minimum_gross_salary}} per month</p>
+                                                <p class="mb-0 ">{{$showwpost->minimum_gross_salary}} per month</p>
                                             </li>
                                             <li>
-                                                <p class="mb-0 ">Expérience : {{$show->minimum_experience}}</p>
+                                                <p class="mb-0 ">Expérience : {{$showwpost->minimum_experience}}</p>
                                             </li>
                                             <li>
-                                                <p class="mb-0 ">Durée du contrat : {{$show->contract_length}}</p>
+                                                <p class="mb-0 ">Durée du contrat : {{$showwpost->contract_length}}</p>
                                             </li>
                                             <li>
-                                                <p class="mb-0 "> Type d 'emploi : {{$show->type_of_employment}}</p>
+                                                <p class="mb-0 "> Type d 'emploi : {{$showwpost->type_of_employment}}</p>
                                             </li>
                                         </ul>
 
                                         <div class="d-flex justify-content-between align-items-center mb-4 pt-5">
                                             <div>
                                                 <h5 class="mb-0 ul_check_color ">Site internet</h5>
-                                                <p class="mb-0 www-text mb-2 ">{{$show->website}}</p>
+                                                <p class="mb-0 www-text mb-2 ">{{$showwpost->website}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -79,12 +75,12 @@
                                 <div class="pb-4 listing-side-pd ">
                                     <div class="job-infosdetail mb-4 ">
                                         <h5 class="job-infos-title ">Description</h5>
-                                        <p>{{$show->job_description}}
+                                        <p>{{$showwpost->job_description}}
                                         </p>
                                     </div>
                                     <div class="job-infosdetail mb-4 ">
                                         <h5 class="job-infos-title ">Mission</h5>
-                                        <p>{{$show->employment_mission}}
+                                        <p>{{$showwpost->employment_mission}}
                                         </p>
                                         <!-- <ul class="job-infos-li ">
                                             <li>Lorem Ipsum is simply dummy text</li>
@@ -95,7 +91,7 @@
                                     </div>
                                     <div class="job-infosdetail mb-4 ">
                                         <h5 class="job-infos-title ">Que recherchons-nous ?</h5>
-                                        <p>{{$show->what_you_are_looking}}
+                                        <p>{{$showwpost->what_you_are_looking}}
                                         </p>
                                         <!-- <ul class="job-infos-li ">
                                             <li>Lorem Ipsum is simply dummy text</li>
@@ -110,7 +106,6 @@
                                         </p> -->
                                     </div>
                                 </div>
-                                @endforeach
                                 <div class="d-flex justify-content-between listing-side-pd mb-4 ">
                                     <div class="pb-5 ">
                                         <h5 class="mb-0 job-location fn-19 ">Lieu du poste</h5>
@@ -120,7 +115,7 @@
                                 </div>
 
                                 <div class="d-flex justify-content-end listing-side-pd pb-4 offer-prs ">
-                                    <a href="{{route('editjob',$show->id)}}" class="btn btn-yellow ">Modifier mon offre</a>
+                                    <a href="{{route('editjob',$showwpost->id)}}" class="btn btn-yellow ">Modifier mon offre</a>
                                 </div>
                             </div>
                         </div>
@@ -134,8 +129,7 @@
 
 
     <!-- See the establishment's file Modal -->
-    <div class="modal fade modal-back-blue " id="establishment " tabindex="-1 " role="dialog "
-        aria-labelledby="exampleModalLabel " aria-hidden="true ">
+    <div class="modal fade modal-back-blue " id="establishment " tabindex="-1 " role="dialog " aria-labelledby="exampleModalLabel " aria-hidden="true ">
         <div class="modal-dialog center-modal-dialog modal-xl " role="document ">
             <div class="modal-content m-32 ">
                 <div class="modal-header resume_header border-0 ">
@@ -149,14 +143,10 @@
 
                         <div class="padding-150px ">
                             <div class="text-center pb-5 mb-5 ">
-                                <button class="btn btn-modals-blue " type="button " data-target="#bravo "
-                                    id="bravo-btn ">Envoyer mon profil profesionnel<br>au recruteur</button>
+                                <button class="btn btn-modals-blue " type="button " data-target="#bravo " id="bravo-btn ">Envoyer mon profil profesionnel<br>au recruteur</button>
                             </div>
                             <div class="text-center ">
-                                <button class="btn btn-modals-blue cv-radius " data-toggle="modal "
-                                    data-target="#cv-modal " id="cv-btn " type="button "><img
-                                        src="images/project/feather-download.svg " alt="download "
-                                        class="mr-3 ">Télécharger et envoyer mon cv</button>
+                                <button class="btn btn-modals-blue cv-radius " data-toggle="modal " data-target="#cv-modal " id="cv-btn " type="button "><img src="images/project/feather-download.svg " alt="download " class="mr-3 ">Télécharger et envoyer mon cv</button>
                             </div>
                         </div>
                     </div>
@@ -166,8 +156,7 @@
     </div>
 
     <!-- bravo modal -->
-    <div class="modal fade " id="bravo " tabindex="-1 " role="dialog " aria-labelledby="exampleModalLabel "
-        aria-hidden="true ">
+    <div class="modal fade " id="bravo " tabindex="-1 " role="dialog " aria-labelledby="exampleModalLabel " aria-hidden="true ">
         <div class="modal-dialog modal-dialog-centered " role="document ">
             <div class="modal-content ">
                 <div class="modal-header resume_header border-0 ">
@@ -193,8 +182,7 @@
     </div>
 
     <!-- cv modal -->
-    <div class="modal fade modal-back-blue " id="cv-modal " tabindex="-1 " role="dialog "
-        aria-labelledby="exampleModalLabel " aria-hidden="true ">
+    <div class="modal fade modal-back-blue " id="cv-modal " tabindex="-1 " role="dialog " aria-labelledby="exampleModalLabel " aria-hidden="true ">
         <div class="modal-dialog center-modal-dialog modal-xl " role="document ">
             <div class="modal-content m-32 ">
                 <div class="modal-header resume_header border-0 ">
@@ -274,7 +262,7 @@
     var togglePassword = document.getElementById("toggle-password ");
 
     if (togglePassword) {
-        togglePassword.addEventListener('click ', function () {
+        togglePassword.addEventListener('click ', function() {
             var x = document.getElementById("password ");
             if (x.type === "password ") {
                 x.type = "text ";

@@ -45,7 +45,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            Dashboard
+                            {{__("messages.dashboard")}}
                         </p>
                     </a>
                 </li>
@@ -54,21 +54,29 @@
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         @switch($locale)
                         @case('en')
-                        <img height="20px" width="30px" src="{{asset('admin\dist\img\EN.png')}}"> English
+                        <img height="20px" width="20px" src="{{asset('admin\dist\img\EN.png')}}" style="
+    margin-right: 10px;
+    margin-left: 3px;
+">English
                         @break
-
                         @case('fr')
-                        <img height="20px" width="30px" src="{{asset('admin\dist\img\fr.png')}}"> French
+                        <img height="20px" width="20px" src="{{asset('admin\dist\img\fr.png')}}" style="
+    margin-right: 11px;
+    margin-left: 3px;
+">French
                         @break
                         @default
-                        <img height="20px" width="30px" src="{{asset('admin\dist\img\fr.png')}}"> French
+                        <img height="20px" width="20px" src="{{asset('admin\dist\img\fr.png')}}" style="
+    margin-right: 10px;
+    margin-left: 3px;
+">
+                        <p>French</p>
                         @endswitch
                         <span class="caret"></span>
                     </a>
                     <div class="dropdown-menu lang  dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{url('languagee/en')}}">&nbsp;&nbsp;<img height="20px" width="30px" src="{{asset('admin\dist\img\EN.png')}}">&nbsp; English</a>
-                        <br><br> <a class="dropdown-item" href="{{url('languagee/fr')}}">&nbsp;&nbsp;<img height="20px" width="30px" src="{{asset('admin\dist\img\fr.png')}}">&nbsp; French</a>
-
+                        <a class="dropdown-item" href="{{url('languagee/en')}}"><img height="20px" width="30px" src="{{asset('admin\dist\img\EN.png')}}">English</a>
+                        <a class="dropdown-item" href="{{url('languagee/fr')}}"><img height="20px" width="30px" src="{{asset('admin\dist\img\fr.png')}}">French</a>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -81,7 +89,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('partner.index')}}" class="nav-link {{ request()->is('partner*') ? 'active' : '' }}">
-                        <i class="far fa-handshake"></i>&nbsp;&nbsp;
+                        <i class="nav-icon far fa-handshake"></i>
                         <p>
                             {{__("messages.partner")}}
                         </p>
@@ -89,7 +97,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('user.index')}}" class="nav-link {{ request()->is('user*') ? 'active' : '' }}">
-                        <i class="far fa-user"></i>&nbsp;&nbsp;
+                        <i class="nav-icon far fa-user"></i>
                         <p>
                             Users
                         </p>
@@ -97,7 +105,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('job.index')}}" class="nav-link {{ request()->is('job*') ? 'active' : '' }}">
-                        <i class="far fa-user"></i>&nbsp;&nbsp;
+                        <i class="nav-icon fas fa-briefcase"></i>
                         <p>
                             Jobs
                         </p>
@@ -106,7 +114,7 @@
                 @php $i=1; @endphp
                 <li class="nav-item">
                     <a href="{{route('contact.edit',$i)}}" class="nav-link {{ request()->is('contact') ? 'active' : '' }}">
-                        <i class="far fa-address-book"></i>&nbsp;&nbsp;
+                        <i class="nav-icon  far fa-address-book"></i>
                         <p>
                             {{__("messages.contact")}}
                         </p>
@@ -114,7 +122,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('skill.index')}}" class="nav-link {{ request()->is('skill*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-cogs"></i>
+                        <i class="nav-icon fas fa-user-tie"></i>
                         <p>
                             {{__("messages.skills")}}
                         </p>
@@ -122,9 +130,17 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('contact.index')}}" class="nav-link {{ request()->is('contact-us') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-cogs"></i>
+                        <i class="nav-icon fas fa-phone-square-alt"></i>
                         <p>
                             {{__("messages.contact us")}}
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('gallery.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-file-image"></i>
+                        <p>
+                            {{__("messages.gallery")}}
                         </p>
                     </a>
                 </li>

@@ -9,8 +9,7 @@ interface JobRepositoryInterface
     public function getJobdata(Request $request);
     
     public function getSingleJobData($id);
+    public function allCandidates();
 
-    public function showJobData($id);
-
-    public function storeOrUpdateJob(Request $request,$id);
+    public function acceptApplicants(Request $request);
 }

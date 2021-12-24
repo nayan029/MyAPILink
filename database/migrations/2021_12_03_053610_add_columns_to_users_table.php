@@ -18,7 +18,7 @@ class AddColumnsToUsersTable extends Migration
             $table->string('first_name')->after('name')->nullable();
             $table->string('last_name')->after('first_name')->nullable();
             $table->string('phone')->after('password')->nullable();
-            $table->string('roles')->after('telephone')->nullable();
+            $table->string('roles')->after('phone')->nullable();
             $table->string('establishment_management')->after('roles')->nullable();
             $table->string('represent')->after('establishment_management')->nullable();
             $table->string('organization')->after('represent')->nullable();

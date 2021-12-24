@@ -15,7 +15,7 @@
                         <a class="nav-link" href="{{route('searchjob')}}">Rechercher un emploi<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="modal" data-target="#contact">Contact</a>
+                        <a class="nav-link" data-toggle="modal" data-target="#contact">Nous contacter</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav header-ul custom-header-drop  ml-0">

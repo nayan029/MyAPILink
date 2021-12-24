@@ -47,6 +47,7 @@ class EstablishmentController extends Controller
     }
     public function store(Request $request)
     {
+       
         $validationrules['document'] = 'required|mimes:pdf';
         $validationrules['more_infomation'] = 'required|mimes:jpeg,png,jpg';
         

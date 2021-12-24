@@ -207,16 +207,16 @@
                                                                         <div class="box-body"></div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="dropzone-wrapper">
+                                                                <!-- <div class="dropzone-wrapper">
                                                                     <div class="dropzone-desc">
                                                                         <img src="{{asset('frontend/images/profile-feather-upload.svg')}}" width="30px" class="mb-1">
-                                                                        <!-- <i class="glyphicon glyphicon-download-alt"></i> -->
+                                                                   
                                                                         <p>Drag and drop here or<span style="color:#192842;font-family: 'Quicksand-Bold'">
                                                                                 Browse</span> </p>
                                                                     </div>
                                                                     {!! Form::file('more_infomation[]', ['id' => 'more_infomation', 'name' => 'more_infomation[]', 'class' => 'dropzone','multiple' => true]) !!}
                                                                  
-                                                                </div>
+                                                                </div> -->
                                                             </div>
                                                         </div>
                                                     </div>

@@ -25,7 +25,7 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
                 $documents[] = $this->uploadImage($file, 'Establishment/document');
             }
         }
-        $applied_pedagogy = implode(",", $request->applied_pedagogy);
+        $applied_pedagogy = implode(",",$request->applied_pedagogy);
         $document = implode(",", $documents);
         $storeData = $request->all();
         $storeData['applied_pedagogy'] = $applied_pedagogy;
@@ -34,17 +34,17 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
         $storeData['user_id'] = auth()->guard('web')->user()->id;
 
         $establishment = Establishment::create($storeData);
-        $more_infomation = "";
-        if ($request->hasFile('more_infomation')) {
-            $files = $request->file('more_infomation');
-            foreach ($files as $file) {
-                $more_infomation  = $this->uploadImage($file, 'Establishment/gallery');;
-                $storeData['image'] = $more_infomation;
-                $storeData['establishment_id'] = $establishment->id;
-                $storeData['user_id'] = auth()->guard('web')->user()->id;
-     EstablishmentGallery::create($storeData);
-            }
-        }
+        //     $more_infomation = "";
+        //     if ($request->hasFile('more_infomation')) {
+        //         $files = $request->file('more_infomation');
+        //         foreach ($files as $file) {
+        //             $more_infomation  = $this->uploadImage($file, 'Establishment/gallery');;
+        //             $storeData['image'] = $more_infomation;
+        //             $storeData['establishment_id'] = $establishment->id;
+        //             $storeData['user_id'] = auth()->guard('web')->user()->id;
+        //  EstablishmentGallery::create($storeData);
+        //         }
+        //     }
 
         return $establishment;
     }
@@ -53,14 +53,15 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
         return Establishment::where('user_id', auth()->guard('web')->user()->id)->where('id', $id)->firstOrFail();
     }
 
-    public function getJobPostsData($id){
-        return Job::where('user_id',$id)->get();
+    public function getJobPostsData($id)
+    {
+        return Job::where('user_id', $id)->get();
     }
 
     public function update(Request $request, $id)
     {
         $applied_pedagogy = implode(",", $request->applied_pedagogy);
-      
+
         $updateData = [
             'type_of_establishment' => $request->type_of_establishment,
             'own_of_our_structure' => $request->own_of_our_structure,
@@ -77,7 +78,7 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
 
 
         ];
-      
+
         if ($request->hasFile('document')) {
             $files = $request->file('document');
             foreach ($files as $file) {
@@ -87,24 +88,24 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
             $updateData['document'] = $document;
         }
 
-        if ($request->hasFile('more_infomation')) {
-            $images = $this->getEstablishmentGallery($id);
-            if (count($images) != 0) {
-                foreach ($images as $image) {
-                    $galleryId = EstablishmentGallery::find($image->id);
-                    $galleryId->delete();
-                }
-            }
+        // if ($request->hasFile('more_infomation')) {
+        //     $images = $this->getEstablishmentGallery($id);
+        //     if (count($images) != 0) {
+        //         foreach ($images as $image) {
+        //             $galleryId = EstablishmentGallery::find($image->id);
+        //             $galleryId->delete();
+        //         }
+        //     }
 
-            $files = $request->file('more_infomation');
-            foreach ($files as $file) {
-                $more_infomation  = $this->uploadImage($file, 'Establishment/gallery');;
-                $storeData['image'] = $more_infomation;
-                $storeData['establishment_id'] = $id;
-                $storeData['user_id'] = auth()->guard('web')->user()->id;
-                EstablishmentGallery::create($storeData);
-            }
-        }
+        //     $files = $request->file('more_infomation');
+        //     foreach ($files as $file) {
+        //         $more_infomation  = $this->uploadImage($file, 'Establishment/gallery');;
+        //         $storeData['image'] = $more_infomation;
+        //         $storeData['establishment_id'] = $id;
+        //         $storeData['user_id'] = auth()->guard('web')->user()->id;
+        //         EstablishmentGallery::create($storeData);
+        //     }
+        // }
 
         return Establishment::where('id', $id)->update($updateData);
     }
@@ -117,7 +118,7 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
 
         $storeData['image'] = $image;
         $storeData['establishment_id'] = auth()->guard('web')->user()->id;
-        
+
 
         return EstablishmentGallery::create($storeData);
     }
@@ -128,7 +129,7 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
 
     public function getCandidateGallery()
     {
-        $query = EstablishmentGallery::where('deleted_at', NULL)->where('created_by',auth()->guard('web')->user()->id)->get();
+        $query = EstablishmentGallery::where('deleted_at', NULL)->where('created_by', auth()->guard('web')->user()->id)->get();
         return  $query;
     }
     public function deleteImage($id)
@@ -138,12 +139,11 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
         return $id;
     }
 
-    public function getPostsData($id){
+    public function getPostsData($id)
+    {
         $data['jobListing'] = Job::where('user_id', $id)->paginate(10);
-        $data['remaining'] = Job::where('created_at', '>=', Carbon::now())->where('user_id',$id)->get();
-        $data['deleted'] = Job::onlyTrashed()->where('user_id',$id)->get();
+        $data['remaining'] = Job::where('created_at', '>=', Carbon::now())->where('user_id', $id)->get();
+        $data['deleted'] = Job::onlyTrashed()->where('user_id', $id)->get();
         return $data;
     }
-
-    
 }

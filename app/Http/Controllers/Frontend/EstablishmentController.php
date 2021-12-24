@@ -18,7 +18,7 @@ class EstablishmentController extends Controller
         'type_of_establishment' => 'required',
         'own_of_our_structure' => 'required|regex:/^([^0-9]*)$/',
         'opening_date' => 'required',
-        'direction' => 'required|regex:/^([^0-9]*)$/',
+        // 'direction' => 'required|regex:/^([^0-9]*)$/',
         'effective' => 'required',
         'number_of_groups_and_age_groups' => 'required',
         'accommodation_capacity' => 'required',

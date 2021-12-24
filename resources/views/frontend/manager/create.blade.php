@@ -273,7 +273,7 @@
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <label class="">Ville<span class="text-danger">*</span></label>
-                                            <input id="city" type="text" name="city" class="form-control form-add-establish pl-23" placeholder="Ville">
+                                            <input id="city" onchange="removeOneDiv()" type="text" name="city" class="form-control form-add-establish pl-23" placeholder="Ville">
                                             <span class="city-error text-danger">@error ('city') {{$message}} @enderror</span>
 
                                         </div>
@@ -326,7 +326,7 @@
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <label class="">Ville<span class="text-danger">*</span></label>
-                                            <input id="city" type="text" name="city" class="form-control form-add-establish pl-23" placeholder="Ville">
+                                            <input id="city" type="text" onchange="removeOneDiv()"  name="city" class="form-control form-add-establish pl-23" placeholder="Ville">
                                             <span class="city-error text-danger">@error ('city') {{$message}} @enderror</span>
 
                                         </div>
@@ -571,6 +571,9 @@
     });
 </script>
 <script>
+    $( document ).ready(function() {
+        $('#singlediv').hide();
+});
     function hideShowStepThree() {
         var radioValue = $("input[name='management']:checked").val();
             if(radioValue=="single"){
@@ -582,5 +585,15 @@
 
             }
     }
+
+    function removeOneDiv() {
+        var radioValue1 = $("input[name='management']:checked").val();
+             if(radioValue1=="single"){
+                $('#multiplediv').remove();
+            }else{
+                $('#singlediv').remove();
+            }
+    }
+
 </script>
 </html>

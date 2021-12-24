@@ -33,7 +33,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <div class="form-group">
                                             {!! Form::label('Date d’ouverture', 'Date d’ouverture') !!}<span class="invalid-error text-danger"> *</span>
@@ -41,12 +41,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <div class="form-group">
                                         {!! Form::label('Direction', 'Direction') !!}<span class="invalid-error text-danger"> *</span>
                                         {!! Form::text('direction',NULL, ['class' => 'form-control inputicon2','id'=>'direction']) !!}
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
 
 

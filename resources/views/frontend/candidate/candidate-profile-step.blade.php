@@ -59,22 +59,25 @@
                                     <div class="col-md-6 customcol-6 pb-2">
                                         <div class="form-group  mb-4 personinfo-form">
                                             <label>Prénom</label>
-                                            <input type="text" name="first_name" id="first_name" class=" form-control input-info" placeholder="Felix">
+                                            <input type="text" name="first_name" id="first_name" value="{{$updateUser->first_name}}" class=" form-control input-info" placeholder="Felix">
                                             <span style="color: red;" class="error" id="first_nameerror"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-6 customcol-6 pb-2">
                                         <div class="form-group  mb-4 personinfo-form">
                                             <label>Nom de famille</label>
-                                            <input type="text" name="last_name" id="last_name" class=" form-control input-info" placeholder="Harris">
+                                            <input type="text" name="last_name" value="{{$updateUser->last_name}}" id="last_name" class=" form-control input-info" placeholder="Harris">
                                             <span style="color: red;" class="error" id="last_nameerror"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-6 customcol-6 pb-2">
-                                        <div class="form-group  mb-4 personinfo-form">
-                                            <label>Civilité</label>
-                                            <input type="text" name="civility" id="civility" class=" form-control input-info" placeholder="M.">
-                                            <span style="color: red;" class="error" id="civilityerror"></span>
+                                    <div class="form-group  mb-4 personinfo-form">
+                                            <label class="">Civilité<span class="text-danger">*</span></label>
+                                            <select class="cus-drop pl-23 select2 form-add-establish" name="civility" style="width: 100%;">
+                                                <option value="Mr">M.</option>
+                                                <option value="Mrs">Madame.</option>
+                                            </select>
+                                            <span class="civility-error text-danger">@error ('civility') {{$message}} @enderror</span>
                                         </div>
                                     </div>
                                     <div class="col-md-6 customcol-6 pb-2">
@@ -87,7 +90,7 @@
                                     <div class="col-md-6 customcol-6 pb-2">
                                         <div class="form-group  mb-4 personinfo-form">
                                             <label>E-mail</label>
-                                            <input type="text" name="email" id="email" class=" form-control input-info" placeholder="felixharris123@email.com">
+                                            <input type="text" value="{{$updateUser->email}}" name="email" id="email" class=" form-control input-info" placeholder="felixharris123@email.com">
                                             <span style="color: red;" class="error" id="emailerror"></span>
                                         </div>
                                     </div>
@@ -115,12 +118,12 @@
                                 </div>
                             </div>
                         </div>
+                         <div class="text-right">
+                         <button type="button" class="btn eng-btn mb-20 mr-3 w-200px" id="step1-btn">Etape suivante</button>
+                          </div>
                     </div>
                 </div>
-                <div class="text-right">
-                    <button type="button" class="btn eng-btn mb-20 mr-3 w-200px" id="step1-btn">Etape suivante</button>
-                </div>
-            </form>
+             </form>
         </div>
 
         <div id="step2-sec" style="display: none;">
@@ -179,11 +182,12 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="text-right">
+                            <button type="button" class="btn eng-btn mb-20 mr-3 w-200px" id="step2-btn">Etape suivante</button>
+                        </div>
                     </div>
                 </div>
-                <div class="text-right">
-                    <button type="button" class="btn eng-btn mb-20 mr-3 w-200px" id="step2-btn">Etape suivante</button>
-                </div>
+               
             </form>
         </div>
 
@@ -284,12 +288,13 @@
                             </div>
 
                         </div>
-                    </div>
-                </div>
-                <div class="text-right">
+                        <div class="text-right">
                     <button type="button" class="btn eng-btn mb-20 mr-3 w-200px" id="step3-btn">Etape
                         suivante</button>
                 </div>
+                    </div>
+                </div>
+               
             </form>
         </div>
 
@@ -389,11 +394,12 @@
 
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="text-right">
+                        <div class="text-right">
                     <button type="button" class="btn eng-btn mb-20 mr-3 w-200px" id="step4-btn">Etape suivante</button>
                 </div>
+                    </div>
+                </div>
+               
             </form>
         </div>
 
@@ -575,7 +581,7 @@
         } else {
             $("#last_nameerror").html("");
         }
-        if (civility.trim() == '') {
+        if (civility == '') {
             $("#civilityerror").html("Please enter civility");
             temp++;
         } else {

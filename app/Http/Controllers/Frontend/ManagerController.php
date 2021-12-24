@@ -96,7 +96,7 @@ class ManagerController extends Controller
         $data['myJobList'] = Job::where('user_id', $id)->paginate(10);
         $data['remaining'] = Job::where('created_at', '>=', Carbon::now())->get();
         $data['deleted'] = Job::onlyTrashed()->get();
-        $data['myEstablishmentList'] = Establishment::where('user_id', $id)->get();
+        $data['myEstablishmentList'] = Establishment::where('user_id', $id)->where('type','!=','Default')->get();
         if ($userType == 2) {
             if (auth()->guard('web')->user()->establishment_management=="single") {
                 $EstablishmentDetails=Establishment::where('user_id', $id)->orderBy('id','DESC')->first();

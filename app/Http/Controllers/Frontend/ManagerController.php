@@ -251,4 +251,9 @@ class ManagerController extends Controller
 
         return view('frontend.manager.chatbox', $data);
     }
+
+    public function managerRegisterStepTwo(Request $request)
+    {
+        return view('frontend.manager.manager_register_step_two');
+    }
 }

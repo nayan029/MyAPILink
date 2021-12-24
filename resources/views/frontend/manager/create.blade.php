@@ -538,12 +538,57 @@
             success: function(response) {
                 console.log(response.success);
                 if (response.success == true) {
+                   
                     // $('#appointment3').modal('show');     //Message come from controller
                     toastr.success(response.message);
                     setTimeout(function() {
                         $('.invisible').trigger('click');
                         $('#regform')[0].reset();
                     }, 2000);
+                    if(response.data.establishment_management=='single'){
+                               $.ajax({
+            url: url,
+            method: 'POST',
+            data: $('#regform').serialize(),
+            success: function(response) {
+                console.log(response.success);
+                if (response.success == true) {
+                   
+                    // $('#appointment3').modal('show');     //Message come from controller
+                    toastr.success(response.message);
+                    setTimeout(function() {
+                        $('.invisible').trigger('click');
+                        $('#regform')[0].reset();
+                    }, 2000);
+                    if(response.data.establishment_management=='single'){
+                        location.href = "{{URL::to('/')}}/manager-register-step-two"
+                    }
+                    $(this).text("S'inscrire");
+                    $(this).text('En traitement...');
+                    $(this).prop('disabled', true);
+                    $(this).prop('disabled', false);
+
+                } else {
+                    $('.civility-error').text(response.errors.civility);
+                    $('.firstname-error').text(response.errors.first_name);
+                    $('.lastname-error').text(response.errors.last_name);
+                    $('.phone-error').text(response.errors.phone);
+                    $('.email-error').text(response.errors.email_address);
+                    $('.password-error').text(response.errors.password);
+                    $('.password_confirmation-error').text(response.errors.confirm_password);
+                    $('.radio-error').text(response.errors.radio);
+                    $('.represent-error').text(response.errors.represent);
+                    $('.organization-error').text(response.errors.name_of_our_organization);
+                    $('.establish-error').text(response.errors.number_of_establishments_in_the_organization);
+                    $('.address-error').text(response.errors.organization_address);
+                    $('.postal-error').text(response.errors.postal_code);
+                    $('.city-error').text(response.errors.city);
+
+                }
+            }
+        });
+                        location.href = "{{URL::to('/')}}/manager-register-step-two"
+                    }
                     $(this).text("S'inscrire");
                     $(this).text('En traitement...');
                     $(this).prop('disabled', true);

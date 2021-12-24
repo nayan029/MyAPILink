@@ -88,7 +88,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('email-verify/{email}', 'RegistrationController@getEmailVerify')->name('email.verify');
 
     $frontRoute->get('manager/email-verify/{email}', 'ManagerController@getEmailVerify')->name('manager.email.verify');
-
+    $frontRoute->get('manager-register-step-two/{id}', 'ManagerController@managerRegisterStepTwo')->name('manager-register-step-two');
+    $frontRoute->post('manager-register-step-two-insert', 'ManagerController@managerRegisterStepTwoInsert')->name('manager-register-step-two-insert');
     //start profile route step
     $frontRoute->get('candidate-profile/{userid}', 'RegistrationController@candidateProfileStep')->name('candidate.profile');
     $frontRoute->get('candidate/resumedownaload/{userid}', 'RegistrationController@candidateDownloadResume')->name('candidate.resume');
@@ -133,8 +134,8 @@ Route::middleware(['auth:web'])->group(function ($route) {
 
         $frontRoute->get('manager-profile', 'ManagerController@profile')->name('profile');
         
-        $frontRoute->get('manager-register-step-two', 'ManagerController@managerRegisterStepTwo')->name('manager-register-step-two');
-
+       
+      
         $frontRoute->post('update-profile', 'ManagerController@updateProfile')->name('update-profile');
         $frontRoute->get('account-setting', 'ManagerController@accountSetting')->name('account-setting');
         $frontRoute->post('update-password', 'ManagerController@updatePassowrd')->name('update-password');

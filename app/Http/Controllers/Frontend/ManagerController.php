@@ -40,13 +40,13 @@ class ManagerController extends Controller
 
     ];
     protected $applyJobRepository = "";
-    protected $candidateRepository ="";
+    protected $candidateRepository = "";
 
-    public function __construct(ManagerRepositoryInterface $managerRepository, ApplyJobRepositoryInterface $applyJobRepository,CandidateRepositoryInterface $candidateRepository)
+    public function __construct(ManagerRepositoryInterface $managerRepository, ApplyJobRepositoryInterface $applyJobRepository, CandidateRepositoryInterface $candidateRepository)
     {
         $this->managerRepository = $managerRepository;
-        $this->applyJobRepository =$applyJobRepository;
-        $this->candidateRepository=$candidateRepository;
+        $this->applyJobRepository = $applyJobRepository;
+        $this->candidateRepository = $candidateRepository;
     }
 
     public function index()
@@ -79,12 +79,14 @@ class ManagerController extends Controller
 
         $storeProfile = $this->managerRepository->StoreProfile($request);
 
+
         if ($storeProfile) {
 
             return response()->json(
                 [
                     'success' => true,
-                    'message' => 'Registered Sucessfully'
+                    'message' => 'Registered Sucessfully',
+                    'data' => $storeProfile
                 ]
             );
         }
@@ -101,17 +103,16 @@ class ManagerController extends Controller
         $data['myJobList'] = Job::where('user_id', $id)->paginate(4);
         $data['remaining'] = Job::where('created_at', '>=', Carbon::now())->get();
         $data['deleted'] = Job::onlyTrashed()->get();
-        $data['myEstablishmentList'] = Establishment::where('user_id', $id)->where('type','!=','Default')->get();
+        $data['myEstablishmentList'] = Establishment::where('user_id', $id)->where('type', '!=', 'Default')->get();
         if ($userType == 2) {
-            if (auth()->guard('web')->user()->establishment_management=="single") {
-                $EstablishmentDetails=Establishment::where('user_id', $id)->orderBy('id','DESC')->first();
-                return redirect('view-establishment-account/'.$EstablishmentDetails->id);
-            }else{
+            if (auth()->guard('web')->user()->establishment_management == "single") {
+                $EstablishmentDetails = Establishment::where('user_id', $id)->orderBy('id', 'DESC')->first();
+                return redirect('view-establishment-account/' . $EstablishmentDetails->id);
+            } else {
                 return view('frontend.manager.manager-profile', $data);
             }
-            
-        }elseif($userType == 1) {
-           
+        } elseif ($userType == 1) {
+
             return redirect()->route('mycandidate-profile');
         }
     }
@@ -200,7 +201,7 @@ class ManagerController extends Controller
         $searchVal = request('search_val');
         $loginUserId = auth()->user()->id;
         $data['validator'] = JsValidator::make($this->imageValidationRules);
-        $data['userList'] =$userList= $this->applyJobRepository->chatUserList();
+        $data['userList'] = $userList = $this->applyJobRepository->chatUserList();
         $receiverarray = array();
         $senderarray = array();
         $checkChatData = array();
@@ -216,7 +217,7 @@ class ManagerController extends Controller
             }
         }
         foreach ($opponent as $kkkey) {
-            $detailsData = $this->managerRepository->managerChatList($kkkey,$loginUserId);
+            $detailsData = $this->managerRepository->managerChatList($kkkey, $loginUserId);
             $checkChatData[] = $detailsData;
         }
         $data['chatList'] = $checkChatData;
@@ -227,33 +228,47 @@ class ManagerController extends Controller
     public function getEmailVerify($email)
     {
         $managerlogin = $this->managerRepository->getManagerEmailVerify($email);
-        if($managerlogin)
-        {
-            Session::flash('success','Email has been verified successfully..');
+        if ($managerlogin) {
+            Session::flash('success', 'Email has been verified successfully..');
             return redirect()->route('profile');
-        }else{
-            Session::flash('error','Email has been already verified so now you can login');
+        } else {
+            Session::flash('error', 'Email has been already verified so now you can login');
             return redirect()->route('registration');
         }
-        $userList=$this->applyJobRepository->chatUserList();
-        
-      
+        $userList = $this->applyJobRepository->chatUserList();
+
+
 
         return view('frontend.manager.chat_index', $data);
     }
     public function messageListAjax(Request $request)
     {
         $data['id'] = $request->id;
-        $data['reciverid'] =$request->reciverid;
-        $data['reciverData'] = $this->candidateRepository->getReciverData($request->reciverid);  
+        $data['reciverid'] = $request->reciverid;
+        $data['reciverData'] = $this->candidateRepository->getReciverData($request->reciverid);
         $data['validator'] = JsValidator::make($this->imageValidationRules);
-        $data['messagelist'] =  $this->candidateRepository->getAllMessage($request->id,$request->reciverid);
+        $data['messagelist'] =  $this->candidateRepository->getAllMessage($request->id, $request->reciverid);
 
         return view('frontend.manager.chatbox', $data);
     }
 
-    public function managerRegisterStepTwo(Request $request)
+    public function managerRegisterStepTwo(Request $request, $id)
     {
-        return view('frontend.manager.manager_register_step_two');
+        $data['id'] = $id;
+        return view('frontend.manager.manager_register_step_two', $data);
+    }
+
+
+    public function managerRegisterStepTwoInsert(Request $request)
+    {
+
+
+        $data = $this->managerRepository->stepTwoInsert($request);
+        if ($data) {
+            Session::flash('success', 'Successfully Inserted');
+            return redirect()->route('dashboard');
+        }
+        Session::flash('error', 'Sorry, something went wrong. please try again.');
+        return redirect()->back();
     }
 }

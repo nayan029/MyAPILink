@@ -7,7 +7,7 @@
 
 <section>
         <div class="atext-pos pt-90px">
-            <img src="images/profile-background.png" alt="profile page background image" class="w-100 prof-resimg">
+            <img src="{{asset('frontend/images/profile-background.png')}}" alt="profile page background image" class="w-100 prof-resimg">
             <a href="" class="back link_a pos-img-link">
                 <span><i class="fa fa-angle-left mr-2"></i></span>Retour à mon profil
             </a>
@@ -17,7 +17,7 @@
                 <div class="col-lg-3 col-md-4 col-9">
 
                     <div class="profile-img">
-                        <img src="images/profile.png" alt="profile image">
+                        <img src="{{asset('frontend/images/project/mont1.svg')}}" alt="profile image">
 
                     </div>
                 </div>
@@ -84,7 +84,8 @@
 
             </div>
         </div>
-
+        <form action="{{ route('manager-register-step-two-insert') }}" method="POST" enctype="multipart/form-data">
+        @csrf
         <div class="tab-content sr-tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                 <section class="prof-backsec">
@@ -100,14 +101,14 @@
                                                 <div class="fileUpload btn btn-primary attach-file">
                                                     <span><i class="fa fa-paperclip mr-2"></i>Attacher un
                                                         document</span>
-                                                    <input id="uploadBtn" type="file" class="upload">
+                                                    <input id="uploadBtn" type="file" name="document[]" multiple class="upload">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-10">
                                         <section>
-                                            <form action="" method="POST" enctype="multipart/form-data">
+                                          
                                                 <div class="container">
                                                     <div class="row">
                                                         <div class="col-md-12 p-0">
@@ -122,19 +123,20 @@
                                                                 </div>
                                                                 <div class="dropzone-wrapper">
                                                                     <div class="dropzone-desc">
-                                                                        <img src="images/profile-feather-upload.svg" width="30px" class="mb-1">
+                                                                        <img src="{{asset('frontend/images/profile-feather-upload.svg')}}" width="30px" class="mb-1">
                                                                         <!-- <i class="glyphicon glyphicon-download-alt"></i> -->
                                                                         <p>Drag and drop here or<span style="color:#192842;font-family: 'Quicksand-Bold'">
                                                                                 Browse</span> </p>
                                                                     </div>
-                                                                    <input type="file" name="img_logo" class="dropzone">
+                                                                    <input type="file" name="more_infomation[]" multiple class="dropzone">
+                                                                <input type="hidden" name="user_id" value="{{$id}}" >
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                 </div>
-                                            </form>
+                                            
                                         </section>
                                         <div class="border-grays mt-3"></div>
 
@@ -146,7 +148,7 @@
                                         </div>
 
                                         <div class="text-center je-btn-pd">
-                                            <button data-dismiss="modal" data-toggle="modal" data-target="#appointment3" class="btn btn-yellow">Je prends un rendez-vous</button>
+                                            <button type="submit" data-dismiss="modal" data-toggle="modal" data-target="#appointment3" class="btn btn-yellow">Je prends un rendez-vous</button>
                                         </div>
                                     </div>
                                 </div>
@@ -158,14 +160,14 @@
                 </section>
             </div>
         </div>
-
+        </form>
         <!-- modal appointment popup-3-->
         <div class="modal modal-back-blue fade" id="appointment3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog center-modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header resume_header border-0">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"><img src="images/material-close.svg"></span>
+                            <span aria-hidden="true"><img src="{{asset('frontend/images/material-close.svg')}}"></span>
                         </button>
                     </div>
                     <div class="modal-body bravo-body">
@@ -174,7 +176,7 @@
                                 <h3>BRAVO !</h3>
                             </div>
                             <div>
-                                <img src="images/project/green-checkmark.svg" alt="checkmark" class="green-checkmarks">
+                                <img src="{{asset('frontend/images/project/green-checkmark.svg')}}" alt="checkmark" class="green-checkmarks">
                                 <p class="modalappoint-text">Un conseiller Apilink vous contactera <br>par email pour prendre un
                                     <br> rendez vous téléphonique
                                 </p>

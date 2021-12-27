@@ -60,7 +60,7 @@ class EstablishmentController extends Controller
 
         if ($storeProfile) {
             Session::flash('success', 'Successfully Inserted');
-            return redirect('/view-establishment-account/' . $storeProfile->id);
+            return redirect('manager-profile');
         }
         Session::flash('error', 'Sorry, something went wrong. please try again.');
         return redirect()->back();

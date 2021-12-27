@@ -34,15 +34,10 @@
                                     <div class="col-md-12">
                                         {!! Form::label('Date d’ouverture', 'Date d’ouverture') !!}<span class="invalid-error text-danger">*</span>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-group">
-                                            {!! Form::text('opening_date',$establishment->opening_date, [ 'id' => 'opening_date', 'class' => 'datepicker1 form-control  form-add-establish inputicon2 fn-family']) !!}
+                                            {!! Form::date('opening_date',$establishment->opening_date, [ 'id' => 'opening_date', 'class' => 'form-control  form-add-establish inputicon2 fn-family']) !!}
 
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            {!! Form::select('year',['Année' => 'Année'], $establishment->year, [ 'id' => 'year', 'class' => 'cus-drop select2 form-add-establish']) !!}
                                         </div>
                                     </div>
                                 </div>

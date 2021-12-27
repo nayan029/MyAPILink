@@ -135,9 +135,6 @@ Route::middleware(['auth:web'])->group(function ($route) {
     $route->group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontRoute) {
 
         $frontRoute->get('manager-profile', 'ManagerController@profile')->name('profile');
-        
-       
-      
         $frontRoute->post('update-profile', 'ManagerController@updateProfile')->name('update-profile');
         $frontRoute->get('account-setting', 'ManagerController@accountSetting')->name('account-setting');
         $frontRoute->post('update-password', 'ManagerController@updatePassowrd')->name('update-password');

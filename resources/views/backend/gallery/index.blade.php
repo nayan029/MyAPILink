@@ -7,12 +7,59 @@
     }
 </style>
 <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="{{asset('admin/plugins/daterangepicker/daterangepicker.css')}}">
 <!--
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
 -->
 @endsection
 @section('content')
 <!-- Main content -->
+<div class="row">
+		
+			<div class="col-12">
+                <form action="#" class="gallery_form">
+				<div class="card">
+					<div class="card-body">
+						<div class="row">
+							<!-- <div class="col-md-4">
+							  <div class="form-group">
+								<label for="name">{{__("messages.gallerygroup.datetime")}}</label>
+								<input class="form-control" value="" name="datetime" type="text" placeholder="Name" id="name">
+							 </div>
+							</div> -->
+
+                            <div class="col-md-4">
+                                <label for="name">{{__("messages.gallerygroup.datetime")}}</label>
+                                <input type="text" class="form-control float-right" id="daterange" name="daterange">
+                                <input type="hidden" name="date_start" id="date_start">
+                                <input type="hidden" name="date_end" id="date_end">
+                            </div>
+						
+							<div class="col-md-4">
+							  <div class="form-group">
+								<label for="name">{{__("messages.gallerygroup.status")}}</label>
+                                <select name="gallerystatus" id="gallerystatus" class="form-control">
+                                    <option value="">Select Status</option>
+                                    <option value="accept">Accept</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="reject">Reject</option>                                
+                                </select>
+							</div>
+							</div>
+                            <div class="col-md-4">
+							  <div class="form-group">
+                              <button type="button" class="btn btn-primary" id="search_Id" >	{{__("messages.gallerygroup.filter")}}</button>
+                              <a href="{{url('gallery')}}"> <button type="button" class="btn btn-default">{{__("messages.gallerygroup.reset")}}</button></a>
+							 </div>
+							</div>
+						</div>
+					</div>
+				 </div>
+                 </form>
+			</div>
+        
+</div>
 
 <div class="row">
     <div class="col-12">
@@ -27,8 +74,9 @@
                         <tr>
                             <th>{{__("messages.gallerygroup.image")}}</th>
                             <th>{{__("messages.gallerygroup.status")}}</th>
+                            <th>{{__("messages.gallerygroup.datetime")}}</th>
+                            <th>{{__("messages.gallerygroup.uploadby")}}</th>
                             <th>{{__("messages.gallerygroup.action")}}</th>
-
                         </tr>
                     </thead>
 
@@ -49,10 +97,39 @@
 @section('script')
 <!-- DataTables  & Plugins -->
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script src="{{asset('admin/plugins/daterangepicker/daterangepicker.js')}}"></script>
 <!-- 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 -->
+
+<script type="text/javascript">
+    $(function() {
+        $('input[name="daterange"]').daterangepicker({
+            timePicker: true,
+            autoUpdateInput: false,
+            locale: {
+                cancelLabel: 'Clear'
+            },
+            format: "DD/MM/YYYY H:i",
+            startDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
+            endDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
+            minDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
+        });
+
+        $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+            $("#date_start").val(picker.startDate.format('DD/MM/YYYY'));
+            $("#date_end").val(picker.endDate.format('DD/MM/YYYY'));
+        });
+
+        $('input[name="daterange"]').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+        });
+
+    });
+</script>
 <script>
     $(document).ready(function() {
         loadData();
@@ -64,13 +141,13 @@
     });
 
     function loadData() {
-
+        var formData = $('.gallery_form').serialize();
         $('#job-table').DataTable({
             "processing": false,
             "serverSide": true,
             "searching": false,
             "ajax": {
-                url: "{{ route('gallery.data') }}?",
+                url: "{{ url('getGalleryData') }}?"+formData,
                 method: "get"
             }
         });

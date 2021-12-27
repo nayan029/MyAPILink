@@ -28,8 +28,9 @@ class GalleryRepository implements GalleryRepositoryInterface
             1 => 'establishment_gallery.status',
             2 => 'establishment_gallery.status',
         );
+        // dd($request->gallerystatus);
 
-        $query = EstablishmentGallery::select('*');
+        $query = EstablishmentGallery::with('establishment')->select('*');
         /*  if ($request->query('title') != '') {
             $query->whereRaw('title LIKE "%' . $request->query('title') . '%"');
         }
@@ -40,8 +41,14 @@ class GalleryRepository implements GalleryRepositoryInterface
         if ($request->query('minimum_experience') != '') {
             $query->whereRaw('minimum_experience LIKE "%' . $request->query('minimum_experience') . '%"');
         } */
+        $query = EstablishmentGallery::with('establishment')->select('*');;
+        if ($request->gallerystatus !='') {
+            $query->where('status',$request->gallerystatus);
+        }
+
 
         $recordstotal = $query->count();
+        // dd($recordstotal);
         $sortColumnName = $sortcolumns[$order[0]['column']];
 
         $query->orderBy($sortColumnName, $order[0]['dir'])
@@ -56,9 +63,11 @@ class GalleryRepository implements GalleryRepositoryInterface
         );
 
         $gallery = $query->orderBy('created_at', 'desc')->get();
+        // dd($gallery);
+        
         foreach ($gallery as $data) {
-
             $image = "<img src='" . $data->image . "' height='30px' width='30px'></img>";
+            $dateTime = date('d-m-Y H:i A',strtotime($data->created_at));
             $action = "<i class='fa fa-check' style='color:green' title='Approve' onclick='openSwal(1," . $data->id . ")'></i>&nbsp;&nbsp;<i class='fa fa-times' title='Reject' style='color:red' onclick='openSwal(2," . $data->id . ")'></i>";
             if ($data->status == "accept") {
                 $class = 'success';
@@ -67,10 +76,14 @@ class GalleryRepository implements GalleryRepositoryInterface
             } else {
                 $class = 'primary';
             }
-            $status = "<span class='badge badge-" . $class . " status'>" . ucfirst($data->status) . "</span>";
+         
+            $userName=!empty($data->establishment->getUserList) ? $data->establishment->getUserList["first_name"].' '.$data->establishment->getUserList["last_name"]: 'N/A';
+            $status = "<span class='badge badge-" . $class . " status' id=".$data->id.">" . ucfirst($data->status) . "</span>";
             $json['data'][] = [
                 $image,
                 $status,
+                $dateTime,
+                $userName,
                 $action,
 
             ];

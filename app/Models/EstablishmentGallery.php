@@ -11,4 +11,9 @@ class EstablishmentGallery extends Model
     protected $guarded = ['id'];
     protected $dates = ['deleted_at'];
     protected $table = 'establishment_gallery';
+    
+    public function establishment()
+    {
+        return $this->hasOne(Establishment::class,'id','establishment_id');
+    }
 }

@@ -92,16 +92,16 @@ class ApplyJobRepository implements ApplyJobRepositoryInterface
     }
 
     public function chatJobList()
-    {
+    {   
         return  ApplyJob::with('jobApplay','getEstablishmentList')->where('is_apply', 1)->where('deleted_at', NULL)->where('user_id', auth()->guard('web')->user()->id)->get();
     }
-    public function chatUserList(){
+    public function chatUserList()
+    {
         return ChatMaster::where(function ($query) {
-            $query->where('reciver_id',auth()->guard('web')->user()->id)
-                  ->orWhere('sender_id',auth()->guard('web')->user()->id);
-                })->GroupBy('sender_id','reciver_id')->where('deleted_at', NULL)
-                ->with('getUserReciverData','getUserSenderData')
-                ->get();
+            $query->where('reciver_id', auth()->guard('web')->user()->id)
+                ->orWhere('sender_id', auth()->guard('web')->user()->id);
+        })->GroupBy('sender_id', 'reciver_id')->where('deleted_at', NULL)
+            ->with('getUserReciverData', 'getUserSenderData')
+            ->get();
     }
-   
 }

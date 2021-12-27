@@ -271,7 +271,6 @@
                                                         <p class="mb-0 offer-app-sec">Educateur Jeunes enfants</p>
                                                         <p class="mb-0 offer-app-sec">{{$jobDetail->minimum_experience}}</p>
                                                     </div>
-
                                                 </div>
                                                 <span class="jobcheck_error text-danger"></span>
                                             </div>
@@ -493,11 +492,12 @@
 
     });
 
-    $(document).on("click", ".tosend-btn", function() {
+    $(document).on("click", ".btn-light-accept,.btn-blue-refuse", function() {
+        $('#message-modal').modal('hide');
+        $('#refusal-modal').modal('hide');
         $('.jobcheck_error').html('');
-        if ($('input[name="jobCheck"]:checked').length == 0) {
-            $('.jobcheck_error').html("please select atleast one user");
-            $('#message-modal').modal('hide');
+        if ($('#customRadio1[value="jobcheck"]:checked').length == 0) {
+            $('.jobcheck_error').html("please select atleast one user");       
         } else {
             $('#message-modal').modal('show');
         }

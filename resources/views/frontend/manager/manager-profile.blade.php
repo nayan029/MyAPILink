@@ -479,34 +479,25 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            @endforeach                                        
+                                            @endforeach
                                         </div>
                                         <div class="custom-pagination pt-5 pb-3">
                                             <nav aria-label="Page navigation example">
                                                 <ul class="pagination justify-content-center">
-                                                    {{$deleted}}
-                                                    {{$deleted->appends(request()->except('page'))->links("pagination::bootstrap-4")}}
                                                 </ul>
                                             </nav>
                                         </div>
                                         @else
-                                            <p class="text-center">No Job Data Found!..</p>
-                                            @endif
+                                        <p class="text-center">No Job Data Found!..</p>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
             </section>
         </div>
-
-
     </div>
-
-
-
 </section>
 @endsection
 @section('script')

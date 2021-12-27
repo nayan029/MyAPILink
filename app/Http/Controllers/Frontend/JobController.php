@@ -86,8 +86,7 @@ class JobController extends Controller
         if (!empty(request('contact_thorugh'))) {
             $contactThrough = implode(',', request('contact_thorugh'));
         }
-       
-       
+
         $certificationArray = array(
             'user_id' => $id,
             'title' => request('title'),
@@ -110,8 +109,8 @@ class JobController extends Controller
             'job_description' => request('job_description'),
             'employment_mission' => request('job_mission'),
             'what_you_are_looking' => request('what_you_are_looking_for'),
-           
-          
+
+
         );
 
         if (!empty($editId)) {

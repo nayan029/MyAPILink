@@ -3,6 +3,7 @@
 <title>ApiLink | Dashboard</title>
 @endsection
 @section('content')
+
 <section class="hero-index" style="background-image: linear-gradient(180deg, rgb(0 0 0 / 70%), rgb(0 0 0 / 70%)), url('frontend/images/index-bg.png');opacity: 0.8;">
     <div class="index-gradient"></div>
     <div class="container">
@@ -148,7 +149,7 @@
                             <ul class="les-professional-ul">
                                 @foreach($sk->positions as $position)
                                 <a href="javascript:void(0);" class="btn-show" data-id="{{$position->id}}">
-                                    <li>- {{$position->position}}-{{$position->title}}</li>
+                                    <li style="color:#192843">- {{$position->position}}-{{$position->title}}</li>
                                 </a>
                                 @endforeach
                             </ul>
@@ -188,8 +189,6 @@
             </div>
             <div class="modal-body resume_modal">
                 <div class="candidate_modal">
-
-
                     <h4 class="mb-3 main_title main-title">-<h3 class="mb-3 position"></h3>
                     </h4>
                     <div class="candidate_modal_title">
@@ -197,10 +196,12 @@
                         <textarea class="candidate-modal-textarea desc" id="summernote">
                         </textarea>
                         <div class="text-center pt-4 pb-3">
+
                             <button class="btn btn-blue btn-skyblue ml-auto" type="button" data-toggle="modal" data-target="#header-Modallogin1" id="new-industry">Je crée
                                 mon
                                 profil
                                 professionnel pour ce poste</button>
+
                         </div>
                     </div>
                 </div>
@@ -253,16 +254,16 @@
     </div>
 </section>
 
-
+<!-- 
 <div class="modal fade" id="header-Modallogin1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog login-modal-dialog" role="document">
         <div class="modal-content">
-            <!-- <div class="modal-header">
+        <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true"><img src="images/material-close.svg"></span>
                 </button>
             </div> -->
-            <div class="modal-body login-modal-body">
+<!-- <div class="modal-body login-modal-body">
                 <div class="">
                     <div class="lmodal-logo">
                         <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="">
@@ -334,10 +335,10 @@
                             </div>
 
                             <div class="col-md-12 text-center res-dec mt-3 mb-3 ">
-                                <!-- <a href="engagement-step1.html" class="btn btn-blue w-100">S'inscrire</a> -->
-                                <!-- <a class="btn btn-blue w-100" id="bravo-btn">S'inscrire</a> -->
+                                <a href="engagement-step1.html" class="btn btn-blue w-100">S'inscrire</a> -->
+<!-- <a class="btn btn-blue w-100" id="bravo-btn">S'inscrire</a> -->
 
-                                <button type="button" class="btn btn-blue w-100 registerUser" id="registerUser">S'inscrire</button>
+<!-- <button type="button" class="btn btn-blue w-100 registerUser applywithposition" id="registerUser">S'inscrire</button>
                             </div>
 
                             <div class="col-md-12 text-center res-dec mt-3">
@@ -352,7 +353,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 
 <!-- header modal1 -->
@@ -486,6 +487,7 @@
                 $('#summernote').html(data.skillData.desc);
                 $('.position').text(data.skillData.title);
                 $('#Modaljob-desc').modal('show');
+                $("#new-industry").attr('data-save-id', id);
             },
             error: function(data) {
                 console.log('Failed');
@@ -494,10 +496,50 @@
             }
         });
     });
+
     $(document).on('click', '.btn-skyblue', function() {
+        var positionid = $(this).attr('data-save-id');
         $('#header-Modallogin1').modal('show');
+        $(".registerUser").attr('position-id',positionid);
         $('#Modaljob-desc').modal('hide');
     });
+
+    // $(document).on('click', '#registerUser', function() {
+    //     var token = $("meta[name='csrf-token']").attr("content");
+    //     var formData = $('#register_form_data').serialize();
+    //     var posid = $(this).attr('position-id');
+    //     alert(posid);
+    //     $.ajax({
+    //         url: "{{ route('registration.save') }}",
+    //         method: 'post',
+    //         data: {
+    //             formData,
+    //             'posid': posid
+    //         },
+    //         success: function(response) {
+    //             if (response.success == true) {
+    //                 toastr.success(response.message);
+    //                 setTimeout(function() {
+    //                     $('#header-Modallogin1').modal('hide');
+    //                     $('.invisible').trigger('click');
+    //                     $("#register_form_data")[0].reset();
+    //                 }, 2000);
+    //             }
+    //         },
+    //         error: function(response) {
+    //             $('#firstname-error').text(response.responseJSON.errors.first_name);
+    //             $('#lastname-error').text(response.responseJSON.errors.last_name);
+    //             $('#email-error').text(response.responseJSON.errors.email);
+    //             $('#phone-error').text(response.responseJSON.errors.phone);
+    //             $('#password-error').text(response.responseJSON.errors.password);
+    //             $('#terms-error').text(response.responseJSON.errors.terms);
+    //             $('#accept_sensitive_data-error').text(response.responseJSON.errors.terms);
+    //         }
+    //     });
+
+    // });
+
+
     $(document).on('click', '.openRegister', function() {
         $("#header-Modallogin1").modal('show');
         $("#Modallogin2").modal('hide');

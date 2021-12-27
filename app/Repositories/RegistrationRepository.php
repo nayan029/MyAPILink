@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Repositories;
+
 use App\Interfaces\RegistrationRepositoryInterface;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
@@ -12,15 +14,16 @@ class RegistrationRepository implements RegistrationRepositoryInterface
 {
     public function createRegistration($request)
     {
-        try {
 
+        try {
             $data = [
+                'position_id' => $request->posid,
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'email' => $request['email'],
                 'password' => Hash::make($request->password),
                 'phone' => $request->phone,
-                'user_type' => 1
+                'user_type' => '1'
             ];
             $user = User::create($data);
             $URL = route('email.verify', $user->email);
@@ -52,10 +55,11 @@ class RegistrationRepository implements RegistrationRepositoryInterface
         }
     }
 
+
     public function verifyEmail($email)
     {
         $verifyUser = User::where('email', $email)->where('verify_email', 'pending')->first();
-       // $verifyUser = User::where('email', $email)->first();
+        // $verifyUser = User::where('email', $email)->first();
         if ($verifyUser) {
             $verifyUser->verify_email = 'accept';
             $verifyUser->update();
@@ -65,52 +69,48 @@ class RegistrationRepository implements RegistrationRepositoryInterface
         }
     }
 
-    public function updateCandidateProfileStep(Request $request,$userid)
+    public function updateCandidateProfileStep(Request $request, $userid)
     {
         $data = $request->all();
-        if(isset($data['research']) || isset($data['available_time']))
-        {
-            $data["available_time"] = implode(',',$data['available_time']);
-            $data["research"] = implode(',',$data['research']);
+        if (isset($data['research']) || isset($data['available_time'])) {
+            $data["available_time"] = implode(',', $data['available_time']);
+            $data["research"] = implode(',', $data['research']);
         }
-        if(isset($data['experiences_at']) || isset($data['pedagogy']))
-        {
-            $data["experiences_at"] = implode(',',$data['experiences_at']);
-            $data["pedagogy"] = implode(',',$data['pedagogy']); 
+        if (isset($data['experiences_at']) || isset($data['pedagogy'])) {
+            $data["experiences_at"] = implode(',', $data['experiences_at']);
+            $data["pedagogy"] = implode(',', $data['pedagogy']);
         }
-        if(isset($data['qualities']) || isset($data['languages_spoken']) || isset($data['permit_vehicle']))
-        {
-            $data["qualities"] = implode(',',$data['qualities']);
-            $data["languages_spoken"] = implode(',',$data['languages_spoken']); 
-            $data["permit_vehicle"] = implode(',',$data['permit_vehicle']);
+        if (isset($data['qualities']) || isset($data['languages_spoken']) || isset($data['permit_vehicle'])) {
+            $data["qualities"] = implode(',', $data['qualities']);
+            $data["languages_spoken"] = implode(',', $data['languages_spoken']);
+            $data["permit_vehicle"] = implode(',', $data['permit_vehicle']);
         }
 
-        if(isset($data['kmmin']))
-        {
-            $data["km_rang"] = $data['kmmin'].','.$data['kmmax'];
+        if (isset($data['kmmin'])) {
+            $data["km_rang"] = $data['kmmin'] . ',' . $data['kmmax'];
         }
-       $userProfile =  User::findorfail($userid);
-       $userProfile->update($data);
-       return $userProfile;
+        $userProfile =  User::findorfail($userid);
+        $userProfile->update($data);
+        return $userProfile;
     }
 
     public function downalodStepResume($userid)
     {
-        
+
         $userData =  User::findorfail($userid);
-        view()->share('userData',$userData);
-        $pdf = PDF::loadView('frontend.candidate.resume-download',$userData);
-        $fileName = 'Resume_'.$userData->first_name.'_'.$userData->last_name.'.pdf';
+        view()->share('userData', $userData);
+        $pdf = PDF::loadView('frontend.candidate.resume-download', $userData);
+        $fileName = 'Resume_' . $userData->first_name . '_' . $userData->last_name . '.pdf';
         return $pdf->download($fileName);
     }
 
     public function directCandidateLogin($userid)
     {
-        $user = User::where('id',$userid)->where('verify_email','accept')->where('deleted_at',null)->first();
-        if($user){
+        $user = User::where('id', $userid)->where('verify_email', 'accept')->where('deleted_at', null)->first();
+        if ($user) {
             Auth::loginUsingId($user->id);
             return true;
-        }else{
+        } else {
             return false;
         }
     }

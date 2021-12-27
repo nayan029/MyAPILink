@@ -42,7 +42,7 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
                 $storeData['image'] = $more_infomation;
                 $storeData['establishment_id'] = $establishment->id;
                 $storeData['user_id'] = auth()->guard('web')->user()->id;
-     EstablishmentGallery::create($storeData);
+                EstablishmentGallery::create($storeData);
             }
         }
 
@@ -53,14 +53,15 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
         return Establishment::where('user_id', auth()->guard('web')->user()->id)->where('id', $id)->firstOrFail();
     }
 
-    public function getJobPostsData($id){
-        return Job::where('user_id',$id)->get();
+    public function getJobPostsData($id)
+    {
+        return Job::where('user_id', $id)->get();
     }
 
     public function update(Request $request, $id)
     {
         $applied_pedagogy = implode(",", $request->applied_pedagogy);
-      
+
         $updateData = [
             'type_of_establishment' => $request->type_of_establishment,
             'own_of_our_structure' => $request->own_of_our_structure,
@@ -77,7 +78,7 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
 
 
         ];
-      
+
         if ($request->hasFile('document')) {
             $files = $request->file('document');
             foreach ($files as $file) {
@@ -117,7 +118,7 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
 
         $storeData['image'] = $image;
         $storeData['establishment_id'] = auth()->guard('web')->user()->id;
-        
+
 
         return EstablishmentGallery::create($storeData);
     }
@@ -128,7 +129,7 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
 
     public function getCandidateGallery()
     {
-        $query = EstablishmentGallery::where('deleted_at', NULL)->where('created_by',auth()->guard('web')->user()->id)->get();
+        $query = EstablishmentGallery::where('deleted_at', NULL)->where('created_by', auth()->guard('web')->user()->id)->get();
         return  $query;
     }
     public function deleteImage($id)
@@ -138,12 +139,11 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
         return $id;
     }
 
-    public function getPostsData($id){
+    public function getPostsData($id)
+    {
         $data['jobListing'] = Job::where('user_id', $id)->paginate(10);
-        $data['remaining'] = Job::where('created_at', '>=', Carbon::now())->where('user_id',$id)->get();
-        $data['deleted'] = Job::onlyTrashed()->where('user_id',$id)->get();
+        $data['remaining'] = Job::where('created_at', '>=', Carbon::now())->where('user_id', $id)->get();
+        $data['deleted'] = Job::onlyTrashed()->where('user_id', $id)->get();
         return $data;
     }
-
-    
 }

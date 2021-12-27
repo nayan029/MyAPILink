@@ -361,7 +361,6 @@
                         <form method="POST" id="mainForm" class="d-content" enctype="multipart/form-data">
                             @method('POST')
                             @csrf
-
                             <button class="btn btn-modals-blue mb-0 cv-radius btn-tele position-relative" id="cv-btn" type="button"><img src="frontend/images/project/feather-download.svg" alt="download" class="mr-3">
                                 <input type="file" class="upload-modal-cv" name="document_name" id="document_name">
                                 Télécharger un cv </button>

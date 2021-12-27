@@ -176,7 +176,7 @@
                             <div class="col-md-7 profile-label">
                                 <div class="management-radios">
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" name="management" class="custom-control-input" value="manage_several" checked>
+                                        <input type="radio" onchange="hideShowStepThree()" name="management" class="custom-control-input" value="multiple" checked>
                                         <div class="custom-management-text">
                                             <p class="manage-textp">Je vais gérer
                                                 plusieurs établissements </p>
@@ -186,7 +186,7 @@
                                 </div>
                                 <div class="management-radios">
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" name="management" class="custom-control-input" value="manage_single">
+                                        <input type="radio" onchange="hideShowStepThree()" name="management" class="custom-control-input" value="single">
                                         <div class="custom-management-text">
                                             <p class="manage-textp">Je vais gérer un seul
                                                 établissement </p>
@@ -223,7 +223,7 @@
 
                         <div class="row justify-content-start">
                             <div class="col-md-11 profile-label">
-                                <div class="row">
+                                <div id="multiplediv" class="row">
                                     <div class="col-md-12 mb-2">
                                         <div class="form-group">
                                             <label class="">Je représente <span class="text-danger">*</span></label>
@@ -253,6 +253,7 @@
 
                                         </div>
                                     </div>
+                                    
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <label class="">Adresse de l'organisation<span class="text-danger">*</span></label>
@@ -272,7 +273,60 @@
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <label class="">Ville<span class="text-danger">*</span></label>
-                                            <input id="city" type="text" name="city" class="form-control form-add-establish pl-23" placeholder="Ville">
+                                            <input id="city" onchange="removeOneDiv()" type="text" name="city" class="form-control form-add-establish pl-23" placeholder="Ville">
+                                            <span class="city-error text-danger">@error ('city') {{$message}} @enderror</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="singlediv" class="row">
+                                    <div class="col-md-12 mb-2">
+                                        <div class="form-group">
+                                            <label class="">Type d'établissement<span class="text-danger">*</span></label>
+                                            <select class="cus-drop pl-23 select2 form-add-establish" name="represent" style="width: 100%;">
+                                                <option value="creche collective">Créche collective</option>
+                                                <option value="private_structure">Créche multi-accueil </option>
+                                                <option value="Créche multi-accueil">Halte garderie</option>
+                                                <option value="Créche municipale">Créche municipale</option>
+                                                <option value="Jardin d'enfants">Jardin d'enfants</option>
+                                                <option value="Micro creche (Prive)">Micro creche (Prive)</option>
+                                                <option value="Créche parentable">Créche parentable</option>
+                                                <option value="Créche prive d'entreprise ou inter-enterpice">Créche prive d'entreprise ou inter-enterpice</option>
+                                                <option value="Créche associative">Créche associative</option>
+                                                <option value="other">Autre </option>
+                                            </select>
+                                            <span class="represent-error text-danger">@error ('represent') {{$message}} @enderror</span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb-2">
+                                        <div class="form-group">
+                                            <label class="">Nom de l'etablissement<span class="text-danger">*</span></label>
+                                            <input id="organization" type="text" name="name_of_our_organization" class="form-control form-add-establish pl-23" placeholder="Nom de notre organisation">
+                                            <span class="organization-error text-danger">@error ('organization') {{$message}} @enderror</span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label class="">Adresse de l'organisation<span class="text-danger">*</span></label>
+                                            <input id="address" type="text" name="organization_address" class="form-control form-add-establish pl-23" placeholder="Adresse de l'organisation">
+                                            <span class="address-error text-danger">@error ('address') {{$message}} @enderror</span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="">Code postal<span class="text-danger">*</span></label>
+                                            <input id="postal_code" type="text" name="postal_code" maxlength="6" onkeypress='return isNumber(event)' class="form-control form-add-establish pl-23" placeholder="Code postal">
+                                            <span class="postal-error text-danger">@error ('postal_code') {{$message}} @enderror</span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label class="">Ville<span class="text-danger">*</span></label>
+                                            <input id="city" type="text" onchange="removeOneDiv()"  name="city" class="form-control form-add-establish pl-23" placeholder="Ville">
                                             <span class="city-error text-danger">@error ('city') {{$message}} @enderror</span>
 
                                         </div>
@@ -516,5 +570,30 @@
         });
     });
 </script>
+<script>
+    $( document ).ready(function() {
+        $('#singlediv').hide();
+});
+    function hideShowStepThree() {
+        var radioValue = $("input[name='management']:checked").val();
+            if(radioValue=="single"){
+                $('#singlediv').show();
+                $('#multiplediv').hide();
+            }else{
+                $('#multiplediv').show();
+                $('#singlediv').hide();
 
+            }
+    }
+
+    function removeOneDiv() {
+        var radioValue1 = $("input[name='management']:checked").val();
+             if(radioValue1=="single"){
+                $('#multiplediv').remove();
+            }else{
+                $('#singlediv').remove();
+            }
+    }
+
+</script>
 </html>

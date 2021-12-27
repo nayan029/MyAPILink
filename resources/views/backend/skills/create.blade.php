@@ -73,7 +73,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             {!! Form::label('desc', 'Description') !!} <span class="text-danger">*</span>
-                            {!! Form::textarea('',null, ['class' => 'form-control ', 'placeholder' => 'Enter description','id'=>'desc']) !!}
+                            {!! Form::textarea('',null, ['class' => 'form-control ', 'placeholder' => 'Enter description','id'=>'summernote']) !!}
                             <div class="error"><span class="descerror"></span></div>
                         </div>
                     </div>

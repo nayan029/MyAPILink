@@ -120,7 +120,7 @@
                     @foreach($jobList as $job)
                     <li class="active">
                         <div class="chatprofile">
-                            <div class="usershortname">CI</div>
+                            <div class="usershortname">{{$job['jobApplay']->title[0]}}</div>
                         </div>@php $revicerId=$job['getEstablishmentList']->user_id @endphp
                         <div onclick="msgbox({{$job->job_id}},{{$revicerId}});" class="chatprofile-content">
                             <h5>{{$job['jobApplay']->title}}</h5>
@@ -176,7 +176,7 @@
 </script>
 <script>
     function sendmessage(id,reciverId) {
-      
+    
         var temp = 0;
         var mess = $("#chatmessage").val();
         var bookingfile = $("#msgfile").val();

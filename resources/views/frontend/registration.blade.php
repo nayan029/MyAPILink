@@ -401,12 +401,13 @@
             method: 'post',
             data: formData,
             success: function(response) {
-                if (response.status == true) {
+                if (response.success == true) {
+                    toastr.success(response.message);
                     setTimeout(function() {
                         $('#header-Modallogin1').modal('hide');
                         $('.invisible').trigger('click');
                         $("#register_form_data")[0].reset();
-                    });
+                    }, 2000);
                 }
             },
             error: function(response) {

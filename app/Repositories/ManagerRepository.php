@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use Exception;
 use App\Models\User;
+use App\Models\ChatMaster;
+use App\Models\Establishment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -15,6 +17,7 @@ class ManagerRepository implements ManagerRepositoryInterface
 {
     public function StoreProfile(Request $request)
     {
+      
         try {
             $storeData = [
                 'civility' => $request->civility,
@@ -36,6 +39,13 @@ class ManagerRepository implements ManagerRepositoryInterface
             ];
             //dd($storeData);
             $manager = User::create($storeData);
+
+            $storeDataEstablishment=array('user_id'=>$manager->id,
+                                            'type' =>"Default",
+                                            'type_of_establishment' => $request->represent,
+                                            'own_of_our_structure' => $request->name_of_our_organization,
+                                        );
+            Establishment::create($storeDataEstablishment);
            
             $URL = route('manager.email.verify', $manager->email);
             $html = "Verify profile <br> <a href='" . $URL . "' target='_blank'>Click Here</a>";
@@ -133,6 +143,10 @@ class ManagerRepository implements ManagerRepositoryInterface
         } else {
             return false;
         }
+    }
+    public function managerChatList($opponent,$loginUserId){
+        return ChatMaster::where('deleted_at',NULL)->whereIn('sender_id', [$opponent, $loginUserId])
+        ->whereIn('reciver_id', [$opponent, $loginUserId])->with('getUserReciverData','getUserSenderData')->first();
     }
     
     

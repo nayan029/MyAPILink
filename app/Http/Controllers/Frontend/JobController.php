@@ -20,7 +20,7 @@ class JobController extends Controller
     protected $jobValidationRules = [
         'title' => 'required|max:25|regex:/^([^0-9]*)$/',
         'address' => 'required',
-        'postal_code' => 'required|digits:6',
+        'postal_code' => 'required|digits:5',
         'city' => 'required',
         'country' => 'required',
         'type_of_contract' => 'required',
@@ -86,7 +86,8 @@ class JobController extends Controller
         if (!empty(request('contact_thorugh'))) {
             $contactThrough = implode(',', request('contact_thorugh'));
         }
-        $count = User::where('user_type', 1)->count();
+       
+       
         $certificationArray = array(
             'user_id' => $id,
             'title' => request('title'),
@@ -109,7 +110,8 @@ class JobController extends Controller
             'job_description' => request('job_description'),
             'employment_mission' => request('job_mission'),
             'what_you_are_looking' => request('what_you_are_looking_for'),
-            'total_reg' => $count,
+           
+          
         );
 
         if (!empty($editId)) {
@@ -129,7 +131,6 @@ class JobController extends Controller
 
     public function destroy($id)
     {
-
         $jobData = Job::findorfail($id);
         $jobData->delete();
         Session::flash('success', 'Successfully deleted');

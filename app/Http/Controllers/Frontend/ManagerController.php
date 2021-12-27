@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Interfaces\ManagerRepositoryInterface;
 use App\Interfaces\ApplyJobRepositoryInterface;
+use App\Interfaces\CandidateRepositoryInterface;
+use App\Models\ApplyJob;
+use App\Models\ChatMaster;
 
 class ManagerController extends Controller
 {
@@ -37,11 +40,13 @@ class ManagerController extends Controller
 
     ];
     protected $applyJobRepository = "";
+    protected $candidateRepository ="";
 
-    public function __construct(ManagerRepositoryInterface $managerRepository, ApplyJobRepositoryInterface $applyJobRepository)
+    public function __construct(ManagerRepositoryInterface $managerRepository, ApplyJobRepositoryInterface $applyJobRepository,CandidateRepositoryInterface $candidateRepository)
     {
         $this->managerRepository = $managerRepository;
-        $this->applyJobRepository = $applyJobRepository;
+        $this->applyJobRepository =$applyJobRepository;
+        $this->candidateRepository=$candidateRepository;
     }
 
     public function index()
@@ -61,7 +66,7 @@ class ManagerController extends Controller
             'confirm_password' => 'required|same:password',
             'represent' => 'required',
             'name_of_our_organization' => 'required|max:75',
-            'number_of_establishments_in_the_organization' => 'required|numeric|digits:5',
+            // 'number_of_establishments_in_the_organization' => 'required|numeric|digits:5',
             'organization_address' => 'required',
             'postal_code' => 'required|digits:5',
             'city' => 'required',
@@ -93,13 +98,20 @@ class ManagerController extends Controller
         $id = auth()->guard('web')->user()->id;
         $userType = auth()->guard('web')->user()->user_type;
         $data['validator'] = JsValidator::make($this->updatevalidationrules);
-        $data['myJobList'] = Job::where('user_id', $id)->paginate(10);
+        $data['myJobList'] = Job::where('user_id', $id)->paginate(4);
         $data['remaining'] = Job::where('created_at', '>=', Carbon::now())->get();
         $data['deleted'] = Job::onlyTrashed()->get();
-        $data['myEstablishmentList'] = Establishment::where('user_id', $id)->get();
+        $data['myEstablishmentList'] = Establishment::where('user_id', $id)->where('type','!=','Default')->get();
         if ($userType == 2) {
-            return view('frontend.manager.manager-profile', $data);
-        } else {
+            if (auth()->guard('web')->user()->establishment_management=="single") {
+                $EstablishmentDetails=Establishment::where('user_id', $id)->orderBy('id','DESC')->first();
+                return redirect('view-establishment-account/'.$EstablishmentDetails->id);
+            }else{
+                return view('frontend.manager.manager-profile', $data);
+            }
+            
+        }elseif($userType == 1) {
+           
             return redirect()->route('mycandidate-profile');
         }
     }
@@ -185,11 +197,29 @@ class ManagerController extends Controller
     }
     public function chatIndex()
     {
-
+        $searchVal = request('search_val');
+        $loginUserId = auth()->user()->id;
         $data['validator'] = JsValidator::make($this->imageValidationRules);
-        $data['userList'] = $this->applyJobRepository->chatUserList();
-
-        dd($data['userList']);
+        $data['userList'] =$userList= $this->applyJobRepository->chatUserList();
+        $receiverarray = array();
+        $senderarray = array();
+        $checkChatData = array();
+        $opponent = array();
+        foreach ($userList as $kkey) {
+            $receiverarray[] = $kkey->receiver_id;
+            if (!in_array($kkey->receiver_id, $opponent) && $loginUserId != $kkey->receiver_id) {
+                $opponent[] = $kkey->receiver_id;
+            }
+            $senderarray[] = $kkey->sender_id;
+            if (!in_array($kkey->sender_id, $opponent) && $loginUserId != $kkey->sender_id) {
+                $opponent[] = $kkey->sender_id;
+            }
+        }
+        foreach ($opponent as $kkkey) {
+            $detailsData = $this->managerRepository->managerChatList($kkkey,$loginUserId);
+            $checkChatData[] = $detailsData;
+        }
+        $data['chatList'] = $checkChatData;
 
         return view('frontend.manager.chat_index', $data);
     }
@@ -205,5 +235,20 @@ class ManagerController extends Controller
             Session::flash('error','Email has been already verified so now you can login');
             return redirect()->route('registration');
         }
+        $userList=$this->applyJobRepository->chatUserList();
+        
+      
+
+        return view('frontend.manager.chat_index', $data);
+    }
+    public function messageListAjax(Request $request)
+    {
+        $data['id'] = $request->id;
+        $data['reciverid'] =$request->reciverid;
+        $data['reciverData'] = $this->candidateRepository->getReciverData($request->reciverid);  
+        $data['validator'] = JsValidator::make($this->imageValidationRules);
+        $data['messagelist'] =  $this->candidateRepository->getAllMessage($request->id,$request->reciverid);
+
+        return view('frontend.manager.chatbox', $data);
     }
 }

@@ -45,12 +45,16 @@ class GalleryRepository implements GalleryRepositoryInterface
         if ($request->gallerystatus !='') {
             $query->where('status',$request->gallerystatus);
         }
-
-
+        if($request->datetime !='')
+        {   
+            $string = explode('-',$request->datetime);
+            $fromDate = str_replace('/','-',$string[0]);
+            $toDate = str_replace('/','-',$string[1]);
+            $query->where('created_at', ">=", date('Y-m-d',strtotime($fromDate)))->where('created_at', "<=", date('Y-m-d',strtotime($toDate)));
+    
+        }
         $recordstotal = $query->count();
-        // dd($recordstotal);
         $sortColumnName = $sortcolumns[$order[0]['column']];
-
         $query->orderBy($sortColumnName, $order[0]['dir'])
             ->take($length)
             ->skip($start);
@@ -63,7 +67,6 @@ class GalleryRepository implements GalleryRepositoryInterface
         );
 
         $gallery = $query->orderBy('created_at', 'desc')->get();
-        // dd($gallery);
         
         foreach ($gallery as $data) {
             $image = "<img src='" . $data->image . "' height='30px' width='30px'></img>";

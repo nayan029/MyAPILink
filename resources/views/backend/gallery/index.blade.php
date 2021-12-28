@@ -31,9 +31,7 @@
 
                             <div class="col-md-4">
                                 <label for="name">{{__("messages.gallerygroup.datetime")}}</label>
-                                <input type="text" class="form-control float-right" id="daterange" name="daterange">
-                                <input type="hidden" name="date_start" id="date_start">
-                                <input type="hidden" name="date_end" id="date_end">
+                                <input type="text" class="form-control float-right" id="datetime" name="datetime" placeholder="DD/MM/YYYY - DD/MM/YYYY">
                             </div>
 						
 							<div class="col-md-4">
@@ -48,8 +46,8 @@
 							</div>
 							</div>
                             <div class="col-md-4">
-							  <div class="form-group">
-                              <button type="button" class="btn btn-primary" id="search_Id" >	{{__("messages.gallerygroup.filter")}}</button>
+							  <div class="form-group" style="margin-bottom: 0px;margin-top: 32px;">
+                              <button type="button" class="btn btn-primary" id="search_Id">	{{__("messages.gallerygroup.filter")}}</button>
                               <a href="{{url('gallery')}}"> <button type="button" class="btn btn-default">{{__("messages.gallerygroup.reset")}}</button></a>
 							 </div>
 							</div>
@@ -105,30 +103,25 @@
 -->
 
 <script type="text/javascript">
-    $(function() {
-        $('input[name="daterange"]').daterangepicker({
-            timePicker: true,
-            autoUpdateInput: false,
-            locale: {
-                cancelLabel: 'Clear'
-            },
-            format: "DD/MM/YYYY H:i",
-            startDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
-            endDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
-            minDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
-        });
-
-        $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
+     $('#datetime').daterangepicker({
+        autoUpdateInput: false,
+        maxDate: new Date(),
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+            format: 'MM/DD/YYYY',
+            cancelLabel: 'Clear'
+      },
+    });
+    $('input[name="datetime"]').on('apply.daterangepicker', function(ev, picker) {
             $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
             $("#date_start").val(picker.startDate.format('DD/MM/YYYY'));
             $("#date_end").val(picker.endDate.format('DD/MM/YYYY'));
         });
-
-        $('input[name="daterange"]').on('cancel.daterangepicker', function(ev, picker) {
+    $('#datetime').on('cancel.daterangepicker', function(ev, picker) {
             $(this).val('');
-        });
-
     });
+
 </script>
 <script>
     $(document).ready(function() {
@@ -143,6 +136,11 @@
     function loadData() {
         var formData = $('.gallery_form').serialize();
         $('#job-table').DataTable({
+            "columnDefs": [{
+                "targets": [0,3,4], //first column / numbering column
+                "orderable": false, //set not orderable
+                "bSortable": true //set not orderable
+            }, ],
             "processing": false,
             "serverSide": true,
             "searching": false,

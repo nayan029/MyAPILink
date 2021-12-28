@@ -17,6 +17,7 @@ use JsValidator;
 class JobController extends Controller
 {
 
+
     protected $jobValidationRules = [
         'title' => 'required|max:25|regex:/^([^0-9]*)$/',
         'address' => 'required',
@@ -26,11 +27,37 @@ class JobController extends Controller
         'type_of_contract' => 'required',
         'duration_of_the_contract' => 'required',
         'job_type' => 'required',
-        'contract_start_date' => 'required|after:tomorrow',
+        'contract_start_date' => 'required|after:today',
         'minimum_gross_salary' => 'required|min:4|numeric',
         'maximum_gross_salary' => 'required|numeric',
         'minimum_experience' => 'required|min:3',
-        'deadline_for_receipt_of_applications' => 'required',
+        'deadline_for_receipt_of_applications' => 'required|after:today',
+        'email_address' => 'required|email',
+        'phone' => 'required|digits:10',
+        'contact_thorugh' => 'required',
+        'website' => 'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
+        'job_description' => 'required',
+        'job_mission' => 'required',
+        'what_you_are_looking_for' => 'required',
+    ];
+
+    protected $messages = [
+        'title.required' => 'Please enter Job title',
+    ];
+
+    protected $deadlinecheck = [
+        'title' => 'required|max:25|regex:/^([^0-9]*)$/',
+        'address' => 'required',
+        'postal_code' => 'required|digits:5',
+        'city' => 'required',
+        'country' => 'required',
+        'type_of_contract' => 'required',
+        'duration_of_the_contract' => 'required',
+        'job_type' => 'required',
+        'contract_start_date' => 'required|after:today',
+        'minimum_gross_salary' => 'required|min:4|numeric',
+        'maximum_gross_salary' => 'required|numeric',
+        'minimum_experience' => 'required|min:3',
         'email_address' => 'required|email',
         'phone' => 'required|digits:10',
         'contact_thorugh' => 'required',
@@ -50,7 +77,7 @@ class JobController extends Controller
 
     public function index(Request $request, $id)
     {
-        $this->data['jobvalidator'] = JsValidator::make($this->jobValidationRules);
+        $this->data['jobvalidator'] = JsValidator::make($this->jobValidationRules, $this->messages);
         $this->data['id'] = $id;
         return view('frontend.job.index', $this->data);
     }
@@ -74,8 +101,12 @@ class JobController extends Controller
 
     public function addOrUpdateJob(Request $request, $id)
     {
+        if ($request->check_deadline_applicantions == "check") {
+            $validation = Validator::make($request->all(), $this->deadlinecheck, $this->messages);
+        } else {
+            $validation = Validator::make($request->all(), $this->jobValidationRules, $this->messages);
+        }
 
-        $validation = Validator::make($request->all(), $this->jobValidationRules);
         if ($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors());
         }

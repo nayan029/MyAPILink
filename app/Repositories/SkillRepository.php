@@ -67,7 +67,7 @@ class SkillRepository implements SkillRepositoryInterface
         }
         $data['image'] = $image;
         $skill->update($data);
-        // return $skill;
+        return $skill;
         
 
 

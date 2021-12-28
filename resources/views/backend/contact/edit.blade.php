@@ -72,4 +72,18 @@
 @section('script')
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 {!! $validator->selector('#contact-update') !!}
+
+<script>
+    
+    $('#address').keypress(function() {
+        var address =  $("#address").val();
+     if(address == "")
+     {
+         $('#address').removeClass('is-valid');
+         //$(this).attr('aria-invalid',true);
+         $('#address').addClass('is-invalid');
+         $('#address').attr('aria-invalid',true);
+     }
+});
+</script>
 @endsection

@@ -39,39 +39,39 @@
                             </div>
                         </div>
                     </div>
-                        <div class="mr-9" >
-                            <div class="form-group">
-                                {!! Form::label('description', 'Description') !!}
-                                {!! Form::textarea('description', old('description'), ['class' => 'form-control', 'placeholder' => 'Enter Description','id'=>'summernote']) !!}
-                            </div>
+                    <div class="mr-9">
+                        <div class="form-group">
+                            {!! Form::label('description', 'Description') !!}
+                            {!! Form::textarea('description', old('description'), ['class' => 'form-control', 'placeholder' => 'Enter Description','id'=>'summernote']) !!}
                         </div>
                     </div>
-                        <div class="card-footer">
-                <button type="submit" class="btn btn-primary">{{__("messages.save")}}</button>
-            </div>
-            {!! Form::close() !!}
-        </div>
-                    </div>
                 </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">{{__("messages.save")}}</button>
+                </div>
+                {!! Form::close() !!}
             </div>
-            <!-- /.card-body -->
-
-            
-        <!-- /.card -->
+        </div>
     </div>
+</div>
+<!-- /.card-body -->
+
+
+<!-- /.card -->
+</div>
 </div>
 @endsection
 @section('script')
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-  {!! $validator->selector('#widget-add') !!}
-  <script>
-      $('#slug').on('change',function(){
-            var slug = $(this).val();
-            if(slug == 'how_it_works'){
-                $('.hideshow').hide();
-            }else{
-                $('.hideshow').show();
-            }
-      });
-  </script>
+{!! $validator->selector('#widget-add') !!}
+<script>
+    $('#slug').on('change', function() {
+        var slug = $(this).val();
+        if (slug == 'how_it_works') {
+            $('.hideshow').hide();
+        } else {
+            $('.hideshow').show();
+        }
+    });
+</script>
 @endsection

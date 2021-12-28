@@ -49,7 +49,8 @@ Code postal">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="publish-smalllabel">Ville<span class="text-danger">*</span></label>
-                                                    <select name="city" class="cus-drop select2 form-publish"  style="width: 100%;">  
+                                                    <select name="city" class="cus-drop select2 form-publish" style="width: 100%;">
+                                                        <option value=""></option>
                                                         <option value="Micro-crèche">Micro-crèche</option>
                                                         <option value="Crèche privée d’entreprise ou
                                                                 inter-entreprises">Crèche privée d’entreprise ou
@@ -57,12 +58,12 @@ Code postal">
                                                         </option>
                                                     </select>
                                                 </div>
-
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group  mb-4">
                                                     <label class="publish-smalllabel">Pays<span class="text-danger">*</span></label>
                                                     <select name="country" class="cus-drop select2 form-publish" style="width: 100%;">
+                                                        <option value=""></option>
                                                         <option value="US">US</option>
                                                         <option value="Franch">Franch</option>
                                                     </select>
@@ -143,7 +144,7 @@ Code postal">
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="custom-control custom-checkbox profile-check ">
-                                                    <input type="checkbox" name="deadline_for_receipt_of_applications" class="custom-control-input" id="checkone" placeholder="">
+                                                    <input type="checkbox" value="check" name="check_deadline_applicantions" class="custom-control-input" id="checkone" placeholder="">
                                                     <label class="custom-control-label pro-check publish-check" for="checkone">Je ne souhaite pas ajouter de date limite
                                                         de
                                                         candidature<span class="text-danger">*</span></label>

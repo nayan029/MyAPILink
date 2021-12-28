@@ -25,7 +25,7 @@ class RegistrationRepository implements RegistrationRepositoryInterface
                 'phone' => $request->phone,
                 'user_type' => '1'
             ];
-            dd($data);
+           
             $user = User::create($data);
             $URL = route('email.verify', $user->email);
             $html = "Verify profile <br> <a href='" . $URL . "' target='_blank'>Click Here</a>";

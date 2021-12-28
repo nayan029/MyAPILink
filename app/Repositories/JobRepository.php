@@ -37,7 +37,6 @@ class JobRepository implements JobRepositoryInterface
         if($request->query('title') != ''){
             $query->whereRaw('title LIKE "%'.$request->query('title').'%"');
         }
-
         if($request->query('type_of_contract') != ''){
             $query->whereRaw('type_of_contract LIKE "%'.$request->query('type_of_contract').'%"');
         }  
@@ -77,8 +76,6 @@ class JobRepository implements JobRepositoryInterface
     {
         return Job::findorfail($id);
     }
-
-  
 
     public function acceptApplicants(Request $request)
     {

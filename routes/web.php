@@ -61,7 +61,7 @@ Route::middleware(['auth:admin'])->group(function ($route) {
 
         //Job module route
         $adminRoute->resource('job', 'JobController');
-        $adminRoute->get('/getdata', 'JobController@getAjaxData')->name('job.data');
+        $adminRoute->get('/getdata/jobdata','JobController@getAjaxJobData')->name('job.data');
 
         //Gallery Module Route
         $adminRoute->resource('gallery', 'GalleryController');

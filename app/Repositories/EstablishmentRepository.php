@@ -18,7 +18,6 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
     public function store(Request $request)
     {
         $documents = array();
-
         if ($request->hasFile('document')) {
             $files = $request->file('document');
             foreach ($files as $file) {

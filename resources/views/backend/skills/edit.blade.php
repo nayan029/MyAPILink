@@ -142,44 +142,44 @@
             var temp = 0;
 
             var number = /([0-9])/;
-        var position = $('#position').val();
-        $('.poserror').html('');
-       
-        if (position.match(number)) {
-            $('.poserror').html("Numbers not allowed.");
-            temp++
-        } else {
-            if(position.length > 25){
-                $('.poserror').html("Position must not be grater than 25 characters.");
-                temp++
-            }else{
-                if(position == ""){
-            $('.poserror').html("Please enter your Position");
-            temp++
-            }
-        }
-    }
+            var position = $('#position').val();
+            $('.poserror').html('');
 
-        var number = /([0-9])/;
-        var title = $('#title').val();
-        $('.titerror').html('');
-
-       
-        if (title.match(number)) {
-            $('.titerror').html("Numbers not allowed.");
-            temp++
-        } else {
-            if(title.length > 25){
-                $('.titerror').html("Title must not be grater than 25 characters.");
+            if (position.match(number)) {
+                $('.poserror').html("Numbers not allowed.");
                 temp++
-            }else{
-                if(title == ""){
-            $('.titerror').html("Please enter your Title");
-            temp++
+            } else {
+                if (position.length > 25) {
+                    $('.poserror').html("Position must not be grater than 25 characters.");
+                    temp++
+                } else {
+                    if (position == "") {
+                        $('.poserror').html("Please enter your Position");
+                        temp++
+                    }
                 }
             }
-        }
-    
+
+            var number = /([0-9])/;
+            var title = $('#title').val();
+            $('.titerror').html('');
+
+
+            if (title.match(number)) {
+                $('.titerror').html("Numbers not allowed.");
+                temp++
+            } else {
+                if (title.length > 25) {
+                    $('.titerror').html("Title must not be grater than 25 characters.");
+                    temp++
+                } else {
+                    if (title == "") {
+                        $('.titerror').html("Please enter your Title");
+                        temp++
+                    }
+                }
+            }
+
 
 
             var desc = $('#desc').val();
@@ -236,8 +236,8 @@
             });
         }
         $(document).on('click', ".edit_row", function() {
+            
             $('.btn-save').show();
-            $(this).closest('tr').attr('row_id').css('background-color', '#ddd');
             var tbl_row = $(this).closest('tr');
             var row_id = tbl_row.attr('row_id');
 
@@ -306,7 +306,7 @@
         }
     </script>
     <script>
-          function checkextension() {
+        function checkextension() {
             var file = document.querySelector("#image");
             alert(file);
             if (/\.(jpe?g|png|gif)$/i.test(file.files[0].name) === false) {

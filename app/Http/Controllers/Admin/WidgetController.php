@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use JsValidator;
+use phpDocumentor\Reflection\Types\Null_;
 
 class WidgetController extends Controller
 {
@@ -145,7 +146,7 @@ class WidgetController extends Controller
         if ($validation->fails()) {
             return redirect()->back()->withErrors($validation->errors());
         }
-        
+        if($request->image == NULL){}
         $updateWidget = $this->widgetRepository->updateWidget($request, $id);
 
         if ($updateWidget) {

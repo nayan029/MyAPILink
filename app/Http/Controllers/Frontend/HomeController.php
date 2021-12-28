@@ -25,6 +25,11 @@ class HomeController extends Controller
         'email' => 'required|email',
         'password' => "required",
     ];
+
+    protected $messages = [
+        'email.required' => 'Please enter Email/User name',
+        'email.email' => 'Please enter Valid Email/User name',
+    ];
     protected $forgotPasswordValidator = [
 
         'email' => 'required|email|exists:users,email',
@@ -96,7 +101,7 @@ class HomeController extends Controller
     public function userLogin(Request $request)
     {
 
-        $validator = Validator::make($request->all(), $this->loginValidationRules);
+        $validator = Validator::make($request->all(), $this->loginValidationRules,$this->messages);
 
         if ($validator->fails()) {
             return response()->json(['success' => false, 'errors' => $validator->errors()]);
@@ -112,7 +117,7 @@ class HomeController extends Controller
                 return response()->json(['success' => false, 'errors' => array('invalid' => "Votre compte sous la vérification s'il vous plaît vérifier le courrier.")]);
             } else {
                 $request->session()->regenerate();
-                return response()->json(['success' => true, 'message' => 'Connexion réussie', 'user' => Auth::guard('web')->user()->user_type]);
+                return response()->json(['success' => true, 'message' => 'Successfully Logged In', 'user' => Auth::guard('web')->user()->user_type]);
             }
         }
         return response()->json(['success' => false, 'errors' => array('invalid' => 'Email et le mot de passe sont erronés')]);

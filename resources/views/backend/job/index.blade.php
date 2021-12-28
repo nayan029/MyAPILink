@@ -115,7 +115,7 @@
             "serverSide": true,
             "searching": false,
             "ajax": {
-                url: "{{ route('job.data') }}?"+formData,
+                url: "{{route('job.data')}}?"+formData,
                 method: "get"
             }
         });

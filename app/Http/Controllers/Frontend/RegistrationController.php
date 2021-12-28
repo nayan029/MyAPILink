@@ -34,7 +34,6 @@ class RegistrationController extends Controller
 
     public function saveRegistration(Request $request)
     {   
-              
         Validator::make($request->all(), [
             'first_name' => 'required|string|max:25|regex:/^([^0-9]*)$/',
             'last_name' => 'required|string|max:25|regex:/^([^0-9]*)$/',
@@ -53,6 +52,8 @@ class RegistrationController extends Controller
             ]);
         }
     }
+
+    
 
     
 

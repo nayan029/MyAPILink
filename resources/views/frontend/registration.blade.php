@@ -393,9 +393,7 @@
         $("#Modallogin2").modal('hide');
     });
     $(document).on('click', '.registerUser', function() {
-        alert("Dsf");
         var posid = $(this).attr('position-id');
-        alert(posid);
         var token = $("meta[name='csrf-token']").attr("content");
         var formData = $('#register_form_data').serialize();
 

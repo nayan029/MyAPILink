@@ -64,6 +64,7 @@ class CandidateController extends Controller
         $data['images'] = $this->establishmentRepository->getCandidateGallery();
         $data['jobSaveData'] = $this->applyJobRepository->getJobsaveDataByUserId();
         $data['applyJobData'] =  $this->applyJobRepository->getApplyJobDataByUserId();
+        $data['candidateCV'] =  $this->candidateRepository->getCvByUserId();
 
 
         return view('frontend.candidate.profile', $data);

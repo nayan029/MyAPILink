@@ -18,8 +18,6 @@ class CandidateCv extends Model
     {
 		$auth = auth()->user();
 		$insert_data = $data; 
-		
-	
 		$inser_id = new CandidateCv($insert_data);
 		$insert =  $inser_id->save();
 		

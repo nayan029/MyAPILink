@@ -299,6 +299,19 @@
                                                            
                                                         </td>
                                                     </tr>
+                                                    @foreach($candidateCV as $cv)
+                                                    <tr>
+                                                        <td>
+                                                            <img src="{{asset('frontend/images/pdf.svg')}}" width="30px">
+                                                        </td>
+                                                        <td>
+                                                          <a href="{{url(''.$cv->cv)}}" target="_blank"><p class="mb-0">Uploded cv.pdf</p></a>
+                                                        </td>
+                                                        <td>
+                                                           
+                                                        </td>
+                                                    </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>

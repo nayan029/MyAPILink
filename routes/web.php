@@ -160,7 +160,7 @@ Route::middleware(['auth:web'])->group(function ($route) {
 
         $frontRoute->post('candidate-sendmessage', 'CandidateController@sendmessage')->name('candidate-sendmessage');
         $frontRoute->post('user/logout', 'HomeController@logout')->name('user-logout');
-        $frontRoute->get('search-job', 'SearchAdController@index')->name('searchjob');
+        $frontRoute->any('search-job', 'SearchAdController@index')->name('searchjob');
         $frontRoute->post('store-jobType', 'SearchAdController@store')->name('store-jobType');
         $frontRoute->post('getDocumentName', 'SearchAdController@getDocumentName')->name('getDocumentName');
         $frontRoute->post('store-savedjobs', 'SearchAdController@insertPosts')->name('store-savedjobs');

@@ -20,4 +20,5 @@ interface CandidateRepositoryInterface
     public function getCandidateApprovedImages($id);
 
     public function getReciverData($id);
+    public function getCvByUserId();
 }

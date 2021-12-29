@@ -2,14 +2,15 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\EstablishmentRepositoryInterface;
-use App\Models\EstablishmentGallery;
-use App\Models\Establishment;
 use Exception;
-use Illuminate\Http\Request;
-use App\Http\Traits\ImageuploadTrait;
-use App\Models\Job;
 use Carbon\Carbon;
+use App\Models\Job;
+use App\Models\CandidateCv;
+use Illuminate\Http\Request;
+use App\Models\Establishment;
+use App\Models\EstablishmentGallery;
+use App\Http\Traits\ImageuploadTrait;
+use App\Interfaces\EstablishmentRepositoryInterface;
 
 class EstablishmentRepository implements EstablishmentRepositoryInterface
 {
@@ -122,6 +123,20 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
 
         return EstablishmentGallery::create($storeData);
     }
+    public function uploadCv(Request $request)
+    {
+        $image = "";
+        if ($request->hasFile('cv')) {
+            $image = $this->uploadImage($request->file('cv'), 'candidate/cv');
+        }
+
+        $storeData['cv'] = $image;
+        $storeData['user_id'] = auth()->guard('web')->user()->id;
+
+
+        return CandidateCv::insert($storeData);
+    }
+    
     public function getEstablishmentGallery($id)
     {
         return EstablishmentGallery::where('establishment_id', $id)->where('deleted_at', NULL)->get();

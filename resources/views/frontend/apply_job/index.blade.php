@@ -4,10 +4,10 @@
 @endsection
 @section('content')
 <style>
-    .modal-textareas{
+    .modal-textareas {
         width: 100%;
-    resize: none;
-    padding: 20px 25px;
+        resize: none;
+        padding: 20px 25px;
     }
 </style>
 <section class="search-bg" style="background-image: url(frontend/images/project/profile-background.png)">
@@ -300,7 +300,7 @@
                     <div class="candidate_modal_title">
                         <h5 class="candidate_modal_text pb-2">Description</h5>
                         <div class="candidate_modal_desc">
-                           <textarea  id="jobdesc" class="modal-textareas" rows="8"></textarea>
+                            <textarea id="jobdesc" class="modal-textareas" rows="8"></textarea>
                         </div>
                         <div class="text-right pt-4 pb-3">
                             <a href="javascript:void(0)" class="btn btn-blue ml-auto skip-btn tele-modal-btn">
@@ -333,19 +333,41 @@
                     <div class="overflow-auto px-4">
                         <table class="download-table w-100">
                             <tbody>
-                                @php
-                                for ($i = 0; $i < 3; $i++) { @endphp <tr>
+
+
+                                <tr>
+                                    <td style="width: 0px;">
+
+                                        <input type="radio" onclick="getcv();" value="{{auth()->guard('web')->user()->cv}}" name="applay_cv">
+
+                                    </td>
                                     <td>
                                         <div class="d-flex">
-                                            <img src="frontend/images/pdf.svg" width="30px" class="mr-3">
-                                            <p class="mb-0"> Uploaded CV_10-09-2020.pdf</p>
+                                            <img src="{{asset('frontend/images/pdf.svg')}}" width="30px" class="mr-3">
+                                            <p class="mb-0"> Uploded cv.pdf</p>
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="uploads/document/Disclaimer.pdf" download="Document.pdf"><img src="frontend/images/feather-download.svg" class="download-img"></a>
+                                        <a href="{{url(''.auth()->guard('web')->user()->cv)}}" download="{{auth()->guard('web')->user()->cv}}"><img src="{{asset('frontend/images/feather-download.svg')}}" class="download-img"></a>
                                     </td>
-                                    </tr>
-                                    @php } @endphp
+                                </tr>
+                                @foreach($candidateCV as $cv)
+                                <tr>
+                                    <td style="width: 0px;">
+                                        <input type="radio" onclick="getcv();" name="applay_cv" value="{{$cv->cv}}">
+                                    </td>
+                                    <td>
+                                        <div class="d-flex">
+                                            <img src="{{asset('frontend/images/pdf.svg')}}" width="30px" class="mr-3">
+                                            <p class="mb-0"> Uploded cv.pdf</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="{{url(''.$cv->cv)}}" download="{{$cv->cv}}"><img src="{{asset('frontend/images/feather-download.svg')}}" class="download-img"></a>
+                                    </td>
+                                </tr>
+                                @endforeach
+
                             </tbody>
                         </table>
                     </div>
@@ -410,13 +432,15 @@
             }
         });
     });
-
+    function getcv(){
+        $("#pdf_name").val($('input[name="applay_cv"]:checked').val());
+    }
     $(document).on("click", "#byResume,#bravo-btn", function() {
         var type = $(this).val();
         var jobid = $('#jobid').val();
         var userid = $('#userid').val();
         var document_name = $('#pdf_name').val();
-        var jobdesc  = $('textarea#jobdesc').val();
+        var jobdesc = $('textarea#jobdesc').val();
 
         var temp = 0;
         regex = new RegExp("(.*?)\.(pdf|docs|docx)$");
@@ -518,7 +542,6 @@
             }
         });
     });
-
 </script>
 
 

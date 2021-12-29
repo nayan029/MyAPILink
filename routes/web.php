@@ -151,6 +151,7 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->get('edit-establishment/{id}', 'EstablishmentController@edit')->name('edit-establishment');
         $frontRoute->post('update-establishment/{id}', 'EstablishmentController@update')->name('update-establishment');
         $frontRoute->post('upload-image', 'EstablishmentController@uploadImage')->name('upload-image');
+        $frontRoute->post('upload-cv', 'EstablishmentController@uploadCv')->name('upload-cv');
         $frontRoute->post('remove-image', 'EstablishmentController@removeImage')->name('remove-image');
 
         $frontRoute->get('mycandidate-profile', 'CandidateController@index')->name('mycandidate-profile');

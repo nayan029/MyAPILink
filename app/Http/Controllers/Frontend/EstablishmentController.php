@@ -31,6 +31,11 @@ class EstablishmentController extends Controller
         'image' => 'required|mimes:jpeg,png,jpg|max:2048',
 
     ];
+    protected   $cvValidationRules =
+    [   
+        'cv' => 'required|mimes:pdf,PDF|max:2048',
+
+    ];
     protected $newsletterValidationRules = [
         'email' => 'required|email|unique:newsletter,email,NULL,id,deleted_at,NULL'
     ];
@@ -119,6 +124,24 @@ class EstablishmentController extends Controller
         }
         return response()->json(['success' => false, 'message' => 'Sorry, something went wrong. please try again.']);
     }
+    
+    public function uploadCv(Request $request)
+    {
+
+
+        $validator = Validator::make($request->all(), $this->cvValidationRules);
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => $validator->errors()]);
+        }
+
+        $store = $this->establishmentRepository->uploadCv($request);
+
+        if ($store) {
+            return response()->json(['success' => true, 'message' => 'Successfully Inserted', 'data' => $store]);
+        }
+        return response()->json(['success' => false, 'message' => 'Sorry, something went wrong. please try again.']);
+    }
+    
     public function removeImage(Request $request)
     {
         $delete = $this->establishmentRepository->deleteImage($request->id);

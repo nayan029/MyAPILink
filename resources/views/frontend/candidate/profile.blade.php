@@ -273,7 +273,7 @@
                                     <div class="card-body">
                                         <div class="overflow-auto can-download-btn">
                                             <table class="download-table w-100">
-                                                <tbody>
+                                                <tbody id="appendcv">
                                                    <tr>
                                                         <td>
                                                             <img src="{{asset('frontend/images/pdf.svg')}}" width="30px">
@@ -296,20 +296,37 @@
                                                           <a href="{{url(''.auth()->guard('web')->user()->cv)}}" target="_blank"><p class="mb-0">Uploded cv.pdf</p></a>
                                                         </td>
                                                         <td>
-                                                            <!-- <div class="input-dupload">
-                                                                <input type="file" class="dupload-file">
-                                                                <img src="{{asset('frontend/images/feather-download.svg')}}" class="download-img">
-                                                            </div> -->
+                                                           
                                                         </td>
                                                     </tr>
+                                                    @foreach($candidateCV as $cv)
+                                                    <tr>
+                                                        <td>
+                                                            <img src="{{asset('frontend/images/pdf.svg')}}" width="30px">
+                                                        </td>
+                                                        <td>
+                                                          <a href="{{url(''.$cv->cv)}}" target="_blank"><p class="mb-0">Uploded cv.pdf</p></a>
+                                                        </td>
+                                                        <td>
+                                                           
+                                                        </td>
+                                                    </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
                                         <div class="downlaod-all">
+                                        <form method="post" enctype="multipart/form-data" name="myForm1" id="myForm1">
+                                                        @csrf
                                             <div class="sr-pos downlaod-mr res-sr-mr">
                                                 <img src="{{asset('frontend/images/feather-download-white.svg')}}" class="contra-icon">
-                                                <button class="btn btn-apply iconbtn">Télécharger un cv </button>
+                                                <input type="file" name="cv" id="cv" style="display: none;" onchange="uploadCV();">
+                                                
+                                                <button class="btn btn-apply iconbtn" type="button" id="cvbtn">Télécharger un cv </button>
+                                                <span class="cv-upload-error text-danger"></span>
+                                                
                                             </div>
+                                        </form>
                                         </div>
 
 
@@ -755,7 +772,9 @@
 <!-- </body> -->
 @endsection
 @section('script')
-<script type="text/javascript">
+<script type="text/javascript">$('#cvbtn').on('click', function() {
+    $('#cv').trigger('click');
+});
     $(".bravo-btn").on('click', function() {
         $('#establishment').modal('hide');
         $('#bravo').modal('show');
@@ -784,6 +803,32 @@
         }, 500);
 
     });
+
+     // upload cv
+     function uploadCV() {
+     
+        $('.cv-upload-error').text('');
+        event.preventDefault();
+        $.ajax({
+            url: '{{ route("upload-cv") }}',
+            method: 'POST',
+            data: new FormData(myForm1),
+            _token: '{{ csrf_token() }}',
+            dataType: 'JSON',
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                if (response.success == true) {
+                    toastr.success(response.message);
+                    console.log(response);
+                    $("#appendcv").prepend("<tr><td><img src='{{asset('frontend/images/pdf.svg')}}' width='30px'></td><td><a href='{{url::to('/')}}/"+response.data.cv+"' target='_blank'><p class='mb-0'>Uploded cv.pdf</p></a></td><td></td></tr>");
+                } else {
+                    $('.cv-upload-error').text(response.errors.cv);
+                }
+            }
+        });
+    }
 
     // upload image
     function imageUploadGallery() {

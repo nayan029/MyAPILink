@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Traits\ImageuploadTrait;
 use App\Interfaces\CandidateRepositoryInterface;
 use App\Models\EstablishmentGallery;
+use App\Models\CandidateCv;
 
 class CandidateRepository implements CandidateRepositoryInterface
 {
@@ -108,4 +109,9 @@ if (!empty($request->qualities)) {
     public function getReciverData($id){
         return User::where('id', $id)->first();
     }
+
+    public function getCvByUserId(){
+        return CandidateCv::where('user_id',auth()->user()->id)->where("deleted_at", Null)->get();
+    }
+    
 }

@@ -22,10 +22,9 @@ class SearchAdController extends Controller
     {
         $this->applyJobRepository = $applyJobRepository;
     }
-    public function index()
+    public function index(Request $request)
     {
-        $data['list'] = $this->applyJobRepository->getCandidateData();
-
+        $data['list'] = $this->applyJobRepository->getCandidateData($request);
         return view('frontend.apply_job.index', $data);
     }
     public function store(Request $request)

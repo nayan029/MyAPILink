@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 interface ApplyJobRepositoryInterface
 {
-    public function getCandidateData();
+    public function getCandidateData($request);
     public function store(Request $request);
     public function getDocumentName(Request $request);
     public function insertPosts(Request $request);

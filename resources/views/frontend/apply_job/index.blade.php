@@ -11,6 +11,7 @@
                     <h2 class="text-center">Nos offres d'emploi</h2>
                 </div>
                 <form method="POST" action="{{route('searchjob')}}" onsubmit="return validation()">
+                @csrf
                 <div class="vacancies-search">
                     <div class="row m-0">
                        
@@ -65,16 +66,20 @@
                 <div class="found-text">
                     <h2 class="text-center mt-3">NOUS AVONS TROUVÉ 120 OFFRES D'EMPLOI</h2>
                 </div>
+                <form action="{{route('searchjob')}}" method="POST" onsubmit="return filtervalidation()">
+                @csrf
                 <div class="cusdrop-list">
                     <div class="position-type change-placeholder-select type-width">
-                        <select title="Basic example" multiple="multiple" name="example-basic" class="select-multi">
-                            <option value="option1">CDI</option>
-                            <option value="option2">CDD</option>
-                            <option value="option3">Stages</option>
-                            <option value="option4">Alternance</option>
-                            <option value="option5">IFreelance / Indépendant</option>
-                            <option value="option6">Remplaçements</option>
+                        <select title="Basic example" multiple="multiple" name="typeofContract[]" id="typeofContract" class="select-multi">
+                            <!-- <option value="">Type Of Contract</option> -->
+                            <option value="CDI">CDI</option>
+                            <option value="CDD">CDD</option>
+                            <option value="Stages">Stages</option>
+                            <option value="Alternance">Alternance</option>
+                            <option value="IFreelance / Indépendant">IFreelance / Indépendant</option>
+                            <option value="Remplaçements">Remplaçements</option>
                         </select>
+                        <span style="color: #ea5455;font-size: 0.857rem;" id="typeofContracterror">
                     </div>
                     <div class="diplo-drop icon-none type-width ">
                         <select class="select2 " id="cmbIdioma2">
@@ -113,8 +118,9 @@
                         </select>
                     </div>
                     <div class="type-width">
-                        <button class="btn btn-yellow filters-btns ml-4">Appliquer les filtres</button>
+                        <button type="submit" class="btn btn-yellow filters-btns ml-4" id="submitbtn2">Appliquer les filtres</button>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -124,7 +130,7 @@
     <div class="container">
         <div>
             <div class="row justify-content-center">
-                <div class="col-md-12 ">
+                <!-- <div class="col-md-12 ">
                     <div class="text-right pb-4">
                         <div class="btn-group">
                             <button class="btn btn-outline-blue btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -134,7 +140,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-md-10 padding-search">
                     <div class="">
                         <div class="card-pd">
@@ -361,7 +367,7 @@
         var searchtext = $('#searchtext').val();
         if (searchtext.trim() == '') 
         {
-            $('#searchtexterror').html('Please search job');
+            $('#searchtexterror').html('Please search job title ,keywords or company');
             temp++;
             f++;
             if (f == 1) {
@@ -371,6 +377,37 @@
         else 
         {
             $('#searchtexterror').html('');
+        }
+        if (temp == 0)
+        {
+            return true;
+        } 
+        else
+        {
+            $('#submitbtn1').removeAttr('disabled');
+            return false;
+        }
+    }
+</script>
+<script>
+    function filtervalidation()
+    {
+        $('#submitbtn2').attr('disabled', 'disabled');
+        var temp = 0;
+        var f = 0;
+        var typeofContract = $('#typeofContract').val().length;
+        if (typeofContract == 0) 
+        {
+            $('#typeofContracterror').html('Please select Type Of Contract');
+            temp++;
+            f++;
+            if (f == 1) {
+                $('#typeofContract').focus()
+            }
+        } 
+        else 
+        {
+            $('#typeofContracterror').html('');
         }
         if (temp == 0)
         {

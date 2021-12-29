@@ -219,4 +219,15 @@ class JobController extends Controller
         $data['candidateList'] = $this->jobRepository->allCandidates();
         return view('frontend.candidate.list', $data);
     }
+    public function emailunique(Request $request)
+    {
+        // return $request->all();
+        $email = $request->email;
+        $data =  Job::where('email', $email)->where('deleted_at', NULL)->first();
+        if (isset($data)) {
+            return '1';
+        } else {
+            return '0';
+        }
+    }
 }

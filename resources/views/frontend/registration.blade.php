@@ -382,8 +382,7 @@
         toastr.error("{{ Session::get('error') }}");
         @endif
     });
-</script>
-<script>
+
     $(document).on('click', '.openLogin', function() {
         $("#header-Modallogin1").modal('hide');
         $("#Modallogin2").modal('show');
@@ -393,7 +392,6 @@
         $("#Modallogin2").modal('hide');
     });
     $(document).on('click', '.registerUser', function() {
-        var posid = $(this).attr('position-id');
         var token = $("meta[name='csrf-token']").attr("content");
         var formData = $('#register_form_data').serialize();
 

@@ -14,6 +14,7 @@ class WidgetRepository implements WidgetRepositoryInterface
 
     public function storeWidget(Request $request)
     {
+        $data = $request->all();
         $checkExits = Widget::where('title','LIKE',$request->title)->first();
         if($checkExits){
               return false;
@@ -22,9 +23,10 @@ class WidgetRepository implements WidgetRepositoryInterface
             if ($request->hasFile('image')) {
                 $image = $this->uploadImage($request->file('image'), 'widgets');
             }
-            $data = $request->all();
+           
             $data['slug'] = $request->widget;
             $data['image'] = $image;
+           
             return Widget::create($data);
         }
       

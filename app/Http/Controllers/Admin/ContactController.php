@@ -33,7 +33,7 @@ class ContactController extends Controller
 
     public function edit($id)
     {
-        $data['validator'] = JsValidator::make($this->validationRules);
+        // $data['validator'] = JsValidator::make($this->validationRules);
         $data['contact'] = $this->contactRepository->editContact($id);
 
         return view('backend.contact.edit', $data);
@@ -41,10 +41,10 @@ class ContactController extends Controller
 
     public function update(Request $request, $id)
     {
-        $validation = Validator::make($request->all(), $this->validationRules);
-        if ($validation->fails()) {
-            return redirect()->back()->withErrors($validation->errors());
-        }
+        // $validation = Validator::make($request->all(), $this->validationRules);
+        // if ($validation->fails()) {
+        //     return redirect()->back()->withErrors($validation->errors());
+        // }
         $this->contactRepository->updateContact($request, $id);
         return redirect()->back()->with(Session::flash('success', 'Successfully Updated'));
     }

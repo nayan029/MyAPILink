@@ -41,17 +41,17 @@ class PartnerController extends Controller
 
     public function create()
     {
-        $data['validator'] = JsValidator::make($this->storevalidationrules);
+        // $data['validator'] = JsValidator::make($this->storevalidationrules);
 
-        return view('backend.partner.create', $data);
+        return view('backend.partner.create');
     }
 
     public function store(Request $request)
     {
-        $validation = Validator::make($request->all(), $this->storevalidationrules);
-        if ($validation->fails()) {
-            return redirect()->back()->withErrors($validation->errors());
-        }
+        // $validation = Validator::make($request->all(), $this->storevalidationrules);
+        // if ($validation->fails()) {
+        //     return redirect()->back()->withErrors($validation->errors());
+        // }
         $storepartner = $this->partnerRepository->storePartner($request);
         if ($storepartner) {
             Session::flash('success', 'Successfully Inserted');
@@ -65,19 +65,19 @@ class PartnerController extends Controller
 
     public function edit($id)
     {
-        $data['validator'] = JsValidator::make($this->updatevalidationrules);
-        $data['image'] = JsValidator::make($this->imagevalidationrules);
+        // $data['validator'] = JsValidator::make($this->updatevalidationrules);
+        // $data['image'] = JsValidator::make($this->imagevalidationrules);
         $data['partner'] = $this->partnerRepository->getSinglePartner($id);
-        return view('backend.partner.edit', $data);
+        return view('backend.partner.edit',$data);
     }
 
 
     public function update(Request $request, $id)
     {
-        $validation = Validator::make($request->all(), $this->updatevalidationrules);
-        if ($validation->fails()) {
-            return redirect()->back()->withErrors($validation->errors());
-        }
+        // $validation = Validator::make($request->all(), $this->updatevalidationrules);
+        // if ($validation->fails()) {
+        //     return redirect()->back()->withErrors($validation->errors());
+        // }
 
         $data = $this->partnerRepository->updatePartner($request, $id);
         Session::flash('success', 'Successfully Updated');

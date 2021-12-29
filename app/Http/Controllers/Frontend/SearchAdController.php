@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use JsValidator;
 use App\Http\Controllers\Controller;
 use App\Interfaces\ApplyJobRepositoryInterface;
+use App\Interfaces\CandidateRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Models\Job;
 use Illuminate\Support\Facades\Response;
@@ -14,17 +15,19 @@ class SearchAdController extends Controller
 {
 
 
-    protected $applyJobRepository = "";
+    protected  $candidateRepository = "", $applyJobRepository = "";
 
 
 
-    public function __construct(ApplyJobRepositoryInterface $applyJobRepository)
+    public function __construct(CandidateRepositoryInterface $candidateRepository,ApplyJobRepositoryInterface $applyJobRepository)
     {
         $this->applyJobRepository = $applyJobRepository;
+        $this->candidateRepository = $candidateRepository;
     }
     public function index()
     {
         $data['list'] = $this->applyJobRepository->getCandidateData();
+        $data['candidateCV'] =  $this->candidateRepository->getCvByUserId();
 
         return view('frontend.apply_job.index', $data);
     }

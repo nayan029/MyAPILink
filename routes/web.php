@@ -67,6 +67,7 @@ Route::middleware(['auth:admin'])->group(function ($route) {
         $adminRoute->resource('gallery', 'GalleryController');
         $adminRoute->get('/getdata', 'GalleryController@getAjaxData')->name('gallery.data');
         $adminRoute->get('/getstatus', 'GalleryController@getUpdateStatus')->name('gallery.update-status');
+        $adminRoute->get('/getGalleryData', 'GalleryController@getAjaxData');
     });
 });
 

@@ -79,6 +79,10 @@ return [
         "image" => "Image",
         "action" => "Action",
         "status" => "Status",
+        "datetime"=>"Date Time",
+        "uploadby"=>"Upload By",
+        'filter' => 'Filter',
+        'reset' => 'Reset',
     ],
 
 ];

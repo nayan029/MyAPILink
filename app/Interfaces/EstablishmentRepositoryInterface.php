@@ -9,6 +9,8 @@ interface EstablishmentRepositoryInterface
     public function update(Request $request,$id);
     public function getSingleEstablishment($id);
     public function uploadEstablishmentImage(Request $request);
+    public function uploadCv(Request $request);
+    
     public function getEstablishmentGallery($id);
     public function deleteImage($id);
     public function getPostsData($id);

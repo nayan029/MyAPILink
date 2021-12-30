@@ -15,7 +15,19 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{asset('frontend/css/bootstrap-datepicker.min.css')}}">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link href="https://cdn.maptiler.com/maptiler-geocoder/v1.1.0/maptiler-geocoder.css" rel="stylesheet" />
+
 </head>
+
+<style>
+    .file-download{
+        position: absolute;
+    top: 0;
+    bottom: 0;
+    opacity: 0;
+    z-index: 999;
+    }
+    </style>
 
 <body>
     <div style="background-image: linear-gradient(
@@ -404,19 +416,23 @@
         </div>
 
         <div id="step5-sec" style="display: none;">
+          <form action="{{route('uploadcv')}}" method="post" enctype="multipart/form-data">
+              @csrf
+              <input type="hidden" name="editid" value="{{$updateUser->id}}">
             <div class="container">
                 <div class="wel-hgt d-flex justify-content-center align-items-center">
                     <div class="row d-flex justify-content-center">
-                        <div>
-                            <a href='{{route("candidate.resume",$updateUser->id)}}' class="btn btn-blue download-btn"><img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" alt="" class="mr-2" download>Télécharger mon cv</a>
+                        <div class="position-relative">
+                            <input name="cv" type="file" class="file-download">
+                            <a  class="btn btn-blue download-btn"><img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" alt="" class="mr-2" download>Télécharger mon cv</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="text-right">
-                <a href="{{route('candidate.welcome',$updateUser->id)}}" class="btn eng-btn mb-20 mr-3 w-200px" id="step5-btn">Etape
-                    suivante</a>
+                <button type="submit" class="btn eng-btn mb-20 mr-3 w-200px" id="step5-btn">Etape suivante</button>
             </div>
+            </form>
         </div>
 
     </div>
@@ -434,6 +450,25 @@
 <script src="{{asset('frontend/js/bootstrap-datepicker.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('frontend/js/bootstrap-multiselect.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="https://cdn.maptiler.com/maptiler-geocoder/v1.1.0/maptiler-geocoder.js"></script>
+<script>
+  var geocoder = new maptiler.Geocoder({
+    input: 'city',
+    key: 'aGdYhIz2jXHVxE7pwlGa'
+  });
+  geocoder.on('select', function(item) {
+    $('#city').val(item.text);
+  });
+</script>
+<script>
+  var geocoder = new maptiler.Geocoder({
+    input: 'mobility',
+    key: 'aGdYhIz2jXHVxE7pwlGa'
+  });
+  geocoder.on('select', function(item) {
+    $('#mobility').val(item.text);
+  });
+</script>
 
 <script>
     $(function() {

@@ -2,14 +2,15 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\EstablishmentRepositoryInterface;
-use App\Models\EstablishmentGallery;
-use App\Models\Establishment;
 use Exception;
-use Illuminate\Http\Request;
-use App\Http\Traits\ImageuploadTrait;
-use App\Models\Job;
 use Carbon\Carbon;
+use App\Models\Job;
+use App\Models\CandidateCv;
+use Illuminate\Http\Request;
+use App\Models\Establishment;
+use App\Models\EstablishmentGallery;
+use App\Http\Traits\ImageuploadTrait;
+use App\Interfaces\EstablishmentRepositoryInterface;
 
 class EstablishmentRepository implements EstablishmentRepositoryInterface
 {
@@ -24,7 +25,7 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
                 $documents[] = $this->uploadImage($file, 'Establishment/document');
             }
         }
-        $applied_pedagogy = implode(",", $request->applied_pedagogy);
+        $applied_pedagogy = implode(",",$request->applied_pedagogy);
         $document = implode(",", $documents);
         $storeData = $request->all();
         $storeData['applied_pedagogy'] = $applied_pedagogy;
@@ -87,24 +88,24 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
             $updateData['document'] = $document;
         }
 
-        if ($request->hasFile('more_infomation')) {
-            $images = $this->getEstablishmentGallery($id);
-            if (count($images) != 0) {
-                foreach ($images as $image) {
-                    $galleryId = EstablishmentGallery::find($image->id);
-                    $galleryId->delete();
-                }
-            }
+        // if ($request->hasFile('more_infomation')) {
+        //     $images = $this->getEstablishmentGallery($id);
+        //     if (count($images) != 0) {
+        //         foreach ($images as $image) {
+        //             $galleryId = EstablishmentGallery::find($image->id);
+        //             $galleryId->delete();
+        //         }
+        //     }
 
-            $files = $request->file('more_infomation');
-            foreach ($files as $file) {
-                $more_infomation  = $this->uploadImage($file, 'Establishment/gallery');;
-                $storeData['image'] = $more_infomation;
-                $storeData['establishment_id'] = $id;
-                $storeData['user_id'] = auth()->guard('web')->user()->id;
-                EstablishmentGallery::create($storeData);
-            }
-        }
+        //     $files = $request->file('more_infomation');
+        //     foreach ($files as $file) {
+        //         $more_infomation  = $this->uploadImage($file, 'Establishment/gallery');;
+        //         $storeData['image'] = $more_infomation;
+        //         $storeData['establishment_id'] = $id;
+        //         $storeData['user_id'] = auth()->guard('web')->user()->id;
+        //         EstablishmentGallery::create($storeData);
+        //     }
+        // }
 
         return Establishment::where('id', $id)->update($updateData);
     }
@@ -121,6 +122,20 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
 
         return EstablishmentGallery::create($storeData);
     }
+    public function uploadCv(Request $request)
+    {
+        $image = "";
+        if ($request->hasFile('cv')) {
+            $image = $this->uploadImage($request->file('cv'), 'candidate/cv');
+        }
+
+        $storeData['cv'] = $image;
+        $storeData['user_id'] = auth()->guard('web')->user()->id;
+
+
+        return CandidateCv::insert($storeData);
+    }
+    
     public function getEstablishmentGallery($id)
     {
         return EstablishmentGallery::where('establishment_id', $id)->where('deleted_at', NULL)->get();

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link href="https://cdn.maptiler.com/maptiler-geocoder/v1.1.0/maptiler-geocoder.css" rel="stylesheet" />
 
 
 </head>
@@ -310,7 +311,7 @@
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <label class="">Adresse de l'organisation<span class="text-danger">*</span></label>
-                                            <input id="address" type="text" name="organization_address" class="form-control form-add-establish pl-23" placeholder="Adresse de l'organisation">
+                                            <input id="address1" type="text" name="organization_address" class="form-control form-add-establish pl-23" placeholder="Adresse de l'organisation">
                                             <span class="address-error text-danger">@error ('address') {{$message}} @enderror</span>
 
                                         </div>
@@ -413,7 +414,25 @@
         </div>
     </footer>
 </body>
-
+<script src="https://cdn.maptiler.com/maptiler-geocoder/v1.1.0/maptiler-geocoder.js"></script>
+<script>
+  var geocoder = new maptiler.Geocoder({
+    input: 'address',
+    key: 'aGdYhIz2jXHVxE7pwlGa'
+  });
+  geocoder.on('select', function(item) {
+    $('#address').val(item.text);
+  });
+</script>.
+<script>
+  var geocoder = new maptiler.Geocoder({
+    input: 'address1',
+    key: 'aGdYhIz2jXHVxE7pwlGa'
+  });
+  geocoder.on('select', function(item) {
+    $('#address1').val(item.text);
+  });
+</script>
 <script src="{{asset('frontend/js/jquery.min.js')}} "></script>
 <script src="{{asset('frontend/js/jquery-ui.min.js')}}"></script>
 <script src="{{asset('frontend/js/popper.min.js')}} "></script>
@@ -538,12 +557,58 @@
             success: function(response) {
                 console.log(response.success);
                 if (response.success == true) {
+                   
                     // $('#appointment3').modal('show');     //Message come from controller
                     toastr.success(response.message);
                     setTimeout(function() {
                         $('.invisible').trigger('click');
                         $('#regform')[0].reset();
                     }, 2000);
+                    if(response.data.establishment_management=='single'){
+                               $.ajax({
+                                url: url,
+                                method: 'POST',
+                                data: $('#regform').serialize(),
+                                success: function(response) {
+                                    console.log(response.success);
+                                    if (response.success == true) {
+                                    
+                                        // $('#appointment3').modal('show');     //Message come from controller
+                                        toastr.success(response.message);
+                                        setTimeout(function() {
+                                            $('.invisible').trigger('click');
+                                            $('#regform')[0].reset();
+                                        }, 2000);
+                                        if(response.data.establishment_management=='single'){
+                                            location.href = "{{URL::to('/')}}/manager-register-step-two"
+                                        }
+                                        $(this).text("S'inscrire");
+                                        $(this).text('En traitement...');
+                                        $(this).prop('disabled', true);
+                                        $(this).prop('disabled', false);
+
+                                    } else {
+                                        $('.civility-error').text(response.errors.civility);
+                                        $('.firstname-error').text(response.errors.first_name);
+                                        $('.lastname-error').text(response.errors.last_name);
+                                        $('.phone-error').text(response.errors.phone);
+                                        $('.email-error').text(response.errors.email_address);
+                                        $('.password-error').text(response.errors.password);
+                                        $('.password_confirmation-error').text(response.errors.confirm_password);
+                                        $('.radio-error').text(response.errors.radio);
+                                        $('.represent-error').text(response.errors.represent);
+                                        $('.organization-error').text(response.errors.name_of_our_organization);
+                                        $('.establish-error').text(response.errors.number_of_establishments_in_the_organization);
+                                        $('.address-error').text(response.errors.organization_address);
+                                        $('.postal-error').text(response.errors.postal_code);
+                                        $('.city-error').text(response.errors.city);
+
+                                    }
+                                }
+                            });
+                            //response.data.id
+                        location.href = "{{url('manager-register-step-two')}}/"+response.data.id;
+                    }
                     $(this).text("S'inscrire");
                     $(this).text('En traitement...');
                     $(this).prop('disabled', true);

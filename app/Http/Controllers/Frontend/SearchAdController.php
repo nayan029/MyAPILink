@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use JsValidator;
 use App\Http\Controllers\Controller;
 use App\Interfaces\ApplyJobRepositoryInterface;
+use App\Interfaces\CandidateRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Models\Job;
 use Illuminate\Support\Facades\Response;
@@ -14,17 +15,19 @@ class SearchAdController extends Controller
 {
 
 
-    protected $applyJobRepository = "";
+    protected  $candidateRepository = "", $applyJobRepository = "";
 
 
 
-    public function __construct(ApplyJobRepositoryInterface $applyJobRepository)
+    public function __construct(CandidateRepositoryInterface $candidateRepository,ApplyJobRepositoryInterface $applyJobRepository)
     {
         $this->applyJobRepository = $applyJobRepository;
+        $this->candidateRepository = $candidateRepository;
     }
-    public function index()
+    public function index(Request $request)
     {
         $data['list'] = $this->applyJobRepository->getCandidateData();
+        $data['candidateCV'] =  $this->candidateRepository->getCvByUserId();
 
         return view('frontend.apply_job.index', $data);
     }
@@ -36,32 +39,18 @@ class SearchAdController extends Controller
             $validator = Validator::make($request->all(), $validationrules);
             if ($validator->fails()) {
                 return response()->json(['success' => false, 'errors' => $validator->errors()]);
-            } else {
-                $storeJobType = $this->applyJobRepository->store($request);
-
-                $jobView = Job::where('id', $storeJobType->job_id)->select('total_reg')->first();
-                $views = $jobView->total_reg + 1;
-                $update = Job::where('id', $storeJobType->job_id)->update(['total_reg' => $views]);
-                if ($storeJobType) {
-                    return response()->json([
-                        'success' => true,
-                        'message' => 'Successfully Inserted'
-                    ]);
-                }
             }
-        } else {
-            $storeJobType = $this->applyJobRepository->store($request);
+        }
+        $storeJobType = $this->applyJobRepository->store($request);
 
-            $jobView = Job::where('id', $storeJobType->job_id)->select('total_reg')->first();
-            $views = $jobView->total_reg + 1;
-            $update = Job::where('id', $storeJobType->job_id)->update(['total_reg' => $views]);
-            if ($storeJobType) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Successfully Inserted',
-                    'data' => $storeJobType
-                ]);
-            }
+        $jobView = Job::select('total_reg')->where('id', $storeJobType->job_id)->first();
+        $views = $jobView->total_reg + 1;
+        $update = Job::where('id', $storeJobType->job_id)->update(['total_reg' => $views]);
+        if ($storeJobType) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Successfully Inserted'
+            ]);
         }
     }
     public function getDocumentName(Request $request)

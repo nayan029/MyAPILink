@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Traits\ImageuploadTrait;
 use App\Interfaces\CandidateRepositoryInterface;
 use App\Models\EstablishmentGallery;
+use App\Models\CandidateCv;
 
 class CandidateRepository implements CandidateRepositoryInterface
 {
@@ -35,11 +36,22 @@ class CandidateRepository implements CandidateRepositoryInterface
             'languages_spoken' => $request->languages_spoken,
 
         ];
-        $updateData['research'] = implode(",", $request->research);
+if (!empty($request->research)) {
+    $updateData['research'] = implode(",", $request->research);
+}
+        
+if (!empty($request->diplomas)) {
         $updateData['diplomas'] = implode(",", $request->diplomas);
+}
+if (!empty($request->permit_vehicle)) {
         $updateData['permit_vehicle'] = implode(",", $request->permit_vehicle);
+}
+if (!empty($request->pedagogy)) {
         $updateData['pedagogy'] = implode(",", $request->pedagogy);
+}
+if (!empty($request->qualities)) {
         $updateData['qualities'] = implode(",", $request->qualities);
+}
 
 
         if ($request->hasfile('profile_photo_path')) {
@@ -97,4 +109,9 @@ class CandidateRepository implements CandidateRepositoryInterface
     public function getReciverData($id){
         return User::where('id', $id)->first();
     }
+
+    public function getCvByUserId(){
+        return CandidateCv::where('user_id',auth()->user()->id)->where("deleted_at", Null)->get();
+    }
+    
 }

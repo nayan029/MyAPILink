@@ -34,15 +34,10 @@
                                     <div class="col-md-12">
                                         {!! Form::label('Date d’ouverture', 'Date d’ouverture') !!}<span class="invalid-error text-danger">*</span>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-group">
-                                            {!! Form::text('opening_date',$establishment->opening_date, [ 'id' => 'opening_date', 'class' => 'datepicker1 form-control  form-add-establish inputicon2 fn-family']) !!}
+                                            {!! Form::date('opening_date',$establishment->opening_date, [ 'id' => 'opening_date', 'class' => 'form-control  form-add-establish inputicon2 fn-family']) !!}
 
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            {!! Form::select('year',['Année' => 'Année'], $establishment->year, [ 'id' => 'year', 'class' => 'cus-drop select2 form-add-establish']) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -207,16 +202,16 @@
                                                                         <div class="box-body"></div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="dropzone-wrapper">
+                                                                <!-- <div class="dropzone-wrapper">
                                                                     <div class="dropzone-desc">
                                                                         <img src="{{asset('frontend/images/profile-feather-upload.svg')}}" width="30px" class="mb-1">
-                                                                        <!-- <i class="glyphicon glyphicon-download-alt"></i> -->
+                                                                   
                                                                         <p>Drag and drop here or<span style="color:#192842;font-family: 'Quicksand-Bold'">
                                                                                 Browse</span> </p>
                                                                     </div>
                                                                     {!! Form::file('more_infomation[]', ['id' => 'more_infomation', 'name' => 'more_infomation[]', 'class' => 'dropzone','multiple' => true]) !!}
                                                                  
-                                                                </div>
+                                                                </div> -->
                                                             </div>
                                                         </div>
                                                     </div>

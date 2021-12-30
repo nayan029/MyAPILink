@@ -17,9 +17,36 @@ use PHPUnit\TextUI\XmlConfiguration\Group;
 class ApplyJobRepository implements ApplyJobRepositoryInterface
 {
     use ImageuploadTrait;
-    public function getCandidateData()
+    public function getCandidateData($request)
     {
-        return Job::with('applyJob')->with('savedJob')->where('deleted_at', NULL)->paginate(2);
+        // return Job::with('applyJob')->with('savedJob')->where('deleted_at', NULL)->paginate(2);
+        
+        $searchValue = $request->searchtext;
+        if(!empty($request->typeofContract))
+        {
+            return Job::with('applyJob')
+            ->with('savedJob')
+            ->whereIn('type_of_contract',$request->typeofContract)
+            ->where('deleted_at', NULL)
+            ->paginate(2);
+            // ->paginate(2);
+            // dd($query);
+        }
+        else
+        {
+            return Job::with('applyJob')
+            ->with('savedJob')
+            ->orwhere('title','like','%'.$searchValue.'%')
+            ->orwhere('address','like','%'.$searchValue.'%')
+            ->orwhere('minimum_gross_salary',$searchValue)
+            ->orwhere('minimum_experience',$searchValue)
+            ->where('deleted_at', NULL)
+            ->paginate(2);
+        }
+        // dd($typeOfContract);
+        
+
+        
     }
     public function store(Request $request)
     {
@@ -29,6 +56,7 @@ class ApplyJobRepository implements ApplyJobRepositoryInterface
         $input['company_id'] = $request->userid;
         $input['apply_type'] = $request->type;
         $input['is_apply'] = 1;
+        $input['desc'] =  $request->desc;
         $input['document_name'] = $request->document_name;
         $input['created_at'] = date('Y-m-d H:i:s');
 

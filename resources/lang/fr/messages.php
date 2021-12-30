@@ -80,5 +80,7 @@ return [
         "image" => "Image",
         "action" => "Action",
         "status" => "statut",
+        "datetime"=>"Date Heure",
+        "uploadby"=>"Télécharger par",
     ],
 ];

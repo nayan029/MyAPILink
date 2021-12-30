@@ -11,8 +11,9 @@
                 <div class="card-header">
                     <h3 class="card-title">{{__("messages.edit")}}</h3>
                 </div>
+                
 
-
+                
                 <!-- /.card-header -->
                 <!-- form start -->
                 {!! Form::model($contact,['method' => 'POST', 'route' => ['contact.update',1], 'files' => true,'id'=>'contact-update']) !!}

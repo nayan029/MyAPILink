@@ -394,11 +394,47 @@
         }
 
 
-        if (email == "") {
-            $('.email-error').html("Please enter E-mail");
-            temp++
+        var emailverify = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        function uniqueEmailCheck(email) {
+            response = false;
+            $.ajax({
+                url: "{{ URL::to('/email'); }}",
+                'type': "POST",
+                data: {
+                    email: email,
+                    '_token': "{{ csrf_token(); }}"
+                },
+                success: function(msg) {
+                    if (msg == 1) {
+                        $('.email-error').html("This Email is already exist.");
+                        response = true;
+                    } else {
+                        response = false;
+
+                    }
+                },
+                error: function(jqXHR, textStatus) {
+                    response = false;
+                }
+            });
+            return response;
+        }
+
+        if (email.trim() == "") {
+            $('.email-error').html('Please enter Email');
+            temp++;
         } else {
-            $('.email-error').html('');
+            if (uniqueEmailCheck(email) == true) {
+                $('.email-error').html("This email is already exist.");
+                temp++;
+            } else {
+                var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/; // for valid email validation
+                if (!regex.test(email)) {
+                    alert("ss")
+                    $('.email-error').html('Please enter Valid Email');
+                    temp++;
+                }
+            }
         }
 
         $('.phone-error').html("");
@@ -417,10 +453,12 @@
             }
         }
 
-        if ($('input[name="contact_thorugh"]').length == 0) {
+        if ($('input[name="contact_thorugh"]:checked').length == 0) {
+            alert("FD");
             $('.contract-through-error').html('Please enter Contract through application');
             temp++
         } else {
+            alert("dsf")
             $('.contract-through-error').html('');
         }
 

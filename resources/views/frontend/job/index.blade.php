@@ -170,7 +170,7 @@ Code postal">
                                                 <div class="form-group  mb-4">
                                                     <label class="publish-smalllabel">Adresse e-mail<span class="text-danger">*</span></label>
                                                     <input type="email" name="email_address" id="email_address" class="datepicker1 form-control inputicon2 form-publish" placeholder="E-mail">
-                                                    <span class="email-error text-danger"></span>
+                                                    <span class="email-error text-danger" id="emailerror"></span>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -415,10 +415,12 @@ Code postal">
             }
         }
 
-        if ($('input[name="contact_thorugh"]').length == 0) {
+        if (($('input[name="contact_thorugh"]:checked').length == 0) ){
+            alert("dfs");
             $('.contract-through-error').html('Please enter Contract through application');
             temp++
         } else {
+            alert("df");
             $('.contract-through-error').html('');
         }
 
@@ -454,23 +456,7 @@ Code postal">
             $('.looking-error').html("");
         }
 
-        if (email == "") {
-            $('.email-error').html("Please enter E-mail");
-            temp++
-        } else {
-            if (uniqueEmailCheck(email) ==
-                true) {
-                $('.email-error').html("This Email is Already Exist.");
-                temp++
-            } else {
-                var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/; // for valid email validation
-                if (!regex.test(email)) {
-                    $('.email-error').html('Please Enter Valid Email');
-                    temp++
-                }
-            }
-        }
-
+        var emailverify = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
         function uniqueEmailCheck(email) {
             response = false;
             $.ajax({
@@ -481,23 +467,40 @@ Code postal">
                     '_token': "{{ csrf_token(); }}"
                 },
                 success: function(msg) {
-                    //  console.log(msg)
                     if (msg == 1) {
-                        $('.email-error').html("This email is already exist.");
+                        $('#emailerror').html("This Email is already exist.");
                         response = true;
                     } else {
-                        $(".email-error").html("");
                         response = false;
 
                     }
                 },
                 error: function(jqXHR, textStatus) {
-                    $(".email-error").html("");
                     response = false;
                 }
             });
             return response;
         }
+
+        if (email.trim() == "") {
+            $('#emailerror').html('Please enter Email');
+            temp++;
+        } else {
+            if (uniqueEmailCheck(email) == true) {
+                $('#emailerror').html("This email is already exist.");
+                temp++;
+            } else {
+                var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/; // for valid email validation
+                if (!regex.test(email)) {
+                    alert("ss")
+                    $('#emailerror').html('Please enter Valid Email');
+                    temp++;
+                }
+            }
+        }
+
+
+
 
         if (temp == 0) {
             return true;

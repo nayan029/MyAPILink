@@ -13,12 +13,12 @@ use JsValidator;
 class SkillsController extends Controller
 {
     protected $storevalidationrules = [
-        'name' => 'required|max:50|regex:/^[a-zA-Z\s]*$/',
+        'name' => 'required|max:50|regex:/^([^0-9]*)$/',
         'description' => 'required',
         'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ];
     protected $updatevalidationrules = [
-        'name' => 'required|max:50|regex:/^[a-zA-Z\s]*$/',
+        'name' => 'required|max:50|regex:/^([^0-9]*)$/',
         'description' => 'required',
     ];
 
@@ -47,8 +47,8 @@ class SkillsController extends Controller
      */
     public function create()
     {
-        $data['validator'] = JsValidator::make($this->storevalidationrules);
-        return view('backend.skills.create', $data);
+        // $data['validator'] = JsValidator::make($this->storevalidationrules);
+        return view('backend.skills.create');
     }
 
     /**
@@ -59,10 +59,10 @@ class SkillsController extends Controller
      */
     public function store(Request $request)
     {
-        $validation = Validator::make($request->all(), $this->storevalidationrules);
-        if ($validation->fails()) {
-            return redirect()->back()->withErrors($validation->errors());
-        }
+        // $validation = Validator::make($request->all(), $this->storevalidationrules);
+        // if ($validation->fails()) {
+        //     return redirect()->back()->withErrors($validation->errors());
+        // }
         $storeskill = $this->SkillRepository->storeSkill($request);
         if ($storeskill) {
             Session::flash('success', 'Successfully Inseted');
@@ -90,7 +90,7 @@ class SkillsController extends Controller
      */
     public function edit($id)
     {
-        $data['validator'] = JsValidator::make($this->updatevalidationrules);
+        // $data['validator'] = JsValidator::make($this->updatevalidationrules);
         $data['skill_position'] = SkillPosition::where('skill_id', $id)->where('deleted_at', NULL)->get();
 
         $data['skill'] = $this->SkillRepository->getSingleSkill($id);
@@ -107,10 +107,10 @@ class SkillsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validation = Validator::make($request->all(), $this->updatevalidationrules);
-        if ($validation->fails()) {
-            return redirect()->back()->withErrors($validation->errors());
-        }
+        // $validation = Validator::make($request->all(), $this->updatevalidationrules);
+        // if ($validation->fails()) {
+        //     return redirect()->back()->withErrors($validation->errors());
+        // }
 
         $updateskill = $this->SkillRepository->updateSkill($request, $id);
         if ($updateskill) {

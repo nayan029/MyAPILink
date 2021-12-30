@@ -183,13 +183,9 @@
         </div>
     </div>
     {!! Form::close() !!}
-
-
-
 </section>
 @endsection
 @section('script')
-
 <script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
 <script type="text/javascript">
     $("#bravo-btn").on('click', function() {

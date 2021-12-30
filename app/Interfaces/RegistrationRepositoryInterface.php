@@ -10,7 +10,7 @@ interface RegistrationRepositoryInterface
 
     public function verifyEmail($email);
 
-    public function updateCandidateProfileStep(Request $request,$id);
+    public function updateCandidateProfileStep(Request $request, $id);
 
     public function downalodStepResume($id);
 

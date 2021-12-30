@@ -61,7 +61,7 @@ Route::middleware(['auth:admin'])->group(function ($route) {
 
         //Job module route
         $adminRoute->resource('job', 'JobController');
-        $adminRoute->get('/getdata', 'JobController@getAjaxData')->name('job.data');
+        $adminRoute->get('/getdata/jobdata','JobController@getAjaxJobData')->name('job.data');
 
         //Gallery Module Route
         $adminRoute->resource('gallery', 'GalleryController');
@@ -82,6 +82,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->post('manager/store', 'ManagerController@storeData')->name('manager.store');
     $frontRoute->post('update-profile', 'ManagerController@updateProfile')->name('update-profile');
     $frontRoute->get('account-setting', 'ManagerController@accountSetting')->name('account-setting');
+    
 
     $frontRoute->get('manager', 'ManagerController@index')->name('manager');
     $frontRoute->get('registration', 'RegistrationController@index')->name('registration');
@@ -111,6 +112,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
 
 
     $frontRoute->get('addjob/{id}', 'JobController@index')->name('addjob');
+    $frontRoute->post('/email','JobController@emailunique');
     $frontRoute->post('addorupdatejob/{id}', 'JobController@addOrUpdateJob')->name('addorupdatejob');
     $frontRoute->get('joblist/{id}', 'JobController@showJob')->name('joblist');
     $frontRoute->post('holdJobData', 'JobController@holdJobData')->name('holdJobData');

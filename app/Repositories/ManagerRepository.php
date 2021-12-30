@@ -20,7 +20,7 @@ class ManagerRepository implements ManagerRepositoryInterface
     use ImageuploadTrait;
     public function StoreProfile(Request $request)
     {
-      
+
         try {
             $storeData = [
                 'civility' => $request->civility,
@@ -43,13 +43,15 @@ class ManagerRepository implements ManagerRepositoryInterface
            
             $manager = User::create($storeData);
 
-            $storeDataEstablishment=array('user_id'=>$manager->id,
-                                            'type' =>"Default",
-                                            'type_of_establishment' => $request->represent,
-                                            'own_of_our_structure' => $request->name_of_our_organization,
-                                        );
+            $storeDataEstablishment = array(
+                'user_id' => $manager->id,
+                'type' => "Default",
+                'type_of_establishment' => $request->represent,
+                'own_of_our_structure' => $request->name_of_our_organization,
+            );
             Establishment::create($storeDataEstablishment);
             
+
             $URL = route('manager.email.verify', $manager->email);
             $html = "Verify profile <br> <a href='" . $URL . "' target='_blank'>Click Here</a>";
             $subject = "Please complete your profile on ApiLink";
@@ -73,11 +75,11 @@ class ManagerRepository implements ManagerRepositoryInterface
             $response = curl_exec($curl);
             $err = curl_error($curl);
             curl_close($curl);
-                return $manager;
-            } catch (Exception $e) {
-                return back()->withError($e->getMessage());
-            }
+            return true;
+        } catch (Exception $e) {
+            return back()->withError($e->getMessage());
         }
+    }
     public function updateProfile(Request $request)
     {
         $updateData = [
@@ -134,7 +136,7 @@ class ManagerRepository implements ManagerRepositoryInterface
 
         return User::where('id', auth()->guard('web')->user()->id)->update($updateData);
     }
-    
+
     public function getManagerEmailVerify($email)
     {
         $verifyUser = User::where('email', $email)->where('verify_email', 'pending')->first();
@@ -147,9 +149,10 @@ class ManagerRepository implements ManagerRepositoryInterface
             return false;
         }
     }
-    public function managerChatList($opponent,$loginUserId){
-        return ChatMaster::where('deleted_at',NULL)->whereIn('sender_id', [$opponent, $loginUserId])
-        ->whereIn('reciver_id', [$opponent, $loginUserId])->with('getUserReciverData','getUserSenderData')->first();
+    public function managerChatList($opponent, $loginUserId)
+    {
+        return ChatMaster::where('deleted_at', NULL)->whereIn('sender_id', [$opponent, $loginUserId])
+            ->whereIn('reciver_id', [$opponent, $loginUserId])->with('getUserReciverData', 'getUserSenderData')->first();
     }
     public function stepTwoInsert(Request $request){
        

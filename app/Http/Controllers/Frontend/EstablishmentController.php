@@ -27,9 +27,8 @@ class EstablishmentController extends Controller
         'applied_pedagogy' => 'required',
     ];
     protected   $imageValidationRules =
-    [   
+    [
         'image' => 'required|mimes:jpeg,png,jpg|max:2048',
-
     ];
     protected   $cvValidationRules =
     [   
@@ -55,7 +54,7 @@ class EstablishmentController extends Controller
        
         $validationrules['document'] = 'required|mimes:pdf';
         $validationrules['more_infomation'] = 'required|mimes:jpeg,png,jpg';
-        
+
         $validator = Validator::make($request->all(), $this->validationrules);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors());

@@ -24,6 +24,7 @@
                             <div class="form-group">
                                 {!! Form::label('email', 'Email ') !!} <span class="text-danger">*</span>
                                 {!! Form::text('email', old('email'), ['class' => 'form-control', 'placeholder' => 'Enter Email','id'=>'email']) !!}
+                                <span class="email-error text-danger"></span>
                             </div>
 
                             <div class="form-group">
@@ -37,12 +38,14 @@
                             <div class="form-group">
                                 {!! Form::label('address', 'Address') !!}<span class="text-danger">*</span>
                                 {!! Form::textarea('address', old('address'), ['class' => 'form-control', 'placeholder' => 'Enter Address','id'=>'address']) !!}
+                                <span class="address-error text-danger"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 {!! Form::label('mobile', 'Mobile ') !!}<span class="text-danger">*</span>
                                 {!! Form::text('mobile', old('mobile'), ['class' => 'form-control', 'placeholder' => 'Enter Mobile','id'=>'mobile']) !!}
+                                <span class="mobile-error text-danger"></span>
                             </div>
                             <div class="form-group">
                                 {!! Form::label('youtube_link', 'Youtube Link') !!}
@@ -60,7 +63,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">{{__("messages.update")}}</button>
+                    <button type="submit" class="btn btn-primary" onclick="return validation();">{{__("messages.update")}}</button>
                 </div>
                 {!! Form::close() !!}
             </div>
@@ -71,6 +74,52 @@
 @endsection
 
 @section('script')
-<script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-{!! $validator->selector('#contact-update') !!}
+
+<script>
+    function validation() {
+        var temp = 0;
+        var number = /([0-9])/;
+
+        var email = $('#email').val();
+        var mobile = $('#mobile').val();
+        var address = $('#address').val();
+
+        if (email == "") {
+            $('.email-error').html("Please enter Email");
+            temp++
+        } else {
+            $('.email-error').html('');
+        }
+
+        $('.mobile-error').html('');
+        if (mobile == "") {
+            $('.mobile-error').html("Please enter your Mobile");
+            temp++
+        } else {
+            if (!mobile.match(number)) {
+                $('.mobile-error').html("Mobile should be a number.");
+                temp++
+            } else {
+                if (mobile.length != 10) {
+                    $('.mobile-error').html("Mobile must be 10 digits");
+                    temp++
+                }
+            }
+        }
+
+        if (address == "") {
+            $('.address-error').html("Please enter address");
+            temp++
+        } else {
+            $('.address-error').html('');
+        }
+
+
+        if (temp == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
 @endsection

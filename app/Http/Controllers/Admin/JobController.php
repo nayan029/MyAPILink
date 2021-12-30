@@ -29,7 +29,7 @@ class JobController extends Controller
     }
 
 
-    public function getAjaxData(Request $request)
+    public function getAjaxJobData(Request $request)
     {
         return $this->jobRepository->getJobdata($request);
     }

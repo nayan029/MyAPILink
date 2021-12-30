@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use JsValidator;
+use phpDocumentor\Reflection\Types\Null_;
 
 class WidgetController extends Controller
 {
@@ -28,7 +29,7 @@ class WidgetController extends Controller
     ];
 
     protected $slugvalidationrules = [
-       'image' => 'required|mimes:jpeg,png,jpg,gif,svg',
+        'image' => 'required|mimes:jpeg,png,jpg,gif,svg',
         'description' => 'required',
         'widget' => 'required',
     ];
@@ -66,7 +67,7 @@ class WidgetController extends Controller
      */
     public function create()
     {
-        $data['validator'] = JsValidator::make($this->storevalidationrules);
+        // $data['validator'] = JsValidator::make($this->storevalidationrules);
         $data['widget'] = ['our_advantages' => 'OUR ADVANTAGES', 'our_added_value' => 'OUR ADDED VALUE', 'how_it_works' => 'HOW IT WORKS'];
         return view('backend.widget.create', $data);
     }
@@ -79,25 +80,28 @@ class WidgetController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->widget=="how_it_works")
-        {
-            $validation = Validator::make($request->all(), $this->slugvalidationrules);
-        }else{
-            $validation = Validator::make($request->all(), $this->storevalidationrules);
-        }
         
-        if ($validation->fails()) {
-            return redirect()->back()->withErrors($validation->errors());
-        }
+
+        // if($request->widget=="how_it_works")
+        // {
+        //     $validation = Validator::make($request->all(), $this->slugvalidationrules);
+        // }else{
+        //     $validation = Validator::make($request->all(), $this->storevalidationrules);
+        // }
+
+        // if ($validation->fails()) {
+        //     return redirect()->back()->withErrors($validation->errors());
+        // }
 
         $storewidget = $this->widgetRepository->storeWidget($request);
         if ($storewidget) {
             Session::flash('success', 'Successfully Inserted');
             return redirect()->route('widget.index');
-        }else{
-            Session::flash('error', 'Title already exits');
-            return redirect()->back;
         }
+        // }else{
+        //     Session::flash('error', 'Title already exits');
+        //     return redirect()->back;
+        // }
     }
 
     /**
@@ -120,7 +124,7 @@ class WidgetController extends Controller
      */
     public function edit($id)
     {
-        $data['validator'] = JsValidator::make($this->updatevalidationrules);
+        // $data['validator'] = JsValidator::make($this->updatevalidationrules);
         $data['widget'] = $this->widgetRepository->getSingleWidget($id);
         $data['widgets'] = ['our_advantages' => 'OUR ADVANTAGES', 'our_added_value' => 'OUR ADDED VALUE', 'how_it_works' => 'HOW IT WORKS'];
         return view('backend.widget.edit', $data);
@@ -135,23 +139,24 @@ class WidgetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if($request->widget=="how_it_works")
-        {
-            $validation = Validator::make($request->all(), $this->slugupdaterules);
-        }else{
-            $validation = Validator::make($request->all(), $this->updatevalidationrules);
+        // if($request->widget=="how_it_works")
+        // {
+        //     $validation = Validator::make($request->all(), $this->slugupdaterules);
+        // }else{
+        //     $validation = Validator::make($request->all(), $this->updatevalidationrules);
+        // }
+
+        // if ($validation->fails()) {
+        //     return redirect()->back()->withErrors($validation->errors());
+        // }
+        if ($request->image == NULL) {
         }
-        
-        if ($validation->fails()) {
-            return redirect()->back()->withErrors($validation->errors());
-        }
-        
         $updateWidget = $this->widgetRepository->updateWidget($request, $id);
 
         if ($updateWidget) {
             Session::flash('success', 'Successfully Updated');
             return redirect()->route('widget.index');
-    }
+        }
     }
 
     /**

@@ -24,4 +24,8 @@ class Skill extends Model
         return response()->json($data,200);
     }
 
+    public function notHavingImageInDb(){
+        return (empty($this->image))?true:false;
+    }
+
 }

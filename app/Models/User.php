@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Laravel\Sanctum\HasApiTokens;
+use Laravel\Jetstream\HasProfilePhoto;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -18,16 +19,32 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var string[]
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    // protected $fillable = [
+    //     'email',
+    //     'password',
+    //     'phone',
+    //     'civility',
+    //     'first_name',
+    //     'last_name',
+    //     'email ',
+    //     'phone',
+    //     'roles',
+    //     'establishment_management',
+    //     'represent',
+    //     'organization',
+    //     'number_of_establishments',
+    //     'address',
+    //     'postal_code',
+    //     'city',
+    //     'user_type',    
+        
+    // ];
+
+    use HasFactory,SoftDeletes;
+
+    protected $guarded = ['id'];
+    protected $dates = ['deleted_at'];
+    protected $table = 'users';
 
     /**
      * The attributes that should be hidden for serialization.
@@ -58,4 +75,29 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public static function getData()
+    {
+        $data =  Skill::get();
+        $skill = SkillPosition::get();
+    }
+    public function saveJob()
+    {
+        return $this->hasMany(SavedJobs::class);
+    }
+    public function establishmentData()
+    {
+        return $this->hasMany(Establishment::class)->where('user_id',auth()->user()->id);
+    }
+
+    public function getJobList()
+    {
+        return $this->hasMany(Job::class);
+    }
+    public function establishmentUserData()
+    {
+        return $this->belongsTo(Establishment::class,'user_id','id')->where('user_id',auth()->user()->id);
+    }
+   
+
 }

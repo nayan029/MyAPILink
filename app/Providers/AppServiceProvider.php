@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Interfaces\HomeRepositoryInterface;
+use App\Models\Contact;
+use App\Models\Partner;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +17,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        view()->composer('*', function ($view) {
+            $data['contact'] = Contact::first();
+            $data['partners'] = Partner::get();
+            $view->with($data);
+        });
     }
 
     /**
@@ -23,6 +31,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Paginator::useBootstrap();
     }
 }

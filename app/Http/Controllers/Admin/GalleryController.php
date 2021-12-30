@@ -25,12 +25,6 @@ class GalleryController extends Controller
     }
     public function getUpdateStatus(Request $request)
     {
-        if ($request->status == '1') {
-            $status = 'accept';
-        } else {
-            $status = 'reject';
-        }
-        $update = EstablishmentGallery::where('id', $request->id)->update(['status' => $status]);
-        return $update;
+        return $this->galleryRepository->getUpdatedStatus($request);
     }
 }

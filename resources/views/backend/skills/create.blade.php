@@ -28,12 +28,14 @@
                             <div class="form-group">
                                 {!! Form::label('name', 'Name') !!} <span class="text-danger">*</span>
                                 {!! Form::text('name', old('name'), ['class' => 'form-control', 'placeholder' => 'Enter Name','id'=>'name']) !!}
+                                <div class="error"><span class="nameerror"></span></div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 {!! Form::label('image', 'Image') !!} <span class="text-danger">*</span>
                                 {!! Form::file('image', old('image'), ['class' => 'form-control','id'=>'image']) !!}
+                                <div class="error"><span class="imageerror"></span></div>
                             </div>
                         </div>
                     </div>
@@ -48,37 +50,37 @@
                     </div>
                     <hr>
                     <br>
-                        <label>Add Position:</label>
-                        <div class="row" id="sectionRows">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    {!! Form::label('position', 'Position') !!} <span class="text-danger">*</span>
-                                    {!! Form::text('',null,['class' => 'form-control', 'placeholder' => 'Enter position','id'=>'position']) !!}
-                                    <div class="error"><span class="poserror"></span></div>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    {!! Form::label('title', 'Title') !!} <span class="text-danger">*</span>
-                                    {!! Form::text('',null, ['class' => 'form-control', 'placeholder' => 'Enter Title','id'=>'title']) !!}
-                                    <div class="error"><span class="titerror"></span></div>
-                                </div>
-                            </div>
-                            <div style="margin-bottom :50px;">
-                                <a href="javascript:void(0);" class="btn btn-success btn-xs mt-4" onclick="return validation();" id="addNewRow"><i class="fa fa-plus"></i></a>
+                    <label>Add Position:</label>
+                    <div class="row" id="sectionRows">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {!! Form::label('position', 'Position') !!} <span class="text-danger">*</span>
+                                {!! Form::text('',null,['class' => 'form-control', 'placeholder' => 'Enter position','id'=>'position']) !!}
+                                <div class="error"><span class="poserror"></span></div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            {!! Form::label('desc', 'Description') !!} <span class="text-danger">*</span>
-                            {!! Form::textarea('',null, ['class' => 'form-control ', 'placeholder' => 'Enter description','id'=>'summernote']) !!}
-                            <div class="error"><span class="descerror"></span></div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                {!! Form::label('title', 'Title') !!} <span class="text-danger">*</span>
+                                {!! Form::text('',null, ['class' => 'form-control', 'placeholder' => 'Enter Title','id'=>'title']) !!}
+                                <div class="error"><span class="titerror"></span></div>
+                            </div>
+                        </div>
+                        <div style="margin-bottom :50px;">
+                            <a href="javascript:void(0);" class="btn btn-success btn-xs mt-4" onclick="return validation();" id="addNewRow"><i class="fa fa-plus"></i></a>
                         </div>
                     </div>
+                </div>
 
-                    <div class="container">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        {!! Form::label('desc', 'Description') !!} <span class="text-danger">*</span>
+                        {!! Form::textarea('',null, ['class' => 'form-control ', 'placeholder' => 'Enter description','id'=>'desc']) !!}
+                        <div class="error"><span class="descerror"></span></div>
+                    </div>
+                </div>
+
+                <div class="container">
                     <div id="appendNrerow">
                         <table class="table table-bordered">
                             <thead>
@@ -95,18 +97,18 @@
                             </tbody>
                         </table>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">{{__("messages.save")}}</button>
+                            <button type="submit" class="btn btn-primary" onclick="return skillvalidation();">{{__("messages.save")}}</button>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>  
-
         </div>
-    
 
-        {!! Form::close() !!}
     </div>
+
+
+    {!! Form::close() !!}
+</div>
 </div>
 </div>
 </div>
@@ -118,52 +120,102 @@
 </div>
 @endsection
 @section('script')
-<script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-{!! $validator->selector('#skill-add') !!}
+
 <script>
     $(function() {
         $('.summernote').summernote();
     });
+    function skillvalidation(){
+        var temp = 0;
+        var number = /([0-9])/;
+        var name = $('#name').val();
+        $('.nameerror').html('');
 
 
+        if (name.match(number)) {
+            $('.nameerror').html("Numbers not allowed.");
+            temp++
+        } else {
+            if (name.length > 50) {
+                $('.nameerror').html("Name must not be grater than 50 characters.");
+                temp++
+            } else {
+                if (name == "") {
+                    $('.nameerror').html("Please enter Name");
+                    temp++
+                }
+            }
+        }
+
+        $('.imageerror').html('');
+        var fuData = document.getElementById('image');      // CHOICE FILE (IMAGE) VILADITION 
+        var FileUploadPath = fuData.value;
+        if (FileUploadPath == '') {
+            $('.imageerror').html('Please enter a Image');
+           temp++;
+        } else {
+                    var Extension = FileUploadPath.substring(
+                    FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+
+                    if (Extension == "png" || Extension == "jpeg" || Extension == "jpg" || Extension == "gif" || Extension == "svg")  {
+                        if (fuData.files && fuData.files[0]) {
+                            var reader = new FileReader();
+                            reader.onload = function(e) {  }
+                            reader.readAsDataURL(fuData.files[0]);
+                        }
+                    }else {
+                        $('.imageerror').html('File must Image!! Like:jpeg, png, jpg, gif, svg' );   
+                          temp++;
+            }
+        }
+         validation();
+
+        if(temp == 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     function validation() {
         var temp = 0;
         var number = /([0-9])/;
         var position = $('#position').val();
         $('.poserror').html('');
-        if(position){   
-        }
+
+
         if (position.match(number)) {
             $('.poserror').html("Numbers not allowed.");
             temp++
         } else {
-            if(position.length > 25){
+            if (position.length > 25) {
                 $('.poserror').html("Position must not be grater than 25 characters.");
                 temp++
-            }else{
-                if(position == ""){
-            $('.poserror').html("Please enter your Position");
-            temp++
+            } else {
+                if (position == "") {
+                    $('.poserror').html("Please enter your Position");
+                    temp++
+                }
             }
         }
-    }
 
         var number = /([0-9])/;
         var title = $('#title').val();
         $('.titerror').html('');
-
-        if(title){
         if (title.match(number)) {
             $('.titerror').html("Numbers not allowed.");
             temp++
         } else {
-            if(title.length > 25){
+            if (title.length > 25) {
                 $('.titerror').html("Title must not be grater than 25 characters.");
                 temp++
+            } else {
+                if (title == "") {
+                    $('.titerror').html("Please enter your Title");
+                    temp++
+                }
             }
         }
-    }
 
         var desc = $('#desc').val();
         if (desc == "") {
@@ -171,10 +223,9 @@
             temp++
         } else {
             $('.descerror').html("");
-
         }
 
-        
+
         if (temp == 0) {
             $(document).on('click', "#addNewRow", function() {
 
@@ -234,8 +285,8 @@
 
     $(document).on('click', ".removeRow", function() {
         var tbl_row = $(this).closest('tr');
-            var row_id = tbl_row.attr('row_id');
-            $("*[row_id=" + row_id + "]").remove();
+        var row_id = tbl_row.attr('row_id');
+        $("*[row_id=" + row_id + "]").remove();
     });
 </script>
 

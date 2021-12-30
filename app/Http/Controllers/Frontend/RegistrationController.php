@@ -8,12 +8,14 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use JsValidator;
+use App\Http\Traits\ImageuploadTrait;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use PDF;
 
 class RegistrationController extends Controller
 {
+    use ImageuploadTrait;
     protected $registrationRepository = "";
     protected $forgotPasswordValidator = [
 
@@ -34,7 +36,6 @@ class RegistrationController extends Controller
 
     public function saveRegistration(Request $request)
     {   
-              
         Validator::make($request->all(), [
             'first_name' => 'required|string|max:25|regex:/^([^0-9]*)$/',
             'last_name' => 'required|string|max:25|regex:/^([^0-9]*)$/',
@@ -53,6 +54,8 @@ class RegistrationController extends Controller
             ]);
         }
     }
+
+    
 
     
 
@@ -109,4 +112,16 @@ class RegistrationController extends Controller
             return redirect()->back();
         }
     }
+    public function uploadCv(Request $request)
+    {
+        $userId=request('editid');
+        if ($request->file('cv')) {
+            $choose_image = $this->uploadImage($request->file('cv'), 'usercv');
+            $updateData=array('cv'=>$choose_image);
+            User::where('id',$userId)->update($updateData);
+        }
+        return redirect('candidate/welcome/'.$userId);
+    }
+
+    
 }

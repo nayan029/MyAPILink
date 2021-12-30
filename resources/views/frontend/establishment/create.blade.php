@@ -104,7 +104,7 @@
                             <div class="form-group">
                                 {!! Form::label('Pédagogie appliquée', 'Pédagogie appliquée') !!}<span class="invalid-error text-danger"> *</span>
                                 <div class="type-drops add-establish-drop maria-placeholder-select">
-                                    {!! Form::select('applied_pedagogy',['Maria Montessori' => 'Maria Montessori','Pédagogie Interactive' => 'Pédagogie Interactive','Pédagogie Faber et Mazlish' => 'Pédagogie Faber et Mazlish','Pickler Loczy' => 'Pickler Loczy','Pédagogie Reggio' => 'Pédagogie Reggio','Snoezelen'=>'Snoezelen','Parler Bambin'=>'Parler Bambin','Aucune en particulier'=>'Aucune en particulier','Autres'=>'Autres'],null, [ 'id' => 'applied_pedagogy','class' => 'select-multi','multiple'=>'multiple']) !!}
+                                    {!! Form::select('applied_pedagogy[]',['Maria Montessori' => 'Maria Montessori','Pédagogie Interactive' => 'Pédagogie Interactive','Pédagogie Faber et Mazlish' => 'Pédagogie Faber et Mazlish','Pickler Loczy' => 'Pickler Loczy','Pédagogie Reggio' => 'Pédagogie Reggio','Snoezelen'=>'Snoezelen','Parler Bambin'=>'Parler Bambin','Aucune en particulier'=>'Aucune en particulier','Autres'=>'Autres'],null, [ 'id' => 'applied_pedagogy','class' => 'select-multi','multiple'=>'multiple']) !!}
                                 </div>
                             </div>
                             <div class="form-group sr-pos">
@@ -183,13 +183,9 @@
         </div>
     </div>
     {!! Form::close() !!}
-
-
-
 </section>
 @endsection
 @section('script')
-
 <script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
 <script type="text/javascript">
     $("#bravo-btn").on('click', function() {

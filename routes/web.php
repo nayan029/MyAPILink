@@ -61,7 +61,7 @@ Route::middleware(['auth:admin'])->group(function ($route) {
 
         //Job module route
         $adminRoute->resource('job', 'JobController');
-        $adminRoute->get('/getdata', 'JobController@getAjaxData')->name('job.data');
+        $adminRoute->get('/getdata/jobdata','JobController@getAjaxJobData')->name('job.data');
 
         //Gallery Module Route
         $adminRoute->resource('gallery', 'GalleryController');
@@ -82,6 +82,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->post('manager/store', 'ManagerController@storeData')->name('manager.store');
     $frontRoute->post('update-profile', 'ManagerController@updateProfile')->name('update-profile');
     $frontRoute->get('account-setting', 'ManagerController@accountSetting')->name('account-setting');
+    
 
     $frontRoute->get('manager', 'ManagerController@index')->name('manager');
     $frontRoute->get('registration', 'RegistrationController@index')->name('registration');
@@ -89,12 +90,15 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('email-verify/{email}', 'RegistrationController@getEmailVerify')->name('email.verify');
 
     $frontRoute->get('manager/email-verify/{email}', 'ManagerController@getEmailVerify')->name('manager.email.verify');
-
+    $frontRoute->get('manager-register-step-two/{id}', 'ManagerController@managerRegisterStepTwo')->name('manager-register-step-two');
+    $frontRoute->post('manager-register-step-two-insert', 'ManagerController@managerRegisterStepTwoInsert')->name('manager-register-step-two-insert');
     //start profile route step
     $frontRoute->get('candidate-profile/{userid}', 'RegistrationController@candidateProfileStep')->name('candidate.profile');
     $frontRoute->get('candidate/resumedownaload/{userid}', 'RegistrationController@candidateDownloadResume')->name('candidate.resume');
     $frontRoute->get('candidate/welcome/{userid}', 'RegistrationController@getWelcomePage')->name('candidate.welcome');
     $frontRoute->get('candidate/success/{userid}', 'RegistrationController@candidateProfileLogin')->name('candidate.login');
+    $frontRoute->post('uploadcv', 'RegistrationController@uploadCv')->name('uploadcv');
+    
     //end profile route step
     $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
     $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');
@@ -108,6 +112,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
 
 
     $frontRoute->get('addjob/{id}', 'JobController@index')->name('addjob');
+    $frontRoute->post('/email','JobController@emailunique');
     $frontRoute->post('addorupdatejob/{id}', 'JobController@addOrUpdateJob')->name('addorupdatejob');
     $frontRoute->get('joblist/{id}', 'JobController@showJob')->name('joblist');
     $frontRoute->post('holdJobData', 'JobController@holdJobData')->name('holdJobData');
@@ -148,6 +153,7 @@ Route::middleware(['auth:web'])->group(function ($route) {
         $frontRoute->get('edit-establishment/{id}', 'EstablishmentController@edit')->name('edit-establishment');
         $frontRoute->post('update-establishment/{id}', 'EstablishmentController@update')->name('update-establishment');
         $frontRoute->post('upload-image', 'EstablishmentController@uploadImage')->name('upload-image');
+        $frontRoute->post('upload-cv', 'EstablishmentController@uploadCv')->name('upload-cv');
         $frontRoute->post('remove-image', 'EstablishmentController@removeImage')->name('remove-image');
 
         $frontRoute->get('mycandidate-profile', 'CandidateController@index')->name('mycandidate-profile');
@@ -160,7 +166,7 @@ Route::middleware(['auth:web'])->group(function ($route) {
 
         $frontRoute->post('candidate-sendmessage', 'CandidateController@sendmessage')->name('candidate-sendmessage');
         $frontRoute->post('user/logout', 'HomeController@logout')->name('user-logout');
-        $frontRoute->get('search-job', 'SearchAdController@index')->name('searchjob');
+        $frontRoute->any('search-job', 'SearchAdController@index')->name('searchjob');
         $frontRoute->post('store-jobType', 'SearchAdController@store')->name('store-jobType');
         $frontRoute->post('getDocumentName', 'SearchAdController@getDocumentName')->name('getDocumentName');
         $frontRoute->post('store-savedjobs', 'SearchAdController@insertPosts')->name('store-savedjobs');

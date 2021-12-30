@@ -15,6 +15,7 @@ class LoginController extends Controller
         'email' => 'required|email',
         'password' => 'required|min:6',
     ];
+    
 
     public function index()
     {

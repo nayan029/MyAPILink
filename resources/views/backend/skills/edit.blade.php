@@ -33,12 +33,14 @@
                             <div class="form-group ">
                                 {!! Form::label('name', 'Name') !!}
                                 {!! Form::text('name', old('name'), ['class' => 'form-control', 'placeholder' => 'Enter Name','id'=>'name']) !!}
+                                <div class="error"><span class="nameerror"></span></div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 {!! Form::label('image', 'Image') !!}
                                 {!! Form::file('image', old('image'), ['class' => 'form-control','id'=>'image','onchange'=>'checkextension()']) !!}
+                                <div class="error"><span class="imageerror"></span></div>
                                 &nbsp;&nbsp; <img src="{{ asset($skill->image) }}" height="50px" width="50px" />
                             </div>
                         </div>
@@ -113,7 +115,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                    <button type="submit" onClick="return validate();" class="btn btn-primary">{{__("messages.update")}}</button>
+                    <button type="submit" onclick="return skillvalidation();" class="btn btn-primary">{{__("messages.update")}}</button>
                 </div>
                 {!! Form::close() !!}
             </div>
@@ -123,8 +125,6 @@
     @endsection
     @section('script')
     @section('script')
-    <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-    {!! $validator->selector('#skill-update') !!}
     <script>
         // var getAllData = '{{$skill_position}}';
         // getAllData = getAllData.replace(/&quot;/gi, "\"");
@@ -138,48 +138,99 @@
             $('.summernote').summernote();
         });
 
+        function skillvalidation(){
+        var temp = 0;
+        var number = /([0-9])/;
+        var name = $('#name').val();
+        $('.nameerror').html('');
+
+
+        if (name.match(number)) {
+            $('.nameerror').html("Numbers not allowed.");
+            temp++
+        } else {
+            if (name.length > 50) {
+                $('.nameerror').html("Name must not be grater than 50 characters.");
+                temp++
+            } else {
+                if (name == "") {
+                    $('.nameerror').html("Please enter Name");
+                    temp++
+                }
+            }
+        }
+
+        // $('.imageerror').html('');
+        // var fuData = document.getElementById('image');      // CHOICE FILE (IMAGE) VILADITION 
+        // var FileUploadPath = fuData.value;
+        // if (FileUploadPath == '') {
+        //     $('.imageerror').html('Please enter a Image');
+        //    temp++;
+        // } else {
+        //             var Extension = FileUploadPath.substring(
+        //             FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+
+        //             if (Extension == "png" || Extension == "jpeg" || Extension == "jpg" || Extension == "gif" || Extension == "svg")  {
+        //                 if (fuData.files && fuData.files[0]) {
+        //                     var reader = new FileReader();
+        //                     reader.onload = function(e) {  }
+        //                     reader.readAsDataURL(fuData.files[0]);
+        //                 }
+        //             }else {
+        //                 $('.imageerror').html('File must Image!! Like:jpeg, png, jpg, gif, svg' );   
+        //                   temp++;
+        //     }
+        // }
+
+        if(temp == 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
         function validation() {
             var temp = 0;
 
             var number = /([0-9])/;
-        var position = $('#position').val();
-        $('.poserror').html('');
-       
-        if (position.match(number)) {
-            $('.poserror').html("Numbers not allowed.");
-            temp++
-        } else {
-            if(position.length > 25){
-                $('.poserror').html("Position must not be grater than 25 characters.");
-                temp++
-            }else{
-                if(position == ""){
-            $('.poserror').html("Please enter your Position");
-            temp++
-            }
-        }
-    }
+            var position = $('#position').val();
+            $('.poserror').html('');
 
-        var number = /([0-9])/;
-        var title = $('#title').val();
-        $('.titerror').html('');
-
-       
-        if (title.match(number)) {
-            $('.titerror').html("Numbers not allowed.");
-            temp++
-        } else {
-            if(title.length > 25){
-                $('.titerror').html("Title must not be grater than 25 characters.");
+            if (position.match(number)) {
+                $('.poserror').html("Numbers not allowed.");
                 temp++
-            }else{
-                if(title == ""){
-            $('.titerror').html("Please enter your Title");
-            temp++
+            } else {
+                if (position.length > 25) {
+                    $('.poserror').html("Position must not be grater than 25 characters.");
+                    temp++
+                } else {
+                    if (position == "") {
+                        $('.poserror').html("Please enter your Position");
+                        temp++
+                    }
                 }
             }
-        }
-    
+
+            var number = /([0-9])/;
+            var title = $('#title').val();
+            $('.titerror').html('');
+
+
+            if (title.match(number)) {
+                $('.titerror').html("Numbers not allowed.");
+                temp++
+            } else {
+                if (title.length > 25) {
+                    $('.titerror').html("Title must not be grater than 25 characters.");
+                    temp++
+                } else {
+                    if (title == "") {
+                        $('.titerror').html("Please enter your Title");
+                        temp++
+                    }
+                }
+            }
+
 
 
             var desc = $('#desc').val();
@@ -236,8 +287,8 @@
             });
         }
         $(document).on('click', ".edit_row", function() {
+            
             $('.btn-save').show();
-            $(this).closest('tr').attr('row_id').css('background-color', '#ddd');
             var tbl_row = $(this).closest('tr');
             var row_id = tbl_row.attr('row_id');
 
@@ -306,7 +357,7 @@
         }
     </script>
     <script>
-          function checkextension() {
+        function checkextension() {
             var file = document.querySelector("#image");
             alert(file);
             if (/\.(jpe?g|png|gif)$/i.test(file.files[0].name) === false) {

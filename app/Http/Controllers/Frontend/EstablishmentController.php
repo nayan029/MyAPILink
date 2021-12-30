@@ -31,7 +31,7 @@ class EstablishmentController extends Controller
         'image' => 'required|mimes:jpeg,png,jpg|max:2048',
     ];
     protected   $cvValidationRules =
-    [   
+    [
         'cv' => 'required|mimes:pdf,PDF|max:2048',
 
     ];
@@ -46,19 +46,19 @@ class EstablishmentController extends Controller
     public function index()
     {
         $data['accommodationCapacity'] = array(1 => 1);
-        $data['validator'] = JsValidator::make($this->validationrules);
+        // $data['validator'] = JsValidator::make($this->validationrules);
         return view('frontend.establishment.create', $data);
     }
     public function store(Request $request)
     {
-       
+
         $validationrules['document'] = 'required|mimes:pdf';
         $validationrules['more_infomation'] = 'required|mimes:jpeg,png,jpg';
 
-        $validator = Validator::make($request->all(), $this->validationrules);
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator->errors());
-        }
+        // $validator = Validator::make($request->all(), $this->validationrules);
+        // if ($validator->fails()) {
+        //     return redirect()->back()->withErrors($validator->errors());
+        // }
 
         $storeProfile = $this->establishmentRepository->store($request);
 
@@ -83,19 +83,11 @@ class EstablishmentController extends Controller
     }
     public function edit($id)
     {
-
-        $data['validator'] = JsValidator::make($this->validationrules);
         $data['establishment'] = $this->establishmentRepository->getSingleEstablishment($id);
         return view('frontend.establishment.edit', $data);
     }
     public function update(Request $request, $id)
     {
-
-
-        $validator = Validator::make($request->all(), $this->validationrules);
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator->errors());
-        }
 
         $update = $this->establishmentRepository->update($request, $id);
 
@@ -109,8 +101,6 @@ class EstablishmentController extends Controller
 
     public function uploadImage(Request $request)
     {
-
-
         $validator = Validator::make($request->all(), $this->imageValidationRules);
         if ($validator->fails()) {
             return response()->json(['success' => false, 'errors' => $validator->errors()]);
@@ -123,7 +113,7 @@ class EstablishmentController extends Controller
         }
         return response()->json(['success' => false, 'message' => 'Sorry, something went wrong. please try again.']);
     }
-    
+
     public function uploadCv(Request $request)
     {
 
@@ -140,7 +130,7 @@ class EstablishmentController extends Controller
         }
         return response()->json(['success' => false, 'message' => 'Sorry, something went wrong. please try again.']);
     }
-    
+
     public function removeImage(Request $request)
     {
         $delete = $this->establishmentRepository->deleteImage($request->id);

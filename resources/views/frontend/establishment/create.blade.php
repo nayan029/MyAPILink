@@ -21,14 +21,15 @@
                                     <div class="form-group mt-5">
 
                                         {!! Form::label('Type d’Établissement', 'Type d’Établissement') !!}<span class="invalid-error text-danger"> *</span>
-                                        {!! Form::select('type_of_establishment',['Crèche collective' => 'Crèche collective','Micro-crèche' => 'Micro-crèche','Crèche privée d’entreprise ou inter-entreprises' => 'Crèche privée d’entreprise ou inter-entreprises'] ,null, [ 'id' => 'type_of_establishment', 'class' => 'cus-drop select2 form-add-establish']) !!}
-
+                                        {!! Form::select('type_of_establishment',[''=>'','Crèche collective' => 'Crèche collective','Micro-crèche' => 'Micro-crèche','Crèche privée d’entreprise ou inter-entreprises' => 'Crèche privée d’entreprise ou inter-entreprises'] ,null, [ 'id' => 'type_of_establishment', 'class' => 'cus-drop select2 form-add-establish']) !!}
+                                        <span class="establishment-error text-danger"></span>
                                     </div>
 
 
                                     <div class="form-group">
                                         {!! Form::label('A propre de notre structure', 'A propre de notre structure') !!}<span class="invalid-error text-danger"> *</span>
                                         {!! Form::text('own_of_our_structure',NULL, ['class' => 'form-control inputicon2 form-add-establish','id'=>'own_of_our_structure']) !!}
+                                        <span class="structure-error text-danger"></span>
                                     </div>
                                 </div>
                             </div>
@@ -38,6 +39,7 @@
                                         <div class="form-group">
                                             {!! Form::label('Date d’ouverture', 'Date d’ouverture') !!}<span class="invalid-error text-danger"> *</span>
                                             {!! Form::date('opening_date',NULL, [ 'id' => 'opening_date', 'class' => 'form-control form-add-establish inputicon2 fn-family']) !!}
+                                            <span class="opening-date-error text-danger"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -54,19 +56,20 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         {!! Form::label('Effectif', 'Effectif') !!}<span class="invalid-error text-danger"> *</span>
-                                        {!! Form::select('effective',['1-10 personnes' => '1-10 personnes','11-20 personnes' => '11-20 personnes','21-30 personnes' => '21-30 personnes','31-40 personnes' => '31-40 personnes','41-50 personnes' => '41-50 personnes'],null, [ 'id' => 'effective' ,'class' => 'cus-drop select2 form-add-establish']) !!}
-
-
+                                        {!! Form::select('effective',[''=>'','1-10 personnes' => '1-10 personnes','11-20 personnes' => '11-20 personnes','21-30 personnes' => '21-30 personnes','31-40 personnes' => '31-40 personnes','41-50 personnes' => '41-50 personnes'],null, [ 'id' => 'effective' ,'class' => 'cus-drop select2 form-add-establish']) !!}
+                                        <span class="effective-error text-danger"></span>
                                     </div>
                                     <div class="form-group ">
                                         {!! Form::label('Nombre de groupes et tranches d’âges', 'Nombre de groupes et tranches d’âges') !!}<span class="invalid-error text-danger"> *</span>
-                                        {!! Form::select('number_of_groups_and_age_groups',['1-10 ans' => '1-10 ans','11-20 ans' => '11-20 ans','21-30 ans' => '21-30 ans','31-40 ans' => '31-40 ans','41-50 ans' => '41-50 ans'],null, [ 'id' => 'number_of_groups_and_age_groups','class' => 'cus-drop select2 form-add-establish']) !!}
+                                        {!! Form::select('number_of_groups_and_age_groups',[''=>'','1-10 ans' => '1-10 ans','11-20 ans' => '11-20 ans','21-30 ans' => '21-30 ans','31-40 ans' => '31-40 ans','41-50 ans' => '41-50 ans'],null, [ 'id' => 'number_of_groups_and_age_groups','class' => 'cus-drop select2 form-add-establish']) !!}
+                                        <span class="age-groups-error text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group ">
                                         {!! Form::label("Capacité d'accueil", "Capacité d'accueil") !!}<span class="invalid-error text-danger"> *</span>
                                         {!! Form::number('accommodation_capacity',NULL, ['class' => 'num-input form-control form-add-establish inputicon2','id'=>'accommodation_capacity']) !!}
+                                        <span class="capacity-error text-danger"></span>
                                     </div>
                                 </div>
 
@@ -76,6 +79,7 @@
                                         {!! Form::label("Superficie de l'établissement", "Superficie de l'établissement") !!}
                                         <span class="invalid-error text-danger"> *</span>
                                         {!! Form::text('surface_area_of_the_establishment',NULL, ['class' => ' form-control form-add-establish inputicon2','id'=>'surface_area_of_the_establishment']) !!}
+                                        <span class="surface-area-error text-danger"></span>
                                         <div class="m2-label">{!! Form::label("m²", "m²") !!}</div>
                                     </div>
                                 </div>
@@ -96,6 +100,7 @@
                                                 {!! Form::radio('garden', 'No',NULL, ['id' => 'garden', 'name' => 'garden', 'class' => 'radio-yes-no']) !!}
                                                 {!! Form::label('Non', 'Non', ['class' => 'label-radios']) !!}
                                             </div>
+                                            <span class="garden-error text-danger"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -105,6 +110,7 @@
                                 {!! Form::label('Pédagogie appliquée', 'Pédagogie appliquée') !!}<span class="invalid-error text-danger"> *</span>
                                 <div class="type-drops add-establish-drop maria-placeholder-select">
                                     {!! Form::select('applied_pedagogy[]',['Maria Montessori' => 'Maria Montessori','Pédagogie Interactive' => 'Pédagogie Interactive','Pédagogie Faber et Mazlish' => 'Pédagogie Faber et Mazlish','Pickler Loczy' => 'Pickler Loczy','Pédagogie Reggio' => 'Pédagogie Reggio','Snoezelen'=>'Snoezelen','Parler Bambin'=>'Parler Bambin','Aucune en particulier'=>'Aucune en particulier','Autres'=>'Autres'],null, [ 'id' => 'applied_pedagogy','class' => 'select-multi','multiple'=>'multiple']) !!}
+                                    <span class="pedagogy-error text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group sr-pos">
@@ -116,11 +122,9 @@
                                             document</span>
                                         {!! Form::file('document[]', ['id' => 'document', 'name' => 'document[]', 'class' => 'upload', 'multiple' => true ],[]) !!}
                                     </div>
+                                    <span class="document-error text-danger"></span>
                                 </div>
                             </div>
-
-
-
                             <div class="row">
                                 <div class="col-md-12">
                                     <section>
@@ -170,7 +174,7 @@
                                 </div>
                                 <div class="col-md-12 d-flex justify-content-end mt-5">
                                     <button class="btn btn-outline-cancel annuler-btns">Annuler</button>
-                                    <button class="btn btn-yellow">Sauvegarder</button>
+                                    <button class="btn btn-yellow" onclick="return validation();">Sauvegarder</button>
                                 </div>
 
 
@@ -298,9 +302,122 @@
             $(this).parent().parent().remove();
         });
     }
+
+    function validation() {
+        var temp = 0;
+
+        var typeestablishment = $('#type_of_establishment').val();
+        var structure = $('#own_of_our_structure').val();
+        var openingdate = $('#opening_date').val();
+        var effective = $('#effective').val();
+        var agegroups = $('#number_of_groups_and_age_groups').val();
+        var capacity = $('#accommodation_capacity').val();
+        var surfacearea = $('#surface_area_of_the_establishment').val();
+        var pedagogy = $('#applied_pedagogy').val();
+        var number = /([0-9])/;
+
+        if (typeestablishment == "") {
+            $('.establishment-error').html("Please enter Type of establishment");
+            temp++
+        } else {
+            $('.establishment-error').html("");
+        }
+
+        $('.structure-error').html('');
+        if (structure == "") {
+            $('.structure-error').html("Please enter Own of our structure");
+            temp++
+        } else {
+            if (structure.match(number)) {
+                $('.structure-error').html("Numbers not allowed");
+                temp++
+            }
+        }
+
+        if (openingdate == "") {
+            $('.opening-date-error').html("Please enter Opening date");
+            temp++
+        } else {
+            $('.opening-date-error').html("");
+        }
+
+        if (effective == "") {
+            $('.effective-error').html("Please enter Effective");
+            temp++
+        } else {
+            $('.effective-error').html("");
+        }
+
+        if (agegroups == "") {
+            $('.age-groups-error').html("Please enter Number of groups and age groups");
+            temp++
+        } else {
+            $('.age-groups-error').html("");
+        }
+
+        if (capacity == "") {
+            $('.capacity-error').html("Please enter Accommodation capacity ");
+            temp++
+        } else {
+            $('.capacity-error').html("");
+        }
+
+        $('.surface-area-error').html("");
+        if (surfacearea == "") {
+            $('.surface-area-error').html("Please enter Surface area of ​​the establishment");
+            temp++
+        } else {
+            if (!surfacearea.match(number)) {
+                $('.surface-area-error').html('Surface area of ​​the establishment must be a number');
+                temp++
+            }
+
+        }
+
+        if ($('input[name="garden"]:checked').length == 0) {
+            $('.garden-error').html("Please select garden");
+            temp++
+        } else {
+            $('.garden-error').html("");
+        }
+
+        if (pedagogy == "") {
+            $('.pedagogy-error').html("Please enter Applied pedagogy");
+            temp++
+        } else {
+            $('.pedagogy-error').html("");
+        }
+
+
+        $('.document-error').html('');
+        var fuData = document.getElementById('document'); // CHOICE FILE (IMAGE) VILADITION 
+        var FileUploadPath = fuData.value;
+        if (FileUploadPath == '') {
+            $('.document-error').html('Please enter a Image');
+            temp++;
+        } else {
+            var Extension = FileUploadPath.substring(
+                FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+
+            if (Extension == "png" || Extension == "jpeg" || Extension == "jpg" || Extension == "gif" || Extension == "svg") {
+                if (fuData.files && fuData.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {}
+                    reader.readAsDataURL(fuData.files[0]);
+                }
+            } else {
+                $('.document-error').html('File must Image!! Like:jpeg, png, jpg, gif, svg.');
+                temp++
+            }
+        }
+
+        if (temp == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 </script>
 
-<script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-{!! $validator->selector('#store-establishment') !!}
 
 @endsection

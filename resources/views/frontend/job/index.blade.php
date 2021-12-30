@@ -339,7 +339,7 @@ Code postal">
             $('.duration-contract-error').html('');
         }
 
-        if ($('input[name="job_type"]').length == 0) {
+        if ($('input[name="job_type"]:checked').length == 0) {
             $('.job-type-error').html('Please enter Job type');
             temp++
         } else {
@@ -396,9 +396,6 @@ Code postal">
             $('.deadlineapp-error').html('');
         }
 
-
-
-
         $('.phone-error').html("");
         if (phone == "") {
             $('.phone-error').html("Please enter Phone");
@@ -415,12 +412,10 @@ Code postal">
             }
         }
 
-        if (($('input[name="contact_thorugh"]').length == 0) ){
-            alert("dfs");
+        if (($('input[name="contact_thorugh"]').length == 0)) {
             $('.contract-through-error').html('Please enter Contract through application');
             temp++
         } else {
-            alert("df");
             $('.contract-through-error').html('');
         }
 
@@ -457,6 +452,7 @@ Code postal">
         }
 
         var emailverify = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+
         function uniqueEmailCheck(email) {
             response = false;
             $.ajax({

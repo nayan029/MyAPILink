@@ -109,7 +109,7 @@
                                     <div class="col-md-10">
                                         <section>
                                           
-                                                <div class="container">
+                                                <!-- <div class="container">
                                                     <div class="row">
                                                         <div class="col-md-12 p-0">
                                                             <div class="form-group mt-3">
@@ -124,18 +124,18 @@
                                                                 <div class="dropzone-wrapper">
                                                                     <div class="dropzone-desc">
                                                                         <img src="{{asset('frontend/images/profile-feather-upload.svg')}}" width="30px" class="mb-1">
-                                                                        <!-- <i class="glyphicon glyphicon-download-alt"></i> -->
                                                                         <p>Drag and drop here or<span style="color:#192842;font-family: 'Quicksand-Bold'">
                                                                                 Browse</span> </p>
                                                                     </div>
                                                                     <input type="file" name="more_infomation[]" multiple class="dropzone">
-                                                                <input type="hidden" name="user_id" value="{{$id}}" >
+                                                               
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
 
-                                                </div>
+                                                </div> -->
+                                                <input type="hidden" name="user_id" value="{{$id}}" >
                                             
                                         </section>
                                         <div class="border-grays mt-3"></div>

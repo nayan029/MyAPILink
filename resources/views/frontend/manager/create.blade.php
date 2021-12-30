@@ -564,6 +564,7 @@
                         $('.invisible').trigger('click');
                         $('#regform')[0].reset();
                     }, 2000);
+                   
                     if(response.data.establishment_management=='single'){
                                $.ajax({
                                 url: url,

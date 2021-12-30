@@ -24,7 +24,7 @@ class SearchAdController extends Controller
         $this->applyJobRepository = $applyJobRepository;
         $this->candidateRepository = $candidateRepository;
     }
-    public function index()
+    public function index(Request $request)
     {
         $data['list'] = $this->applyJobRepository->getCandidateData();
         $data['candidateCV'] =  $this->candidateRepository->getCvByUserId();

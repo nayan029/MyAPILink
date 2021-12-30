@@ -39,32 +39,18 @@ class SearchAdController extends Controller
             $validator = Validator::make($request->all(), $validationrules);
             if ($validator->fails()) {
                 return response()->json(['success' => false, 'errors' => $validator->errors()]);
-            } else {
-                $storeJobType = $this->applyJobRepository->store($request);
-
-                $jobView = Job::where('id', $storeJobType->job_id)->select('total_reg')->first();
-                $views = $jobView->total_reg + 1;
-                $update = Job::where('id', $storeJobType->job_id)->update(['total_reg' => $views]);
-                if ($storeJobType) {
-                    return response()->json([
-                        'success' => true,
-                        'message' => 'Successfully Inserted'
-                    ]);
-                }
             }
-        } else {
-            $storeJobType = $this->applyJobRepository->store($request);
+        }
+        $storeJobType = $this->applyJobRepository->store($request);
 
-            $jobView = Job::where('id', $storeJobType->job_id)->select('total_reg')->first();
-            $views = $jobView->total_reg + 1;
-            $update = Job::where('id', $storeJobType->job_id)->update(['total_reg' => $views]);
-            if ($storeJobType) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Successfully Inserted',
-                    'data' => $storeJobType
-                ]);
-            }
+        $jobView = Job::select('total_reg')->where('id', $storeJobType->job_id)->first();
+        $views = $jobView->total_reg + 1;
+        $update = Job::where('id', $storeJobType->job_id)->update(['total_reg' => $views]);
+        if ($storeJobType) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Successfully Inserted'
+            ]);
         }
     }
     public function getDocumentName(Request $request)

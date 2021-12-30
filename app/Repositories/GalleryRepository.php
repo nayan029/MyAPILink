@@ -93,4 +93,13 @@ class GalleryRepository implements GalleryRepositoryInterface
         }
         return $json;
     }
+    public function getUpdatedStatus(Request $request)
+    {
+        if ($request->status == '1') {
+            $status = 'accept';
+        } else {
+            $status = 'reject';
+        }
+        return EstablishmentGallery::where('id', $request->id)->update(['status' => $status]);
+    }
 }

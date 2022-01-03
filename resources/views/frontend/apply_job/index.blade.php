@@ -469,6 +469,7 @@
         });
     });
     function getcv(){
+      
         $("#pdf_name").val($('input[name="applay_cv"]:checked').val());
     }
     $(document).on("click", "#byResume,#bravo-btn", function() {

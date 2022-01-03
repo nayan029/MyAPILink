@@ -156,6 +156,7 @@
 
                     </div>
                 </div>
+                </div>
                 <div class="col-md-8">
                     <div class="">
                         <div class="card sr-card">
@@ -194,6 +195,7 @@
                                                     <label>Prénom <span class="invalid-error text-danger">*</span></label>
                                                     <input type="text" name="first_name" value="{{auth()->guard('web')->user()->first_name}}" class="form-control bg-f6 inputicon2 edit-placeholder">
                                                 </div>
+                                            </div>
                                                 <div class="col-lg-6 col-md-12">
                                                     <div class="form-group">
                                                         <label>Nom de famille <span class="invalid-error text-danger">*</span></label>

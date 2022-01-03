@@ -29,18 +29,13 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('admin/dist/js/pages/dashboard3.js')}}"></script>
 <script src="{{asset('admin/plugins/select2/js/select2.full.min.js')}}"></script>
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="{{asset('admin/plugins/summernote/summernote-bs4.min.js')}}"></script>
 <script src="{{asset('admin/plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}"></script>
-<script src="{{asset('admin/plugins/sweetalert2/sweetalert2.all.js')}}"></script>
-<script src="{{asset('admin/plugins/sweetalert2/sweetalert2.all.min.js')}}"></script>
-<script src="{{asset('admin/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
-
-
-
+<!-- <script src="{{asset('admin/plugins/sweetalert2/sweetalert2.all.js')}}"></script> -->
+<!-- <script src="{{asset('admin/plugins/sweetalert2/sweetalert2.all.min.js')}}"></script> -->
+<!-- <script src="{{asset('admin/plugins/sweetalert2/sweetalert2.min.js')}}"></script> -->
 <script>
     var AppUrl = "{{url('')}}";
     $(function() {

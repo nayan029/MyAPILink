@@ -66,9 +66,10 @@
             $('.link-error').html("Please enter Link");
             temp++
         }else{
-            if(!link.match(linkverify))
+            if(!link.match(linkverify)){
             $('.link-error').html("Please enter Valid Link");
               temp++
+            }
         }
         
 

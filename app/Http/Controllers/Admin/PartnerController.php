@@ -11,21 +11,19 @@ use Illuminate\Support\Facades\Session;
 
 class PartnerController extends Controller
 {
+    // protected $storevalidationrules = [
+    //     'link' => 'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
+    //     'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    // ];
 
-
-    protected $storevalidationrules = [
-        'link' => 'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
-        'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    ];
-
-    protected $updatevalidationrules =
-    [
-        'link' => 'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
-    ];
-    protected $imagevalidationrules =
-    [
-        'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    ];
+    // protected $updatevalidationrules =
+    // [
+    //     'link' => 'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
+    // ];
+    // protected $imagevalidationrules =
+    // [
+    //     'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    // ];
 
     protected $partnerRepository = "";
 
@@ -41,17 +39,11 @@ class PartnerController extends Controller
 
     public function create()
     {
-        // $data['validator'] = JsValidator::make($this->storevalidationrules);
-
         return view('backend.partner.create');
     }
 
     public function store(Request $request)
     {
-        // $validation = Validator::make($request->all(), $this->storevalidationrules);
-        // if ($validation->fails()) {
-        //     return redirect()->back()->withErrors($validation->errors());
-        // }
         $storepartner = $this->partnerRepository->storePartner($request);
         if ($storepartner) {
             Session::flash('success', 'Successfully Inserted');

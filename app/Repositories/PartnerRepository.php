@@ -15,7 +15,6 @@ class PartnerRepository implements PartnerRepositoryInterface
 
     public function storePartner(Request $request)
     {
-
         $image = "";
         if ($request->hasFile('image')) {
             $image = $this->uploadImage($request->file('image'), 'partner');

@@ -93,8 +93,8 @@
         }
 
 
+        $('.title-error').html('');
         if (widget != "how_it_works") {
-            $('.titerror').html('');
             if (title.match(number)) {
                 $('.title-error').html("Numbers not allowed.");
                 temp++

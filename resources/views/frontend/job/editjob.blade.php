@@ -453,12 +453,10 @@
             }
         }
 
-        if ($('input[name="contact_thorugh"]:checked').length == 0) {
-            alert("FD");
+        if ($('input[name="contact_thorugh[]"]:checked').length == 0) {
             $('.contract-through-error').html('Please enter Contract through application');
             temp++
         } else {
-            alert("dsf")
             $('.contract-through-error').html('');
         }
 

@@ -311,6 +311,10 @@
 <script src="{{asset('frontend/js/select2.min.js')}} "></script>
 <script type="text/javascript" src="{{asset('frontend/js/bootstrap-multiselect.js')}}"></script>
 
+
+
+"></script>
+
 <script>
     $(".select2 ").select2();
 </script>

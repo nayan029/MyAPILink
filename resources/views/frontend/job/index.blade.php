@@ -412,7 +412,7 @@ Code postal">
             }
         }
 
-        if (($('input[name="contact_thorugh"]').length == 0)) {
+        if ($('input[name="contact_thorugh[]"]:checked').length == 0) {
             $('.contract-through-error').html('Please enter Contract through application');
             temp++
         } else {

@@ -157,6 +157,7 @@
         } else if (status == 2) {
             var message = "Are you want to Reject?";
         }
+    
         Swal.fire({
             title: message,
             showDenyButton: true,

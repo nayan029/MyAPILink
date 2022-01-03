@@ -5,20 +5,20 @@
         width: 100%;
     }
 
-.fileinput {
-    width: 70%;
-    display: inline-block;
-}
+    .fileinput {
+        width: 70%;
+        display: inline-block;
+    }
 
-label.tt {
-    width: 100%;
-}
+    label.tt {
+        width: 100%;
+    }
 
-img.img-fluid.setimg {
-    border: 1px solid #007bff;
-    padding: 7px;
-    border-radius: 100%;
-}
+    img.img-fluid.setimg {
+        border: 1px solid #007bff;
+        padding: 7px;
+        border-radius: 100%;
+    }
 </style>
 @endsection
 @section('content')
@@ -69,7 +69,7 @@ img.img-fluid.setimg {
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary" onclick="return validation();" >{{__("messages.update")}}</button>
+                    <button type="submit" class="btn btn-primary" onclick="return validation();">{{__("messages.update")}}</button>
                 </div>
                 {!! Form::close() !!}
             </div>
@@ -103,14 +103,15 @@ img.img-fluid.setimg {
         }
     });
 
-    function validation(){
+    function validation() {
         var temp = 0;
         var number = /([0-9])/;
 
         var widget = $('#slug').val();
         var title = $('#title').val();
+        var image1 = $('#image').val();
+        alert(image1)
 
-       
         $('.title-error').html('');
         $('.image-error').html('');
 
@@ -118,17 +119,17 @@ img.img-fluid.setimg {
         if (widget == "") {
             $('.slug-error').html("Please enter Widget");
             temp++
-        }else{
+        } else {
             $('.slug-error').html('');
         }
-        
+
         $('.titerror').html('');
         if (title.match(number)) {
             $('.title-error').html("Numbers not allowed.");
             temp++
         } else {
-            if (title.length > 25) {
-                $('.title-error').html("Title must not be grater than 25 characters.");
+            if (title.length > 50) {
+                $('.title-error').html("Title must not be grater than 50 characters.");
                 temp++
             } else {
                 if (title == "") {
@@ -138,32 +139,32 @@ img.img-fluid.setimg {
             }
         }
 
-        // var fuData = document.getElementById('image');      // CHOICE FILE (IMAGE) VILADITION 
-     
-        // var FileUploadPath = fuData.value;
-        // alert(FileUploadPath);
-        // if (FileUploadPath == '') {
-        //     $('.image-error').html('Please enter a image');
-        //    temp++
-        // } else {
-        //             var Extension = FileUploadPath.substring(
-        //             FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+        if (image1) {
+            var fuData = document.getElementById('image'); // CHOICE FILE (IMAGE) VILADITION 
+            var FileUploadPath = fuData.value;
+            if (FileUploadPath == '') {
+                $('.image-error').html('Please enter a image');
+                temp++
+            } else {
+                var Extension = FileUploadPath.substring(
+                    FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
 
-        //             if (Extension == "png" || Extension == "jpeg" || Extension == "jpg" || Extension == "svg") {
-        //                 if (fuData.files && fuData.files[0]) {
-        //                     var reader = new FileReader();
-        //                     reader.onload = function(e) {  }
-        //                     reader.readAsDataURL(fuData.files[0]);
-        //                 }
-        //             }else {
-        //                 $('.image-error').html('Photo only allows image types of PNG, JPG, JPEG.');   
-        //                   temp++
-        //     }
-        // }
+                if (Extension == "png" || Extension == "jpeg" || Extension == "jpg" || Extension == "svg") {
+                    if (fuData.files && fuData.files[0]) {
+                        var reader = new FileReader();
+                        reader.onload = function(e) {}
+                        reader.readAsDataURL(fuData.files[0]);
+                    }
+                } else {
+                    $('.image-error').html('Photo only allows image types of PNG, JPG, JPEG.');
+                    temp++
+                }
+            }
+        }
 
-        if(temp == 0){
+        if (temp == 0) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

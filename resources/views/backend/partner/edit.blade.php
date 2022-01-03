@@ -29,9 +29,9 @@
 
                                 {!! Form::file('image', ['id' => 'image', 'name' => 'image', 'class' => 'file']) !!}
                                 &nbsp;&nbsp;
-                                <span class="image-error text-danger"></span>
+                                <span class="image-error text-danger checkimg" data-img="{{$partner->image}}"></span>
                                 <div>
-                                    <img src="{{ asset($partner->image) }}" height="50px" width="50px"/>
+                                    <img src="{{ asset($partner->image) }}" height="50px" width="50px" />
                                 </div>
 
                             </div>
@@ -64,47 +64,53 @@
 @endsection
 @section('script')
 <script>
-     function validation(){
+    function validation() {
         var temp = 0;
         var linkverify = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
         var link = $('#link').val();
-      
+        var image = $('#image').val();
+
         $('.link-error').html('');
         if (link == "") {
             $('.link-error').html("Please enter Link");
             temp++
-        }else{
-            if(!link.match(linkverify))
-            $('.link-error').html("Please enter Valid Link");
-              temp++
+        } else {
+            if (!link.match(linkverify)) {
+                $('.link-error').html("Please enter Valid Link");
+                temp++
+            }
         }
-        
 
-        // $('.image-error').html('');
-        // var fuData = document.getElementById('image');      // CHOICE FILE (IMAGE) VILADITION 
-        // var FileUploadPath = fuData.value;
-        // if (FileUploadPath == '') {
-        //     $('.image-error').html('Please enter a image');
-        //    temp++;
-        // } else {
-        //             var Extension = FileUploadPath.substring(
-        //             FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+        // var ext = $('#image').val().split('.').pop().toLowerCase();
+        // var checkImg = $(".checkimg").data('img');
+        // if ((image == "") && (checkImg == "") || ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg', 'svg']) == -1)) {
+        if (image) {
+            var fuData = document.getElementById('image'); // CHOICE FILE (IMAGE) VILADITION 
+            var FileUploadPath = fuData.value;
+            if (FileUploadPath == '') {
+                $('.image-error').html('Please enter a image');
+                temp++;
+            } else {
+                var Extension = FileUploadPath.substring(
+                    FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
 
-        //             if (Extension == "png" || Extension == "jpeg" || Extension == "jpg" || Extension == "gif" || Extension == "svg") {
-        //                 if (fuData.files && fuData.files[0]) {
-        //                     var reader = new FileReader();
-        //                     reader.onload = function(e) {  }
-        //                     reader.readAsDataURL(fuData.files[0]);
-        //                 }
-        //             }else {
-        //                 $('.image-error').html('File must Image!! Like:jpeg, png, jpg, gif, svg');   
-        //                   temp++;
-        //     }
-        // }
-
-        if(temp == 0){
+                if (Extension == "png" || Extension == "jpeg" || Extension == "jpg" || Extension == "gif" || Extension == "svg") {
+                    if (fuData.files && fuData.files[0]) {
+                        var reader = new FileReader();
+                        reader.onload = function(e) {}
+                        reader.readAsDataURL(fuData.files[0]);
+                    }
+                } else {
+                    $('.image-error').html('File must Image!! Like:jpeg, png, jpg, gif, svg');
+                    temp++;
+                }
+            }
+        } else {
+            $('.image-error').html('');
+        }
+        if (temp == 0) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

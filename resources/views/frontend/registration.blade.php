@@ -398,10 +398,7 @@
         $.ajax({
             url: "{{ route('registration.save') }}",
             method: 'post',
-            data: {
-                formData,
-                posid: posid
-            },
+            data:formData,
             success: function(response) {
                 if (response.success == true) {
                     toastr.success(response.message);

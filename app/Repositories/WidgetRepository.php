@@ -14,11 +14,12 @@ class WidgetRepository implements WidgetRepositoryInterface
 
     public function storeWidget(Request $request)
     {
+      
         $data = $request->all();
-        $checkExits = Widget::where('title','LIKE',$request->title)->first();
-        if($checkExits){
-              return false;
-        }else{
+        // $checkExits = Widget::where('title','LIKE',$request->title)->first();
+        // if($checkExits){
+        //       return false;
+        // }else{
             $image = "";
             if ($request->hasFile('image')) {
                 $image = $this->uploadImage($request->file('image'), 'widgets');
@@ -26,11 +27,11 @@ class WidgetRepository implements WidgetRepositoryInterface
            
             $data['slug'] = $request->widget;
             $data['image'] = $image;
-           
+            
             return Widget::create($data);
         }
       
-    }
+    // }
 
     public function updateWidget(Request $request, $id)
     {

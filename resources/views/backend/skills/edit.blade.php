@@ -144,7 +144,6 @@
             var name = $('#name').val();
             var image = $('#image').val();
 
-
             $('.nameerror').html('');
             if (name.match(number)) {
                 $('.nameerror').html("Numbers not allowed.");

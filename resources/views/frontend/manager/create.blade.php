@@ -65,7 +65,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-5 mb-2">
-                                              <div class="form-group">
+                                        <div class="form-group">
                                             <label class="">Prénom<span class="text-danger">*</span></label>
                                             <input id="firstname" type="text" name="first_name" class="form-control form-add-establish pl-23" placeholder="Prénom">
                                             <span class="firstname-error text-danger">@error ('firstname') {{$message}} @enderror</span>
@@ -97,17 +97,18 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-2">
-                                        <div class="form-group">
+                                        <div class="form-group sr-rel">
                                             <label class="">Mot de passe<span class="text-danger">*</span></label>
-                                            <input id="password" type="password" name="password" class="form-control form-add-establish pl-23" placeholder="Mot de passe">
+                                            <input id="password" type="password" name="password" class="form-control form-add-establish pl-23 email-place login-input inputicon2 sr-rel" placeholder="Mot de passe">
+                                            <img src="{{asset('frontend/images/about/eye.svg')}}" alt="" class="sr-eye " id="toggle-password" style="margin-top:30px">
                                             <span class="password-error text-danger">@error ('password') {{$message}} @enderror</span>
-
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-2">
                                         <div class="form-group">
                                             <label class="">Confirmer le mot de passe<span class="text-danger">*</span></label>
                                             <input id="confirm_password" type="password" name="confirm_password" class="form-control form-add-establish pl-23" placeholder="Confirmer le mot de passe">
+                                            <img src="{{asset('frontend/images/about/eye.svg')}}" alt="" class="sr-eye mr-3" id="confirm-password" style="margin-top:30px">
                                             <span class="password_confirmation-error text-danger">@error ('password_confirmation') {{$message}} @enderror</span>
 
                                         </div>
@@ -254,7 +255,7 @@
 
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <label class="">Adresse de l'organisation<span class="text-danger">*</span></label>
@@ -327,7 +328,7 @@
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <label class="">Ville<span class="text-danger">*</span></label>
-                                            <input id="city" type="text" onchange="removeOneDiv()"  name="city" class="form-control form-add-establish pl-23" placeholder="Ville">
+                                            <input id="city" type="text" onchange="removeOneDiv()" name="city" class="form-control form-add-establish pl-23" placeholder="Ville">
                                             <span class="city-error text-danger">@error ('city') {{$message}} @enderror</span>
 
                                         </div>
@@ -416,22 +417,22 @@
 </body>
 <script src="https://cdn.maptiler.com/maptiler-geocoder/v1.1.0/maptiler-geocoder.js"></script>
 <script>
-  var geocoder = new maptiler.Geocoder({
-    input: 'address',
-    key: 'aGdYhIz2jXHVxE7pwlGa'
-  });
-  geocoder.on('select', function(item) {
-    $('#address').val(item.text);
-  });
+    var geocoder = new maptiler.Geocoder({
+        input: 'address',
+        key: 'aGdYhIz2jXHVxE7pwlGa'
+    });
+    geocoder.on('select', function(item) {
+        $('#address').val(item.text);
+    });
 </script>.
 <script>
-  var geocoder = new maptiler.Geocoder({
-    input: 'address1',
-    key: 'aGdYhIz2jXHVxE7pwlGa'
-  });
-  geocoder.on('select', function(item) {
-    $('#address1').val(item.text);
-  });
+    var geocoder = new maptiler.Geocoder({
+        input: 'address1',
+        key: 'aGdYhIz2jXHVxE7pwlGa'
+    });
+    geocoder.on('select', function(item) {
+        $('#address1').val(item.text);
+    });
 </script>
 <script src="{{asset('frontend/js/jquery.min.js')}} "></script>
 <script src="{{asset('frontend/js/jquery-ui.min.js')}}"></script>
@@ -557,58 +558,58 @@
             success: function(response) {
                 console.log(response.success);
                 if (response.success == true) {
-                   
+
                     // $('#appointment3').modal('show');     //Message come from controller
                     toastr.success(response.message);
                     setTimeout(function() {
                         $('.invisible').trigger('click');
                         $('#regform')[0].reset();
                     }, 2000);
-                   
-                    if(response.data.establishment_management=='single'){
-                               $.ajax({
-                                url: url,
-                                method: 'POST',
-                                data: $('#regform').serialize(),
-                                success: function(response) {
-                                    console.log(response.success);
-                                    if (response.success == true) {
-                                    
-                                        // $('#appointment3').modal('show');     //Message come from controller
-                                        toastr.success(response.message);
-                                        setTimeout(function() {
-                                            $('.invisible').trigger('click');
-                                            $('#regform')[0].reset();
-                                        }, 2000);
-                                        if(response.data.establishment_management=='single'){
-                                            location.href = "{{URL::to('/')}}/manager-register-step-two"
-                                        }
-                                        $(this).text("S'inscrire");
-                                        $(this).text('En traitement...');
-                                        $(this).prop('disabled', true);
-                                        $(this).prop('disabled', false);
 
-                                    } else {
-                                        $('.civility-error').text(response.errors.civility);
-                                        $('.firstname-error').text(response.errors.first_name);
-                                        $('.lastname-error').text(response.errors.last_name);
-                                        $('.phone-error').text(response.errors.phone);
-                                        $('.email-error').text(response.errors.email_address);
-                                        $('.password-error').text(response.errors.password);
-                                        $('.password_confirmation-error').text(response.errors.confirm_password);
-                                        $('.radio-error').text(response.errors.radio);
-                                        $('.represent-error').text(response.errors.represent);
-                                        $('.organization-error').text(response.errors.name_of_our_organization);
-                                        $('.establish-error').text(response.errors.number_of_establishments_in_the_organization);
-                                        $('.address-error').text(response.errors.organization_address);
-                                        $('.postal-error').text(response.errors.postal_code);
-                                        $('.city-error').text(response.errors.city);
+                    if (response.data.establishment_management == 'single') {
+                        $.ajax({
+                            url: url,
+                            method: 'POST',
+                            data: $('#regform').serialize(),
+                            success: function(response) {
+                                console.log(response.success);
+                                if (response.success == true) {
 
+                                    // $('#appointment3').modal('show');     //Message come from controller
+                                    toastr.success(response.message);
+                                    setTimeout(function() {
+                                        $('.invisible').trigger('click');
+                                        $('#regform')[0].reset();
+                                    }, 2000);
+                                    if (response.data.establishment_management == 'single') {
+                                        location.href = "{{URL::to('/')}}/manager-register-step-two"
                                     }
+                                    $(this).text("S'inscrire");
+                                    $(this).text('En traitement...');
+                                    $(this).prop('disabled', true);
+                                    $(this).prop('disabled', false);
+
+                                } else {
+                                    $('.civility-error').text(response.errors.civility);
+                                    $('.firstname-error').text(response.errors.first_name);
+                                    $('.lastname-error').text(response.errors.last_name);
+                                    $('.phone-error').text(response.errors.phone);
+                                    $('.email-error').text(response.errors.email_address);
+                                    $('.password-error').text(response.errors.password);
+                                    $('.password_confirmation-error').text(response.errors.confirm_password);
+                                    $('.radio-error').text(response.errors.radio);
+                                    $('.represent-error').text(response.errors.represent);
+                                    $('.organization-error').text(response.errors.name_of_our_organization);
+                                    $('.establish-error').text(response.errors.number_of_establishments_in_the_organization);
+                                    $('.address-error').text(response.errors.organization_address);
+                                    $('.postal-error').text(response.errors.postal_code);
+                                    $('.city-error').text(response.errors.city);
+
                                 }
-                            });
-                            //response.data.id
-                        location.href = "{{url('manager-register-step-two')}}/"+response.data.id;
+                            }
+                        });
+                        //response.data.id
+                        location.href = "{{url('manager-register-step-two')}}/" + response.data.id;
                     }
                     $(this).text("S'inscrire");
                     $(this).text('En traitement...');
@@ -637,29 +638,46 @@
     });
 </script>
 <script>
-    $( document ).ready(function() {
+    $(document).ready(function() {
         $('#singlediv').hide();
-});
+    });
+
     function hideShowStepThree() {
         var radioValue = $("input[name='management']:checked").val();
-            if(radioValue=="single"){
-                $('#singlediv').show();
-                $('#multiplediv').hide();
-            }else{
-                $('#multiplediv').show();
-                $('#singlediv').hide();
+        if (radioValue == "single") {
+            $('#singlediv').show();
+            $('#multiplediv').hide();
+        } else {
+            $('#multiplediv').show();
+            $('#singlediv').hide();
 
-            }
+        }
     }
 
     function removeOneDiv() {
         var radioValue1 = $("input[name='management']:checked").val();
-             if(radioValue1=="single"){
-                $('#multiplediv').remove();
-            }else{
-                $('#singlediv').remove();
-            }
+        if (radioValue1 == "single") {
+            $('#multiplediv').remove();
+        } else {
+            $('#singlediv').remove();
+        }
     }
 
+    $(document).on('click', '#toggle-password', function() {
+        if ($("#password").attr("type") === "password") {
+            $("#password").attr("type", "text");
+        } else {
+            $("#password").attr("type", "password");
+        }
+    });
+
+    $(document).on('click', '#confirm-password', function() {
+        if ($("#confirm_password").attr("type") === "password") {
+            $("#confirm_password").attr("type", "text");
+        } else {
+            $("#confirm_password").attr("type", "password");
+        }
+    });
 </script>
+
 </html>

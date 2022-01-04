@@ -18,6 +18,7 @@ class ContactUs extends Model
 
     public static function contactUsData(Request $request){
 
+       
         $user =  ContactUs::create($request->all());
 
         try {

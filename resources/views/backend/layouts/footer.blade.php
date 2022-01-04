@@ -33,7 +33,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="{{asset('admin/plugins/summernote/summernote-bs4.min.js')}}"></script>
 <script src="{{asset('admin/plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}"></script>
-<!-- <script src="{{asset('admin/plugins/sweetalert2/sweetalert2.all.js')}}"></script> -->
+<script src="{{asset('admin/plugins/sweetalert2/sweetalert2.all.js')}}"></script>
 <!-- <script src="{{asset('admin/plugins/sweetalert2/sweetalert2.all.min.js')}}"></script> -->
 <!-- <script src="{{asset('admin/plugins/sweetalert2/sweetalert2.min.js')}}"></script> -->
 <script>

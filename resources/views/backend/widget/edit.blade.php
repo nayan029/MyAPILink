@@ -53,10 +53,10 @@
                             <div class="form-group">
                                 <label for="image" class="tt">Image <span class="text-danger">*</span></label>
                                 <div class="fileinput">
-                                    {!! Form::file('image', old('image'), ['class' => 'form-control','id'=>'image']) !!}
+                                    {!! Form::file('image', ['id' => 'photo', 'class' => 'form-control','onchange'=>'checkextension()']) !!}
                                 </div>
+                                <div class="img-fluid" style="display: inline-block;text-align: center;"><img src="{{ asset($widget->image) }}" class="img-fluid setimg" height="50px" width="50px"></div><br>
                                 <span class="image-error text-danger"></span>
-                                <div class="img-fluid" style="display: inline-block;text-align: center;"><img src="{{ asset($widget->image) }}" class="img-fluid setimg" height="50px" width="50px"></div>
                             </div>
                         </div>
                     </div>
@@ -109,8 +109,7 @@
 
         var widget = $('#slug').val();
         var title = $('#title').val();
-        var image1 = $('#image').val();
-        alert(image1)
+        var image1 = $('#photo').val();
 
         $('.title-error').html('');
         $('.image-error').html('');
@@ -124,49 +123,51 @@
         }
 
         $('.titerror').html('');
-        if (title.match(number)) {
-            $('.title-error').html("Numbers not allowed.");
-            temp++
-        } else {
-            if (title.length > 50) {
-                $('.title-error').html("Title must not be grater than 50 characters.");
+        if (widget != "how_it_works") {
+            if (title.match(number)) {
+                $('.title-error').html("Numbers not allowed.");
                 temp++
             } else {
-                if (title == "") {
-                    $('.title-error').html("Please enter your Title");
+                if (title.length > 50) {
+                    $('.title-error').html("Title must not be grater than 50 characters.");
                     temp++
-                }
-            }
-        }
-
-        if (image1) {
-            var fuData = document.getElementById('image'); // CHOICE FILE (IMAGE) VILADITION 
-            var FileUploadPath = fuData.value;
-            if (FileUploadPath == '') {
-                $('.image-error').html('Please enter a image');
-                temp++
-            } else {
-                var Extension = FileUploadPath.substring(
-                    FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
-
-                if (Extension == "png" || Extension == "jpeg" || Extension == "jpg" || Extension == "svg") {
-                    if (fuData.files && fuData.files[0]) {
-                        var reader = new FileReader();
-                        reader.onload = function(e) {}
-                        reader.readAsDataURL(fuData.files[0]);
-                    }
                 } else {
-                    $('.image-error').html('Photo only allows image types of PNG, JPG, JPEG.');
-                    temp++
+                    if (title == "") {
+                        $('.title-error').html("Please enter your Title");
+                        temp++
+                    }
                 }
             }
         }
-
-        if (temp == 0) {
-            return true;
+        if(image1){
+        var fuData = document.getElementById('photo'); // CHOICE FILE (IMAGE) VILADITION 
+        var FileUploadPath = fuData.value;
+        if (FileUploadPath == '') {
+            $('.image-error').html('Please enter a Image');
+            temp++;
         } else {
-            return false;
+            var Extension = FileUploadPath.substring(
+                FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+
+            if (Extension == "png" || Extension == "jpeg" || Extension == "jpg" || Extension == "gif" || Extension == "svg") {
+                if (fuData.files && fuData.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {}
+                    reader.readAsDataURL(fuData.files[0]);
+                }
+            } else {
+                $('.image-error').html('File must Image!! Like:jpeg, png, jpg, gif, svg');
+                temp++;
+            }
         }
     }
+
+    if (temp == 0) {
+        return true;
+    } else {
+        return false;
+    }
+    }
 </script>
+
 @endsection

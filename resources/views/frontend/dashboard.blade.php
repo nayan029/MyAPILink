@@ -25,11 +25,12 @@
     </div>
 </section>
 
-<section class="index_section_bg" style="{{asset('frontend/images/register-bg2.png')}}">
+<!-- <section class="index_section_bg" style=""> -->
+<section class="index_section_bg" style="background-image: url('{{asset('frontend/images/register-bg2.png')}}');">
     <div class="container">
-        <div class="row">
+        <div class="row">   
             <div class="col-md-12 text-center">
-                <h3 class=" discover_text color2a">Nos avantages</h3>
+                <h3 class="discover_text color2a">Nos avantages</h3>
             </div>
         </div>
         @if($widget)
@@ -390,7 +391,6 @@
                                 <img src="{{asset('frontend/images/about/eye.svg')}}" alt="" class="sr-eye" id="toggle-password">
                                 <span class="password-error text-danger">@error ('password') {{$message}} @enderror</span>
                                 <span class="invalid-error text-danger">@error ('invalid') {{$message}} @enderror</span>
-
                             </div>
                         </div>
 
@@ -500,7 +500,7 @@
     $(document).on('click', '.btn-skyblue', function() {
         var positionid = $(this).attr('data-save-id');
         $('#header-Modallogin1').modal('show');
-        $(".registerUser").attr('position-id',positionid);
+        $(".registerUser").attr('position-id', positionid);
         $('#Modaljob-desc').modal('hide');
     });
 

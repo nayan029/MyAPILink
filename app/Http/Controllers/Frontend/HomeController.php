@@ -55,7 +55,7 @@ class HomeController extends Controller
     public function userDashboard()
     {
         $data['newslettervalidator'] = JsValidator::make($this->newsletterValidationRules);
-        $data['forgotPasswordValidator'] = JsValidator::make($this->forgotPasswordValidator); 
+        $data['forgotPasswordValidator'] = JsValidator::make($this->forgotPasswordValidator);
         $userData = $this->homeRepository->UserData();
         $data['widget'] = $userData['widget'];
         $data['skill'] = $userData['skill'];
@@ -101,7 +101,7 @@ class HomeController extends Controller
     public function userLogin(Request $request)
     {
 
-        $validator = Validator::make($request->all(), $this->loginValidationRules,$this->messages);
+        $validator = Validator::make($request->all(), $this->loginValidationRules, $this->messages);
 
         if ($validator->fails()) {
             return response()->json(['success' => false, 'errors' => $validator->errors()]);
@@ -120,7 +120,7 @@ class HomeController extends Controller
                 return response()->json(['success' => true, 'message' => 'Successfully Logged In', 'user' => Auth::guard('web')->user()->user_type]);
             }
         }
-        return response()->json(['success' => false, 'errors' => array('invalid' => 'Email et le mot de passe sont erronés')]);
+        return response()->json(['success' => false, 'errors' => array('invalid' => "Email/User name and Password are wrong")]);
     }
     public function forgotPassword(Request $request)
     {

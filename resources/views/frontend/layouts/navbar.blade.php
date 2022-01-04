@@ -132,8 +132,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <div class="form-group">
-
+                                <div class="form-group">    
                                     {!! Form::text('email', old('email'), ['class' => 'form-control contact-input inputicon2', 'placeholder' => 'Email*','id'=>'email']) !!}
                                     <span class="text-danger error-text email_error"></span>
                                 </div>

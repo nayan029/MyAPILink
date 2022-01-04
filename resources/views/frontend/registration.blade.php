@@ -382,7 +382,8 @@
         toastr.error("{{ Session::get('error') }}");
         @endif
     });
-
+</script>
+<script>
     $(document).on('click', '.openLogin', function() {
         $("#header-Modallogin1").modal('hide');
         $("#Modallogin2").modal('show');
@@ -391,22 +392,19 @@
         $("#header-Modallogin1").modal('show');
         $("#Modallogin2").modal('hide');
     });
-    $(document).on('click', '.registerUser', function() {
+    $(document).on('click', '#registerUser', function() {
         var token = $("meta[name='csrf-token']").attr("content");
         var formData = $('#register_form_data').serialize();
-
         $.ajax({
             url: "{{ route('registration.save') }}",
             method: 'post',
-            data:formData,
+            data: formData,
             success: function(response) {
                 if (response.success == true) {
-                    toastr.success(response.message);
-                    setTimeout(function() {
+                        toastr.success(response.message);
                         $('#header-Modallogin1').modal('hide');
                         $('.invisible').trigger('click');
                         $("#register_form_data")[0].reset();
-                    }, 2000);
                 }
             },
             error: function(response) {

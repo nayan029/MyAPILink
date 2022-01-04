@@ -41,7 +41,7 @@ class ApplyJobRepository implements ApplyJobRepositoryInterface
             ->orwhere('minimum_gross_salary',$searchValue)
             ->orwhere('minimum_experience',$searchValue)
             ->where('deleted_at', NULL)
-            ->paginate(2);
+            ->paginate(6);
         }
         // dd($typeOfContract);
         

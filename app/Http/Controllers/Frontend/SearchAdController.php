@@ -96,11 +96,11 @@ class SearchAdController extends Controller
         $data['pages'] = $request->page;
         $data['showCompany'] = $this->applyJobRepository->getCompanyData($id);
         $data['showJobs'] = $this->applyJobRepository->getManagerPosts($id);
+        $data['list'] = $this->applyJobRepository->getCandidateData($request);
 
         if ($request->ajax()) {
-            return view('frontend.apply_job.get_ajax', $data)->render();
+            return view('frontend.apply_job.get_ajax',$data)->render();
         }
-
         return view('frontend.apply_job.view', $data);
     }
     public function jobDetails($id, Request $request)

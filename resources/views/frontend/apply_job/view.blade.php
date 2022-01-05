@@ -351,7 +351,70 @@
                         <div class="col-md-9">
                             <div class="card sr-card">
                                 <div class="card-body" id="table_data">
-
+                                    @if(count($list)>0)
+                                    @foreach($list as $data)
+                                    @php
+                                    $isApplyed = $data->applyJob!="" ? "disabled":"";
+                                    $createDate = date('d-m-Y',strtotime($data->created_at));
+                                    $now = date('d-m-Y');
+                                    $diff = strtotime($createDate) - strtotime($now);
+                                    $finalDays = abs(round($diff / 86400));
+                                    $saveJob = $data->savedJob!=null && count($data->savedJob)>0 ? $data->savedJob[0]->job_save : '';
+                                    @endphp
+                                    <div class="job-card">
+                                        <div class="job-listing-flex">
+                                            <h5 class="ml-2 mb-0 linkcolor">Auxiliaire Puéricultrice</h5><br><br>
+                                                       
+                                            <input type="hidden" name="job_id" id="job_id">
+                                        <input type="hidden" name="user_id" id="user_id">
+                                        <button id="saveclass{{$data->id}}" class="btn fav-btn save-fav" type="button" data-job="{{$data->id}}" data-user="{{$data->user_id}}" data-rowid="{{$data->id}}">
+                                            <img id="saveicon{{$data->id}}" src="{{$saveJob=='1' ? 'frontend/images/imgs-svg/book-mark-yellow.svg' : 'frontend/images/bookmark.svg'}}" alt="bookmark image" class="b1 bookmark-img">
+                                        </button>
+                                        </div>
+                                        <div class="row mr-minus9 mb-2">
+                                            <div class="col-md-12">
+                                                <div>
+                                                    <ul class="job-border-ul">
+                                                        <li>
+                                                            <p class="mb-0">Nom du poste : {{$data->title}}
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="mb-0">Experience : Minimum 2 Year</p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <ul class="job-image-ul">
+                                                    <li>
+                                                        <img src="{{asset('frontend/images/map.svg')}}" width="12px">
+                                                        <p class="mb-0">{{$data->address}}</p>
+                                                    </li>
+                                                    <li>
+                                                        <img src="{{asset('frontend/images/icon1.svg')}}" width="12px">
+                                                        <p class="mb-0">{{$data->minimum_gross_salary}}€ par an</p>
+                                                    </li>
+                                                    <li>
+                                                        <img src="{{asset('frontend/images/calendar.svg')}}" width="12px">
+                                                        <p class="mb-0">Publié il y a {{$finalDays}} jours</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-4 d-flex align-items-end">
+                                                <div class="d-flex justify-content-end align-items-center resbtn-flex">
+                                                    <a href="{{route('details-job',$data->id)}}" class="btn btn-viewjob ">Voir l’offre</a>
+                                                    <button class="btn btn-apply" @if($data->applyJob != '') @else onclick="openJobModal('{{$data->id}}','{{$data->user_id}}')" @endif {{$isApplyed}}>Postuler</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                    @else
+                                    <div class="job-card">
+                                        <p class="text-center">No Data Available.</p>
+                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

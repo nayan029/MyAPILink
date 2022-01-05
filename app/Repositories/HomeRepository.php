@@ -19,6 +19,7 @@ use Exception;
 use App\Models\Skill;
 use App\Models\SkillPosition;
 use App\Models\Widget;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Support\Facades\Auth;
 
 class HomeRepository implements HomeRepositoryInterface
@@ -95,8 +96,7 @@ class HomeRepository implements HomeRepositoryInterface
             'email' => request('email'),
             'created_at' => date('Y-m-d H:i:s'),
         );
-        $inasert = new Newsletter($instArray);
-        $inasert->save();
+        $inasert = Newsletter::create($instArray);
         return $inasert;
     }
 

@@ -18,26 +18,26 @@
                     <h2 class="text-center">Nos offres d'emploi</h2>
                 </div>
                 <form method="POST" action="{{route('searchjob')}}" onsubmit="return validation()">
-                @csrf
-                <div class="vacancies-search">
-                    <div class="row m-0">
-                       
-                        <div class="col-md-9 p-0">
-                            <div class="with-icon search-btn-hide">
-                                <div class="yellow-line"></div>
-                                <img class="icon-img res-icon" src="frontend/images/search.svg">
-                                <input type="text" name="searchtext"  id="searchtext" class="form-control fn-form" placeholder="Titre du poste, mots clés ou entreprise..">
-                                <span style="color: #ea5455;font-size: 0.857rem;" id="searchtexterror">
+                    @csrf
+                    <div class="vacancies-search">
+                        <div class="row m-0">
+
+                            <div class="col-md-9 p-0">
+                                <div class="with-icon search-btn-hide">
+                                    <div class="yellow-line"></div>
+                                    <img class="icon-img res-icon" src="frontend/images/search.svg">
+                                    <input type="text" name="searchtext" id="searchtext" class="form-control fn-form" placeholder="Titre du poste, mots clés ou entreprise..">
+                                    <span style="color: #ea5455;font-size: 0.857rem;" id="searchtexterror">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3 p-0">
-                            <div class="emp-btn-end">
-                                <button type="submit" id="submitbtn1" class="btn-find-job btn p-2">Trouver des emplois</butto>
+                            <div class="col-md-3 p-0">
+                                <div class="emp-btn-end">
+                                    <button type="submit" id="submitbtn1" class="btn-find-job btn p-2">Trouver des emplois</butto>
+                                </div>
                             </div>
+
                         </div>
-                       
                     </div>
-                </div>
                 </form>
                 <div class="row">
                     <div class="col-md-6">
@@ -74,63 +74,63 @@
                     <h2 class="text-center mt-3">NOUS AVONS TROUVÉ 120 OFFRES D'EMPLOI</h2>
                 </div>
                 <form action="{{route('searchjob')}}" method="POST" onsubmit="return filtervalidation()">
-                @csrf
-                <div class="cusdrop-list">
-                    <div class="position-type change-placeholder-select type-width">
-                        <select title="Basic example" multiple="multiple" name="typeofContract[]" id="typeofContract" class="select-multi">
-                            <!-- <option value="">Type Of Contract</option> -->
-                            <option value="CDI">CDI</option>
-                            <option value="CDD">CDD</option>
-                            <option value="Stages">Stages</option>
-                            <option value="Alternance">Alternance</option>
-                            <option value="IFreelance / Indépendant">IFreelance / Indépendant</option>
-                            <option value="Remplaçements">Remplaçements</option>
-                        </select>
-                        <span style="color: #ea5455;font-size: 0.857rem;" id="typeofContracterror">
-                    </div>
-                    <div class="diplo-drop icon-none type-width ">
-                        <select class="select2 " id="cmbIdioma2">
-                            <option value="option1" selected>Catégories</option>
-                            <option value="option1">compétences pédagogiques</option>
-                            <option value="option2">compétences médicales</option>
-                            <option value="option3">compétences techniques</option>
-                        </select>
-                    </div>
-                    <div class="position-type post-placeholder-select type-width">
-                        <select title="Basic example" multiple="multiple" name="example-basic" class="select-multi">
-                            <option value="option1">Crèche collective</option>
-                            <option value="option2">Crèche multi-accueil</option>
-                            <option value="option3">Halte garderie</option>
-                            <option value="option4">Crèche municipale</option>
-                            <option value="option5">Jardin d’enfants</option>
-                            <option value="option6">Micro-crèche</option>
-                            <option value="option7">Crèche parentale</option>
-                            <option value="option8">Crèche privée d’entreprise</option>
-                            <option value="option9">Psychomotricienne - Psychomotricien</option>
-                            <option value="option10">Crèche associative</option>
-                        </select>
-                    </div>
-                    <div class="diplo-drop type-width ">
-                        <select class="select2 " id="cmbIdioma">
-                            <option value="option1" selected>Diplômes</option>
-                            <option value="option7">Éducateur de jeunes enfants</option>
-                            <option value="option1">Auxiliaire de puériculture</option>
-                            <option value="option2">Diplôme d’État d’infirmière</option>
-                            <option value="option3">Diplôme d’État de Puériculture</option>
-                            <option value="option4">CAP Petite enfance</option>
-                            <option value="option5">CAP Accompagnant éducatif Petite enfance</option>
-                            <option value="option6">Formation d’Assistante maternelle</option>
-                            <option value="option5">BAFA</option>
-                            <option value="option6">Autres</option>
-                        </select>
-                    </div>
-                    <div class="type-width">
-                        <button type="submit" class="btn btn-yellow filters-btns ml-4" id="submitbtn2">Appliquer les filtres</button>
-                    </div>
-                    </form>
-                </div>
+                    @csrf
+                    <div class="cusdrop-list">
+                        <div class="position-type change-placeholder-select type-width">
+                            <select title="Basic example" multiple="multiple" name="typeofContract[]" id="typeofContract" class="select-multi">
+                                <!-- <option value="">Type Of Contract</option> -->
+                                <option value="CDI">CDI</option>
+                                <option value="CDD">CDD</option>
+                                <option value="Stages">Stages</option>
+                                <option value="Alternance">Alternance</option>
+                                <option value="IFreelance / Indépendant">IFreelance / Indépendant</option>
+                                <option value="Remplaçements">Remplaçements</option>
+                            </select>
+                            <span style="color: #ea5455;font-size: 0.857rem;" id="typeofContracterror">
+                        </div>
+                        <div class="diplo-drop icon-none type-width ">
+                            <select class="select2 " id="cmbIdioma2">
+                                <option value="option1" selected>Catégories</option>
+                                <option value="option1">compétences pédagogiques</option>
+                                <option value="option2">compétences médicales</option>
+                                <option value="option3">compétences techniques</option>
+                            </select>
+                        </div>
+                        <div class="position-type post-placeholder-select type-width">
+                            <select title="Basic example" multiple="multiple" name="example-basic" class="select-multi">
+                                <option value="option1">Crèche collective</option>
+                                <option value="option2">Crèche multi-accueil</option>
+                                <option value="option3">Halte garderie</option>
+                                <option value="option4">Crèche municipale</option>
+                                <option value="option5">Jardin d’enfants</option>
+                                <option value="option6">Micro-crèche</option>
+                                <option value="option7">Crèche parentale</option>
+                                <option value="option8">Crèche privée d’entreprise</option>
+                                <option value="option9">Psychomotricienne - Psychomotricien</option>
+                                <option value="option10">Crèche associative</option>
+                            </select>
+                        </div>
+                        <div class="diplo-drop type-width ">
+                            <select class="select2 " id="cmbIdioma">
+                                <option value="option1" selected>Diplômes</option>
+                                <option value="option7">Éducateur de jeunes enfants</option>
+                                <option value="option1">Auxiliaire de puériculture</option>
+                                <option value="option2">Diplôme d’État d’infirmière</option>
+                                <option value="option3">Diplôme d’État de Puériculture</option>
+                                <option value="option4">CAP Petite enfance</option>
+                                <option value="option5">CAP Accompagnant éducatif Petite enfance</option>
+                                <option value="option6">Formation d’Assistante maternelle</option>
+                                <option value="option5">BAFA</option>
+                                <option value="option6">Autres</option>
+                            </select>
+                        </div>
+                        <div class="type-width">
+                            <button type="submit" class="btn btn-yellow filters-btns ml-4" id="submitbtn2">Appliquer les filtres</button>
+                        </div>
+                </form>
             </div>
         </div>
+    </div>
     </div>
 </section>
 <section>
@@ -176,8 +176,8 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div class="row mb-3 ">
-                                    <div class="col-md-8 ">
+                                <div class="row mb-3">
+                                    <div class="col-md-8">
                                         <ul class="search-image-ul">
                                             <li>
                                                 <p class="mb-0 ">Montpellier (34)</p>
@@ -378,61 +378,48 @@
 @section('script')
 <script type="text/javascript" src="{{asset('frontend/js/bootstrap-multiselect.js')}}"></script>
 <script>
-     function validation() {
+    function validation() {
         $('#submitbtn1').attr('disabled', 'disabled');
         var temp = 0;
         var f = 0;
         var searchtext = $('#searchtext').val();
-        if (searchtext.trim() == '') 
-        {
+        if (searchtext.trim() == '') {
             $('#searchtexterror').html('Please search job title ,keywords or company');
             temp++;
             f++;
             if (f == 1) {
                 $('#searchtext').focus()
             }
-        } 
-        else 
-        {
+        } else {
             $('#searchtexterror').html('');
         }
-        if (temp == 0)
-        {
+        if (temp == 0) {
             return true;
-        } 
-        else
-        {
+        } else {
             $('#submitbtn1').removeAttr('disabled');
             return false;
         }
     }
 </script>
 <script>
-    function filtervalidation()
-    {
+    function filtervalidation() {
         $('#submitbtn2').attr('disabled', 'disabled');
         var temp = 0;
         var f = 0;
         var typeofContract = $('#typeofContract').val().length;
-        if (typeofContract == 0) 
-        {
+        if (typeofContract == 0) {
             $('#typeofContracterror').html('Please select Type Of Contract');
             temp++;
             f++;
             if (f == 1) {
                 $('#typeofContract').focus()
             }
-        } 
-        else 
-        {
+        } else {
             $('#typeofContracterror').html('');
         }
-        if (temp == 0)
-        {
+        if (temp == 0) {
             return true;
-        } 
-        else
-        {
+        } else {
             $('#submitbtn1').removeAttr('disabled');
             return false;
         }
@@ -446,6 +433,7 @@
         });
     });
     var count = 0;
+
     function openJobModal(job_id, user_id) {
         $('#jobid').val(job_id);
         $('#userid').val(user_id);
@@ -468,8 +456,9 @@
             }
         });
     });
-    function getcv(){
-      
+
+    function getcv() {
+
         $("#pdf_name").val($('input[name="applay_cv"]:checked').val());
     }
     $(document).on("click", "#byResume,#bravo-btn", function() {
@@ -570,4 +559,5 @@
 </script>
 @endsection
 </body>
+
 </html>

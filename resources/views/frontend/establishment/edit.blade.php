@@ -40,33 +40,31 @@
                                     <div class="form-group">
                                         {!! Form::date('opening_date',$establishment->opening_date, [ 'id' => 'opening_date', 'class' => 'form-control form-add-establish inputicon2 fn-family']) !!}
                                         <span class="opening-date-error text-danger"></span>
-
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-
-                                    {!! Form::label('Effectif', 'Effectif') !!}<span class="invalid-error text-danger">*</span>
-                                    {!! Form::select('effective',['1-10 personnes' => '1-10 personnes','11-20 personnes' => '11-20 personnes','21-30 personnes' => '21-30 personnes','31-40 personnes' => '31-40 personnes','41-50 personnes' => '41-50 personnes'],$establishment->effective, [ 'id' => 'effective','placeholder'=>'' ,'class' => 'cus-drop select2 form-add-establish']) !!}
-                                    <span class="effective-error text-danger"></span>
-
-
+                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        {!! Form::label('Effectif', 'Effectif') !!}<span class="invalid-error text-danger"> *</span>
+                                        {!! Form::select('effective',[''=>'','1-10 personnes' => '1-10 personnes','11-20 personnes' => '11-20 personnes','21-30 personnes' => '21-30 personnes','31-40 personnes' => '31-40 personnes','41-50 personnes' => '41-50 personnes'],$establishment->effective, [ 'id' => 'effective' ,'class' => 'cus-drop select2 form-add-establish']) !!}
+                                        <span class="effective-error text-danger"></span>
+                                    </div>
+                                    <div class="form-group ">
+                                        {!! Form::label('Nombre de groupes et tranches d’âges', 'Nombre de groupes et tranches d’âges') !!}<span class="invalid-error text-danger"> *</span>
+                                        {!! Form::select('number_of_groups_and_age_groups',[''=>'','1-10 ans' => '1-10 ans','11-20 ans' => '11-20 ans','21-30 ans' => '21-30 ans','31-40 ans' => '31-40 ans','41-50 ans' => '41-50 ans'],$establishment->number_of_groups_and_age_groups, [ 'id' => 'number_of_groups_and_age_groups','class' => 'cus-drop select2 form-add-establish']) !!}
+                                        <span class="age-groups-error text-danger"></span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group ">
-                                    {!! Form::label('Nombre de groupes et tranches d’âges', 'Nombre de groupes et tranches d’âges') !!}<span class="invalid-error text-danger">*</span>
-                                    {!! Form::select('number_of_groups_and_age_groups',['1-10 ans' => '1-10 ans','11-20 ans' => '11-20 ans','21-30 ans' => '21-30 ans','31-40 ans' => '31-40 ans','41-50 ans' => '41-50 ans'],$establishment->number_of_groups_and_age_groups, [ 'id' => 'number_of_groups_and_age_groups','placeholder'=>'' ,'class' => 'cus-drop select2 form-add-establish']) !!}
-                                    <span class="age-groups-error text-danger"></span>
-                                </div>
-                            </div>
+
+                         
+                       
                             <div class="col-md-12">
                                 <div class="form-group ">
                                     {!! Form::label("Capacité d'accueil", "Capacité d'accueil") !!}<span class="invalid-error text-danger">*</span>
                                     {!! Form::select('accommodation_capacity',['35' => '35'],$establishment->accommodation_capacity, [ 'id' => 'accommodation_capacity','class' => 'cus-drop select2 form-add-establish']) !!}
                                     <span class="capacity-error text-danger"></span>
-
                                 </div>
                             </div>
 
@@ -98,13 +96,13 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <div class="form-group">
                             {!! Form::label('Pédagogie appliquée', 'Pédagogie appliquée') !!}<span class="invalid-error text-danger"> *</span>
                             <div class="type-drops add-establish-drop maria-placeholder-select">
-                                {!! Form::select('applied_pedagogy[]',['Maria Montessori' => 'Maria Montessori','Pédagogie Interactive' => 'Pédagogie Interactive','Pédagogie Faber et Mazlish' => 'Pédagogie Faber et Mazlish','Pickler Loczy' => 'Pickler Loczy','Pédagogie Reggio' => 'Pédagogie Reggio','Snoezelen'=>'Snoezelen','Parler Bambin'=>'Parler Bambin','Aucune en particulier'=>'Aucune en particulier','Autres'=>'Autres'],null, [ 'id' => 'applied_pedagogy','class' => 'select-multi','multiple'=>'multiple']) !!}
+                                {!! Form::select('applied_pedagogy[]',['Maria Montessori' => 'Maria Montessori','Pédagogie Interactive' => 'Pédagogie Interactive','Pédagogie Faber et Mazlish' => 'Pédagogie Faber et Mazlish','Pickler Loczy' => 'Pickler Loczy','Pédagogie Reggio' => 'Pédagogie Reggio','Snoezelen'=>'Snoezelen','Parler Bambin'=>'Parler Bambin','Aucune en particulier'=>'Aucune en particulier','Autres'=>'Autres'],$establishment->applied_pedagogy, [ 'id' => 'applied_pedagogy','class' => 'select-multi','multiple'=>'multiple']) !!}
                                 <span class="pedagogy-error text-danger"></span>
+                                <div>
                             </div>
                         </div>
                         <div class="form-group sr-pos">
@@ -117,6 +115,7 @@
                                     {!! Form::file('document[]', ['id' => 'document', 'name' => 'document[]', 'class' => 'upload', 'multiple' => true ],[]) !!}
                                 </div>
                                 <span class="document-error text-danger"></span>
+                                <img src="{{asset($establishment->document)}}" height="50px" width="50px" />
                             </div>
                         </div>
 

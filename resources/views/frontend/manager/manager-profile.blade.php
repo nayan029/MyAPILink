@@ -22,7 +22,6 @@
             </div>
             <div class="col-md-8">
                 <div class="mb-3 mt-3 profile" id="manager-id">
-                  <a href="{{url('edit-establishment/'.$defaultEstablishment->id)}}"><h4 class="profile-name">{{auth()->guard('web')->user()->organization}} <img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" alt="edit" class="ml-1 edit-manager"></h4></a>
                     <p class="mb-0 d-flex align-items-center">{{auth()->guard('web')->user()->address}} <img src="{{asset('frontend/images/imgs-svg/edit-icon.svg')}}" alt="edit" class="edit-manager ml-2"></p>
                     <p class="">
                         @if(auth()->guard('web')->user()->represent=="municipality")Une municipalité @endif
@@ -44,7 +43,6 @@
             </div>
         </div>
     </div>
-
     <div class="prof-head2">
         <div class="container">
             <div class="prof-head2-inner">
@@ -62,7 +60,6 @@
                     </ul>
                 </div>
             </div>
-
         </div>
     </div>
 

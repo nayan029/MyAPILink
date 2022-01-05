@@ -10,10 +10,17 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav header-ul ml-auto">
+                    @if(Auth::guard('web')->user()->user_type == 1)
                     <li class="nav-item ">
                         <!--active-->
                         <a class="nav-link" href="{{route('searchjob')}}">Rechercher un emploi<span class="sr-only">(current)</span></a>
                     </li>
+                    @else
+                    <li class="nav-item ">
+                        <!--active-->
+                        <a class="nav-link" href="{{route('showallcandidate')}}">Rechercher un emploi<span class="sr-only">(current)</span></a>
+                    </li>
+                    @endif
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="modal" data-target="#contact">Nous contacter</a>
                     </li>
@@ -56,7 +63,7 @@
             <a class="navbar-brand" href="{{URL::to('/')}}">
                 <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" width="170px" alt="header logo" class="header-logo">
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="col   lapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -64,7 +71,7 @@
                     <li class="nav-item">
                         <!--active-->
                         <!-- <a class="nav-link" href="" data-toggle="modal" data-target="#header-Modallogin1"> -->
-                        <a class="nav-link" href="{{URL::to('/')}}">
+                        <a class="nav-link" href="{{URL::to('/')}}" data-target="#header-Modallogin1" data-toggle="modal">
                             <p>Candidats</p> <span class="sr-only">(current)</span>
                         </a>
                     </li>

@@ -60,8 +60,12 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
 
     public function update(Request $request, $id)
     {
-        $applied_pedagogy = implode(",", $request->applied_pedagogy);
+       
+        if (!empty($request->applied_pedagogy)) {
+            $applied_pedagogys = implode(',', $request->applied_pedagogy);
+        }
 
+    
         $updateData = [
             'type_of_establishment' => $request->type_of_establishment,
             'own_of_our_structure' => $request->own_of_our_structure,
@@ -73,18 +77,19 @@ class EstablishmentRepository implements EstablishmentRepositoryInterface
             'accommodation_capacity' => $request->accommodation_capacity,
             'surface_area_of_the_establishment' => $request->surface_area_of_the_establishment,
             'garden' => $request->garden,
-            'applied_pedagogy' => $applied_pedagogy,
-            'our_values' => $request->our_values,
-
-
+            'applied_pedagogy' => $applied_pedagogys,
+            
         ];
+      
 
         if ($request->hasFile('document')) {
             $files = $request->file('document');
             foreach ($files as $file) {
                 $documents[] = $this->uploadImage($file, 'Establishment/document');
             }
-            $document = implode(",", $documents);
+            if (!empty($request->document)) {
+                $document = implode(',', $request->document);
+            }
             $updateData['document'] = $document;
         }
 

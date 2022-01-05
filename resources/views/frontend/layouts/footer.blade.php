@@ -238,7 +238,7 @@
                                 </div>
                                 <ul class="footer-ul2">
                                     <li>
-                                        <a href="">
+                                        <a href="{{route('about-us')}}">
                                             <p class="mb-0">Qui sommes-nous ?</p>
                                         </a>
                                     </li>
@@ -310,10 +310,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="{{asset('frontend/js/select2.min.js')}} "></script>
 <script type="text/javascript" src="{{asset('frontend/js/bootstrap-multiselect.js')}}"></script>
+<script src="{{asset('frontend/js/custom.js')}}"></script>
 
 
 
-"></script>
+</script>
 
 <script>
     $(".select2 ").select2();

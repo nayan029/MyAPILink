@@ -85,11 +85,9 @@ class HomeController extends Controller
 
     public function addNewsletter(Request $request)
     {
-
+        
         $validation = Validator::make($request->all(), $this->newsletterValidationRules);
-
         if ($validation->fails()) {
-
             return redirect()->back()->withErrors($validation->errors());
         }
         $instArray = $this->homeRepository->storeNewsLater($request);
@@ -157,5 +155,10 @@ class HomeController extends Controller
         } else {
             return redirect()->back();
         }
+    }
+
+    public function aboutUs(){
+        $data['newslettervalidator'] = JsValidator::make($this->newsletterValidationRules);
+        return view('frontend.about_us',$data);
     }
 }

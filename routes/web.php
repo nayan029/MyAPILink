@@ -61,7 +61,7 @@ Route::middleware(['auth:admin'])->group(function ($route) {
 
         //Job module route
         $adminRoute->resource('job', 'JobController');
-        $adminRoute->get('/getdata/jobdata','JobController@getAjaxJobData')->name('job.data');
+        $adminRoute->get('/getdata/jobdata', 'JobController@getAjaxJobData')->name('job.data');
 
         //Gallery Module Route
         $adminRoute->resource('gallery', 'GalleryController');
@@ -82,7 +82,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->post('manager/store', 'ManagerController@storeData')->name('manager.store');
     $frontRoute->post('update-profile', 'ManagerController@updateProfile')->name('update-profile');
     $frontRoute->get('account-setting', 'ManagerController@accountSetting')->name('account-setting');
-    
+
 
     $frontRoute->get('manager', 'ManagerController@index')->name('manager');
     $frontRoute->get('registration', 'RegistrationController@index')->name('registration');
@@ -98,7 +98,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('candidate/welcome/{userid}', 'RegistrationController@getWelcomePage')->name('candidate.welcome');
     $frontRoute->get('candidate/success/{userid}', 'RegistrationController@candidateProfileLogin')->name('candidate.login');
     $frontRoute->post('uploadcv', 'RegistrationController@uploadCv')->name('uploadcv');
-    
+
     //end profile route step
     $frontRoute->get('add-establishment', 'EstablishmentController@index')->name('add-establishment');
     $frontRoute->post('store-establishment', 'EstablishmentController@store')->name('store-establishment');
@@ -112,7 +112,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
 
 
     $frontRoute->get('addjob/{id}', 'JobController@index')->name('addjob');
-    $frontRoute->post('/email','JobController@emailunique');
+    $frontRoute->post('/email', 'JobController@emailunique');
     $frontRoute->post('addorupdatejob/{id}', 'JobController@addOrUpdateJob')->name('addorupdatejob');
     $frontRoute->get('joblist/{id}', 'JobController@showJob')->name('joblist');
     $frontRoute->post('holdJobData', 'JobController@holdJobData')->name('holdJobData');
@@ -124,7 +124,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->delete('destroy/{id}', 'JobController@destroy')->name('destroy');
     $frontRoute->get('see-applicants/{id}', 'JobController@viewApplcants')->name('see-applicants');
     $frontRoute->get('edit-applicants/{id}', 'JobController@viewApplcants')->name('edit-applicants');
-    $frontRoute->get('showallcandidate', 'JobController@showAllCandidate')->name('showallcandidate');
+    $frontRoute->get('find-candidate', 'JobController@showAllCandidate')->name('showallcandidate');
 
     $frontRoute->post('getAjaxSkill', 'HomeController@getAjaxSkill')->name('getAjaxSkill');
 
@@ -132,6 +132,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->post('send-forgot-password-mail', 'HomeController@forgotPassword')->name('send-forgot-password-mail');
     $frontRoute->get('forgotpassword-user/{token}', 'HomeController@resetPassword')->name('forgotpassword-user');
     $frontRoute->post('user-reset-password', 'HomeController@updatePassword')->name('user-reset-password');
+    $frontRoute->get('abouts-us', 'HomeController@aboutUs')->name('about-us');
 });
 
 Route::middleware(['auth:web'])->group(function ($route) {

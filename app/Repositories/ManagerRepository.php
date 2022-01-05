@@ -40,7 +40,7 @@ class ManagerRepository implements ManagerRepositoryInterface
                 'user_type' => 2,
                 'verify_email' => "accept",
             ];
-           
+
             $manager = User::create($storeData);
 
             $storeDataEstablishment = array(
@@ -50,7 +50,7 @@ class ManagerRepository implements ManagerRepositoryInterface
                 'own_of_our_structure' => $request->name_of_our_organization,
             );
             Establishment::create($storeDataEstablishment);
-            
+
 
             $URL = route('manager.email.verify', $manager->email);
             $html = "Verify profile <br> <a href='" . $URL . "' target='_blank'>Click Here</a>";
@@ -154,8 +154,8 @@ class ManagerRepository implements ManagerRepositoryInterface
         return ChatMaster::where('deleted_at', NULL)->whereIn('sender_id', [$opponent, $loginUserId])
             ->whereIn('reciver_id', [$opponent, $loginUserId])->with('getUserReciverData', 'getUserSenderData')->first();
     }
-    public function stepTwoInsert(Request $request){
-       
+    public function stepTwoInsert(Request $request)
+    {
         if ($request->hasFile('document')) {
             $files = $request->file('document');
             foreach ($files as $file) {
@@ -164,21 +164,15 @@ class ManagerRepository implements ManagerRepositoryInterface
             $document = implode(",", $documents);
             $insertData['document'] = $document;
         }
-         if ($request->hasFile('more_infomation')) {
-           
+        if ($request->hasFile('more_infomation')) {
             $files = $request->file('more_infomation');
             foreach ($files as $file) {
                 $more_infomations[]  = $this->uploadImage($file, 'twostep/document');;
                 $more_infomation = implode(",", $more_infomations);
                 $insertData['more_info'] = $more_infomation;
-               
             }
-            $insertData['user_id'] =$request->user_id;
+            $insertData['user_id'] = $request->user_id;
         }
         return RegisterStep::create($insertData);
-
     }
-    
-    
-    
 }

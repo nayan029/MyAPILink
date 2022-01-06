@@ -132,9 +132,9 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group mt-3">
-                                                        <label class="control-label">Attachez vos
+                                                        <!-- <label class="control-label">Attachez vos
                                                             documents, relatifs à votre structure pour
-                                                            plus d’informations</label>
+                                                            plus d’informations</label> -->
                                                         <div class="preview-zone hidden">
                                                             <div class="box box-solid">
                                                                 <div class="box-body"></div>

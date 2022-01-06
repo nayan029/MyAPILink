@@ -16,12 +16,13 @@
                             <div class="with-icon search-btn-hide">
                                 <div class="yellow-line"></div>
                                 <img class="icon-img res-icon" src="{{url('frontend/images/search.svg')}}">
-                                <input type="text" name="" class="form-control fn-form" placeholder="Titre du poste, mots clés ou entreprise..">
+                                <input type="text" name="candidate" id="candidate" class="form-control fn-form" placeholder="Titre du poste, mots clés ou entreprise..">
+                                <span id="candidate-error" class="text-danger"> </span>
                             </div>
                         </div>
                         <div class="col-md-3 p-0">
                             <div class="emp-btn-end">
-                                <button class="btn p-2 fc-trouverbtn">Trouver des candidats</butto>
+                                <button type="submit" class="btn p-2 fc-trouverbtn">Trouver des candidats</butto>
                             </div>
                         </div>
                     </div>
@@ -63,56 +64,56 @@
                     <div class="found-text">
                         <h2 class="text-center">Les profils de candidats</h2>
                     </div>
-
-
-
-
-
+                    <form action="javascript:void(0);" method="post" id="candidate_search_form"></form>
                     <div class="cusdrop-list">
                         <div class="diplo-drop type-width bg-trans">
-                            <select class="select2 " id="cmbIdioma1">
-                                <option value="option1" selected>Disponibilité</option>
-                                <option value="option1">Immédiate</option>
-                                <option value="option2">1 mois</option>
-                                <option value="option3">2 mois</option>
-                                <option value="option4">3 mois</option>
-                                <option value="option5">Dès que Possible</option>
+                            <select class="select2" name="availablity" id="availablity">
+                                <option value="Disponibilité">Disponibilité</option>
+                                <option value="Immédiate">Immédiate</option>
+                                <option value="1 mois">1 mois</option>
+                                <option value="2 mois">2 mois</option>
+                                <option value="3 mois">3 mois</option>
+                                <option value="Dès que Possible">Dès que Possible</option>
                             </select>
+                            <span id="availablity-error" class="text-danger"></span>
                         </div>
                         <div class="diplo-drop type-width bg-trans">
-                            <select class="select2 " id="cmbIdioma2">
-                                <option value="option1" selected>Type de poste</option>
-                                <option value="option1">CDI</option>
-                                <option value="option2">CDD</option>
-                                <option value="option3">Stages</option>
-                                <option value="option4">Remplacements</option>
-                                <option value="option5">Indépendants</option>
+                            <select class="select2" name="position_type" id="position_type">
+                                <option value="Type de poste" selected>Type de poste</option>
+                                <option value="CDI">CDI</option>
+                                <option value="CDD">CDD</option>
+                                <option value="Stages">Stages</option>
+                                <option value="Remplacements">Remplacements</option>
+                                <option value="Indépendants">Indépendants</option>
                             </select>
+                            <span id="position_type-error" class="text-danger"></span>
                         </div>
 
 
                         <div class="diplo-drop type-width bg-trans">
-                            <select class="select2 " id="cmbIdioma3">
+                            <select class="select2" name="experiences" id="experiences">
                                 <option value="option1" selected>Expériences</option>
-                                <option value="option1">CDI</option>
-                                <option value="option2">CDD</option>
-                                <option value="option3">Stages</option>
-                                <option value="option4">Remplacements</option>
-                                <option value="option5">Indépendants</option>
+                                <option value="CDI">CDI</option>
+                                <option value="CDD">CDD</option>
+                                <option value="Stages">Stages</option>
+                                <option value="Remplacements">Remplacements</option>
+                                <option value="Indépendants">Indépendants</option>
                             </select>
+                            <span id="experiences-error" class="text-danger"></span>
                         </div>
                         <div class="diplo-drop type-width bg-trans">
-                            <select class="select2 " id="cmbIdioma">
+                            <select class="select2" name="diplomas" id="diplomas">
                                 <option value="option1" selected>Diplômes</option>
-                                <option value="option1">BAFA</option>
-                                <option value="option2">BEP</option>
-                                <option value="option3">BAC</option>
-                                <option value="option4">LICENCE</option>
-                                <option value="option5">MASTER</option>
+                                <option value="BAFA">BAFA</option>
+                                <option value="BEP">BEP</option>
+                                <option value="BAC">BAC</option>
+                                <option value="LICENCE">LICENCE</option>
+                                <option value="MASTER">MASTER</option>
                             </select>
+                            <span id="diplomas-error" class="text-danger"></span>
                         </div>
                         <div class="type-width">
-                            <button class="btn btn-yellow filters-btns">Appliquer les filtres</button>
+                            <button type="submit" class="btn btn-yellow filters-btns">Appliquer les filtres</button>
                         </div>
                     </div>
                 </div>
@@ -170,13 +171,36 @@
     </div>
 
 </section>
-
-
-
-
 @endsection
 @section('script')
+<script>
+    $(document).on('click', '.fc-trouverbtn', function() {
+        var temp = 0;
 
+        var title = $('#candidate').val();
+        if (title == "") {
+            $('#candidate-error').html('Please search job title ,keywords or company');
+            temp++
+        } else {
+            $('#candidate-error').html('');
+        }
+
+        if (temp == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+
+    $(document).on('click', '.filters-btns', function() {
+        var formData = $('#candidate_search_form').serialize();            
+
+        $.ajax({
+            url:"{{route('candidate.data')}}?"+formData,
+            method:"get" 
+        });
+    });
+</script>
 @endsection
 </body>
 

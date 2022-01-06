@@ -95,6 +95,7 @@ class SearchAdController extends Controller
     {
         $data['pages'] = $request->page;
         $data['showCompany'] = $this->applyJobRepository->getCompanyData($id);
+        $data['establishmentdata'] = $this->applyJobRepository->getSingleEstablishmentData($id);
         $data['showJobs'] = $this->applyJobRepository->getManagerPosts($id);
         $data['list'] = $this->applyJobRepository->getCandidateData($request);
 

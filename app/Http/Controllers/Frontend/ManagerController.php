@@ -254,17 +254,16 @@ class ManagerController extends Controller
         return view('frontend.manager.chatbox', $data);
     }
 
-    public function managerRegisterStepTwo(Request $request, $id)
+    public function managerRegisterStepTwo($id)
     {
         $data['id'] = $id;
-        return view('frontend.manager.manager_register_step_two', $data);
+        return view('frontend.manager.manager_register_step_two',$data);
     }
 
 
     public function managerRegisterStepTwoInsert(Request $request)
     {
-
-
+        
         $data = $this->managerRepository->stepTwoInsert($request);
         if ($data) {
             Session::flash('success', 'Successfully Inserted');

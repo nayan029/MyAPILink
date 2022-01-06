@@ -132,4 +132,9 @@ class ApplyJobRepository implements ApplyJobRepositoryInterface
             ->with('getUserReciverData', 'getUserSenderData')
             ->get();
     }
+
+    public function getSingleEstablishmentData($id)
+    {
+        return Establishment::findorfail($id);
+    }
 }

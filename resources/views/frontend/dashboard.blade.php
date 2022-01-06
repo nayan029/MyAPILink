@@ -2,6 +2,20 @@
 @section('title')
 <title>ApiLink | Dashboard</title>
 @endsection
+@section('css')
+<style>
+    .box {
+    display: inline-flex;
+}
+
+.box .position {
+    color: #2A2960;
+    font-family: QUICKSAND_BOLD_REGULAR;
+    font-size: 1.3rem;
+    padding-left: 5px;
+}
+</style>
+@endsection
 @section('content')
 
 <section class="hero-index" style="background-image: linear-gradient(180deg, rgb(0 0 0 / 70%), rgb(0 0 0 / 70%)), url('frontend/images/index-bg.png');opacity: 0.8;">
@@ -140,6 +154,7 @@
                 </div>
             </div>
             <div class="row les-professional-sec">
+                @if(count($skill) > 0)
                 @foreach($skill as $sk)
                 <div class="col-md-4">
                     <div class="card sr-card">
@@ -162,6 +177,7 @@
                     </div>
                 </div>
                 @endforeach
+                @endif
             </div>
         </div>
     </div>
@@ -190,8 +206,9 @@
             </div>
             <div class="modal-body resume_modal">
                 <div class="candidate_modal">
-                    <h4 class="mb-3 main_title main-title">-<h3 class="mb-3 position"></h3>
-                    </h4>
+                        <div class="box">
+                        <h4 class="mb-3 main-title"></h4><span class="mb-3 position"></span>
+                        </div>
                     <div class="candidate_modal_title">
                         <h5 class="candidate_modal_text pb-2 ">Description</h5>
                         <textarea class="candidate-modal-textarea desc" id="summernote">
@@ -468,9 +485,6 @@
         var url = "{{route('getAjaxSkill')}}";
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
-        var title = $('.main-title').text();
-        var desc = $('.desc').text();
-        var pos = $('.position').text();
 
         $.ajax({
             url: url,
@@ -478,14 +492,12 @@
             data: {
                 _token: CSRF_TOKEN,
                 id: id,
-                title: title,
-                desc: desc,
-                pos: pos,
             },
             success: function(data) {
+                console.log(data.skillData);
                 $('.main-title').text(data.skillData.position);
                 $('#summernote').html(data.skillData.desc);
-                $('.position').text(data.skillData.title);
+                $('.position').text(' - '+data.skillData.title);
                 $('#Modaljob-desc').modal('show');
                 $("#new-industry").attr('data-save-id', id);
             },

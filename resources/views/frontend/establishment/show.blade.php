@@ -307,16 +307,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="mb-30px">
-                                        <div class="card sr-card">
-                                            <div class="card-body">
-                                                <h5 class="propos">Nos valeurs :</h5>
-                                                <p class="propos-text">
-                                                    {{$establishment->our_values}}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

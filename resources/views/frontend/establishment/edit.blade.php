@@ -16,14 +16,10 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group mt-5">
-
                                         {!! Form::label('Type d’Établissement', 'Type d’Établissement') !!}<span class="invalid-error text-danger">*</span>
                                         {!! Form::select('type_of_establishment',['Crèche collective' => 'Crèche collective','Micro-crèche' => 'Micro-crèche','Crèche privée d’entreprise ou inter-entreprises' => 'Crèche privée d’entreprise ou inter-entreprises'] ,$establishment->type_of_establishment, [ 'id' => 'type_of_establishment', 'class' => 'cus-drop select2 form-add-establish']) !!}
                                         <span class="establishment-error text-danger"></span>
-
                                     </div>
-
-
                                     <div class="form-group">
                                         {!! Form::label('A propre de notre structure', 'A propre de notre structure') !!}<span class="invalid-error text-danger">*</span>
                                         {!! Form::text('own_of_our_structure',$establishment->own_of_our_structure, ['class' => 'form-control inputicon2 form-add-establish','id'=>'own_of_our_structure']) !!}
@@ -43,7 +39,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -57,85 +53,82 @@
                                         <span class="age-groups-error text-danger"></span>
                                     </div>
                                 </div>
-
-                         
-                       
-                            <div class="col-md-12">
-                                <div class="form-group ">
-                                    {!! Form::label("Capacité d'accueil", "Capacité d'accueil") !!}<span class="invalid-error text-danger">*</span>
-                                    {!! Form::select('accommodation_capacity',['35' => '35'],$establishment->accommodation_capacity, [ 'id' => 'accommodation_capacity','class' => 'cus-drop select2 form-add-establish']) !!}
-                                    <span class="capacity-error text-danger"></span>
+                                <div class="col-md-12">
+                                    <div class="form-group ">
+                                        {!! Form::label("Capacité d'accueil", "Capacité d'accueil") !!}<span class="invalid-error text-danger">*</span>
+                                        {!! Form::select('accommodation_capacity',['35' => '35'],$establishment->accommodation_capacity, [ 'id' => 'accommodation_capacity','class' => 'cus-drop select2 form-add-establish']) !!}
+                                        <span class="capacity-error text-danger"></span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-md-6">
-                                <div class="form-group position-rel value-color">
-                                    {!! Form::label("Superficie de l'établissement", "Superficie de l'établissement") !!}<span class="invalid-error text-danger">*</span>
-                                    {!! Form::text('surface_area_of_the_establishment',$establishment->surface_area_of_the_establishment, ['class' => ' form-control form-add-establish inputicon2','id'=>'surface_area_of_the_establishment']) !!}
+                                <div class="col-md-6">
+                                    <div class="form-group position-rel value-color">
+                                        {!! Form::label("Superficie de l'établissement", "Superficie de l'établissement") !!}<span class="invalid-error text-danger">*</span>
+                                        {!! Form::text('surface_area_of_the_establishment',$establishment->surface_area_of_the_establishment, ['class' => ' form-control form-add-establish inputicon2','id'=>'surface_area_of_the_establishment']) !!}
 
-                                    <div class="m2-label"> {!! Form::label("m²", "m²") !!}</div>
-                                    <span class="surface-area-error text-danger"></span>
+                                        <div class="m2-label"> {!! Form::label("m²", "m²") !!}</div>
+                                        <span class="surface-area-error text-danger"></span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-md-6">
-                                {!! Form::label('Votre établissement possède t-il un jardin ?', 'Votre établissement possède t-il un jardin ?') !!}<span class="invalid-error text-danger">*</span>
+                                <div class="col-md-6">
+                                    {!! Form::label('Votre établissement possède t-il un jardin ?', 'Votre établissement possède t-il un jardin ?') !!}<span class="invalid-error text-danger">*</span>
 
-                                <div>
-                                    <div class="radio-custom ">
-                                        <div class=" position-rel w-120px">
-                                            {!! Form::radio('garden', 'Yes', true, ['id' => 'garden', 'name' => 'garden', 'class' => 'radio-yes-no']) !!}
-                                            {!! Form::label('Oui', 'Oui', ['class' => 'label-radios']) !!}
+                                    <div>
+                                        <div class="radio-custom ">
+                                            <div class=" position-rel w-120px">
+                                                {!! Form::radio('garden', 'Yes', true, ['id' => 'garden', 'name' => 'garden', 'class' => 'radio-yes-no']) !!}
+                                                {!! Form::label('Oui', 'Oui', ['class' => 'label-radios']) !!}
 
+                                            </div>
+                                            <div class=" position-rel w-120px">
+                                                {!! Form::radio('garden', 'No',NULL, ['id' => 'garden', 'name' => 'garden', 'class' => 'radio-yes-no']) !!}
+                                                {!! Form::label('Non', 'Non', ['class' => 'label-radios']) !!}
+                                            </div>
+                                            <span class="garden-error text-danger"></span>
                                         </div>
-                                        <div class=" position-rel w-120px">
-                                            {!! Form::radio('garden', 'No',NULL, ['id' => 'garden', 'name' => 'garden', 'class' => 'radio-yes-no']) !!}
-                                            {!! Form::label('Non', 'Non', ['class' => 'label-radios']) !!}
-                                        </div>
-                                        <span class="garden-error text-danger"></span>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('Pédagogie appliquée', 'Pédagogie appliquée') !!}<span class="invalid-error text-danger"> *</span>
-                            <div class="type-drops add-establish-drop maria-placeholder-select">
-                                {!! Form::select('applied_pedagogy[]',['Maria Montessori' => 'Maria Montessori','Pédagogie Interactive' => 'Pédagogie Interactive','Pédagogie Faber et Mazlish' => 'Pédagogie Faber et Mazlish','Pickler Loczy' => 'Pickler Loczy','Pédagogie Reggio' => 'Pédagogie Reggio','Snoezelen'=>'Snoezelen','Parler Bambin'=>'Parler Bambin','Aucune en particulier'=>'Aucune en particulier','Autres'=>'Autres'],$establishment->applied_pedagogy, [ 'id' => 'applied_pedagogy','class' => 'select-multi','multiple'=>'multiple']) !!}
-                                <span class="pedagogy-error text-danger"></span>
-                                <div>
-                            </div>
-                        </div>
-                        <div class="form-group sr-pos">
-                            <div class="upload-file-input">
-                                {!! Form::label("Notre projet pédagogique", "Notre projet pédagogique") !!}<span class="invalid-error text-danger"> *</span>
-                                <input id="uploadFile" value="" class="form-add-establish w-100 inputicon2" disabled>
-                                <div class="fileUpload btn btn-primary attach-file">
-                                    <span><i class="fa fa-paperclip mr-2"></i>Attacher un
-                                        document</span>
-                                    {!! Form::file('document[]', ['id' => 'document', 'name' => 'document[]', 'class' => 'upload', 'multiple' => true ],[]) !!}
+                            <div class="form-group">
+                                {!! Form::label('Pédagogie appliquée', 'Pédagogie appliquée') !!}<span class="invalid-error text-danger"> *</span>
+                                <div class="type-drops add-establish-drop maria-placeholder-select">
+                                    {!! Form::select('applied_pedagogy[]',['Maria Montessori' => 'Maria Montessori','Pédagogie Interactive' => 'Pédagogie Interactive','Pédagogie Faber et Mazlish' => 'Pédagogie Faber et Mazlish','Pickler Loczy' => 'Pickler Loczy','Pédagogie Reggio' => 'Pédagogie Reggio','Snoezelen'=>'Snoezelen','Parler Bambin'=>'Parler Bambin','Aucune en particulier'=>'Aucune en particulier','Autres'=>'Autres'],$establishment->applied_pedagogy, [ 'id' => 'applied_pedagogy','class' => 'select-multi','multiple'=>'multiple']) !!}
+                                    <span class="pedagogy-error text-danger"></span>
+                                    <div>
+                                    </div>
                                 </div>
-                                <span class="document-error text-danger"></span>
-                                <img src="{{asset($establishment->document)}}" height="50px" width="50px" />
-                            </div>
-                        </div>
+                                <div class="form-group sr-pos">
+                                    <div class="upload-file-input">
+                                        {!! Form::label("Notre projet pédagogique", "Notre projet pédagogique") !!}<span class="invalid-error text-danger"> *</span>
+                                        <input id="uploadFile" value="" class="form-add-establish w-100 inputicon2" disabled>
+                                        <div class="fileUpload btn btn-primary attach-file">
+                                            <span><i class="fa fa-paperclip mr-2"></i>Attacher un
+                                                document</span>
+                                            {!! Form::file('document[]', ['id' => 'document', 'name' => 'document[]', 'class' => 'upload', 'multiple' => true ],[]) !!}
+                                        </div>
+                                        <span class="document-error text-danger"></span>
+                                        <img src="{{asset($establishment->document)}}" height="50px" width="50px" />
+                                    </div>
+                                </div>
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <section>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <section>
 
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group mt-3">
-                                                    <label class="control-label">Attachez vos
-                                                        documents, relatifs à votre structure pour
-                                                        plus d’informations</label><span class="text-danger">*</span>
-                                                    <div class="preview-zone hidden">
-                                                        <div class="box box-solid">
-                                                            <div class="box-body"></div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- <div class="dropzone-wrapper">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group mt-3">
+                                                            <label class="control-label">Attachez vos
+                                                                documents, relatifs à votre structure pour
+                                                                plus d’informations</label><span class="text-danger">*</span>
+                                                            <div class="preview-zone hidden">
+                                                                <div class="box box-solid">
+                                                                    <div class="box-body"></div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- <div class="dropzone-wrapper">
                                                                     <div class="dropzone-desc">
                                                                         <img src="{{asset('frontend/images/profile-feather-upload.svg')}}" width="30px" class="mb-1">
                                                                    
@@ -145,27 +138,27 @@
                                                                     {!! Form::file('more_infomation[]', ['id' => 'more_infomation', 'name' => 'more_infomation[]', 'class' => 'dropzone','multiple' => true]) !!}
                                                                  
                                                                 </div> -->
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </section>
                                     </div>
-                                </section>
-                            </div>
-                            <div class="col-md-12 d-flex justify-content-end mt-5">
-                                <button class="btn btn-outline-cancel annuler-btns">Annuler</button>
-                                <button class="btn btn-yellow">Mettre à jour</button>
-                                <!-- href="view-establishment-account-3.html" -->
-                            </div>
+                                    <div class="col-md-12 d-flex justify-content-end mt-5">
+                                        <button class="btn btn-outline-cancel annuler-btns">Annuler</button>
+                                        <button class="btn btn-yellow">Mettre à jour</button>
+                                        <!-- href="view-establishment-account-3.html" -->
+                                    </div>
 
 
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    </div>
-    {!! Form::close() !!}
+        {!! Form::close() !!}
 </section>
 @endsection
 @section('script')

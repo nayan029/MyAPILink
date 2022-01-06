@@ -168,7 +168,7 @@
 
                                             </ul>
                                             <div>
-                                                <p class="mb-0 ouvert-p mr-3">Ouvert depuis le 15 Février 1999</p>
+                                                <p class="mb-0 ouvert-p mr-3">Ouvert depuis le {{date('j F, Y,', strtotime($establishmentdata->opening_date));}}</p>
                                             </div>
                                         </div>
 
@@ -181,7 +181,7 @@
                                             <div class="card-body">
                                                 <h5 class="propos">À propos de la structure</h5>
                                                 <p class="propos-text">
-                                                    Indisponible
+                                                    {{$establishmentdata->own_of_our_structure}}
                                                 </p>
                                             </div>
                                         </div>
@@ -191,7 +191,7 @@
                                             <div class="card-body">
                                                 <div class="d-flex">
                                                     <h5 class="propos mb-0">Effectif :</h5>
-                                                    <span class="span-propos">Indisponible</span>
+                                                    <span class="span-propos">{{$establishmentdata->effective}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -202,7 +202,7 @@
                                                 <div class="d-flex">
                                                     <h5 class="propos mb-0">Nombre de groupes et tranche d’âges :
                                                     </h5>
-                                                    <span class="span-propos">Indisponible</span>
+                                                    <span class="span-propos">{{$establishmentdata->number_of_groups_and_age_groups}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -212,7 +212,7 @@
                                             <div class="card-body">
                                                 <div class="d-flex">
                                                     <h5 class="propos mb-0">Pédagogie appréciées :</h5>
-                                                    <span class="span-propos">Indisponible</span>
+                                                    <span class="span-propos">{{$establishmentdata->applied_pedagogy}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -222,7 +222,7 @@
                                             <div class="card-body">
                                                 <div class="d-flex">
                                                     <h5 class="propos mb-0">Peut accueillir:</h5>
-                                                    <span class="span-propos">Indisponible</span>
+                                                    <span class="span-propos">{{$establishmentdata->accommodation_capacity}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -232,7 +232,7 @@
                                             <div class="card-body">
                                                 <div class="d-flex">
                                                     <h5 class="propos mb-0">Superficie de l'établissement</h5>
-                                                    <span class="span-propos">Indisponible</span>
+                                                    <span class="span-propos">{{$establishmentdata->surface_area_of_the_establishment}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -242,21 +242,12 @@
                                             <div class="card-body">
                                                 <div class="d-flex">
                                                     <h5 class="propos mb-0">Autres informations : </h5>
-                                                    <span class="span-propos">Indisponible</span>
+                                                    <span class="span-propos">{{$establishmentdata->type_of_establishment}}</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="mb-30px">
-                                        <div class="card sr-card">
-                                            <div class="card-body">
-                                                <h5 class="propos">Nos valeurs :</h5>
-                                                <p class="propos-text">
-                                                    Indisponible
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -364,12 +355,12 @@
                                     <div class="job-card">
                                         <div class="job-listing-flex">
                                             <h5 class="ml-2 mb-0 linkcolor">Auxiliaire Puéricultrice</h5><br><br>
-                                                       
+
                                             <input type="hidden" name="job_id" id="job_id">
-                                        <input type="hidden" name="user_id" id="user_id">
-                                        <button id="saveclass{{$data->id}}" class="btn fav-btn save-fav" type="button" data-job="{{$data->id}}" data-user="{{$data->user_id}}" data-rowid="{{$data->id}}">
-                                            <img id="saveicon{{$data->id}}" src="{{$saveJob=='1' ? 'frontend/images/imgs-svg/book-mark-yellow.svg' : 'frontend/images/bookmark.svg'}}" alt="bookmark image" class="b1 bookmark-img">
-                                        </button>
+                                            <input type="hidden" name="user_id" id="user_id">
+                                            <button id="saveclass{{$data->id}}" class="btn fav-btn save-fav" type="button" data-job="{{$data->id}}" data-user="{{$data->user_id}}" data-rowid="{{$data->id}}">
+                                                <img id="saveicon{{$data->id}}" src="{{$saveJob=='1' ? 'frontend/images/imgs-svg/book-mark-yellow.svg' : 'frontend/images/bookmark.svg'}}" alt="bookmark image" class="b1 bookmark-img">
+                                            </button>
                                         </div>
                                         <div class="row mr-minus9 mb-2">
                                             <div class="col-md-12">

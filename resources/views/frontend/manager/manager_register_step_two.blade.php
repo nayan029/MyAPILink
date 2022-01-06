@@ -182,7 +182,7 @@
                                 </p>
                             </div>
                             <div class="mt-4 mb-2">
-                                <a href="view-establishment-account-2.html" class="btn btn-white modal-appointment-ok">Ok</a>
+                                <a href="javascript:void(0);" class="btn btn-white modal-appointment-ok">Ok</a>
 
                             </div>
 
@@ -192,9 +192,6 @@
             </div>
         </div>
         <!-- end modal -->
-
-
-
     </section>
 
 @endsection
@@ -225,9 +222,7 @@
             }
         });
     }
-
     // -------------------
-
     $(function() {
         $(".select-multi").multiselect({
             includeSelectAllOption: true

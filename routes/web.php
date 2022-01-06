@@ -125,6 +125,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
     $frontRoute->get('see-applicants/{id}', 'JobController@viewApplcants')->name('see-applicants');
     $frontRoute->get('edit-applicants/{id}', 'JobController@viewApplcants')->name('edit-applicants');
     $frontRoute->get('find-candidate', 'JobController@showAllCandidate')->name('showallcandidate');
+    $frontRoute->get('candidate-filter-data','JobController@candidateData')->name('candidate.data');
 
     $frontRoute->post('getAjaxSkill', 'HomeController@getAjaxSkill')->name('getAjaxSkill');
 

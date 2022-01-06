@@ -21,7 +21,6 @@
                     @csrf
                     <div class="vacancies-search">
                         <div class="row m-0">
-
                             <div class="col-md-9 p-0">
                                 <div class="with-icon search-btn-hide">
                                     <div class="yellow-line"></div>
@@ -35,7 +34,6 @@
                                     <button type="submit" id="submitbtn1" class="btn-find-job btn p-2">Trouver des emplois</butto>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </form>

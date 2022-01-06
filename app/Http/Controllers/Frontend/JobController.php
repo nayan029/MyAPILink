@@ -230,4 +230,8 @@ class JobController extends Controller
             return '0';
         }
     }
+
+    public function candidateData(){
+        return $this->jobRepository->getCandidateData($request);
+    }
 }

@@ -22,4 +22,5 @@
             display: none !important;
         }
     </style>
+    @yield('css')
 </head>

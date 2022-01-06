@@ -91,4 +91,9 @@ class JobRepository implements JobRepositoryInterface
     {
         return User::where('user_type',1)->get();
     }
+
+    public function getCandidateData(Request $request)
+    {
+        dd($request->all());
+    }
 }

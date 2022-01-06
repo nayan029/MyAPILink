@@ -17,4 +17,5 @@ interface ApplyJobRepositoryInterface
     public function getApplyJobDataByUserId();
     public function chatJobList();
     public function chatUserList();
+    public function getSingleEstablishmentData($id);
 }

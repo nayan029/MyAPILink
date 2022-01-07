@@ -22,11 +22,7 @@
             <div class="modal fade" id="header-Modallogin1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog login-modal-dialog" role="document">
                     <div class="modal-content">
-                        <!-- <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><img src="images/material-close.svg"></span>
-                </button>
-            </div> -->
+            
                         <div class="modal-body login-modal-body">
                             <div class="">
                                 <div class="lmodal-logo">
@@ -276,25 +272,23 @@
 
                     </div>
                 </div>
-            </div>
+            </div>  
             @endif
             <div class="footer-bottom">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-5 col-lg-5 col-md-12">
-                            <p class="copyright_text">Copyright © 2021 Expert Petite Enfance. by trtdigital.</p>
-                        </div>
-                        <div class="col-xl-7 col-lg-7 col-md-12">
-                            <p class="mb-0">
-                                Page de Confidentialité – Mentions Légales – Conditions Générales d’Utilisation –
-                                CNIL –
-                                Cookies
-                            </p>
-                        </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 text-center">
+                        <p class="copyright_text mb-2">Copyright © 2021 Expert Petite Enfance. by trtdigital.</p>
+                        <p class="mb-0">
+                            Page de Confidentialité – Mentions Légales – Conditions Générales d’Utilisation – CNIL – Cookies
+                        </p>
                     </div>
+
                 </div>
             </div>
         </div>
+    </div>
+
     </footer>
 </div>
 </div>

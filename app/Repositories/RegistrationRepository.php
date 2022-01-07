@@ -17,7 +17,6 @@ class RegistrationRepository implements RegistrationRepositoryInterface
 
         try {
             $data = [
-                'position_id' => $request->posid,
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'email' => $request['email'],
@@ -25,7 +24,7 @@ class RegistrationRepository implements RegistrationRepositoryInterface
                 'phone' => $request->phone,
                 'user_type' => '1'
             ];
-           
+
             $user = User::create($data);
             $URL = route('email.verify', $user->email);
             $html = "Verify profile <br> <a href='" . $URL . "' target='_blank'>Click Here</a>";
@@ -40,16 +39,17 @@ class RegistrationRepository implements RegistrationRepositoryInterface
                 CURLOPT_TIMEOUT => 30,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => "{\"sender\":{\"name\":\"ApiLink\",\"email\":\"no-reply@apilink.fr\"},\"to\":[{\"name\":\"ApiLink\",\"email\":\"" . $request->email . "\"}],\"subject\":\"" . $subject . "\",\"templateId\":1,\"params\":{\"EMAIL\":\"" . $request->email . "\",\"RESET_LINK\":\"" . $URL . "\",\"LINK\":\"" . $URL . "\"}}",
+                CURLOPT_POSTFIELDS => "{\"sender\":{\"name\":\"ApiLink\",\"email\":\"no-reply@apilink.fr\"},\"to\":[{\"name\":\"ApiLink\",\"email\":\"" . $request->email . "\"}],\"subject\":\"" . $subject . "\",\"templateId\":3,\"params\":{\"EMAIL\":\"" . $request->email . "\",\"PASSWORD\":\"" . $request->password . "\",\"RESET_LINK\":\"" . $URL . "\",\"LINK\":\"" . $URL . "\"}}",
                 CURLOPT_HTTPHEADER => array(
                     "accept: application/json",
-                    "api-key: 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",
+                    "api-key: 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",
                     "content-type: application/json"
                 ),
             ));
             $response = curl_exec($curl);
             $err = curl_error($curl);
             curl_close($curl);
+
             return true;
         } catch (Exception $e) {
             return back()->withError($e->getMessage());

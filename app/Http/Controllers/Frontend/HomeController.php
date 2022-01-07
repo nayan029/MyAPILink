@@ -135,10 +135,10 @@ class HomeController extends Controller
             return redirect()->back();
         }
     }
-    public function resetPassword($token)
+    public function resetPassword($email)
     {
         $data['validator'] = JsValidator::make($this->resetvalidationrules);
-        return view('frontend.forgot.reset-password', ['token' => $token], $data);
+        return view('frontend.forgot.reset-password', ['email' => $email], $data);
     }
 
     public function updatePassword(Request $request)

@@ -68,17 +68,20 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav header-ul">
-                    <li class="nav-item">
+                    <li class="nav-item" id="candidat">
                         <!--active-->
                         <!-- <a class="nav-link" href="" data-toggle="modal" data-target="#header-Modallogin1"> -->
-                        <a class="nav-link" href="{{URL::to('/')}}" data-target="#header-Modallogin1" data-toggle="modal">
+                            @php $test = $_SERVER['REQUEST_URI']=='/'?'data-toggle=modal data-target=#header-Modallogin1':''; @endphp
+                        <a class="nav-link " href="{{URL::to('/')}}" {{$test}} >
                             <p>Candidats</p> <span class="sr-only">(current)</span>
                         </a>
+                        <span class="span-home"></span>
                     </li>
-                    <li id="establish" class="nav-item ">
+                    <li class="nav-item" id="establish">
                         <a class="nav-link" href="{{URL::to('/establishment-dashborad')}}">
                             <p>Établissements</p><span class="sr-only">(current)</span>
                         </a>
+                           <span class="span-home"></span>
                     </li>
                 </ul>
                 <ul class="header-btns">
@@ -91,7 +94,7 @@
                                 Mon compte
                             </button>
                             <div class="dropdown-menu home-drop" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Modallogin2">Se
+                                <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#Modallogin2">Se
                                     Connector</a>
                                 <a class="dropdown-item" href="{{ route('registration') }}">S’inscrire</a>
                             </div>
@@ -151,7 +154,7 @@
                                     <span class="text-danger error-text description_error"></span>
                                 </div>
                             </div>
-
+                            openLogin
                             <div class="col-md-12 text-center res-dec mt-3 mb-5 ">
                                 <button type="submit" class="btn btn-blue w-100" style="background:#FFA500;">Poser
                                     une

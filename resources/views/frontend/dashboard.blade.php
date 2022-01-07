@@ -29,7 +29,7 @@
 
             @else
             <div class="jesuis_btn_text">
-                <button class="btn btn-home-pink " data-toggle="modal" data-target="#header-Modallogin1">JE SUIS UN
+                <button class="btn btn-home-pink" data-toggle="modal" data-target="#header-Modallogin1">JE SUIS UN
                     CANDIDAT</button>
                 <a href="{{route('establishment-dashborad')}}" class="btn btn-home-blue ">JE SUIS UN ÉTABLISSEMENT PETITE
                     ENFANCE</a>
@@ -418,7 +418,7 @@
                             <button id="loginbtn" type="submit" class="btn btn-blue w-100">Connexion</button>
                         </div>
                         <div class=" meconnecter">
-                            <p class="proxima-nove">Pas encore membre?<a href="#" data-toggle="modal" data-target="#header-Modallogin1" class="openRegister"> Inscrivez-vous</a></p>
+                            <p class="proxima-nove">Pas encore membre?<a href="javascript:void(0);" data-toggle="modal" data-target="#header-Modallogin1" id="openRegister"> Inscrivez-vous</a></p>
                         </div>
                     </div>
                 </form>
@@ -551,10 +551,18 @@
 
     // });
 
+    $(document).ready(function() {
+        setInterval(function() {
+            $('#candidat').addClass('active');
+        }, 500);
 
-    $(document).on('click', '.openRegister', function() {
+    });
+    $(document).on('click', '#openRegister', function() {
         $("#header-Modallogin1").modal('show');
         $("#Modallogin2").modal('hide');
+        setTimeout(function() {
+            $('body').addClass('modal-open');
+        }, 500);
     });
 </script>
 @endsection

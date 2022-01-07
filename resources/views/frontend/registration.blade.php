@@ -59,7 +59,7 @@
         <div class="col-md-6 p-5">
             <div>
                 <div class="Se-connecter-text">
-                    <a href="javascript:void(0)" data-toggle="modal" data-target="#Modallogin2" class="">Se
+                    <a href="javascript:void(0)" data-toggle="modal" data-target="#Modallogin2" id="Seconnecter">Se
                         connecter</a>
                 </div>
                 <div>
@@ -86,7 +86,7 @@
                         </a>
                     </div>
                     <div>
-                        <a href="" data-toggle="modal" data-target="#header-Modallogin1">
+                        <a href="javascript:void(0);" class="openreg" data-toggle="modal" data-target="#header-Modallogin1">
                             <div class="login-etablissement-sec">
                                 <div class="d-flex w-100">
                                     <img src="{{asset('frontend/images/imgs-svg/user-blue.svg')}}" alt="build image" class="mr-4">
@@ -109,9 +109,7 @@
         </div>
     </div>
 </body>
-
 <!-- header modal1 -->
-
 <div class="modal fade login_modal" id="Modallogin2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog login-modal-dialog" role="document">
         <div class="modal-content">
@@ -148,13 +146,13 @@
                         </div>
 
                         <div class="mb-20 text-right">
-                            <a href="#" data-toggle="modal" data-target="#forgot_password_modal" class="forgot-link forgot_password_mdl">J'ai perdu mon mot de passe?</a>
+                            <a href="javascript:void(0);" data-toggle="modal" data-target="#forgot_password_modal" class="forgot-link forgot_password_mdl">J'ai perdu mon mot de passe?</a>
                         </div>
                         <div class="col-md-12 text-center res-dec mb-3 ">
                             <button id="loginbtn" type="submit" class="btn btn-blue w-100">Connexion</button>
                         </div>
                         <div class=" meconnecter">
-                            <p class="proxima-nove">Pas encore membre?<a href="javascript:void(0);" class="openRegister"> Inscrivez-vous</a></p>
+                            <p class="proxima-nove">Pas encore membre?<a href="javascript:void(0);" id="openRegister" data-target="#header-Modallogin1" data-toggle="modal"> Inscrivez-vous</a></p>
                         </div>
                     </div>
                 </form>
@@ -212,11 +210,7 @@
 <div class="modal fade" id="header-Modallogin1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog login-modal-dialog" role="document">
         <div class="modal-content">
-            <!-- <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><img src="images/material-close.svg"></span>
-                </button>
-            </div> -->
+
             <div class="modal-body login-modal-body">
                 <div class="">
                     <div class="lmodal-logo">
@@ -297,12 +291,11 @@
 
                             <div class="col-md-12 text-center res-dec mt-3">
                                 <div class=" meconnecter Connectez-vous">
-                                    <p class="">Déjà membre?<a href="javascript:void(0);" class="openLogin"> Connectez-vous</a></p>
+                                    <p class="">Déjà membre?<a href="javascript:void(0);" data-toggle="modal" data-target="#Modallogin2" id="openLogin"> Connectez-vous</a></p>
                                 </div>
                             </div>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>
@@ -384,14 +377,33 @@
     });
 </script>
 <script>
-    $(document).on('click', '.openLogin', function() {
+     $(document).on('click','#openLogin' ,function() {
         $("#header-Modallogin1").modal('hide');
         $("#Modallogin2").modal('show');
+        setTimeout(function() {
+            $('body').addClass('modal-open');
+        }, 500);
     });
-    $(document).on('click', '.openRegister', function() {
+    $(document).on('click','#openRegister', function() {
         $("#header-Modallogin1").modal('show');
         $("#Modallogin2").modal('hide');
+        setTimeout(function() {
+            $('body').addClass('modal-open');
+        }, 500);
     });
+    $(document).on('click', '.forgot_password_mdl', function() {
+        $('#forgot_password_modal').modal('show');
+        $("#Modallogin2").modal('hide');
+        setTimeout(function() {
+            $('body').addClass('modal-open');
+        }, 500);
+    });
+
+
+    // $(document).on('click','.openreg',function(){    
+    //     $("#Modallogin2").modal('show');
+    //     $("#header-Modallogin1").modal('hide');
+    // })
     $(document).on('click', '#registerUser', function() {
         var token = $("meta[name='csrf-token']").attr("content");
         var formData = $('#register_form_data').serialize();
@@ -401,10 +413,10 @@
             data: formData,
             success: function(response) {
                 if (response.success == true) {
-                        toastr.success(response.message);
-                        $('#header-Modallogin1').modal('hide');
-                        $('.invisible').trigger('click');
-                        $("#register_form_data")[0].reset();
+                    toastr.success(response.message);
+                    $('#header-Modallogin1').modal('hide');
+                    $('.invisible').trigger('click');
+                    $("#register_form_data")[0].reset();
                 }
             },
             error: function(response) {
@@ -458,6 +470,8 @@
     //         }
     //     });
 </script>
+
+<script type="text/javascript" src="http://127.0.0.1:8000/vendor/jsvalidation/js/jsvalidation.js"></script>
 @include('frontend.layouts.login_script')
 
 </body>

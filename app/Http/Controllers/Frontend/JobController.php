@@ -11,6 +11,7 @@ use App\Models\ApplyJob;
 use App\Models\Job;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Support\Facades\Session;
 use JsValidator;
 
@@ -231,7 +232,7 @@ class JobController extends Controller
         }
     }
 
-    public function candidateData(){
+    public function candidateData(Request $request){
         return $this->jobRepository->getCandidateData($request);
     }
 }

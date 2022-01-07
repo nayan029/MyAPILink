@@ -42,7 +42,6 @@ class ManagerRepository implements ManagerRepositoryInterface
             ];
 
             $manager = User::create($storeData);
-
             $storeDataEstablishment = array(
                 'user_id' => $manager->id,
                 'type' => "Default",
@@ -50,12 +49,11 @@ class ManagerRepository implements ManagerRepositoryInterface
                 'own_of_our_structure' => $request->name_of_our_organization,
             );
             Establishment::create($storeDataEstablishment);
-
-
             $URL = route('manager.email.verify', $manager->email);
             $html = "Verify profile <br> <a href='" . $URL . "' target='_blank'>Click Here</a>";
             $subject = "Please complete your profile on ApiLink";
             // -------Mail------
+
             $curl = curl_init();
             curl_setopt_array($curl, array(
                 CURLOPT_URL => "https://api.sendinblue.com/v3/smtp/email",
@@ -65,10 +63,10 @@ class ManagerRepository implements ManagerRepositoryInterface
                 CURLOPT_TIMEOUT => 30,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => "{\"sender\":{\"name\":\"apilink\",\"email\":\"no-reply@apilink.fr\"},\"to\":[{\"name\":\"ApiLink\",\"email\":\"" . $request->email . "\"}],\"subject\":\"" . $subject . "\",\"templateId\":1,\"params\":{\"EMAIL\":\"" . $request->email . "\",\"RESET_LINK\":\"" . $URL . "\",\"LINK\":\"" . $URL . "\"}}",
+                CURLOPT_POSTFIELDS => "{\"sender\":{\"name\":\"apilink\",\"email\":\"no-reply@apilink.fr\"},\"to\":[{\"name\":\"ApiLink\",\"email\":\"" . $request->email_address . "\"}],\"subject\":\"" . $subject . "\",\"templateId\":3,\"params\":{\"EMAIL\":\"" . $request->email_address . "\",\"RESET_LINK\":\"" . $URL . "\",\"LINK\":\"" . $URL . "\"}}",
                 CURLOPT_HTTPHEADER => array(
                     "accept: application/json",
-                    "api-key: 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",
+                    "api-key: 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",
                     "content-type: application/json"
                 ),
             ));
@@ -145,7 +143,7 @@ class ManagerRepository implements ManagerRepositoryInterface
             $verifyUser->update();
             Auth::loginUsingId($verifyUser->id);
             return true;
-        } else {
+        }else{
             return false;
         }
     }

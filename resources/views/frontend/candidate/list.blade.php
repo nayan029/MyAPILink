@@ -92,23 +92,26 @@
 
                         <div class="diplo-drop type-width bg-trans">
                             <select class="select2" name="experiences" id="experiences">
-                                <option value="option1" selected>Expériences</option>
-                                <option value="CDI">CDI</option>
-                                <option value="CDD">CDD</option>
-                                <option value="Stages">Stages</option>
-                                <option value="Remplacements">Remplacements</option>
-                                <option value="Indépendants">Indépendants</option>
+                                <option value="Expériences" selected>Expériences</option>
+                                <option value="1 - 2 ans">1 - 2 ans</option>
+                                <option value="3 - 5 ans">3 - 5 ans</option>
+                                <option value="5 - 10 ans">5 - 10 ans</option>
+                                <option value="+ de 10 ans">+ de 10 ans</option>
                             </select>
                             <span id="experiences-error" class="text-danger"></span>
                         </div>
                         <div class="diplo-drop type-width bg-trans">
                             <select class="select2" name="diplomas" id="diplomas">
-                                <option value="option1" selected>Diplômes</option>
-                                <option value="BAFA">BAFA</option>
-                                <option value="BEP">BEP</option>
-                                <option value="BAC">BAC</option>
-                                <option value="LICENCE">LICENCE</option>
-                                <option value="MASTER">MASTER</option>
+                                <option value="Diplômes" selected>Diplômes</option>
+                                <option value="Éducateur de jeunes enfants">Éducateur de jeunes enfants</option>
+                                <option value="Auxiliaire de puériculture">Auxiliaire de puériculture</option>
+                                <option value="Diplôme d’État d’infirmière">Diplôme d’État d’infirmière</option>
+                                <option value="Diplôme d’État de Puériculture">Diplôme d’État de Puériculture</option>
+                                <option value="CAP Petite enfance">CAP Petite enfance</option>
+                                <option value="CAP Accompagnant éducatif Petite enfance">CAP Accompagnant éducatif Petite enfance</option>
+                                <option value="Formation d’Assistante maternelle">Formation d’Assistante maternelle</option>
+                                <option value="CBAFA">CBAFA</option>
+                                <option value="Autres">Autres</option>
                             </select>
                             <span id="diplomas-error" class="text-danger"></span>
                         </div>
@@ -193,11 +196,11 @@
     });
 
     $(document).on('click', '.filters-btns', function() {
-        var formData = $('#candidate_search_form').serialize();            
+        var formData = $('#candidate_search_form').serialize();
 
         $.ajax({
-            url:"{{route('candidate.data')}}?"+formData,
-            method:"get" 
+            url: "{{route('candidate.data')}}?" + formData,
+            method: "get"
         });
     });
 </script>

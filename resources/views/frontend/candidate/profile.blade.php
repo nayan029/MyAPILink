@@ -27,7 +27,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="col-md-5 d-flex align-items-end">
                         <div class="progress-main">
                             <span>Mon profil rempli</span>
@@ -39,7 +38,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -194,10 +192,8 @@
                                             <h5 class="dark-tit profside-title">Mes valeurs</h5>
                                             <ul class="prof-view-ul Mes-ul">
                                                 <li>{{auth()->guard('web')->user()->values}}</li>
-
                                             </ul>
                                         </div>
-
                                         <div class="text-right edit-btns">
                                             <a href="{{URL::to('/candidate-profile-edit')}}" class="btn btn-yellow"><img src="{{asset('frontend/images/imgs-svg/feather-edit.svg')}}" class="edit-profile mr-4" alt="edit" height="16" width="16">Editer mon profil</a>
                                         </div>

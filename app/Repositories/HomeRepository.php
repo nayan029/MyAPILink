@@ -39,20 +39,34 @@ class HomeRepository implements HomeRepositoryInterface
         
         $token = Str::random(64);
 
-        PasswordReset::create([
+       $user =  PasswordReset::create([
             'email' => $request->email,
-            'token' => $token
         ]);
         try {
-            $emailtemplateid = EmailTemplate::where('id', 1)->first();
-            $html = $emailtemplateid->email;
-            $link = route('forgotpassword-user', $token);
-            $html = str_replace('{{LINK}}', $link, $html);
+          
+            $URL = route('forgotpassword-user', $user->email);
+            $html = "Verify profile <br> <a href='" . $URL . "' target='_blank'>Click Here</a>";
+            $subject = "Please complete your profile on ApiLink";
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://api.sendinblue.com/v3/smtp/email",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING  => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => "{\"sender\":{\"name\":\"ApiLink\",\"email\":\"no-reply@apilink.fr\"},\"to\":[{\"name\":\"ApiLink\",\"email\":\"" . $request->email . "\"}],\"subject\":\"" . $subject . "\",\"templateId\":4,\"params\":{\"EMAIL\":\"" . $request->email . "\",\"LINK\":\"" . $URL . "\"}}",
+                CURLOPT_HTTPHEADER => array(
+                    "accept: application/json",
+                    "api-key: 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",
+                    "content-type: application/json"
+                ),
+            ));
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+            curl_close($curl);
 
-            Mail::send('frontend.email-template.forgot-password', ['token' => $token, 'emailtemplate' => $html], function ($message) use ($request) {
-                $message->to($request->email);
-                $message->subject('Api link Password Reset');
-            });
             return true;
         } catch (Exception $e) {
             return back()->withError($e->getMessage());
@@ -61,18 +75,18 @@ class HomeRepository implements HomeRepositoryInterface
 
     public function updatePassword(Request $request)
     {
-
-        $updatepassword = PasswordReset::where('token', $request['token'])->first();
+        
+        $updatepassword = PasswordReset::where('email', $request->email)->first();
+ 
         if ($updatepassword && $updatepassword != null) {
-            $password = User::where('email', $updatepassword->email)->first();
-           
+            $password = User::where('email', $updatepassword->email)->first();           
                 User::where('email', $updatepassword->email)
                     ->update(['password' => Hash::make($request->password)]);
                 PasswordReset::where(['email' => $updatepassword->email])->delete();
                 return true;
             
         } else {
-            Session::flash('error', 'Invalid token');
+            Session::flash('error', 'Invalid email');
             return false;
         }
     }

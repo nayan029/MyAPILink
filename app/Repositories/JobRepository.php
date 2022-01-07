@@ -14,7 +14,7 @@ class JobRepository implements JobRepositoryInterface
 {
     use ImageuploadTrait;
 
-    
+
 
     public function getJobdata(Request $request)
     {
@@ -34,16 +34,16 @@ class JobRepository implements JobRepositoryInterface
         );
 
         $query = Job::select('*');
-        if($request->query('title') != ''){
-            $query->whereRaw('title LIKE "%'.$request->query('title').'%"');
+        if ($request->query('title') != '') {
+            $query->whereRaw('title LIKE "%' . $request->query('title') . '%"');
         }
-        if($request->query('type_of_contract') != ''){
-            $query->whereRaw('type_of_contract LIKE "%'.$request->query('type_of_contract').'%"');
-        }  
-        if($request->query('minimum_experience') != ''){
-            $query->whereRaw('minimum_experience LIKE "%'.$request->query('minimum_experience').'%"');
+        if ($request->query('type_of_contract') != '') {
+            $query->whereRaw('type_of_contract LIKE "%' . $request->query('type_of_contract') . '%"');
         }
-       
+        if ($request->query('minimum_experience') != '') {
+            $query->whereRaw('minimum_experience LIKE "%' . $request->query('minimum_experience') . '%"');
+        }
+
         $recordstotal = $query->count();
         $sortColumnName = $sortcolumns[$order[0]['column']];
 
@@ -61,11 +61,11 @@ class JobRepository implements JobRepositoryInterface
         $jobs = $query->orderBy('created_at', 'desc')->get();
         foreach ($jobs as $job) {
             $url = route("job.show", $job->id);
-            $titleAction = "<a href='" . $url . "'>" . $job->title . "</a>";      
+            $titleAction = "<a href='" . $url . "'>" . $job->title . "</a>";
             $json['data'][] = [
                 $titleAction,
                 $job->type_of_contract,
-                date('m/d/Y',strtotime($job->contract_start_date)),
+                date('m/d/Y', strtotime($job->contract_start_date)),
                 $job->minimum_experience,
             ];
         }
@@ -89,11 +89,33 @@ class JobRepository implements JobRepositoryInterface
     }
     public function allCandidates()
     {
-        return User::where('user_type',1)->get();
+        return User::where('user_type', 1)->get();
     }
 
     public function getCandidateData(Request $request)
     {
-        dd($request->all());
+        $searchavAilablity = $request->query('availablity');
+        $searchPositionType = $request->query('position_type');
+        $searchresearch = $request->query('experiences');
+        $searchDiplomas = $request->query('diplomas');
+
+        $draw = $request->query('draw', 0);
+        $start = $request->query('start', 0);
+        $length = $request->query('length', 25);
+        $order = $request->query('order', array(1, 'asc'));
+
+        $query = User::where('user_type', 1)->select('*');
+        if (!empty($searchavAilablity)) {
+            $query->where('available_day', 'like', '%' . $searchavAilablity . '%');
+        }
+        if (!empty($searchPositionType)) {
+            $query->where('position', 'like', '%' . $searchPositionType . '%');
+        }
+        if (!empty($searchExpereiences)) {
+            $query->where('research', 'like', '%' . $searchresearch . '%');
+        }
+        if (!empty($searchDiplomas)) {
+            $query->where('diplomas', 'like', '%' . $searchDiplomas . '%');
+        }
     }
 }

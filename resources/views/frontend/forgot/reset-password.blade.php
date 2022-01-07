@@ -24,7 +24,7 @@
 
                 <form action="{{route('user-reset-password')}}" method="post" id="resetform">
                     @csrf
-                    <input type="hidden" name="token" value="{{ $token }}">
+                    <input type="hidden" name="email" value="{{ $email }}">
                     <div class="">
                         <div class="lmodal-logo mb-20">
                             <img src="{{asset('frontend/images/apilink_logo_dark.png')}}" alt="">

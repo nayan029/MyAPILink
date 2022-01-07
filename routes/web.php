@@ -131,8 +131,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Frontend'], function ($frontR
 
     $frontRoute->get('establishment-dashborad', 'EstablishmentController@dashborad')->name('establishment-dashborad');
     $frontRoute->post('send-forgot-password-mail', 'HomeController@forgotPassword')->name('send-forgot-password-mail');
-    $frontRoute->get('forgotpassword-user/{token}', 'HomeController@resetPassword')->name('forgotpassword-user');
-    $frontRoute->post('user-reset-password', 'HomeController@updatePassword')->name('user-reset-password');
+    $frontRoute->get('forgotpassword-user/{email}', 'HomeController@resetPassword')->name('forgotpassword-user');
+    $frontRoute->post('user-reset-password','HomeController@updatePassword')->name('user-reset-password');
     $frontRoute->get('abouts-us', 'HomeController@aboutUs')->name('about-us');
 });
 

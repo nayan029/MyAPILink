@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-//admin without login route
+//admin without login route 
 
 Route::group(['namespace' => 'App\Http\Controllers\Admin'], function ($normalAdminRoute) {
     $normalAdminRoute->get('administrator', 'LoginController@index')->name('admin.login');
